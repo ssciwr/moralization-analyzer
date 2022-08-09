@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><xmi:XMI xmlns:pos="http:///de/tudarmstadt/ukp/dkpro/core/api/lexmorph/type/pos.ecore" xmlns:tcas="http:///uima/tcas.ecore" xmlns:xmi="http://www.omg.org/XMI" xmlns:cas="http:///uima/cas.ecore" xmlns:tweet="http:///de/tudarmstadt/ukp/dkpro/core/api/lexmorph/type/pos/tweet.ecore" xmlns:morph="http:///de/tudarmstadt/ukp/dkpro/core/api/lexmorph/type/morph.ecore" xmlns:type="http:///de/tudarmstadt/ukp/clarin/webanno/api/type.ecore" xmlns:dependency="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type/dependency.ecore" xmlns:type6="http:///de/tudarmstadt/ukp/dkpro/core/api/semantics/type.ecore" xmlns:type9="http:///de/tudarmstadt/ukp/dkpro/core/api/transform/type.ecore" xmlns:type8="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type.ecore" xmlns:type3="http:///de/tudarmstadt/ukp/dkpro/core/api/metadata/type.ecore" xmlns:type10="http:///org/dkpro/core/api/xml/type.ecore" xmlns:type4="http:///de/tudarmstadt/ukp/dkpro/core/api/ner/type.ecore" xmlns:type5="http:///de/tudarmstadt/ukp/dkpro/core/api/segmentation/type.ecore" xmlns:type2="http:///de/tudarmstadt/ukp/dkpro/core/api/coref/type.ecore" xmlns:type7="http:///de/tudarmstadt/ukp/dkpro/core/api/structure/type.ecore" xmlns:constituent="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type/constituent.ecore" xmlns:chunk="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type/chunk.ecore" xmlns:custom="http:///webanno/custom.ecore" xmi:version="2.0">
+    <cas:NULL xmi:id="0"/>
+    <type3:DocumentMetaData xmi:id="8" sofa="1" begin="0" end="41" language="x-unspecified" documentTitle="inception_example.txt" documentId="inception_example.txt" documentUri="file:/home/gwydion/.inception/repository/project/0/document/2/source/inception_example.txt" collectionId="file:/home/gwydion/.inception/repository/project/0/document/2/source/" documentBaseUri="file:/home/gwydion/.inception/repository/project/0/document/2/source/" isLastSegment="false"/>
+    <type5:Sentence xmi:id="19" sofa="1" begin="0" end="28"/>
+    <type5:Sentence xmi:id="24" sofa="1" begin="29" end="41"/>
+    <type5:Token xmi:id="29" sofa="1" begin="0" end="4" order="0"/>
+    <type5:Token xmi:id="42" sofa="1" begin="5" end="7" order="0"/>
+    <type5:Token xmi:id="55" sofa="1" begin="8" end="10" order="0"/>
+    <type5:Token xmi:id="68" sofa="1" begin="11" end="18" order="0"/>
+    <type5:Token xmi:id="81" sofa="1" begin="19" end="27" order="0"/>
+    <type5:Token xmi:id="94" sofa="1" begin="27" end="28" order="0"/>
+    <type5:Token xmi:id="107" sofa="1" begin="29" end="35" order="0"/>
+    <type5:Token xmi:id="120" sofa="1" begin="36" end="40" order="0"/>
+    <type5:Token xmi:id="133" sofa="1" begin="40" end="41" order="0"/>
+    <chunk:Chunk xmi:id="146" sofa="1" begin="5" end="28" chunkValue="Test Chunk 1"/>
+    <custom:OverlayChunk xmi:id="151" sofa="1" begin="0" end="27" Tag="Test1"/>
+    <custom:OverlayChunk xmi:id="161" sofa="1" begin="8" end="18" Tag="Test 2"/>
+    <custom:OverlayChunk xmi:id="156" sofa="1" begin="29" end="41" Tag="Test1"/>
+    <type:LayerDefinition xmi:id="231" name="de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" uiName="Chunk"/>
+    <type:LayerDefinition xmi:id="260" name="webanno.custom.OverlayChunk" uiName="Overlay Chunk"/>
+    <type:LayerDefinition xmi:id="184" name="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" uiName="Part of speech"/>
+    <type:LayerDefinition xmi:id="249" name="de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" uiName="Orthography Correction"/>
+    <type:LayerDefinition xmi:id="220" name="de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" uiName="SemPred"/>
+    <type:LayerDefinition xmi:id="166" name="de.tudarmstadt.ukp.dkpro.core.api.coref.type.Coreference" uiName="Coreference"/>
+    <type:LayerDefinition xmi:id="195" name="de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" uiName="Named entity"/>
+    <type:LayerDefinition xmi:id="177" name="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures" uiName="Morphological features"/>
+    <type:LayerDefinition xmi:id="206" name="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" uiName="Lemma"/>
+    <type:LayerDefinition xmi:id="213" name="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm" uiName="Surface form"/>
+    <type:LayerDefinition xmi:id="238" name="de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" uiName="Dependency"/>
+    <type:FeatureDefinition xmi:id="173" layer="166" name="referenceType" uiName="referenceType"/>
+    <type:FeatureDefinition xmi:id="256" layer="249" name="value" uiName="Correction"/>
+    <type:FeatureDefinition xmi:id="227" layer="220" name="category" uiName="category"/>
+    <type:FeatureDefinition xmi:id="252" layer="249" name="operation" uiName="Operation"/>
+    <type:FeatureDefinition xmi:id="241" layer="238" name="DependencyType" uiName="Relation"/>
+    <type:FeatureDefinition xmi:id="209" layer="206" name="value" uiName="Lemma"/>
+    <type:FeatureDefinition xmi:id="263" layer="260" name="Tag" uiName="Tag"/>
+    <type:FeatureDefinition xmi:id="234" layer="231" name="chunkValue" uiName="Tag"/>
+    <type:FeatureDefinition xmi:id="245" layer="238" name="flavor" uiName="Flavor"/>
+    <type:FeatureDefinition xmi:id="202" layer="195" name="value" uiName="value"/>
+    <type:FeatureDefinition xmi:id="169" layer="166" name="referenceRelation" uiName="referenceRelation"/>
+    <type:FeatureDefinition xmi:id="198" layer="195" name="identifier" uiName="identifier"/>
+    <type:FeatureDefinition xmi:id="187" layer="184" name="PosValue" uiName="XPOS"/>
+    <type:FeatureDefinition xmi:id="180" layer="177" name="value" uiName="Features"/>
+    <type:FeatureDefinition xmi:id="223" layer="220" name="arguments" uiName="arguments"/>
+    <type:FeatureDefinition xmi:id="216" layer="213" name="value" uiName="Form"/>
+    <type:FeatureDefinition xmi:id="191" layer="184" name="coarseValue" uiName="UPOS"/>
+    <type3:TagsetDescription xmi:id="267" sofa="1" begin="0" end="0" layer="de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" name="UD Universal Dependencies (v2)" input="false"/>
+    <type3:TagsetDescription xmi:id="280" sofa="1" begin="0" end="0" layer="de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" name="Named Entity tags" input="false"/>
+    <type3:TagsetDescription xmi:id="293" sofa="1" begin="0" end="0" layer="de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" name="Operation" input="false"/>
+    <type3:TagsetDescription xmi:id="306" sofa="1" begin="0" end="0" layer="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" name="UD Universal POS tags (v2)" input="false"/>
+    <cas:Sofa xmi:id="1" sofaNum="1" sofaID="_InitialView" mimeType="text" sofaString="This is an example sentence.&#10;Second Line."/>
+    <cas:View sofa="1" members="8 19 24 29 42 55 68 81 94 107 120 133 146 151 161 156 231 260 184 249 220 166 195 177 206 213 238 173 256 227 252 241 209 263 234 245 202 169 198 187 180 223 216 191 267 280 293 306"/>
+</xmi:XMI>
