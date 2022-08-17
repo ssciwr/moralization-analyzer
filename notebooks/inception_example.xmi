@@ -12,10 +12,10 @@
     <type5:Token xmi:id="107" sofa="1" begin="29" end="35" order="0"/>
     <type5:Token xmi:id="120" sofa="1" begin="36" end="40" order="0"/>
     <type5:Token xmi:id="133" sofa="1" begin="40" end="41" order="0"/>
-    <chunk:Chunk xmi:id="146" sofa="1" begin="5" end="28" chunkValue="Test Chunk 1"/>
-    <custom:OverlayChunk xmi:id="151" sofa="1" begin="0" end="27" Tag="Test1"/>
-    <custom:OverlayChunk xmi:id="161" sofa="1" begin="8" end="18" Tag="Test 2"/>
-    <custom:OverlayChunk xmi:id="156" sofa="1" begin="29" end="41" Tag="Test1"/>
+    <custom:OverlayChunk xmi:id="146" sofa="1" begin="5" end="7" Tag="good"/>
+    <custom:OverlayChunk xmi:id="156" sofa="1" begin="8" end="10" Tag="bad"/>
+    <custom:OverlayChunk xmi:id="151" sofa="1" begin="11" end="18" Tag="good"/>
+    <custom:OverlayChunk xmi:id="161" sofa="1" begin="29" end="35" Tag="bad"/>
     <type:LayerDefinition xmi:id="231" name="de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" uiName="Chunk"/>
     <type:LayerDefinition xmi:id="260" name="webanno.custom.OverlayChunk" uiName="Overlay Chunk"/>
     <type:LayerDefinition xmi:id="184" name="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" uiName="Part of speech"/>
@@ -49,5 +49,5 @@
     <type3:TagsetDescription xmi:id="293" sofa="1" begin="0" end="0" layer="de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" name="Operation" input="false"/>
     <type3:TagsetDescription xmi:id="306" sofa="1" begin="0" end="0" layer="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" name="UD Universal POS tags (v2)" input="false"/>
     <cas:Sofa xmi:id="1" sofaNum="1" sofaID="_InitialView" mimeType="text" sofaString="This is an example sentence.&#10;Second Line."/>
-    <cas:View sofa="1" members="8 19 24 29 42 55 68 81 94 107 120 133 146 151 161 156 231 260 184 249 220 166 195 177 206 213 238 173 256 227 252 241 209 263 234 245 202 169 198 187 180 223 216 191 267 280 293 306"/>
+    <cas:View sofa="1" members="8 19 24 29 42 55 68 81 94 107 120 133 146 156 151 161 231 260 184 249 220 166 195 177 206 213 238 173 256 227 252 241 209 263 234 245 202 169 198 187 180 223 216 191 267 280 293 306"/>
 </xmi:XMI>

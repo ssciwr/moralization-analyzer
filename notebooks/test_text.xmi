@@ -1,0 +1,67 @@
+<?xml version="1.1" encoding="UTF-8"?><xmi:XMI xmlns:pos="http:///de/tudarmstadt/ukp/dkpro/core/api/lexmorph/type/pos.ecore" xmlns:tcas="http:///uima/tcas.ecore" xmlns:xmi="http://www.omg.org/XMI" xmlns:cas="http:///uima/cas.ecore" xmlns:tweet="http:///de/tudarmstadt/ukp/dkpro/core/api/lexmorph/type/pos/tweet.ecore" xmlns:morph="http:///de/tudarmstadt/ukp/dkpro/core/api/lexmorph/type/morph.ecore" xmlns:type="http:///de/tudarmstadt/ukp/clarin/webanno/api/type.ecore" xmlns:dependency="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type/dependency.ecore" xmlns:type6="http:///de/tudarmstadt/ukp/dkpro/core/api/semantics/type.ecore" xmlns:type9="http:///de/tudarmstadt/ukp/dkpro/core/api/transform/type.ecore" xmlns:type8="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type.ecore" xmlns:type3="http:///de/tudarmstadt/ukp/dkpro/core/api/metadata/type.ecore" xmlns:type10="http:///org/dkpro/core/api/xml/type.ecore" xmlns:type4="http:///de/tudarmstadt/ukp/dkpro/core/api/ner/type.ecore" xmlns:type5="http:///de/tudarmstadt/ukp/dkpro/core/api/segmentation/type.ecore" xmlns:type2="http:///de/tudarmstadt/ukp/dkpro/core/api/coref/type.ecore" xmlns:type7="http:///de/tudarmstadt/ukp/dkpro/core/api/structure/type.ecore" xmlns:constituent="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type/constituent.ecore" xmlns:chunk="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type/chunk.ecore" xmlns:custom="http:///webanno/custom.ecore" xmi:version="2.0">
+    <cas:NULL xmi:id="0"/>
+    <type3:DocumentMetaData xmi:id="8" sofa="1" begin="0" end="124" language="x-unspecified" documentTitle="test_text.txt" documentId="test_text.txt" documentUri="file:/home/gwydion/.inception/repository/project/0/document/3/source/test_text.txt" collectionId="file:/home/gwydion/.inception/repository/project/0/document/3/source/" documentBaseUri="file:/home/gwydion/.inception/repository/project/0/document/3/source/" isLastSegment="false"/>
+    <type5:Sentence xmi:id="19" sofa="1" begin="0" end="50"/>
+    <type5:Sentence xmi:id="24" sofa="1" begin="52" end="80"/>
+    <type5:Sentence xmi:id="29" sofa="1" begin="82" end="123"/>
+    <type5:Token xmi:id="34" sofa="1" begin="0" end="2" order="0"/>
+    <type5:Token xmi:id="47" sofa="1" begin="3" end="7" order="0"/>
+    <type5:Token xmi:id="60" sofa="1" begin="8" end="12" order="0"/>
+    <type5:Token xmi:id="73" sofa="1" begin="13" end="18" order="0"/>
+    <type5:Token xmi:id="86" sofa="1" begin="19" end="22" order="0"/>
+    <type5:Token xmi:id="99" sofa="1" begin="23" end="26" order="0"/>
+    <type5:Token xmi:id="112" sofa="1" begin="27" end="36" order="0"/>
+    <type5:Token xmi:id="125" sofa="1" begin="37" end="49" order="0"/>
+    <type5:Token xmi:id="138" sofa="1" begin="49" end="50" order="0"/>
+    <type5:Token xmi:id="151" sofa="1" begin="52" end="55" order="0"/>
+    <type5:Token xmi:id="164" sofa="1" begin="56" end="60" order="0"/>
+    <type5:Token xmi:id="177" sofa="1" begin="61" end="65" order="0"/>
+    <type5:Token xmi:id="190" sofa="1" begin="66" end="69" order="0"/>
+    <type5:Token xmi:id="203" sofa="1" begin="70" end="79" order="0"/>
+    <type5:Token xmi:id="216" sofa="1" begin="79" end="80" order="0"/>
+    <type5:Token xmi:id="229" sofa="1" begin="82" end="84" order="0"/>
+    <type5:Token xmi:id="242" sofa="1" begin="85" end="87" order="0"/>
+    <type5:Token xmi:id="255" sofa="1" begin="88" end="91" order="0"/>
+    <type5:Token xmi:id="268" sofa="1" begin="92" end="97" order="0"/>
+    <type5:Token xmi:id="281" sofa="1" begin="98" end="107" order="0"/>
+    <type5:Token xmi:id="294" sofa="1" begin="108" end="112" order="0"/>
+    <type5:Token xmi:id="307" sofa="1" begin="113" end="116" order="0"/>
+    <type5:Token xmi:id="320" sofa="1" begin="117" end="122" order="0"/>
+    <type5:Token xmi:id="333" sofa="1" begin="122" end="123" order="0"/>
+    <custom:OverlayChunk xmi:id="346" sofa="1" begin="0" end="50" Tag="positiv"/>
+    <custom:OverlayChunk xmi:id="351" sofa="1" begin="52" end="80" Tag="negativ"/>
+    <type:LayerDefinition xmi:id="421" name="de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" uiName="Chunk"/>
+    <type:LayerDefinition xmi:id="428" name="de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" uiName="Dependency"/>
+    <type:LayerDefinition xmi:id="403" name="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm" uiName="Surface form"/>
+    <type:LayerDefinition xmi:id="385" name="de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" uiName="Named entity"/>
+    <type:LayerDefinition xmi:id="396" name="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" uiName="Lemma"/>
+    <type:LayerDefinition xmi:id="356" name="de.tudarmstadt.ukp.dkpro.core.api.coref.type.Coreference" uiName="Coreference"/>
+    <type:LayerDefinition xmi:id="374" name="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" uiName="Part of speech"/>
+    <type:LayerDefinition xmi:id="450" name="webanno.custom.OverlayChunk" uiName="Overlay Chunk"/>
+    <type:LayerDefinition xmi:id="410" name="de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" uiName="SemPred"/>
+    <type:LayerDefinition xmi:id="439" name="de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" uiName="Orthography Correction"/>
+    <type:LayerDefinition xmi:id="367" name="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures" uiName="Morphological features"/>
+    <type:FeatureDefinition xmi:id="453" layer="450" name="Tag" uiName="Tag"/>
+    <type:FeatureDefinition xmi:id="406" layer="403" name="value" uiName="Form"/>
+    <type:FeatureDefinition xmi:id="442" layer="439" name="operation" uiName="Operation"/>
+    <type:FeatureDefinition xmi:id="435" layer="428" name="flavor" uiName="Flavor"/>
+    <type:FeatureDefinition xmi:id="413" layer="410" name="arguments" uiName="arguments"/>
+    <type:FeatureDefinition xmi:id="359" layer="356" name="referenceRelation" uiName="referenceRelation"/>
+    <type:FeatureDefinition xmi:id="388" layer="385" name="identifier" uiName="identifier"/>
+    <type:FeatureDefinition xmi:id="417" layer="410" name="category" uiName="category"/>
+    <type:FeatureDefinition xmi:id="424" layer="421" name="chunkValue" uiName="Tag"/>
+    <type:FeatureDefinition xmi:id="377" layer="374" name="PosValue" uiName="XPOS"/>
+    <type:FeatureDefinition xmi:id="370" layer="367" name="value" uiName="Features"/>
+    <type:FeatureDefinition xmi:id="431" layer="428" name="DependencyType" uiName="Relation"/>
+    <type:FeatureDefinition xmi:id="381" layer="374" name="coarseValue" uiName="UPOS"/>
+    <type:FeatureDefinition xmi:id="363" layer="356" name="referenceType" uiName="referenceType"/>
+    <type:FeatureDefinition xmi:id="446" layer="439" name="value" uiName="Correction"/>
+    <type:FeatureDefinition xmi:id="392" layer="385" name="value" uiName="value"/>
+    <type:FeatureDefinition xmi:id="399" layer="396" name="value" uiName="Lemma"/>
+    <type3:TagsetDescription xmi:id="457" sofa="1" begin="0" end="0" layer="de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" name="UD Universal Dependencies (v2)" input="false"/>
+    <type3:TagsetDescription xmi:id="470" sofa="1" begin="0" end="0" layer="de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" name="Named Entity tags" input="false"/>
+    <type3:TagsetDescription xmi:id="483" sofa="1" begin="0" end="0" layer="de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" name="Operation" input="false"/>
+    <type3:TagsetDescription xmi:id="496" sofa="1" begin="0" end="0" layer="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" name="UD Universal POS tags (v2)" input="false"/>
+    <cas:Sofa xmi:id="1" sofaNum="1" sofaID="_InitialView" mimeType="text" sofaString="Ok also hier haben wir ein positives Textbeispiel.&#10;&#10;Und hier wäre ein negatives.&#10;&#10;Ob er bei etwas neutralem auch was lernt?&#10;"/>
+    <cas:View sofa="1" members="8 19 24 29 34 47 60 73 86 99 112 125 138 151 164 177 190 203 216 229 242 255 268 281 294 307 320 333 346 351 421 428 403 385 396 356 374 450 410 439 367 453 406 442 435 413 359 388 417 424 377 370 431 381 363 446 392 399 457 470 483 496"/>
+</xmi:XMI>
