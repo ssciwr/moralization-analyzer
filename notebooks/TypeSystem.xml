@@ -29,6 +29,120 @@
                 
         <typeDescription>
                         
+            <name>custom.Span</name>
+                        
+            <description/>
+                        
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+                        
+            <features>
+                                
+                <featureDescription>
+                                        
+                    <name>KAT1MoralisierendesSegment</name>
+                                        
+                    <description/>
+                                        
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                                    
+                </featureDescription>
+                                
+                <featureDescription>
+                                        
+                    <name>Moralwerte</name>
+                                        
+                    <description/>
+                                        
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                                    
+                </featureDescription>
+                                
+                <featureDescription>
+                                        
+                    <name>KAT2Subjektive_Ausdrcke</name>
+                                        
+                    <description/>
+                                        
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                                    
+                </featureDescription>
+                                
+                <featureDescription>
+                                        
+                    <name>Protagonistinnen2</name>
+                                        
+                    <description/>
+                                        
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                                    
+                </featureDescription>
+                                
+                <featureDescription>
+                                        
+                    <name>Protagonistinnen</name>
+                                        
+                    <description/>
+                                        
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                                    
+                </featureDescription>
+                                
+                <featureDescription>
+                                        
+                    <name>Protagonistinnen3</name>
+                                        
+                    <description/>
+                                        
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                                    
+                </featureDescription>
+                                
+                <featureDescription>
+                                        
+                    <name>KommunikativeFunktion</name>
+                                        
+                    <description/>
+                                        
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                                    
+                </featureDescription>
+                                
+                <featureDescription>
+                                        
+                    <name>Forderung</name>
+                                        
+                    <description/>
+                                        
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                                    
+                </featureDescription>
+                                
+                <featureDescription>
+                                        
+                    <name>KAT5Ausformulierung</name>
+                                        
+                    <description/>
+                                        
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                                    
+                </featureDescription>
+                                
+                <featureDescription>
+                                        
+                    <name>KOMMENTAR</name>
+                                        
+                    <description/>
+                                        
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                                    
+                </featureDescription>
+                            
+            </features>
+                    
+        </typeDescription>
+                
+        <typeDescription>
+                        
             <name>de.tudarmstadt.ukp.clarin.webanno.api.type.FeatureDefinition</name>
                         
             <description/>
@@ -2682,20 +2796,6 @@
                     <rangeTypeName>org.dkpro.core.api.xml.type.XmlElement</rangeTypeName>
                                     
                 </featureDescription>
-                                
-                <featureDescription>
-                                        
-                    <name>captureRoots</name>
-                                        
-                    <description/>
-                                        
-                    <rangeTypeName>uima.cas.FSArray</rangeTypeName>
-                                        
-                    <elementType>org.dkpro.core.api.xml.type.XmlNode</elementType>
-                                        
-                    <multipleReferencesAllowed>true</multipleReferencesAllowed>
-                                    
-                </featureDescription>
                             
             </features>
                     
@@ -2752,30 +2852,6 @@
                     <description/>
                                         
                     <rangeTypeName>uima.cas.Boolean</rangeTypeName>
-                                    
-                </featureDescription>
-                            
-            </features>
-                    
-        </typeDescription>
-                
-        <typeDescription>
-                        
-            <name>webanno.custom.OverlayChunk</name>
-                        
-            <description/>
-                        
-            <supertypeName>uima.tcas.Annotation</supertypeName>
-                        
-            <features>
-                                
-                <featureDescription>
-                                        
-                    <name>Tag</name>
-                                        
-                    <description/>
-                                        
-                    <rangeTypeName>uima.cas.String</rangeTypeName>
                                     
                 </featureDescription>
                             
