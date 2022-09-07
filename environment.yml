@@ -1,0 +1,13 @@
+name: moralization
+channels:
+  - conda-forge
+
+dependencies:
+  - python
+  - numpy 
+  - pandas 
+  - matplotlib 
+  - seaborn 
+  - click
+  - pip:
+    - dkpro-cassis
