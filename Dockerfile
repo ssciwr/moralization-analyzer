@@ -21,8 +21,6 @@ ENV JUPYTER_ENABLE_LAB=yes
 # I don't see why we need a work subdirectory in home
 RUN rm -rf ${HOME}/work
 
-# Copy the artifacts from stage 0 that we need
-COPY --from=builder /opt/conda /opt/conda
 
 # Ensure that the conda provided PROJ database is found. This
 # is somewhat not possible in the base environment. There is
