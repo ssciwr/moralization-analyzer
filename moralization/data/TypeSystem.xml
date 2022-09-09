@@ -2796,6 +2796,20 @@
                     <rangeTypeName>org.dkpro.core.api.xml.type.XmlElement</rangeTypeName>
                                     
                 </featureDescription>
+                                
+                <featureDescription>
+                                        
+                    <name>captureRoots</name>
+                                        
+                    <description/>
+                                        
+                    <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+                                        
+                    <elementType>org.dkpro.core.api.xml.type.XmlNode</elementType>
+                                        
+                    <multipleReferencesAllowed>true</multipleReferencesAllowed>
+                                    
+                </featureDescription>
                             
             </features>
                     
