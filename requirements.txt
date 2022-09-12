@@ -1,1 +1,7 @@
-dkpro-cassis
+pandas
+numpy
+dkpro-cassis 
+matplotlib 
+IPython
+seaborn
+click
