@@ -30,6 +30,10 @@ dependencies = [
     "click",
 ]
 
+[tool.setuptools.package-data]
+# Include any *.xml files found in the "data" subdirectory of "moralization"
+"moralization.data" = ["*.xml"]
+
 [project.scripts]
 moralization_copy_notebooks = "moralization.paths:copy_notebooks"
 
