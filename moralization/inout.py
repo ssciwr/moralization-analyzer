@@ -55,3 +55,4 @@ if __name__ == "__main__":
     data = InputOutput.get_input_file(
         "moralization/data/Gerichtsurteile-pos-AW-neu-optimiert-BB.xmi"
     )
+    data_dict_list = InputOutput.get_input_dir("moralization/data/")
