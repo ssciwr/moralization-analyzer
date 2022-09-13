@@ -9,8 +9,17 @@ pkg = importlib_resources.files("moralization")
 
 
 class InputOutput:
+    """Namespace class to handle input and output."""
+
+    # this dict can be extended to contain more file formats
+    input_type = {"xmi": load_cas_from_xmi}
+
     def __init__(self) -> None:
         None
+
+    @staticmethod
+    def get_file_type(filename):
+        return filename.strip().split(".")[-1]
 
     @staticmethod
     def read_typesystem() -> object:
@@ -23,32 +32,32 @@ class InputOutput:
     @staticmethod
     def get_input_file(filename: str) -> object:
         """Read in the input file. Currently only xmi file format."""
-        # this dict can be extended to contain more file formats
-        input_type = {"xmi": load_cas_from_xmi}
-        file_ending = filename.strip().split(".")[-1]
         ts = InputOutput.read_typesystem()
+        file_type = InputOutput.get_file_type(filename)
         # read the actual data file
         with open(filename, "rb") as f:
-            data = input_type[file_ending](f, typesystem=ts)
+            data = InputOutput.input_type[file_type](f, typesystem=ts)
         return data
 
     @staticmethod
-    def get_input_dir(dir_path: str) -> list:
-        "Get a list of input files from a given directory. Only xmi files."
+    def get_input_dir(dir_path: str) -> dict:
+        "Get a list of input files from a given directory. Currently only xmi files."
         ### load multiple files into a list of dictionaries
         ts = InputOutput.read_typesystem()
         data_files = glob.glob(os.path.join(dir_path, "*.xmi"))
-        data_dict_list = {}
+        data_dict = {}
         for data_file in data_files:
+            # get the file type dynamically
+            file_type = InputOutput.get_file_type(data_file)
             # the wikipediadiskussionen file breaks as it has an invalid xmi charakter.
             # if data_file != "../data/Wikipediadiskussionen-neg-BD-neu-optimiert-CK.xmi":
             with open(data_file, "rb") as f:
-                cas = load_cas_from_xmi(f, typesystem=ts)
-            data_dict_list[os.path.basename(data_file).split(".xmi")[0]] = {
+                cas = InputOutput.input_type[file_type](f, typesystem=ts)
+            data_dict[os.path.basename(data_file).split(".xmi")[0]] = {
                 # "data": sort_spans(cas, ts),
                 "file_type": os.path.basename(data_file).split(".")[1],
             }
-        return data_dict_list
+        return data_dict
 
 
 if __name__ == "__main__":
