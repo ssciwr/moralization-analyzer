@@ -1,9 +1,8 @@
-import re
 from cassis import load_typesystem, load_cas_from_xmi
-from collections import defaultdict
 import glob
 import os
 import importlib_resources
+from moralization import analyse
 
 pkg = importlib_resources.files("moralization")
 
@@ -54,7 +53,7 @@ class InputOutput:
             with open(data_file, "rb") as f:
                 cas = InputOutput.input_type[file_type](f, typesystem=ts)
             data_dict[os.path.basename(data_file).split(".xmi")[0]] = {
-                # "data": sort_spans(cas, ts),
+                "data": analyse.sort_spans(cas, ts),
                 "file_type": os.path.basename(data_file).split(".")[1],
             }
         return data_dict
