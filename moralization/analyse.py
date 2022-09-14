@@ -53,8 +53,13 @@ def sort_spans(cas, ts):
 
         for cat in cat_list:
             # this excludes any unwanted datapoints
-            if span[cat] and span["KOMMENTAR"] != "Dopplung":
-
+            # also ignore the ones with no moralization
+            if (
+                span[cat]
+                and span["KOMMENTAR"] != "Dopplung"
+                and span[cat] != "Keine Moralisierung"
+            ):
+                # Here we could also exclude unnecessary information
                 span_dict[cat][span[cat]].append(span)
 
     # for span_dict_key, span_dict_sub_kat in span_dict.items():
