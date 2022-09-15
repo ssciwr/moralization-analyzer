@@ -13,9 +13,6 @@ class InputOutput:
     # this dict can be extended to contain more file formats
     input_type = {"xmi": load_cas_from_xmi}
 
-    def __init__(self) -> None:
-        None
-
     @staticmethod
     def get_file_type(filename):
         return filename.strip().split(".")[-1]
