@@ -59,7 +59,7 @@ def sort_spans(cas: object, ts: object) -> dict:
             if (
                 span[cat]
                 and span["KOMMENTAR"] != "Dopplung"
-                and span[cat] != "Keine Moralisierung"
+                # and span[cat] != "Keine Moralisierung"
             ):
                 # Here we could also exclude unnecessary information
                 span_dict[cat][span[cat]].append(span)
@@ -110,16 +110,13 @@ def get_percent_matrix(data_dict, file_name, cat_list=None):
     df.columns = cat_list
     return df
 
-    # mode can be "instances" or "span"
 
-
+# mode can be "instances" or "span"
 # instances reports the number of occurences and span
-
-
-def report_instances(data_dict, file_names=None):
+def report_instances(data_dict_list, file_names=None):
 
     if file_names is None:
-        file_names = list(data_dict.keys())
+        file_names = list(data_dict_list.keys())
     elif isinstance(file_names, str):
         file_names = [file_names]
 
@@ -127,9 +124,10 @@ def report_instances(data_dict, file_names=None):
     instance_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
 
     for file_name in file_names:
-        span_dict = data_dict[file_name]["data"]
+        span_dict = data_dict_list[file_name]["data"]
         # initilize total instances rows for easier setting later.
-        instance_dict[file_name][("total instances")] = 0
+        instance_dict[file_name][("total instances", "with invalid")] = 0
+        instance_dict[file_name][("total instances", "without invalid")] = 0
 
         for main_cat_key, main_cat_value in span_dict.items():
             for sub_cat_key, sub_cat_value in main_cat_value.items():
@@ -137,16 +135,16 @@ def report_instances(data_dict, file_names=None):
                 instance_dict[file_name][(main_cat_key, sub_cat_key)] = len(
                     sub_cat_value
                 )
-    print(instance_dict)
+
     df = pd.DataFrame(instance_dict)
     df.index = df.index.set_names((["Main Category", "Sub Category"]))
 
     # add rows for total instances
-    df.loc[("total instances"), :] = df.sum(axis=0).values
-    # df.loc[("total instances", "without invalid"), :] = (
-    # df.loc[("total instances", "with invalid"), :].values
-    # - df.loc["KAT1MoralisierendesSegment", "Keine Moralisierung"].values
-    # )
+    df.loc[("total instances", "with invalid"), :] = df.sum(axis=0).values
+    df.loc[("total instances", "without invalid"), :] = (
+        df.loc[("total instances", "with invalid"), :].values
+        - df.loc["KAT1MoralisierendesSegment", "Keine Moralisierung"].values
+    )
 
     # sort by index and occurence number
     df = df.sort_values(
@@ -163,19 +161,19 @@ def report_instances(data_dict, file_names=None):
     return df
 
 
-def report_spans(data_dict_list, file_names=None):
+def report_spans(data_dict, file_names=None):
 
     if file_names is None:
-        file_names = list(data_dict_list.keys())
+        file_names = list(data_dict.keys())
     elif isinstance(file_names, str):
         file_names = [file_names]
 
-    df_spans = report_instances(data_dict_list, file_names)
+    df_spans = report_instances(data_dict, file_names)
     # this report_instances call makes it much easier to include the total number of spans for each columns, as well as removes the need to duplicate the pandas setup.
 
     df_spans[:] = df_spans[:].astype("object")
     for file_name in file_names:
-        span_dict = data_dict_list[file_name]["data"]
+        span_dict = data_dict[file_name]["data"]
 
         for main_cat_key, main_cat_value in span_dict.items():
             for sub_cat_key, sub_cat_value in main_cat_value.items():
