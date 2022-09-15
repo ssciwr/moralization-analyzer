@@ -24,12 +24,5 @@ RUN rm -rf ${HOME}/work
 # Copy the artifacts from stage 0 that we need
 COPY --from=builder /opt/conda /opt/conda
 
-# Ensure that the conda provided PROJ database is found. This
-# is somewhat not possible in the base environment. There is
-# this discussion which allowed me to solve the issue although I
-# think it is a horrible situation and definitely a bug:
-# https://github.com/conda-forge/geopandas-feedstock/issues/63
-ENV PROJ_LIB="/opt/conda/share/proj"
-
 # Ensure that the Jupyter notebooks are located in the home directory
 RUN copy_moralization_notebooks ${HOME}/
