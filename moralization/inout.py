@@ -3,6 +3,9 @@ import glob
 import os
 import importlib_resources
 from moralization import analyse
+import spacy
+from spacy.tokens import DocBin
+import random
 
 pkg = importlib_resources.files("moralization")
 
@@ -21,10 +24,11 @@ class InputOutput:
         return filename.strip().split(".")[-1]
 
     @staticmethod
-    def read_typesystem() -> object:
+    def read_typesystem(filename: str) -> object:
         # read in the file system types
-        file = pkg / "data" / "TypeSystem.xml"
-        with open(file, "rb") as f:
+        # file = pkg / "data" / "TypeSystem.xml"
+
+        with open(filename, "rb") as f:
             ts = load_typesystem(f)
         return ts
 
@@ -42,7 +46,17 @@ class InputOutput:
     def get_input_dir(dir_path: str) -> dict:
         "Get a list of input files from a given directory. Currently only xmi files."
         ### load multiple files into a list of dictionaries
-        ts = InputOutput.read_typesystem()
+        ts_file = glob.glob(os.path.join(dir_path, "TypeSystem.xml"))
+        if len(ts_file) == 1:
+            ts = InputOutput.read_typesystem(ts_file[0])
+        elif len(ts_file) == 0:
+            print("No Typesystem found in given directory, trying default location")
+            if not glob.glob(str(pkg / "data" / "TypeSystem.xml")):
+                raise FileNotFoundError("No typesystem found in ", pkg / "data")
+            ts = InputOutput.read_typesystem(pkg / "data" / "TypeSystem.xml")
+        else:
+            raise Warning("Multiple typesystems found. Please provide only one.")
+
         data_files = glob.glob(os.path.join(dir_path, "*.xmi"))
         data_dict = {}
         for data_file in data_files:
@@ -55,8 +69,52 @@ class InputOutput:
             data_dict[os.path.basename(data_file).split(".xmi")[0]] = {
                 "data": analyse.sort_spans(cas, ts),
                 "file_type": os.path.basename(data_file).split(".")[1],
+                "sofa": cas.get_sofa(),
             }
         return data_dict
+
+    @staticmethod
+    def prepare_spacy_dat(dir_path: str):
+        data_dict = InputOutput.get_input_dir(dir_path)
+        for file in data_dict.keys():
+
+            nlp = spacy.blank("de")
+            db_train = DocBin()
+            db_dev = DocBin()
+
+            doc_train = nlp(str(data_dict[file]["sofa"]))
+            doc_dev = nlp(str(data_dict[file]["sofa"]))
+
+            ents = []
+            for main_cat_key, main_cat_value in data_dict[file]["data"].items():
+                if main_cat_key != "KAT5Ausformulierung":
+                    for sub_cat_label, sub_cat_span_list in main_cat_value.items():
+                        for span in sub_cat_span_list:
+                            # print(span["begin"],span["end"])
+                            # print(doc.text[span["begin"]:span["end"]])
+                            spacy_span = doc_train.char_span(
+                                span["begin"],
+                                span["end"],
+                                label=sub_cat_label,
+                                alignment_mode="contract",
+                            )
+                            ents.append(spacy_span)
+            # split data in test and training
+            random.shuffle(ents)
+            ents_train = ents[:80]
+            ents_test = ents[80:]
+
+            # https://explosion.ai/blog/spancat
+            # use spancat for multiple labels on the same token
+
+            doc_train.spans["sc"] = ents_train
+            db_train.add(doc_train)
+
+            doc_dev.spans["sc"] = ents_test
+            db_dev.add(doc_dev)
+
+            db_train.to_disk("../data/Training/train.spacy")
+            db_dev.to_disk("../data/Training/dev.spacy")
 
 
 if __name__ == "__main__":
