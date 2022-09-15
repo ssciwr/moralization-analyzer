@@ -20,8 +20,8 @@ class InputOutput:
     @staticmethod
     def read_typesystem() -> object:
         # read in the file system types
-        file = pkg / "data" / "TypeSystem.xml"
-        with open(file, "rb") as f:
+        myfile = pkg / "data" / "TypeSystem.xml"
+        with open(myfile, "rb") as f:
             ts = load_typesystem(f)
         return ts
 
