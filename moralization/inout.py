@@ -63,13 +63,21 @@ if __name__ == "__main__":
     # data = InputOutput.get_input_file(
     # "moralization/data/Gerichtsurteile-pos-AW-neu-optimiert-BB.xmi"
     # )
-    data_dict = InputOutput.get_input_dir("moralization/data/")
+    data_dict = InputOutput.get_input_dir("data/")
     df_instances = analyse.report_instances(data_dict)
-    print(df_instances.head(10))
+    print(df_instances)
+    # I checked these numbers using test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB
+    # and it looks correct
+    #
+    #
     # this df can now easily be filtered.
-    # df_instances.loc["KAT2Subjektive_Ausdrcke"]
-    # df_spans = analyse.report_spans(data_dict_list)
-    # df_spans.head(10)
+    print(df_instances.loc["KAT2Subjektive_Ausdrcke"])
+    # checked these numbers and they look correct
+    #
+    df_spans = analyse.report_spans(data_dict)
+    print(df_spans)
+    # checked these numbers and they look correct
+    #
     # analyse.get_overlap_percent(
     # "Forderer:in", "Neutral", data_dict_list, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
     #     )

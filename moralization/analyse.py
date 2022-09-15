@@ -63,7 +63,6 @@ def sort_spans(cas: object, ts: object) -> dict:
             ):
                 # Here we could also exclude unnecessary information
                 span_dict[cat][span[cat]].append(span)
-
     # for span_dict_key, span_dict_sub_kat in span_dict.items():
     #     print(f"{span_dict_key}: {[key for key in span_dict_sub_kat.keys()]}")
     return span_dict
@@ -71,7 +70,6 @@ def sort_spans(cas: object, ts: object) -> dict:
 
 # find the overlaying category for an second dimension cat name
 def find_cat_from_str(cat_entry, span_dict):
-
     for span_dict_key, span_dict_sub_kat in span_dict.items():
         if cat_entry in span_dict_sub_kat.keys():
             return span_dict_key
@@ -82,7 +80,6 @@ def find_cat_from_str(cat_entry, span_dict):
 def get_overlap_percent(cat_1, cat_2, data_dict, file_name, ret_occ=False):
     o_cat1 = find_cat_from_str(cat_1, data_dict[file_name]["data"])
     o_cat2 = find_cat_from_str(cat_2, data_dict[file_name]["data"])
-
     occurence = 0
     total = 0
     for span in data_dict[file_name]["data"][o_cat1][cat_1]:
@@ -100,52 +97,45 @@ def get_percent_matrix(data_dict, file_name, cat_list=None):
         cat_list = []
         for span_dict_key, span_dict_sub_kat in data_dict[file_name]["data"].items():
             [cat_list.append(key) for key in span_dict_sub_kat.keys()]
-
     percent_matrix = np.zeros((len(cat_list), len(cat_list)))
     for i, cat1 in enumerate(cat_list):
         for j, cat2 in enumerate(cat_list):
             percent_matrix[i, j] = get_overlap_percent(cat1, cat2, data_dict, file_name)
-
     df = pd.DataFrame(percent_matrix, index=cat_list)
     df.columns = cat_list
     return df
 
 
 # mode can be "instances" or "span"
-# instances reports the number of occurences and span
-def report_instances(data_dict_list, file_names=None):
-
+# instances reports the number of occurences
+def report_instances(data_dict, file_names=None):
+    # get the file names from the global dict of dicts
     if file_names is None:
-        file_names = list(data_dict_list.keys())
+        file_names = list(data_dict.keys())
+    # or use the file names that were passed explicitly
     elif isinstance(file_names, str):
         file_names = [file_names]
-
     # filename: main_cat: sub_cat: instances
     instance_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
-
     for file_name in file_names:
-        span_dict = data_dict_list[file_name]["data"]
+        span_dict = data_dict[file_name]["data"]
         # initilize total instances rows for easier setting later.
         instance_dict[file_name][("total instances", "with invalid")] = 0
         instance_dict[file_name][("total instances", "without invalid")] = 0
-
         for main_cat_key, main_cat_value in span_dict.items():
             for sub_cat_key, sub_cat_value in main_cat_value.items():
                 # the tuple index makes it easy to convert the dict into a pandas dataframe
                 instance_dict[file_name][(main_cat_key, sub_cat_key)] = len(
                     sub_cat_value
                 )
-
     df = pd.DataFrame(instance_dict)
     df.index = df.index.set_names((["Main Category", "Sub Category"]))
-
     # add rows for total instances
     df.loc[("total instances", "with invalid"), :] = df.sum(axis=0).values
     df.loc[("total instances", "without invalid"), :] = (
         df.loc[("total instances", "with invalid"), :].values
         - df.loc["KAT1MoralisierendesSegment", "Keine Moralisierung"].values
     )
-
     # sort by index and occurence number
     df = df.sort_values(
         by=[
@@ -155,50 +145,52 @@ def report_instances(data_dict_list, file_names=None):
         ],
         ascending=False,
     )
-
     # fill NaN
     df = df.fillna(0)
     return df
 
 
+# mode can be "instances" or "span"
+# span reports the spans of the annotations in a list
 def report_spans(data_dict, file_names=None):
-
+    # get the file names from the global dict of dicts
     if file_names is None:
         file_names = list(data_dict.keys())
+    # or use the file names that were passed explicitly
     elif isinstance(file_names, str):
         file_names = [file_names]
-
     df_spans = report_instances(data_dict, file_names)
     # this report_instances call makes it much easier to include the total number of spans for each columns, as well as removes the need to duplicate the pandas setup.
-
     df_spans[:] = df_spans[:].astype("object")
     for file_name in file_names:
         span_dict = data_dict[file_name]["data"]
-
         for main_cat_key, main_cat_value in span_dict.items():
             for sub_cat_key, sub_cat_value in main_cat_value.items():
+                # report the beginning and end of each span as a tuple
+                span_list = [
+                    (span["begin"], span["end"])
+                    for span in span_dict[main_cat_key][sub_cat_key]
+                ]
 
                 # multiple options for how to report the spans are available
-
                 # first report the entire span object as a string
-                span_list = [str(span) for span in span_dict[main_cat_key][sub_cat_key]]
+                # span_list = [str(span) for span in span_dict[main_cat_key][sub_cat_key]]
                 # this would look like this:
                 # c.Span(Protagonistinnen=Forderer:in, Protagonistinnen2=Individuum, Protagonistinnen3=Own Group, begin=21822, end=21874);
                 # c.Span(Protagonistinnen=Benefizient:in, Protagonistinnen2=Institution, Protagonistinnen3=Own Group, begin=21974, end=21984);
                 # c.Span(Protagonistinnen=Forderer:in, Protagonistinnen2=Institution, Protagonistinnen3=Own Group, begin=66349, end=66352)
                 # maybe one should remove the c.Span() but i'm not sure what exactly is wanted here.
-
                 # second option is to report the end or beginning index for each span
                 # span_list=[str(span["end"]) for span in span_dict[main_cat_key][sub_cat_key] ]
 
                 # convert list to seperated str
-
-                span_str = ";".join(span_list)
-                span_str = span_str.replace("[", "").replace("]", "")
+                # span_str = ";".join(span_list)
+                # span_str = span_str.replace("[", "").replace("]", "")
 
                 df_spans.at[
                     (main_cat_key, sub_cat_key),
                     file_name,
-                ] = span_str
+                    # ] = span_str
+                ] = span_list
 
     return df_spans
