@@ -61,7 +61,7 @@ if __name__ == "__main__":
     # "moralization/data/Gerichtsurteile-pos-AW-neu-optimiert-BB.xmi"
     # )
     data_dict = InputOutput.get_input_dir("data/")
-    df_instances = analyse.report_instances(data_dict)
+    df_instances = analyse.AnalyseOccurence(data_dict, mode="instances").df
     print(df_instances)
     # I checked these numbers using test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB
     # and it looks correct

@@ -20,7 +20,7 @@ map_expressions = {
 # where the first dimension is the used inception category (Protagonistinnen, Forderung, etc...)
 # and the second dimension is the corresponding value of this category ('Forderer:in', 'Adresassat:in', 'Benefizient:in')
 # dict[category][entry value] = span
-def sort_spans(cas: object, ts: object) -> dict:
+def sort_spans(cas: object, ts: object) -> defaultdict:
 
     span_type = ts.get_type("custom.Span")
     span_dict = defaultdict(lambda: defaultdict(list))
@@ -68,6 +68,84 @@ def sort_spans(cas: object, ts: object) -> dict:
     return span_dict
 
 
+class AnalyseOccurence:
+    """Contains statistical information methods about the data."""
+
+    def __init__(
+        self, data_dict: dict, mode: str = "instances", file_names: str = None
+    ) -> None:
+        self.mode = mode
+        self.data_dict = data_dict
+        self.mode_dict = {"instances": self.report_instances}
+        # , "span": self.report_span}
+        self.file_names = self._initialize_files(file_names)
+        self.instance_dict = self._initialize_dict()
+        # call the analysis method
+        self.mode_dict[self.mode]()
+
+    def _initialize_files(self, file_names: str) -> list:
+        """Helper method to get file names in list."""
+        # get the file names from the global dict of dicts
+        if file_names is None:
+            file_names = list(self.data_dict.keys())
+        # or use the file names that were passed explicitly
+        elif isinstance(file_names, str):
+            file_names = [file_names]
+        return file_names
+
+    def _initialize_dict(self) -> defaultdict:
+        """Helper method to initialize dict."""
+        return defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+
+    def _initialize_df(self):
+        """Helper method to initialize data frame."""
+        self.df = pd.DataFrame(self.instance_dict)
+        self.df.index = self.df.index.set_names((["Main Category", "Sub Category"]))
+
+    def _add_total(self):
+        """Helper method to set additional headers in data frame."""
+        self.df.loc[("total instances", "with invalid"), :] = self.df.sum(axis=0).values
+        self.df.loc[("total instances", "without invalid"), :] = (
+            self.df.loc[("total instances", "with invalid"), :].values
+            - self.df.loc["KAT1MoralisierendesSegment", "Keine Moralisierung"].values
+        )
+
+    def _clean_df(self):
+        """Helper method to sort data frame and clean up values."""
+        self.df = self.df.sort_values(
+            by=[
+                "Main Category",
+                "Sub Category",
+                self.file_names[0],
+            ],
+            ascending=False,
+        )
+        # fill NaN
+        self.df = self.df.fillna(0)
+
+    def report_instances(self):
+        """Reports number of occurences of a category per text source."""
+        # instances reports the number of occurences
+        # filename: main_cat: sub_cat: instances
+        for file_name in self.file_names:
+            span_dict = self.data_dict[file_name]["data"]
+            # initilize total instances rows for easier setting later.
+            self.instance_dict[file_name][("total instances", "with invalid")] = 0
+            self.instance_dict[file_name][("total instances", "without invalid")] = 0
+            for main_cat_key, main_cat_value in span_dict.items():
+                for sub_cat_key, sub_cat_value in main_cat_value.items():
+                    # the tuple index makes it easy to convert the dict into a pandas dataframe
+                    self.instance_dict[file_name][(main_cat_key, sub_cat_key)] = len(
+                        sub_cat_value
+                    )
+        # initialize data frame
+        self._initialize_df()
+        # add rows for total instances
+        self._add_total()
+        # sort by index and occurence number
+        self._clean_df()
+
+
 # find the overlaying category for an second dimension cat name
 def find_cat_from_str(cat_entry, span_dict):
     for span_dict_key, span_dict_sub_kat in span_dict.items():
@@ -107,50 +185,6 @@ def get_percent_matrix(data_dict, file_name, cat_list=None):
 
 
 # mode can be "instances" or "span"
-# instances reports the number of occurences
-def report_instances(data_dict, file_names=None):
-    # get the file names from the global dict of dicts
-    if file_names is None:
-        file_names = list(data_dict.keys())
-    # or use the file names that were passed explicitly
-    elif isinstance(file_names, str):
-        file_names = [file_names]
-    # filename: main_cat: sub_cat: instances
-    instance_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
-    for file_name in file_names:
-        span_dict = data_dict[file_name]["data"]
-        # initilize total instances rows for easier setting later.
-        instance_dict[file_name][("total instances", "with invalid")] = 0
-        instance_dict[file_name][("total instances", "without invalid")] = 0
-        for main_cat_key, main_cat_value in span_dict.items():
-            for sub_cat_key, sub_cat_value in main_cat_value.items():
-                # the tuple index makes it easy to convert the dict into a pandas dataframe
-                instance_dict[file_name][(main_cat_key, sub_cat_key)] = len(
-                    sub_cat_value
-                )
-    df = pd.DataFrame(instance_dict)
-    df.index = df.index.set_names((["Main Category", "Sub Category"]))
-    # add rows for total instances
-    df.loc[("total instances", "with invalid"), :] = df.sum(axis=0).values
-    df.loc[("total instances", "without invalid"), :] = (
-        df.loc[("total instances", "with invalid"), :].values
-        - df.loc["KAT1MoralisierendesSegment", "Keine Moralisierung"].values
-    )
-    # sort by index and occurence number
-    df = df.sort_values(
-        by=[
-            "Main Category",
-            "Sub Category",
-            file_names[0],
-        ],
-        ascending=False,
-    )
-    # fill NaN
-    df = df.fillna(0)
-    return df
-
-
-# mode can be "instances" or "span"
 # span reports the spans of the annotations in a list
 def report_spans(data_dict, file_names=None):
     # get the file names from the global dict of dicts
@@ -159,7 +193,7 @@ def report_spans(data_dict, file_names=None):
     # or use the file names that were passed explicitly
     elif isinstance(file_names, str):
         file_names = [file_names]
-    df_spans = report_instances(data_dict, file_names)
+    df_spans = AnalyseOccurence(data_dict, mode="instances").df
     # this report_instances call makes it much easier to include the total number of spans for each columns, as well as removes the need to duplicate the pandas setup.
     df_spans[:] = df_spans[:].astype("object")
     for file_name in file_names:
