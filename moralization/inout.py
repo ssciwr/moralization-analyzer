@@ -69,7 +69,7 @@ class InputOutput:
             data_dict[os.path.basename(data_file).split(".xmi")[0]] = {
                 "data": analyse.sort_spans(cas, ts),
                 "file_type": os.path.basename(data_file).split(".")[1],
-                "sofa": cas.get_sofa(),
+                "sofa": cas.sofa_string,  # note: use .sofa_string not .get_sofa() as the latter removes \n and similar markers
             }
         return data_dict
 
@@ -82,39 +82,41 @@ class InputOutput:
             db_train = DocBin()
             db_dev = DocBin()
 
-            doc_train = nlp(str(data_dict[file]["sofa"]))
-            doc_dev = nlp(str(data_dict[file]["sofa"]))
+            doc_train = nlp(data_dict[file]["sofa"])
+            doc_dev = nlp(data_dict[file]["sofa"])
 
             ents = []
             for main_cat_key, main_cat_value in data_dict[file]["data"].items():
                 if main_cat_key != "KAT5Ausformulierung":
                     for sub_cat_label, sub_cat_span_list in main_cat_value.items():
                         for span in sub_cat_span_list:
-                            # print(span["begin"],span["end"])
-                            # print(doc.text[span["begin"]:span["end"]])
+
                             spacy_span = doc_train.char_span(
                                 span["begin"],
                                 span["end"],
                                 label=sub_cat_label,
-                                alignment_mode="contract",
                             )
+
                             ents.append(spacy_span)
-            # split data in test and training
-            random.shuffle(ents)
-            ents_train = ents[:80]
-            ents_test = ents[80:]
 
-            # https://explosion.ai/blog/spancat
-            # use spancat for multiple labels on the same token
+        # split data in test and training
+        random.shuffle(ents)
+        ents_train = ents[: int(0.8 * len(ents))]
+        print(f"len training: {len(ents_train)}")
+        ents_test = ents[int(0.8 * len(ents)) :]
+        print(f"len testing: {len(ents_test)}")
 
-            doc_train.spans["sc"] = ents_train
-            db_train.add(doc_train)
+        # https://explosion.ai/blog/spancat
+        # use spancat for multiple labels on the same token
 
-            doc_dev.spans["sc"] = ents_test
-            db_dev.add(doc_dev)
+        doc_train.spans["sc"] = ents_train
+        db_train.add(doc_train)
 
-            db_train.to_disk("../data/Training/train.spacy")
-            db_dev.to_disk("../data/Training/dev.spacy")
+        doc_dev.spans["sc"] = ents_test
+        db_dev.add(doc_dev)
+
+        db_train.to_disk("../data/Training/train.spacy")
+        db_dev.to_disk("../data/Training/dev.spacy")
 
 
 if __name__ == "__main__":
