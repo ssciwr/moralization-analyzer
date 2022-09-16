@@ -76,8 +76,10 @@ class AnalyseOccurence:
     ) -> None:
         self.mode = mode
         self.data_dict = data_dict
-        self.mode_dict = {"instances": self.report_instances}
-        # , "span": self.report_span}
+        self.mode_dict = {
+            "instances": self.report_instances,
+            "spans": self.report_spans,
+        }
         self.file_names = self._initialize_files(file_names)
         self.instance_dict = self._initialize_dict()
         # call the analysis method
@@ -145,6 +147,44 @@ class AnalyseOccurence:
         # sort by index and occurence number
         self._clean_df()
 
+    def report_spans(self):
+        """Reports spans of a category per text source."""
+        # span reports the spans of the annotations in a list
+        # this report_instances call makes it much easier to include the total number of spans
+        # for each columns, as well as removes the need to duplicate the pandas setup.
+        self.report_instances()
+        self.df[:] = self.df[:].astype("object")
+        for file_name in self.file_names:
+            span_dict = self.data_dict[file_name]["data"]
+            for main_cat_key, main_cat_value in span_dict.items():
+                for sub_cat_key in main_cat_value.keys():
+                    # report the beginning and end of each span as a tuple
+                    span_list = [
+                        (span["begin"], span["end"])
+                        for span in span_dict[main_cat_key][sub_cat_key]
+                    ]
+
+                    # multiple options for how to report the spans are available
+                    # first report the entire span object as a string
+                    # span_list = [str(span) for span in span_dict[main_cat_key][sub_cat_key]]
+                    # this would look like this:
+                    # c.Span(Protagonistinnen=Forderer:in, Protagonistinnen2=Individuum, Protagonistinnen3=Own Group, begin=21822, end=21874);
+                    # c.Span(Protagonistinnen=Benefizient:in, Protagonistinnen2=Institution, Protagonistinnen3=Own Group, begin=21974, end=21984);
+                    # c.Span(Protagonistinnen=Forderer:in, Protagonistinnen2=Institution, Protagonistinnen3=Own Group, begin=66349, end=66352)
+                    # maybe one should remove the c.Span() but i'm not sure what exactly is wanted here.
+                    # second option is to report the end or beginning index for each span
+                    # span_list=[str(span["end"]) for span in span_dict[main_cat_key][sub_cat_key] ]
+
+                    # convert list to seperated str
+                    # span_str = ";".join(span_list)
+                    # span_str = span_str.replace("[", "").replace("]", "")
+
+                    self.df.at[
+                        (main_cat_key, sub_cat_key),
+                        file_name,
+                        # ] = span_str
+                    ] = span_list
+
 
 # find the overlaying category for an second dimension cat name
 def find_cat_from_str(cat_entry, span_dict):
@@ -182,49 +222,3 @@ def get_percent_matrix(data_dict, file_name, cat_list=None):
     df = pd.DataFrame(percent_matrix, index=cat_list)
     df.columns = cat_list
     return df
-
-
-# mode can be "instances" or "span"
-# span reports the spans of the annotations in a list
-def report_spans(data_dict, file_names=None):
-    # get the file names from the global dict of dicts
-    if file_names is None:
-        file_names = list(data_dict.keys())
-    # or use the file names that were passed explicitly
-    elif isinstance(file_names, str):
-        file_names = [file_names]
-    df_spans = AnalyseOccurence(data_dict, mode="instances").df
-    # this report_instances call makes it much easier to include the total number of spans for each columns, as well as removes the need to duplicate the pandas setup.
-    df_spans[:] = df_spans[:].astype("object")
-    for file_name in file_names:
-        span_dict = data_dict[file_name]["data"]
-        for main_cat_key, main_cat_value in span_dict.items():
-            for sub_cat_key, sub_cat_value in main_cat_value.items():
-                # report the beginning and end of each span as a tuple
-                span_list = [
-                    (span["begin"], span["end"])
-                    for span in span_dict[main_cat_key][sub_cat_key]
-                ]
-
-                # multiple options for how to report the spans are available
-                # first report the entire span object as a string
-                # span_list = [str(span) for span in span_dict[main_cat_key][sub_cat_key]]
-                # this would look like this:
-                # c.Span(Protagonistinnen=Forderer:in, Protagonistinnen2=Individuum, Protagonistinnen3=Own Group, begin=21822, end=21874);
-                # c.Span(Protagonistinnen=Benefizient:in, Protagonistinnen2=Institution, Protagonistinnen3=Own Group, begin=21974, end=21984);
-                # c.Span(Protagonistinnen=Forderer:in, Protagonistinnen2=Institution, Protagonistinnen3=Own Group, begin=66349, end=66352)
-                # maybe one should remove the c.Span() but i'm not sure what exactly is wanted here.
-                # second option is to report the end or beginning index for each span
-                # span_list=[str(span["end"]) for span in span_dict[main_cat_key][sub_cat_key] ]
-
-                # convert list to seperated str
-                # span_str = ";".join(span_list)
-                # span_str = span_str.replace("[", "").replace("]", "")
-
-                df_spans.at[
-                    (main_cat_key, sub_cat_key),
-                    file_name,
-                    # ] = span_str
-                ] = span_list
-
-    return df_spans

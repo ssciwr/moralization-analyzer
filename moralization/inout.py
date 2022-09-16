@@ -71,7 +71,7 @@ if __name__ == "__main__":
     print(df_instances.loc["KAT2Subjektive_Ausdrcke"])
     # checked these numbers and they look correct
     #
-    df_spans = analyse.report_spans(data_dict)
+    df_spans = analyse.AnalyseOccurence(data_dict, mode="spans").df
     print(df_spans)
     # checked these numbers and they look correct
     #
