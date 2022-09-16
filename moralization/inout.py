@@ -76,5 +76,5 @@ if __name__ == "__main__":
     # checked these numbers and they look correct
     #
     # analyse.get_overlap_percent(
-    # "Forderer:in", "Neutral", data_dict_list, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
+    # "Forderer:in", "Neutral", data_dict, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
     #     )
