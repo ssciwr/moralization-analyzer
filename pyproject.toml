@@ -28,6 +28,7 @@ dependencies = [
     "IPython",
     "seaborn",
     "click",
+    "importlib_metadata",
 ]
 
 [tool.setuptools.package-data]
