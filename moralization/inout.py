@@ -76,44 +76,39 @@ class InputOutput:
     @staticmethod
     def prepare_spacy_dat(dir_path: str):
         data_dict = InputOutput.get_input_dir(dir_path)
+        nlp = spacy.blank("de")
+        db_train = DocBin()
+        db_dev = DocBin()
+
         for file in data_dict.keys():
-
-            nlp = spacy.blank("de")
-            db_train = DocBin()
-            db_dev = DocBin()
-
             doc_train = nlp(data_dict[file]["sofa"])
             doc_dev = nlp(data_dict[file]["sofa"])
-
             ents = []
+
             for main_cat_key, main_cat_value in data_dict[file]["data"].items():
                 if main_cat_key != "KAT5Ausformulierung":
                     for sub_cat_label, sub_cat_span_list in main_cat_value.items():
                         for span in sub_cat_span_list:
-
                             spacy_span = doc_train.char_span(
                                 span["begin"],
                                 span["end"],
                                 label=sub_cat_label,
                             )
-
                             ents.append(spacy_span)
 
-        # split data in test and training
-        random.shuffle(ents)
-        ents_train = ents[: int(0.8 * len(ents))]
-        print(f"len training: {len(ents_train)}")
-        ents_test = ents[int(0.8 * len(ents)) :]
-        print(f"len testing: {len(ents_test)}")
+            # split data for each file in test and training
+            random.shuffle(ents)
+            ents_train = ents[: int(0.8 * len(ents))]
+            ents_test = ents[int(0.8 * len(ents)) :]
 
-        # https://explosion.ai/blog/spancat
-        # use spancat for multiple labels on the same token
+            # https://explosion.ai/blog/spancat
+            # use spancat for multiple labels on the same token
 
-        doc_train.spans["sc"] = ents_train
-        db_train.add(doc_train)
+            doc_train.spans["sc"] = ents_train
+            db_train.add(doc_train)
 
-        doc_dev.spans["sc"] = ents_test
-        db_dev.add(doc_dev)
+            doc_dev.spans["sc"] = ents_test
+            db_dev.add(doc_dev)
 
         db_train.to_disk("../data/Training/train.spacy")
         db_dev.to_disk("../data/Training/dev.spacy")
