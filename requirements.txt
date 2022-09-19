@@ -5,3 +5,4 @@ matplotlib
 IPython
 seaborn
 click
+importlib_metadata

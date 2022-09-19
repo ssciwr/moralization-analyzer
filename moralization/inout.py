@@ -40,7 +40,11 @@ class InputOutput:
         "Get a list of input files from a given directory. Currently only xmi files."
         ### load multiple files into a list of dictionaries
         ts = InputOutput.read_typesystem()
+        if not os.path.isdir(dir_path):
+            raise RuntimeError(f"Path {dir_path} does not exist")
         data_files = glob.glob(os.path.join(dir_path, "*.xmi"))
+        if not data_files:
+            raise RuntimeError(f"No input files found in {dir_path}")
         data_dict = {}
         for data_file in data_files:
             # get the file type dynamically
@@ -61,7 +65,7 @@ if __name__ == "__main__":
     # "moralization/data/Gerichtsurteile-pos-AW-neu-optimiert-BB.xmi"
     # )
     data_dict = InputOutput.get_input_dir("data/")
-    df_instances = analyse.report_instances(data_dict)
+    df_instances = analyse.AnalyseOccurence(data_dict, mode="instances").df
     print(df_instances)
     # I checked these numbers using test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB
     # and it looks correct
@@ -71,10 +75,10 @@ if __name__ == "__main__":
     print(df_instances.loc["KAT2Subjektive_Ausdrcke"])
     # checked these numbers and they look correct
     #
-    df_spans = analyse.report_spans(data_dict)
+    df_spans = analyse.AnalyseOccurence(data_dict, mode="spans").df
     print(df_spans)
     # checked these numbers and they look correct
     #
     # analyse.get_overlap_percent(
-    # "Forderer:in", "Neutral", data_dict_list, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
+    # "Forderer:in", "Neutral", data_dict, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
     #     )
