@@ -5,3 +5,4 @@ __version__ = metadata.version(__package__)
 del metadata
 
 from moralization.inout import InputOutput
+from moralization.machine_learning import Machine_Learning
