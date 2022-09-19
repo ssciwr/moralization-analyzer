@@ -55,6 +55,8 @@ class InputOutput:
             ts = InputOutput.read_typesystem(ts_file[0])
 
         data_files = glob.glob(os.path.join(dir_path, "*.xmi"))
+        if not data_files:
+            raise RuntimeError(f"No input files found in {dir_path}")
         data_dict = {}
         for data_file in data_files:
             # get the file type dynamically

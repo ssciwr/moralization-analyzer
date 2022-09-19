@@ -191,6 +191,7 @@ def find_cat_from_str(cat_entry, span_dict):
     for span_dict_key, span_dict_sub_kat in span_dict.items():
         if cat_entry in span_dict_sub_kat.keys():
             return span_dict_key
+    raise RuntimeError(f"Category '{cat_entry}' not found in dataset")
 
 
 # get overlap%

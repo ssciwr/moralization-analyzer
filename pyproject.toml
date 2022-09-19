@@ -28,6 +28,7 @@ dependencies = [
     "IPython",
     "seaborn",
     "click",
+    "importlib_metadata",
 ]
 
 [tool.setuptools.package-data]
@@ -38,4 +39,4 @@ dependencies = [
 moralization_copy_notebooks = "moralization.paths:copy_notebooks"
 
 [tool.setuptools]
-packages = ["moralization"]
+packages = ["moralization", "moralization.data"]
