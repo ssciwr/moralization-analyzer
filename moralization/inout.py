@@ -18,10 +18,11 @@ class InputOutput:
         return filename.strip().split(".")[-1]
 
     @staticmethod
-    def read_typesystem() -> object:
+    def read_typesystem(filename="") -> object:
         # read in the file system types
-        myfile = pkg / "data" / "TypeSystem.xml"
-        with open(myfile, "rb") as f:
+        if filename == "":
+            filename = pkg / "data" / "TypeSystem.xml"
+        with open(filename, "rb") as f:
             ts = load_typesystem(f)
         return ts
 
@@ -37,9 +38,23 @@ class InputOutput:
 
     @staticmethod
     def get_input_dir(dir_path: str) -> dict:
-        "Get a list of input files from a given directory. Currently only xmi files."
+        """Get a list of input files from a given directory. Currently only xmi files.
+        Read the TypeSystem file from the provided data directory.
+        """
         ### load multiple files into a list of dictionaries
-        ts = InputOutput.read_typesystem()
+        ts_file = glob.glob(os.path.join(dir_path, "TypeSystem.xml"))
+        if len(ts_file) == 1:
+            ts = InputOutput.read_typesystem(ts_file[0])
+        elif len(ts_file) == 0:
+            print(
+                f"No Typesystem found in {os.path.abspath(dir_path)}, trying default location"
+            )
+            if not glob.glob(str(pkg / "data" / "TypeSystem.xml")):
+                raise FileNotFoundError("No typesystem found in ", pkg / "data")
+            ts = InputOutput.read_typesystem(pkg / "data" / "TypeSystem.xml")
+        else:
+            raise Warning("Multiple typesystems found. Please provide only one.")
+
         data_files = glob.glob(os.path.join(dir_path, "*.xmi"))
         data_dict = {}
         for data_file in data_files:
