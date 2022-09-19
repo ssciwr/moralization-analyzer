@@ -40,7 +40,11 @@ class InputOutput:
         "Get a list of input files from a given directory. Currently only xmi files."
         ### load multiple files into a list of dictionaries
         ts = InputOutput.read_typesystem()
+        if not os.path.isdir(dir_path):
+            raise RuntimeError(f"Path {dir_path} does not exist")
         data_files = glob.glob(os.path.join(dir_path, "*.xmi"))
+        if not data_files:
+            raise RuntimeError(f"No input files found in {dir_path}")
         data_dict = {}
         for data_file in data_files:
             # get the file type dynamically
