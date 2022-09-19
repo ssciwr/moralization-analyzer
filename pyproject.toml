@@ -39,4 +39,4 @@ dependencies = [
 moralization_copy_notebooks = "moralization.paths:copy_notebooks"
 
 [tool.setuptools]
-packages = ["moralization"]
+packages = ["moralization", "moralization.data"]

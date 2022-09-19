@@ -9,5 +9,6 @@ dependencies:
   - matplotlib 
   - seaborn 
   - click
+  - importlib_metadata
   - pip:
     - dkpro-cassis
