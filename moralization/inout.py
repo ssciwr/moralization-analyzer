@@ -1,6 +1,5 @@
 from cassis import load_typesystem, load_cas_from_xmi
-import glob
-import os
+import pathlib
 import importlib_resources
 import logging
 from moralization import analyse
@@ -17,7 +16,7 @@ class InputOutput:
 
     @staticmethod
     def get_file_type(filename):
-        return filename.strip().split(".")[-1]
+        return pathlib.Path(filename).suffix[1:]
 
     @staticmethod
     def read_typesystem(filename=(pkg / "data" / "TypeSystem.xml")) -> object:
@@ -63,14 +62,12 @@ class InputOutput:
         for data_file in data_files:
             # get the file type dynamically
             file_type = InputOutput.get_file_type(data_file)
-            # the wikipediadiskussionen file breaks as it has an invalid xmi charakter.
-            # if data_file != "../data/Wikipediadiskussionen-neg-BD-neu-optimiert-CK.xmi":
             try:
                 with open(data_file, "rb") as f:
                     cas = InputOutput.input_type[file_type](f, typesystem=ts)
-                data_dict[os.path.basename(data_file).split(".xmi")[0]] = {
+                data_dict[data_file.stem] = {
                     "data": analyse.sort_spans(cas, ts),
-                    "file_type": os.path.basename(data_file).split(".")[1],
+                    "file_type": file_type,
                 }
             except XMLSyntaxError as e:
                 logging.warning(
