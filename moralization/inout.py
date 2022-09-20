@@ -2,7 +2,9 @@ from cassis import load_typesystem, load_cas_from_xmi
 import glob
 import os
 import importlib_resources
+import logging
 from moralization import analyse
+from lxml.etree import XMLSyntaxError
 
 pkg = importlib_resources.files("moralization")
 
@@ -63,12 +65,18 @@ class InputOutput:
             file_type = InputOutput.get_file_type(data_file)
             # the wikipediadiskussionen file breaks as it has an invalid xmi charakter.
             # if data_file != "../data/Wikipediadiskussionen-neg-BD-neu-optimiert-CK.xmi":
-            with open(data_file, "rb") as f:
-                cas = InputOutput.input_type[file_type](f, typesystem=ts)
-            data_dict[os.path.basename(data_file).split(".xmi")[0]] = {
-                "data": analyse.sort_spans(cas, ts),
-                "file_type": os.path.basename(data_file).split(".")[1],
-            }
+            try:
+                with open(data_file, "rb") as f:
+                    cas = InputOutput.input_type[file_type](f, typesystem=ts)
+                data_dict[os.path.basename(data_file).split(".xmi")[0]] = {
+                    "data": analyse.sort_spans(cas, ts),
+                    "file_type": os.path.basename(data_file).split(".")[1],
+                }
+            except XMLSyntaxError as e:
+                logging.warning(
+                    f"WARNING: skipping file '{data_file}' due to XMLSyntaxError: {e}"
+                )
+
         return data_dict
 
 
