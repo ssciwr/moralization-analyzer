@@ -1,6 +1,5 @@
 from cassis import load_typesystem, load_cas_from_xmi
-import glob
-import os
+import pathlib
 import importlib_resources
 import logging
 from moralization import analyse
@@ -17,7 +16,7 @@ class InputOutput:
 
     @staticmethod
     def get_file_type(filename):
-        return filename.strip().split(".")[-1]
+        return pathlib.Path(filename).suffix[1:]
 
     @staticmethod
     def read_typesystem() -> object:
@@ -38,27 +37,26 @@ class InputOutput:
         return data
 
     @staticmethod
-    def get_input_dir(dir_path: str) -> dict:
+    def get_input_dir(dir: str) -> dict:
         "Get a list of input files from a given directory. Currently only xmi files."
         ### load multiple files into a list of dictionaries
         ts = InputOutput.read_typesystem()
-        if not os.path.isdir(dir_path):
+        dir_path = pathlib.Path(dir)
+        if not dir_path.is_dir():
             raise RuntimeError(f"Path {dir_path} does not exist")
-        data_files = glob.glob(os.path.join(dir_path, "*.xmi"))
+        data_files = dir_path.glob("*.xmi")
         if not data_files:
             raise RuntimeError(f"No input files found in {dir_path}")
         data_dict = {}
         for data_file in data_files:
             # get the file type dynamically
             file_type = InputOutput.get_file_type(data_file)
-            # the wikipediadiskussionen file breaks as it has an invalid xmi charakter.
-            # if data_file != "../data/Wikipediadiskussionen-neg-BD-neu-optimiert-CK.xmi":
             try:
                 with open(data_file, "rb") as f:
                     cas = InputOutput.input_type[file_type](f, typesystem=ts)
-                data_dict[os.path.basename(data_file).split(".xmi")[0]] = {
+                data_dict[data_file.stem] = {
                     "data": analyse.sort_spans(cas, ts),
-                    "file_type": os.path.basename(data_file).split(".")[1],
+                    "file_type": file_type,
                 }
             except XMLSyntaxError as e:
                 logging.warning(
