@@ -1,0 +1,1828 @@
+#FORMAT=WebAnno TSV 3.3
+#T_SP=custom.Span|Forderung|KAT1MoralisierendesSegment|KAT2Subjektive_Ausdrcke|KAT5Ausformulierung|KOMMENTAR|KommunikativeFunktion|Moralwerte|Protagonistinnen|Protagonistinnen2|Protagonistinnen3
+
+
+#Text=PBW/W15.00002 Protokoll der Sitzung des Parlaments Landtag von Baden-Württemberg am 12.05.2011. 2. Sitzung der 15. Wahlperiode 2011-. Plenarprotokoll, Stuttgart, 2011 ### ### Ich will eindringlich vor solchen Handlungen warnen, weil die #Gefahr# einer Ungültigkeit der Wahl ins Haus steht. ### Wir alle sollten wissen, dass der Grundsatz der geheimen Wahl ein Verfassungsgrundsatz ist. Das Wahlgeheimnis ist kein verzichtbares Recht des Wählers, sondern ein unabdingbarer Bestandteil der verfassungsmäßigen Ordnung.
+1-1	799-802	PBW	_	_	_	_	_	_	_	_	_	_	
+1-2	802-803	/	_	_	_	_	_	_	_	_	_	_	
+1-3	803-812	W15.00002	_	_	_	_	_	_	_	_	_	_	
+1-4	813-822	Protokoll	_	_	_	_	_	_	_	_	_	_	
+1-5	823-826	der	_	_	_	_	_	_	_	_	_	_	
+1-6	827-834	Sitzung	_	_	_	_	_	_	_	_	_	_	
+1-7	835-838	des	_	_	_	_	_	_	_	_	_	_	
+1-8	839-849	Parlaments	_	_	_	_	_	_	_	_	_	_	
+1-9	850-857	Landtag	_	_	_	_	_	_	_	_	_	_	
+1-10	858-861	von	_	_	_	_	_	_	_	_	_	_	
+1-11	862-879	Baden-Württemberg	_	_	_	_	_	_	_	_	_	_	
+1-12	880-882	am	_	_	_	_	_	_	_	_	_	_	
+1-13	883-893	12.05.2011	_	_	_	_	_	_	_	_	_	_	
+1-14	893-894	.	_	_	_	_	_	_	_	_	_	_	
+1-15	895-896	2	_	_	_	_	_	_	_	_	_	_	
+1-16	896-897	.	_	_	_	_	_	_	_	_	_	_	
+1-17	898-905	Sitzung	_	_	_	_	_	_	_	_	_	_	
+1-18	906-909	der	_	_	_	_	_	_	_	_	_	_	
+1-19	910-912	15	_	_	_	_	_	_	_	_	_	_	
+1-20	912-913	.	_	_	_	_	_	_	_	_	_	_	
+1-21	914-925	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+1-22	926-930	2011	_	_	_	_	_	_	_	_	_	_	
+1-23	930-931	-	_	_	_	_	_	_	_	_	_	_	
+1-24	931-932	.	_	_	_	_	_	_	_	_	_	_	
+1-25	933-948	Plenarprotokoll	_	_	_	_	_	_	_	_	_	_	
+1-26	948-949	,	_	_	_	_	_	_	_	_	_	_	
+1-27	950-959	Stuttgart	_	_	_	_	_	_	_	_	_	_	
+1-28	959-960	,	_	_	_	_	_	_	_	_	_	_	
+1-29	961-965	2011	_	_	_	_	_	_	_	_	_	_	
+1-30	966-967	#	_	_	_	_	_	_	_	_	_	_	
+1-31	967-968	#	_	_	_	_	_	_	_	_	_	_	
+1-32	968-969	#	_	_	_	_	_	_	_	_	_	_	
+1-33	970-971	#	_	_	_	_	_	_	_	_	_	_	
+1-34	971-972	#	_	_	_	_	_	_	_	_	_	_	
+1-35	972-973	#	_	_	_	_	_	_	_	_	_	_	
+1-36	974-977	Ich	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-37	978-982	will	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-38	983-995	eindringlich	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-39	996-999	vor	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-40	1000-1007	solchen	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-41	1008-1018	Handlungen	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-42	1019-1025	warnen	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-43	1025-1026	,	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-44	1027-1031	weil	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-45	1032-1035	die	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-46	1036-1037	#	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-47	1037-1043	Gefahr	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-48	1043-1044	#	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-49	1045-1050	einer	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-50	1051-1063	Ungültigkeit	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-51	1064-1067	der	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-52	1068-1072	Wahl	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-53	1073-1076	ins	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-54	1077-1081	Haus	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-55	1082-1087	steht	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-56	1087-1088	.	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-57	1089-1090	#	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-58	1090-1091	#	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-59	1091-1092	#	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-60	1093-1096	Wir	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-61	1097-1101	alle	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-62	1102-1109	sollten	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-63	1110-1116	wissen	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-64	1116-1117	,	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-65	1118-1122	dass	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-66	1123-1126	der	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-67	1127-1136	Grundsatz	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-68	1137-1140	der	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-69	1141-1149	geheimen	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-70	1150-1154	Wahl	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-71	1155-1158	ein	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-72	1159-1179	Verfassungsgrundsatz	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-73	1180-1183	ist	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-74	1183-1184	.	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-75	1185-1188	Das	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-76	1189-1202	Wahlgeheimnis	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-77	1203-1206	ist	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-78	1207-1211	kein	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-79	1212-1225	verzichtbares	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-80	1226-1231	Recht	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-81	1232-1235	des	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-82	1236-1243	Wählers	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-83	1243-1244	,	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-84	1245-1252	sondern	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-85	1253-1256	ein	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-86	1257-1270	unabdingbarer	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-87	1271-1282	Bestandteil	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-88	1283-1286	der	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-89	1287-1305	verfassungsmäßigen	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-90	1306-1313	Ordnung	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+1-91	1313-1314	.	*[1]	Keine Moralisierung[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	*[1]	
+
+#Text=PHB/W16.00001 Protokoll der Sitzung des Parlaments Bremische Bürgerschaft am 03.07.2003. 1. Sitzung der 16. Wahlperiode 2003-2007. Plenarprotokoll, Bremen, 2003 ### ### Andererseits halte ich es doch für bemerkenswert, dass man mit 62 Jahren schon Alterspräsidentin wird, und ich spreche damit einen Umstand an, den schon der Alterspräsident des Bundestages in seiner Eröffnungsrede ansprach, die #Ausgrenzung# der älteren Mitmenschen, die, wie ich mit Otto Schily meine, ein selbstverständliches Recht auf eine aktive Mitgestaltung der Politik haben. ###
+2-1	2074-2077	PHB	_	_	_	_	_	_	_	_	_	_	
+2-2	2077-2078	/	_	_	_	_	_	_	_	_	_	_	
+2-3	2078-2087	W16.00001	_	_	_	_	_	_	_	_	_	_	
+2-4	2088-2097	Protokoll	_	_	_	_	_	_	_	_	_	_	
+2-5	2098-2101	der	_	_	_	_	_	_	_	_	_	_	
+2-6	2102-2109	Sitzung	_	_	_	_	_	_	_	_	_	_	
+2-7	2110-2113	des	_	_	_	_	_	_	_	_	_	_	
+2-8	2114-2124	Parlaments	_	_	_	_	_	_	_	_	_	_	
+2-9	2125-2134	Bremische	_	_	_	_	_	_	_	_	_	_	
+2-10	2135-2147	Bürgerschaft	_	_	_	_	_	_	_	_	_	_	
+2-11	2148-2150	am	_	_	_	_	_	_	_	_	_	_	
+2-12	2151-2161	03.07.2003	_	_	_	_	_	_	_	_	_	_	
+2-13	2161-2162	.	_	_	_	_	_	_	_	_	_	_	
+2-14	2163-2164	1	_	_	_	_	_	_	_	_	_	_	
+2-15	2164-2165	.	_	_	_	_	_	_	_	_	_	_	
+2-16	2166-2173	Sitzung	_	_	_	_	_	_	_	_	_	_	
+2-17	2174-2177	der	_	_	_	_	_	_	_	_	_	_	
+2-18	2178-2180	16	_	_	_	_	_	_	_	_	_	_	
+2-19	2180-2181	.	_	_	_	_	_	_	_	_	_	_	
+2-20	2182-2193	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+2-21	2194-2198	2003	_	_	_	_	_	_	_	_	_	_	
+2-22	2198-2199	-	_	_	_	_	_	_	_	_	_	_	
+2-23	2199-2203	2007	_	_	_	_	_	_	_	_	_	_	
+2-24	2203-2204	.	_	_	_	_	_	_	_	_	_	_	
+2-25	2205-2220	Plenarprotokoll	_	_	_	_	_	_	_	_	_	_	
+2-26	2220-2221	,	_	_	_	_	_	_	_	_	_	_	
+2-27	2222-2228	Bremen	_	_	_	_	_	_	_	_	_	_	
+2-28	2228-2229	,	_	_	_	_	_	_	_	_	_	_	
+2-29	2230-2234	2003	_	_	_	_	_	_	_	_	_	_	
+2-30	2235-2236	#	_	_	_	_	_	_	_	_	_	_	
+2-31	2236-2237	#	_	_	_	_	_	_	_	_	_	_	
+2-32	2237-2238	#	_	_	_	_	_	_	_	_	_	_	
+2-33	2239-2240	#	_	_	_	_	_	_	_	_	_	_	
+2-34	2240-2241	#	_	_	_	_	_	_	_	_	_	_	
+2-35	2241-2242	#	_	_	_	_	_	_	_	_	_	_	
+2-36	2243-2255	Andererseits	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-37	2256-2261	halte	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-38	2262-2265	ich	*[2]|*[3]	*[2]|*[3]	*[2]|*[3]	*[2]|*[3]	*[2]|*[3]	Expression[2]|*[3]	*[2]|*[3]	*[2]|Forderer:in[3]	*[2]|Individuum[3]	*[2]|Own Group[3]	
+2-39	2266-2268	es	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-40	2269-2273	doch	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-41	2274-2277	für	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-42	2278-2291	bemerkenswert	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-43	2291-2292	,	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-44	2293-2297	dass	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-45	2298-2301	man	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-46	2302-2305	mit	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-47	2306-2308	62	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-48	2309-2315	Jahren	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-49	2316-2321	schon	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-50	2322-2339	Alterspräsidentin	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-51	2340-2344	wird	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-52	2344-2345	,	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-53	2346-2349	und	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-54	2350-2353	ich	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-55	2354-2361	spreche	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-56	2362-2367	damit	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-57	2368-2373	einen	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-58	2374-2381	Umstand	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-59	2382-2384	an	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-60	2384-2385	,	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-61	2386-2389	den	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-62	2390-2395	schon	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-63	2396-2399	der	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-64	2400-2415	Alterspräsident	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-65	2416-2419	des	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-66	2420-2431	Bundestages	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-67	2432-2434	in	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-68	2435-2441	seiner	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-69	2442-2456	Eröffnungsrede	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-70	2457-2465	ansprach	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-71	2465-2466	,	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-72	2467-2470	die	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-73	2471-2472	#	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-74	2472-2483	Ausgrenzung	*[2]|*[4]	*[2]|*[4]	*[2]|Cheating[4]	*[2]|*[4]	*[2]|*[4]	Expression[2]|*[4]	*[2]|*[4]	*[2]|*[4]	*[2]|*[4]	*[2]|*[4]	
+2-75	2483-2484	#	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-76	2485-2488	der	*[2]|*[5]	*[2]|*[5]	*[2]|*[5]	*[2]|*[5]	*[2]|*[5]	Expression[2]|*[5]	*[2]|*[5]	*[2]|Benefizient:in[5]	*[2]|soziale Gruppe[5]	*[2]|Neutral[5]	
+2-77	2489-2496	älteren	*[2]|*[5]	*[2]|*[5]	*[2]|*[5]	*[2]|*[5]	*[2]|*[5]	Expression[2]|*[5]	*[2]|*[5]	*[2]|Benefizient:in[5]	*[2]|soziale Gruppe[5]	*[2]|Neutral[5]	
+2-78	2497-2508	Mitmenschen	*[2]|*[5]	*[2]|*[5]	*[2]|*[5]	*[2]|*[5]	*[2]|*[5]	Expression[2]|*[5]	*[2]|*[5]	*[2]|Benefizient:in[5]	*[2]|soziale Gruppe[5]	*[2]|Neutral[5]	
+2-79	2508-2509	,	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-80	2510-2513	die	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-81	2513-2514	,	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-82	2515-2518	wie	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-83	2519-2522	ich	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-84	2523-2526	mit	*[2]|*[6]	*[2]|*[6]	*[2]|*[6]	*[2]|*[6]	*[2]|*[6]	Expression[2]|*[6]	*[2]|*[6]	*[2]|Forderer:in[6]	*[2]|Individuum[6]	*[2]|Neutral[6]	
+2-85	2527-2531	Otto	*[2]|*[6]	*[2]|*[6]	*[2]|*[6]	*[2]|*[6]	*[2]|*[6]	Expression[2]|*[6]	*[2]|*[6]	*[2]|Forderer:in[6]	*[2]|Individuum[6]	*[2]|Neutral[6]	
+2-86	2532-2538	Schily	*[2]|*[6]	*[2]|*[6]	*[2]|*[6]	*[2]|*[6]	*[2]|*[6]	Expression[2]|*[6]	*[2]|*[6]	*[2]|Forderer:in[6]	*[2]|Individuum[6]	*[2]|Neutral[6]	
+2-87	2539-2544	meine	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-88	2544-2545	,	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-89	2546-2549	ein	*[2]|*[7]	*[2]|Moralisierung explizit[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	Expression[2]|*[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	
+2-90	2550-2570	selbstverständliches	*[2]|*[7]	*[2]|Moralisierung explizit[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	Expression[2]|*[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	
+2-91	2571-2576	Recht	*[2]|*[7]	*[2]|Moralisierung explizit[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	Expression[2]|*[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	
+2-92	2577-2580	auf	*[2]|*[7]	*[2]|Moralisierung explizit[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	Expression[2]|*[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	
+2-93	2581-2585	eine	*[2]|*[7]|*[8]	*[2]|Moralisierung explizit[7]|*[8]	*[2]|*[7]|Fairness[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	Expression[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	
+2-94	2586-2592	aktive	*[2]|*[7]|*[8]	*[2]|Moralisierung explizit[7]|*[8]	*[2]|*[7]|Fairness[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	Expression[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	
+2-95	2593-2606	Mitgestaltung	*[2]|*[7]|*[8]	*[2]|Moralisierung explizit[7]|*[8]	*[2]|*[7]|Fairness[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	Expression[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	
+2-96	2607-2610	der	*[2]|*[7]|*[8]	*[2]|Moralisierung explizit[7]|*[8]	*[2]|*[7]|Fairness[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	Expression[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	
+2-97	2611-2618	Politik	*[2]|*[7]|*[8]	*[2]|Moralisierung explizit[7]|*[8]	*[2]|*[7]|Fairness[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	Expression[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	*[2]|*[7]|*[8]	
+2-98	2619-2624	haben	*[2]|*[7]	*[2]|Moralisierung explizit[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	Expression[2]|*[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	*[2]|*[7]	
+2-99	2624-2625	.	*[2]	*[2]	*[2]	*[2]	*[2]	Expression[2]	*[2]	*[2]	*[2]	*[2]	
+2-100	2626-2627	#	_	_	_	_	_	_	_	_	_	_	
+2-101	2627-2628	#	_	_	_	_	_	_	_	_	_	_	
+2-102	2628-2629	#	_	_	_	_	_	_	_	_	_	_	
+
+#Text=PHB/W16.00026 Protokoll der Sitzung des Parlaments Bremische Bürgerschaft am 06.10.2004. 26. Sitzung der 16. Wahlperiode 2003-2007. Plenarprotokoll, Bremen, 2004 ### Ein zweiter Punkt ist der Bereich Frauen, ich sage bewusst Frauen und nicht Gender. ### Ich weiß ja, was der Unterschied ist, aber es geht doch letzten Endes darum, dass die #Gefahr# droht, dass Frauen zu Verlierern dieser Reform werden, das müssen wir einmal ganz deutlich sagen! ### Durch den nachgelagerten Anspruch auf ALG II, der eine stärkere Anrechnung des Partnereinkommens vorsieht, und angesichts der sozialen Situation von Frauen in dieser Gesellschaft, die häufig oder immer noch diejenigen sind, die weniger verdienen, fallen noch mehr Frauen aus der Förderung heraus, als es bisher in der Arbeitslosenhilfe schon der Fall gewesen ist. Ich finde, dass das auch ein Webfehler dieser Reform ist, aber ich finde, dass wir dann wenigstens dafür sorgen müssen - ich glaube, dass wir uns da dann auch schon nahe kommen, Frau Schön -, dass das nicht auch heißt, dass Frauen dann überhaupt keine Ansprüche mehr auf arbeitsmarktpolitische Maßnahmen seitens der neuen Gesellschaft haben.
+3-1	2788-2791	PHB	_	_	_	_	_	_	_	_	_	_	
+3-2	2791-2792	/	_	_	_	_	_	_	_	_	_	_	
+3-3	2792-2801	W16.00026	_	_	_	_	_	_	_	_	_	_	
+3-4	2802-2811	Protokoll	_	_	_	_	_	_	_	_	_	_	
+3-5	2812-2815	der	_	_	_	_	_	_	_	_	_	_	
+3-6	2816-2823	Sitzung	_	_	_	_	_	_	_	_	_	_	
+3-7	2824-2827	des	_	_	_	_	_	_	_	_	_	_	
+3-8	2828-2838	Parlaments	_	_	_	_	_	_	_	_	_	_	
+3-9	2839-2848	Bremische	_	_	_	_	_	_	_	_	_	_	
+3-10	2849-2861	Bürgerschaft	_	_	_	_	_	_	_	_	_	_	
+3-11	2862-2864	am	_	_	_	_	_	_	_	_	_	_	
+3-12	2865-2875	06.10.2004	_	_	_	_	_	_	_	_	_	_	
+3-13	2875-2876	.	_	_	_	_	_	_	_	_	_	_	
+3-14	2877-2879	26	_	_	_	_	_	_	_	_	_	_	
+3-15	2879-2880	.	_	_	_	_	_	_	_	_	_	_	
+3-16	2881-2888	Sitzung	_	_	_	_	_	_	_	_	_	_	
+3-17	2889-2892	der	_	_	_	_	_	_	_	_	_	_	
+3-18	2893-2895	16	_	_	_	_	_	_	_	_	_	_	
+3-19	2895-2896	.	_	_	_	_	_	_	_	_	_	_	
+3-20	2897-2908	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+3-21	2909-2913	2003	_	_	_	_	_	_	_	_	_	_	
+3-22	2913-2914	-	_	_	_	_	_	_	_	_	_	_	
+3-23	2914-2918	2007	_	_	_	_	_	_	_	_	_	_	
+3-24	2918-2919	.	_	_	_	_	_	_	_	_	_	_	
+3-25	2920-2935	Plenarprotokoll	_	_	_	_	_	_	_	_	_	_	
+3-26	2935-2936	,	_	_	_	_	_	_	_	_	_	_	
+3-27	2937-2943	Bremen	_	_	_	_	_	_	_	_	_	_	
+3-28	2943-2944	,	_	_	_	_	_	_	_	_	_	_	
+3-29	2945-2949	2004	_	_	_	_	_	_	_	_	_	_	
+3-30	2950-2951	#	_	_	_	_	_	_	_	_	_	_	
+3-31	2951-2952	#	_	_	_	_	_	_	_	_	_	_	
+3-32	2952-2953	#	_	_	_	_	_	_	_	_	_	_	
+3-33	2954-2957	Ein	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-34	2958-2965	zweiter	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-35	2966-2971	Punkt	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-36	2972-2975	ist	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-37	2976-2979	der	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-38	2980-2987	Bereich	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-39	2988-2994	Frauen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-40	2994-2995	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-41	2996-2999	ich	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-42	3000-3004	sage	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-43	3005-3012	bewusst	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-44	3013-3019	Frauen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-45	3020-3023	und	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-46	3024-3029	nicht	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-47	3030-3036	Gender	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-48	3036-3037	.	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-49	3038-3039	#	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-50	3039-3040	#	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-51	3040-3041	#	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-52	3042-3045	Ich	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-53	3046-3050	weiß	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-54	3051-3053	ja	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-55	3053-3054	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-56	3055-3058	was	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-57	3059-3062	der	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-58	3063-3074	Unterschied	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-59	3075-3078	ist	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-60	3078-3079	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-61	3080-3084	aber	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-62	3085-3087	es	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-63	3088-3092	geht	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-64	3093-3097	doch	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-65	3098-3105	letzten	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-66	3106-3111	Endes	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-67	3112-3117	darum	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-68	3117-3118	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-69	3119-3123	dass	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-70	3124-3127	die	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-71	3128-3129	#	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-72	3129-3135	Gefahr	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-73	3135-3136	#	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-74	3137-3142	droht	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-75	3142-3143	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-76	3144-3148	dass	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-77	3149-3155	Frauen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-78	3156-3158	zu	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-79	3159-3169	Verlierern	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-80	3170-3176	dieser	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-81	3177-3183	Reform	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-82	3184-3190	werden	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-83	3190-3191	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-84	3192-3195	das	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-85	3196-3202	müssen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-86	3203-3206	wir	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-87	3207-3213	einmal	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-88	3214-3218	ganz	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-89	3219-3227	deutlich	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-90	3228-3233	sagen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-91	3233-3234	!	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-92	3235-3236	#	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-93	3236-3237	#	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-94	3237-3238	#	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-95	3239-3244	Durch	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-96	3245-3248	den	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-97	3249-3263	nachgelagerten	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-98	3264-3272	Anspruch	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-99	3273-3276	auf	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-100	3277-3280	ALG	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-101	3281-3283	II	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-102	3283-3284	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-103	3285-3288	der	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-104	3289-3293	eine	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-105	3294-3302	stärkere	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-106	3303-3313	Anrechnung	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-107	3314-3317	des	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-108	3318-3335	Partnereinkommens	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-109	3336-3344	vorsieht	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-110	3344-3345	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-111	3346-3349	und	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-112	3350-3360	angesichts	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-113	3361-3364	der	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-114	3365-3373	sozialen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-115	3374-3383	Situation	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-116	3384-3387	von	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-117	3388-3394	Frauen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-118	3395-3397	in	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-119	3398-3404	dieser	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-120	3405-3417	Gesellschaft	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-121	3417-3418	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-122	3419-3422	die	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-123	3423-3429	häufig	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-124	3430-3434	oder	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-125	3435-3440	immer	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-126	3441-3445	noch	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-127	3446-3456	diejenigen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-128	3457-3461	sind	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-129	3461-3462	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-130	3463-3466	die	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-131	3467-3474	weniger	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-132	3475-3484	verdienen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-133	3484-3485	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-134	3486-3492	fallen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-135	3493-3497	noch	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-136	3498-3502	mehr	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-137	3503-3509	Frauen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-138	3510-3513	aus	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-139	3514-3517	der	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-140	3518-3527	Förderung	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-141	3528-3534	heraus	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-142	3534-3535	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-143	3536-3539	als	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-144	3540-3542	es	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-145	3543-3549	bisher	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-146	3550-3552	in	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-147	3553-3556	der	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-148	3557-3574	Arbeitslosenhilfe	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-149	3575-3580	schon	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-150	3581-3584	der	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-151	3585-3589	Fall	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-152	3590-3597	gewesen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-153	3598-3601	ist	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-154	3601-3602	.	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-155	3603-3606	Ich	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-156	3607-3612	finde	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-157	3612-3613	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-158	3614-3618	dass	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-159	3619-3622	das	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-160	3623-3627	auch	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-161	3628-3631	ein	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-162	3632-3641	Webfehler	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-163	3642-3648	dieser	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-164	3649-3655	Reform	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-165	3656-3659	ist	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-166	3659-3660	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-167	3661-3665	aber	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-168	3666-3669	ich	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-169	3670-3675	finde	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-170	3675-3676	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-171	3677-3681	dass	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-172	3682-3685	wir	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-173	3686-3690	dann	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-174	3691-3701	wenigstens	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-175	3702-3707	dafür	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-176	3708-3714	sorgen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-177	3715-3721	müssen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-178	3722-3723	-	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-179	3724-3727	ich	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-180	3728-3734	glaube	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-181	3734-3735	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-182	3736-3740	dass	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-183	3741-3744	wir	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-184	3745-3748	uns	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-185	3749-3751	da	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-186	3752-3756	dann	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-187	3757-3761	auch	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-188	3762-3767	schon	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-189	3768-3772	nahe	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-190	3773-3779	kommen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-191	3779-3780	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-192	3781-3785	Frau	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-193	3786-3791	Schön	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-194	3792-3793	-	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-195	3793-3794	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-196	3795-3799	dass	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-197	3800-3803	das	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-198	3804-3809	nicht	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-199	3810-3814	auch	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-200	3815-3820	heißt	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-201	3820-3821	,	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-202	3822-3826	dass	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-203	3827-3833	Frauen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-204	3834-3838	dann	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-205	3839-3848	überhaupt	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-206	3849-3854	keine	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-207	3855-3864	Ansprüche	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-208	3865-3869	mehr	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-209	3870-3873	auf	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-210	3874-3896	arbeitsmarktpolitische	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-211	3897-3906	Maßnahmen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-212	3907-3914	seitens	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-213	3915-3918	der	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-214	3919-3924	neuen	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-215	3925-3937	Gesellschaft	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-216	3938-3943	haben	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+3-217	3943-3944	.	*[9]	Keine Moralisierung[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	*[9]	
+
+#Text=PHB/W16.00026 Protokoll der Sitzung des Parlaments Bremische Bürgerschaft am 06.10.2004. 26. Sitzung der 16. Wahlperiode 2003-2007. Plenarprotokoll, Bremen, 2004 ### Herr Oppermann, ich gebe Ihnen Recht, vielleicht ist das nicht die größte Sozialreform in der bundesrepublikanischen Geschichte mit der Sozialhilfe, aber dann doch die zweitgrößte. Ich finde, es ist klar, wenn man eine solche große Reform ins Werk setzt, dass man dann auch in ihrem Vollzug schauen muss, ob man alles richtig gemacht hat. Ich finde es sehr gut, wenn man sagt, wie der Präses der Evangelischen Kirche, diese Reform muss eine atmende Reform sein. ### Wir müssen in den nächsten Jahren schauen, ob wir erstens vielleicht arbeitsmarktpolitische Effekte erreichen mit der Reform, die wir so nicht erreichen wollten, ich spreche vor allem auch das Thema Zumutbarkeit an, wenn es denn zu #Lohndumping# führt. ### Ich finde, wir müssen zweitens auch sehen, wenn wir wirklich unzumutbare Härten in dieser Reform haben, vor allem für ältere Arbeitnehmerinnen und Arbeitnehmer, die keine Chance auf dem Arbeitsmarkt haben und dann aber an der Grenze stehen, Antwort des Senats vom 14. September 2004( Drucksache 16/396
+4-1	4069-4072	PHB	_	_	_	_	_	_	_	_	_	_	
+4-2	4072-4073	/	_	_	_	_	_	_	_	_	_	_	
+4-3	4073-4082	W16.00026	_	_	_	_	_	_	_	_	_	_	
+4-4	4083-4092	Protokoll	_	_	_	_	_	_	_	_	_	_	
+4-5	4093-4096	der	_	_	_	_	_	_	_	_	_	_	
+4-6	4097-4104	Sitzung	_	_	_	_	_	_	_	_	_	_	
+4-7	4105-4108	des	_	_	_	_	_	_	_	_	_	_	
+4-8	4109-4119	Parlaments	_	_	_	_	_	_	_	_	_	_	
+4-9	4120-4129	Bremische	_	_	_	_	_	_	_	_	_	_	
+4-10	4130-4142	Bürgerschaft	_	_	_	_	_	_	_	_	_	_	
+4-11	4143-4145	am	_	_	_	_	_	_	_	_	_	_	
+4-12	4146-4156	06.10.2004	_	_	_	_	_	_	_	_	_	_	
+4-13	4156-4157	.	_	_	_	_	_	_	_	_	_	_	
+4-14	4158-4160	26	_	_	_	_	_	_	_	_	_	_	
+4-15	4160-4161	.	_	_	_	_	_	_	_	_	_	_	
+4-16	4162-4169	Sitzung	_	_	_	_	_	_	_	_	_	_	
+4-17	4170-4173	der	_	_	_	_	_	_	_	_	_	_	
+4-18	4174-4176	16	_	_	_	_	_	_	_	_	_	_	
+4-19	4176-4177	.	_	_	_	_	_	_	_	_	_	_	
+4-20	4178-4189	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+4-21	4190-4194	2003	_	_	_	_	_	_	_	_	_	_	
+4-22	4194-4195	-	_	_	_	_	_	_	_	_	_	_	
+4-23	4195-4199	2007	_	_	_	_	_	_	_	_	_	_	
+4-24	4199-4200	.	_	_	_	_	_	_	_	_	_	_	
+4-25	4201-4216	Plenarprotokoll	_	_	_	_	_	_	_	_	_	_	
+4-26	4216-4217	,	_	_	_	_	_	_	_	_	_	_	
+4-27	4218-4224	Bremen	_	_	_	_	_	_	_	_	_	_	
+4-28	4224-4225	,	_	_	_	_	_	_	_	_	_	_	
+4-29	4226-4230	2004	_	_	_	_	_	_	_	_	_	_	
+4-30	4231-4232	#	_	_	_	_	_	_	_	_	_	_	
+4-31	4232-4233	#	_	_	_	_	_	_	_	_	_	_	
+4-32	4233-4234	#	_	_	_	_	_	_	_	_	_	_	
+4-33	4235-4239	Herr	_	_	_	_	_	_	_	_	_	_	
+4-34	4240-4249	Oppermann	_	_	_	_	_	_	_	_	_	_	
+4-35	4249-4250	,	_	_	_	_	_	_	_	_	_	_	
+4-36	4251-4254	ich	_	_	_	_	_	_	_	_	_	_	
+4-37	4255-4259	gebe	_	_	_	_	_	_	_	_	_	_	
+4-38	4260-4265	Ihnen	_	_	_	_	_	_	_	_	_	_	
+4-39	4266-4271	Recht	_	_	_	_	_	_	_	_	_	_	
+4-40	4271-4272	,	_	_	_	_	_	_	_	_	_	_	
+4-41	4273-4283	vielleicht	_	_	_	_	_	_	_	_	_	_	
+4-42	4284-4287	ist	_	_	_	_	_	_	_	_	_	_	
+4-43	4288-4291	das	_	_	_	_	_	_	_	_	_	_	
+4-44	4292-4297	nicht	_	_	_	_	_	_	_	_	_	_	
+4-45	4298-4301	die	_	_	_	_	_	_	_	_	_	_	
+4-46	4302-4308	größte	_	_	_	_	_	_	_	_	_	_	
+4-47	4309-4321	Sozialreform	_	_	_	_	_	_	_	_	_	_	
+4-48	4322-4324	in	_	_	_	_	_	_	_	_	_	_	
+4-49	4325-4328	der	_	_	_	_	_	_	_	_	_	_	
+4-50	4329-4351	bundesrepublikanischen	_	_	_	_	_	_	_	_	_	_	
+4-51	4352-4362	Geschichte	_	_	_	_	_	_	_	_	_	_	
+4-52	4363-4366	mit	_	_	_	_	_	_	_	_	_	_	
+4-53	4367-4370	der	_	_	_	_	_	_	_	_	_	_	
+4-54	4371-4382	Sozialhilfe	_	_	_	_	_	_	_	_	_	_	
+4-55	4382-4383	,	_	_	_	_	_	_	_	_	_	_	
+4-56	4384-4388	aber	_	_	_	_	_	_	_	_	_	_	
+4-57	4389-4393	dann	_	_	_	_	_	_	_	_	_	_	
+4-58	4394-4398	doch	_	_	_	_	_	_	_	_	_	_	
+4-59	4399-4402	die	_	_	_	_	_	_	_	_	_	_	
+4-60	4403-4414	zweitgrößte	_	_	_	_	_	_	_	_	_	_	
+4-61	4414-4415	.	_	_	_	_	_	_	_	_	_	_	
+4-62	4416-4419	Ich	_	_	_	_	_	_	_	_	_	_	
+4-63	4420-4425	finde	_	_	_	_	_	_	_	_	_	_	
+4-64	4425-4426	,	_	_	_	_	_	_	_	_	_	_	
+4-65	4427-4429	es	_	_	_	_	_	_	_	_	_	_	
+4-66	4430-4433	ist	_	_	_	_	_	_	_	_	_	_	
+4-67	4434-4438	klar	_	_	_	_	_	_	_	_	_	_	
+4-68	4438-4439	,	_	_	_	_	_	_	_	_	_	_	
+4-69	4440-4444	wenn	_	_	_	_	_	_	_	_	_	_	
+4-70	4445-4448	man	_	_	_	_	_	_	_	_	_	_	
+4-71	4449-4453	eine	_	_	_	_	_	_	_	_	_	_	
+4-72	4454-4460	solche	_	_	_	_	_	_	_	_	_	_	
+4-73	4461-4466	große	_	_	_	_	_	_	_	_	_	_	
+4-74	4467-4473	Reform	_	_	_	_	_	_	_	_	_	_	
+4-75	4474-4477	ins	_	_	_	_	_	_	_	_	_	_	
+4-76	4478-4482	Werk	_	_	_	_	_	_	_	_	_	_	
+4-77	4483-4488	setzt	_	_	_	_	_	_	_	_	_	_	
+4-78	4488-4489	,	_	_	_	_	_	_	_	_	_	_	
+4-79	4490-4494	dass	_	_	_	_	_	_	_	_	_	_	
+4-80	4495-4498	man	_	_	_	_	_	_	_	_	_	_	
+4-81	4499-4503	dann	_	_	_	_	_	_	_	_	_	_	
+4-82	4504-4508	auch	_	_	_	_	_	_	_	_	_	_	
+4-83	4509-4511	in	_	_	_	_	_	_	_	_	_	_	
+4-84	4512-4517	ihrem	_	_	_	_	_	_	_	_	_	_	
+4-85	4518-4525	Vollzug	_	_	_	_	_	_	_	_	_	_	
+4-86	4526-4533	schauen	_	_	_	_	_	_	_	_	_	_	
+4-87	4534-4538	muss	_	_	_	_	_	_	_	_	_	_	
+4-88	4538-4539	,	_	_	_	_	_	_	_	_	_	_	
+4-89	4540-4542	ob	_	_	_	_	_	_	_	_	_	_	
+4-90	4543-4546	man	_	_	_	_	_	_	_	_	_	_	
+4-91	4547-4552	alles	_	_	_	_	_	_	_	_	_	_	
+4-92	4553-4560	richtig	_	_	_	_	_	_	_	_	_	_	
+4-93	4561-4568	gemacht	_	_	_	_	_	_	_	_	_	_	
+4-94	4569-4572	hat	_	_	_	_	_	_	_	_	_	_	
+4-95	4572-4573	.	_	_	_	_	_	_	_	_	_	_	
+4-96	4574-4577	Ich	_	_	_	_	_	_	_	_	_	_	
+4-97	4578-4583	finde	_	_	_	_	_	_	_	_	_	_	
+4-98	4584-4586	es	_	_	_	_	_	_	_	_	_	_	
+4-99	4587-4591	sehr	_	_	_	_	_	_	_	_	_	_	
+4-100	4592-4595	gut	_	_	_	_	_	_	_	_	_	_	
+4-101	4595-4596	,	_	_	_	_	_	_	_	_	_	_	
+4-102	4597-4601	wenn	_	_	_	_	_	_	_	_	_	_	
+4-103	4602-4605	man	_	_	_	_	_	_	_	_	_	_	
+4-104	4606-4610	sagt	_	_	_	_	_	_	_	_	_	_	
+4-105	4610-4611	,	_	_	_	_	_	_	_	_	_	_	
+4-106	4612-4615	wie	_	_	_	_	_	_	_	_	_	_	
+4-107	4616-4619	der	_	_	_	_	_	_	_	_	_	_	
+4-108	4620-4626	Präses	_	_	_	_	_	_	_	_	_	_	
+4-109	4627-4630	der	_	_	_	_	_	_	_	_	_	_	
+4-110	4631-4644	Evangelischen	_	_	_	_	_	_	_	_	_	_	
+4-111	4645-4651	Kirche	_	_	_	_	_	_	_	_	_	_	
+4-112	4651-4652	,	_	_	_	_	_	_	_	_	_	_	
+4-113	4653-4658	diese	_	_	_	_	_	_	_	_	_	_	
+4-114	4659-4665	Reform	_	_	_	_	_	_	_	_	_	_	
+4-115	4666-4670	muss	_	_	_	_	_	_	_	_	_	_	
+4-116	4671-4675	eine	_	_	_	_	_	_	_	_	_	_	
+4-117	4676-4683	atmende	_	_	_	_	_	_	_	_	_	_	
+4-118	4684-4690	Reform	_	_	_	_	_	_	_	_	_	_	
+4-119	4691-4695	sein	_	_	_	_	_	_	_	_	_	_	
+4-120	4695-4696	.	_	_	_	_	_	_	_	_	_	_	
+4-121	4697-4698	#	_	_	_	_	_	_	_	_	_	_	
+4-122	4698-4699	#	_	_	_	_	_	_	_	_	_	_	
+4-123	4699-4700	#	_	_	_	_	_	_	_	_	_	_	
+4-124	4701-4704	Wir	explizit[10]|explizit[11]|*[12]|*[13]	*[10]|*[11]|Moralisierung explizit[12]|*[13]	*[10]|*[11]|*[12]|*[13]	*[10]|*[11]|*[12]|*[13]	*[10]|*[11]|*[12]|*[13]	Appell[10]|*[11]|*[12]|*[13]	*[10]|*[11]|*[12]|*[13]	*[10]|*[11]|*[12]|Adresassat:in[13]	*[10]|*[11]|*[12]|Menschen[13]	*[10]|*[11]|*[12]|Own Group[13]	
+4-125	4705-4711	müssen	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-126	4712-4714	in	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-127	4715-4718	den	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-128	4719-4727	nächsten	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-129	4728-4734	Jahren	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-130	4735-4742	schauen	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-131	4742-4743	,	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-132	4744-4746	ob	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-133	4747-4750	wir	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-134	4751-4758	erstens	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-135	4759-4769	vielleicht	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-136	4770-4792	arbeitsmarktpolitische	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-137	4793-4800	Effekte	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-138	4801-4810	erreichen	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-139	4811-4814	mit	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-140	4815-4818	der	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-141	4819-4825	Reform	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-142	4825-4826	,	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-143	4827-4830	die	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-144	4831-4834	wir	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-145	4835-4837	so	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-146	4838-4843	nicht	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-147	4844-4853	erreichen	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-148	4854-4861	wollten	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-149	4861-4862	,	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-150	4863-4866	ich	explizit[10]|explizit[11]|*[12]|*[14]	*[10]|*[11]|Moralisierung explizit[12]|*[14]	*[10]|*[11]|*[12]|*[14]	*[10]|*[11]|*[12]|*[14]	*[10]|*[11]|*[12]|*[14]	Appell[10]|*[11]|*[12]|*[14]	*[10]|*[11]|*[12]|*[14]	*[10]|*[11]|*[12]|Forderer:in[14]	*[10]|*[11]|*[12]|Individuum[14]	*[10]|*[11]|*[12]|Own Group[14]	
+4-151	4867-4874	spreche	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-152	4875-4878	vor	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-153	4879-4884	allem	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-154	4885-4889	auch	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-155	4890-4893	das	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-156	4894-4899	Thema	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-157	4900-4912	Zumutbarkeit	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-158	4913-4915	an	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-159	4915-4916	,	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-160	4917-4921	wenn	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-161	4922-4924	es	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-162	4925-4929	denn	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-163	4930-4932	zu	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-164	4933-4934	#	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-165	4934-4945	Lohndumping	explizit[10]|explizit[11]|*[12]|*[15]	*[10]|*[11]|Moralisierung explizit[12]|*[15]	*[10]|*[11]|*[12]|Harm[15]	*[10]|*[11]|*[12]|*[15]	*[10]|*[11]|*[12]|*[15]	Appell[10]|*[11]|*[12]|*[15]	*[10]|*[11]|*[12]|*[15]	*[10]|*[11]|*[12]|*[15]	*[10]|*[11]|*[12]|*[15]	*[10]|*[11]|*[12]|*[15]	
+4-166	4945-4946	#	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-167	4947-4952	führt	explizit[10]|explizit[11]|*[12]	*[10]|*[11]|Moralisierung explizit[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	Appell[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	*[10]|*[11]|*[12]	
+4-168	4952-4953	.	_	_	_	_	_	_	_	_	_	_	
+4-169	4954-4955	#	_	_	_	_	_	_	_	_	_	_	
+4-170	4955-4956	#	_	_	_	_	_	_	_	_	_	_	
+4-171	4956-4957	#	_	_	_	_	_	_	_	_	_	_	
+4-172	4958-4961	Ich	_	_	_	_	_	_	_	_	_	_	
+4-173	4962-4967	finde	_	_	_	_	_	_	_	_	_	_	
+4-174	4967-4968	,	_	_	_	_	_	_	_	_	_	_	
+4-175	4969-4972	wir	_	_	_	_	_	_	_	_	_	_	
+4-176	4973-4979	müssen	_	_	_	_	_	_	_	_	_	_	
+4-177	4980-4988	zweitens	_	_	_	_	_	_	_	_	_	_	
+4-178	4989-4993	auch	_	_	_	_	_	_	_	_	_	_	
+4-179	4994-4999	sehen	_	_	_	_	_	_	_	_	_	_	
+4-180	4999-5000	,	_	_	_	_	_	_	_	_	_	_	
+4-181	5001-5005	wenn	_	_	_	_	_	_	_	_	_	_	
+4-182	5006-5009	wir	_	_	_	_	_	_	_	_	_	_	
+4-183	5010-5018	wirklich	_	_	_	_	_	_	_	_	_	_	
+4-184	5019-5030	unzumutbare	_	_	_	_	_	_	_	_	_	_	
+4-185	5031-5037	Härten	_	_	_	_	_	_	_	_	_	_	
+4-186	5038-5040	in	_	_	_	_	_	_	_	_	_	_	
+4-187	5041-5047	dieser	_	_	_	_	_	_	_	_	_	_	
+4-188	5048-5054	Reform	_	_	_	_	_	_	_	_	_	_	
+4-189	5055-5060	haben	_	_	_	_	_	_	_	_	_	_	
+4-190	5060-5061	,	_	_	_	_	_	_	_	_	_	_	
+4-191	5062-5065	vor	_	_	_	_	_	_	_	_	_	_	
+4-192	5066-5071	allem	_	_	_	_	_	_	_	_	_	_	
+4-193	5072-5075	für	_	_	_	_	_	_	_	_	_	_	
+4-194	5076-5082	ältere	_	_	_	_	_	_	_	_	_	_	
+4-195	5083-5100	Arbeitnehmerinnen	_	_	_	_	_	_	_	_	_	_	
+4-196	5101-5104	und	_	_	_	_	_	_	_	_	_	_	
+4-197	5105-5117	Arbeitnehmer	_	_	_	_	_	_	_	_	_	_	
+4-198	5117-5118	,	_	_	_	_	_	_	_	_	_	_	
+4-199	5119-5122	die	_	_	_	_	_	_	_	_	_	_	
+4-200	5123-5128	keine	_	_	_	_	_	_	_	_	_	_	
+4-201	5129-5135	Chance	_	_	_	_	_	_	_	_	_	_	
+4-202	5136-5139	auf	_	_	_	_	_	_	_	_	_	_	
+4-203	5140-5143	dem	_	_	_	_	_	_	_	_	_	_	
+4-204	5144-5156	Arbeitsmarkt	_	_	_	_	_	_	_	_	_	_	
+4-205	5157-5162	haben	_	_	_	_	_	_	_	_	_	_	
+4-206	5163-5166	und	_	_	_	_	_	_	_	_	_	_	
+4-207	5167-5171	dann	_	_	_	_	_	_	_	_	_	_	
+4-208	5172-5176	aber	_	_	_	_	_	_	_	_	_	_	
+4-209	5177-5179	an	_	_	_	_	_	_	_	_	_	_	
+4-210	5180-5183	der	_	_	_	_	_	_	_	_	_	_	
+4-211	5184-5190	Grenze	_	_	_	_	_	_	_	_	_	_	
+4-212	5191-5197	stehen	_	_	_	_	_	_	_	_	_	_	
+4-213	5197-5198	,	_	_	_	_	_	_	_	_	_	_	
+4-214	5199-5206	Antwort	_	_	_	_	_	_	_	_	_	_	
+4-215	5207-5210	des	_	_	_	_	_	_	_	_	_	_	
+4-216	5211-5217	Senats	_	_	_	_	_	_	_	_	_	_	
+4-217	5218-5221	vom	_	_	_	_	_	_	_	_	_	_	
+4-218	5222-5224	14	_	_	_	_	_	_	_	_	_	_	
+4-219	5224-5225	.	_	_	_	_	_	_	_	_	_	_	
+4-220	5226-5235	September	_	_	_	_	_	_	_	_	_	_	
+4-221	5236-5240	2004	_	_	_	_	_	_	_	_	_	_	
+4-222	5240-5241	(	_	_	_	_	_	_	_	_	_	_	
+4-223	5242-5252	Drucksache	_	_	_	_	_	_	_	_	_	_	
+4-224	5253-5255	16	_	_	_	_	_	_	_	_	_	_	
+4-225	5255-5256	/	_	_	_	_	_	_	_	_	_	_	
+4-226	5256-5259	396	_	_	_	_	_	_	_	_	_	_	
+
+#Text=PHE/W16.00028 Protokoll der Sitzung des Parlaments Hessischer Landtag am 29.01.2004. 28. Sitzung der 16. Wahlperiode 2003-2008. Plenarprotokoll, Wiesbaden, 2004 ### Wenn Sie zu diesem Punkt nicht dezidiert Stellung nehmen, dann sollten Sie schweigen. Denn in den letzten drei Monaten haben Sie Ihre Glaubwürdigkeit zu diesem Thema komplett verspielt. Mit den Kürzungen haben Sie direkt und ganz gezielt bei den Frauen zugeschlagen. ### Wenn von einer Frauenministerin nicht ein Aufschrei der #Empörung# kommt, wenn es darum geht, dass Grafensöhnchen mit einem lebenslangen W'ohnrecht versehen werden sollen, dann ist klar, dass alles, was Sie zu diesem Thema von sich geben, die Seifenblasen der Silke Schaumschläger sind. ###
+5-1	5848-5851	PHE	_	_	_	_	_	_	_	_	_	_	
+5-2	5851-5852	/	_	_	_	_	_	_	_	_	_	_	
+5-3	5852-5861	W16.00028	_	_	_	_	_	_	_	_	_	_	
+5-4	5862-5871	Protokoll	_	_	_	_	_	_	_	_	_	_	
+5-5	5872-5875	der	_	_	_	_	_	_	_	_	_	_	
+5-6	5876-5883	Sitzung	_	_	_	_	_	_	_	_	_	_	
+5-7	5884-5887	des	_	_	_	_	_	_	_	_	_	_	
+5-8	5888-5898	Parlaments	_	_	_	_	_	_	_	_	_	_	
+5-9	5899-5909	Hessischer	_	_	_	_	_	_	_	_	_	_	
+5-10	5910-5917	Landtag	_	_	_	_	_	_	_	_	_	_	
+5-11	5918-5920	am	_	_	_	_	_	_	_	_	_	_	
+5-12	5921-5931	29.01.2004	_	_	_	_	_	_	_	_	_	_	
+5-13	5931-5932	.	_	_	_	_	_	_	_	_	_	_	
+5-14	5933-5935	28	_	_	_	_	_	_	_	_	_	_	
+5-15	5935-5936	.	_	_	_	_	_	_	_	_	_	_	
+5-16	5937-5944	Sitzung	_	_	_	_	_	_	_	_	_	_	
+5-17	5945-5948	der	_	_	_	_	_	_	_	_	_	_	
+5-18	5949-5951	16	_	_	_	_	_	_	_	_	_	_	
+5-19	5951-5952	.	_	_	_	_	_	_	_	_	_	_	
+5-20	5953-5964	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+5-21	5965-5969	2003	_	_	_	_	_	_	_	_	_	_	
+5-22	5969-5970	-	_	_	_	_	_	_	_	_	_	_	
+5-23	5970-5974	2008	_	_	_	_	_	_	_	_	_	_	
+5-24	5974-5975	.	_	_	_	_	_	_	_	_	_	_	
+5-25	5976-5991	Plenarprotokoll	_	_	_	_	_	_	_	_	_	_	
+5-26	5991-5992	,	_	_	_	_	_	_	_	_	_	_	
+5-27	5993-6002	Wiesbaden	_	_	_	_	_	_	_	_	_	_	
+5-28	6002-6003	,	_	_	_	_	_	_	_	_	_	_	
+5-29	6004-6008	2004	_	_	_	_	_	_	_	_	_	_	
+5-30	6009-6010	#	_	_	_	_	_	_	_	_	_	_	
+5-31	6010-6011	#	_	_	_	_	_	_	_	_	_	_	
+5-32	6011-6012	#	_	_	_	_	_	_	_	_	_	_	
+5-33	6013-6017	Wenn	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-34	6018-6021	Sie	*[16]|explizit[17]|*[18]	Moralisierung[16]|*[17]|*[18]	*[16]|*[17]|*[18]	*[16]|*[17]|*[18]	*[16]|*[17]|*[18]	*[16]|Appell[17]|*[18]	*[16]|*[17]|*[18]	*[16]|*[17]|Adresassat:in[18]	*[16]|*[17]|Individuum[18]	*[16]|*[17]|Neutral[18]	
+5-35	6022-6024	zu	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-36	6025-6031	diesem	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-37	6032-6037	Punkt	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-38	6038-6043	nicht	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-39	6044-6053	dezidiert	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-40	6054-6062	Stellung	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-41	6063-6069	nehmen	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-42	6069-6070	,	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-43	6071-6075	dann	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-44	6076-6083	sollten	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-45	6084-6087	Sie	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-46	6088-6097	schweigen	*[16]|explizit[17]	Moralisierung[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|Appell[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+5-47	6097-6098	.	*[16]	Moralisierung[16]	*[16]	*[16]	*[16]	*[16]	*[16]	*[16]	*[16]	*[16]	
+5-48	6099-6103	Denn	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-49	6104-6106	in	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-50	6107-6110	den	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-51	6111-6118	letzten	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-52	6119-6123	drei	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-53	6124-6131	Monaten	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-54	6132-6137	haben	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-55	6138-6141	Sie	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-56	6142-6146	Ihre	*[16]|*[19]|*[20]	Moralisierung[16]|*[19]|*[20]	*[16]|*[19]|Fairness[20]	*[16]|*[19]|*[20]	*[16]|*[19]|*[20]	*[16]|Darstellung[19]|*[20]	*[16]|*[19]|*[20]	*[16]|*[19]|*[20]	*[16]|*[19]|*[20]	*[16]|*[19]|*[20]	
+5-57	6147-6162	Glaubwürdigkeit	*[16]|*[19]|*[20]	Moralisierung[16]|*[19]|*[20]	*[16]|*[19]|Fairness[20]	*[16]|*[19]|*[20]	*[16]|*[19]|*[20]	*[16]|Darstellung[19]|*[20]	*[16]|*[19]|*[20]	*[16]|*[19]|*[20]	*[16]|*[19]|*[20]	*[16]|*[19]|*[20]	
+5-58	6163-6165	zu	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-59	6166-6172	diesem	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-60	6173-6178	Thema	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-61	6179-6187	komplett	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-62	6188-6197	verspielt	*[16]|*[19]	Moralisierung[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|Darstellung[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	*[16]|*[19]	
+5-63	6197-6198	.	_	_	_	_	_	_	_	_	_	_	
+5-64	6199-6202	Mit	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-65	6203-6206	den	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-66	6207-6216	Kürzungen	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-67	6217-6222	haben	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-68	6223-6226	Sie	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-69	6227-6233	direkt	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-70	6234-6237	und	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-71	6238-6242	ganz	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-72	6243-6250	gezielt	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-73	6251-6254	bei	*[21]|*[22]|*[23]	*[21]|Moralisierung Kontext[22]|*[23]	*[21]|*[22]|*[23]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[23]	*[21]|*[22]|*[23]	*[21]|*[22]|*[23]	*[21]|*[22]|*[23]	*[21]|*[22]|Forderer:in[23]	*[21]|*[22]|soziale Gruppe[23]	*[21]|*[22]|Neutral[23]	
+5-74	6255-6258	den	*[21]|*[22]|*[23]	*[21]|Moralisierung Kontext[22]|*[23]	*[21]|*[22]|*[23]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[23]	*[21]|*[22]|*[23]	*[21]|*[22]|*[23]	*[21]|*[22]|*[23]	*[21]|*[22]|Forderer:in[23]	*[21]|*[22]|soziale Gruppe[23]	*[21]|*[22]|Neutral[23]	
+5-75	6259-6265	Frauen	*[21]|*[22]|*[23]	*[21]|Moralisierung Kontext[22]|*[23]	*[21]|*[22]|*[23]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[23]	*[21]|*[22]|*[23]	*[21]|*[22]|*[23]	*[21]|*[22]|*[23]	*[21]|*[22]|Forderer:in[23]	*[21]|*[22]|soziale Gruppe[23]	*[21]|*[22]|Neutral[23]	
+5-76	6266-6278	zugeschlagen	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-77	6278-6279	.	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-78	6280-6281	#	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-79	6281-6282	#	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-80	6282-6283	#	*[21]|*[22]	*[21]|Moralisierung Kontext[22]	*[21]|*[22]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	*[21]|*[22]	
+5-81	6284-6288	Wenn	*[21]|*[22]|*[24]	*[21]|Moralisierung Kontext[22]|*[24]	*[21]|*[22]|*[24]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|Darstellung[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	
+5-82	6289-6292	von	*[21]|*[22]|*[24]	*[21]|Moralisierung Kontext[22]|*[24]	*[21]|*[22]|*[24]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|Darstellung[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	
+5-83	6293-6298	einer	*[21]|*[22]|*[24]|*[25]	*[21]|Moralisierung Kontext[22]|*[24]|*[25]	*[21]|*[22]|*[24]|*[25]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]|*[25]	*[21]|*[22]|*[24]|*[25]	*[21]|*[22]|Darstellung[24]|*[25]	*[21]|*[22]|*[24]|*[25]	*[21]|*[22]|*[24]|Adresassat:in[25]	*[21]|*[22]|*[24]|Individuum[25]	*[21]|*[22]|*[24]|Neutral[25]	
+5-84	6299-6315	Frauenministerin	*[21]|*[22]|*[24]|*[25]	*[21]|Moralisierung Kontext[22]|*[24]|*[25]	*[21]|*[22]|*[24]|*[25]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]|*[25]	*[21]|*[22]|*[24]|*[25]	*[21]|*[22]|Darstellung[24]|*[25]	*[21]|*[22]|*[24]|*[25]	*[21]|*[22]|*[24]|Adresassat:in[25]	*[21]|*[22]|*[24]|Individuum[25]	*[21]|*[22]|*[24]|Neutral[25]	
+5-85	6316-6321	nicht	*[21]|*[22]|*[24]	*[21]|Moralisierung Kontext[22]|*[24]	*[21]|*[22]|*[24]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|Darstellung[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	
+5-86	6322-6325	ein	*[21]|*[22]|*[24]	*[21]|Moralisierung Kontext[22]|*[24]	*[21]|*[22]|*[24]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|Darstellung[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	
+5-87	6326-6335	Aufschrei	*[21]|*[22]|*[24]	*[21]|Moralisierung Kontext[22]|*[24]	*[21]|*[22]|*[24]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|Darstellung[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	
+5-88	6336-6339	der	*[21]|*[22]|*[24]	*[21]|Moralisierung Kontext[22]|*[24]	*[21]|*[22]|*[24]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|Darstellung[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	
+5-89	6340-6341	#	*[21]|*[22]|*[24]	*[21]|Moralisierung Kontext[22]|*[24]	*[21]|*[22]|*[24]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|Darstellung[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	
+5-90	6341-6349	Empörung	*[21]|*[22]|*[24]|*[26]	*[21]|Moralisierung Kontext[22]|*[24]|*[26]	*[21]|*[22]|*[24]|OTHER[26]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]|*[26]	*[21]|*[22]|*[24]|*[26]	*[21]|*[22]|Darstellung[24]|*[26]	*[21]|*[22]|*[24]|*[26]	*[21]|*[22]|*[24]|*[26]	*[21]|*[22]|*[24]|*[26]	*[21]|*[22]|*[24]|*[26]	
+5-91	6349-6350	#	*[21]|*[22]|*[24]	*[21]|Moralisierung Kontext[22]|*[24]	*[21]|*[22]|*[24]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|Darstellung[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	
+5-92	6351-6356	kommt	*[21]|*[22]|*[24]	*[21]|Moralisierung Kontext[22]|*[24]	*[21]|*[22]|*[24]	Die Frauenministerin sollte sich für die Belange der Frauen einsetzen.[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|Darstellung[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	*[21]|*[22]|*[24]	
+5-93	6356-6357	,	_	_	_	_	_	_	_	_	_	_	
+5-94	6358-6362	wenn	_	_	_	_	_	_	_	_	_	_	
+5-95	6363-6365	es	_	_	_	_	_	_	_	_	_	_	
+5-96	6366-6371	darum	_	_	_	_	_	_	_	_	_	_	
+5-97	6372-6376	geht	_	_	_	_	_	_	_	_	_	_	
+5-98	6376-6377	,	_	_	_	_	_	_	_	_	_	_	
+5-99	6378-6382	dass	_	_	_	_	_	_	_	_	_	_	
+5-100	6383-6397	Grafensöhnchen	_	_	_	_	_	_	_	_	_	_	
+5-101	6398-6401	mit	_	_	_	_	_	_	_	_	_	_	
+5-102	6402-6407	einem	_	_	_	_	_	_	_	_	_	_	
+5-103	6408-6420	lebenslangen	_	_	_	_	_	_	_	_	_	_	
+5-104	6421-6431	W'ohnrecht	_	_	_	_	_	_	_	_	_	_	
+5-105	6432-6440	versehen	_	_	_	_	_	_	_	_	_	_	
+5-106	6441-6447	werden	_	_	_	_	_	_	_	_	_	_	
+5-107	6448-6454	sollen	_	_	_	_	_	_	_	_	_	_	
+5-108	6454-6455	,	_	_	_	_	_	_	_	_	_	_	
+5-109	6456-6460	dann	_	_	_	_	_	_	_	_	_	_	
+5-110	6461-6464	ist	_	_	_	_	_	_	_	_	_	_	
+5-111	6465-6469	klar	_	_	_	_	_	_	_	_	_	_	
+5-112	6469-6470	,	_	_	_	_	_	_	_	_	_	_	
+5-113	6471-6475	dass	_	_	_	_	_	_	_	_	_	_	
+5-114	6476-6481	alles	_	_	_	_	_	_	_	_	_	_	
+5-115	6481-6482	,	_	_	_	_	_	_	_	_	_	_	
+5-116	6483-6486	was	_	_	_	_	_	_	_	_	_	_	
+5-117	6487-6490	Sie	_	_	_	_	_	_	_	_	_	_	
+5-118	6491-6493	zu	_	_	_	_	_	_	_	_	_	_	
+5-119	6494-6500	diesem	_	_	_	_	_	_	_	_	_	_	
+5-120	6501-6506	Thema	_	_	_	_	_	_	_	_	_	_	
+5-121	6507-6510	von	_	_	_	_	_	_	_	_	_	_	
+5-122	6511-6515	sich	_	_	_	_	_	_	_	_	_	_	
+5-123	6516-6521	geben	_	_	_	_	_	_	_	_	_	_	
+5-124	6521-6522	,	_	_	_	_	_	_	_	_	_	_	
+5-125	6523-6526	die	_	_	_	_	_	_	_	_	_	_	
+5-126	6527-6539	Seifenblasen	_	_	_	_	_	_	_	_	_	_	
+5-127	6540-6543	der	_	_	_	_	_	_	_	_	_	_	
+5-128	6544-6549	Silke	_	_	_	_	_	_	_	_	_	_	
+5-129	6550-6564	Schaumschläger	_	_	_	_	_	_	_	_	_	_	
+5-130	6565-6569	sind	_	_	_	_	_	_	_	_	_	_	
+5-131	6569-6570	.	_	_	_	_	_	_	_	_	_	_	
+5-132	6571-6572	#	_	_	_	_	_	_	_	_	_	_	
+5-133	6572-6573	#	_	_	_	_	_	_	_	_	_	_	
+5-134	6573-6574	#	_	_	_	_	_	_	_	_	_	_	
+
+#Text=PHE/W16.00028 Protokoll der Sitzung des Parlaments Hessischer Landtag am 29.01.2004. 28. Sitzung der 16. Wahlperiode 2003-2008. Plenarprotokoll, Wiesbaden, 2004 ### Sozialpolitik ist nicht nur Teil gesellschaftlichen Wirtschaftens. sondern auch immer Voraussetzung von Wirtschaft. Wenn nicht ein bestimmter Anteil an sozialen Leistungen entsprechend dem gesellschaftlichen Bedarf erbracht wird, hat das auch Auswirkungen auf die Wirtschaft. auf die Qualität der Arbeitskraft und das gesellschaftliche Zusammenleben. ### Deshalb kann Sozialpolitik im Idealfall dafür sorgen, dass nachhaltiges, solidarisches und verantwortungsbewusstes Handeln gefördert wird, oder im schlimmsten Fall zu einer #Brutalisierung# und Ausgrenzung von Menschen führen. ### Eine Politik, wie sie die Landesregierung betreibt, die keine sozialpolitischen Ziele formuliert, die es zu erreichen gilt, und die über keine Instrumente verfügt, um wenigstens die Folgen ihrer Politik abschätzen zu können, ist nicht intelligent, sondern in hohem Maße unverantwortlich gegenüber den Menschen in diesem Land.
+6-1	6813-6816	PHE	_	_	_	_	_	_	_	_	_	_	
+6-2	6816-6817	/	_	_	_	_	_	_	_	_	_	_	
+6-3	6817-6826	W16.00028	_	_	_	_	_	_	_	_	_	_	
+6-4	6827-6836	Protokoll	_	_	_	_	_	_	_	_	_	_	
+6-5	6837-6840	der	_	_	_	_	_	_	_	_	_	_	
+6-6	6841-6848	Sitzung	_	_	_	_	_	_	_	_	_	_	
+6-7	6849-6852	des	_	_	_	_	_	_	_	_	_	_	
+6-8	6853-6863	Parlaments	_	_	_	_	_	_	_	_	_	_	
+6-9	6864-6874	Hessischer	_	_	_	_	_	_	_	_	_	_	
+6-10	6875-6882	Landtag	_	_	_	_	_	_	_	_	_	_	
+6-11	6883-6885	am	_	_	_	_	_	_	_	_	_	_	
+6-12	6886-6896	29.01.2004	_	_	_	_	_	_	_	_	_	_	
+6-13	6896-6897	.	_	_	_	_	_	_	_	_	_	_	
+6-14	6898-6900	28	_	_	_	_	_	_	_	_	_	_	
+6-15	6900-6901	.	_	_	_	_	_	_	_	_	_	_	
+6-16	6902-6909	Sitzung	_	_	_	_	_	_	_	_	_	_	
+6-17	6910-6913	der	_	_	_	_	_	_	_	_	_	_	
+6-18	6914-6916	16	_	_	_	_	_	_	_	_	_	_	
+6-19	6916-6917	.	_	_	_	_	_	_	_	_	_	_	
+6-20	6918-6929	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+6-21	6930-6934	2003	_	_	_	_	_	_	_	_	_	_	
+6-22	6934-6935	-	_	_	_	_	_	_	_	_	_	_	
+6-23	6935-6939	2008	_	_	_	_	_	_	_	_	_	_	
+6-24	6939-6940	.	_	_	_	_	_	_	_	_	_	_	
+6-25	6941-6956	Plenarprotokoll	_	_	_	_	_	_	_	_	_	_	
+6-26	6956-6957	,	_	_	_	_	_	_	_	_	_	_	
+6-27	6958-6967	Wiesbaden	_	_	_	_	_	_	_	_	_	_	
+6-28	6967-6968	,	_	_	_	_	_	_	_	_	_	_	
+6-29	6969-6973	2004	_	_	_	_	_	_	_	_	_	_	
+6-30	6974-6975	#	_	_	_	_	_	_	_	_	_	_	
+6-31	6975-6976	#	_	_	_	_	_	_	_	_	_	_	
+6-32	6976-6977	#	_	_	_	_	_	_	_	_	_	_	
+6-33	6978-6991	Sozialpolitik	_	_	_	_	_	_	_	_	_	_	
+6-34	6992-6995	ist	_	_	_	_	_	_	_	_	_	_	
+6-35	6996-7001	nicht	_	_	_	_	_	_	_	_	_	_	
+6-36	7002-7005	nur	_	_	_	_	_	_	_	_	_	_	
+6-37	7006-7010	Teil	_	_	_	_	_	_	_	_	_	_	
+6-38	7011-7029	gesellschaftlichen	_	_	_	_	_	_	_	_	_	_	
+6-39	7030-7043	Wirtschaftens	_	_	_	_	_	_	_	_	_	_	
+6-40	7043-7044	.	_	_	_	_	_	_	_	_	_	_	
+6-41	7045-7052	sondern	_	_	_	_	_	_	_	_	_	_	
+6-42	7053-7057	auch	_	_	_	_	_	_	_	_	_	_	
+6-43	7058-7063	immer	_	_	_	_	_	_	_	_	_	_	
+6-44	7064-7077	Voraussetzung	_	_	_	_	_	_	_	_	_	_	
+6-45	7078-7081	von	_	_	_	_	_	_	_	_	_	_	
+6-46	7082-7092	Wirtschaft	_	_	_	_	_	_	_	_	_	_	
+6-47	7092-7093	.	_	_	_	_	_	_	_	_	_	_	
+6-48	7094-7098	Wenn	_	_	_	_	_	_	_	_	_	_	
+6-49	7099-7104	nicht	_	_	_	_	_	_	_	_	_	_	
+6-50	7105-7108	ein	_	_	_	_	_	_	_	_	_	_	
+6-51	7109-7119	bestimmter	_	_	_	_	_	_	_	_	_	_	
+6-52	7120-7126	Anteil	_	_	_	_	_	_	_	_	_	_	
+6-53	7127-7129	an	_	_	_	_	_	_	_	_	_	_	
+6-54	7130-7138	sozialen	_	_	_	_	_	_	_	_	_	_	
+6-55	7139-7149	Leistungen	_	_	_	_	_	_	_	_	_	_	
+6-56	7150-7162	entsprechend	_	_	_	_	_	_	_	_	_	_	
+6-57	7163-7166	dem	_	_	_	_	_	_	_	_	_	_	
+6-58	7167-7185	gesellschaftlichen	_	_	_	_	_	_	_	_	_	_	
+6-59	7186-7192	Bedarf	_	_	_	_	_	_	_	_	_	_	
+6-60	7193-7201	erbracht	_	_	_	_	_	_	_	_	_	_	
+6-61	7202-7206	wird	_	_	_	_	_	_	_	_	_	_	
+6-62	7206-7207	,	_	_	_	_	_	_	_	_	_	_	
+6-63	7208-7211	hat	_	_	_	_	_	_	_	_	_	_	
+6-64	7212-7215	das	_	_	_	_	_	_	_	_	_	_	
+6-65	7216-7220	auch	_	_	_	_	_	_	_	_	_	_	
+6-66	7221-7233	Auswirkungen	_	_	_	_	_	_	_	_	_	_	
+6-67	7234-7237	auf	_	_	_	_	_	_	_	_	_	_	
+6-68	7238-7241	die	_	_	_	_	_	_	_	_	_	_	
+6-69	7242-7252	Wirtschaft	_	_	_	_	_	_	_	_	_	_	
+6-70	7252-7253	.	_	_	_	_	_	_	_	_	_	_	
+6-71	7254-7257	auf	_	_	_	_	_	_	_	_	_	_	
+6-72	7258-7261	die	_	_	_	_	_	_	_	_	_	_	
+6-73	7262-7270	Qualität	_	_	_	_	_	_	_	_	_	_	
+6-74	7271-7274	der	_	_	_	_	_	_	_	_	_	_	
+6-75	7275-7287	Arbeitskraft	_	_	_	_	_	_	_	_	_	_	
+6-76	7288-7291	und	_	_	_	_	_	_	_	_	_	_	
+6-77	7292-7295	das	_	_	_	_	_	_	_	_	_	_	
+6-78	7296-7313	gesellschaftliche	_	_	_	_	_	_	_	_	_	_	
+6-79	7314-7327	Zusammenleben	_	_	_	_	_	_	_	_	_	_	
+6-80	7327-7328	.	_	_	_	_	_	_	_	_	_	_	
+6-81	7329-7330	#	_	_	_	_	_	_	_	_	_	_	
+6-82	7330-7331	#	_	_	_	_	_	_	_	_	_	_	
+6-83	7331-7332	#	_	_	_	_	_	_	_	_	_	_	
+6-84	7333-7340	Deshalb	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-85	7341-7345	kann	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-86	7346-7359	Sozialpolitik	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-87	7360-7362	im	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-88	7363-7372	Idealfall	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-89	7373-7378	dafür	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-90	7379-7385	sorgen	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-91	7385-7386	,	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-92	7387-7391	dass	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-93	7392-7404	nachhaltiges	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-94	7404-7405	,	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-95	7406-7419	solidarisches	*[27]|*[28]|*[29]|*[30]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]|*[30]	*[27]|*[28]|*[29]|*[30]	*[27]|*[28]|*[29]|*[30]	*[27]|*[28]|*[29]|*[30]	*[27]|*[28]|Darstellung[29]|*[30]	*[27]|*[28]|*[29]|Care[30]	*[27]|*[28]|*[29]|*[30]	*[27]|*[28]|*[29]|*[30]	*[27]|*[28]|*[29]|*[30]	
+6-96	7420-7423	und	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-97	7424-7447	verantwortungsbewusstes	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-98	7448-7455	Handeln	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-99	7456-7465	gefördert	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-100	7466-7470	wird	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-101	7470-7471	,	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-102	7472-7476	oder	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-103	7477-7479	im	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-104	7480-7491	schlimmsten	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-105	7492-7496	Fall	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-106	7497-7499	zu	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-107	7500-7505	einer	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-108	7506-7507	#	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-109	7507-7521	Brutalisierung	*[27]|*[28]|*[29]|*[31]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]|*[31]	*[27]|*[28]|*[29]|Harm[31]	*[27]|*[28]|*[29]|*[31]	*[27]|*[28]|*[29]|*[31]	*[27]|*[28]|Darstellung[29]|*[31]	*[27]|*[28]|*[29]|*[31]	*[27]|*[28]|*[29]|*[31]	*[27]|*[28]|*[29]|*[31]	*[27]|*[28]|*[29]|*[31]	
+6-110	7521-7522	#	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-111	7523-7526	und	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-112	7527-7538	Ausgrenzung	*[27]|*[28]|*[29]|*[32]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]|*[32]	*[27]|*[28]|*[29]|Cheating[32]	*[27]|*[28]|*[29]|*[32]	*[27]|*[28]|*[29]|*[32]	*[27]|*[28]|Darstellung[29]|*[32]	*[27]|*[28]|*[29]|*[32]	*[27]|*[28]|*[29]|*[32]	*[27]|*[28]|*[29]|*[32]	*[27]|*[28]|*[29]|*[32]	
+6-113	7539-7542	von	*[27]|*[28]|*[29]|*[33]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]|*[33]	*[27]|*[28]|*[29]|*[33]	*[27]|*[28]|*[29]|*[33]	*[27]|*[28]|*[29]|*[33]	*[27]|*[28]|Darstellung[29]|*[33]	*[27]|*[28]|*[29]|*[33]	*[27]|*[28]|*[29]|Benefizient:in[33]	*[27]|*[28]|*[29]|Menschen[33]	*[27]|*[28]|*[29]|Own Group[33]	
+6-114	7543-7551	Menschen	*[27]|*[28]|*[29]|*[33]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]|*[33]	*[27]|*[28]|*[29]|*[33]	*[27]|*[28]|*[29]|*[33]	*[27]|*[28]|*[29]|*[33]	*[27]|*[28]|Darstellung[29]|*[33]	*[27]|*[28]|*[29]|*[33]	*[27]|*[28]|*[29]|Benefizient:in[33]	*[27]|*[28]|*[29]|Menschen[33]	*[27]|*[28]|*[29]|Own Group[33]	
+6-115	7552-7558	führen	*[27]|*[28]|*[29]	Moralisierung[27]|Moralisierung Kontext[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|Darstellung[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	*[27]|*[28]|*[29]	
+6-116	7558-7559	.	*[27]|*[28]	Moralisierung[27]|Moralisierung Kontext[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	
+6-117	7560-7561	#	*[27]|*[28]	Moralisierung[27]|Moralisierung Kontext[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	
+6-118	7561-7562	#	*[27]|*[28]	Moralisierung[27]|Moralisierung Kontext[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	
+6-119	7562-7563	#	*[27]|*[28]	Moralisierung[27]|Moralisierung Kontext[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	*[27]|*[28]	
+6-120	7564-7568	Eine	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-121	7569-7576	Politik	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-122	7576-7577	,	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-123	7578-7581	wie	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-124	7582-7585	sie	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-125	7586-7589	die	*[27]|*[28]|*[34]|*[35]|*[36]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]|*[36]	*[27]|*[28]|*[34]|*[35]|*[36]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]|*[36]	*[27]|*[28]|*[34]|*[35]|*[36]	*[27]|*[28]|Darstellung[34]|*[35]|*[36]	*[27]|*[28]|*[34]|*[35]|*[36]	*[27]|*[28]|*[34]|*[35]|Adresassat:in[36]	*[27]|*[28]|*[34]|*[35]|Institution[36]	*[27]|*[28]|*[34]|*[35]|Other Group[36]	
+6-126	7590-7605	Landesregierung	*[27]|*[28]|*[34]|*[35]|*[36]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]|*[36]	*[27]|*[28]|*[34]|*[35]|*[36]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]|*[36]	*[27]|*[28]|*[34]|*[35]|*[36]	*[27]|*[28]|Darstellung[34]|*[35]|*[36]	*[27]|*[28]|*[34]|*[35]|*[36]	*[27]|*[28]|*[34]|*[35]|Adresassat:in[36]	*[27]|*[28]|*[34]|*[35]|Institution[36]	*[27]|*[28]|*[34]|*[35]|Other Group[36]	
+6-127	7606-7614	betreibt	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-128	7614-7615	,	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-129	7616-7619	die	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-130	7620-7625	keine	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-131	7626-7643	sozialpolitischen	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-132	7644-7649	Ziele	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-133	7650-7660	formuliert	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-134	7660-7661	,	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-135	7662-7665	die	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-136	7666-7668	es	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-137	7669-7671	zu	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-138	7672-7681	erreichen	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-139	7682-7686	gilt	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-140	7686-7687	,	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-141	7688-7691	und	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-142	7692-7695	die	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-143	7696-7700	über	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-144	7701-7706	keine	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-145	7707-7718	Instrumente	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-146	7719-7726	verfügt	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-147	7726-7727	,	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-148	7728-7730	um	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-149	7731-7741	wenigstens	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-150	7742-7745	die	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-151	7746-7752	Folgen	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-152	7753-7758	ihrer	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-153	7759-7766	Politik	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-154	7767-7777	abschätzen	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-155	7778-7780	zu	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-156	7781-7787	können	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-157	7787-7788	,	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-158	7789-7792	ist	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-159	7793-7798	nicht	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-160	7799-7810	intelligent	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-161	7810-7811	,	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-162	7812-7819	sondern	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-163	7820-7822	in	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-164	7823-7828	hohem	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-165	7829-7833	Maße	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-166	7834-7850	unverantwortlich	*[27]|*[28]|*[34]|*[35]|*[37]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]|*[37]	*[27]|*[28]|*[34]|*[35]|Harm[37]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]|*[37]	*[27]|*[28]|*[34]|*[35]|*[37]	*[27]|*[28]|Darstellung[34]|*[35]|*[37]	*[27]|*[28]|*[34]|*[35]|*[37]	*[27]|*[28]|*[34]|*[35]|*[37]	*[27]|*[28]|*[34]|*[35]|*[37]	*[27]|*[28]|*[34]|*[35]|*[37]	
+6-167	7851-7860	gegenüber	*[27]|*[28]|*[34]|*[35]|*[38]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]|*[38]	*[27]|*[28]|*[34]|*[35]|*[38]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]|*[38]	*[27]|*[28]|*[34]|*[35]|*[38]	*[27]|*[28]|Darstellung[34]|*[35]|*[38]	*[27]|*[28]|*[34]|*[35]|*[38]	*[27]|*[28]|*[34]|*[35]|Benefizient:in[38]	*[27]|*[28]|*[34]|*[35]|Menschen[38]	*[27]|*[28]|*[34]|*[35]|Neutral[38]	
+6-168	7861-7864	den	*[27]|*[28]|*[34]|*[35]|*[38]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]|*[38]	*[27]|*[28]|*[34]|*[35]|*[38]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]|*[38]	*[27]|*[28]|*[34]|*[35]|*[38]	*[27]|*[28]|Darstellung[34]|*[35]|*[38]	*[27]|*[28]|*[34]|*[35]|*[38]	*[27]|*[28]|*[34]|*[35]|Benefizient:in[38]	*[27]|*[28]|*[34]|*[35]|Menschen[38]	*[27]|*[28]|*[34]|*[35]|Neutral[38]	
+6-169	7865-7873	Menschen	*[27]|*[28]|*[34]|*[35]|*[38]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]|*[38]	*[27]|*[28]|*[34]|*[35]|*[38]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]|*[38]	*[27]|*[28]|*[34]|*[35]|*[38]	*[27]|*[28]|Darstellung[34]|*[35]|*[38]	*[27]|*[28]|*[34]|*[35]|*[38]	*[27]|*[28]|*[34]|*[35]|Benefizient:in[38]	*[27]|*[28]|*[34]|*[35]|Menschen[38]	*[27]|*[28]|*[34]|*[35]|Neutral[38]	
+6-170	7874-7876	in	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-171	7877-7883	diesem	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-172	7884-7888	Land	*[27]|*[28]|*[34]|*[35]	Moralisierung[27]|Moralisierung Kontext[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|Die Landesregierung soll sozialpolitische Ziele festlegen.[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|Darstellung[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	*[27]|*[28]|*[34]|*[35]	
+6-173	7888-7889	.	_	_	_	_	_	_	_	_	_	_	
+
+#Text=PHE/W16.00028 Protokoll der Sitzung des Parlaments Hessischer Landtag am 29.01.2004. 28. Sitzung der 16. Wahlperiode 2003-2008. Plenarprotokoll, Wiesbaden, 2004 ### Sozialpolitik ist nicht nur Teil gesellschaftlichen Wirtschaftens. sondern auch immer Voraussetzung von Wirtschaft. Wenn nicht ein bestimmter Anteil an sozialen Leistungen entsprechend dem gesellschaftlichen Bedarf erbracht wird, hat das auch Auswirkungen auf die Wirtschaft. auf die Qualität der Arbeitskraft und das gesellschaftliche Zusammenleben. ### Deshalb kann Sozialpolitik im Idealfall dafür sorgen, dass nachhaltiges, solidarisches und verantwortungsbewusstes Handeln gefördert wird, oder im schlimmsten Fall zu einer Brutalisierung und #Ausgrenzung# von Menschen führen. ### Eine Politik, wie sie die Landesregierung betreibt, die keine sozialpolitischen Ziele formuliert, die es zu erreichen gilt, und die über keine Instrumente verfügt, um wenigstens die Folgen ihrer Politik abschätzen zu können, ist nicht intelligent, sondern in hohem Maße unverantwortlich gegenüber den Menschen in diesem Land.
+7-1	8128-8131	PHE	_	_	_	_	_	_	_	_	_	_	
+7-2	8131-8132	/	_	_	_	_	_	_	_	_	_	_	
+7-3	8132-8141	W16.00028	_	_	_	_	_	_	_	_	_	_	
+7-4	8142-8151	Protokoll	_	_	_	_	_	_	_	_	_	_	
+7-5	8152-8155	der	_	_	_	_	_	_	_	_	_	_	
+7-6	8156-8163	Sitzung	_	_	_	_	_	_	_	_	_	_	
+7-7	8164-8167	des	_	_	_	_	_	_	_	_	_	_	
+7-8	8168-8178	Parlaments	_	_	_	_	_	_	_	_	_	_	
+7-9	8179-8189	Hessischer	_	_	_	_	_	_	_	_	_	_	
+7-10	8190-8197	Landtag	_	_	_	_	_	_	_	_	_	_	
+7-11	8198-8200	am	_	_	_	_	_	_	_	_	_	_	
+7-12	8201-8211	29.01.2004	_	_	_	_	_	_	_	_	_	_	
+7-13	8211-8212	.	_	_	_	_	_	_	_	_	_	_	
+7-14	8213-8215	28	_	_	_	_	_	_	_	_	_	_	
+7-15	8215-8216	.	_	_	_	_	_	_	_	_	_	_	
+7-16	8217-8224	Sitzung	_	_	_	_	_	_	_	_	_	_	
+7-17	8225-8228	der	_	_	_	_	_	_	_	_	_	_	
+7-18	8229-8231	16	_	_	_	_	_	_	_	_	_	_	
+7-19	8231-8232	.	_	_	_	_	_	_	_	_	_	_	
+7-20	8233-8244	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+7-21	8245-8249	2003	_	_	_	_	_	_	_	_	_	_	
+7-22	8249-8250	-	_	_	_	_	_	_	_	_	_	_	
+7-23	8250-8254	2008	_	_	_	_	_	_	_	_	_	_	
+7-24	8254-8255	.	_	_	_	_	_	_	_	_	_	_	
+7-25	8256-8271	Plenarprotokoll	_	_	_	_	_	_	_	_	_	_	
+7-26	8271-8272	,	_	_	_	_	_	_	_	_	_	_	
+7-27	8273-8282	Wiesbaden	_	_	_	_	_	_	_	_	_	_	
+7-28	8282-8283	,	_	_	_	_	_	_	_	_	_	_	
+7-29	8284-8288	2004	_	_	_	_	_	_	_	_	_	_	
+7-30	8289-8290	#	_	_	_	_	_	_	_	_	_	_	
+7-31	8290-8291	#	_	_	_	_	_	_	_	_	_	_	
+7-32	8291-8292	#	_	_	_	_	_	_	_	_	_	_	
+7-33	8293-8306	Sozialpolitik	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-34	8307-8310	ist	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-35	8311-8316	nicht	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-36	8317-8320	nur	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-37	8321-8325	Teil	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-38	8326-8344	gesellschaftlichen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-39	8345-8358	Wirtschaftens	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-40	8358-8359	.	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-41	8360-8367	sondern	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-42	8368-8372	auch	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-43	8373-8378	immer	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-44	8379-8392	Voraussetzung	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-45	8393-8396	von	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-46	8397-8407	Wirtschaft	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-47	8407-8408	.	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-48	8409-8413	Wenn	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-49	8414-8419	nicht	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-50	8420-8423	ein	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-51	8424-8434	bestimmter	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-52	8435-8441	Anteil	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-53	8442-8444	an	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-54	8445-8453	sozialen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-55	8454-8464	Leistungen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-56	8465-8477	entsprechend	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-57	8478-8481	dem	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-58	8482-8500	gesellschaftlichen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-59	8501-8507	Bedarf	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-60	8508-8516	erbracht	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-61	8517-8521	wird	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-62	8521-8522	,	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-63	8523-8526	hat	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-64	8527-8530	das	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-65	8531-8535	auch	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-66	8536-8548	Auswirkungen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-67	8549-8552	auf	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-68	8553-8556	die	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-69	8557-8567	Wirtschaft	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-70	8567-8568	.	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-71	8569-8572	auf	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-72	8573-8576	die	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-73	8577-8585	Qualität	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-74	8586-8589	der	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-75	8590-8602	Arbeitskraft	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-76	8603-8606	und	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-77	8607-8610	das	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-78	8611-8628	gesellschaftliche	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-79	8629-8642	Zusammenleben	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-80	8642-8643	.	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-81	8644-8645	#	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-82	8645-8646	#	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-83	8646-8647	#	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-84	8648-8655	Deshalb	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-85	8656-8660	kann	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-86	8661-8674	Sozialpolitik	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-87	8675-8677	im	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-88	8678-8687	Idealfall	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-89	8688-8693	dafür	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-90	8694-8700	sorgen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-91	8700-8701	,	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-92	8702-8706	dass	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-93	8707-8719	nachhaltiges	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-94	8719-8720	,	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-95	8721-8734	solidarisches	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-96	8735-8738	und	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-97	8739-8762	verantwortungsbewusstes	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-98	8763-8770	Handeln	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-99	8771-8780	gefördert	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-100	8781-8785	wird	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-101	8785-8786	,	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-102	8787-8791	oder	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-103	8792-8794	im	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-104	8795-8806	schlimmsten	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-105	8807-8811	Fall	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-106	8812-8814	zu	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-107	8815-8820	einer	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-108	8821-8835	Brutalisierung	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-109	8836-8839	und	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-110	8840-8841	#	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-111	8841-8852	Ausgrenzung	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-112	8852-8853	#	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-113	8854-8857	von	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-114	8858-8866	Menschen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-115	8867-8873	führen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-116	8873-8874	.	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-117	8875-8876	#	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-118	8876-8877	#	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-119	8877-8878	#	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-120	8879-8883	Eine	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-121	8884-8891	Politik	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-122	8891-8892	,	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-123	8893-8896	wie	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-124	8897-8900	sie	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-125	8901-8904	die	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-126	8905-8920	Landesregierung	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-127	8921-8929	betreibt	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-128	8929-8930	,	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-129	8931-8934	die	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-130	8935-8940	keine	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-131	8941-8958	sozialpolitischen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-132	8959-8964	Ziele	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-133	8965-8975	formuliert	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-134	8975-8976	,	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-135	8977-8980	die	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-136	8981-8983	es	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-137	8984-8986	zu	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-138	8987-8996	erreichen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-139	8997-9001	gilt	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-140	9001-9002	,	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-141	9003-9006	und	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-142	9007-9010	die	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-143	9011-9015	über	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-144	9016-9021	keine	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-145	9022-9033	Instrumente	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-146	9034-9041	verfügt	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-147	9041-9042	,	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-148	9043-9045	um	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-149	9046-9056	wenigstens	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-150	9057-9060	die	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-151	9061-9067	Folgen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-152	9068-9073	ihrer	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-153	9074-9081	Politik	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-154	9082-9092	abschätzen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-155	9093-9095	zu	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-156	9096-9102	können	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-157	9102-9103	,	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-158	9104-9107	ist	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-159	9108-9113	nicht	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-160	9114-9125	intelligent	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-161	9125-9126	,	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-162	9127-9134	sondern	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-163	9135-9137	in	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-164	9138-9143	hohem	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-165	9144-9148	Maße	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-166	9149-9165	unverantwortlich	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-167	9166-9175	gegenüber	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-168	9176-9179	den	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-169	9180-9188	Menschen	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-170	9189-9191	in	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-171	9192-9198	diesem	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-172	9199-9203	Land	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+7-173	9203-9204	.	*[39]	*[39]	*[39]	*[39]	Doppelung[39]	*[39]	*[39]	*[39]	*[39]	*[39]	
+
+#Text=PMV/W04.00030 Protokoll der Sitzung des Parlaments Landtag Mecklenburg-Vorpommern am 18.02.2004. 30. Sitzung der 4. Wahlperiode 2002-2006. Plenarprotokoll, Schwerin, 2004 ### Dr. Henning von Storch.CDU: Frau Präsidentin! Meine Kolleginnen und Kollegen) Meine Damen und Herren! Die CDU-Fraktion wird dem Zweiten Nachtragshaushaltsgesetz 2003 ihre Zustimmung versagen. Wir halten diesen Nachtragshaushalt für verfassungswidrig. Er überschreitet mit seinen Festlegungen die Regelkreditobergrenze. Die Begründung, dass eine Überschreitung nach dem Urteil des Berliner Bundesverfassungsgerichts vorliegen muss - die Kriterien dazu -. ist hier nicht eingehalten. ### Die Landesregierung hat zwar darauf hingewiesen, dass die Überschreitung im Jahr 2003 zur Überwindung einer ernsthaften und nachhaltigen Störung des gesamtwirtschaftlichen Gleichgewichts notwendig sei und der #Bedrohung# der Wirtschaftsund Beschäftigungslage des Landes entgegenwirken soll. ### Wir widersprechen dieser Begründung. Es mag richtig sein, dass wir heute von einer Störung des gesamtwirtschaftlichen Gleichgewichts werden sprechen müssen, aber das Zahlenwerk macnt nicht deutlich, dass das, was uns vorgelegt worden ist. zur Überwindung dieses Zustandes geeignet ist.
+8-1	9278-9281	PMV	_	_	_	_	_	_	_	_	_	_	
+8-2	9281-9282	/	_	_	_	_	_	_	_	_	_	_	
+8-3	9282-9291	W04.00030	_	_	_	_	_	_	_	_	_	_	
+8-4	9292-9301	Protokoll	_	_	_	_	_	_	_	_	_	_	
+8-5	9302-9305	der	_	_	_	_	_	_	_	_	_	_	
+8-6	9306-9313	Sitzung	_	_	_	_	_	_	_	_	_	_	
+8-7	9314-9317	des	_	_	_	_	_	_	_	_	_	_	
+8-8	9318-9328	Parlaments	_	_	_	_	_	_	_	_	_	_	
+8-9	9329-9336	Landtag	_	_	_	_	_	_	_	_	_	_	
+8-10	9337-9359	Mecklenburg-Vorpommern	_	_	_	_	_	_	_	_	_	_	
+8-11	9360-9362	am	_	_	_	_	_	_	_	_	_	_	
+8-12	9363-9373	18.02.2004	_	_	_	_	_	_	_	_	_	_	
+8-13	9373-9374	.	_	_	_	_	_	_	_	_	_	_	
+8-14	9375-9377	30	_	_	_	_	_	_	_	_	_	_	
+8-15	9377-9378	.	_	_	_	_	_	_	_	_	_	_	
+8-16	9379-9386	Sitzung	_	_	_	_	_	_	_	_	_	_	
+8-17	9387-9390	der	_	_	_	_	_	_	_	_	_	_	
+8-18	9391-9392	4	_	_	_	_	_	_	_	_	_	_	
+8-19	9392-9393	.	_	_	_	_	_	_	_	_	_	_	
+8-20	9394-9405	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+8-21	9406-9410	2002	_	_	_	_	_	_	_	_	_	_	
+8-22	9410-9411	-	_	_	_	_	_	_	_	_	_	_	
+8-23	9411-9415	2006	_	_	_	_	_	_	_	_	_	_	
+8-24	9415-9416	.	_	_	_	_	_	_	_	_	_	_	
+8-25	9417-9432	Plenarprotokoll	_	_	_	_	_	_	_	_	_	_	
+8-26	9432-9433	,	_	_	_	_	_	_	_	_	_	_	
+8-27	9434-9442	Schwerin	_	_	_	_	_	_	_	_	_	_	
+8-28	9442-9443	,	_	_	_	_	_	_	_	_	_	_	
+8-29	9444-9448	2004	_	_	_	_	_	_	_	_	_	_	
+8-30	9449-9450	#	_	_	_	_	_	_	_	_	_	_	
+8-31	9450-9451	#	_	_	_	_	_	_	_	_	_	_	
+8-32	9451-9452	#	_	_	_	_	_	_	_	_	_	_	
+8-33	9453-9455	Dr	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-34	9455-9456	.	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-35	9457-9464	Henning	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-36	9465-9468	von	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-37	9469-9479	Storch.CDU	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-38	9479-9480	:	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-39	9481-9485	Frau	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-40	9486-9497	Präsidentin	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-41	9497-9498	!	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-42	9499-9504	Meine	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-43	9505-9516	Kolleginnen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-44	9517-9520	und	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-45	9521-9529	Kollegen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-46	9529-9530	)	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-47	9531-9536	Meine	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-48	9537-9542	Damen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-49	9543-9546	und	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-50	9547-9553	Herren	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-51	9553-9554	!	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-52	9555-9558	Die	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-53	9559-9571	CDU-Fraktion	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-54	9572-9576	wird	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-55	9577-9580	dem	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-56	9581-9588	Zweiten	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-57	9589-9613	Nachtragshaushaltsgesetz	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-58	9614-9618	2003	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-59	9619-9623	ihre	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-60	9624-9634	Zustimmung	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-61	9635-9643	versagen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-62	9643-9644	.	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-63	9645-9648	Wir	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-64	9649-9655	halten	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-65	9656-9662	diesen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-66	9663-9680	Nachtragshaushalt	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-67	9681-9684	für	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-68	9685-9702	verfassungswidrig	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-69	9702-9703	.	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-70	9704-9706	Er	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-71	9707-9720	überschreitet	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-72	9721-9724	mit	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-73	9725-9731	seinen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-74	9732-9744	Festlegungen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-75	9745-9748	die	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-76	9749-9770	Regelkreditobergrenze	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-77	9770-9771	.	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-78	9772-9775	Die	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-79	9776-9786	Begründung	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-80	9786-9787	,	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-81	9788-9792	dass	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-82	9793-9797	eine	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-83	9798-9812	Überschreitung	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-84	9813-9817	nach	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-85	9818-9821	dem	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-86	9822-9828	Urteil	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-87	9829-9832	des	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-88	9833-9841	Berliner	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-89	9842-9867	Bundesverfassungsgerichts	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-90	9868-9877	vorliegen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-91	9878-9882	muss	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-92	9883-9884	-	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-93	9885-9888	die	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-94	9889-9898	Kriterien	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-95	9899-9903	dazu	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-96	9904-9905	-	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-97	9905-9906	.	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-98	9907-9910	ist	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-99	9911-9915	hier	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-100	9916-9921	nicht	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-101	9922-9933	eingehalten	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-102	9933-9934	.	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-103	9935-9936	#	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-104	9936-9937	#	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-105	9937-9938	#	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-106	9939-9942	Die	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-107	9943-9958	Landesregierung	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-108	9959-9962	hat	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-109	9963-9967	zwar	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-110	9968-9974	darauf	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-111	9975-9986	hingewiesen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-112	9986-9987	,	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-113	9988-9992	dass	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-114	9993-9996	die	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-115	9997-10011	Überschreitung	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-116	10012-10014	im	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-117	10015-10019	Jahr	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-118	10020-10024	2003	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-119	10025-10028	zur	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-120	10029-10040	Überwindung	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-121	10041-10046	einer	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-122	10047-10058	ernsthaften	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-123	10059-10062	und	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-124	10063-10075	nachhaltigen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-125	10076-10083	Störung	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-126	10084-10087	des	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-127	10088-10110	gesamtwirtschaftlichen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-128	10111-10125	Gleichgewichts	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-129	10126-10135	notwendig	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-130	10136-10139	sei	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-131	10140-10143	und	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-132	10144-10147	der	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-133	10148-10149	#	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-134	10149-10158	Bedrohung	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-135	10158-10159	#	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-136	10160-10163	der	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-137	10164-10178	Wirtschaftsund	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-138	10179-10197	Beschäftigungslage	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-139	10198-10201	des	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-140	10202-10208	Landes	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-141	10209-10223	entgegenwirken	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-142	10224-10228	soll	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-143	10228-10229	.	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-144	10230-10231	#	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-145	10231-10232	#	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-146	10232-10233	#	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-147	10234-10237	Wir	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-148	10238-10251	widersprechen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-149	10252-10258	dieser	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-150	10259-10269	Begründung	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-151	10269-10270	.	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-152	10271-10273	Es	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-153	10274-10277	mag	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-154	10278-10285	richtig	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-155	10286-10290	sein	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-156	10290-10291	,	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-157	10292-10296	dass	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-158	10297-10300	wir	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-159	10301-10306	heute	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-160	10307-10310	von	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-161	10311-10316	einer	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-162	10317-10324	Störung	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-163	10325-10328	des	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-164	10329-10351	gesamtwirtschaftlichen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-165	10352-10366	Gleichgewichts	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-166	10367-10373	werden	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-167	10374-10382	sprechen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-168	10383-10389	müssen	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-169	10389-10390	,	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-170	10391-10395	aber	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-171	10396-10399	das	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-172	10400-10410	Zahlenwerk	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-173	10411-10416	macnt	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-174	10417-10422	nicht	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-175	10423-10431	deutlich	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-176	10431-10432	,	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-177	10433-10437	dass	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-178	10438-10441	das	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-179	10441-10442	,	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-180	10443-10446	was	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-181	10447-10450	uns	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-182	10451-10460	vorgelegt	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-183	10461-10467	worden	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-184	10468-10471	ist	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-185	10471-10472	.	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-186	10473-10476	zur	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-187	10477-10488	Überwindung	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-188	10489-10495	dieses	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-189	10496-10505	Zustandes	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-190	10506-10514	geeignet	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-191	10515-10518	ist	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+8-192	10518-10519	.	*[40]	Keine Moralisierung[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	*[40]	
+
+#Text=PMV/W04.00030 Protokoll der Sitzung des Parlaments Landtag Mecklenburg-Vorpommern am 18.02.2004. 30. Sitzung der 4. Wahlperiode 2002-2006. Plenarprotokoll, Schwerin, 2004 ### Deshalb ist festzustellen - Herr von Storch, ich habe das sehr wohl aufgenommen -, dass auch Sie sagen, ja. das gesamtwirtschaftliche Gleichgewicht ist gestört. ### Ich sage, zumindest haben wir eine schwerwiegende Störung zu verzeichnen und eine unmittelbare #Bedrohung# für die Wirtschaftsund Arbeitsmarktpolitik des Landes. ### Das sagt uns ja die Landesverfassung im Artikel 65 Absatz 2. dass es unter diesen Bedingungen auch notwendig und möglich ist, höhere Kredite aufzunehmen, als wir sie in eigenfinanzierte Investitionen stecken. Ich glaube, dass dies einer ernsthaften Prüfung standhält, denn wer dieser Störung begegnen will, muss dafür sorgen - und ich denke, dass wir mit dem Nachtragshaushalt als auch mit dem Doppelhaushalt dafür sorgen werden dass es ein hohes Investitionsniveau gibt, welches wir fortführen können, dass damit wichtige Entwicklungen in der Infrastruktur, in der Verbesserung der Wirtschaftsförderung für kleine und mittelständische Unternehmen bis hin zur Existenzgründung möglich gemacht werden, auch was die Unterstützung von Finanzierungsmöglichkeiten und Liquiditätsengpässen in Unternehmen betrifft.
+9-1	10520-10523	PMV	_	_	_	_	_	_	_	_	_	_	
+9-2	10523-10524	/	_	_	_	_	_	_	_	_	_	_	
+9-3	10524-10533	W04.00030	_	_	_	_	_	_	_	_	_	_	
+9-4	10534-10543	Protokoll	_	_	_	_	_	_	_	_	_	_	
+9-5	10544-10547	der	_	_	_	_	_	_	_	_	_	_	
+9-6	10548-10555	Sitzung	_	_	_	_	_	_	_	_	_	_	
+9-7	10556-10559	des	_	_	_	_	_	_	_	_	_	_	
+9-8	10560-10570	Parlaments	_	_	_	_	_	_	_	_	_	_	
+9-9	10571-10578	Landtag	_	_	_	_	_	_	_	_	_	_	
+9-10	10579-10601	Mecklenburg-Vorpommern	_	_	_	_	_	_	_	_	_	_	
+9-11	10602-10604	am	_	_	_	_	_	_	_	_	_	_	
+9-12	10605-10615	18.02.2004	_	_	_	_	_	_	_	_	_	_	
+9-13	10615-10616	.	_	_	_	_	_	_	_	_	_	_	
+9-14	10617-10619	30	_	_	_	_	_	_	_	_	_	_	
+9-15	10619-10620	.	_	_	_	_	_	_	_	_	_	_	
+9-16	10621-10628	Sitzung	_	_	_	_	_	_	_	_	_	_	
+9-17	10629-10632	der	_	_	_	_	_	_	_	_	_	_	
+9-18	10633-10634	4	_	_	_	_	_	_	_	_	_	_	
+9-19	10634-10635	.	_	_	_	_	_	_	_	_	_	_	
+9-20	10636-10647	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+9-21	10648-10652	2002	_	_	_	_	_	_	_	_	_	_	
+9-22	10652-10653	-	_	_	_	_	_	_	_	_	_	_	
+9-23	10653-10657	2006	_	_	_	_	_	_	_	_	_	_	
+9-24	10657-10658	.	_	_	_	_	_	_	_	_	_	_	
+9-25	10659-10674	Plenarprotokoll	_	_	_	_	_	_	_	_	_	_	
+9-26	10674-10675	,	_	_	_	_	_	_	_	_	_	_	
+9-27	10676-10684	Schwerin	_	_	_	_	_	_	_	_	_	_	
+9-28	10684-10685	,	_	_	_	_	_	_	_	_	_	_	
+9-29	10686-10690	2004	_	_	_	_	_	_	_	_	_	_	
+9-30	10691-10692	#	_	_	_	_	_	_	_	_	_	_	
+9-31	10692-10693	#	_	_	_	_	_	_	_	_	_	_	
+9-32	10693-10694	#	_	_	_	_	_	_	_	_	_	_	
+9-33	10695-10702	Deshalb	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-34	10703-10706	ist	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-35	10707-10720	festzustellen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-36	10721-10722	-	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-37	10723-10727	Herr	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-38	10728-10731	von	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-39	10732-10738	Storch	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-40	10738-10739	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-41	10740-10743	ich	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-42	10744-10748	habe	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-43	10749-10752	das	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-44	10753-10757	sehr	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-45	10758-10762	wohl	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-46	10763-10774	aufgenommen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-47	10775-10776	-	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-48	10776-10777	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-49	10778-10782	dass	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-50	10783-10787	auch	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-51	10788-10791	Sie	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-52	10792-10797	sagen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-53	10797-10798	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-54	10799-10801	ja	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-55	10801-10802	.	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-56	10803-10806	das	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-57	10807-10828	gesamtwirtschaftliche	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-58	10829-10842	Gleichgewicht	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-59	10843-10846	ist	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-60	10847-10854	gestört	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-61	10854-10855	.	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-62	10856-10857	#	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-63	10857-10858	#	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-64	10858-10859	#	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-65	10860-10863	Ich	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-66	10864-10868	sage	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-67	10868-10869	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-68	10870-10879	zumindest	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-69	10880-10885	haben	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-70	10886-10889	wir	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-71	10890-10894	eine	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-72	10895-10909	schwerwiegende	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-73	10910-10917	Störung	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-74	10918-10920	zu	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-75	10921-10932	verzeichnen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-76	10933-10936	und	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-77	10937-10941	eine	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-78	10942-10954	unmittelbare	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-79	10955-10956	#	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-80	10956-10965	Bedrohung	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-81	10965-10966	#	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-82	10967-10970	für	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-83	10971-10974	die	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-84	10975-10989	Wirtschaftsund	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-85	10990-11009	Arbeitsmarktpolitik	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-86	11010-11013	des	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-87	11014-11020	Landes	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-88	11020-11021	.	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-89	11022-11023	#	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-90	11023-11024	#	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-91	11024-11025	#	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-92	11026-11029	Das	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-93	11030-11034	sagt	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-94	11035-11038	uns	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-95	11039-11041	ja	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-96	11042-11045	die	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-97	11046-11062	Landesverfassung	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-98	11063-11065	im	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-99	11066-11073	Artikel	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-100	11074-11076	65	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-101	11077-11083	Absatz	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-102	11084-11085	2	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-103	11085-11086	.	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-104	11087-11091	dass	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-105	11092-11094	es	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-106	11095-11100	unter	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-107	11101-11107	diesen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-108	11108-11119	Bedingungen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-109	11120-11124	auch	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-110	11125-11134	notwendig	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-111	11135-11138	und	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-112	11139-11146	möglich	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-113	11147-11150	ist	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-114	11150-11151	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-115	11152-11158	höhere	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-116	11159-11166	Kredite	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-117	11167-11178	aufzunehmen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-118	11178-11179	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-119	11180-11183	als	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-120	11184-11187	wir	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-121	11188-11191	sie	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-122	11192-11194	in	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-123	11195-11211	eigenfinanzierte	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-124	11212-11225	Investitionen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-125	11226-11233	stecken	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-126	11233-11234	.	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-127	11235-11238	Ich	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-128	11239-11245	glaube	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-129	11245-11246	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-130	11247-11251	dass	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-131	11252-11256	dies	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-132	11257-11262	einer	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-133	11263-11274	ernsthaften	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-134	11275-11282	Prüfung	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-135	11283-11292	standhält	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-136	11292-11293	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-137	11294-11298	denn	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-138	11299-11302	wer	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-139	11303-11309	dieser	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-140	11310-11317	Störung	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-141	11318-11326	begegnen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-142	11327-11331	will	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-143	11331-11332	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-144	11333-11337	muss	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-145	11338-11343	dafür	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-146	11344-11350	sorgen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-147	11351-11352	-	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-148	11353-11356	und	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-149	11357-11360	ich	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-150	11361-11366	denke	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-151	11366-11367	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-152	11368-11372	dass	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-153	11373-11376	wir	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-154	11377-11380	mit	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-155	11381-11384	dem	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-156	11385-11402	Nachtragshaushalt	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-157	11403-11406	als	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-158	11407-11411	auch	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-159	11412-11415	mit	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-160	11416-11419	dem	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-161	11420-11434	Doppelhaushalt	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-162	11435-11440	dafür	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-163	11441-11447	sorgen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-164	11448-11454	werden	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-165	11455-11459	dass	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-166	11460-11462	es	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-167	11463-11466	ein	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-168	11467-11472	hohes	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-169	11473-11491	Investitionsniveau	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-170	11492-11496	gibt	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-171	11496-11497	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-172	11498-11505	welches	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-173	11506-11509	wir	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-174	11510-11520	fortführen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-175	11521-11527	können	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-176	11527-11528	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-177	11529-11533	dass	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-178	11534-11539	damit	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-179	11540-11548	wichtige	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-180	11549-11562	Entwicklungen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-181	11563-11565	in	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-182	11566-11569	der	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-183	11570-11583	Infrastruktur	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-184	11583-11584	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-185	11585-11587	in	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-186	11588-11591	der	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-187	11592-11604	Verbesserung	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-188	11605-11608	der	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-189	11609-11629	Wirtschaftsförderung	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-190	11630-11633	für	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-191	11634-11640	kleine	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-192	11641-11644	und	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-193	11645-11661	mittelständische	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-194	11662-11673	Unternehmen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-195	11674-11677	bis	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-196	11678-11681	hin	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-197	11682-11685	zur	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-198	11686-11702	Existenzgründung	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-199	11703-11710	möglich	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-200	11711-11718	gemacht	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-201	11719-11725	werden	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-202	11725-11726	,	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-203	11727-11731	auch	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-204	11732-11735	was	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-205	11736-11739	die	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-206	11740-11753	Unterstützung	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-207	11754-11757	von	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-208	11758-11784	Finanzierungsmöglichkeiten	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-209	11785-11788	und	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-210	11789-11809	Liquiditätsengpässen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-211	11810-11812	in	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-212	11813-11824	Unternehmen	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-213	11825-11833	betrifft	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+9-214	11833-11834	.	*[41]	Keine Moralisierung[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	*[41]	
+
+#Text=PSH/W16.00120 Protokoll der Sitzung des Parlaments Landtag Schleswig-Holstein am 20.07.2009. 120. Sitzung der 16. Wahlperiode 2005-2009. Plenarprotokoll, Kiel, 2009 ### Der Verfassungsgeber dieses Landes hat im Zuge der Verfassungsreform 1990 dem Landtag das Recht eingeräumt, unter gleichzeitiger Bestimmung eines Termins eine Neuwahl vornehmen zu lassen und mit einer autonomen Entscheidung die Wahlperiode vorzeitig zu beenden. Vor der Parlamentsund Verfassungsreform konnte der Landtag nur auf Antrag des Ministerpräsidenten mit der Mehrheit seiner Mitglieder seine Auflösung beschließen. In dem Antragsrecht zur Selbstauflösung, das allein dem Ministerpräsidenten zustand, wurde ein Ausweis seiner starken Stellung im schleswig-holsteinischen Verfassungssystem gesehen. ### Aus diesem Antragsrecht des Ministerpräsidenten ergab sich eine #Abhängigkeit# des Landtags in Krisensituationen, die auch nach meinem Verständnis nicht dem Verhältnis von Parlament und Regierung in einer parlamentarischen Demokratie entspricht. ###
+10-1	12121-12124	PSH	_	_	_	_	_	_	_	_	_	_	
+10-2	12124-12125	/	_	_	_	_	_	_	_	_	_	_	
+10-3	12125-12134	W16.00120	_	_	_	_	_	_	_	_	_	_	
+10-4	12135-12144	Protokoll	_	_	_	_	_	_	_	_	_	_	
+10-5	12145-12148	der	_	_	_	_	_	_	_	_	_	_	
+10-6	12149-12156	Sitzung	_	_	_	_	_	_	_	_	_	_	
+10-7	12157-12160	des	_	_	_	_	_	_	_	_	_	_	
+10-8	12161-12171	Parlaments	_	_	_	_	_	_	_	_	_	_	
+10-9	12172-12179	Landtag	_	_	_	_	_	_	_	_	_	_	
+10-10	12180-12198	Schleswig-Holstein	_	_	_	_	_	_	_	_	_	_	
+10-11	12199-12201	am	_	_	_	_	_	_	_	_	_	_	
+10-12	12202-12212	20.07.2009	_	_	_	_	_	_	_	_	_	_	
+10-13	12212-12213	.	_	_	_	_	_	_	_	_	_	_	
+10-14	12214-12217	120	_	_	_	_	_	_	_	_	_	_	
+10-15	12217-12218	.	_	_	_	_	_	_	_	_	_	_	
+10-16	12219-12226	Sitzung	_	_	_	_	_	_	_	_	_	_	
+10-17	12227-12230	der	_	_	_	_	_	_	_	_	_	_	
+10-18	12231-12233	16	_	_	_	_	_	_	_	_	_	_	
+10-19	12233-12234	.	_	_	_	_	_	_	_	_	_	_	
+10-20	12235-12246	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+10-21	12247-12251	2005	_	_	_	_	_	_	_	_	_	_	
+10-22	12251-12252	-	_	_	_	_	_	_	_	_	_	_	
+10-23	12252-12256	2009	_	_	_	_	_	_	_	_	_	_	
+10-24	12256-12257	.	_	_	_	_	_	_	_	_	_	_	
+10-25	12258-12273	Plenarprotokoll	_	_	_	_	_	_	_	_	_	_	
+10-26	12273-12274	,	_	_	_	_	_	_	_	_	_	_	
+10-27	12275-12279	Kiel	_	_	_	_	_	_	_	_	_	_	
+10-28	12279-12280	,	_	_	_	_	_	_	_	_	_	_	
+10-29	12281-12285	2009	_	_	_	_	_	_	_	_	_	_	
+10-30	12286-12287	#	_	_	_	_	_	_	_	_	_	_	
+10-31	12287-12288	#	_	_	_	_	_	_	_	_	_	_	
+10-32	12288-12289	#	_	_	_	_	_	_	_	_	_	_	
+10-33	12290-12293	Der	_	_	_	_	_	_	_	_	_	_	
+10-34	12294-12310	Verfassungsgeber	_	_	_	_	_	_	_	_	_	_	
+10-35	12311-12317	dieses	_	_	_	_	_	_	_	_	_	_	
+10-36	12318-12324	Landes	_	_	_	_	_	_	_	_	_	_	
+10-37	12325-12328	hat	_	_	_	_	_	_	_	_	_	_	
+10-38	12329-12331	im	_	_	_	_	_	_	_	_	_	_	
+10-39	12332-12336	Zuge	_	_	_	_	_	_	_	_	_	_	
+10-40	12337-12340	der	_	_	_	_	_	_	_	_	_	_	
+10-41	12341-12358	Verfassungsreform	_	_	_	_	_	_	_	_	_	_	
+10-42	12359-12363	1990	_	_	_	_	_	_	_	_	_	_	
+10-43	12364-12367	dem	_	_	_	_	_	_	_	_	_	_	
+10-44	12368-12375	Landtag	_	_	_	_	_	_	_	_	_	_	
+10-45	12376-12379	das	_	_	_	_	_	_	_	_	_	_	
+10-46	12380-12385	Recht	_	_	_	_	_	_	_	_	_	_	
+10-47	12386-12396	eingeräumt	_	_	_	_	_	_	_	_	_	_	
+10-48	12396-12397	,	_	_	_	_	_	_	_	_	_	_	
+10-49	12398-12403	unter	_	_	_	_	_	_	_	_	_	_	
+10-50	12404-12418	gleichzeitiger	_	_	_	_	_	_	_	_	_	_	
+10-51	12419-12429	Bestimmung	_	_	_	_	_	_	_	_	_	_	
+10-52	12430-12435	eines	_	_	_	_	_	_	_	_	_	_	
+10-53	12436-12443	Termins	_	_	_	_	_	_	_	_	_	_	
+10-54	12444-12448	eine	_	_	_	_	_	_	_	_	_	_	
+10-55	12449-12456	Neuwahl	_	_	_	_	_	_	_	_	_	_	
+10-56	12457-12466	vornehmen	_	_	_	_	_	_	_	_	_	_	
+10-57	12467-12469	zu	_	_	_	_	_	_	_	_	_	_	
+10-58	12470-12476	lassen	_	_	_	_	_	_	_	_	_	_	
+10-59	12477-12480	und	_	_	_	_	_	_	_	_	_	_	
+10-60	12481-12484	mit	_	_	_	_	_	_	_	_	_	_	
+10-61	12485-12490	einer	_	_	_	_	_	_	_	_	_	_	
+10-62	12491-12500	autonomen	_	_	_	_	_	_	_	_	_	_	
+10-63	12501-12513	Entscheidung	_	_	_	_	_	_	_	_	_	_	
+10-64	12514-12517	die	_	_	_	_	_	_	_	_	_	_	
+10-65	12518-12529	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+10-66	12530-12539	vorzeitig	_	_	_	_	_	_	_	_	_	_	
+10-67	12540-12542	zu	_	_	_	_	_	_	_	_	_	_	
+10-68	12543-12550	beenden	_	_	_	_	_	_	_	_	_	_	
+10-69	12550-12551	.	_	_	_	_	_	_	_	_	_	_	
+10-70	12552-12555	Vor	_	_	_	_	_	_	_	_	_	_	
+10-71	12556-12559	der	_	_	_	_	_	_	_	_	_	_	
+10-72	12560-12573	Parlamentsund	_	_	_	_	_	_	_	_	_	_	
+10-73	12574-12591	Verfassungsreform	_	_	_	_	_	_	_	_	_	_	
+10-74	12592-12598	konnte	_	_	_	_	_	_	_	_	_	_	
+10-75	12599-12602	der	_	_	_	_	_	_	_	_	_	_	
+10-76	12603-12610	Landtag	_	_	_	_	_	_	_	_	_	_	
+10-77	12611-12614	nur	_	_	_	_	_	_	_	_	_	_	
+10-78	12615-12618	auf	_	_	_	_	_	_	_	_	_	_	
+10-79	12619-12625	Antrag	_	_	_	_	_	_	_	_	_	_	
+10-80	12626-12629	des	_	_	_	_	_	_	_	_	_	_	
+10-81	12630-12649	Ministerpräsidenten	_	_	_	_	_	_	_	_	_	_	
+10-82	12650-12653	mit	_	_	_	_	_	_	_	_	_	_	
+10-83	12654-12657	der	_	_	_	_	_	_	_	_	_	_	
+10-84	12658-12666	Mehrheit	_	_	_	_	_	_	_	_	_	_	
+10-85	12667-12673	seiner	_	_	_	_	_	_	_	_	_	_	
+10-86	12674-12684	Mitglieder	_	_	_	_	_	_	_	_	_	_	
+10-87	12685-12690	seine	_	_	_	_	_	_	_	_	_	_	
+10-88	12691-12700	Auflösung	_	_	_	_	_	_	_	_	_	_	
+10-89	12701-12712	beschließen	_	_	_	_	_	_	_	_	_	_	
+10-90	12712-12713	.	_	_	_	_	_	_	_	_	_	_	
+10-91	12714-12716	In	_	_	_	_	_	_	_	_	_	_	
+10-92	12717-12720	dem	_	_	_	_	_	_	_	_	_	_	
+10-93	12721-12733	Antragsrecht	_	_	_	_	_	_	_	_	_	_	
+10-94	12734-12737	zur	_	_	_	_	_	_	_	_	_	_	
+10-95	12738-12753	Selbstauflösung	_	_	_	_	_	_	_	_	_	_	
+10-96	12753-12754	,	_	_	_	_	_	_	_	_	_	_	
+10-97	12755-12758	das	_	_	_	_	_	_	_	_	_	_	
+10-98	12759-12765	allein	_	_	_	_	_	_	_	_	_	_	
+10-99	12766-12769	dem	_	_	_	_	_	_	_	_	_	_	
+10-100	12770-12789	Ministerpräsidenten	_	_	_	_	_	_	_	_	_	_	
+10-101	12790-12797	zustand	_	_	_	_	_	_	_	_	_	_	
+10-102	12797-12798	,	_	_	_	_	_	_	_	_	_	_	
+10-103	12799-12804	wurde	_	_	_	_	_	_	_	_	_	_	
+10-104	12805-12808	ein	_	_	_	_	_	_	_	_	_	_	
+10-105	12809-12816	Ausweis	_	_	_	_	_	_	_	_	_	_	
+10-106	12817-12823	seiner	_	_	_	_	_	_	_	_	_	_	
+10-107	12824-12831	starken	_	_	_	_	_	_	_	_	_	_	
+10-108	12832-12840	Stellung	_	_	_	_	_	_	_	_	_	_	
+10-109	12841-12843	im	_	_	_	_	_	_	_	_	_	_	
+10-110	12844-12868	schleswig-holsteinischen	_	_	_	_	_	_	_	_	_	_	
+10-111	12869-12886	Verfassungssystem	_	_	_	_	_	_	_	_	_	_	
+10-112	12887-12894	gesehen	_	_	_	_	_	_	_	_	_	_	
+10-113	12894-12895	.	_	_	_	_	_	_	_	_	_	_	
+10-114	12896-12897	#	_	_	_	_	_	_	_	_	_	_	
+10-115	12897-12898	#	_	_	_	_	_	_	_	_	_	_	
+10-116	12898-12899	#	_	_	_	_	_	_	_	_	_	_	
+10-117	12900-12903	Aus	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-118	12904-12910	diesem	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-119	12911-12923	Antragsrecht	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-120	12924-12927	des	*[42]|*[43]|*[44]	*[42]|Moralisierung Weltwissen[43]|*[44]	*[42]|*[43]|*[44]	Die Verfassung soll geändert werden.[42]|*[43]|*[44]	*[42]|*[43]|*[44]	Expression[42]|*[43]|*[44]	*[42]|*[43]|*[44]	*[42]|*[43]|Kein Bezug[44]	*[42]|*[43]|soziale Gruppe[44]	*[42]|*[43]|Neutral[44]	
+10-121	12928-12947	Ministerpräsidenten	*[42]|*[43]|*[44]	*[42]|Moralisierung Weltwissen[43]|*[44]	*[42]|*[43]|*[44]	Die Verfassung soll geändert werden.[42]|*[43]|*[44]	*[42]|*[43]|*[44]	Expression[42]|*[43]|*[44]	*[42]|*[43]|*[44]	*[42]|*[43]|Kein Bezug[44]	*[42]|*[43]|soziale Gruppe[44]	*[42]|*[43]|Neutral[44]	
+10-122	12948-12953	ergab	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-123	12954-12958	sich	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-124	12959-12963	eine	*[42]|*[43]|*[45]	*[42]|Moralisierung Weltwissen[43]|*[45]	*[42]|*[43]|Oppression[45]	Die Verfassung soll geändert werden.[42]|*[43]|*[45]	*[42]|*[43]|*[45]	Expression[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	
+10-125	12964-12965	#	*[42]|*[43]|*[45]	*[42]|Moralisierung Weltwissen[43]|*[45]	*[42]|*[43]|Oppression[45]	Die Verfassung soll geändert werden.[42]|*[43]|*[45]	*[42]|*[43]|*[45]	Expression[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	
+10-126	12965-12977	Abhängigkeit	*[42]|*[43]|*[45]	*[42]|Moralisierung Weltwissen[43]|*[45]	*[42]|*[43]|Oppression[45]	Die Verfassung soll geändert werden.[42]|*[43]|*[45]	*[42]|*[43]|*[45]	Expression[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	
+10-127	12977-12978	#	*[42]|*[43]|*[45]	*[42]|Moralisierung Weltwissen[43]|*[45]	*[42]|*[43]|Oppression[45]	Die Verfassung soll geändert werden.[42]|*[43]|*[45]	*[42]|*[43]|*[45]	Expression[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	
+10-128	12979-12982	des	*[42]|*[43]|*[45]	*[42]|Moralisierung Weltwissen[43]|*[45]	*[42]|*[43]|Oppression[45]	Die Verfassung soll geändert werden.[42]|*[43]|*[45]	*[42]|*[43]|*[45]	Expression[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	
+10-129	12983-12991	Landtags	*[42]|*[43]|*[45]	*[42]|Moralisierung Weltwissen[43]|*[45]	*[42]|*[43]|Oppression[45]	Die Verfassung soll geändert werden.[42]|*[43]|*[45]	*[42]|*[43]|*[45]	Expression[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	
+10-130	12992-12994	in	*[42]|*[43]|*[45]	*[42]|Moralisierung Weltwissen[43]|*[45]	*[42]|*[43]|Oppression[45]	Die Verfassung soll geändert werden.[42]|*[43]|*[45]	*[42]|*[43]|*[45]	Expression[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	
+10-131	12995-13012	Krisensituationen	*[42]|*[43]|*[45]	*[42]|Moralisierung Weltwissen[43]|*[45]	*[42]|*[43]|Oppression[45]	Die Verfassung soll geändert werden.[42]|*[43]|*[45]	*[42]|*[43]|*[45]	Expression[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	*[42]|*[43]|*[45]	
+10-132	13012-13013	,	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-133	13014-13017	die	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-134	13018-13022	auch	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-135	13023-13027	nach	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-136	13028-13034	meinem	*[42]|*[43]|*[46]	*[42]|Moralisierung Weltwissen[43]|*[46]	*[42]|*[43]|*[46]	Die Verfassung soll geändert werden.[42]|*[43]|*[46]	*[42]|*[43]|*[46]	Expression[42]|*[43]|*[46]	*[42]|*[43]|*[46]	*[42]|*[43]|Forderer:in[46]	*[42]|*[43]|Individuum[46]	*[42]|*[43]|Own Group[46]	
+10-137	13035-13046	Verständnis	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-138	13047-13052	nicht	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-139	13053-13056	dem	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-140	13057-13067	Verhältnis	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-141	13068-13071	von	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-142	13072-13081	Parlament	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-143	13082-13085	und	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-144	13086-13095	Regierung	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-145	13096-13098	in	*[42]|*[43]|*[47]	*[42]|Moralisierung Weltwissen[43]|*[47]	*[42]|*[43]|Liberty[47]	Die Verfassung soll geändert werden.[42]|*[43]|*[47]	*[42]|*[43]|*[47]	Expression[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	
+10-146	13099-13104	einer	*[42]|*[43]|*[47]	*[42]|Moralisierung Weltwissen[43]|*[47]	*[42]|*[43]|Liberty[47]	Die Verfassung soll geändert werden.[42]|*[43]|*[47]	*[42]|*[43]|*[47]	Expression[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	
+10-147	13105-13122	parlamentarischen	*[42]|*[43]|*[47]	*[42]|Moralisierung Weltwissen[43]|*[47]	*[42]|*[43]|Liberty[47]	Die Verfassung soll geändert werden.[42]|*[43]|*[47]	*[42]|*[43]|*[47]	Expression[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	
+10-148	13123-13133	Demokratie	*[42]|*[43]|*[47]	*[42]|Moralisierung Weltwissen[43]|*[47]	*[42]|*[43]|Liberty[47]	Die Verfassung soll geändert werden.[42]|*[43]|*[47]	*[42]|*[43]|*[47]	Expression[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	*[42]|*[43]|*[47]	
+10-149	13134-13144	entspricht	*[42]|*[43]	*[42]|Moralisierung Weltwissen[43]	*[42]|*[43]	Die Verfassung soll geändert werden.[42]|*[43]	*[42]|*[43]	Expression[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	*[42]|*[43]	
+10-150	13144-13145	.	_	_	_	_	_	_	_	_	_	_	
+10-151	13146-13147	#	_	_	_	_	_	_	_	_	_	_	
+10-152	13147-13148	#	_	_	_	_	_	_	_	_	_	_	
+10-153	13148-13149	#	_	_	_	_	_	_	_	_	_	_	
+
+#Text=PSH/W18.00001 Protokoll der Sitzung des Parlaments Landtag Schleswig-Holstein am 05.06.2012. 1. Sitzung der 18. Wahlperiode 2012-. Plenarprotokoll, Kiel, 2012 ### ### Deswegen meine Bitte an Sie: Lassen Sie uns gemeinsam die Politik für Menschen in SchleswigHolstein, die sich informieren und die sich #einmischen# möchten, weiter öffnen. ### Lassen Sie uns etwas gegen das beschämend geringe Ansehen der Politik in der Bevölkerung tun, gegen die verbreitete Unzufriedenheit mit dem gegenwärtigen Zustand der Demokratie, die sich auch in einer geringen Wahlbeteiligung äußert. Lassen Sie uns dort, wo die Schleswig-Holsteinerinnen und Schleswig-Holsteiner bisher keinen echten Einblick in die politische Arbeit hatten, mehr Transparenz wagen.
+11-1	13722-13725	PSH	_	_	_	_	_	_	_	_	_	_	
+11-2	13725-13726	/	_	_	_	_	_	_	_	_	_	_	
+11-3	13726-13735	W18.00001	_	_	_	_	_	_	_	_	_	_	
+11-4	13736-13745	Protokoll	_	_	_	_	_	_	_	_	_	_	
+11-5	13746-13749	der	_	_	_	_	_	_	_	_	_	_	
+11-6	13750-13757	Sitzung	_	_	_	_	_	_	_	_	_	_	
+11-7	13758-13761	des	_	_	_	_	_	_	_	_	_	_	
+11-8	13762-13772	Parlaments	_	_	_	_	_	_	_	_	_	_	
+11-9	13773-13780	Landtag	_	_	_	_	_	_	_	_	_	_	
+11-10	13781-13799	Schleswig-Holstein	_	_	_	_	_	_	_	_	_	_	
+11-11	13800-13802	am	_	_	_	_	_	_	_	_	_	_	
+11-12	13803-13813	05.06.2012	_	_	_	_	_	_	_	_	_	_	
+11-13	13813-13814	.	_	_	_	_	_	_	_	_	_	_	
+11-14	13815-13816	1	_	_	_	_	_	_	_	_	_	_	
+11-15	13816-13817	.	_	_	_	_	_	_	_	_	_	_	
+11-16	13818-13825	Sitzung	_	_	_	_	_	_	_	_	_	_	
+11-17	13826-13829	der	_	_	_	_	_	_	_	_	_	_	
+11-18	13830-13832	18	_	_	_	_	_	_	_	_	_	_	
+11-19	13832-13833	.	_	_	_	_	_	_	_	_	_	_	
+11-20	13834-13845	Wahlperiode	_	_	_	_	_	_	_	_	_	_	
+11-21	13846-13850	2012	_	_	_	_	_	_	_	_	_	_	
+11-22	13850-13851	-	_	_	_	_	_	_	_	_	_	_	
+11-23	13851-13852	.	_	_	_	_	_	_	_	_	_	_	
+11-24	13853-13868	Plenarprotokoll	_	_	_	_	_	_	_	_	_	_	
+11-25	13868-13869	,	_	_	_	_	_	_	_	_	_	_	
+11-26	13870-13874	Kiel	_	_	_	_	_	_	_	_	_	_	
+11-27	13874-13875	,	_	_	_	_	_	_	_	_	_	_	
+11-28	13876-13880	2012	_	_	_	_	_	_	_	_	_	_	
+11-29	13881-13882	#	_	_	_	_	_	_	_	_	_	_	
+11-30	13882-13883	#	_	_	_	_	_	_	_	_	_	_	
+11-31	13883-13884	#	_	_	_	_	_	_	_	_	_	_	
+11-32	13885-13886	#	_	_	_	_	_	_	_	_	_	_	
+11-33	13886-13887	#	_	_	_	_	_	_	_	_	_	_	
+11-34	13887-13888	#	_	_	_	_	_	_	_	_	_	_	
+11-35	13889-13897	Deswegen	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-36	13898-13903	meine	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-37	13904-13909	Bitte	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-38	13910-13912	an	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-39	13913-13916	Sie	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-40	13916-13917	:	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-41	13918-13924	Lassen	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-42	13925-13928	Sie	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-43	13929-13932	uns	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-44	13933-13942	gemeinsam	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-45	13943-13946	die	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-46	13947-13954	Politik	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-47	13955-13958	für	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-48	13959-13967	Menschen	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-49	13968-13970	in	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-50	13971-13988	SchleswigHolstein	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-51	13988-13989	,	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-52	13990-13993	die	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-53	13994-13998	sich	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-54	13999-14010	informieren	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-55	14011-14014	und	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-56	14015-14018	die	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-57	14019-14023	sich	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-58	14024-14025	#	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-59	14025-14035	einmischen	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-60	14035-14036	#	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-61	14037-14044	möchten	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-62	14044-14045	,	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-63	14046-14052	weiter	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-64	14053-14059	öffnen	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-65	14059-14060	.	*[48]	Keine Moralisierung[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	*[48]	
+11-66	14061-14062	#	_	_	_	_	_	_	_	_	_	_	
+11-67	14062-14063	#	_	_	_	_	_	_	_	_	_	_	
+11-68	14063-14064	#	_	_	_	_	_	_	_	_	_	_	
+11-69	14065-14071	Lassen	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-70	14072-14075	Sie	*[49]|*[50]|explizit[51]|*[52]	Moralisierung[49]|Moralisierung explizit[50]|*[51]|*[52]	*[49]|*[50]|*[51]|*[52]	*[49]|*[50]|*[51]|*[52]	*[49]|*[50]|*[51]|*[52]	*[49]|*[50]|Appell[51]|*[52]	*[49]|*[50]|*[51]|*[52]	*[49]|*[50]|*[51]|Adresassat:in[52]	*[49]|*[50]|*[51]|Institution[52]	*[49]|*[50]|*[51]|Other Group[52]	
+11-71	14076-14079	uns	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-72	14080-14085	etwas	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-73	14086-14091	gegen	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-74	14092-14095	das	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-75	14096-14106	beschämend	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-76	14107-14114	geringe	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-77	14115-14122	Ansehen	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-78	14123-14126	der	*[49]|*[50]|explizit[51]|*[53]	Moralisierung[49]|Moralisierung explizit[50]|*[51]|*[53]	*[49]|*[50]|*[51]|*[53]	*[49]|*[50]|*[51]|*[53]	*[49]|*[50]|*[51]|*[53]	*[49]|*[50]|Appell[51]|*[53]	*[49]|*[50]|*[51]|*[53]	*[49]|*[50]|*[51]|Benefizient:in[53]	*[49]|*[50]|*[51]|Institution[53]	*[49]|*[50]|*[51]|Neutral[53]	
+11-79	14127-14134	Politik	*[49]|*[50]|explizit[51]|*[53]	Moralisierung[49]|Moralisierung explizit[50]|*[51]|*[53]	*[49]|*[50]|*[51]|*[53]	*[49]|*[50]|*[51]|*[53]	*[49]|*[50]|*[51]|*[53]	*[49]|*[50]|Appell[51]|*[53]	*[49]|*[50]|*[51]|*[53]	*[49]|*[50]|*[51]|Benefizient:in[53]	*[49]|*[50]|*[51]|Institution[53]	*[49]|*[50]|*[51]|Neutral[53]	
+11-80	14135-14137	in	*[49]|*[50]|explizit[51]|*[54]	Moralisierung[49]|Moralisierung explizit[50]|*[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|Appell[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|*[51]|Benefizient:in[54]	*[49]|*[50]|*[51]|Menschen[54]	*[49]|*[50]|*[51]|Own Group[54]	
+11-81	14138-14141	der	*[49]|*[50]|explizit[51]|*[54]	Moralisierung[49]|Moralisierung explizit[50]|*[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|Appell[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|*[51]|Benefizient:in[54]	*[49]|*[50]|*[51]|Menschen[54]	*[49]|*[50]|*[51]|Own Group[54]	
+11-82	14142-14153	Bevölkerung	*[49]|*[50]|explizit[51]|*[54]	Moralisierung[49]|Moralisierung explizit[50]|*[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|Appell[51]|*[54]	*[49]|*[50]|*[51]|*[54]	*[49]|*[50]|*[51]|Benefizient:in[54]	*[49]|*[50]|*[51]|Menschen[54]	*[49]|*[50]|*[51]|Own Group[54]	
+11-83	14154-14157	tun	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-84	14157-14158	,	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-85	14159-14164	gegen	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-86	14165-14168	die	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-87	14169-14180	verbreitete	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-88	14181-14196	Unzufriedenheit	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-89	14197-14200	mit	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-90	14201-14204	dem	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-91	14205-14218	gegenwärtigen	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-92	14219-14226	Zustand	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-93	14227-14230	der	*[49]|*[50]|explizit[51]|*[55]	Moralisierung[49]|Moralisierung explizit[50]|*[51]|*[55]	*[49]|*[50]|*[51]|Fairness[55]	*[49]|*[50]|*[51]|*[55]	*[49]|*[50]|*[51]|*[55]	*[49]|*[50]|Appell[51]|*[55]	*[49]|*[50]|*[51]|*[55]	*[49]|*[50]|*[51]|*[55]	*[49]|*[50]|*[51]|*[55]	*[49]|*[50]|*[51]|*[55]	
+11-94	14231-14241	Demokratie	*[49]|*[50]|explizit[51]|*[55]	Moralisierung[49]|Moralisierung explizit[50]|*[51]|*[55]	*[49]|*[50]|*[51]|Fairness[55]	*[49]|*[50]|*[51]|*[55]	*[49]|*[50]|*[51]|*[55]	*[49]|*[50]|Appell[51]|*[55]	*[49]|*[50]|*[51]|*[55]	*[49]|*[50]|*[51]|*[55]	*[49]|*[50]|*[51]|*[55]	*[49]|*[50]|*[51]|*[55]	
+11-95	14241-14242	,	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-96	14243-14246	die	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-97	14247-14251	sich	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-98	14252-14256	auch	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-99	14257-14259	in	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-100	14260-14265	einer	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-101	14266-14274	geringen	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-102	14275-14290	Wahlbeteiligung	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-103	14291-14297	äußert	*[49]|*[50]|explizit[51]	Moralisierung[49]|Moralisierung explizit[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|Appell[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	*[49]|*[50]|*[51]	
+11-104	14297-14298	.	*[49]|*[50]	Moralisierung[49]|Moralisierung explizit[50]	*[49]|*[50]	*[49]|*[50]	*[49]|*[50]	*[49]|*[50]	*[49]|*[50]	*[49]|*[50]	*[49]|*[50]	*[49]|*[50]	
+11-105	14299-14305	Lassen	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-106	14306-14309	Sie	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-107	14310-14313	uns	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-108	14314-14318	dort	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-109	14318-14319	,	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-110	14320-14322	wo	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-111	14323-14326	die	*[49]|*[50]|explizit[56]|*[57]	Moralisierung[49]|Moralisierung explizit[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|Appell[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|Benefizient:in[57]	*[49]|*[50]|*[56]|soziale Gruppe[57]	*[49]|*[50]|*[56]|Neutral[57]	
+11-112	14327-14352	Schleswig-Holsteinerinnen	*[49]|*[50]|explizit[56]|*[57]	Moralisierung[49]|Moralisierung explizit[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|Appell[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|Benefizient:in[57]	*[49]|*[50]|*[56]|soziale Gruppe[57]	*[49]|*[50]|*[56]|Neutral[57]	
+11-113	14353-14356	und	*[49]|*[50]|explizit[56]|*[57]	Moralisierung[49]|Moralisierung explizit[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|Appell[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|Benefizient:in[57]	*[49]|*[50]|*[56]|soziale Gruppe[57]	*[49]|*[50]|*[56]|Neutral[57]	
+11-114	14357-14377	Schleswig-Holsteiner	*[49]|*[50]|explizit[56]|*[57]	Moralisierung[49]|Moralisierung explizit[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|Appell[56]|*[57]	*[49]|*[50]|*[56]|*[57]	*[49]|*[50]|*[56]|Benefizient:in[57]	*[49]|*[50]|*[56]|soziale Gruppe[57]	*[49]|*[50]|*[56]|Neutral[57]	
+11-115	14378-14384	bisher	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-116	14385-14391	keinen	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-117	14392-14398	echten	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-118	14399-14407	Einblick	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-119	14408-14410	in	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-120	14411-14414	die	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-121	14415-14425	politische	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-122	14426-14432	Arbeit	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-123	14433-14439	hatten	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-124	14439-14440	,	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-125	14441-14445	mehr	*[49]|*[50]|explizit[56]|*[58]	Moralisierung[49]|Moralisierung explizit[50]|*[56]|*[58]	*[49]|*[50]|*[56]|Fairness[58]	*[49]|*[50]|*[56]|*[58]	*[49]|*[50]|*[56]|*[58]	*[49]|*[50]|Appell[56]|*[58]	*[49]|*[50]|*[56]|*[58]	*[49]|*[50]|*[56]|*[58]	*[49]|*[50]|*[56]|*[58]	*[49]|*[50]|*[56]|*[58]	
+11-126	14446-14457	Transparenz	*[49]|*[50]|explizit[56]|*[58]	Moralisierung[49]|Moralisierung explizit[50]|*[56]|*[58]	*[49]|*[50]|*[56]|Fairness[58]	*[49]|*[50]|*[56]|*[58]	*[49]|*[50]|*[56]|*[58]	*[49]|*[50]|Appell[56]|*[58]	*[49]|*[50]|*[56]|*[58]	*[49]|*[50]|*[56]|*[58]	*[49]|*[50]|*[56]|*[58]	*[49]|*[50]|*[56]|*[58]	
+11-127	14458-14463	wagen	*[49]|*[50]|explizit[56]	Moralisierung[49]|Moralisierung explizit[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|Appell[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	*[49]|*[50]|*[56]	
+11-128	14463-14464	.	_	_	_	_	_	_	_	_	_	_	

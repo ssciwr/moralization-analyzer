@@ -1,0 +1,872 @@
+#FORMAT=WebAnno TSV 3.3
+#T_SP=custom.Span|Forderung|KAT1MoralisierendesSegment|KAT2Subjektive_Ausdrcke|KAT5Ausformulierung|KOMMENTAR|KommunikativeFunktion|Moralwerte|Protagonistinnen|Protagonistinnen2|Protagonistinnen3
+
+
+#Text=T07/JUL.02661 die tageszeitung, 18.07.2007, S. 18; "Dann kann man die KMK auflösen" ### Das kommt auf das Stück an. Den Beteiligten ist die Situation klar. ### Ich zitiere mal einen Kollegen: „Wenn ich mir die Entscheidungswege der Kultusministerkonferenz anschaue, dann könnte ich manchmal entweder zum Separatisten oder zum Zentralisten werden.” Den Satz kann ich als Mahnung, unsere #Verantwortung# wahrzunehmen, unterschreiben. ###
+1-1	752-755	T07	_	_	_	_	_	_	_	_	_	_	
+1-2	755-756	/	_	_	_	_	_	_	_	_	_	_	
+1-3	756-759	JUL	_	_	_	_	_	_	_	_	_	_	
+1-4	759-765	.02661	_	_	_	_	_	_	_	_	_	_	
+1-5	766-769	die	_	_	_	_	_	_	_	_	_	_	
+1-6	770-782	tageszeitung	_	_	_	_	_	_	_	_	_	_	
+1-7	782-783	,	_	_	_	_	_	_	_	_	_	_	
+1-8	784-794	18.07.2007	_	_	_	_	_	_	_	_	_	_	
+1-9	794-795	,	_	_	_	_	_	_	_	_	_	_	
+1-10	796-797	S	_	_	_	_	_	_	_	_	_	_	
+1-11	797-798	.	_	_	_	_	_	_	_	_	_	_	
+1-12	799-801	18	_	_	_	_	_	_	_	_	_	_	
+1-13	801-802	;	_	_	_	_	_	_	_	_	_	_	
+1-14	803-804	"	_	_	_	_	_	_	_	_	_	_	
+1-15	804-808	Dann	_	_	_	_	_	_	_	_	_	_	
+1-16	809-813	kann	_	_	_	_	_	_	_	_	_	_	
+1-17	814-817	man	_	_	_	_	_	_	_	_	_	_	
+1-18	818-821	die	_	_	_	_	_	_	_	_	_	_	
+1-19	822-825	KMK	_	_	_	_	_	_	_	_	_	_	
+1-20	826-834	auflösen	_	_	_	_	_	_	_	_	_	_	
+1-21	834-835	"	_	_	_	_	_	_	_	_	_	_	
+1-22	836-837	#	_	_	_	_	_	_	_	_	_	_	
+1-23	837-838	#	_	_	_	_	_	_	_	_	_	_	
+1-24	838-839	#	_	_	_	_	_	_	_	_	_	_	
+1-25	840-843	Das	_	_	_	_	_	_	_	_	_	_	
+1-26	844-849	kommt	_	_	_	_	_	_	_	_	_	_	
+1-27	850-853	auf	_	_	_	_	_	_	_	_	_	_	
+1-28	854-857	das	_	_	_	_	_	_	_	_	_	_	
+1-29	858-863	Stück	_	_	_	_	_	_	_	_	_	_	
+1-30	864-866	an	_	_	_	_	_	_	_	_	_	_	
+1-31	866-867	.	_	_	_	_	_	_	_	_	_	_	
+1-32	868-871	Den	_	_	_	_	_	_	_	_	_	_	
+1-33	872-883	Beteiligten	_	_	_	_	_	_	_	_	_	_	
+1-34	884-887	ist	_	_	_	_	_	_	_	_	_	_	
+1-35	888-891	die	_	_	_	_	_	_	_	_	_	_	
+1-36	892-901	Situation	_	_	_	_	_	_	_	_	_	_	
+1-37	902-906	klar	_	_	_	_	_	_	_	_	_	_	
+1-38	906-907	.	_	_	_	_	_	_	_	_	_	_	
+1-39	908-909	#	_	_	_	_	_	_	_	_	_	_	
+1-40	909-910	#	_	_	_	_	_	_	_	_	_	_	
+1-41	910-911	#	_	_	_	_	_	_	_	_	_	_	
+1-42	912-915	Ich	_	_	_	_	_	_	_	_	_	_	
+1-43	916-923	zitiere	_	_	_	_	_	_	_	_	_	_	
+1-44	924-927	mal	_	_	_	_	_	_	_	_	_	_	
+1-45	928-933	einen	_	_	_	_	_	_	_	_	_	_	
+1-46	934-942	Kollegen	_	_	_	_	_	_	_	_	_	_	
+1-47	942-943	:	_	_	_	_	_	_	_	_	_	_	
+1-48	944-945	„	_	_	_	_	_	_	_	_	_	_	
+1-49	945-949	Wenn	_	_	_	_	_	_	_	_	_	_	
+1-50	950-953	ich	_	_	_	_	_	_	_	_	_	_	
+1-51	954-957	mir	_	_	_	_	_	_	_	_	_	_	
+1-52	958-961	die	_	_	_	_	_	_	_	_	_	_	
+1-53	962-979	Entscheidungswege	_	_	_	_	_	_	_	_	_	_	
+1-54	980-983	der	_	_	_	_	_	_	_	_	_	_	
+1-55	984-1007	Kultusministerkonferenz	_	_	_	_	_	_	_	_	_	_	
+1-56	1008-1016	anschaue	_	_	_	_	_	_	_	_	_	_	
+1-57	1016-1017	,	_	_	_	_	_	_	_	_	_	_	
+1-58	1018-1022	dann	_	_	_	_	_	_	_	_	_	_	
+1-59	1023-1029	könnte	_	_	_	_	_	_	_	_	_	_	
+1-60	1030-1033	ich	_	_	_	_	_	_	_	_	_	_	
+1-61	1034-1042	manchmal	_	_	_	_	_	_	_	_	_	_	
+1-62	1043-1051	entweder	_	_	_	_	_	_	_	_	_	_	
+1-63	1052-1055	zum	_	_	_	_	_	_	_	_	_	_	
+1-64	1056-1068	Separatisten	_	_	_	_	_	_	_	_	_	_	
+1-65	1069-1073	oder	_	_	_	_	_	_	_	_	_	_	
+1-66	1074-1077	zum	_	_	_	_	_	_	_	_	_	_	
+1-67	1078-1090	Zentralisten	_	_	_	_	_	_	_	_	_	_	
+1-68	1091-1097	werden	_	_	_	_	_	_	_	_	_	_	
+1-69	1097-1098	.	_	_	_	_	_	_	_	_	_	_	
+1-70	1098-1099	”	_	_	_	_	_	_	_	_	_	_	
+1-71	1100-1103	Den	*[1]	Moralisierung explizit[1]	*[1]	Die KMK muss ihre Veratworung wahrnehmen.[1]	*[1]	Appell[1]	*[1]	*[1]	*[1]	*[1]	
+1-72	1104-1108	Satz	*[1]	Moralisierung explizit[1]	*[1]	Die KMK muss ihre Veratworung wahrnehmen.[1]	*[1]	Appell[1]	*[1]	*[1]	*[1]	*[1]	
+1-73	1109-1113	kann	*[1]	Moralisierung explizit[1]	*[1]	Die KMK muss ihre Veratworung wahrnehmen.[1]	*[1]	Appell[1]	*[1]	*[1]	*[1]	*[1]	
+1-74	1114-1117	ich	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	Die KMK muss ihre Veratworung wahrnehmen.[1]|*[2]	*[1]|*[2]	Appell[1]|*[2]	*[1]|*[2]	*[1]|Adresassat:in[2]	*[1]|Individuum[2]	*[1]|Own Group[2]	
+1-75	1118-1121	als	*[1]	Moralisierung explizit[1]	*[1]	Die KMK muss ihre Veratworung wahrnehmen.[1]	*[1]	Appell[1]	*[1]	*[1]	*[1]	*[1]	
+1-76	1122-1129	Mahnung	*[1]	Moralisierung explizit[1]	*[1]	Die KMK muss ihre Veratworung wahrnehmen.[1]	*[1]	Appell[1]	*[1]	*[1]	*[1]	*[1]	
+1-77	1129-1130	,	*[1]	Moralisierung explizit[1]	*[1]	Die KMK muss ihre Veratworung wahrnehmen.[1]	*[1]	Appell[1]	*[1]	*[1]	*[1]	*[1]	
+1-78	1131-1137	unsere	*[1]|*[3]|*[4]|*[5]	Moralisierung explizit[1]|*[3]|*[4]|*[5]	*[1]|*[3]|*[4]|*[5]	Die KMK muss ihre Veratworung wahrnehmen.[1]|*[3]|*[4]|*[5]	*[1]|*[3]|*[4]|*[5]	Appell[1]|*[3]|*[4]|*[5]	*[1]|Care[3]|*[4]|*[5]	*[1]|*[3]|Adresassat:in[4]|Forderer:in[5]	*[1]|*[3]|Institution[4]|*[5]	*[1]|*[3]|Own Group[4]|*[5]	
+1-79	1138-1139	#	*[1]|*[3]	Moralisierung explizit[1]|*[3]	*[1]|*[3]	Die KMK muss ihre Veratworung wahrnehmen.[1]|*[3]	*[1]|*[3]	Appell[1]|*[3]	*[1]|Care[3]	*[1]|*[3]	*[1]|*[3]	*[1]|*[3]	
+1-80	1139-1152	Verantwortung	*[1]|*[3]	Moralisierung explizit[1]|*[3]	*[1]|*[3]	Die KMK muss ihre Veratworung wahrnehmen.[1]|*[3]	*[1]|*[3]	Appell[1]|*[3]	*[1]|Care[3]	*[1]|*[3]	*[1]|*[3]	*[1]|*[3]	
+1-81	1152-1153	#	*[1]|*[3]	Moralisierung explizit[1]|*[3]	*[1]|*[3]	Die KMK muss ihre Veratworung wahrnehmen.[1]|*[3]	*[1]|*[3]	Appell[1]|*[3]	*[1]|Care[3]	*[1]|*[3]	*[1]|*[3]	*[1]|*[3]	
+1-82	1154-1166	wahrzunehmen	*[1]	Moralisierung explizit[1]	*[1]	Die KMK muss ihre Veratworung wahrnehmen.[1]	*[1]	Appell[1]	*[1]	*[1]	*[1]	*[1]	
+1-83	1166-1167	,	*[1]	Moralisierung explizit[1]	*[1]	Die KMK muss ihre Veratworung wahrnehmen.[1]	*[1]	Appell[1]	*[1]	*[1]	*[1]	*[1]	
+1-84	1168-1182	unterschreiben	*[1]	Moralisierung explizit[1]	*[1]	Die KMK muss ihre Veratworung wahrnehmen.[1]	*[1]	Appell[1]	*[1]	*[1]	*[1]	*[1]	
+1-85	1182-1183	.	*[1]	Moralisierung explizit[1]	*[1]	Die KMK muss ihre Veratworung wahrnehmen.[1]	*[1]	Appell[1]	*[1]	*[1]	*[1]	*[1]	
+1-86	1184-1185	#	_	_	_	_	_	_	_	_	_	_	
+1-87	1185-1186	#	_	_	_	_	_	_	_	_	_	_	
+1-88	1186-1187	#	_	_	_	_	_	_	_	_	_	_	
+
+#Text=T07/JUL.02677 die tageszeitung, 18.07.2007, S. 24; "Der Druck wird immer größer" ### Das stimmt, aber es geht erst einmal darum, wie sie es den Eltern sagen. ### Wir üben aber auch, wie sie die #Unterstützung# einfordern können, die sie brauchen, um ihre Leistungen zu verbessern. ### Das wollen viele nämlich, aber sie trauen sich nicht zu sagen, dass sie Hilfe brauchen. Viele Eltern kümmern sich nämlich das ganze Jahr nicht um die Schule und interessieren sich nur für das Zeugnis.
+2-1	1890-1893	T07	_	_	_	_	_	_	_	_	_	_	
+2-2	1893-1894	/	_	_	_	_	_	_	_	_	_	_	
+2-3	1894-1897	JUL	_	_	_	_	_	_	_	_	_	_	
+2-4	1897-1903	.02677	_	_	_	_	_	_	_	_	_	_	
+2-5	1904-1907	die	_	_	_	_	_	_	_	_	_	_	
+2-6	1908-1920	tageszeitung	_	_	_	_	_	_	_	_	_	_	
+2-7	1920-1921	,	_	_	_	_	_	_	_	_	_	_	
+2-8	1922-1932	18.07.2007	_	_	_	_	_	_	_	_	_	_	
+2-9	1932-1933	,	_	_	_	_	_	_	_	_	_	_	
+2-10	1934-1935	S	_	_	_	_	_	_	_	_	_	_	
+2-11	1935-1936	.	_	_	_	_	_	_	_	_	_	_	
+2-12	1937-1939	24	_	_	_	_	_	_	_	_	_	_	
+2-13	1939-1940	;	_	_	_	_	_	_	_	_	_	_	
+2-14	1941-1942	"	_	_	_	_	_	_	_	_	_	_	
+2-15	1942-1945	Der	_	_	_	_	_	_	_	_	_	_	
+2-16	1946-1951	Druck	_	_	_	_	_	_	_	_	_	_	
+2-17	1952-1956	wird	_	_	_	_	_	_	_	_	_	_	
+2-18	1957-1962	immer	_	_	_	_	_	_	_	_	_	_	
+2-19	1963-1969	größer	_	_	_	_	_	_	_	_	_	_	
+2-20	1969-1970	"	_	_	_	_	_	_	_	_	_	_	
+2-21	1971-1972	#	_	_	_	_	_	_	_	_	_	_	
+2-22	1972-1973	#	_	_	_	_	_	_	_	_	_	_	
+2-23	1973-1974	#	_	_	_	_	_	_	_	_	_	_	
+2-24	1975-1978	Das	_	_	_	_	_	_	_	_	_	_	
+2-25	1979-1985	stimmt	_	_	_	_	_	_	_	_	_	_	
+2-26	1985-1986	,	_	_	_	_	_	_	_	_	_	_	
+2-27	1987-1991	aber	_	_	_	_	_	_	_	_	_	_	
+2-28	1992-1994	es	_	_	_	_	_	_	_	_	_	_	
+2-29	1995-1999	geht	_	_	_	_	_	_	_	_	_	_	
+2-30	2000-2004	erst	_	_	_	_	_	_	_	_	_	_	
+2-31	2005-2011	einmal	_	_	_	_	_	_	_	_	_	_	
+2-32	2012-2017	darum	_	_	_	_	_	_	_	_	_	_	
+2-33	2017-2018	,	_	_	_	_	_	_	_	_	_	_	
+2-34	2019-2022	wie	_	_	_	_	_	_	_	_	_	_	
+2-35	2023-2026	sie	_	_	_	_	_	_	_	_	_	_	
+2-36	2027-2029	es	_	_	_	_	_	_	_	_	_	_	
+2-37	2030-2033	den	_	_	_	_	_	_	_	_	_	_	
+2-38	2034-2040	Eltern	_	_	_	_	_	_	_	_	_	_	
+2-39	2041-2046	sagen	_	_	_	_	_	_	_	_	_	_	
+2-40	2046-2047	.	_	_	_	_	_	_	_	_	_	_	
+2-41	2048-2049	#	_	_	_	_	_	_	_	_	_	_	
+2-42	2049-2050	#	_	_	_	_	_	_	_	_	_	_	
+2-43	2050-2051	#	_	_	_	_	_	_	_	_	_	_	
+2-44	2052-2055	Wir	*[6]|*[7]	Moralisierung interpretativ[6]|*[7]	*[6]|*[7]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]|*[7]	*[6]|*[7]	Darstellung[6]|*[7]	*[6]|*[7]	*[6]|Forderer:in[7]	*[6]|Institution[7]	*[6]|Own Group[7]	
+2-45	2056-2060	üben	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-46	2061-2065	aber	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-47	2066-2070	auch	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-48	2070-2071	,	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-49	2072-2075	wie	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-50	2076-2079	sie	*[6]|*[8]	Moralisierung interpretativ[6]|*[8]	*[6]|*[8]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]|*[8]	*[6]|*[8]	Darstellung[6]|*[8]	*[6]|*[8]	*[6]|Benefizient:in[8]	*[6]|soziale Gruppe[8]	*[6]|Other Group[8]	
+2-51	2080-2083	die	*[6]|*[9]	Moralisierung interpretativ[6]|*[9]	*[6]|*[9]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]|*[9]	*[6]|*[9]	Darstellung[6]|*[9]	*[6]|Care[9]	*[6]|*[9]	*[6]|*[9]	*[6]|*[9]	
+2-52	2084-2085	#	*[6]|*[9]	Moralisierung interpretativ[6]|*[9]	*[6]|*[9]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]|*[9]	*[6]|*[9]	Darstellung[6]|*[9]	*[6]|Care[9]	*[6]|*[9]	*[6]|*[9]	*[6]|*[9]	
+2-53	2085-2098	Unterstützung	*[6]|*[9]	Moralisierung interpretativ[6]|*[9]	*[6]|*[9]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]|*[9]	*[6]|*[9]	Darstellung[6]|*[9]	*[6]|Care[9]	*[6]|*[9]	*[6]|*[9]	*[6]|*[9]	
+2-54	2098-2099	#	*[6]|*[9]	Moralisierung interpretativ[6]|*[9]	*[6]|*[9]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]|*[9]	*[6]|*[9]	Darstellung[6]|*[9]	*[6]|Care[9]	*[6]|*[9]	*[6]|*[9]	*[6]|*[9]	
+2-55	2100-2110	einfordern	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-56	2111-2117	können	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-57	2117-2118	,	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-58	2119-2122	die	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-59	2123-2126	sie	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-60	2127-2135	brauchen	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-61	2135-2136	,	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-62	2137-2139	um	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-63	2140-2144	ihre	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-64	2145-2155	Leistungen	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-65	2156-2158	zu	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-66	2159-2169	verbessern	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-67	2169-2170	.	*[6]	Moralisierung interpretativ[6]	*[6]	Kinder müssen Unterstützung bei ihren Eltern  einfordern können![6]	*[6]	Darstellung[6]	*[6]	*[6]	*[6]	*[6]	
+2-68	2171-2172	#	_	_	_	_	_	_	_	_	_	_	
+2-69	2172-2173	#	_	_	_	_	_	_	_	_	_	_	
+2-70	2173-2174	#	_	_	_	_	_	_	_	_	_	_	
+2-71	2175-2178	Das	_	_	_	_	_	_	_	_	_	_	
+2-72	2179-2185	wollen	_	_	_	_	_	_	_	_	_	_	
+2-73	2186-2191	viele	_	_	_	_	_	_	_	_	_	_	
+2-74	2192-2199	nämlich	_	_	_	_	_	_	_	_	_	_	
+2-75	2199-2200	,	_	_	_	_	_	_	_	_	_	_	
+2-76	2201-2205	aber	_	_	_	_	_	_	_	_	_	_	
+2-77	2206-2209	sie	_	_	_	_	_	_	_	_	_	_	
+2-78	2210-2216	trauen	_	_	_	_	_	_	_	_	_	_	
+2-79	2217-2221	sich	_	_	_	_	_	_	_	_	_	_	
+2-80	2222-2227	nicht	_	_	_	_	_	_	_	_	_	_	
+2-81	2228-2230	zu	_	_	_	_	_	_	_	_	_	_	
+2-82	2231-2236	sagen	_	_	_	_	_	_	_	_	_	_	
+2-83	2236-2237	,	_	_	_	_	_	_	_	_	_	_	
+2-84	2238-2242	dass	_	_	_	_	_	_	_	_	_	_	
+2-85	2243-2246	sie	_	_	_	_	_	_	_	_	_	_	
+2-86	2247-2252	Hilfe	_	_	_	_	_	_	_	_	_	_	
+2-87	2253-2261	brauchen	_	_	_	_	_	_	_	_	_	_	
+2-88	2261-2262	.	_	_	_	_	_	_	_	_	_	_	
+2-89	2263-2268	Viele	_	_	_	_	_	_	_	_	_	_	
+2-90	2269-2275	Eltern	_	_	_	_	_	_	_	_	_	_	
+2-91	2276-2283	kümmern	_	_	_	_	_	_	_	_	_	_	
+2-92	2284-2288	sich	_	_	_	_	_	_	_	_	_	_	
+2-93	2289-2296	nämlich	_	_	_	_	_	_	_	_	_	_	
+2-94	2297-2300	das	_	_	_	_	_	_	_	_	_	_	
+2-95	2301-2306	ganze	_	_	_	_	_	_	_	_	_	_	
+2-96	2307-2311	Jahr	_	_	_	_	_	_	_	_	_	_	
+2-97	2312-2317	nicht	_	_	_	_	_	_	_	_	_	_	
+2-98	2318-2320	um	_	_	_	_	_	_	_	_	_	_	
+2-99	2321-2324	die	_	_	_	_	_	_	_	_	_	_	
+2-100	2325-2331	Schule	_	_	_	_	_	_	_	_	_	_	
+2-101	2332-2335	und	_	_	_	_	_	_	_	_	_	_	
+2-102	2336-2349	interessieren	_	_	_	_	_	_	_	_	_	_	
+2-103	2350-2354	sich	_	_	_	_	_	_	_	_	_	_	
+2-104	2355-2358	nur	_	_	_	_	_	_	_	_	_	_	
+2-105	2359-2362	für	_	_	_	_	_	_	_	_	_	_	
+2-106	2363-2366	das	_	_	_	_	_	_	_	_	_	_	
+2-107	2367-2374	Zeugnis	_	_	_	_	_	_	_	_	_	_	
+2-108	2374-2375	.	_	_	_	_	_	_	_	_	_	_	
+
+#Text=T07/JUL.02764 die tageszeitung, 18.07.2007, S. 24; "Die Regionalmuseen werden unterschätzt" ### Gerade in den kleinen Museen gibt es oft die Chance, mit dem Kurator oder der Kuratorin eine Führung zu machen. In den großen Häusern ist das nur für einen ausgewählten Personenkreis möglich. Die Regionalmuseen arbeiten intensiv mit Schulen zusammen. Sie sind nah dran an der Bevölkerung und entwickeln ihre Sammlungen und Ausstellungen gemeinsam mit ihr. ### Gerade in Zeiten, in denen wir über Jugendprobleme oder mangelnde #Integration# ganzer Bevölkerungsschichten diskutieren, ist das wichtig. ### Aus der Nähe zum Publikum haben einige Häuser, zum Beispiel das Kreuzberg Museum, innovative Präsentationsformen entwickelt, die anschließend von den großen Museen aufgegriffen wurden.
+3-1	2780-2783	T07	_	_	_	_	_	_	_	_	_	_	
+3-2	2783-2784	/	_	_	_	_	_	_	_	_	_	_	
+3-3	2784-2787	JUL	_	_	_	_	_	_	_	_	_	_	
+3-4	2787-2793	.02764	_	_	_	_	_	_	_	_	_	_	
+3-5	2794-2797	die	_	_	_	_	_	_	_	_	_	_	
+3-6	2798-2810	tageszeitung	_	_	_	_	_	_	_	_	_	_	
+3-7	2810-2811	,	_	_	_	_	_	_	_	_	_	_	
+3-8	2812-2822	18.07.2007	_	_	_	_	_	_	_	_	_	_	
+3-9	2822-2823	,	_	_	_	_	_	_	_	_	_	_	
+3-10	2824-2825	S	_	_	_	_	_	_	_	_	_	_	
+3-11	2825-2826	.	_	_	_	_	_	_	_	_	_	_	
+3-12	2827-2829	24	_	_	_	_	_	_	_	_	_	_	
+3-13	2829-2830	;	_	_	_	_	_	_	_	_	_	_	
+3-14	2831-2832	"	_	_	_	_	_	_	_	_	_	_	
+3-15	2832-2835	Die	_	_	_	_	_	_	_	_	_	_	
+3-16	2836-2850	Regionalmuseen	_	_	_	_	_	_	_	_	_	_	
+3-17	2851-2857	werden	_	_	_	_	_	_	_	_	_	_	
+3-18	2858-2870	unterschätzt	_	_	_	_	_	_	_	_	_	_	
+3-19	2870-2871	"	_	_	_	_	_	_	_	_	_	_	
+3-20	2872-2873	#	_	_	_	_	_	_	_	_	_	_	
+3-21	2873-2874	#	_	_	_	_	_	_	_	_	_	_	
+3-22	2874-2875	#	_	_	_	_	_	_	_	_	_	_	
+3-23	2876-2882	Gerade	_	_	_	_	_	_	_	_	_	_	
+3-24	2883-2885	in	_	_	_	_	_	_	_	_	_	_	
+3-25	2886-2889	den	_	_	_	_	_	_	_	_	_	_	
+3-26	2890-2897	kleinen	_	_	_	_	_	_	_	_	_	_	
+3-27	2898-2904	Museen	_	_	_	_	_	_	_	_	_	_	
+3-28	2905-2909	gibt	_	_	_	_	_	_	_	_	_	_	
+3-29	2910-2912	es	_	_	_	_	_	_	_	_	_	_	
+3-30	2913-2916	oft	_	_	_	_	_	_	_	_	_	_	
+3-31	2917-2920	die	_	_	_	_	_	_	_	_	_	_	
+3-32	2921-2927	Chance	_	_	_	_	_	_	_	_	_	_	
+3-33	2927-2928	,	_	_	_	_	_	_	_	_	_	_	
+3-34	2929-2932	mit	_	_	_	_	_	_	_	_	_	_	
+3-35	2933-2936	dem	_	_	_	_	_	_	_	_	_	_	
+3-36	2937-2944	Kurator	_	_	_	_	_	_	_	_	_	_	
+3-37	2945-2949	oder	_	_	_	_	_	_	_	_	_	_	
+3-38	2950-2953	der	_	_	_	_	_	_	_	_	_	_	
+3-39	2954-2963	Kuratorin	_	_	_	_	_	_	_	_	_	_	
+3-40	2964-2968	eine	_	_	_	_	_	_	_	_	_	_	
+3-41	2969-2976	Führung	_	_	_	_	_	_	_	_	_	_	
+3-42	2977-2979	zu	_	_	_	_	_	_	_	_	_	_	
+3-43	2980-2986	machen	_	_	_	_	_	_	_	_	_	_	
+3-44	2986-2987	.	_	_	_	_	_	_	_	_	_	_	
+3-45	2988-2990	In	_	_	_	_	_	_	_	_	_	_	
+3-46	2991-2994	den	_	_	_	_	_	_	_	_	_	_	
+3-47	2995-3001	großen	_	_	_	_	_	_	_	_	_	_	
+3-48	3002-3009	Häusern	_	_	_	_	_	_	_	_	_	_	
+3-49	3010-3013	ist	_	_	_	_	_	_	_	_	_	_	
+3-50	3014-3017	das	_	_	_	_	_	_	_	_	_	_	
+3-51	3018-3021	nur	_	_	_	_	_	_	_	_	_	_	
+3-52	3022-3025	für	_	_	_	_	_	_	_	_	_	_	
+3-53	3026-3031	einen	_	_	_	_	_	_	_	_	_	_	
+3-54	3032-3044	ausgewählten	_	_	_	_	_	_	_	_	_	_	
+3-55	3045-3058	Personenkreis	_	_	_	_	_	_	_	_	_	_	
+3-56	3059-3066	möglich	_	_	_	_	_	_	_	_	_	_	
+3-57	3066-3067	.	_	_	_	_	_	_	_	_	_	_	
+3-58	3068-3071	Die	*[10]|*[11]	Moralisierung explizit[10]|*[11]	*[10]|*[11]	*[10]|*[11]	*[10]|*[11]	Darstellung[10]|*[11]	*[10]|*[11]	*[10]|Adresassat:in[11]	*[10]|Institution[11]	*[10]|Neutral[11]	
+3-59	3072-3086	Regionalmuseen	*[10]|*[11]	Moralisierung explizit[10]|*[11]	*[10]|*[11]	*[10]|*[11]	*[10]|*[11]	Darstellung[10]|*[11]	*[10]|*[11]	*[10]|Adresassat:in[11]	*[10]|Institution[11]	*[10]|Neutral[11]	
+3-60	3087-3095	arbeiten	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-61	3096-3104	intensiv	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-62	3105-3108	mit	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-63	3109-3116	Schulen	*[10]|*[12]	Moralisierung explizit[10]|*[12]	*[10]|*[12]	*[10]|*[12]	*[10]|*[12]	Darstellung[10]|*[12]	*[10]|*[12]	*[10]|Benefizient:in[12]	*[10]|Institution[12]	*[10]|Neutral[12]	
+3-64	3117-3125	zusammen	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-65	3125-3126	.	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-66	3127-3130	Sie	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-67	3131-3135	sind	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-68	3136-3139	nah	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-69	3140-3144	dran	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-70	3145-3147	an	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-71	3148-3151	der	*[10]|*[13]	Moralisierung explizit[10]|*[13]	*[10]|*[13]	*[10]|*[13]	*[10]|*[13]	Darstellung[10]|*[13]	*[10]|*[13]	*[10]|Benefizient:in[13]	*[10]|Menschen[13]	*[10]|Neutral[13]	
+3-72	3152-3163	Bevölkerung	*[10]|*[13]	Moralisierung explizit[10]|*[13]	*[10]|*[13]	*[10]|*[13]	*[10]|*[13]	Darstellung[10]|*[13]	*[10]|*[13]	*[10]|Benefizient:in[13]	*[10]|Menschen[13]	*[10]|Neutral[13]	
+3-73	3164-3167	und	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-74	3168-3178	entwickeln	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-75	3179-3183	ihre	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-76	3184-3194	Sammlungen	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-77	3195-3198	und	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-78	3199-3212	Ausstellungen	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-79	3213-3222	gemeinsam	*[10]|*[14]	Moralisierung explizit[10]|*[14]	*[10]|Care[14]	*[10]|*[14]	*[10]|*[14]	Darstellung[10]|*[14]	*[10]|*[14]	*[10]|*[14]	*[10]|*[14]	*[10]|*[14]	
+3-80	3223-3226	mit	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-81	3227-3230	ihr	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-82	3230-3231	.	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-83	3232-3233	#	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-84	3233-3234	#	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-85	3234-3235	#	*[10]	Moralisierung explizit[10]	*[10]	*[10]	*[10]	Darstellung[10]	*[10]	*[10]	*[10]	*[10]	
+3-86	3236-3242	Gerade	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-87	3243-3245	in	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-88	3246-3252	Zeiten	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-89	3252-3253	,	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-90	3254-3256	in	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-91	3257-3262	denen	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-92	3263-3266	wir	*[10]|*[15]|*[16]	Moralisierung explizit[10]|*[15]|*[16]	*[10]|*[15]|*[16]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]|*[16]	*[10]|*[15]|*[16]	Darstellung[10]|*[15]|*[16]	*[10]|*[15]|*[16]	*[10]|*[15]|Forderer:in[16]	*[10]|*[15]|Institution[16]	*[10]|*[15]|Own Group[16]	
+3-93	3267-3271	über	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-94	3272-3286	Jugendprobleme	*[10]|*[15]|*[17]	Moralisierung explizit[10]|*[15]|*[17]	*[10]|*[15]|Harm[17]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]|*[17]	*[10]|*[15]|*[17]	Darstellung[10]|*[15]|*[17]	*[10]|*[15]|*[17]	*[10]|*[15]|*[17]	*[10]|*[15]|*[17]	*[10]|*[15]|*[17]	
+3-95	3287-3291	oder	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-96	3292-3301	mangelnde	*[10]|*[15]|*[18]|*[19]	Moralisierung explizit[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	Darstellung[10]|*[15]|*[18]|*[19]	*[10]|*[15]|Cheating[18]|Oppression[19]	*[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	
+3-97	3302-3303	#	*[10]|*[15]|*[18]|*[19]	Moralisierung explizit[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	Darstellung[10]|*[15]|*[18]|*[19]	*[10]|*[15]|Cheating[18]|Oppression[19]	*[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	
+3-98	3303-3314	Integration	*[10]|*[15]|*[18]|*[19]	Moralisierung explizit[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	Darstellung[10]|*[15]|*[18]|*[19]	*[10]|*[15]|Cheating[18]|Oppression[19]	*[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	
+3-99	3314-3315	#	*[10]|*[15]|*[18]|*[19]	Moralisierung explizit[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	Darstellung[10]|*[15]|*[18]|*[19]	*[10]|*[15]|Cheating[18]|Oppression[19]	*[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	*[10]|*[15]|*[18]|*[19]	
+3-100	3316-3322	ganzer	*[10]|*[15]|*[20]	Moralisierung explizit[10]|*[15]|*[20]	*[10]|*[15]|*[20]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]|*[20]	*[10]|*[15]|*[20]	Darstellung[10]|*[15]|*[20]	*[10]|*[15]|*[20]	*[10]|*[15]|Benefizient:in[20]	*[10]|*[15]|soziale Gruppe[20]	*[10]|*[15]|Neutral[20]	
+3-101	3323-3344	Bevölkerungsschichten	*[10]|*[15]|*[20]	Moralisierung explizit[10]|*[15]|*[20]	*[10]|*[15]|*[20]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]|*[20]	*[10]|*[15]|*[20]	Darstellung[10]|*[15]|*[20]	*[10]|*[15]|*[20]	*[10]|*[15]|Benefizient:in[20]	*[10]|*[15]|soziale Gruppe[20]	*[10]|*[15]|Neutral[20]	
+3-102	3345-3356	diskutieren	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-103	3356-3357	,	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-104	3358-3361	ist	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-105	3362-3365	das	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-106	3366-3373	wichtig	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-107	3373-3374	.	*[10]|*[15]	Moralisierung explizit[10]|*[15]	*[10]|*[15]	*[10]|Regionalmuseen müssen intensiv mit Schulen zusammenarbeiten, um für mehr Integration und weniger Jugendprobleme zu sorgen.[15]	*[10]|*[15]	Darstellung[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	*[10]|*[15]	
+3-108	3375-3376	#	_	_	_	_	_	_	_	_	_	_	
+3-109	3376-3377	#	_	_	_	_	_	_	_	_	_	_	
+3-110	3377-3378	#	_	_	_	_	_	_	_	_	_	_	
+3-111	3379-3382	Aus	_	_	_	_	_	_	_	_	_	_	
+3-112	3383-3386	der	_	_	_	_	_	_	_	_	_	_	
+3-113	3387-3391	Nähe	_	_	_	_	_	_	_	_	_	_	
+3-114	3392-3395	zum	_	_	_	_	_	_	_	_	_	_	
+3-115	3396-3404	Publikum	_	_	_	_	_	_	_	_	_	_	
+3-116	3405-3410	haben	_	_	_	_	_	_	_	_	_	_	
+3-117	3411-3417	einige	_	_	_	_	_	_	_	_	_	_	
+3-118	3418-3424	Häuser	_	_	_	_	_	_	_	_	_	_	
+3-119	3424-3425	,	_	_	_	_	_	_	_	_	_	_	
+3-120	3426-3429	zum	_	_	_	_	_	_	_	_	_	_	
+3-121	3430-3438	Beispiel	_	_	_	_	_	_	_	_	_	_	
+3-122	3439-3442	das	_	_	_	_	_	_	_	_	_	_	
+3-123	3443-3452	Kreuzberg	_	_	_	_	_	_	_	_	_	_	
+3-124	3453-3459	Museum	_	_	_	_	_	_	_	_	_	_	
+3-125	3459-3460	,	_	_	_	_	_	_	_	_	_	_	
+3-126	3461-3471	innovative	_	_	_	_	_	_	_	_	_	_	
+3-127	3472-3491	Präsentationsformen	_	_	_	_	_	_	_	_	_	_	
+3-128	3492-3502	entwickelt	_	_	_	_	_	_	_	_	_	_	
+3-129	3502-3503	,	_	_	_	_	_	_	_	_	_	_	
+3-130	3504-3507	die	_	_	_	_	_	_	_	_	_	_	
+3-131	3508-3520	anschließend	_	_	_	_	_	_	_	_	_	_	
+3-132	3521-3524	von	_	_	_	_	_	_	_	_	_	_	
+3-133	3525-3528	den	_	_	_	_	_	_	_	_	_	_	
+3-134	3529-3535	großen	_	_	_	_	_	_	_	_	_	_	
+3-135	3536-3542	Museen	_	_	_	_	_	_	_	_	_	_	
+3-136	3543-3555	aufgegriffen	_	_	_	_	_	_	_	_	_	_	
+3-137	3556-3562	wurden	_	_	_	_	_	_	_	_	_	_	
+3-138	3562-3563	.	_	_	_	_	_	_	_	_	_	_	
+
+#Text=T07/JUL.02854 die tageszeitung, 19.07.2007, S. 12; "Wir brauchen Strafen für Falschmeldungen" ### Unabhängige Medienkollektive und Journalisten haben den richtigen Wortlaut der Rede bereits am Sonntag veröffentlicht. Das gilt auch für das zweite Beispiel: Am Samstag war von 433 verletzten Polizisten die Rede, davon mindestens 32 Schwerverletzten. In Wahrheit wurden rund 158 Beamte behandelt, zwei davon stationär, nur einer blieb über Nacht in der Klinik. Also keine Schwerverletzten, die meisten wurden sogar durch ihr eigenes CS-Gas verletzt, dessen Einsatz meiner Ansicht nach innenpolitisch unbedingt verboten werden muss. Viele Medien haben diese falschen Zahlen übernommen, ohne sie zu prüfen und ohne die Quelle anzugeben. Andere gingen von einer Eigenrecherche der Agenturen aus. ### Sie haben diese Nachrichten übernommen, weil die Agenturen hohe #Glaubwürdigkeit# genießen. ###
+4-1	3861-3864	T07	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-2	3864-3865	/	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-3	3865-3868	JUL	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-4	3868-3874	.02854	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-5	3875-3878	die	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-6	3879-3891	tageszeitung	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-7	3891-3892	,	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-8	3893-3903	19.07.2007	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-9	3903-3904	,	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-10	3905-3906	S	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-11	3906-3907	.	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-12	3908-3910	12	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-13	3910-3911	;	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-14	3912-3913	"	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-15	3913-3916	Wir	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-16	3917-3925	brauchen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-17	3926-3933	Strafen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-18	3934-3937	für	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-19	3938-3953	Falschmeldungen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-20	3953-3954	"	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-21	3955-3956	#	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-22	3956-3957	#	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-23	3957-3958	#	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-24	3959-3970	Unabhängige	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-25	3971-3987	Medienkollektive	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-26	3988-3991	und	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-27	3992-4004	Journalisten	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-28	4005-4010	haben	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-29	4011-4014	den	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-30	4015-4024	richtigen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-31	4025-4033	Wortlaut	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-32	4034-4037	der	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-33	4038-4042	Rede	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-34	4043-4050	bereits	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-35	4051-4053	am	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-36	4054-4061	Sonntag	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-37	4062-4076	veröffentlicht	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-38	4076-4077	.	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-39	4078-4081	Das	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-40	4082-4086	gilt	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-41	4087-4091	auch	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-42	4092-4095	für	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-43	4096-4099	das	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-44	4100-4106	zweite	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-45	4107-4115	Beispiel	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-46	4115-4116	:	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-47	4117-4119	Am	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-48	4120-4127	Samstag	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-49	4128-4131	war	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-50	4132-4135	von	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-51	4136-4139	433	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-52	4140-4150	verletzten	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-53	4151-4161	Polizisten	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-54	4162-4165	die	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-55	4166-4170	Rede	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-56	4170-4171	,	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-57	4172-4177	davon	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-58	4178-4188	mindestens	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-59	4189-4191	32	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-60	4192-4208	Schwerverletzten	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-61	4208-4209	.	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-62	4210-4212	In	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-63	4213-4221	Wahrheit	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-64	4222-4228	wurden	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-65	4229-4233	rund	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-66	4234-4237	158	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-67	4238-4244	Beamte	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-68	4245-4254	behandelt	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-69	4254-4255	,	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-70	4256-4260	zwei	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-71	4261-4266	davon	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-72	4267-4276	stationär	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-73	4276-4277	,	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-74	4278-4281	nur	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-75	4282-4287	einer	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-76	4288-4293	blieb	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-77	4294-4298	über	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-78	4299-4304	Nacht	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-79	4305-4307	in	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-80	4308-4311	der	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-81	4312-4318	Klinik	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-82	4318-4319	.	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-83	4320-4324	Also	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-84	4325-4330	keine	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-85	4331-4347	Schwerverletzten	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-86	4347-4348	,	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-87	4349-4352	die	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-88	4353-4360	meisten	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-89	4361-4367	wurden	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-90	4368-4373	sogar	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-91	4374-4379	durch	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-92	4380-4383	ihr	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-93	4384-4391	eigenes	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-94	4392-4398	CS-Gas	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-95	4399-4407	verletzt	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-96	4407-4408	,	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-97	4409-4415	dessen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-98	4416-4423	Einsatz	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-99	4424-4430	meiner	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-100	4431-4438	Ansicht	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-101	4439-4443	nach	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-102	4444-4458	innenpolitisch	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-103	4459-4468	unbedingt	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-104	4469-4477	verboten	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-105	4478-4484	werden	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-106	4485-4489	muss	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-107	4489-4490	.	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-108	4491-4496	Viele	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-109	4497-4503	Medien	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-110	4504-4509	haben	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-111	4510-4515	diese	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-112	4516-4524	falschen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-113	4525-4531	Zahlen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-114	4532-4542	übernommen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-115	4542-4543	,	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-116	4544-4548	ohne	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-117	4549-4552	sie	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-118	4553-4555	zu	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-119	4556-4562	prüfen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-120	4563-4566	und	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-121	4567-4571	ohne	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-122	4572-4575	die	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-123	4576-4582	Quelle	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-124	4583-4592	anzugeben	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-125	4592-4593	.	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-126	4594-4600	Andere	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-127	4601-4607	gingen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-128	4608-4611	von	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-129	4612-4617	einer	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-130	4618-4632	Eigenrecherche	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-131	4633-4636	der	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-132	4637-4646	Agenturen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-133	4647-4650	aus	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-134	4650-4651	.	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-135	4652-4653	#	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-136	4653-4654	#	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-137	4654-4655	#	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-138	4656-4659	Sie	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-139	4660-4665	haben	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-140	4666-4671	diese	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-141	4672-4683	Nachrichten	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-142	4684-4694	übernommen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-143	4694-4695	,	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-144	4696-4700	weil	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-145	4701-4704	die	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-146	4705-4714	Agenturen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-147	4715-4719	hohe	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-148	4720-4721	#	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-149	4721-4736	Glaubwürdigkeit	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-150	4736-4737	#	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-151	4738-4746	genießen	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-152	4746-4747	.	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-153	4748-4749	#	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-154	4749-4750	#	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+4-155	4750-4751	#	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+
+#Text=T07/JUL.03063 die tageszeitung, 20.07.2007, S. 12; "Das europäische Sozialmodell ist zentral" ### ### Die Bürger fordern mehr Transparenz und #Demokratie,# wollen aber auch keine supranationale EU, weil sie fürchten, ihre Identität zu verlieren. ### Ein unlösbares Dilemma?
+5-1	5666-5669	T07	_	_	_	_	_	_	_	_	_	_	
+5-2	5669-5670	/	_	_	_	_	_	_	_	_	_	_	
+5-3	5670-5673	JUL	_	_	_	_	_	_	_	_	_	_	
+5-4	5673-5679	.03063	_	_	_	_	_	_	_	_	_	_	
+5-5	5680-5683	die	_	_	_	_	_	_	_	_	_	_	
+5-6	5684-5696	tageszeitung	_	_	_	_	_	_	_	_	_	_	
+5-7	5696-5697	,	_	_	_	_	_	_	_	_	_	_	
+5-8	5698-5708	20.07.2007	_	_	_	_	_	_	_	_	_	_	
+5-9	5708-5709	,	_	_	_	_	_	_	_	_	_	_	
+5-10	5710-5711	S	_	_	_	_	_	_	_	_	_	_	
+5-11	5711-5712	.	_	_	_	_	_	_	_	_	_	_	
+5-12	5713-5715	12	_	_	_	_	_	_	_	_	_	_	
+5-13	5715-5716	;	_	_	_	_	_	_	_	_	_	_	
+5-14	5717-5718	"	_	_	_	_	_	_	_	_	_	_	
+5-15	5718-5721	Das	_	_	_	_	_	_	_	_	_	_	
+5-16	5722-5733	europäische	_	_	_	_	_	_	_	_	_	_	
+5-17	5734-5746	Sozialmodell	_	_	_	_	_	_	_	_	_	_	
+5-18	5747-5750	ist	_	_	_	_	_	_	_	_	_	_	
+5-19	5751-5758	zentral	_	_	_	_	_	_	_	_	_	_	
+5-20	5758-5759	"	_	_	_	_	_	_	_	_	_	_	
+5-21	5760-5761	#	_	_	_	_	_	_	_	_	_	_	
+5-22	5761-5762	#	_	_	_	_	_	_	_	_	_	_	
+5-23	5762-5763	#	_	_	_	_	_	_	_	_	_	_	
+5-24	5764-5765	#	_	_	_	_	_	_	_	_	_	_	
+5-25	5765-5766	#	_	_	_	_	_	_	_	_	_	_	
+5-26	5766-5767	#	_	_	_	_	_	_	_	_	_	_	
+5-27	5768-5771	Die	*[22]|explizit[23]|*[24]	Moralisierung explizit[22]|*[23]|*[24]	*[22]|*[23]|*[24]	*[22]|*[23]|*[24]	*[22]|*[23]|*[24]	Darstellung[22]|*[23]|*[24]	*[22]|*[23]|*[24]	*[22]|*[23]|Forderer:in[24]	*[22]|*[23]|Menschen[24]	*[22]|*[23]|Neutral[24]	
+5-28	5772-5778	Bürger	*[22]|explizit[23]|*[24]	Moralisierung explizit[22]|*[23]|*[24]	*[22]|*[23]|*[24]	*[22]|*[23]|*[24]	*[22]|*[23]|*[24]	Darstellung[22]|*[23]|*[24]	*[22]|*[23]|*[24]	*[22]|*[23]|Forderer:in[24]	*[22]|*[23]|Menschen[24]	*[22]|*[23]|Neutral[24]	
+5-29	5779-5786	fordern	*[22]|explizit[23]	Moralisierung explizit[22]|*[23]	*[22]|*[23]	*[22]|*[23]	*[22]|*[23]	Darstellung[22]|*[23]	*[22]|*[23]	*[22]|*[23]	*[22]|*[23]	*[22]|*[23]	
+5-30	5787-5791	mehr	*[22]|explizit[23]|*[25]	Moralisierung explizit[22]|*[23]|*[25]	*[22]|*[23]|*[25]	*[22]|*[23]|*[25]	*[22]|*[23]|*[25]	Darstellung[22]|*[23]|*[25]	*[22]|*[23]|Fairness[25]	*[22]|*[23]|*[25]	*[22]|*[23]|*[25]	*[22]|*[23]|*[25]	
+5-31	5792-5803	Transparenz	*[22]|explizit[23]|*[25]	Moralisierung explizit[22]|*[23]|*[25]	*[22]|*[23]|*[25]	*[22]|*[23]|*[25]	*[22]|*[23]|*[25]	Darstellung[22]|*[23]|*[25]	*[22]|*[23]|Fairness[25]	*[22]|*[23]|*[25]	*[22]|*[23]|*[25]	*[22]|*[23]|*[25]	
+5-32	5804-5807	und	*[22]|explizit[23]	Moralisierung explizit[22]|*[23]	*[22]|*[23]	*[22]|*[23]	*[22]|*[23]	Darstellung[22]|*[23]	*[22]|*[23]	*[22]|*[23]	*[22]|*[23]	*[22]|*[23]	
+5-33	5808-5809	#	*[22]|explizit[23]	Moralisierung explizit[22]|*[23]	*[22]|*[23]	*[22]|*[23]	*[22]|*[23]	Darstellung[22]|*[23]	*[22]|*[23]	*[22]|*[23]	*[22]|*[23]	*[22]|*[23]	
+5-34	5809-5819	Demokratie	*[22]|explizit[23]|*[26]	Moralisierung explizit[22]|*[23]|*[26]	*[22]|*[23]|*[26]	*[22]|*[23]|*[26]	*[22]|*[23]|*[26]	Darstellung[22]|*[23]|*[26]	*[22]|*[23]|Fairness[26]	*[22]|*[23]|*[26]	*[22]|*[23]|*[26]	*[22]|*[23]|*[26]	
+5-35	5819-5820	,	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-36	5820-5821	#	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-37	5822-5828	wollen	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-38	5829-5833	aber	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-39	5834-5838	auch	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-40	5839-5844	keine	*[22]|*[27]	Moralisierung explizit[22]|*[27]	*[22]|*[27]	*[22]|*[27]	*[22]|*[27]	Darstellung[22]|*[27]	*[22]|*[27]	*[22]|Adresassat:in[27]	*[22]|Institution[27]	*[22]|Neutral[27]	
+5-41	5845-5859	supranationale	*[22]|*[27]	Moralisierung explizit[22]|*[27]	*[22]|*[27]	*[22]|*[27]	*[22]|*[27]	Darstellung[22]|*[27]	*[22]|*[27]	*[22]|Adresassat:in[27]	*[22]|Institution[27]	*[22]|Neutral[27]	
+5-42	5860-5862	EU	*[22]|*[27]	Moralisierung explizit[22]|*[27]	*[22]|*[27]	*[22]|*[27]	*[22]|*[27]	Darstellung[22]|*[27]	*[22]|*[27]	*[22]|Adresassat:in[27]	*[22]|Institution[27]	*[22]|Neutral[27]	
+5-43	5862-5863	,	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-44	5864-5868	weil	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-45	5869-5872	sie	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-46	5873-5881	fürchten	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-47	5881-5882	,	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-48	5883-5887	ihre	*[22]|*[28]	Moralisierung explizit[22]|*[28]	*[22]|Liberty[28]	*[22]|*[28]	*[22]|*[28]	Darstellung[22]|*[28]	*[22]|*[28]	*[22]|*[28]	*[22]|*[28]	*[22]|*[28]	
+5-49	5888-5897	Identität	*[22]|*[28]	Moralisierung explizit[22]|*[28]	*[22]|Liberty[28]	*[22]|*[28]	*[22]|*[28]	Darstellung[22]|*[28]	*[22]|*[28]	*[22]|*[28]	*[22]|*[28]	*[22]|*[28]	
+5-50	5898-5900	zu	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-51	5901-5910	verlieren	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-52	5910-5911	.	*[22]	Moralisierung explizit[22]	*[22]	*[22]	*[22]	Darstellung[22]	*[22]	*[22]	*[22]	*[22]	
+5-53	5912-5913	#	_	_	_	_	_	_	_	_	_	_	
+5-54	5913-5914	#	_	_	_	_	_	_	_	_	_	_	
+5-55	5914-5915	#	_	_	_	_	_	_	_	_	_	_	
+5-56	5916-5919	Ein	_	_	_	_	_	_	_	_	_	_	
+5-57	5920-5930	unlösbares	_	_	_	_	_	_	_	_	_	_	
+5-58	5931-5938	Dilemma	_	_	_	_	_	_	_	_	_	_	
+5-59	5938-5939	?	_	_	_	_	_	_	_	_	_	_	
+
+#Text=T07/JUL.03257 die tageszeitung, 21.07.2007, S. 12; "In diesem Sommer gibt es keinen Krieg" ### Es gibt nicht nur ein Syrien, sondern zwei. Erstens das Syrien der herrschenden Alawiten und zum zweiten das Syrien der Sunniten, die ungefähr 85 Prozent der Bevölkerung ausmachen. Das ist zunächst ein religiöser Unterschied, wobei die Alawiten in den Augen der Sunniten noch weniger gelten als die Schiiten. ### In dem Moment, wo es #Frieden# mit Israel gibt und Syrien sich dem Westen gegenüber wirtschaftlich und kulturell öffnen würde, wächst die Gefahr für die Alawiten-Herrschaft. ### Wirtschaftliche Öffnung bedeutet zwingend eine Annäherung an die moderne Welt und Demokratie.
+6-1	6448-6451	T07	_	_	_	_	_	_	_	_	_	_	
+6-2	6451-6452	/	_	_	_	_	_	_	_	_	_	_	
+6-3	6452-6455	JUL	_	_	_	_	_	_	_	_	_	_	
+6-4	6455-6461	.03257	_	_	_	_	_	_	_	_	_	_	
+6-5	6462-6465	die	_	_	_	_	_	_	_	_	_	_	
+6-6	6466-6478	tageszeitung	_	_	_	_	_	_	_	_	_	_	
+6-7	6478-6479	,	_	_	_	_	_	_	_	_	_	_	
+6-8	6480-6490	21.07.2007	_	_	_	_	_	_	_	_	_	_	
+6-9	6490-6491	,	_	_	_	_	_	_	_	_	_	_	
+6-10	6492-6493	S	_	_	_	_	_	_	_	_	_	_	
+6-11	6493-6494	.	_	_	_	_	_	_	_	_	_	_	
+6-12	6495-6497	12	_	_	_	_	_	_	_	_	_	_	
+6-13	6497-6498	;	_	_	_	_	_	_	_	_	_	_	
+6-14	6499-6500	"	_	_	_	_	_	_	_	_	_	_	
+6-15	6500-6502	In	_	_	_	_	_	_	_	_	_	_	
+6-16	6503-6509	diesem	_	_	_	_	_	_	_	_	_	_	
+6-17	6510-6516	Sommer	_	_	_	_	_	_	_	_	_	_	
+6-18	6517-6521	gibt	_	_	_	_	_	_	_	_	_	_	
+6-19	6522-6524	es	_	_	_	_	_	_	_	_	_	_	
+6-20	6525-6531	keinen	_	_	_	_	_	_	_	_	_	_	
+6-21	6532-6537	Krieg	_	_	_	_	_	_	_	_	_	_	
+6-22	6537-6538	"	_	_	_	_	_	_	_	_	_	_	
+6-23	6539-6540	#	_	_	_	_	_	_	_	_	_	_	
+6-24	6540-6541	#	_	_	_	_	_	_	_	_	_	_	
+6-25	6541-6542	#	_	_	_	_	_	_	_	_	_	_	
+6-26	6543-6545	Es	_	_	_	_	_	_	_	_	_	_	
+6-27	6546-6550	gibt	_	_	_	_	_	_	_	_	_	_	
+6-28	6551-6556	nicht	_	_	_	_	_	_	_	_	_	_	
+6-29	6557-6560	nur	_	_	_	_	_	_	_	_	_	_	
+6-30	6561-6564	ein	_	_	_	_	_	_	_	_	_	_	
+6-31	6565-6571	Syrien	_	_	_	_	_	_	_	_	_	_	
+6-32	6571-6572	,	_	_	_	_	_	_	_	_	_	_	
+6-33	6573-6580	sondern	_	_	_	_	_	_	_	_	_	_	
+6-34	6581-6585	zwei	_	_	_	_	_	_	_	_	_	_	
+6-35	6585-6586	.	_	_	_	_	_	_	_	_	_	_	
+6-36	6587-6594	Erstens	_	_	_	_	_	_	_	_	_	_	
+6-37	6595-6598	das	_	_	_	_	_	_	_	_	_	_	
+6-38	6599-6605	Syrien	_	_	_	_	_	_	_	_	_	_	
+6-39	6606-6609	der	_	_	_	_	_	_	_	_	_	_	
+6-40	6610-6622	herrschenden	_	_	_	_	_	_	_	_	_	_	
+6-41	6623-6631	Alawiten	_	_	_	_	_	_	_	_	_	_	
+6-42	6632-6635	und	_	_	_	_	_	_	_	_	_	_	
+6-43	6636-6639	zum	_	_	_	_	_	_	_	_	_	_	
+6-44	6640-6647	zweiten	_	_	_	_	_	_	_	_	_	_	
+6-45	6648-6651	das	_	_	_	_	_	_	_	_	_	_	
+6-46	6652-6658	Syrien	_	_	_	_	_	_	_	_	_	_	
+6-47	6659-6662	der	_	_	_	_	_	_	_	_	_	_	
+6-48	6663-6671	Sunniten	_	_	_	_	_	_	_	_	_	_	
+6-49	6671-6672	,	_	_	_	_	_	_	_	_	_	_	
+6-50	6673-6676	die	_	_	_	_	_	_	_	_	_	_	
+6-51	6677-6685	ungefähr	_	_	_	_	_	_	_	_	_	_	
+6-52	6686-6688	85	_	_	_	_	_	_	_	_	_	_	
+6-53	6689-6696	Prozent	_	_	_	_	_	_	_	_	_	_	
+6-54	6697-6700	der	_	_	_	_	_	_	_	_	_	_	
+6-55	6701-6712	Bevölkerung	_	_	_	_	_	_	_	_	_	_	
+6-56	6713-6722	ausmachen	_	_	_	_	_	_	_	_	_	_	
+6-57	6722-6723	.	_	_	_	_	_	_	_	_	_	_	
+6-58	6724-6727	Das	_	_	_	_	_	_	_	_	_	_	
+6-59	6728-6731	ist	_	_	_	_	_	_	_	_	_	_	
+6-60	6732-6740	zunächst	_	_	_	_	_	_	_	_	_	_	
+6-61	6741-6744	ein	_	_	_	_	_	_	_	_	_	_	
+6-62	6745-6755	religiöser	_	_	_	_	_	_	_	_	_	_	
+6-63	6756-6767	Unterschied	_	_	_	_	_	_	_	_	_	_	
+6-64	6767-6768	,	_	_	_	_	_	_	_	_	_	_	
+6-65	6769-6774	wobei	_	_	_	_	_	_	_	_	_	_	
+6-66	6775-6778	die	_	_	_	_	_	_	_	_	_	_	
+6-67	6779-6787	Alawiten	_	_	_	_	_	_	_	_	_	_	
+6-68	6788-6790	in	_	_	_	_	_	_	_	_	_	_	
+6-69	6791-6794	den	_	_	_	_	_	_	_	_	_	_	
+6-70	6795-6800	Augen	_	_	_	_	_	_	_	_	_	_	
+6-71	6801-6804	der	_	_	_	_	_	_	_	_	_	_	
+6-72	6805-6813	Sunniten	_	_	_	_	_	_	_	_	_	_	
+6-73	6814-6818	noch	_	_	_	_	_	_	_	_	_	_	
+6-74	6819-6826	weniger	_	_	_	_	_	_	_	_	_	_	
+6-75	6827-6833	gelten	_	_	_	_	_	_	_	_	_	_	
+6-76	6834-6837	als	_	_	_	_	_	_	_	_	_	_	
+6-77	6838-6841	die	_	_	_	_	_	_	_	_	_	_	
+6-78	6842-6850	Schiiten	_	_	_	_	_	_	_	_	_	_	
+6-79	6850-6851	.	_	_	_	_	_	_	_	_	_	_	
+6-80	6852-6853	#	_	_	_	_	_	_	_	_	_	_	
+6-81	6853-6854	#	_	_	_	_	_	_	_	_	_	_	
+6-82	6854-6855	#	_	_	_	_	_	_	_	_	_	_	
+6-83	6856-6858	In	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-84	6859-6862	dem	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-85	6863-6869	Moment	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-86	6869-6870	,	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-87	6871-6873	wo	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-88	6874-6876	es	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-89	6877-6878	#	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-90	6878-6885	Frieden	*[29]|*[30]|*[31]|*[32]	Moralisierung interpretativ[29]|*[30]|*[31]|*[32]	*[29]|*[30]|*[31]|*[32]	*[29]|*[30]|*[31]|*[32]	*[29]|*[30]|*[31]|*[32]	Darstellung[29]|*[30]|*[31]|*[32]	*[29]|Fairness[30]|Liberty[31]|Care[32]	*[29]|*[30]|*[31]|*[32]	*[29]|*[30]|*[31]|*[32]	*[29]|*[30]|*[31]|*[32]	
+6-91	6885-6886	#	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-92	6887-6890	mit	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-93	6891-6897	Israel	*[29]|*[33]	Moralisierung interpretativ[29]|*[33]	*[29]|*[33]	*[29]|*[33]	*[29]|*[33]	Darstellung[29]|*[33]	*[29]|*[33]	*[29]|Benefizient:in[33]	*[29]|Institution[33]	*[29]|Neutral[33]	
+6-94	6898-6902	gibt	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-95	6903-6906	und	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-96	6907-6913	Syrien	*[29]|*[34]	Moralisierung interpretativ[29]|*[34]	*[29]|*[34]	*[29]|*[34]	*[29]|*[34]	Darstellung[29]|*[34]	*[29]|*[34]	*[29]|Adresassat:in[34]	*[29]|Institution[34]	*[29]|Neutral[34]	
+6-97	6914-6918	sich	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-98	6919-6922	dem	*[29]|*[35]	Moralisierung interpretativ[29]|*[35]	*[29]|*[35]	*[29]|*[35]	*[29]|*[35]	Darstellung[29]|*[35]	*[29]|*[35]	*[29]|Benefizient:in[35]	*[29]|Institution[35]	*[29]|Neutral[35]	
+6-99	6923-6929	Westen	*[29]|*[35]	Moralisierung interpretativ[29]|*[35]	*[29]|*[35]	*[29]|*[35]	*[29]|*[35]	Darstellung[29]|*[35]	*[29]|*[35]	*[29]|Benefizient:in[35]	*[29]|Institution[35]	*[29]|Neutral[35]	
+6-100	6930-6939	gegenüber	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-101	6940-6954	wirtschaftlich	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-102	6955-6958	und	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-103	6959-6968	kulturell	*[29]|*[36]	Moralisierung interpretativ[29]|*[36]	*[29]|*[36]	*[29]|*[36]	*[29]|*[36]	Darstellung[29]|*[36]	*[29]|Liberty[36]	*[29]|*[36]	*[29]|*[36]	*[29]|*[36]	
+6-104	6969-6975	öffnen	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-105	6976-6981	würde	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-106	6981-6982	,	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-107	6983-6989	wächst	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-108	6990-6993	die	*[29]|*[37]	Moralisierung interpretativ[29]|*[37]	*[29]|*[37]	*[29]|*[37]	*[29]|*[37]	Darstellung[29]|*[37]	*[29]|Harm[37]	*[29]|*[37]	*[29]|*[37]	*[29]|*[37]	
+6-109	6994-7000	Gefahr	*[29]|*[37]	Moralisierung interpretativ[29]|*[37]	*[29]|*[37]	*[29]|*[37]	*[29]|*[37]	Darstellung[29]|*[37]	*[29]|Harm[37]	*[29]|*[37]	*[29]|*[37]	*[29]|*[37]	
+6-110	7001-7004	für	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-111	7005-7008	die	*[29]|*[38]	Moralisierung interpretativ[29]|*[38]	*[29]|*[38]	*[29]|*[38]	*[29]|*[38]	Darstellung[29]|*[38]	*[29]|*[38]	*[29]|Kein Bezug[38]	*[29]|Institution[38]	*[29]|Other Group[38]	
+6-112	7009-7028	Alawiten-Herrschaft	*[29]|*[38]	Moralisierung interpretativ[29]|*[38]	*[29]|*[38]	*[29]|*[38]	*[29]|*[38]	Darstellung[29]|*[38]	*[29]|*[38]	*[29]|Kein Bezug[38]	*[29]|Institution[38]	*[29]|Other Group[38]	
+6-113	7028-7029	.	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-114	7030-7031	#	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-115	7031-7032	#	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-116	7032-7033	#	*[29]	Moralisierung interpretativ[29]	*[29]	*[29]	*[29]	Darstellung[29]	*[29]	*[29]	*[29]	*[29]	
+6-117	7034-7049	Wirtschaftliche	*[29]|explizit[39]	Moralisierung interpretativ[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	Darstellung[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	
+6-118	7050-7057	Öffnung	*[29]|explizit[39]	Moralisierung interpretativ[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	Darstellung[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	
+6-119	7058-7066	bedeutet	*[29]|explizit[39]	Moralisierung interpretativ[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	Darstellung[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	
+6-120	7067-7075	zwingend	*[29]|explizit[39]	Moralisierung interpretativ[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	Darstellung[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	
+6-121	7076-7080	eine	*[29]|explizit[39]|*[40]	Moralisierung interpretativ[29]|*[39]|*[40]	*[29]|*[39]|Care[40]	*[29]|*[39]|*[40]	*[29]|*[39]|*[40]	Darstellung[29]|*[39]|*[40]	*[29]|*[39]|*[40]	*[29]|*[39]|*[40]	*[29]|*[39]|*[40]	*[29]|*[39]|*[40]	
+6-122	7081-7091	Annäherung	*[29]|explizit[39]|*[40]	Moralisierung interpretativ[29]|*[39]|*[40]	*[29]|*[39]|Care[40]	*[29]|*[39]|*[40]	*[29]|*[39]|*[40]	Darstellung[29]|*[39]|*[40]	*[29]|*[39]|*[40]	*[29]|*[39]|*[40]	*[29]|*[39]|*[40]	*[29]|*[39]|*[40]	
+6-123	7092-7094	an	*[29]|explizit[39]	Moralisierung interpretativ[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	Darstellung[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	
+6-124	7095-7098	die	*[29]|explizit[39]|*[41]	Moralisierung interpretativ[29]|*[39]|*[41]	*[29]|*[39]|*[41]	*[29]|*[39]|*[41]	*[29]|*[39]|*[41]	Darstellung[29]|*[39]|*[41]	*[29]|*[39]|*[41]	*[29]|*[39]|Benefizient:in[41]	*[29]|*[39]|Institution[41]	*[29]|*[39]|Neutral[41]	
+6-125	7099-7106	moderne	*[29]|explizit[39]|*[41]	Moralisierung interpretativ[29]|*[39]|*[41]	*[29]|*[39]|*[41]	*[29]|*[39]|*[41]	*[29]|*[39]|*[41]	Darstellung[29]|*[39]|*[41]	*[29]|*[39]|*[41]	*[29]|*[39]|Benefizient:in[41]	*[29]|*[39]|Institution[41]	*[29]|*[39]|Neutral[41]	
+6-126	7107-7111	Welt	*[29]|explizit[39]|*[41]	Moralisierung interpretativ[29]|*[39]|*[41]	*[29]|*[39]|*[41]	*[29]|*[39]|*[41]	*[29]|*[39]|*[41]	Darstellung[29]|*[39]|*[41]	*[29]|*[39]|*[41]	*[29]|*[39]|Benefizient:in[41]	*[29]|*[39]|Institution[41]	*[29]|*[39]|Neutral[41]	
+6-127	7112-7115	und	*[29]|explizit[39]	Moralisierung interpretativ[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	Darstellung[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	
+6-128	7116-7126	Demokratie	*[29]|explizit[39]|*[42]	Moralisierung interpretativ[29]|*[39]|*[42]	*[29]|*[39]|*[42]	*[29]|*[39]|*[42]	*[29]|*[39]|*[42]	Darstellung[29]|*[39]|*[42]	*[29]|*[39]|Fairness[42]	*[29]|*[39]|*[42]	*[29]|*[39]|*[42]	*[29]|*[39]|*[42]	
+6-129	7126-7127	.	*[29]|explizit[39]	Moralisierung interpretativ[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	Darstellung[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	*[29]|*[39]	
+
+#Text=T07/JUL.03257 die tageszeitung, 21.07.2007, S. 12; "In diesem Sommer gibt es keinen Krieg" ### Es gibt nicht nur ein Syrien, sondern zwei. Erstens das Syrien der herrschenden Alawiten und zum zweiten das Syrien der Sunniten, die ungefähr 85 Prozent der Bevölkerung ausmachen. Das ist zunächst ein religiöser Unterschied, wobei die Alawiten in den Augen der Sunniten noch weniger gelten als die Schiiten. ### In dem Moment, wo es Frieden mit Israel gibt und Syrien sich dem Westen gegenüber wirtschaftlich und #kulturell# öffnen würde, wächst die Gefahr für die Alawiten-Herrschaft. ### Wirtschaftliche Öffnung bedeutet zwingend eine Annäherung an die moderne Welt und Demokratie.
+7-1	7636-7639	T07	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-2	7639-7640	/	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-3	7640-7643	JUL	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-4	7643-7649	.03257	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-5	7650-7653	die	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-6	7654-7666	tageszeitung	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-7	7666-7667	,	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-8	7668-7678	21.07.2007	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-9	7678-7679	,	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-10	7680-7681	S	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-11	7681-7682	.	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-12	7683-7685	12	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-13	7685-7686	;	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-14	7687-7688	"	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-15	7688-7690	In	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-16	7691-7697	diesem	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-17	7698-7704	Sommer	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-18	7705-7709	gibt	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-19	7710-7712	es	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-20	7713-7719	keinen	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-21	7720-7725	Krieg	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-22	7725-7726	"	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-23	7727-7728	#	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-24	7728-7729	#	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-25	7729-7730	#	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-26	7731-7733	Es	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-27	7734-7738	gibt	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-28	7739-7744	nicht	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-29	7745-7748	nur	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-30	7749-7752	ein	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-31	7753-7759	Syrien	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-32	7759-7760	,	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-33	7761-7768	sondern	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-34	7769-7773	zwei	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-35	7773-7774	.	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-36	7775-7782	Erstens	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-37	7783-7786	das	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-38	7787-7793	Syrien	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-39	7794-7797	der	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-40	7798-7810	herrschenden	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-41	7811-7819	Alawiten	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-42	7820-7823	und	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-43	7824-7827	zum	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-44	7828-7835	zweiten	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-45	7836-7839	das	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-46	7840-7846	Syrien	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-47	7847-7850	der	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-48	7851-7859	Sunniten	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-49	7859-7860	,	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-50	7861-7864	die	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-51	7865-7873	ungefähr	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-52	7874-7876	85	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-53	7877-7884	Prozent	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-54	7885-7888	der	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-55	7889-7900	Bevölkerung	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-56	7901-7910	ausmachen	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-57	7910-7911	.	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-58	7912-7915	Das	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-59	7916-7919	ist	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-60	7920-7928	zunächst	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-61	7929-7932	ein	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-62	7933-7943	religiöser	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-63	7944-7955	Unterschied	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-64	7955-7956	,	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-65	7957-7962	wobei	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-66	7963-7966	die	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-67	7967-7975	Alawiten	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-68	7976-7978	in	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-69	7979-7982	den	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-70	7983-7988	Augen	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-71	7989-7992	der	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-72	7993-8001	Sunniten	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-73	8002-8006	noch	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-74	8007-8014	weniger	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-75	8015-8021	gelten	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-76	8022-8025	als	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-77	8026-8029	die	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-78	8030-8038	Schiiten	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-79	8038-8039	.	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-80	8040-8041	#	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-81	8041-8042	#	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-82	8042-8043	#	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-83	8044-8046	In	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-84	8047-8050	dem	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-85	8051-8057	Moment	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-86	8057-8058	,	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-87	8059-8061	wo	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-88	8062-8064	es	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-89	8065-8072	Frieden	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-90	8073-8076	mit	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-91	8077-8083	Israel	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-92	8084-8088	gibt	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-93	8089-8092	und	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-94	8093-8099	Syrien	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-95	8100-8104	sich	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-96	8105-8108	dem	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-97	8109-8115	Westen	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-98	8116-8125	gegenüber	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-99	8126-8140	wirtschaftlich	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-100	8141-8144	und	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-101	8145-8146	#	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-102	8146-8155	kulturell	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-103	8155-8156	#	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-104	8157-8163	öffnen	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-105	8164-8169	würde	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-106	8169-8170	,	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-107	8171-8177	wächst	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-108	8178-8181	die	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-109	8182-8188	Gefahr	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-110	8189-8192	für	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-111	8193-8196	die	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-112	8197-8216	Alawiten-Herrschaft	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-113	8216-8217	.	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-114	8218-8219	#	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-115	8219-8220	#	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-116	8220-8221	#	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-117	8222-8237	Wirtschaftliche	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-118	8238-8245	Öffnung	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-119	8246-8254	bedeutet	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-120	8255-8263	zwingend	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-121	8264-8268	eine	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-122	8269-8279	Annäherung	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-123	8280-8282	an	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-124	8283-8286	die	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-125	8287-8294	moderne	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-126	8295-8299	Welt	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-127	8300-8303	und	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-128	8304-8314	Demokratie	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+7-129	8314-8315	.	*[43]	*[43]	*[43]	*[43]	Dopplung[43]	*[43]	*[43]	*[43]	*[43]	*[43]	
+
+#Text=T07/JUL.03257 die tageszeitung, 21.07.2007, S. 12; "In diesem Sommer gibt es keinen Krieg" ### ### Ägypten und Jordanien wurden nach den #Friedensabkommen# mit Israel aber nicht gerade demokratischer? ###
+8-1	9299-9302	T07	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-2	9302-9303	/	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-3	9303-9306	JUL	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-4	9306-9312	.03257	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-5	9313-9316	die	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-6	9317-9329	tageszeitung	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-7	9329-9330	,	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-8	9331-9341	21.07.2007	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-9	9341-9342	,	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-10	9343-9344	S	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-11	9344-9345	.	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-12	9346-9348	12	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-13	9348-9349	;	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-14	9350-9351	"	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-15	9351-9353	In	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-16	9354-9360	diesem	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-17	9361-9367	Sommer	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-18	9368-9372	gibt	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-19	9373-9375	es	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-20	9376-9382	keinen	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-21	9383-9388	Krieg	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-22	9388-9389	"	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-23	9390-9391	#	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-24	9391-9392	#	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-25	9392-9393	#	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-26	9394-9395	#	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-27	9395-9396	#	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-28	9396-9397	#	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-29	9398-9405	Ägypten	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-30	9406-9409	und	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-31	9410-9419	Jordanien	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-32	9420-9426	wurden	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-33	9427-9431	nach	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-34	9432-9435	den	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-35	9436-9437	#	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-36	9437-9453	Friedensabkommen	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-37	9453-9454	#	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-38	9455-9458	mit	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-39	9459-9465	Israel	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-40	9466-9470	aber	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-41	9471-9476	nicht	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-42	9477-9483	gerade	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-43	9484-9498	demokratischer	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-44	9498-9499	?	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-45	9500-9501	#	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-46	9501-9502	#	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	
+8-47	9502-9503	#	*[44]	Keine Moralisierung[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	*[44]	

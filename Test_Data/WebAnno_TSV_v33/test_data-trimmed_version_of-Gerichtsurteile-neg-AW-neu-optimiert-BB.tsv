@@ -1,0 +1,526 @@
+#FORMAT=WebAnno TSV 3.3
+#T_SP=custom.Span|Forderung|KAT1MoralisierendesSegment|KAT2Subjektive_Ausdrcke|KAT5Ausformulierung|KOMMENTAR|KommunikativeFunktion|Moralwerte|Protagonistinnen|Protagonistinnen2|Protagonistinnen3
+
+
+#Text=HMP05/AUG.00228 Hamburger Morgenpost, 03.08.2005, S. 5; ALG II ist mit der Menschenwürde vereinbar ### BERLIN Das Arbeitslosengeld II ist nicht so niedrig, dass dadurch die grundgesetzlich garantierte Menschenwürde verletzt wird, urteilte das Sozialgericht Berlin.
+1-1	656-661	HMP05	_	_	_	_	_	_	_	_	_	_	
+1-2	661-662	/	_	_	_	_	_	_	_	_	_	_	
+1-3	662-665	AUG	_	_	_	_	_	_	_	_	_	_	
+1-4	665-671	.00228	_	_	_	_	_	_	_	_	_	_	
+1-5	672-681	Hamburger	_	_	_	_	_	_	_	_	_	_	
+1-6	682-692	Morgenpost	_	_	_	_	_	_	_	_	_	_	
+1-7	692-693	,	_	_	_	_	_	_	_	_	_	_	
+1-8	694-704	03.08.2005	_	_	_	_	_	_	_	_	_	_	
+1-9	704-705	,	_	_	_	_	_	_	_	_	_	_	
+1-10	706-707	S	_	_	_	_	_	_	_	_	_	_	
+1-11	707-708	.	_	_	_	_	_	_	_	_	_	_	
+1-12	709-710	5	_	_	_	_	_	_	_	_	_	_	
+1-13	710-711	;	_	_	_	_	_	_	_	_	_	_	
+1-14	712-715	ALG	_	_	_	_	_	_	_	_	_	_	
+1-15	716-718	II	_	_	_	_	_	_	_	_	_	_	
+1-16	719-722	ist	_	_	_	_	_	_	_	_	_	_	
+1-17	723-726	mit	_	_	_	_	_	_	_	_	_	_	
+1-18	727-730	der	_	_	_	_	_	_	_	_	_	_	
+1-19	731-744	Menschenwürde	_	_	_	_	_	_	_	_	_	_	
+1-20	745-754	vereinbar	_	_	_	_	_	_	_	_	_	_	
+1-21	755-756	#	_	_	_	_	_	_	_	_	_	_	
+1-22	756-757	#	_	_	_	_	_	_	_	_	_	_	
+1-23	757-758	#	_	_	_	_	_	_	_	_	_	_	
+1-24	759-765	BERLIN	_	_	_	_	_	_	_	_	_	_	
+1-25	766-769	Das	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-26	770-786	Arbeitslosengeld	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-27	787-789	II	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-28	790-793	ist	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-29	794-799	nicht	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-30	800-802	so	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-31	803-810	niedrig	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-32	810-811	,	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-33	812-816	dass	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-34	817-824	dadurch	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-35	825-828	die	*[1]|*[2]|*[3]	Moralisierung explizit[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|Care[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	
+1-36	829-844	grundgesetzlich	*[1]|*[2]|*[3]	Moralisierung explizit[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|Care[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	
+1-37	845-856	garantierte	*[1]|*[2]|*[3]	Moralisierung explizit[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|Care[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	
+1-38	857-870	Menschenwürde	*[1]|*[2]|*[3]	Moralisierung explizit[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|Care[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	*[1]|*[2]|*[3]	
+1-39	871-879	verletzt	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-40	880-884	wird	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-41	884-885	,	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-42	886-894	urteilte	*[1]|*[2]	Moralisierung explizit[1]|*[2]	*[1]|*[2]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	*[1]|*[2]	
+1-43	895-898	das	*[1]|*[2]|*[4]	Moralisierung explizit[1]|*[2]|*[4]	*[1]|*[2]|*[4]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]|*[4]	*[1]|*[2]|*[4]	*[1]|*[2]|*[4]	*[1]|*[2]|*[4]	*[1]|*[2]|Forderer:in[4]	*[1]|*[2]|Institution[4]	*[1]|*[2]|Neutral[4]	
+1-44	899-912	Sozialgericht	*[1]|*[2]|*[4]	Moralisierung explizit[1]|*[2]|*[4]	*[1]|*[2]|*[4]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]|*[4]	*[1]|*[2]|*[4]	*[1]|*[2]|*[4]	*[1]|*[2]|*[4]	*[1]|*[2]|Forderer:in[4]	*[1]|*[2]|Institution[4]	*[1]|*[2]|Neutral[4]	
+1-45	913-919	Berlin	*[1]|*[2]|*[4]	Moralisierung explizit[1]|*[2]|*[4]	*[1]|*[2]|*[4]	*[1]|Das Arbeitslosengeld muss erhöht werden.[2]|*[4]	*[1]|*[2]|*[4]	*[1]|*[2]|*[4]	*[1]|*[2]|*[4]	*[1]|*[2]|Forderer:in[4]	*[1]|*[2]|Institution[4]	*[1]|*[2]|Neutral[4]	
+1-46	919-920	.	_	_	_	_	_	_	_	_	_	_	
+
+#Text=Klägerin war eine 55-jährige Arbeitslose, die mit ihrem Mann in "Bedarfsgemeinschaft" zusammenlebt.
+2-1	921-929	Klägerin	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-2	930-933	war	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-3	934-938	eine	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-4	939-941	55	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-5	941-942	-	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-6	942-949	jährige	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-7	950-961	Arbeitslose	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-8	961-962	,	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-9	963-966	die	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-10	967-970	mit	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-11	971-976	ihrem	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-12	977-981	Mann	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-13	982-984	in	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-14	985-986	"	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-15	986-1005	Bedarfsgemeinschaft	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-16	1005-1006	"	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-17	1007-1019	zusammenlebt	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+2-18	1019-1020	.	*[5]	Keine Moralisierung[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	*[5]	
+
+#Text=Deswegen bekommen beide pro Kopf nur 311 Euro ALG II statt des vollen Satzes von 354 Euro.
+3-1	1021-1029	Deswegen	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-2	1030-1038	bekommen	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-3	1039-1044	beide	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-4	1045-1048	pro	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-5	1049-1053	Kopf	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-6	1054-1057	nur	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-7	1058-1061	311	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-8	1062-1066	Euro	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-9	1067-1070	ALG	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-10	1071-1073	II	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-11	1074-1079	statt	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-12	1080-1083	des	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-13	1084-1090	vollen	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-14	1091-1097	Satzes	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-15	1098-1101	von	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-16	1102-1105	354	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-17	1106-1110	Euro	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+3-18	1110-1111	.	*[6]	Keine Moralisierung[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	*[6]	
+
+#Text=Arztkosten seien dadurch ebenso wenig finanzierbar wie die Teilnahme am gesellschaftlichen Leben, argumentierte die Klägerin. ### Dies führe zur #Ausgrenzung,# die Menschenwürde und das Sozialstaatsprinzip seien verletzt. ### Das Sozialgericht räumte ein, das ALG II sei "knapp bemessen".
+4-1	1112-1122	Arztkosten	*[7]|*[8]	Moralisierung explizit[7]|*[8]	*[7]|*[8]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]	*[7]|*[8]	*[7]|Darstellung[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	
+4-2	1123-1128	seien	*[7]|*[8]	Moralisierung explizit[7]|*[8]	*[7]|*[8]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]	*[7]|*[8]	*[7]|Darstellung[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	
+4-3	1129-1136	dadurch	*[7]|*[8]	Moralisierung explizit[7]|*[8]	*[7]|*[8]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]	*[7]|*[8]	*[7]|Darstellung[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	
+4-4	1137-1143	ebenso	*[7]|*[8]	Moralisierung explizit[7]|*[8]	*[7]|*[8]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]	*[7]|*[8]	*[7]|Darstellung[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	
+4-5	1144-1149	wenig	*[7]|*[8]	Moralisierung explizit[7]|*[8]	*[7]|*[8]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]	*[7]|*[8]	*[7]|Darstellung[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	
+4-6	1150-1162	finanzierbar	*[7]|*[8]	Moralisierung explizit[7]|*[8]	*[7]|*[8]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]	*[7]|*[8]	*[7]|Darstellung[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	
+4-7	1163-1166	wie	*[7]|*[8]	Moralisierung explizit[7]|*[8]	*[7]|*[8]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]	*[7]|*[8]	*[7]|Darstellung[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	*[7]|*[8]	
+4-8	1167-1170	die	*[7]|*[8]|*[9]	Moralisierung explizit[7]|*[8]|*[9]	*[7]|*[8]|Fairness[9]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]|*[9]	*[7]|*[8]|*[9]	*[7]|Darstellung[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	
+4-9	1171-1180	Teilnahme	*[7]|*[8]|*[9]	Moralisierung explizit[7]|*[8]|*[9]	*[7]|*[8]|Fairness[9]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]|*[9]	*[7]|*[8]|*[9]	*[7]|Darstellung[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	
+4-10	1181-1183	am	*[7]|*[8]|*[9]	Moralisierung explizit[7]|*[8]|*[9]	*[7]|*[8]|Fairness[9]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]|*[9]	*[7]|*[8]|*[9]	*[7]|Darstellung[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	
+4-11	1184-1202	gesellschaftlichen	*[7]|*[8]|*[9]	Moralisierung explizit[7]|*[8]|*[9]	*[7]|*[8]|Fairness[9]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]|*[9]	*[7]|*[8]|*[9]	*[7]|Darstellung[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	
+4-12	1203-1208	Leben	*[7]|*[8]|*[9]	Moralisierung explizit[7]|*[8]|*[9]	*[7]|*[8]|Fairness[9]	*[7]|Das Arbeitslosengeld muss erhöht werden.[8]|*[9]	*[7]|*[8]|*[9]	*[7]|Darstellung[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	*[7]|*[8]|*[9]	
+4-13	1208-1209	,	*[7]	Moralisierung explizit[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	
+4-14	1210-1223	argumentierte	*[7]	Moralisierung explizit[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	
+4-15	1224-1227	die	*[7]|*[10]	Moralisierung explizit[7]|*[10]	*[7]|*[10]	*[7]|*[10]	*[7]|*[10]	*[7]|*[10]	*[7]|*[10]	*[7]|Forderer:in[10]	*[7]|Individuum[10]	*[7]|Neutral[10]	
+4-16	1228-1236	Klägerin	*[7]|*[10]	Moralisierung explizit[7]|*[10]	*[7]|*[10]	*[7]|*[10]	*[7]|*[10]	*[7]|*[10]	*[7]|*[10]	*[7]|Forderer:in[10]	*[7]|Individuum[10]	*[7]|Neutral[10]	
+4-17	1236-1237	.	*[7]	Moralisierung explizit[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	
+4-18	1238-1239	#	*[7]	Moralisierung explizit[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	
+4-19	1239-1240	#	*[7]	Moralisierung explizit[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	
+4-20	1240-1241	#	*[7]	Moralisierung explizit[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	*[7]	
+4-21	1242-1246	Dies	*[7]|*[11]	Moralisierung explizit[7]|*[11]	*[7]|*[11]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]	*[7]|*[11]	*[7]|Darstellung[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	
+4-22	1247-1252	führe	*[7]|*[11]	Moralisierung explizit[7]|*[11]	*[7]|*[11]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]	*[7]|*[11]	*[7]|Darstellung[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	
+4-23	1253-1256	zur	*[7]|*[11]	Moralisierung explizit[7]|*[11]	*[7]|*[11]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]	*[7]|*[11]	*[7]|Darstellung[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	
+4-24	1257-1258	#	*[7]|*[11]	Moralisierung explizit[7]|*[11]	*[7]|*[11]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]	*[7]|*[11]	*[7]|Darstellung[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	
+4-25	1258-1269	Ausgrenzung	*[7]|*[11]|*[12]	Moralisierung explizit[7]|*[11]|*[12]	*[7]|*[11]|Oppression[12]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]|*[12]	*[7]|*[11]|*[12]	*[7]|Darstellung[11]|*[12]	*[7]|*[11]|*[12]	*[7]|*[11]|*[12]	*[7]|*[11]|*[12]	*[7]|*[11]|*[12]	
+4-26	1269-1270	,	*[7]|*[11]	Moralisierung explizit[7]|*[11]	*[7]|*[11]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]	*[7]|*[11]	*[7]|Darstellung[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	
+4-27	1270-1271	#	*[7]|*[11]	Moralisierung explizit[7]|*[11]	*[7]|*[11]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]	*[7]|*[11]	*[7]|Darstellung[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	
+4-28	1272-1275	die	*[7]|*[11]|*[13]	Moralisierung explizit[7]|*[11]|*[13]	*[7]|*[11]|*[13]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]|*[13]	*[7]|*[11]|*[13]	*[7]|Darstellung[11]|*[13]	*[7]|*[11]|Care[13]	*[7]|*[11]|*[13]	*[7]|*[11]|*[13]	*[7]|*[11]|*[13]	
+4-29	1276-1289	Menschenwürde	*[7]|*[11]|*[13]	Moralisierung explizit[7]|*[11]|*[13]	*[7]|*[11]|*[13]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]|*[13]	*[7]|*[11]|*[13]	*[7]|Darstellung[11]|*[13]	*[7]|*[11]|Care[13]	*[7]|*[11]|*[13]	*[7]|*[11]|*[13]	*[7]|*[11]|*[13]	
+4-30	1290-1293	und	*[7]|*[11]	Moralisierung explizit[7]|*[11]	*[7]|*[11]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]	*[7]|*[11]	*[7]|Darstellung[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	
+4-31	1294-1297	das	*[7]|*[11]|*[14]	Moralisierung explizit[7]|*[11]|*[14]	*[7]|*[11]|Fairness[14]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]|*[14]	*[7]|*[11]|*[14]	*[7]|Darstellung[11]|*[14]	*[7]|*[11]|*[14]	*[7]|*[11]|*[14]	*[7]|*[11]|*[14]	*[7]|*[11]|*[14]	
+4-32	1298-1317	Sozialstaatsprinzip	*[7]|*[11]|*[14]	Moralisierung explizit[7]|*[11]|*[14]	*[7]|*[11]|Fairness[14]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]|*[14]	*[7]|*[11]|*[14]	*[7]|Darstellung[11]|*[14]	*[7]|*[11]|*[14]	*[7]|*[11]|*[14]	*[7]|*[11]|*[14]	*[7]|*[11]|*[14]	
+4-33	1318-1323	seien	*[7]|*[11]	Moralisierung explizit[7]|*[11]	*[7]|*[11]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]	*[7]|*[11]	*[7]|Darstellung[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	
+4-34	1324-1332	verletzt	*[7]|*[11]	Moralisierung explizit[7]|*[11]	*[7]|*[11]	*[7]|Das Arbeitslosengeld muss erhöht werden.[11]	*[7]|*[11]	*[7]|Darstellung[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	*[7]|*[11]	
+4-35	1332-1333	.	*[11]	*[11]	*[11]	Das Arbeitslosengeld muss erhöht werden.[11]	*[11]	Darstellung[11]	*[11]	*[11]	*[11]	*[11]	
+4-36	1334-1335	#	_	_	_	_	_	_	_	_	_	_	
+4-37	1335-1336	#	_	_	_	_	_	_	_	_	_	_	
+4-38	1336-1337	#	_	_	_	_	_	_	_	_	_	_	
+4-39	1338-1341	Das	_	_	_	_	_	_	_	_	_	_	
+4-40	1342-1355	Sozialgericht	_	_	_	_	_	_	_	_	_	_	
+4-41	1356-1362	räumte	_	_	_	_	_	_	_	_	_	_	
+4-42	1363-1366	ein	_	_	_	_	_	_	_	_	_	_	
+4-43	1366-1367	,	_	_	_	_	_	_	_	_	_	_	
+4-44	1368-1371	das	_	_	_	_	_	_	_	_	_	_	
+4-45	1372-1375	ALG	_	_	_	_	_	_	_	_	_	_	
+4-46	1376-1378	II	_	_	_	_	_	_	_	_	_	_	
+4-47	1379-1382	sei	_	_	_	_	_	_	_	_	_	_	
+4-48	1383-1384	"	_	_	_	_	_	_	_	_	_	_	
+4-49	1384-1389	knapp	_	_	_	_	_	_	_	_	_	_	
+4-50	1390-1398	bemessen	_	_	_	_	_	_	_	_	_	_	
+4-51	1398-1399	"	_	_	_	_	_	_	_	_	_	_	
+4-52	1399-1400	.	_	_	_	_	_	_	_	_	_	_	
+
+#Text=Es reiche aber für eine menschenwürdige "bescheidene Lebensführung" noch aus.
+5-1	1401-1403	Es	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-2	1404-1410	reiche	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-3	1411-1415	aber	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-4	1416-1419	für	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-5	1420-1424	eine	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-6	1425-1440	menschenwürdige	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-7	1441-1442	"	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-8	1442-1453	bescheidene	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-9	1454-1467	Lebensführung	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-10	1467-1468	"	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-11	1469-1473	noch	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-12	1474-1477	aus	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+5-13	1477-1478	.	*[15]	Keine Moralisierung[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	*[15]	
+
+#Text=HMP06/OKT.02502 Hamburger Morgenpost, 27.10.2006, S. 26; Wer vorzeitig auszieht, muss nicht renovieren ### Wenn Mieter aus ihrer Wohnung ausziehen, bevor Schönheitsreparaturen fällig werden, müssen sie sich nicht anteilig an den Renovierungskosten beteiligen. ### Der Bundesgerichtshof (BGH) entschied vergangene Woche in Karlsruhe, dass solche Abgeltungsklauseln den Mieter "unangemessen" #benachteiligen,# hieß es. ### Mit den Klauseln wollten Immobilienbesitzer von einem vorzeitig ausziehenden Mieter einen prozentualer Anteil an Renovierungskosten für den Abnutzungszeitraum seit den letzten Schönheitsreparaturen verlangen.
+6-1	2309-2314	HMP06	_	_	_	_	_	_	_	_	_	_	
+6-2	2314-2315	/	_	_	_	_	_	_	_	_	_	_	
+6-3	2315-2318	OKT	_	_	_	_	_	_	_	_	_	_	
+6-4	2318-2324	.02502	_	_	_	_	_	_	_	_	_	_	
+6-5	2325-2334	Hamburger	_	_	_	_	_	_	_	_	_	_	
+6-6	2335-2345	Morgenpost	_	_	_	_	_	_	_	_	_	_	
+6-7	2345-2346	,	_	_	_	_	_	_	_	_	_	_	
+6-8	2347-2357	27.10.2006	_	_	_	_	_	_	_	_	_	_	
+6-9	2357-2358	,	_	_	_	_	_	_	_	_	_	_	
+6-10	2359-2360	S	_	_	_	_	_	_	_	_	_	_	
+6-11	2360-2361	.	_	_	_	_	_	_	_	_	_	_	
+6-12	2362-2364	26	_	_	_	_	_	_	_	_	_	_	
+6-13	2364-2365	;	_	_	_	_	_	_	_	_	_	_	
+6-14	2366-2369	Wer	_	_	_	_	_	_	_	_	_	_	
+6-15	2370-2379	vorzeitig	_	_	_	_	_	_	_	_	_	_	
+6-16	2380-2388	auszieht	_	_	_	_	_	_	_	_	_	_	
+6-17	2388-2389	,	_	_	_	_	_	_	_	_	_	_	
+6-18	2390-2394	muss	_	_	_	_	_	_	_	_	_	_	
+6-19	2395-2400	nicht	_	_	_	_	_	_	_	_	_	_	
+6-20	2401-2411	renovieren	_	_	_	_	_	_	_	_	_	_	
+6-21	2412-2413	#	_	_	_	_	_	_	_	_	_	_	
+6-22	2413-2414	#	_	_	_	_	_	_	_	_	_	_	
+6-23	2414-2415	#	_	_	_	_	_	_	_	_	_	_	
+6-24	2416-2420	Wenn	_	_	_	_	_	_	_	_	_	_	
+6-25	2421-2427	Mieter	_	_	_	_	_	_	_	_	_	_	
+6-26	2428-2431	aus	_	_	_	_	_	_	_	_	_	_	
+6-27	2432-2437	ihrer	_	_	_	_	_	_	_	_	_	_	
+6-28	2438-2445	Wohnung	_	_	_	_	_	_	_	_	_	_	
+6-29	2446-2455	ausziehen	_	_	_	_	_	_	_	_	_	_	
+6-30	2455-2456	,	_	_	_	_	_	_	_	_	_	_	
+6-31	2457-2462	bevor	_	_	_	_	_	_	_	_	_	_	
+6-32	2463-2484	Schönheitsreparaturen	_	_	_	_	_	_	_	_	_	_	
+6-33	2485-2491	fällig	_	_	_	_	_	_	_	_	_	_	
+6-34	2492-2498	werden	_	_	_	_	_	_	_	_	_	_	
+6-35	2498-2499	,	_	_	_	_	_	_	_	_	_	_	
+6-36	2500-2506	müssen	_	_	_	_	_	_	_	_	_	_	
+6-37	2507-2510	sie	_	_	_	_	_	_	_	_	_	_	
+6-38	2511-2515	sich	_	_	_	_	_	_	_	_	_	_	
+6-39	2516-2521	nicht	_	_	_	_	_	_	_	_	_	_	
+6-40	2522-2530	anteilig	_	_	_	_	_	_	_	_	_	_	
+6-41	2531-2533	an	_	_	_	_	_	_	_	_	_	_	
+6-42	2534-2537	den	_	_	_	_	_	_	_	_	_	_	
+6-43	2538-2556	Renovierungskosten	_	_	_	_	_	_	_	_	_	_	
+6-44	2557-2567	beteiligen	_	_	_	_	_	_	_	_	_	_	
+6-45	2567-2568	.	_	_	_	_	_	_	_	_	_	_	
+6-46	2569-2570	#	_	_	_	_	_	_	_	_	_	_	
+6-47	2570-2571	#	_	_	_	_	_	_	_	_	_	_	
+6-48	2571-2572	#	_	_	_	_	_	_	_	_	_	_	
+6-49	2573-2576	Der	*[16]|*[17]|*[18]	Moralisierung explizit[16]|*[17]|*[18]	*[16]|*[17]|*[18]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]|*[18]	*[16]|*[17]|*[18]	*[16]|Darstellung[17]|*[18]	*[16]|*[17]|*[18]	*[16]|*[17]|Forderer:in[18]	*[16]|*[17]|Institution[18]	*[16]|*[17]|Neutral[18]	
+6-50	2577-2594	Bundesgerichtshof	*[16]|*[17]|*[18]	Moralisierung explizit[16]|*[17]|*[18]	*[16]|*[17]|*[18]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]|*[18]	*[16]|*[17]|*[18]	*[16]|Darstellung[17]|*[18]	*[16]|*[17]|*[18]	*[16]|*[17]|Forderer:in[18]	*[16]|*[17]|Institution[18]	*[16]|*[17]|Neutral[18]	
+6-51	2595-2596	(	*[16]|*[17]|*[18]	Moralisierung explizit[16]|*[17]|*[18]	*[16]|*[17]|*[18]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]|*[18]	*[16]|*[17]|*[18]	*[16]|Darstellung[17]|*[18]	*[16]|*[17]|*[18]	*[16]|*[17]|Forderer:in[18]	*[16]|*[17]|Institution[18]	*[16]|*[17]|Neutral[18]	
+6-52	2596-2599	BGH	*[16]|*[17]|*[18]	Moralisierung explizit[16]|*[17]|*[18]	*[16]|*[17]|*[18]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]|*[18]	*[16]|*[17]|*[18]	*[16]|Darstellung[17]|*[18]	*[16]|*[17]|*[18]	*[16]|*[17]|Forderer:in[18]	*[16]|*[17]|Institution[18]	*[16]|*[17]|Neutral[18]	
+6-53	2599-2600	)	*[16]|*[17]|*[18]	Moralisierung explizit[16]|*[17]|*[18]	*[16]|*[17]|*[18]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]|*[18]	*[16]|*[17]|*[18]	*[16]|Darstellung[17]|*[18]	*[16]|*[17]|*[18]	*[16]|*[17]|Forderer:in[18]	*[16]|*[17]|Institution[18]	*[16]|*[17]|Neutral[18]	
+6-54	2601-2610	entschied	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-55	2611-2621	vergangene	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-56	2622-2627	Woche	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-57	2628-2630	in	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-58	2631-2640	Karlsruhe	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-59	2640-2641	,	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-60	2642-2646	dass	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-61	2647-2653	solche	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-62	2654-2672	Abgeltungsklauseln	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-63	2673-2676	den	*[16]|*[17]|*[19]	Moralisierung explizit[16]|*[17]|*[19]	*[16]|*[17]|*[19]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]|*[19]	*[16]|*[17]|*[19]	*[16]|Darstellung[17]|*[19]	*[16]|*[17]|*[19]	*[16]|*[17]|Benefizient:in[19]	*[16]|*[17]|soziale Gruppe[19]	*[16]|*[17]|Neutral[19]	
+6-64	2677-2683	Mieter	*[16]|*[17]|*[19]	Moralisierung explizit[16]|*[17]|*[19]	*[16]|*[17]|*[19]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]|*[19]	*[16]|*[17]|*[19]	*[16]|Darstellung[17]|*[19]	*[16]|*[17]|*[19]	*[16]|*[17]|Benefizient:in[19]	*[16]|*[17]|soziale Gruppe[19]	*[16]|*[17]|Neutral[19]	
+6-65	2684-2685	"	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-66	2685-2697	unangemessen	*[16]|*[17]|*[20]	Moralisierung explizit[16]|*[17]|*[20]	*[16]|*[17]|Cheating[20]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]|*[20]	*[16]|*[17]|*[20]	*[16]|Darstellung[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	
+6-67	2697-2698	"	*[16]|*[17]|*[20]	Moralisierung explizit[16]|*[17]|*[20]	*[16]|*[17]|Cheating[20]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]|*[20]	*[16]|*[17]|*[20]	*[16]|Darstellung[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	
+6-68	2699-2700	#	*[16]|*[17]|*[20]	Moralisierung explizit[16]|*[17]|*[20]	*[16]|*[17]|Cheating[20]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]|*[20]	*[16]|*[17]|*[20]	*[16]|Darstellung[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	
+6-69	2700-2714	benachteiligen	*[16]|*[17]|*[20]	Moralisierung explizit[16]|*[17]|*[20]	*[16]|*[17]|Cheating[20]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]|*[20]	*[16]|*[17]|*[20]	*[16]|Darstellung[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	*[16]|*[17]|*[20]	
+6-70	2714-2715	,	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-71	2715-2716	#	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-72	2717-2721	hieß	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-73	2722-2724	es	*[16]|*[17]	Moralisierung explizit[16]|*[17]	*[16]|*[17]	*[16]|Es soll keine Abgeltungsklauseln geben.[17]	*[16]|*[17]	*[16]|Darstellung[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	*[16]|*[17]	
+6-74	2724-2725	.	_	_	_	_	_	_	_	_	_	_	
+6-75	2726-2727	#	_	_	_	_	_	_	_	_	_	_	
+6-76	2727-2728	#	_	_	_	_	_	_	_	_	_	_	
+6-77	2728-2729	#	_	_	_	_	_	_	_	_	_	_	
+6-78	2730-2733	Mit	_	_	_	_	_	_	_	_	_	_	
+6-79	2734-2737	den	_	_	_	_	_	_	_	_	_	_	
+6-80	2738-2746	Klauseln	_	_	_	_	_	_	_	_	_	_	
+6-81	2747-2754	wollten	_	_	_	_	_	_	_	_	_	_	
+6-82	2755-2773	Immobilienbesitzer	_	_	_	_	_	_	_	_	_	_	
+6-83	2774-2777	von	_	_	_	_	_	_	_	_	_	_	
+6-84	2778-2783	einem	_	_	_	_	_	_	_	_	_	_	
+6-85	2784-2793	vorzeitig	_	_	_	_	_	_	_	_	_	_	
+6-86	2794-2806	ausziehenden	_	_	_	_	_	_	_	_	_	_	
+6-87	2807-2813	Mieter	_	_	_	_	_	_	_	_	_	_	
+6-88	2814-2819	einen	_	_	_	_	_	_	_	_	_	_	
+6-89	2820-2832	prozentualer	_	_	_	_	_	_	_	_	_	_	
+6-90	2833-2839	Anteil	_	_	_	_	_	_	_	_	_	_	
+6-91	2840-2842	an	_	_	_	_	_	_	_	_	_	_	
+6-92	2843-2861	Renovierungskosten	_	_	_	_	_	_	_	_	_	_	
+6-93	2862-2865	für	_	_	_	_	_	_	_	_	_	_	
+6-94	2866-2869	den	_	_	_	_	_	_	_	_	_	_	
+6-95	2870-2888	Abnutzungszeitraum	_	_	_	_	_	_	_	_	_	_	
+6-96	2889-2893	seit	_	_	_	_	_	_	_	_	_	_	
+6-97	2894-2897	den	_	_	_	_	_	_	_	_	_	_	
+6-98	2898-2905	letzten	_	_	_	_	_	_	_	_	_	_	
+6-99	2906-2927	Schönheitsreparaturen	_	_	_	_	_	_	_	_	_	_	
+6-100	2928-2937	verlangen	_	_	_	_	_	_	_	_	_	_	
+6-101	2937-2938	.	_	_	_	_	_	_	_	_	_	_	
+
+#Text=(AZ: VII ZR 52/06)
+#Text=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              HMP07/JAN.02145 Hamburger Morgenpost, 21.01.2007, S. 45; Wie kündige ich die Muckibude?
+7-1	2939-2940	(	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-2	2940-2942	AZ	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-3	2942-2943	:	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-4	2944-2947	VII	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-5	2948-2950	ZR	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-6	2951-2953	52	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-7	2953-2954	/	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-8	2954-2956	06	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-9	2956-2957	)	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-10	4156-4161	HMP07	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-11	4161-4162	/	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-12	4162-4165	JAN	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-13	4165-4171	.02145	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-14	4172-4181	Hamburger	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-15	4182-4192	Morgenpost	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-16	4192-4193	,	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-17	4194-4204	21.01.2007	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-18	4204-4205	,	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-19	4206-4207	S	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-20	4207-4208	.	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-21	4209-4211	45	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-22	4211-4212	;	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-23	4213-4216	Wie	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-24	4217-4224	kündige	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-25	4225-4228	ich	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-26	4229-4232	die	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-27	4233-4242	Muckibude	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+7-28	4242-4243	?	*[21]	Keine Moralisierung[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	*[21]	
+
+#Text=### Vertragslaufzeit: Laufzeiten von 12 Monaten sind rechtens. ### Aber: Längere Verträge dürften vor Gericht keine Chance haben, weil hier "eine unangemessene #Benachteiligung"# vorliegt. ###
+#Text=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             HMP07/FEB.02638 Hamburger Morgenpost, 23.02.2007, S. 23; Stacheldraht muss entfernt werden ### Hat ein Ehepaar sein Grundstück mit einem Lamellenzaun eingegrenzt, auf dem Stacheldraht angebracht ist, und steht der Zaun vor einem weiteren Holzzaun, kann die Stadt verlangen, dass der Stacheldraht entfernt wird. ### Das Argument: Er stelle eine #Gefahr# dar. ### Kinder könnten sich verletzen, so das Verwaltungsgericht Koblenz. (7 K 2595/05)
+#Text=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 HMP07/SEP.01673 Hamburger Morgenpost, 16.09.2007, S. 46; Das darf Ihr Wagen wert sein ### ### Schluss auch mit der Praxis, behinderte ALG-II-Empfänger zu #benachteiligen!
+8-1	4244-4245	#	_	_	_	_	_	_	_	_	_	_	
+8-2	4245-4246	#	_	_	_	_	_	_	_	_	_	_	
+8-3	4246-4247	#	_	_	_	_	_	_	_	_	_	_	
+8-4	4248-4264	Vertragslaufzeit	_	_	_	_	_	_	_	_	_	_	
+8-5	4264-4265	:	_	_	_	_	_	_	_	_	_	_	
+8-6	4266-4276	Laufzeiten	_	_	_	_	_	_	_	_	_	_	
+8-7	4277-4280	von	_	_	_	_	_	_	_	_	_	_	
+8-8	4281-4283	12	_	_	_	_	_	_	_	_	_	_	
+8-9	4284-4291	Monaten	_	_	_	_	_	_	_	_	_	_	
+8-10	4292-4296	sind	_	_	_	_	_	_	_	_	_	_	
+8-11	4297-4305	rechtens	_	_	_	_	_	_	_	_	_	_	
+8-12	4305-4306	.	_	_	_	_	_	_	_	_	_	_	
+8-13	4307-4308	#	_	_	_	_	_	_	_	_	_	_	
+8-14	4308-4309	#	_	_	_	_	_	_	_	_	_	_	
+8-15	4309-4310	#	_	_	_	_	_	_	_	_	_	_	
+8-16	4311-4315	Aber	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-17	4315-4316	:	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-18	4317-4324	Längere	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-19	4325-4333	Verträge	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-20	4334-4341	dürften	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-21	4342-4345	vor	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-22	4346-4353	Gericht	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-23	4354-4359	keine	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-24	4360-4366	Chance	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-25	4367-4372	haben	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-26	4372-4373	,	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-27	4374-4378	weil	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-28	4379-4383	hier	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-29	4384-4385	"	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-30	4385-4389	eine	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-31	4390-4403	unangemessene	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-32	4404-4405	#	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-33	4405-4420	Benachteiligung	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-34	4420-4421	"	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-35	4421-4422	#	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-36	4423-4431	vorliegt	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-37	4431-4432	.	*[22]	Keine Moralisierung[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	*[22]	
+8-38	4433-4434	#	_	_	_	_	_	_	_	_	_	_	
+8-39	4434-4435	#	_	_	_	_	_	_	_	_	_	_	
+8-40	4435-4436	#	_	_	_	_	_	_	_	_	_	_	
+8-41	5474-5479	HMP07	_	_	_	_	_	_	_	_	_	_	
+8-42	5479-5480	/	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-43	5480-5483	FEB	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-44	5483-5489	.02638	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-45	5490-5499	Hamburger	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-46	5500-5510	Morgenpost	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-47	5510-5511	,	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-48	5512-5522	23.02.2007	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-49	5522-5523	,	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-50	5524-5525	S	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-51	5525-5526	.	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-52	5527-5529	23	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-53	5529-5530	;	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-54	5531-5543	Stacheldraht	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-55	5544-5548	muss	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-56	5549-5557	entfernt	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-57	5558-5564	werden	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-58	5565-5566	#	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-59	5566-5567	#	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-60	5567-5568	#	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-61	5569-5572	Hat	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-62	5573-5576	ein	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-63	5577-5584	Ehepaar	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-64	5585-5589	sein	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-65	5590-5600	Grundstück	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-66	5601-5604	mit	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-67	5605-5610	einem	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-68	5611-5623	Lamellenzaun	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-69	5624-5635	eingegrenzt	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-70	5635-5636	,	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-71	5637-5640	auf	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-72	5641-5644	dem	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-73	5645-5657	Stacheldraht	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-74	5658-5668	angebracht	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-75	5669-5672	ist	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-76	5672-5673	,	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-77	5674-5677	und	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-78	5678-5683	steht	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-79	5684-5687	der	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-80	5688-5692	Zaun	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-81	5693-5696	vor	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-82	5697-5702	einem	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-83	5703-5711	weiteren	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-84	5712-5720	Holzzaun	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-85	5720-5721	,	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-86	5722-5726	kann	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-87	5727-5730	die	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-88	5731-5736	Stadt	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-89	5737-5746	verlangen	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-90	5746-5747	,	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-91	5748-5752	dass	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-92	5753-5756	der	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-93	5757-5769	Stacheldraht	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-94	5770-5778	entfernt	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-95	5779-5783	wird	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-96	5783-5784	.	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-97	5785-5786	#	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-98	5786-5787	#	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-99	5787-5788	#	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-100	5789-5792	Das	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-101	5793-5801	Argument	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-102	5801-5802	:	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-103	5803-5805	Er	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-104	5806-5812	stelle	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-105	5813-5817	eine	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-106	5818-5819	#	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-107	5819-5825	Gefahr	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-108	5825-5826	#	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-109	5827-5830	dar	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-110	5830-5831	.	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-111	5832-5833	#	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-112	5833-5834	#	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-113	5834-5835	#	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-114	5836-5842	Kinder	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-115	5843-5850	könnten	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-116	5851-5855	sich	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-117	5856-5865	verletzen	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-118	5865-5866	,	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-119	5867-5869	so	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-120	5870-5873	das	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-121	5874-5892	Verwaltungsgericht	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-122	5893-5900	Koblenz	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-123	5900-5901	.	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-124	5902-5903	(	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-125	5903-5904	7	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-126	5905-5906	K	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-127	5907-5911	2595	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-128	5911-5912	/	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-129	5912-5914	05	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-130	5914-5915	)	*[23]	Keine Moralisierung[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	*[23]	
+8-131	6989-6994	HMP07	_	_	_	_	_	_	_	_	_	_	
+8-132	6994-6995	/	_	_	_	_	_	_	_	_	_	_	
+8-133	6995-6998	SEP	_	_	_	_	_	_	_	_	_	_	
+8-134	6998-7004	.01673	_	_	_	_	_	_	_	_	_	_	
+8-135	7005-7014	Hamburger	_	_	_	_	_	_	_	_	_	_	
+8-136	7015-7025	Morgenpost	_	_	_	_	_	_	_	_	_	_	
+8-137	7025-7026	,	_	_	_	_	_	_	_	_	_	_	
+8-138	7027-7037	16.09.2007	_	_	_	_	_	_	_	_	_	_	
+8-139	7037-7038	,	_	_	_	_	_	_	_	_	_	_	
+8-140	7039-7040	S	_	_	_	_	_	_	_	_	_	_	
+8-141	7040-7041	.	_	_	_	_	_	_	_	_	_	_	
+8-142	7042-7044	46	_	_	_	_	_	_	_	_	_	_	
+8-143	7044-7045	;	_	_	_	_	_	_	_	_	_	_	
+8-144	7046-7049	Das	_	_	_	_	_	_	_	_	_	_	
+8-145	7050-7054	darf	_	_	_	_	_	_	_	_	_	_	
+8-146	7055-7058	Ihr	_	_	_	_	_	_	_	_	_	_	
+8-147	7059-7064	Wagen	_	_	_	_	_	_	_	_	_	_	
+8-148	7065-7069	wert	_	_	_	_	_	_	_	_	_	_	
+8-149	7070-7074	sein	_	_	_	_	_	_	_	_	_	_	
+8-150	7075-7076	#	_	_	_	_	_	_	_	_	_	_	
+8-151	7076-7077	#	_	_	_	_	_	_	_	_	_	_	
+8-152	7077-7078	#	_	_	_	_	_	_	_	_	_	_	
+8-153	7079-7080	#	_	_	_	_	_	_	_	_	_	_	
+8-154	7080-7081	#	_	_	_	_	_	_	_	_	_	_	
+8-155	7081-7082	#	_	_	_	_	_	_	_	_	_	_	
+8-156	7083-7090	Schluss	explizit[24]|*[25]	*[24]|Moralisierung[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	Appell[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	
+8-157	7091-7095	auch	explizit[24]|*[25]	*[24]|Moralisierung[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	Appell[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	
+8-158	7096-7099	mit	explizit[24]|*[25]	*[24]|Moralisierung[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	Appell[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	
+8-159	7100-7103	der	explizit[24]|*[25]	*[24]|Moralisierung[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	Appell[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	
+8-160	7104-7110	Praxis	explizit[24]|*[25]	*[24]|Moralisierung[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	Appell[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	
+8-161	7110-7111	,	explizit[24]|*[25]	*[24]|Moralisierung[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	Appell[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	
+8-162	7112-7122	behinderte	explizit[24]|*[25]|*[26]	*[24]|Moralisierung[25]|*[26]	*[24]|*[25]|*[26]	*[24]|*[25]|*[26]	*[24]|*[25]|*[26]	Appell[24]|*[25]|*[26]	*[24]|*[25]|*[26]	*[24]|*[25]|Benefizient:in[26]	*[24]|*[25]|soziale Gruppe[26]	*[24]|*[25]|Neutral[26]	
+8-163	7123-7139	ALG-II-Empfänger	explizit[24]|*[25]|*[26]	*[24]|Moralisierung[25]|*[26]	*[24]|*[25]|*[26]	*[24]|*[25]|*[26]	*[24]|*[25]|*[26]	Appell[24]|*[25]|*[26]	*[24]|*[25]|*[26]	*[24]|*[25]|Benefizient:in[26]	*[24]|*[25]|soziale Gruppe[26]	*[24]|*[25]|Neutral[26]	
+8-164	7140-7142	zu	explizit[24]|*[25]	*[24]|Moralisierung[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	Appell[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	
+8-165	7143-7144	#	explizit[24]|*[25]	*[24]|Moralisierung[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	Appell[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	
+8-166	7144-7158	benachteiligen	explizit[24]|*[25]|*[27]	*[24]|Moralisierung[25]|*[27]	*[24]|*[25]|Cheating[27]	*[24]|*[25]|*[27]	*[24]|*[25]|*[27]	Appell[24]|*[25]|*[27]	*[24]|*[25]|*[27]	*[24]|*[25]|*[27]	*[24]|*[25]|*[27]	*[24]|*[25]|*[27]	
+8-167	7158-7159	!	explizit[24]|*[25]	*[24]|Moralisierung[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	Appell[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	*[24]|*[25]	
+
+#Text=# Lebten die in einem Heim, hieß es generell: kein ALG II. ### Das Bundessozialgericht: Wer nur für sechs Monate in einem Heim untergebracht wird, aber prinzipiell erwerbsfähig ist, der hat Anspruch auf ALG II (Az.
+9-1	7159-7160	#	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-2	7161-7167	Lebten	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-3	7168-7171	die	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-4	7172-7174	in	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-5	7175-7180	einem	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-6	7181-7185	Heim	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-7	7185-7186	,	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-8	7187-7191	hieß	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-9	7192-7194	es	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-10	7195-7203	generell	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-11	7203-7204	:	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-12	7205-7209	kein	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-13	7210-7213	ALG	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-14	7214-7216	II	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-15	7216-7217	.	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-16	7218-7219	#	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-17	7219-7220	#	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-18	7220-7221	#	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-19	7222-7225	Das	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-20	7226-7245	Bundessozialgericht	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-21	7245-7246	:	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-22	7247-7250	Wer	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-23	7251-7254	nur	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-24	7255-7258	für	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-25	7259-7264	sechs	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-26	7265-7271	Monate	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-27	7272-7274	in	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-28	7275-7280	einem	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-29	7281-7285	Heim	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-30	7286-7299	untergebracht	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-31	7300-7304	wird	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-32	7304-7305	,	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-33	7306-7310	aber	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-34	7311-7322	prinzipiell	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-35	7323-7335	erwerbsfähig	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-36	7336-7339	ist	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-37	7339-7340	,	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-38	7341-7344	der	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-39	7345-7348	hat	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-40	7349-7357	Anspruch	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-41	7358-7361	auf	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-42	7362-7365	ALG	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-43	7366-7368	II	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-44	7369-7370	(	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-45	7370-7372	Az	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+9-46	7372-7373	.	*[28]	Keine Moralisierung[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	*[28]	
+
+#Text=B 14/7b AS 16/07 R).
+10-1	7374-7375	B	*[29]	Keine Moralisierung[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	
+10-2	7376-7378	14	*[29]	Keine Moralisierung[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	
+10-3	7378-7379	/	*[29]	Keine Moralisierung[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	
+10-4	7379-7381	7b	*[29]	Keine Moralisierung[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	
+10-5	7382-7384	AS	*[29]	Keine Moralisierung[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	
+10-6	7385-7387	16	*[29]	Keine Moralisierung[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	
+10-7	7387-7388	/	*[29]	Keine Moralisierung[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	
+10-8	7388-7390	07	*[29]	Keine Moralisierung[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	
+10-9	7391-7392	R	*[29]	Keine Moralisierung[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	
+10-10	7392-7393	)	*[29]	Keine Moralisierung[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	
+10-11	7393-7394	.	*[29]	Keine Moralisierung[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	*[29]	
