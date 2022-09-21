@@ -1,6 +1,9 @@
 from collections import defaultdict
 import pandas as pd
 import numpy as np
+import bisect
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 map_expressions = {
     "KAT1-Moralisierendes Segment": "KAT1MoralisierendesSegment",
@@ -47,8 +50,8 @@ def sort_spans(cas: object, ts: object) -> defaultdict:
         "Protagonistinnen3",
         "KommunikativeFunktion",
         "Forderung",
-        "KAT5Ausformulierung",
-        "KOMMENTAR",
+        # "KAT5Ausformulierung",
+        # "KOMMENTAR",
     ]
 
     for span in cas.select(span_type.name):
@@ -66,6 +69,17 @@ def sort_spans(cas: object, ts: object) -> defaultdict:
     # for span_dict_key, span_dict_sub_kat in span_dict.items():
     #     print(f"{span_dict_key}: {[key for key in span_dict_sub_kat.keys()]}")
     return span_dict
+
+
+def get_sentences(cas: object, ts: object) -> list:
+    span_type = ts.get_type(
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
+    )
+    sentence_dict = defaultdict(list)
+    for span in cas.select(span_type.name):
+        sentence_dict["span"].append((span.begin, span.end))
+        sentence_dict["sofa"].append(span.get_covered_text())
+    return sentence_dict
 
 
 class AnalyseOccurence:
@@ -192,6 +206,52 @@ def find_cat_from_str(cat_entry, span_dict):
         if cat_entry in span_dict_sub_kat.keys():
             return span_dict_key
     raise RuntimeError(f"Category '{cat_entry}' not found in dataset")
+
+
+def find_all_cat_in_sentence(data_dict):
+    df_spans = AnalyseOccurence(data_dict, mode="spans").df
+
+    # sentence, main_cat, sub_cat : occurence
+    sentence_dict = defaultdict(lambda: defaultdict(lambda: 0))
+
+    for file_dict, df_file in zip(data_dict.values(), df_spans):
+        sentence_span_list_per_file = file_dict["sentences"]["span"]
+        sentence_str_list_per_file = file_dict["sentences"]["sofa"]
+        for main_cat_key, sub_cat_key in df_spans[df_file].index:
+            if main_cat_key != "total instances":
+                # print(main_cat_key,sub_cat_key, type(df_spans[df_file].loc[[main_cat_key],[sub_cat_key]].values[0]) )
+                if isinstance(
+                    df_spans[df_file].loc[[main_cat_key], [sub_cat_key]].values[0], list
+                ):
+                    for occurence in (
+                        df_spans[df_file].loc[[main_cat_key], [sub_cat_key]].values[0]
+                    ):
+                        sentence_idx = bisect.bisect(
+                            sentence_span_list_per_file, occurence
+                        )
+                        if sentence_idx > 0:
+                            sentence_dict[sentence_str_list_per_file[sentence_idx - 1]][
+                                (main_cat_key, sub_cat_key)
+                            ] += 1
+
+    return sentence_dict
+
+
+def report_occurence_per_sentence(data_dict) -> pd.DataFrame:
+    sentence_dict = find_all_cat_in_sentence(data_dict)
+    df_sentence_occurence = pd.DataFrame(sentence_dict).fillna(0).transpose()
+    df_sentence_occurence.index = df_sentence_occurence.index.set_names((["Sentence"]))
+    return df_sentence_occurence
+
+
+def report_occurence_heatmap(df_sentence_occurence, type="Heatmap"):
+    if type == "Heatmap":
+        df_sentence_occurence = df_sentence_occurence.copy()
+        df_sentence_occurence.columns = df_sentence_occurence.columns.droplevel()
+        plt.figure(figsize=(16, 16))
+        return sns.heatmap(df_sentence_occurence.corr(), cmap="cividis")
+    elif type == "Numbers":
+        return df_sentence_occurence.corr()
 
 
 # get overlap%
