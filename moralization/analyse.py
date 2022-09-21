@@ -252,34 +252,3 @@ def report_occurence_heatmap(df_sentence_occurence, type="Heatmap"):
         return sns.heatmap(df_sentence_occurence.corr(), cmap="cividis")
     elif type == "Numbers":
         return df_sentence_occurence.corr()
-
-
-# get overlap%
-# so far this only works on a span basis and not a sentence basis.
-def get_overlap_percent(cat_1, cat_2, data_dict, file_name, ret_occ=False):
-    o_cat1 = find_cat_from_str(cat_1, data_dict[file_name]["data"])
-    o_cat2 = find_cat_from_str(cat_2, data_dict[file_name]["data"])
-    occurence = 0
-    total = 0
-    for span in data_dict[file_name]["data"][o_cat1][cat_1]:
-        total += 1
-        if span[o_cat2] == cat_2:
-            occurence += 1
-    if ret_occ:
-        return occurence, total
-    else:
-        return round(occurence / total, 7)
-
-
-def get_percent_matrix(data_dict, file_name, cat_list=None):
-    if cat_list is None:
-        cat_list = []
-        for span_dict_key, span_dict_sub_kat in data_dict[file_name]["data"].items():
-            [cat_list.append(key) for key in span_dict_sub_kat.keys()]
-    percent_matrix = np.zeros((len(cat_list), len(cat_list)))
-    for i, cat1 in enumerate(cat_list):
-        for j, cat2 in enumerate(cat_list):
-            percent_matrix[i, j] = get_overlap_percent(cat1, cat2, data_dict, file_name)
-    df = pd.DataFrame(percent_matrix, index=cat_list)
-    df.columns = cat_list
-    return df
