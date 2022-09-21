@@ -4,8 +4,7 @@ import importlib_resources
 import logging
 from moralization import analyse
 from lxml.etree import XMLSyntaxError
-import glob
-import os
+
 
 pkg = importlib_resources.files("moralization")
 
@@ -53,7 +52,7 @@ class InputOutput:
         if use_custom_ts is False:
             ts = InputOutput.read_typesystem()
         else:
-            ts_file = glob.glob(os.path.join(dir_path, "TypeSystem.xml"))
+            ts_file = list(dir_path.glob("TypeSystem.xml"))
             if len(ts_file) > 1:
                 raise Warning("Multiple typesystems found. Please provide only one.")
             elif len(ts_file) == 0:
