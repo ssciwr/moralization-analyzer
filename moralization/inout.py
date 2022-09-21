@@ -19,7 +19,9 @@ class InputOutput:
         return pathlib.Path(filename).suffix[1:]
 
     @staticmethod
-    def read_typesystem(filename=(pkg / "data" / "TypeSystem.xml")) -> object:
+    def read_typesystem(filename=None) -> object:
+        if filename is None:
+            filename = pkg / "data" / "TypeSystem.xml"
         # read in the file system types
         with open(filename, "rb") as f:
             ts = load_typesystem(f)
