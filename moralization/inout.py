@@ -57,6 +57,7 @@ class InputOutput:
                 data_dict[data_file.stem] = {
                     "data": analyse.sort_spans(cas, ts),
                     "file_type": file_type,
+                    "text": cas.sofas[0]._sofaString,
                 }
             except XMLSyntaxError as e:
                 logging.warning(
