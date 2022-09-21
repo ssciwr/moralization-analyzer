@@ -124,6 +124,7 @@ class Machine_Learning:  # name is subject to change
         data_dict = InputOutput.get_input_dir(dir_path)
 
         nlp = spacy.blank("de")
+        # nlp.add_pipe("sentencizer",config={"punct_chars":['!','.','?']})
         db_train = DocBin()
         db_dev = DocBin()
 
@@ -146,8 +147,8 @@ class Machine_Learning:  # name is subject to change
 
             # split data for each file in test and training
             random.shuffle(ents)
-            ents_train = ents[: int(0.8 * len(ents))]
-            ents_test = ents[int(0.8 * len(ents)) :]
+            ents_train = ents[: int(0.95 * len(ents))]
+            ents_test = ents[int(0.05 * len(ents)) :]
 
             # https://explosion.ai/blog/spancat
             # use spancat for multiple labels on the same token
