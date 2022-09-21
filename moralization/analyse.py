@@ -156,34 +156,22 @@ class AnalyseOccurence:
         self.df[:] = self.df[:].astype("object")
         for file_name in self.file_names:
             span_dict = self.data_dict[file_name]["data"]
+            span_text = self.data_dict[file_name]["sofa"]
             for main_cat_key, main_cat_value in span_dict.items():
                 for sub_cat_key in main_cat_value.keys():
-                    # report the beginning and end of each span as a tuple
-                    span_list = [
-                        (span["begin"], span["end"])
+                    # find the text for each span
+                    span_annotated_text = [
+                        span_text[span["begin"] : span["end"]]
                         for span in span_dict[main_cat_key][sub_cat_key]
                     ]
-
-                    # multiple options for how to report the spans are available
-                    # first report the entire span object as a string
-                    # span_list = [str(span) for span in span_dict[main_cat_key][sub_cat_key]]
-                    # this would look like this:
-                    # c.Span(Protagonistinnen=Forderer:in, Protagonistinnen2=Individuum, Protagonistinnen3=Own Group, begin=21822, end=21874);
-                    # c.Span(Protagonistinnen=Benefizient:in, Protagonistinnen2=Institution, Protagonistinnen3=Own Group, begin=21974, end=21984);
-                    # c.Span(Protagonistinnen=Forderer:in, Protagonistinnen2=Institution, Protagonistinnen3=Own Group, begin=66349, end=66352)
-                    # maybe one should remove the c.Span() but i'm not sure what exactly is wanted here.
-                    # second option is to report the end or beginning index for each span
-                    # span_list=[str(span["end"]) for span in span_dict[main_cat_key][sub_cat_key] ]
-
-                    # convert list to seperated str
-                    # span_str = ";".join(span_list)
-                    # span_str = span_str.replace("[", "").replace("]", "")
-
+                    # clean the spans from "#"
+                    span_annotated_text = [
+                        span.replace("#", "") for span in span_annotated_text
+                    ]
                     self.df.at[
                         (main_cat_key, sub_cat_key),
                         file_name,
-                        # ] = span_str
-                    ] = span_list
+                    ] = span_annotated_text
 
 
 # find the overlaying category for an second dimension cat name

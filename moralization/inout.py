@@ -57,7 +57,7 @@ class InputOutput:
                 data_dict[data_file.stem] = {
                     "data": analyse.sort_spans(cas, ts),
                     "file_type": file_type,
-                    "text": cas.sofas[0]._sofaString,
+                    "sofa": cas.sofa_string,  # note: use .sofa_string not .get_sofa() as the latter removes \n and similar markers
                 }
             except XMLSyntaxError as e:
                 logging.warning(
@@ -72,14 +72,14 @@ if __name__ == "__main__":
     # "moralization/data/Gerichtsurteile-pos-AW-neu-optimiert-BB.xmi"
     # )
     data_dict = InputOutput.get_input_dir("data/")
-    df_instances = analyse.AnalyseOccurence(data_dict, mode="instances").df
-    print(df_instances)
+    # df_instances = analyse.AnalyseOccurence(data_dict, mode="instances").df
+    # print(df_instances)
     # I checked these numbers using test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB
     # and it looks correct
     #
     #
     # this df can now easily be filtered.
-    print(df_instances.loc["KAT2Subjektive_Ausdrcke"])
+    # print(df_instances.loc["KAT2Subjektive_Ausdrcke"])
     # checked these numbers and they look correct
     #
     df_spans = analyse.AnalyseOccurence(data_dict, mode="spans").df
