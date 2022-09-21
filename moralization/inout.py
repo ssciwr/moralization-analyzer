@@ -18,10 +18,8 @@ class InputOutput:
         return filename.strip().split(".")[-1]
 
     @staticmethod
-    def read_typesystem(filename="") -> object:
+    def read_typesystem(filename=(pkg / "data" / "TypeSystem.xml")) -> object:
         # read in the file system types
-        if filename == "":
-            filename = pkg / "data" / "TypeSystem.xml"
         with open(filename, "rb") as f:
             ts = load_typesystem(f)
         return ts
@@ -37,23 +35,24 @@ class InputOutput:
         return data
 
     @staticmethod
-    def get_input_dir(dir_path: str) -> dict:
+    def get_input_dir(dir_path: str, use_custom_ts=False) -> dict:
         """Get a list of input files from a given directory. Currently only xmi files.
-        Read the TypeSystem file from the provided data directory.
+        When use_custom_ts is True the Typesystem from the
         """
         ### load multiple files into a list of dictionaries
-        ts_file = glob.glob(os.path.join(dir_path, "TypeSystem.xml"))
-        if len(ts_file) == 1:
-            ts = InputOutput.read_typesystem(ts_file[0])
-        elif len(ts_file) == 0:
-            print(
-                f"No Typesystem found in {os.path.abspath(dir_path)}, trying default location"
-            )
-            if not glob.glob(str(pkg / "data" / "TypeSystem.xml")):
-                raise FileNotFoundError("No typesystem found in ", pkg / "data")
-            ts = InputOutput.read_typesystem(pkg / "data" / "TypeSystem.xml")
+
+        if use_custom_ts is False:
+            ts = InputOutput.read_typesystem()
         else:
+            ts_file = glob.glob(os.path.join(dir_path, "TypeSystem.xml"))
+        if len(ts_file) > 1:
             raise Warning("Multiple typesystems found. Please provide only one.")
+        elif len(ts_file) == 0:
+            raise FileNotFoundError(
+                f"Trying to find custom typesystem, but no 'TypeSystem.xml' found in {dir_path}"
+            )
+        else:
+            ts = InputOutput.read_typesystem(ts_file[0])
 
         data_files = glob.glob(os.path.join(dir_path, "*.xmi"))
         data_dict = {}
