@@ -58,6 +58,7 @@ class InputOutput:
                     "data": analyse.sort_spans(cas, ts),
                     "file_type": file_type,
                     "sentences": analyse.get_sentences(cas, ts),
+                    "paragraphs": analyse.get_paragraphs(cas, ts),
                 }
             except XMLSyntaxError as e:
                 logging.warning(
