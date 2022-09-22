@@ -73,25 +73,16 @@ def sort_spans(cas: object, ts: object) -> defaultdict:
     return span_dict
 
 
-def get_paragraphs(cas: object, ts: object) -> list:
-    span_type = ts.get_type(
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
-    )
-    paragraph_dict = defaultdict(list)
-    for span in cas.select(span_type.name):
-        paragraph_dict["span"].append((span.begin, span.end))
-        paragraph_dict["sofa"].append(span.get_covered_text())
-    print("para", len(paragraph_dict["span"]))
-
-    return paragraph_dict
-
-
-def get_sentences(cas: object, ts: object) -> list:
+def add_true_sentences(cas: object, ts: object) -> object:
     nlp = spacy.load("de_core_news_sm")
-    sentence_dict = defaultdict(list)
-
     text = cas.sofa_string
-    sentences = [i for i in nlp(text).sents]
+    sentences = [sentence for sentence in nlp(text).sents]
+    # create new typesystem:
+    try:
+        True_sentence_type = ts.create_type(name="moralization.TrueSentence")
+    except ValueError:
+        True_sentence_type = ts.get_type("moralization.TrueSentence")
+
     for sentence in sentences:
         if (sentence.end - sentence.start) > 3:
             # spacy returns the token ids, not the character ids.
@@ -103,13 +94,34 @@ def get_sentences(cas: object, ts: object) -> list:
                 .replace("(", r"\(")
                 .replace(")", r"\)")
             )
-            sentence_dict["span"] = sentence_dict["span"] + [
+            sentence_span = [
                 (m.start(0), m.end(0)) for m in re.finditer(current_str, text)
             ]
+            for span in sentence_span:
+                if (span[1] - span[0]) > 9:
+                    cas.add_annotation(True_sentence_type(begin=span[0], end=span[1]))
+    return cas, ts
 
-    sentence_dict["span"] = list(set(sentence_dict["span"]))
-    sentence_dict["sofa"] = [text[span[0] : span[1]] for span in sentence_dict["span"]]
-    print("sent", len(sentence_dict["span"]))
+
+def get_paragraphs(cas: object, ts: object) -> list:
+    span_type = ts.get_type(
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
+    )
+    paragraph_dict = defaultdict(list)
+    for span in cas.select(span_type.name):
+        paragraph_dict["span"].append((span.begin, span.end))
+        paragraph_dict["sofa"].append(span.get_covered_text().replace("#", ""))
+
+    return paragraph_dict
+
+
+def get_sentences(cas: object, ts: object) -> list:
+    span_type = ts.get_type("moralization.TrueSentence")
+    sentence_dict = defaultdict(list)
+    for span in cas.select(span_type.name):
+        sentence_dict["span"].append((span.begin, span.end))
+        sentence_dict["sofa"].append(span.get_covered_text().replace("#", ""))
+
     return sentence_dict
 
 
@@ -191,6 +203,7 @@ class AnalyseOccurence:
         self._add_total()
         # sort by index and occurence number
         self._clean_df()
+        self.df = self.df[:].astype(int)
 
     def report_spans(self):
         """Reports spans of a category per text source."""
@@ -242,12 +255,8 @@ def _find_all_cat_in_sentence(data_dict, mode="sentences"):
     for file_dict, df_file in zip(data_dict.values(), df_spans):
         # from the file dict we extract the sentence span start and end points as a list of tuples (eg [(23,45),(65,346)])
         # as well as the corresponding string
-        print(file_dict.keys())
         sentence_span_list_per_file = file_dict[mode]["span"]
         sentence_str_list_per_file = file_dict[mode]["sofa"]
-        # print("sentence_list",sentence_span_list_per_file)
-        # print(len(sentence_span_list_per_file))
-        # print(len(sentence_str_list_per_file))
         # because the pandas multiindex is a tuple of (main_cat, sub_cat) for each subcat,#
         # we can now loop over each category pair in one loop instead of one for each index level.
         for main_cat_key, sub_cat_key in df_spans[df_file].index:
@@ -267,10 +276,8 @@ def _find_all_cat_in_sentence(data_dict, mode="sentences"):
                         sentence_idx = bisect.bisect(
                             sentence_span_list_per_file, occurence
                         )
-                        # print("occurence:",occurence, "index",sentence_idx )
 
                         # when we found a sentence index we can use this to add the sentence string to our dict and add +1 to the (main_cat_key, sub_cat_key) cell.
-                        # print(sentence_idx,len(sentence_str_list_per_file))
                         if sentence_idx > 0:
                             sentence_dict[sentence_str_list_per_file[sentence_idx - 1]][
                                 (main_cat_key, sub_cat_key)
@@ -281,6 +288,7 @@ def _find_all_cat_in_sentence(data_dict, mode="sentences"):
         pd.DataFrame(sentence_dict).fillna(0).sort_index(level=0).transpose()
     )
     df_sentence_occurence.index = df_sentence_occurence.index.set_names((["Sentence"]))
+    df_sentence_occurence = df_sentence_occurence[:].astype(int)
 
     return df_sentence_occurence
 

@@ -54,6 +54,10 @@ class InputOutput:
             try:
                 with open(data_file, "rb") as f:
                     cas = InputOutput.input_type[file_type](f, typesystem=ts)
+
+                # add sentences as defined by spacy to the cas.
+                cas, ts = analyse.add_true_sentences(cas, ts)
+
                 data_dict[data_file.stem] = {
                     "data": analyse.sort_spans(cas, ts),
                     "file_type": file_type,
