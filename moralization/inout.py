@@ -83,9 +83,9 @@ if __name__ == "__main__":
     # checked these numbers and they look correct
     #
     df_spans = analyse.AnalyseOccurence(data_dict, mode="spans").df
-    print(df_spans)
+    # print(df_spans)
     # checked these numbers and they look correct
-    # df_spans.to_csv("spans_out.csv")
+    df_spans.to_csv("spans_out.csv")
     #
     # analyse.get_overlap_percent(
     # "Forderer:in", "Neutral", data_dict, "Gerichtsurteile-neg-AW-neu-optimiert-BB"

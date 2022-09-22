@@ -3,15 +3,15 @@ import pandas as pd
 import numpy as np
 
 map_expressions = {
-    "KAT1-Moralisierendes Segment": "KAT1MoralisierendesSegment",
-    "KAT2-Moralwerte": "Moralwerte",
-    "KAT2-Subjektive_Ausdrücke": "KAT2Subjektive_Ausdrcke",
-    "KAT3-Gruppe": "Protagonistinnen2",
-    "KAT3-Rolle": "Protagonistinnen",
-    "KAT3-own/other": "Protagonistinnen3",
-    "KAT4-Kommunikative Funktion": "KommunikativeFunktion",
-    "KAT5-Forderung_explizit": "Forderung",
-    "KAT5-Forderung_implizit": "KAT5Ausformulierung",
+    "KAT1MoralisierendesSegment": "KAT1-Moralisierendes Segment",
+    "Moralwerte": "KAT2-Moralwerte",
+    "KAT2Subjektive_Ausdrcke": "KAT2-Subjektive Ausdrücke",
+    "Protagonistinnen2": "KAT3-Gruppe",
+    "Protagonistinnen": "KAT3-Rolle",
+    "Protagonistinnen3": "KAT3-own/other",
+    "KommunikativeFunktion": "KAT4-Kommunikative Funktion",
+    "Forderung": "KAT5-Forderung explizit",
+    "KAT5Ausformulierung": "KAT5-Forderung implizit",
     "Kommentar": "KOMMENTAR",
 }
 
@@ -84,6 +84,8 @@ class AnalyseOccurence:
         self.instance_dict = self._initialize_dict()
         # call the analysis method
         self.mode_dict[self.mode]()
+        # map the df columns to the expressions given
+        self.map_categories()
 
     def _initialize_files(self, file_names: str) -> list:
         """Helper method to get file names in list."""
@@ -118,9 +120,9 @@ class AnalyseOccurence:
             by=[
                 "Main Category",
                 "Sub Category",
-                self.file_names[0],
+                # self.file_names[0],
             ],
-            ascending=False,
+            ascending=True,
         )
         # fill NaN
         self.df = self.df.fillna(0)
@@ -144,8 +146,6 @@ class AnalyseOccurence:
         self._initialize_df()
         # add rows for total instances
         self._add_total()
-        # sort by index and occurence number
-        self._clean_df()
 
     def report_spans(self):
         """Reports spans of a category per text source."""
@@ -172,6 +172,10 @@ class AnalyseOccurence:
                         (main_cat_key, sub_cat_key),
                         file_name,
                     ] = span_annotated_text
+
+    def map_categories(self):
+        self.df = self.df.rename(map_expressions)
+        self._clean_df()
 
 
 # find the overlaying category for an second dimension cat name
