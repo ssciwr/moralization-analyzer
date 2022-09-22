@@ -32,6 +32,7 @@ dependencies = [
     "openpyxl",
     "pytest",
     "pytest-cov",
+    "ipywidgets",
 ]
 
 [tool.setuptools.package-data]
