@@ -84,22 +84,11 @@ def add_true_sentences(cas: object, ts: object) -> object:
         True_sentence_type = ts.get_type("moralization.TrueSentence")
 
     for sentence in sentences:
-        if (sentence.end - sentence.start) > 3:
-            # spacy returns the token ids, not the character ids.
-            # this is in missmatch with cassis.
-            # to convert from token to character I search through the doc with a regex to find the correct ids.
-            # the replace is to avoid regex errors in regards to brackets
-            current_str = (
-                str(sentence.doc[sentence.start : sentence.end])
-                .replace("(", r"\(")
-                .replace(")", r"\)")
+        minimum_tokens_per_sentence = 3
+        if (sentence.end - sentence.start) > minimum_tokens_per_sentence:
+            cas.add_annotation(
+                True_sentence_type(begin=sentence.start_char, end=sentence.end_char)
             )
-            sentence_span = [
-                (m.start(0), m.end(0)) for m in re.finditer(current_str, text)
-            ]
-            for span in sentence_span:
-                if (span[1] - span[0]) > 9:
-                    cas.add_annotation(True_sentence_type(begin=span[0], end=span[1]))
     return cas, ts
 
 
