@@ -29,6 +29,7 @@ dependencies = [
     "seaborn",
     "click",
     "importlib_metadata",
+    "openpyxl",
 ]
 
 [tool.setuptools.package-data]
