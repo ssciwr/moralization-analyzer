@@ -164,10 +164,16 @@ class AnalyseOccurence:
                         span_text[span["begin"] : span["end"]]
                         for span in span_dict[main_cat_key][sub_cat_key]
                     ]
-                    # clean the spans from "#"
+                    # clean the spans from #
                     span_annotated_text = [
                         span.replace("#", "") for span in span_annotated_text
                     ]
+                    # clean the spans from "
+                    span_annotated_text = [
+                        span.replace('"', "") for span in span_annotated_text
+                    ]
+                    # convert list to &-separated spans
+                    span_annotated_text = " & ".join(span_annotated_text)
                     self.df.at[
                         (main_cat_key, sub_cat_key),
                         file_name,
