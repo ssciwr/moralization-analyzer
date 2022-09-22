@@ -48,19 +48,17 @@ class InputOutput:
         data_files = dir_path.glob("*.xmi")
         if not data_files:
             raise RuntimeError(f"No input files found in {dir_path}")
-
-        if use_custom_ts is False:
-            ts = InputOutput.read_typesystem()
-        else:
-            ts_file = list(dir_path.glob("TypeSystem.xml"))
-            if len(ts_file) > 1:
+        ts_file = None
+        if use_custom_ts:
+            ts_files = list(dir_path.glob("TypeSystem.xml"))
+            if len(ts_files) > 1:
                 raise Warning("Multiple typesystems found. Please provide only one.")
-            elif len(ts_file) == 0:
+            elif len(ts_files) == 0:
                 raise FileNotFoundError(
                     f"Trying to find custom typesystem, but no 'TypeSystem.xml' found in {dir_path}"
                 )
-            else:
-                ts = InputOutput.read_typesystem(ts_file[0])
+            ts_file = ts_files[0]
+        ts = InputOutput.read_typesystem(ts_file)
 
         data_dict = {}
         for data_file in data_files:
