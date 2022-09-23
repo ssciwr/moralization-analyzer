@@ -106,6 +106,16 @@ class AnalyseOccurence:
         self.df = pd.DataFrame(self.instance_dict)
         self.df.index = self.df.index.set_names((["Main Category", "Sub Category"]))
 
+    def _get_categories(self, span_dict, file_name):
+        """Helper method to initialize a dict with the given main and sub categories."""
+        for main_cat_key, main_cat_value in span_dict.items():
+            for sub_cat_key, sub_cat_value in main_cat_value.items():
+                # the tuple index makes it easy to convert the dict into a pandas dataframe
+                self.instance_dict[file_name][(main_cat_key, sub_cat_key)] = len(
+                    sub_cat_value
+                )
+        return self.instance_dict
+
     def _add_total(self):
         """Helper method to set additional headers in data frame."""
         self.df.loc[("total instances", "with invalid"), :] = self.df.sum(axis=0).values
@@ -140,23 +150,14 @@ class AnalyseOccurence:
             span_dict = self.data_dict[file_name]["data"]
             # initilize total instances rows for easier setting later.
             # only for mode instances
-            if self.mode == "instances":
-                self.instance_dict[file_name][("total instances", "with invalid")] = 0
-                self.instance_dict[file_name][
-                    ("total instances", "without invalid")
-                ] = 0
-            for main_cat_key, main_cat_value in span_dict.items():
-                for sub_cat_key, sub_cat_value in main_cat_value.items():
-                    # the tuple index makes it easy to convert the dict into a pandas dataframe
-                    self.instance_dict[file_name][(main_cat_key, sub_cat_key)] = len(
-                        sub_cat_value
-                    )
+            self.instance_dict[file_name][("total instances", "with invalid")] = 0
+            self.instance_dict[file_name][("total instances", "without invalid")] = 0
+            self.instance_dict = self._get_categories(span_dict, file_name)
         # initialize data frame
         self._initialize_df()
         # add rows for total instances
         # only do this for mode instances
-        if self.mode == "instances":
-            self._add_total()
+        self._add_total()
 
     def report_spans(self):
         """Reports spans of a category per text source."""
