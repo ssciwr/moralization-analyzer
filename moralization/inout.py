@@ -83,7 +83,7 @@ if __name__ == "__main__":
     # checked these numbers and they look correct
     #
     df_spans = analyse.AnalyseOccurence(data_dict, mode="spans").df
-    # print(df_spans)
+    # print(df_spans.head(10))
     # checked these numbers and they look correct
     df_spans.to_csv("spans_out.csv")
     #

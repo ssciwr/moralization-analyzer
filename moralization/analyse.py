@@ -124,8 +124,13 @@ class AnalyseOccurence:
             ],
             ascending=True,
         )
-        # fill NaN
-        self.df = self.df.fillna(0)
+        # fill NaN with 0 for instances or None for spans
+        if self.mode == "instances":
+            self.df = self.df.fillna(0)
+        if self.mode == "spans":
+            self.df = self.df.replace({np.nan: None})
+            # remove quotes - not sure if this is necessary
+            # self.df = self.df.applymap(lambda x: x.replace('"','') if isinstance(x, str) else x)
 
     def report_instances(self):
         """Reports number of occurences of a category per text source."""
@@ -134,8 +139,12 @@ class AnalyseOccurence:
         for file_name in self.file_names:
             span_dict = self.data_dict[file_name]["data"]
             # initilize total instances rows for easier setting later.
-            self.instance_dict[file_name][("total instances", "with invalid")] = 0
-            self.instance_dict[file_name][("total instances", "without invalid")] = 0
+            # only for mode instances
+            if self.mode == "instances":
+                self.instance_dict[file_name][("total instances", "with invalid")] = 0
+                self.instance_dict[file_name][
+                    ("total instances", "without invalid")
+                ] = 0
             for main_cat_key, main_cat_value in span_dict.items():
                 for sub_cat_key, sub_cat_value in main_cat_value.items():
                     # the tuple index makes it easy to convert the dict into a pandas dataframe
@@ -145,13 +154,16 @@ class AnalyseOccurence:
         # initialize data frame
         self._initialize_df()
         # add rows for total instances
-        self._add_total()
+        # only do this for mode instances
+        if self.mode == "instances":
+            self._add_total()
 
     def report_spans(self):
         """Reports spans of a category per text source."""
-        # span reports the spans of the annotations in a list
+        # span reports the spans of the annotations separated by separator-token
         # this report_instances call makes it much easier to include the total number of spans
         # for each columns, as well as removes the need to duplicate the pandas setup.
+        # TODO convert into helper method
         self.report_instances()
         self.df[:] = self.df[:].astype("object")
         for file_name in self.file_names:
@@ -169,9 +181,10 @@ class AnalyseOccurence:
                         span.replace("#", "") for span in span_annotated_text
                     ]
                     # clean the spans from "
-                    span_annotated_text = [
-                        span.replace('"', "") for span in span_annotated_text
-                    ]
+                    # span_annotated_text = [
+                    #     span.replace('"', "") for span in span_annotated_text
+                    # ]
+                    # print([i for i in span_annotated_text])
                     # convert list to &-separated spans
                     span_annotated_text = " & ".join(span_annotated_text)
                     self.df.at[
