@@ -68,23 +68,12 @@ class InputOutput:
 
 
 if __name__ == "__main__":
-    # data = InputOutput.get_input_file(
-    # "moralization/data/Gerichtsurteile-pos-AW-neu-optimiert-BB.xmi"
-    # )
     data_dict = InputOutput.get_input_dir("data/")
-    # df_instances = analyse.AnalyseOccurence(data_dict, mode="instances").df
-    # print(df_instances)
-    # I checked these numbers using test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB
-    # and it looks correct
-    #
-    #
+    df_instances = analyse.AnalyseOccurence(data_dict, mode="instances").df
+    df_instances.to_csv("instances_out.csv")
     # this df can now easily be filtered.
-    # print(df_instances.loc["KAT2Subjektive_Ausdrcke"])
-    # checked these numbers and they look correct
-    #
+    # print(df_instances.loc["KAT2-Subjektive Ausdrücke"])
     df_spans = analyse.AnalyseOccurence(data_dict, mode="spans").df
-    # print(df_spans.head(10))
-    # checked these numbers and they look correct
     df_spans.to_csv("spans_out.csv")
     #
     # analyse.get_overlap_percent(

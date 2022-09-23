@@ -162,10 +162,10 @@ class AnalyseOccurence:
     def report_spans(self):
         """Reports spans of a category per text source."""
         # span reports the spans of the annotations separated by separator-token
-        # this report_instances call makes it much easier to include the total number of spans
-        # for each columns, as well as removes the need to duplicate the pandas setup.
-        # TODO convert into helper method
-        self.report_instances()
+        self.instance_dict = self._get_categories(
+            self.data_dict[self.file_names[0]]["data"], self.file_names[0]
+        )
+        self._initialize_df()
         self.df[:] = self.df[:].astype("object")
         for file_name in self.file_names:
             span_dict = self.data_dict[file_name]["data"]
@@ -185,7 +185,6 @@ class AnalyseOccurence:
                     # span_annotated_text = [
                     #     span.replace('"', "") for span in span_annotated_text
                     # ]
-                    # print([i for i in span_annotated_text])
                     # convert list to &-separated spans
                     span_annotated_text = " & ".join(span_annotated_text)
                     self.df.at[
