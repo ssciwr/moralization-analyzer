@@ -50,8 +50,8 @@ def sort_spans(cas: object, ts: object) -> defaultdict:
         "Protagonistinnen3",
         "KommunikativeFunktion",
         "Forderung",
-        # "KAT5Ausformulierung",
-        # "KOMMENTAR",
+        "KAT5Ausformulierung",
+        "KOMMENTAR",
     ]
 
     for span in cas.select(span_type.name):
