@@ -71,7 +71,7 @@ def sort_spans(cas: object, ts: object) -> defaultdict:
     return span_dict
 
 
-def get_sentences(cas: object, ts: object) -> list:
+def get_sentences(cas: object, ts: object) -> defaultdict:
     span_type = ts.get_type(
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
     )
@@ -308,34 +308,34 @@ def report_occurence_heatmap(df_sentence_occurence: pd.DataFrame, filter=None):
 
     # df_sentence_occurence.columns = df_sentence_occurence.columns.droplevel()
     plt.figure(figsize=(16, 16))
-    df_corr = report_occurence_matrix(df_sentence_occurence, filter=filter)
+    df_corr = report_occurence_matrix(df_sentence_occurence, filter_vals=filter)
 
     heatmap = sns.heatmap(df_corr, cmap="cividis")
     return heatmap
 
 
 def report_occurence_matrix(
-    df_sentence_occurence: pd.DataFrame, filter=None
+    df_sentence_occurence: pd.DataFrame, filter_vals=None
 ) -> pd.DataFrame:
     """Calculates the correlation matrix for the sentence occurence dataframe as well as handles its filtering.
 
 
     Args:
         df_sentence_occurence (pd.DataFrame): The sentence occurence dataframe.
-        filter (str,list(str), optional): Filter values for the dataframe. Defaults to None.
+        filter_vals (str,list(str), optional): Filter values for the dataframe. Defaults to None.
 
 
     Returns:
         pd.DataFrame: Correlation matrix.
     """
-    if filter is None:
+    if filter_vals is None:
         return df_sentence_occurence.corr().sort_index(level=0)
     else:
-        filter = _get_filter_multiindex(df_sentence_occurence, filter)
+        filter_vals = _get_filter_multiindex(df_sentence_occurence, filter_vals)
         # Couldn't figure out how to easily select columns based on the second level column name.
         # So the df is transposed, the multiindex can be filterd using loc, and then transposed back to get the correct correlation matrix.
         return (
-            df_sentence_occurence.T.loc[(slice(None), filter), :]
+            df_sentence_occurence.T.loc[(slice(None), filter_vals), :]
             .sort_index(level=0)
             .T.corr()
         )
