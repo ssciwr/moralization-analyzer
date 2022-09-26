@@ -10,5 +10,6 @@ dependencies:
   - seaborn 
   - click
   - importlib_metadata
+  - openpyxl
   - pip:
     - dkpro-cassis
