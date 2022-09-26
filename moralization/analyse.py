@@ -200,6 +200,7 @@ class AnalyseOccurence:
                     ] = span_list
 
 
+# TODO refactor complexity
 def _find_all_cat_in_sentence(data_dict):
     df_spans = AnalyseOccurence(data_dict, mode="spans").df
 
