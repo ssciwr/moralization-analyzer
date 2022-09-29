@@ -6,15 +6,15 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 map_expressions = {
-    "KAT1-Moralisierendes Segment": "KAT1MoralisierendesSegment",
-    "KAT2-Moralwerte": "Moralwerte",
-    "KAT2-Subjektive_Ausdrücke": "KAT2Subjektive_Ausdrcke",
-    "KAT3-Gruppe": "Protagonistinnen2",
-    "KAT3-Rolle": "Protagonistinnen",
-    "KAT3-own/other": "Protagonistinnen3",
-    "KAT4-Kommunikative Funktion": "KommunikativeFunktion",
-    "KAT5-Forderung_explizit": "Forderung",
-    "KAT5-Forderung_implizit": "KAT5Ausformulierung",
+    "KAT1MoralisierendesSegment": "KAT1-Moralisierendes Segment",
+    "Moralwerte": "KAT2-Moralwerte",
+    "KAT2Subjektive_Ausdrcke": "KAT2-Subjektive Ausdrücke",
+    "Protagonistinnen2": "KAT3-Gruppe",
+    "Protagonistinnen": "KAT3-Rolle",
+    "Protagonistinnen3": "KAT3-own/other",
+    "KommunikativeFunktion": "KAT4-Kommunikative Funktion",
+    "Forderung": "KAT5-Forderung explizit",
+    "KAT5Ausformulierung": "KAT5-Forderung implizit",
     "Kommentar": "KOMMENTAR",
 }
 
@@ -98,6 +98,8 @@ class AnalyseOccurence:
         self.instance_dict = self._initialize_dict()
         # call the analysis method
         self.mode_dict[self.mode]()
+        # map the df columns to the expressions given
+        self.map_categories()
 
     def _initialize_files(self, file_names: str) -> list:
         """Helper method to get file names in list."""
@@ -118,6 +120,16 @@ class AnalyseOccurence:
         self.df = pd.DataFrame(self.instance_dict)
         self.df.index = self.df.index.set_names((["Main Category", "Sub Category"]))
 
+    def _get_categories(self, span_dict, file_name):
+        """Helper method to initialize a dict with the given main and sub categories."""
+        for main_cat_key, main_cat_value in span_dict.items():
+            for sub_cat_key, sub_cat_value in main_cat_value.items():
+                # the tuple index makes it easy to convert the dict into a pandas dataframe
+                self.instance_dict[file_name][(main_cat_key, sub_cat_key)] = len(
+                    sub_cat_value
+                )
+        return self.instance_dict
+
     def _add_total(self):
         """Helper method to set additional headers in data frame."""
         self.df.loc[("total instances", "with invalid"), :] = self.df.sum(axis=0).values
@@ -132,12 +144,17 @@ class AnalyseOccurence:
             by=[
                 "Main Category",
                 "Sub Category",
-                self.file_names[0],
+                # self.file_names[0],
             ],
-            ascending=False,
+            ascending=True,
         )
-        # fill NaN
-        self.df = self.df.fillna(0)
+        # fill NaN with 0 for instances or None for spans
+        if self.mode == "instances":
+            self.df = self.df.fillna(0)
+        if self.mode == "spans":
+            self.df = self.df.replace({np.nan: None})
+            # remove quotes - not sure if this is necessary
+            # self.df = self.df.applymap(lambda x: x.replace('"','') if isinstance(x, str) else x)
 
     def report_instances(self):
         """Reports number of occurences of a category per text source."""
@@ -146,58 +163,52 @@ class AnalyseOccurence:
         for file_name in self.file_names:
             span_dict = self.data_dict[file_name]["data"]
             # initilize total instances rows for easier setting later.
+            # only for mode instances
             self.instance_dict[file_name][("total instances", "with invalid")] = 0
             self.instance_dict[file_name][("total instances", "without invalid")] = 0
-            for main_cat_key, main_cat_value in span_dict.items():
-                for sub_cat_key, sub_cat_value in main_cat_value.items():
-                    # the tuple index makes it easy to convert the dict into a pandas dataframe
-                    self.instance_dict[file_name][(main_cat_key, sub_cat_key)] = len(
-                        sub_cat_value
-                    )
+            self.instance_dict = self._get_categories(span_dict, file_name)
         # initialize data frame
         self._initialize_df()
         # add rows for total instances
+        # only do this for mode instances
         self._add_total()
-        # sort by index and occurence number
-        self._clean_df()
 
     def report_spans(self):
         """Reports spans of a category per text source."""
-        # span reports the spans of the annotations in a list
-        # this report_instances call makes it much easier to include the total number of spans
-        # for each columns, as well as removes the need to duplicate the pandas setup.
-        self.report_instances()
+        # span reports the spans of the annotations separated by separator-token
+        self.instance_dict = self._get_categories(
+            self.data_dict[self.file_names[0]]["data"], self.file_names[0]
+        )
+        self._initialize_df()
         self.df[:] = self.df[:].astype("object")
         for file_name in self.file_names:
             span_dict = self.data_dict[file_name]["data"]
+            span_text = self.data_dict[file_name]["sofa"]
             for main_cat_key, main_cat_value in span_dict.items():
                 for sub_cat_key in main_cat_value.keys():
-                    # report the beginning and end of each span as a tuple
-                    span_list = [
-                        (span["begin"], span["end"])
+                    # find the text for each span
+                    span_annotated_text = [
+                        span_text[span["begin"] : span["end"]]
                         for span in span_dict[main_cat_key][sub_cat_key]
                     ]
-
-                    # multiple options for how to report the spans are available
-                    # first report the entire span object as a string
-                    # span_list = [str(span) for span in span_dict[main_cat_key][sub_cat_key]]
-                    # this would look like this:
-                    # c.Span(Protagonistinnen=Forderer:in, Protagonistinnen2=Individuum, Protagonistinnen3=Own Group, begin=21822, end=21874);
-                    # c.Span(Protagonistinnen=Benefizient:in, Protagonistinnen2=Institution, Protagonistinnen3=Own Group, begin=21974, end=21984);
-                    # c.Span(Protagonistinnen=Forderer:in, Protagonistinnen2=Institution, Protagonistinnen3=Own Group, begin=66349, end=66352)
-                    # maybe one should remove the c.Span() but i'm not sure what exactly is wanted here.
-                    # second option is to report the end or beginning index for each span
-                    # span_list=[str(span["end"]) for span in span_dict[main_cat_key][sub_cat_key] ]
-
-                    # convert list to seperated str
-                    # span_str = ";".join(span_list)
-                    # span_str = span_str.replace("[", "").replace("]", "")
-
+                    # clean the spans from #
+                    span_annotated_text = [
+                        span.replace("#", "") for span in span_annotated_text
+                    ]
+                    # clean the spans from "
+                    # span_annotated_text = [
+                    #     span.replace('"', "") for span in span_annotated_text
+                    # ]
+                    # convert list to &-separated spans
+                    span_annotated_text = " & ".join(span_annotated_text)
                     self.df.at[
                         (main_cat_key, sub_cat_key),
                         file_name,
-                        # ] = span_str
-                    ] = span_list
+                    ] = span_annotated_text
+
+    def map_categories(self):
+        self.df = self.df.rename(map_expressions)
+        self._clean_df()
 
 
 # TODO refactor complexity

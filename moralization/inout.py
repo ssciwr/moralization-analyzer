@@ -70,6 +70,7 @@ class InputOutput:
                 data_dict[data_file.stem] = {
                     "data": analyse.sort_spans(cas, ts),
                     "file_type": file_type,
+                    "sofa": cas.sofa_string,  # note: use .sofa_string not .get_sofa() as the latter removes \n and similar markers
                     "sentences": analyse.get_sentences(cas, ts),
                 }
             except XMLSyntaxError as e:
@@ -81,23 +82,13 @@ class InputOutput:
 
 
 if __name__ == "__main__":
-    # data = InputOutput.get_input_file(
-    # "moralization/data/Gerichtsurteile-pos-AW-neu-optimiert-BB.xmi"
-    # )
     data_dict = InputOutput.get_input_dir("data/")
     df_instances = analyse.AnalyseOccurence(data_dict, mode="instances").df
-    print(df_instances)
-    # I checked these numbers using test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB
-    # and it looks correct
-    #
-    #
+    df_instances.to_csv("instances_out.csv")
     # this df can now easily be filtered.
-    print(df_instances.loc["KAT2Subjektive_Ausdrcke"])
-    # checked these numbers and they look correct
-    #
+    # print(df_instances.loc["KAT2-Subjektive Ausdrücke"])
     df_spans = analyse.AnalyseOccurence(data_dict, mode="spans").df
-    print(df_spans)
-    # checked these numbers and they look correct
+    df_spans.to_csv("spans_out.csv")
     #
     # analyse.get_overlap_percent(
     # "Forderer:in", "Neutral", data_dict, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
