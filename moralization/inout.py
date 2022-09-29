@@ -68,10 +68,10 @@ class InputOutput:
                 with open(data_file, "rb") as f:
                     cas = InputOutput.input_type[file_type](f, typesystem=ts)
                 data_dict[data_file.stem] = {
-                    "data": analyse.sort_spans(cas, ts),
+                    "data": analyse.get_spans(cas, ts),
                     "file_type": file_type,
                     "sofa": cas.sofa_string,  # note: use .sofa_string not .get_sofa() as the latter removes \n and similar markers
-                    "sentences": analyse.get_sentences(cas, ts),
+                    "paragraph": analyse.get_paragraphs(cas, ts),
                 }
             except XMLSyntaxError as e:
                 logging.warning(
