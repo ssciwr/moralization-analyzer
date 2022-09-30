@@ -270,6 +270,8 @@ class AnalyseSpans:
         df_sentence_occurence.index = df_sentence_occurence.index.set_names(
             (["Sentence"])
         )
+        # map the category names to the updated ones
+        df_sentence_occurence = df_sentence_occurence.rename(columns=map_expressions)
 
         return df_sentence_occurence
 

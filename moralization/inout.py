@@ -94,4 +94,5 @@ if __name__ == "__main__":
     # "Forderer:in", "Neutral", data_dict, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
     #     )
     df_sentences = analyse.AnalyseSpans.report_occurence_per_paragraph(data_dict)
+    df_sentences.to_csv("sentences_out.csv")
     print(df_sentences)
