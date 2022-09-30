@@ -240,21 +240,18 @@ class AnalyseSpans:
             # we can now loop over each category pair in one loop instead of one for each index level.
             for main_cat_key, sub_cat_key in df_spans[df_file].index:
                 # find the beginning and end of each span as a tuple
-                print(file_dict["data"][main_cat_key][sub_cat_key])
                 span_annotated_tuples = [
                     (span["begin"], span["end"])
                     for span in file_dict["data"][main_cat_key][sub_cat_key]
                 ]
-                # if the type of the df cell is not a list it means there is no occurence of this category in the given file
+                # if the type of span_annotated_tuples is not a list it means there is no occurence of this category in the given file
                 # this should only happen in the test dataset
                 if isinstance(
-                    df_spans[df_file].loc[[main_cat_key], [sub_cat_key]].values[0],
+                    span_annotated_tuples,
                     list,
                 ):
                     # now we have a list of the span beginnings and endings for each category in a given file.
-                    for occurence in (
-                        df_spans[df_file].loc[[main_cat_key], [sub_cat_key]].values[0]
-                    ):
+                    for occurence in span_annotated_tuples:
                         # with bisect.bisect we can search for the index of the sentece in which the current category occurence falls.
                         sentence_idx = bisect.bisect(
                             sentence_span_list_per_file, occurence
