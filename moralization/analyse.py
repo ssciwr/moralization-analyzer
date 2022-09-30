@@ -90,9 +90,11 @@ class AnalyseOccurence:
         data_dict: dict,
         mode: str = "instances",
         file_names: str = None,
+        mapping: bool = True,
     ) -> None:
         self.mode = mode
         self.data_dict = data_dict
+        self.mapping = mapping
         self.mode_dict = {
             "instances": self.report_instances,
             "spans": self.report_spans,
@@ -102,7 +104,9 @@ class AnalyseOccurence:
         # call the analysis method
         self.mode_dict[self.mode]()
         # map the df columns to the expressions given
-        self.map_categories()
+        # we skip this here for now if paragraph correlation is analyzed
+        if self.mapping:
+            self.map_categories()
 
     def _initialize_files(self, file_names: str) -> list:
         """Helper method to get file names in list."""
@@ -223,7 +227,7 @@ class AnalyseSpans:
     @staticmethod
     def _find_all_cat_in_paragraph(data_dict):
         # df_spans is only used to get the category names for the annotations
-        df_spans = AnalyseOccurence(data_dict, mode="spans").df
+        df_spans = AnalyseOccurence(data_dict, mode="spans", mapping=False).df
         # sentence, main_cat, sub_cat : occurence with the default value of 0 to allow adding of +1 at a later point.
         sentence_dict = defaultdict(lambda: defaultdict(lambda: 0))
 
