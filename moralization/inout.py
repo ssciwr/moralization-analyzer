@@ -93,3 +93,5 @@ if __name__ == "__main__":
     # analyse.get_overlap_percent(
     # "Forderer:in", "Neutral", data_dict, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
     #     )
+    df_sentences = analyse.AnalyseSpans.report_occurence_per_paragraph(data_dict)
+    print(df_sentences)

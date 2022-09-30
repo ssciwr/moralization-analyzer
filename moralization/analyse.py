@@ -86,10 +86,15 @@ class AnalyseOccurence:
     """Contains statistical information methods about the data."""
 
     def __init__(
-        self, data_dict: dict, mode: str = "instances", file_names: str = None
+        self,
+        data_dict: dict,
+        mode: str = "instances",
+        file_names: str = None,
+        mapping: bool = True,
     ) -> None:
         self.mode = mode
         self.data_dict = data_dict
+        self.mapping = mapping
         self.mode_dict = {
             "instances": self.report_instances,
             "spans": self.report_spans,
@@ -99,7 +104,9 @@ class AnalyseOccurence:
         # call the analysis method
         self.mode_dict[self.mode]()
         # map the df columns to the expressions given
-        self.map_categories()
+        # we skip this here for now if paragraph correlation is analyzed
+        if self.mapping:
+            self.map_categories()
 
     def _initialize_files(self, file_names: str) -> list:
         """Helper method to get file names in list."""
@@ -186,6 +193,8 @@ class AnalyseOccurence:
             span_text = self.data_dict[file_name]["sofa"]
             for main_cat_key, main_cat_value in span_dict.items():
                 for sub_cat_key in main_cat_value.keys():
+                    # save the span begin and end character index for further analysis
+                    # span_dict[main_cat_key][sub_cat_key] =
                     # find the text for each span
                     span_annotated_text = [
                         span_text[span["begin"] : span["end"]]
@@ -217,8 +226,7 @@ class AnalyseSpans:
 
     @staticmethod
     def _find_all_cat_in_paragraph(data_dict):
-        df_spans = AnalyseOccurence(data_dict, mode="spans").df
-
+        df_spans = AnalyseOccurence(data_dict, mode="spans", mapping=False).df
         # sentence, main_cat, sub_cat : occurence with the default value of 0 to allow adding of +1 at a later point.
         sentence_dict = defaultdict(lambda: defaultdict(lambda: 0))
 
