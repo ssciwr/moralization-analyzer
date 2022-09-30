@@ -4,6 +4,7 @@ import numpy as np
 import bisect
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pathlib
 
 map_expressions = {
     "KAT1MoralisierendesSegment": "KAT1-Moralisierendes Segment",
@@ -75,11 +76,11 @@ def get_paragraphs(cas: object, ts: object) -> defaultdict:
     span_type = ts.get_type(
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
     )
-    sentence_dict = defaultdict(list)
+    paragraph_dict = defaultdict(list)
     for span in cas.select(span_type.name):
-        sentence_dict["span"].append((span.begin, span.end))
-        sentence_dict["sofa"].append(span.get_covered_text())
-    return sentence_dict
+        paragraph_dict["span"].append((span.begin, span.end))
+        paragraph_dict["sofa"].append(span.get_covered_text())
+    return paragraph_dict
 
 
 class AnalyseOccurence:
@@ -93,6 +94,7 @@ class AnalyseOccurence:
         self.mode_dict = {
             "instances": self.report_instances,
             "spans": self.report_spans,
+            "span_index": self.report_index,
         }
         self.file_names = self._initialize_files(file_names)
         self.instance_dict = self._initialize_dict()
@@ -206,6 +208,23 @@ class AnalyseOccurence:
                         file_name,
                     ] = span_annotated_text
 
+    def report_index(self):
+        self.report_instances()
+        self.df[:] = self.df[:].astype("object")
+        for file_name in self.file_names:
+            span_dict = self.data_dict[file_name]["data"]
+            for main_cat_key, main_cat_value in span_dict.items():
+                for sub_cat_key in main_cat_value.keys():
+                    # report the beginning and end of each span as a tuple
+                    span_list = [
+                        (span["begin"], span["end"])
+                        for span in span_dict[main_cat_key][sub_cat_key]
+                    ]
+                    self.df.at[
+                        (main_cat_key, sub_cat_key),
+                        file_name,
+                    ] = span_list
+
     def map_categories(self):
         self.df = self.df.rename(map_expressions)
         self._clean_df()
@@ -217,7 +236,7 @@ class AnalyseSpans:
 
     @staticmethod
     def _find_all_cat_in_paragraph(data_dict):
-        df_spans = AnalyseOccurence(data_dict, mode="spans").df
+        df_spans = AnalyseOccurence(data_dict, mode="span_index").df
 
         # sentence, main_cat, sub_cat : occurence with the default value of 0 to allow adding of +1 at a later point.
         sentence_dict = defaultdict(lambda: defaultdict(lambda: 0))
@@ -281,6 +300,11 @@ class AnalyseSpans:
         if filter_docs is not None:
             if not isinstance(filter_docs, list):
                 filter_docs = [filter_docs]
+
+            # allows use of abs path or just filename with or without extension.
+            for i, filter_doc in enumerate(filter_docs):
+                filter_docs[i] = pathlib.PurePath(filter_doc).stem
+
             data_dict = {
                 filter_doc: data_dict[filter_doc] for filter_doc in filter_docs
             }
@@ -307,6 +331,9 @@ class PlotSpans:
             filters = [filters]
         sub_cat_filter = []
         for filter in filters:
+            if filter in map_expressions:
+                filter = map_expressions[filter]
+
             if filter in df_sentence_occurence.columns.levels[0]:
                 [
                     sub_cat_filter.append(key)
@@ -357,13 +384,13 @@ class PlotSpans:
 
     @staticmethod
     def report_occurence_matrix(
-        df_sentence_occurence: pd.DataFrame, filter_vals=None
+        df_sentence_occurence: pd.DataFrame, filter=None
     ) -> pd.DataFrame:
         """
         Returns the correlation matrix in regards to the given filters.
         Args:
-            filter_vals (str,list(str), optional): Filter values for the dataframe. Defaults to None.
+            filter (str,list(str), optional): Filter values for the dataframe. Defaults to None.
         Returns:
             pd.DataFrame: Correlation matrix.
         """
-        return PlotSpans._generate_corr_df(df_sentence_occurence, filter_vals)
+        return PlotSpans._generate_corr_df(df_sentence_occurence, filter)
