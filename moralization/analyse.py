@@ -357,7 +357,7 @@ class PlotSpans:
 
     @staticmethod
     def report_occurence_matrix(
-        df_sentence_occurence: pd.DataFrame, filter=None
+        df_sentence_occurence: pd.DataFrame, filter_vals=None
     ) -> pd.DataFrame:
         """
         Returns the correlation matrix in regards to the given filters.
@@ -366,4 +366,4 @@ class PlotSpans:
         Returns:
             pd.DataFrame: Correlation matrix.
         """
-        return PlotSpans._generate_corr_df(df_sentence_occurence, filter)
+        return PlotSpans._generate_corr_df(df_sentence_occurence, filter_vals)
