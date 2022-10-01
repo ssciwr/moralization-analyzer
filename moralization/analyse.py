@@ -225,6 +225,15 @@ class AnalyseSpans:
     # TODO refactor complexity
 
     @staticmethod
+    def list_categories(mydict: dict) -> list:
+        """Unravel the categories into a list of tuples."""
+        mylist = []
+        for main_cat_key, main_cat_value in mydict.items():
+            for sub_cat_key in main_cat_value.keys():
+                mylist.append((main_cat_key, sub_cat_key))
+        return mylist
+
+    @staticmethod
     def _find_occurence(
         sentence_dict,
         span_annotated_tuples,
@@ -257,27 +266,28 @@ class AnalyseSpans:
             # as well as the corresponding string
             sentence_span_list_per_file = file_dict["paragraph"]["span"]
             sentence_str_list_per_file = file_dict["paragraph"]["sofa"]
-            for main_cat_key, main_cat_value in file_dict["data"].items():
-                for sub_cat_key in main_cat_value.keys():
-                    # find the beginning and end of each span as a tuple
-                    span_annotated_tuples = [
-                        (span["begin"], span["end"])
-                        for span in file_dict["data"][main_cat_key][sub_cat_key]
-                    ]
-                    # if the type of span_annotated_tuples is not a list it means there is no occurence of this category in the given file
-                    # this should only happen in the test dataset
-                    if not isinstance(span_annotated_tuples, list):
-                        continue
+            # get the main and sub category names
+            category_names = AnalyseSpans.list_categories(file_dict["data"])
+            for cat_tuple in category_names:
 
-                    # now we have a list of the span beginnings and endings for each category in a given file.
-                    sentence_dict = AnalyseSpans._find_occurence(
-                        sentence_dict,
-                        span_annotated_tuples,
-                        sentence_span_list_per_file,
-                        sentence_str_list_per_file,
-                        main_cat_key,
-                        sub_cat_key,
-                    )
+                # find the beginning and end of each span as a tuple
+                span_annotated_tuples = [
+                    (span["begin"], span["end"])
+                    for span in file_dict["data"][cat_tuple[0]][cat_tuple[1]]
+                ]
+                # if the type of span_annotated_tuples is not a list it means there is no occurence of this category in the given file
+                # this should only happen in the test dataset
+                if not isinstance(span_annotated_tuples, list):
+                    continue
+                # now we have a list of the span beginnings and endings for each category in a given file.
+                sentence_dict = AnalyseSpans._find_occurence(
+                    sentence_dict,
+                    span_annotated_tuples,
+                    sentence_span_list_per_file,
+                    sentence_str_list_per_file,
+                    cat_tuple[0],
+                    cat_tuple[1],
+                )
 
         # transform dict into multicolumn pd.DataFrame
         df_sentence_occurence = (
