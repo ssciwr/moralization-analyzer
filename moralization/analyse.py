@@ -20,6 +20,30 @@ map_expressions = {
 }
 
 
+def validate_data_dict(data_dict):
+    if not data_dict:
+        raise ValueError("data_dict is empty")
+    for data_file_name, data_file in data_dict.items():
+        if not data_file:
+            raise ValueError(f"The dict content under {data_file_name} is empty.")
+        if not isinstance(data_file, dict):
+            raise ValueError(
+                f"The content of {data_file_name} is not a dict but {type(data_file)}."
+            )
+
+        validation_list = ["data", "file_type", "sofa", "paragraph"]
+        missing_cats = []
+        for category in validation_list:
+            if category not in list(data_file.keys()):
+                missing_cats.append(category)
+
+        if missing_cats:
+            raise ValueError(f"Data dict is missing categories: {missing_cats}")
+        # if list(data_file.keys()).sort() != validation_list:
+        #     raise ValueError(f"The content of the data dict under {data_file_name} does not match the validation keys.\n"+
+        #                         f"Is {list(data_file.keys())} but should be {validation_list}.")
+
+
 # select all custom Spans and store them in an ordered dict,
 # where the first dimension is the used inception category (Protagonistinnen, Forderung, etc...)
 # and the second dimension is the corresponding value of this category ('Forderer:in', 'Adresassat:in', 'Benefizient:in')
@@ -93,6 +117,9 @@ class AnalyseOccurrence:
         file_names: str = None,
         mapping: bool = True,
     ) -> None:
+
+        validate_data_dict(data_dict)
+
         self.mode = mode
         self.data_dict = data_dict
         self.mapping = mapping
@@ -332,6 +359,9 @@ class AnalyseSpans:
         Returns:
             pd.DataFrame: Category occurrences per sentence.
         """
+
+        validate_data_dict(data_dict)
+
         if filter_docs is not None:
             if not isinstance(filter_docs, list):
                 filter_docs = [filter_docs]

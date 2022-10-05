@@ -41,6 +41,13 @@ def test_InputOutput_get_input_file():
 
 def test_InputOutput_get_input_dir():
     data_dict = InputOutput.get_input_dir(data_dir)
+    with pytest.raises(FileNotFoundError):
+        InputOutput.get_input_dir("./not_real_dir/")
+    with pytest.raises(FileNotFoundError):
+        InputOutput.get_input_dir(".")
+
+    data_dict = InputOutput.get_input_dir(data_dir)
+    assert data_dict
     data_dict = InputOutput.get_input_dir(data_dir, use_custom_ts=True)
     print(list(data_dict.keys()))
     assert (

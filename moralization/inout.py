@@ -61,10 +61,12 @@ class InputOutput:
         ### load multiple files into a list of dictionaries
         dir_path = pathlib.Path(dir)
         if not dir_path.is_dir():
-            raise RuntimeError(f"Path {dir_path} does not exist")
-        data_files = dir_path.glob("*.xmi")
+            raise FileNotFoundError(f"Path {dir_path} does not exist")
+        # convert generator to list to check if dir is emtpy
+        data_files = list(dir_path.glob("*.xmi"))
         if not data_files:
-            raise RuntimeError(f"No input files found in {dir_path}")
+            raise FileNotFoundError(f"No input files found in {dir_path}")
+
         ts_file = None
         if use_custom_ts:
             ts_files = list(dir_path.glob("TypeSystem.xml"))

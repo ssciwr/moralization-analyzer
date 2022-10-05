@@ -40,6 +40,22 @@ def test_get_paragraphs():
 
 
 def test_AnalyseOccurrence():
+
+    with pytest.raises(ValueError):
+        analyse.AnalyseOccurrence({})
+
+    with pytest.raises(ValueError):
+        false_data_dict = {"foo": {}}
+        analyse.AnalyseOccurrence(false_data_dict)
+
+    with pytest.raises(ValueError):
+        false_data_dict = {"foo": "bar"}
+        analyse.AnalyseOccurrence(false_data_dict)
+
+    with pytest.raises(ValueError):
+        false_data_dict = {"foo": {"bar": "test"}}
+        analyse.AnalyseOccurrence(false_data_dict)
+
     df_instances = analyse.AnalyseOccurrence(data_dict, mode="instances").df
     df_spans = analyse.AnalyseOccurrence(data_dict, mode="spans").df
     df_sindex = analyse.AnalyseOccurrence(data_dict, mode="span_index").df
