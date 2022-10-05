@@ -225,42 +225,69 @@ class AnalyseSpans:
     # TODO refactor complexity
 
     @staticmethod
+    def list_categories(mydict: dict) -> list:
+        """Unravel the categories into a list of tuples."""
+        mylist = []
+        for main_cat_key, main_cat_value in mydict.items():
+            for sub_cat_key in main_cat_value.keys():
+                mylist.append((main_cat_key, sub_cat_key))
+        return mylist
+
+    @staticmethod
+    def _find_occurence(
+        sentence_dict,
+        span_annotated_tuples,
+        sentence_span_list_per_file,
+        sentence_str_list_per_file,
+        main_cat_key,
+        sub_cat_key,
+    ):
+        """Find occurence of category in a sentence."""
+        for occurence in span_annotated_tuples:
+            # with bisect.bisect we can search for the index of the sentece in which the current category occurence falls.
+            sentence_idx = bisect.bisect(sentence_span_list_per_file, occurence)
+            # when we found a sentence index we can use this to add the sentence string to our dict and add +1 to the (main_cat_key, sub_cat_key) cell.
+            if sentence_idx > 0:
+                sentence_dict[sentence_str_list_per_file[sentence_idx - 1]][
+                    (main_cat_key, sub_cat_key)
+                ] += 1
+
+        return sentence_dict
+
+    @staticmethod
     def _find_all_cat_in_paragraph(data_dict):
-        df_spans = AnalyseOccurence(data_dict, mode="spans", mapping=False).df
+
         # sentence, main_cat, sub_cat : occurence with the default value of 0 to allow adding of +1 at a later point.
         sentence_dict = defaultdict(lambda: defaultdict(lambda: 0))
 
-        # iterate over the data_dict entries and the corresponding df columns with the span lists at the same time.
-        for file_dict, df_file in zip(data_dict.values(), df_spans):
+        # iterate over the data_dict entries
+        for file_dict in data_dict.values():
             # from the file dict we extract the sentence span start and end points as a list of tuples (eg [(23,45),(65,346)])
             # as well as the corresponding string
             sentence_span_list_per_file = file_dict["paragraph"]["span"]
             sentence_str_list_per_file = file_dict["paragraph"]["sofa"]
-            # because the pandas multiindex is a tuple of (main_cat, sub_cat) for each subcat,#
-            # we can now loop over each category pair in one loop instead of one for each index level.
-            for main_cat_key, sub_cat_key in df_spans[df_file].index:
+            # get the main and sub category names
+            category_names = AnalyseSpans.list_categories(file_dict["data"])
+            for cat_tuple in category_names:
+
                 # find the beginning and end of each span as a tuple
                 span_annotated_tuples = [
                     (span["begin"], span["end"])
-                    for span in file_dict["data"][main_cat_key][sub_cat_key]
+                    for span in file_dict["data"][cat_tuple[0]][cat_tuple[1]]
                 ]
                 # if the type of span_annotated_tuples is not a list it means there is no occurence of this category in the given file
                 # this should only happen in the test dataset
-                if isinstance(
+                if not isinstance(span_annotated_tuples, list):
+                    continue
+                # now we have a list of the span beginnings and endings for each category in a given file.
+                sentence_dict = AnalyseSpans._find_occurence(
+                    sentence_dict,
                     span_annotated_tuples,
-                    list,
-                ):
-                    # now we have a list of the span beginnings and endings for each category in a given file.
-                    for occurence in span_annotated_tuples:
-                        # with bisect.bisect we can search for the index of the sentece in which the current category occurence falls.
-                        sentence_idx = bisect.bisect(
-                            sentence_span_list_per_file, occurence
-                        )
-                        # when we found a sentence index we can use this to add the sentence string to our dict and add +1 to the (main_cat_key, sub_cat_key) cell.
-                        if sentence_idx > 0:
-                            sentence_dict[sentence_str_list_per_file[sentence_idx - 1]][
-                                (main_cat_key, sub_cat_key)
-                            ] += 1
+                    sentence_span_list_per_file,
+                    sentence_str_list_per_file,
+                    cat_tuple[0],
+                    cat_tuple[1],
+                )
 
         # transform dict into multicolumn pd.DataFrame
         df_sentence_occurence = (
@@ -269,6 +296,8 @@ class AnalyseSpans:
         df_sentence_occurence.index = df_sentence_occurence.index.set_names(
             (["Sentence"])
         )
+        # map the category names to the updated ones
+        df_sentence_occurence = df_sentence_occurence.rename(columns=map_expressions)
 
         return df_sentence_occurence
 
