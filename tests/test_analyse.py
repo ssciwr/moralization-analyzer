@@ -39,10 +39,10 @@ def test_get_paragraphs():
     assert len(paragraph_dict["span"]) == len(paragraph_dict["sofa"])
 
 
-def test_AnalyseOccurence():
-    df_instances = analyse.AnalyseOccurence(data_dict, mode="instances").df
-    df_spans = analyse.AnalyseOccurence(data_dict, mode="spans").df
-    df_sindex = analyse.AnalyseOccurence(data_dict, mode="span_index").df
+def test_AnalyseOccurrence():
+    df_instances = analyse.AnalyseOccurrence(data_dict, mode="instances").df
+    df_spans = analyse.AnalyseOccurrence(data_dict, mode="spans").df
+    df_sindex = analyse.AnalyseOccurrence(data_dict, mode="span_index").df
 
     # check that map_expressions was applied correctly
     with pytest.raises(KeyError):
@@ -57,54 +57,54 @@ def test_AnalyseOccurence():
     assert len(df_sindex.loc["KAT2-Subjektive Ausdrücke"]) == 6
 
 
-def test_AnalyseSpans_report_occurence_per_paragraph():
-    df_sentence_occurence = analyse.AnalyseSpans.report_occurence_per_paragraph(
+def test_AnalyseSpans_report_occurrence_per_paragraph():
+    df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict
     )
-    assert len(df_sentence_occurence) == 17
+    assert len(df_sentence_occurrence) == 17
 
-    df_sentence_occurence = analyse.AnalyseSpans.report_occurence_per_paragraph(
+    df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict, data_file
     )
-    assert len(df_sentence_occurence) == 7
+    assert len(df_sentence_occurrence) == 7
 
-    df_sentence_occurence = analyse.AnalyseSpans.report_occurence_per_paragraph(
+    df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict, "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW.xmi"
     )
-    assert len(df_sentence_occurence) == 7
+    assert len(df_sentence_occurrence) == 7
 
-    df_sentence_occurence = analyse.AnalyseSpans.report_occurence_per_paragraph(
+    df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict,
         "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
     )
-    assert len(df_sentence_occurence) == 10
+    assert len(df_sentence_occurrence) == 10
 
 
-def test_PlotSpans_report_occurence_heatmap():
-    df_sentence_occurence = analyse.AnalyseSpans.report_occurence_per_paragraph(
+def test_PlotSpans_report_occurrence_heatmap():
+    df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict
     )
-    analyse.PlotSpans.report_occurence_heatmap(df_sentence_occurence)
-    analyse.PlotSpans.report_occurence_heatmap(
-        df_sentence_occurence, filter=["KAT1MoralisierendesSegment", "Neutral", "Care"]
+    analyse.PlotSpans.report_occurrence_heatmap(df_sentence_occurrence)
+    analyse.PlotSpans.report_occurrence_heatmap(
+        df_sentence_occurrence, filter=["KAT1MoralisierendesSegment", "Neutral", "Care"]
     )
     # check support for old and new category labels.
-    analyse.PlotSpans.report_occurence_heatmap(
-        df_sentence_occurence,
+    analyse.PlotSpans.report_occurrence_heatmap(
+        df_sentence_occurrence,
         filter=["KAT1-Moralisierendes Segment", "Neutral", "Care"],
     )
 
 
-def test_PlotSpans_report_occurence_matrix():
-    df_sentence_occurence = analyse.AnalyseSpans.report_occurence_per_paragraph(
+def test_PlotSpans_report_occurrence_matrix():
+    df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict
     )
-    analyse.PlotSpans.report_occurence_matrix(df_sentence_occurence)
-    analyse.PlotSpans.report_occurence_matrix(
-        df_sentence_occurence, filter=["KAT1MoralisierendesSegment", "Neutral", "Care"]
+    analyse.PlotSpans.report_occurrence_matrix(df_sentence_occurrence)
+    analyse.PlotSpans.report_occurrence_matrix(
+        df_sentence_occurrence, filter=["KAT1MoralisierendesSegment", "Neutral", "Care"]
     )
     # check support for old and new category labels.
-    analyse.PlotSpans.report_occurence_matrix(
-        df_sentence_occurence,
+    analyse.PlotSpans.report_occurrence_matrix(
+        df_sentence_occurrence,
         filter=["KAT1-Moralisierendes Segment", "Neutral", "Care"],
     )

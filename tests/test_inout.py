@@ -42,7 +42,11 @@ def test_InputOutput_get_input_file():
 def test_InputOutput_get_input_dir():
     data_dict = InputOutput.get_input_dir(data_dir)
     data_dict = InputOutput.get_input_dir(data_dir, use_custom_ts=True)
-    assert list(data_dict.keys()) == [
-        "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
-        "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
-    ]
+    print(list(data_dict.keys()))
+    assert (
+        list(data_dict.keys()).sort()
+        == [
+            "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
+            "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
+        ].sort()
+    )

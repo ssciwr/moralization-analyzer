@@ -98,16 +98,16 @@ class InputOutput:
 
 if __name__ == "__main__":
     data_dict = InputOutput.get_input_dir("data/")
-    df_instances = analyse.AnalyseOccurence(data_dict, mode="instances").df
+    df_instances = analyse.Analyseoccurrence(data_dict, mode="instances").df
     df_instances.to_csv("instances_out.csv")
     # this df can now easily be filtered.
     # print(df_instances.loc["KAT2-Subjektive Ausdrücke"])
-    df_spans = analyse.AnalyseOccurence(data_dict, mode="spans").df
+    df_spans = analyse.Analyseoccurrence(data_dict, mode="spans").df
     df_spans.to_csv("spans_out.csv")
     #
     # analyse.get_overlap_percent(
     # "Forderer:in", "Neutral", data_dict, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
     #     )
-    df_sentences = analyse.AnalyseSpans.report_occurence_per_paragraph(data_dict)
+    df_sentences = analyse.AnalyseSpans.report_occurrence_per_paragraph(data_dict)
     df_sentences.to_csv("sentences_out.csv")
     print(df_sentences)
