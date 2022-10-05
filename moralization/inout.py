@@ -1,4 +1,5 @@
-from cassis import load_typesystem, load_cas_from_xmi
+from ast import Raise
+from cassis import load_typesystem, load_cas_from_xmi, typesystem
 import pathlib
 import importlib_resources
 import logging
@@ -26,7 +27,23 @@ class InputOutput:
         # read in the file system types
         with open(filename, "rb") as f:
             ts = load_typesystem(f)
-        return ts
+
+        try:
+            # this type exists for every typesystem created by inception
+            # otherwise a .xmi data file can be loaded as a typesystem without raising an error.
+            ts.get_type("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence")
+            return ts
+
+        except typesystem.TypeNotFoundError:
+            raise Warning(f"No valid type system found at {filename}")
+
+    @staticmethod
+    def read_cas_file(filename, ts):
+        file_type = InputOutput.get_file_type(filename)
+
+        with open(filename, "rb") as f:
+            cas = InputOutput.input_type[file_type](f, typesystem=ts)
+        return cas, file_type
 
     @staticmethod
     def get_input_file(filename: str) -> object:
@@ -63,15 +80,13 @@ class InputOutput:
         data_dict = {}
         for data_file in data_files:
             # get the file type dynamically
-            file_type = InputOutput.get_file_type(data_file)
             try:
-                with open(data_file, "rb") as f:
-                    cas = InputOutput.input_type[file_type](f, typesystem=ts)
+                cas, file_type = InputOutput.read_cas_file(data_file, ts=ts)
                 data_dict[data_file.stem] = {
-                    "data": analyse.sort_spans(cas, ts),
+                    "data": analyse.get_spans(cas, ts),
                     "file_type": file_type,
                     "sofa": cas.sofa_string,  # note: use .sofa_string not .get_sofa() as the latter removes \n and similar markers
-                    "sentences": analyse.get_sentences(cas, ts),
+                    "paragraph": analyse.get_paragraphs(cas, ts),
                 }
             except XMLSyntaxError as e:
                 logging.warning(
@@ -93,3 +108,6 @@ if __name__ == "__main__":
     # analyse.get_overlap_percent(
     # "Forderer:in", "Neutral", data_dict, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
     #     )
+    df_sentences = analyse.AnalyseSpans.report_occurence_per_paragraph(data_dict)
+    df_sentences.to_csv("sentences_out.csv")
+    print(df_sentences)
