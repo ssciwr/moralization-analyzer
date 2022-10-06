@@ -192,20 +192,17 @@ class Pattern_Matching:
 
                     for string in self.df_spans[column].loc[id].split("&"):
                         pattern = []
-                        random_int = random.randint(0, 1)
-                        # take 20% of the data for validation.
-                        if string.strip() and random_int < 0.8:
-                            # for word in string.split(" "):
+                        if string.strip() and random.randint(0, 1) < 0.8:
+                            for word in string.split(" "):
 
-                            # if word.strip():
-                            pattern.append({"LOWER": string.lower()})
+                                if word.strip():
+                                    pattern.append({"LOWER": word.lower()})
 
                             self.matcher.add(id[1], [pattern])
 
-                        elif string.strip() and random_int >= 0.8:
+                        elif string.strip() and random.randint(0, 1) >= 0.8:
                             self.val_dict[id].append(string)
 
-    # a problem seems to be, that some words are present in many different
     def validate(self):
         correct_labels = 0
         false_labels = 0
