@@ -19,7 +19,7 @@ def _data_dict_fixture(dir_path):
     return _fixture
 
 
-dir_path = pathlib.Path(__file__).parent.resolve() / ".." / "data"
+dir_path = pathlib.Path(__file__).parents[1].resolve() / "data"
 
 data_dir = _data_path_fixture(dir_path)
 data_dict = _data_dict_fixture(dir_path)
