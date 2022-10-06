@@ -8,3 +8,4 @@ click
 importlib_metadata
 openpyxl
 pytest-cov
+pytest

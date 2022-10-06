@@ -14,3 +14,4 @@ dependencies:
   - pip:
     - dkpro-cassis
     - pytest-cov
+    - pytest
