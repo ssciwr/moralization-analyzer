@@ -31,6 +31,8 @@ jobs:
       run: |
         ls
         cd moralization
+        ls
+        pwd
         python -m pytest -s --cov=. --cov-report=xml
     - name: Upload coverage
       uses: codecov/codecov-action@v1
