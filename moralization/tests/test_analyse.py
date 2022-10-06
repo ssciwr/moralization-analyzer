@@ -1,16 +1,8 @@
 from moralization import inout, analyse
 import pytest
-import pathlib
-
-data_dir = pathlib.Path("../moralization_data/Test_Data/XMI_11/")
-data_dict = inout.InputOutput.get_input_dir(data_dir)
-ts_file = pathlib.Path("../moralization_data/Test_Data/XMI_11/TypeSystem.xml")
-data_file = pathlib.Path(
-    "../moralization_data/Test_Data/XMI_11/test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW.xmi"
-)
 
 
-def test_get_spans():
+def test_get_spans(data_file):
     ts = inout.InputOutput.read_typesystem()
     cas, file_type = inout.InputOutput.read_cas_file(data_file, ts)
     span_dict = analyse.get_spans(cas, ts)
@@ -31,7 +23,7 @@ def test_get_spans():
     ]
 
 
-def test_get_paragraphs():
+def test_get_paragraphs(data_file):
     ts = inout.InputOutput.read_typesystem()
     cas, file_type = inout.InputOutput.read_cas_file(data_file, ts)
     paragraph_dict = analyse.get_paragraphs(cas, ts)
@@ -39,7 +31,7 @@ def test_get_paragraphs():
     assert len(paragraph_dict["span"]) == len(paragraph_dict["sofa"])
 
 
-def test_AnalyseOccurrence():
+def test_AnalyseOccurrence(data_dict):
 
     with pytest.raises(ValueError):
         analyse.AnalyseOccurrence({})
@@ -73,7 +65,8 @@ def test_AnalyseOccurrence():
     assert len(df_sindex.loc["KAT2-Subjektive Ausdrücke"]) == 6
 
 
-def test_AnalyseSpans_report_occurrence_per_paragraph():
+def test_AnalyseSpans_report_occurrence_per_paragraph(data_dict, data_file):
+
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict
     )
@@ -96,7 +89,7 @@ def test_AnalyseSpans_report_occurrence_per_paragraph():
     assert len(df_sentence_occurrence) == 10
 
 
-def test_PlotSpans_report_occurrence_heatmap():
+def test_PlotSpans_report_occurrence_heatmap(data_dict):
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict
     )
@@ -111,7 +104,7 @@ def test_PlotSpans_report_occurrence_heatmap():
     )
 
 
-def test_PlotSpans_report_occurrence_matrix():
+def test_PlotSpans_report_occurrence_matrix(data_dict):
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict
     )
