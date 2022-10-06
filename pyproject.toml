@@ -33,6 +33,7 @@ dependencies = [
     "pytest",
     "pytest-cov",
     "ipywidgets",
+    "spacy",
 ]
 
 [tool.setuptools.package-data]

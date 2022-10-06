@@ -10,3 +10,4 @@ openpyxl
 pytest-cov
 pytest
 ipywidgets
+spacy
