@@ -29,7 +29,7 @@ jobs:
         python -m pip install .
     - name: Run pytest
       run: |
-        cd misinformation
+        cd moralization
         python -m pytest -s --cov=. --cov-report=xml
     - name: Upload coverage
       uses: codecov/codecov-action@v1
