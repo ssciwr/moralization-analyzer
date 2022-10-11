@@ -46,6 +46,51 @@ class InputOutput:
         return cas, file_type
 
     @staticmethod
+    def add_custom_instance_to_ts(
+        cas,
+        ts,
+        custom_span_type_name="custom.Span",
+        custom_span_category="KAT1MoralisierendesSegment",
+        new_span_type_name="moralization.instance",
+    ):
+        """
+        Make a new annotation category from the spans in custom labeled span type.
+
+        Args:
+            cas (_type_): the cas object
+            ts (_type_): the typesystem object
+            custom_span_type_name (str, optional): The name of the span category to be used as a base. Defaults to "custom.Span".
+            custom_span_category (str, optional): The label in the custom span category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
+            new_span_type_name (str, optional): The name of the new span category. Defaults to 'moralization.instance'.
+
+        Returns:
+            _type_: _description_
+        """
+        span_type = ts.get_type(custom_span_type_name)
+        try:
+            instance_type = ts.create_type(name="moralization.instance")
+            ts.create_feature(
+                domainType=instance_type,
+                name="KAT1MoralisierendesSegment",
+                rangeType=str,
+            )
+        except ValueError:
+            instance_type = ts.get_type("moralization.instance")
+        for span in cas.select(span_type.name):
+            if (
+                span["KAT1MoralisierendesSegment"]
+                and span["KAT1MoralisierendesSegment"] != "Keine Moralisierung"
+            ):
+                cas.add_annotation(
+                    instance_type(
+                        begin=span.begin,
+                        end=span.end,
+                        KAT1MoralisierendesSegment=span["KAT1MoralisierendesSegment"],
+                    )
+                )
+        return cas, ts
+
+    @staticmethod
     def get_input_file(filename: str) -> object:
         """Read in the input file. Currently only xmi file format."""
         ts = InputOutput.read_typesystem()
@@ -84,11 +129,14 @@ class InputOutput:
             # get the file type dynamically
             try:
                 cas, file_type = InputOutput.read_cas_file(data_file, ts=ts)
+                cas, ts = InputOutput.add_custom_instance_to_ts(cas, ts)
                 data_dict[data_file.stem] = {
                     "data": analyse.get_spans(cas, ts),
                     "file_type": file_type,
                     "sofa": cas.sofa_string,  # note: use .sofa_string not .get_sofa() as the latter removes \n and similar markers
-                    "paragraph": analyse.get_paragraphs(cas, ts),
+                    "paragraph": analyse.get_paragraphs(
+                        cas, ts, span_str="moralization.instance"
+                    ),
                 }
             except XMLSyntaxError as e:
                 logging.warning(
