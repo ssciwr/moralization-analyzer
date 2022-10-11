@@ -96,10 +96,13 @@ def get_spans(cas: object, ts: object, span_str="custom.Span") -> defaultdict:
     return span_dict
 
 
-def get_paragraphs(cas: object, ts: object) -> defaultdict:
-    span_type = ts.get_type(
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
-    )
+def get_paragraphs(cas: object, ts: object, span_str=None) -> defaultdict:
+    if span_str is None:
+        span_type = ts.get_type(
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
+        )
+    else:
+        span_type = ts.get_type(span_str)
     paragraph_dict = defaultdict(list)
     for span in cas.select(span_type.name):
         paragraph_dict["span"].append((span.begin, span.end))
