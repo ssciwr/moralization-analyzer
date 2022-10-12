@@ -70,23 +70,26 @@ def test_AnalyseSpans_report_occurrence_per_paragraph(data_dict, data_file):
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict
     )
-    assert len(df_sentence_occurrence) == 17
+    assert len(df_sentence_occurrence) == 9
 
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict, data_file
     )
-    assert len(df_sentence_occurrence) == 7
+
+    assert len(df_sentence_occurrence) == 5
 
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict, "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW.xmi"
     )
-    assert len(df_sentence_occurrence) == 7
+
+    assert len(df_sentence_occurrence) == 5
 
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict,
         "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
     )
-    assert len(df_sentence_occurrence) == 10
+
+    assert len(df_sentence_occurrence) == 4
 
 
 def test_PlotSpans_report_occurrence_heatmap(data_dict):
