@@ -2,12 +2,106 @@ from logging import exception
 import spacy
 from spacy.tokens import DocBin
 from spacy.matcher import Matcher
+import classy_classification
+
 from moralization import InputOutput
 import glob
 import os
 import random
 import subprocess
 from collections import defaultdict
+import pathlib
+
+import pickle
+
+# TODO Add accuracy testing
+
+
+class Few_Shot_Classifier:
+    """
+    A few shot classifier based on https://github.com/Pandora-Intelligence/classy-classification.
+
+    """
+
+    def __init__(self, nlp=None):
+        """The initilization can either directly take a spacy nlp object, a saved classifier file or be empty for a new default nlp oject.
+
+        :param nlp: Either NLP-Object, path or none, defaults to None
+        :type nlp: nlp,spacy.lang.de.German or str, optional
+        """
+
+        if isinstance(nlp, str):
+            model_file = pathlib.Path(nlp)
+            if model_file.is_file():
+                self.load_model(model_file)
+            else:
+                raise FileNotFoundError(
+                    "The nlp file under {nlp} does not exist".format(nlp=nlp)
+                )
+
+        elif nlp is None:
+            self.nlp = spacy.load("de_core_news_sm")
+
+    def load_model(self, model_file):
+        f = open(model_file, "rb")
+        self.nlp = pickle.load(f)
+
+    def create_new_model(self, data: dict):
+        """Takes prepared data as a dict of category with list of span strings
+
+        :param data: Category Span dictionary
+        :type data: dict
+        """
+        self.nlp.add_pipe("text_categorizer", config={"data": data, "model": "spacy"})
+
+    @classmethod
+    def create_binary_model(cls, df_spans):
+        """This model only differentiates between no moralization and moralization.
+
+        :param df_spans: _description_
+        :type df_spans: _type_
+        :param filename: _description_
+        :type filename: _type_
+        """
+
+        classifier_object = cls()
+        df_spans.loc["KAT1-Moralisierendes Segment"]
+        data = defaultdict(list)
+        for file_name in df_spans.loc["KAT1-Moralisierendes Segment"]:
+            for cat_name, cat_value in (
+                df_spans.loc["KAT1-Moralisierendes Segment"][file_name]
+                .to_dict()
+                .items()
+            ):
+                if cat_value:
+                    if cat_name == "Keine Moralisierung":
+                        data["Keine Moralisierung"] += cat_value.split("&")
+                    else:
+                        data["Moralisierung"] += cat_value.split("&")
+
+        classifier_object.create_new_model(data)
+        return classifier_object
+
+    def apply_model(self, sofa_list):
+        """_summary_
+
+        :param sofa_list: List of sofa strings or single string
+        :type sofa_list: _type_
+        """
+
+        if isinstance(sofa_list, str):
+            sofa_list = [sofa_list]
+
+        result_dict = defaultdict(list)
+        for sofa in sofa_list:
+            result_dict["sofa"].append(sofa)
+            result_dict["classification"].append(self.nlp(sofa)._.cats)
+
+        return result_dict
+
+    def save_model(self, filename):
+        with open(f"{filename}.pkl", "wb") as f:
+            pickle.dump(self.nlp, f)
 
 
 class Machine_Learning:  # name is subject to change
@@ -118,6 +212,8 @@ class Machine_Learning:  # name is subject to change
         :type dir_path: _type_, str,path
         :raises Warning: data directory and data dict cant both be given.
         """
+
+        pathlib.Path(working_dir).mkdir(exist_ok=True)
 
         data_dict = InputOutput.get_input_dir(dir_path)
 
