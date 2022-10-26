@@ -2,7 +2,9 @@ from logging import exception
 import spacy
 from spacy.tokens import DocBin
 from spacy.matcher import Matcher
-import classy_classification
+import classy_classification  # needed although not explicitly used
+import pandas as pd
+import numpy as np
 
 from moralization import InputOutput
 import glob
@@ -11,7 +13,7 @@ import random
 import subprocess
 from collections import defaultdict
 import pathlib
-
+from sklearn.metrics import classification_report
 import pickle
 
 # TODO Add accuracy testing
@@ -46,16 +48,16 @@ class Few_Shot_Classifier:
         f = open(model_file, "rb")
         self.nlp = pickle.load(f)
 
-    def create_new_model(self, data: dict):
-        """Takes prepared data as a dict of category with list of span strings
+    def create_new_model(self, data: pd.DataFrame):
+        """Takes prepared data as a DataFrame of categories and span strings.
 
-        :param data: Category Span dictionary
-        :type data: dict
+        :param data: Category Span DataFrame
+        :type data: pd.DataFrame
         """
         self.nlp.add_pipe("text_categorizer", config={"data": data, "model": "spacy"})
 
     @classmethod
-    def create_binary_model(cls, df_spans):
+    def create_binary_model(cls, df_spans, test_percentage=0.2):
         """This model only differentiates between no moralization and moralization.
 
         :param df_spans: _description_
@@ -66,6 +68,7 @@ class Few_Shot_Classifier:
 
         classifier_object = cls()
         df_spans.loc["KAT1-Moralisierendes Segment"]
+
         data = defaultdict(list)
         for file_name in df_spans.loc["KAT1-Moralisierendes Segment"]:
             for cat_name, cat_value in (
@@ -79,8 +82,28 @@ class Few_Shot_Classifier:
                     else:
                         data["Moralisierung"] += cat_value.split("&")
 
-        classifier_object.create_new_model(data)
+        # split training and test data
+        data_train, classifier_object.data_test = classifier_object._split_data_dict(
+            data
+        )
+
+        classifier_object.create_new_model(data_train)
         return classifier_object
+
+    def _split_data_dict(self, data, test_percentage=0.2):
+
+        data_train = {}
+        data_test = {}
+        for cat, value in data.items():
+            random.shuffle(value)
+
+            train_list, test_list = (
+                value[int(len(value) * test_percentage) :],
+                value[: int(len(value) * test_percentage)],
+            )
+            data_train[cat] = train_list
+            data_test[cat] = test_list
+        return data_train, data_test
 
     def apply_model(self, sofa_list):
         """_summary_
@@ -95,9 +118,58 @@ class Few_Shot_Classifier:
         result_dict = defaultdict(list)
         for sofa in sofa_list:
             result_dict["sofa"].append(sofa)
-            result_dict["classification"].append(self.nlp(sofa)._.cats)
+            for key, value in self.nlp(sofa)._.cats.items():
+                result_dict[key].append(value)
 
-        return result_dict
+        result_df = pd.DataFrame(result_dict).set_index("sofa")
+
+        return result_df
+
+    def validate_model(self, validation_data=None, return_df=False):
+        """
+        For the moment validation data needs to have the format specified in https://github.com/Pandora-Intelligence/classy-classification.
+
+        """
+        if validation_data is None:
+            validation_data = self.data_test
+
+        # transform validation data into df
+
+        validation_df = defaultdict(lambda: defaultdict(int))
+        # key is the category label and value the list of strings
+        for key, val in validation_data.items():
+            for sofa in val:
+                validation_df[sofa][f"{key}_val"] = 1
+
+        validation_df = pd.DataFrame(validation_df).fillna(0).transpose()
+        validation_df.astype("object")
+        validation_df.index.name = "sofa"
+
+        test_df = self.apply_model(validation_df.index)
+        test_df.values[range(len(test_df.index)), np.argmax(test_df.values, axis=1)] = 1
+        test_df.where(test_df == 1, 0, inplace=True)
+
+        # add predicted class as column entry
+        test_df["pred_class"] = test_df.idxmax(axis=1)
+        validation_df["true_class"] = validation_df.idxmax(axis=1)
+
+        validation_df["true_class"] = [
+            string.split("_val")[0] for string in validation_df["true_class"]
+        ]
+
+        if return_df is True:
+            # return validation_df
+            return pd.concat([validation_df, test_df], axis="columns")
+
+        else:
+            # acc = {key:accuracy_score(validation_df[f"{key}_val"],test_df[key]) for key in test_df.keys() if key!= "pred_class"}
+            output_df = pd.DataFrame(
+                classification_report(
+                    validation_df["true_class"], test_df["pred_class"], output_dict=True
+                )
+            )
+
+            return output_df
 
     def save_model(self, filename):
         with open(f"{filename}.pkl", "wb") as f:
