@@ -23,24 +23,24 @@ class Few_Shot_Classifier:
 
     """
 
-    def __init__(self, nlp=None):
+    def __init__(self, model="de_core_news_sm"):
         """The initilization can either directly take a spacy nlp object, a saved classifier file or be empty for a new default nlp oject.
 
         :param nlp: Either NLP-Object, path or none, defaults to None
         :type nlp: nlp,spacy.lang.de.German or str, optional
         """
 
-        if isinstance(nlp, str):
-            model_file = pathlib.Path(nlp)
+        if isinstance(model, str) and pathlib.Path(model).is_file():
+            model_file = pathlib.Path(model)
             if model_file.is_file():
                 self.load_model(model_file)
             else:
                 raise FileNotFoundError(
-                    "The nlp file under {nlp} does not exist".format(nlp=nlp)
+                    "The nlp file under {model} does not exist".format(model=model)
                 )
 
-        elif nlp is None:
-            self.nlp = spacy.load("de_core_news_sm")
+        elif model is None:
+            self.nlp = spacy.load(model)
 
     def load_model(self, model_file):
         f = open(model_file, "rb")
@@ -53,6 +53,19 @@ class Few_Shot_Classifier:
         :type data: pd.DataFrame
         """
         self.nlp.add_pipe("text_categorizer", config={"data": data, "model": model})
+
+    def create_hugging_face_model(
+        self, data: pd.DataFrame, model="MoritzLaurer/mDeBERTa-v3-base-mnli-xnli"
+    ):
+        self.nlp = spacy.blank("de")
+        self.nlp.add_pipe(
+            "text_categorizer",
+            config={
+                "data": list(data.keys()),
+                "model": model,
+                "cat_type": "zero",
+            },
+        )
 
     def _split_data_dict(self, data, test_percentage=0.2):
 
@@ -82,7 +95,11 @@ class Few_Shot_Classifier:
         result_dict = defaultdict(list)
         for sofa in sofa_list:
             result_dict["sofa"].append(sofa)
-            for key, value in self.nlp(sofa)._.cats.items():
+            cats_prediciton = self.nlp(sofa)._.cats
+            if isinstance(cats_prediciton, list):
+                cats_prediciton = cats_prediciton[0]
+
+            for key, value in cats_prediciton.items():
                 result_dict[key].append(value)
 
         result_df = pd.DataFrame(result_dict).set_index("sofa")
@@ -144,13 +161,19 @@ class Few_Shot_Classifier:
 
 
 class Binary_Few_Shot_Classifier(Few_Shot_Classifier):
-    def __init__(self, df_spans, test_percentage=0.2, model="spacy"):
+    def __init__(
+        self,
+        df_spans,
+        test_percentage=0.2,
+        model_origin="spacy",
+        model="de_core_news_sm",
+    ):
         """This model only differentiates between no moralization and moralization.
 
         :param df_spans: _description_
         :type df_spans: _type_
-        :param filename: _description_
-        :type filename: _type_
+        :param model_origin: either spacy or huggingface
+        :type filename: str
         """
         Few_Shot_Classifier.__init__(self)
         df_spans.loc["KAT1-Moralisierendes Segment"]
@@ -169,6 +192,12 @@ class Binary_Few_Shot_Classifier(Few_Shot_Classifier):
                         data["Moralisierung"] += cat_value.split("&")
 
         # split training and test data
-        data_train, self.data_test = self._split_data_dict(data)
 
-        self.create_new_model(data_train, model=model)
+        if model_origin == "spacy":
+            data_train, self.data_test = self._split_data_dict(data)
+
+            self.create_new_model(data_train, model=model)
+        elif model_origin == "huggingface":
+            self.create_hugging_face_model(data, model=model)
+
+            self.data_test = data
