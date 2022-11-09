@@ -121,9 +121,11 @@ class InteractiveCategoryPlot:
         filenames = list(data_dict.keys())
         for filename in filenames:
             self._categories[filename] = [
-                key
-                for span_dict_sub_kat in data_dict[filename]["data"].values()
-                for key in span_dict_sub_kat.keys()
+                f"{main_kat_key}: {sub_kat_key}"
+                for main_kat_key, span_dict_sub_kat in data_dict[filename][
+                    "data"
+                ].items()
+                for sub_kat_key in span_dict_sub_kat.keys()
             ]
         # filename widget
         self._filename_widget = ipywidgets.Dropdown(

@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 import bisect
 import pathlib
+from collections.abc import Iterable
 
 map_expressions = {
     "KAT1MoralisierendesSegment": "KAT1-Moralisierendes Segment",
