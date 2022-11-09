@@ -5,6 +5,7 @@ import bisect
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pathlib
+from collections.abc import Iterable
 
 map_expressions = {
     "KAT1MoralisierendesSegment": "KAT1-Moralisierendes Segment",
@@ -382,6 +383,8 @@ class AnalyseSpans:
 
 
 class PlotSpans:
+    # TODO! refactor to always return filter as tuple.
+    # The way it is now the interactive plot can't distinguish between moralwerte:Care and Kat2:Care
     @staticmethod
     def _get_filter_multiindex(df_sentence_occurrence: pd.DataFrame, filters):
         """Search through the given filters and return all sub_cat_keys when a main_cat_key is given.
@@ -395,22 +398,29 @@ class PlotSpans:
         Returns:
             list: the filter strings of only the sub_cat_keys
         """
-        if not isinstance(filters, list):
+        if not isinstance(filters, Iterable):
             filters = [filters]
         sub_cat_filter = []
         for filter in filters:
-            if filter in map_expressions:
-                filter = map_expressions[filter]
 
-            if filter in df_sentence_occurrence.columns.levels[0]:
-                [
-                    sub_cat_filter.append(key)
-                    for key in (df_sentence_occurrence[filter].keys())
-                ]
-            elif filter in df_sentence_occurrence.columns.levels[1]:
-                sub_cat_filter.append(filter)
+            # when giving a filter as tuple (main_cat,sub_cat)
+            if isinstance(filter, Iterable):
+                sub_cat_filter.append(filter[1])
             else:
-                raise Warning(f"Filter key: {filter} not in dataframe columns.")
+                if filter in map_expressions:
+                    filter = map_expressions[filter]
+
+                elif filter in df_sentence_occurrence.columns.levels[0]:
+                    [
+                        sub_cat_filter.append(key)
+                        for key in (df_sentence_occurrence[filter].keys())
+                    ]
+                elif filter in df_sentence_occurrence.columns.levels[1]:
+                    sub_cat_filter.append(filter)
+                else:
+                    raise Warning(
+                        f"Filter key: {filter} not in dataframe columns.\n Columns are: {df_sentence_occurrence.columns}"
+                    )
 
         return sub_cat_filter
 

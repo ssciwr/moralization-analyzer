@@ -7,12 +7,23 @@ import IPython
 
 def percent_matrix_heatmap(ax, data_dict, filename, categories):
     """Plot a heatmap of the overlap percent matrix for given data_dict, filename and categories"""
-    df = moralization.analyse.get_percent_matrix(
-        data_dict,
-        filename,
+    data_dict = {filename: data_dict[filename]}
+
+    # since categories are now stored as a string of type "main_kat:sub_kat" it needs to be split.
+
+    categories = [cat.split(": ") for cat in categories]
+
+    df_sentences = moralization.analyse.AnalyseSpans.report_occurrence_per_paragraph(
+        data_dict
+    )
+
+    df_corr = moralization.analyse.PlotSpans.report_occurrence_matrix(
+        df_sentences,
+        # filename,
         categories,
     )
-    return seaborn.heatmap(df, cmap="cividis", ax=ax)
+    return seaborn.heatmap(df_corr, cmap="cividis", ax=ax)
+    # return heatmap
 
 
 class InteractiveCategoryPlot:
@@ -41,9 +52,11 @@ class InteractiveCategoryPlot:
         filenames = list(data_dict.keys())
         for filename in filenames:
             self._categories[filename] = [
-                key
-                for span_dict_sub_kat in data_dict[filename]["data"].values()
-                for key in span_dict_sub_kat.keys()
+                f"{main_kat_key}: {sub_kat_key}"
+                for main_kat_key, span_dict_sub_kat in data_dict[filename][
+                    "data"
+                ].items()
+                for sub_kat_key in span_dict_sub_kat.keys()
             ]
         # filename widget
         self._filename_widget = ipywidgets.Dropdown(
