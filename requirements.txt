@@ -11,3 +11,4 @@ pytest-cov
 pytest
 ipywidgets
 spacy
+classy-classification
