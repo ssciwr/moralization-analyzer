@@ -30,6 +30,8 @@ dependencies = [
     "click",
     "importlib_metadata",
     "openpyxl",
+    "pytest",
+    "pytest-cov",
 ]
 
 [tool.setuptools.package-data]

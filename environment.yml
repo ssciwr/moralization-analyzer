@@ -13,3 +13,5 @@ dependencies:
   - openpyxl
   - pip:
     - dkpro-cassis
+    - pytest-cov
+    - pytest
