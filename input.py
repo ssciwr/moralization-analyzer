@@ -1,5 +1,5 @@
 """
-Module that handles input and output.
+Module that handles input reading.
 """
 from cassis import load_typesystem, load_cas_from_xmi, typesystem
 import pathlib
