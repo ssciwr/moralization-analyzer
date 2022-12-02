@@ -385,5 +385,3 @@ class AnalyseSpans:
 
         df_sentence_occurrence = AnalyseSpans._find_all_cat_in_paragraph(data_dict)
         return df_sentence_occurrence
-
-

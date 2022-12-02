@@ -6,6 +6,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from moralization import analyse as ae
 
+
 class PlotSpans:
     @staticmethod
     def _get_filter_multiindex(df_sentence_occurrence: pd.DataFrame, filters):
