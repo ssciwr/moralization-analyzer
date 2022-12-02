@@ -43,10 +43,9 @@ def test_InputOutput_get_input_dir(data_dir):
     assert data_dict
     data_dict = InputOutput.get_input_dir(data_dir, use_custom_ts=True)
     print(list(data_dict.keys()))
-    assert (
-        list(data_dict.keys()).sort()
-        == [
+    testlist = list(data_dict.keys()).sort()
+    correctlist = [
             "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
             "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
         ].sort()
-    )
+    assert testlist == correctlist 

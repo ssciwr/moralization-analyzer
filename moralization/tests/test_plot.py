@@ -7,12 +7,12 @@ def test_PlotSpans_report_occurrence_heatmap(data_dict):
     )
     plot.PlotSpans.report_occurrence_heatmap(df_sentence_occurrence)
     plot.PlotSpans.report_occurrence_heatmap(
-        df_sentence_occurrence, filter=["KAT1MoralisierendesSegment", "Neutral", "Care"]
+        df_sentence_occurrence, filter_=["KAT1MoralisierendesSegment", "Neutral", "Care"]
     )
     # check support for old and new category labels.
     plot.PlotSpans.report_occurrence_heatmap(
         df_sentence_occurrence,
-        filter=["KAT1-Moralisierendes Segment", "Neutral", "Care"],
+        filter_=["KAT1-Moralisierendes Segment", "Neutral", "Care"],
     )
 
 
@@ -22,10 +22,10 @@ def test_PlotSpans_report_occurrence_matrix(data_dict):
     )
     plot.PlotSpans.report_occurrence_matrix(df_sentence_occurrence)
     plot.PlotSpans.report_occurrence_matrix(
-        df_sentence_occurrence, filter=["KAT1MoralisierendesSegment", "Neutral", "Care"]
+        df_sentence_occurrence, filter_=["KAT1MoralisierendesSegment", "Neutral", "Care"]
     )
     # check support for old and new category labels.
     plot.PlotSpans.report_occurrence_matrix(
         df_sentence_occurrence,
-        filter=["KAT1-Moralisierendes Segment", "Neutral", "Care"],
+        filter_=["KAT1-Moralisierendes Segment", "Neutral", "Care"],
     )

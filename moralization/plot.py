@@ -25,71 +25,70 @@ class PlotSpans:
         if not isinstance(filters, list):
             filters = [filters]
         sub_cat_filter = []
-        for filter in filters:
-            if filter in ae.map_expressions:
-                filter = ae.map_expressions[filter]
+        for filter_ in filters:
+            if filter_ in ae.map_expressions:
+                filter_ = ae.map_expressions[filter_]
 
-            if filter in df_sentence_occurrence.columns.levels[0]:
+            if filter_ in df_sentence_occurrence.columns.levels[0]:
                 [
                     sub_cat_filter.append(key)
-                    for key in (df_sentence_occurrence[filter].keys())
+                    for key in (df_sentence_occurrence[filter_].keys())
                 ]
-            elif filter in df_sentence_occurrence.columns.levels[1]:
-                sub_cat_filter.append(filter)
+            elif filter_ in df_sentence_occurrence.columns.levels[1]:
+                sub_cat_filter.append(filter_)
             else:
-                raise Warning(f"Filter key: {filter} not in dataframe columns.")
+                raise Warning(f"Filter key: {filter_} not in dataframe columns.")
 
         return sub_cat_filter
 
     @staticmethod
     def _generate_corr_df(
-        df_sentence_occurrence: pd.DataFrame, filter=None
+        df_sentence_occurrence: pd.DataFrame, filter_=None
     ) -> pd.DataFrame:
-        if filter is None:
+        if filter_ is None:
             return df_sentence_occurrence.corr().sort_index(level=0)
         else:
-            filter = PlotSpans._get_filter_multiindex(df_sentence_occurrence, filter)
+            filter_ = PlotSpans._get_filter_multiindex(df_sentence_occurrence, filter_)
             # Couldn't figure out how to easily select columns based on the
             # second level column name.
             # So the df is transposed, the multiindex can be filterd using
             # loc, and then transposed back to get the correct correlation matrix.
             return (
-                df_sentence_occurrence.T.loc[(slice(None), filter), :]
+                df_sentence_occurrence.T.loc[(slice(None), filter_), :]
                 .sort_index(level=0)
                 .T.corr()
             )
 
     @staticmethod
-    def report_occurrence_heatmap(df_sentence_occurrence: pd.DataFrame, filter=None):
+    def report_occurrence_heatmap(df_sentence_occurrence: pd.DataFrame, filter_=None):
         """Returns the occurrence heatmap for the given dataframe.
         Can also filter based on both main_cat and sub_cat keys.
 
         Args:
             df_sentence_occurrence (pd.DataFrame): The sentence occurrence dataframe.
-            filter (str,list(str), optional): Filter values for the dataframe.
+            filter_ (str,list(str), optional): Filter values for the dataframe.
             Defaults to None.
 
         Returns:
             plt.figure : The heatmap figure.
         """
 
-        # df_sentence_occurrence.columns = df_sentence_occurrence.columns.droplevel()
         plt.figure(figsize=(16, 16))
-        df_corr = PlotSpans._generate_corr_df(df_sentence_occurrence, filter=filter)
+        df_corr = PlotSpans._generate_corr_df(df_sentence_occurrence, filter_=filter_)
 
         heatmap = sns.heatmap(df_corr, cmap="cividis")
         return heatmap
 
     @staticmethod
     def report_occurrence_matrix(
-        df_sentence_occurrence: pd.DataFrame, filter=None
+        df_sentence_occurrence: pd.DataFrame, filter_=None
     ) -> pd.DataFrame:
         """
         Returns the correlation matrix in regards to the given filters.
         Args:
-            filter (str,list(str), optional): Filter values for the dataframe.
+            filter_ (str,list(str), optional): Filter values for the dataframe.
             Defaults to None.
         Returns:
             pd.DataFrame: Correlation matrix.
         """
-        return PlotSpans._generate_corr_df(df_sentence_occurrence, filter)
+        return PlotSpans._generate_corr_df(df_sentence_occurrence, filter_)

@@ -63,35 +63,35 @@ class InputOutput:
             cas (_type_): the cas object
             ts (_type_): the typesystem object
             custom_span_type_name (str, optional): The name of the span category
-            to be used as a base. Defaults to "custom.Span".
+                to be used as a base. Defaults to "custom.Span".
             custom_span_category (str, optional): The label in the custom span
-            category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
+                category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
             new_span_type_name (str, optional): The name of the new span category.
-            Defaults to 'moralization.instance'.
+                Defaults to 'moralization.instance'.
 
         Returns:
             _type_: _description_
         """
         span_type = ts.get_type(custom_span_type_name)
         try:
-            instance_type = ts.create_type(name="moralization.instance")
+            instance_type = ts.create_type(name=new_span_type_name)
             ts.create_feature(
                 domainType=instance_type,
-                name="KAT1MoralisierendesSegment",
+                name=custom_span_category,
                 rangeType=str,
             )
         except ValueError:
-            instance_type = ts.get_type("moralization.instance")
+            instance_type = ts.get_type(new_span_type_name)
         for span in cas.select(span_type.name):
             if (
-                span["KAT1MoralisierendesSegment"]
-                and span["KAT1MoralisierendesSegment"] != "Keine Moralisierung"
+                span[custom_span_category]
+                and span[custom_span_category] != "Keine Moralisierung"
             ):
                 cas.add_annotation(
                     instance_type(
                         begin=span.begin,
                         end=span.end,
-                        KAT1MoralisierendesSegment=span["KAT1MoralisierendesSegment"],
+                        KAT1MoralisierendesSegment=span[custom_span_category],
                     )
                 )
         return cas, ts
