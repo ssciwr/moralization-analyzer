@@ -32,19 +32,30 @@ def test_InputOutput_add_custom_instance_to_ts(ts_file, data_file):
     pass
 
 
-def test_InputOutput_get_input_dir(data_dir):
-    data_dict = InputOutput.get_input_dir(data_dir)
+def test_InputOutput_get_multiple_input(data_dir):
+    data_files, ts_file = InputOutput.get_multiple_input(data_dir)
     with pytest.raises(FileNotFoundError):
-        InputOutput.get_input_dir("./not_real_dir/")
+        InputOutput.get_multiple_input("./not_real_dir/")
     with pytest.raises(FileNotFoundError):
-        InputOutput.get_input_dir(".")
+        InputOutput.get_multiple_input(".")
+    data_files = [i.parts[-1] for i in data_files]
+    test_files = [
+        "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB.xmi",
+        "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW.xmi",
+    ]
+    assert set(data_files) == set(test_files)
+    assert ts_file.parts[-1] == "TypeSystem.xml"
 
-    data_dict = InputOutput.get_input_dir(data_dir)
-    assert data_dict
-    data_dict = InputOutput.get_input_dir(data_dir, use_custom_ts=True)
+
+def test_InputOutput_read_cas_content(data_dir):
+    data_files, ts_file = InputOutput.get_multiple_input(data_dir)
+    # read in the ts
+    ts = InputOutput.read_typesystem(ts_file)
+    data_dict = InputOutput.read_cas_content(data_files, ts)
     testlist = list(data_dict.keys())
     correctlist = [
         "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
         "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
     ]
     assert set(testlist) == set(correctlist)
+    # add more assert statements here

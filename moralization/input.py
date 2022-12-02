@@ -96,35 +96,30 @@ class InputOutput:
         return cas, ts
 
     @staticmethod
-    # TODO this should be split into two methods, one gets the dir and
-    # one reads the data
-    def get_input_dir(dir: str, use_custom_ts: bool = False) -> dict:
+    def get_multiple_input(dir: str) -> dict:
         "Get a list of input files from a given directory. Currently only xmi files."
-        # load multiple files into a list of dictionaries
+        # load multiple files into a list
         dir_path = pathlib.Path(dir)
         if not dir_path.is_dir():
             raise FileNotFoundError(f"Path {dir_path} does not exist")
         # convert generator to list to check if dir is emtpy
+        # currently only xmi but maybe can be extended
         data_files = list(dir_path.glob("*.xmi"))
         if not data_files:
             raise FileNotFoundError(f"No input files found in {dir_path}")
 
-        ts_file = None
-        if use_custom_ts:
-            ts_files = list(dir_path.glob("TypeSystem.xml"))
-            if len(ts_files) > 1:
-                raise Warning("Multiple typesystems found. Please provide only one.")
-            elif len(ts_files) == 0:
-                raise FileNotFoundError(
-                    "Trying to find custom typesystem, \
-                        but no 'TypeSystem.xml' found in {}".format(
-                        dir_path
-                    )
-                )
-            ts_file = ts_files[0]
-        ts = InputOutput.read_typesystem(ts_file)
+        # look for a ts file
+        ts_files = list(dir_path.glob("TypeSystem.xml"))
+        if len(ts_files) == 0:
+            ts_files = None
+        ts_file = ts_files[0] if ts_files is not None else ts_files
+        return data_files, ts_file
 
+    @staticmethod
+    def read_cas_content(data_files: list or str, ts: object):
         data_dict = {}
+        if isinstance(data_files, str):
+            data_files = list(data_files)
         for data_file in data_files:
             # get the file type dynamically
             try:
@@ -149,7 +144,10 @@ class InputOutput:
 
 
 if __name__ == "__main__":
-    data_dict = InputOutput.get_input_dir("data/Test_Data/XMI_11")
+    data_files, ts_file = InputOutput.get_multiple_input("data/Test_Data/XMI_11")
+    # read in the ts
+    ts = InputOutput.read_typesystem(ts_file)
+    data_dict = InputOutput.read_cas_content(data_files, ts)
     df_instances = analyse.AnalyseOccurrence(data_dict, mode="instances").df
     df_instances.to_csv("instances_out.csv")
     # this df can now easily be filtered.
