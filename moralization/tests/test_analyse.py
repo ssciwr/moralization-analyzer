@@ -90,5 +90,3 @@ def test_AnalyseSpans_report_occurrence_per_paragraph(data_dict, data_file):
     )
 
     assert len(df_sentence_occurrence) == 4
-
-
