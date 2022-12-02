@@ -43,7 +43,6 @@ class InputOutput:
     @staticmethod
     def read_cas_file(filename: str, ts: object):
         file_type = InputOutput.get_file_type(filename)
-
         with open(filename, "rb") as f:
             cas = InputOutput.input_type[file_type](f, typesystem=ts)
         return cas, file_type
@@ -87,7 +86,7 @@ class InputOutput:
                 span[custom_span_category]
                 and span[custom_span_category] != "Keine Moralisierung"
             ):
-                cas.add_annotation(
+                cas.add(
                     instance_type(
                         begin=span.begin,
                         end=span.end,
@@ -95,16 +94,6 @@ class InputOutput:
                     )
                 )
         return cas, ts
-
-    @staticmethod
-    def get_input_file(filename: str) -> object:
-        """Read in the input file. Currently only xmi file format."""
-        ts = InputOutput.read_typesystem()
-        file_type = InputOutput.get_file_type(filename)
-        # read the actual data file
-        with open(filename, "rb") as f:
-            data = InputOutput.input_type[file_type](f, typesystem=ts)
-        return data
 
     @staticmethod
     # TODO this should be split into two methods, one gets the dir and

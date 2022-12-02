@@ -25,15 +25,11 @@ def test_InputOutput_read_cas_file(data_file):
     assert file_type == "xmi"
 
 
-def test_InputOutput_add_custom_instance_to_ts():
+def test_InputOutput_add_custom_instance_to_ts(ts_file, data_file):
+    # ts = InputOutput.read_typesystem(ts_file)
+    # cas = InputOutput.read_cas_file(data_file, ts)
+    # cas, ts = InputOutput.add_custom_instance_to_ts(cas, ts)
     pass
-
-
-def test_InputOutput_get_input_file(data_dir):
-    filename = data_dir.joinpath(
-        "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB.xmi"
-    )
-    _ = InputOutput.get_input_file(filename)
 
 
 def test_InputOutput_get_input_dir(data_dir):
