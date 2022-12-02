@@ -43,7 +43,6 @@ class InputOutput:
     @staticmethod
     def read_cas_file(filename: str, ts: object):
         file_type = InputOutput.get_file_type(filename)
-
         with open(filename, "rb") as f:
             cas = InputOutput.input_type[file_type](f, typesystem=ts)
         return cas, file_type
@@ -87,7 +86,7 @@ class InputOutput:
                 span[custom_span_category]
                 and span[custom_span_category] != "Keine Moralisierung"
             ):
-                cas.add_annotation(
+                cas.add(
                     instance_type(
                         begin=span.begin,
                         end=span.end,
@@ -97,45 +96,31 @@ class InputOutput:
         return cas, ts
 
     @staticmethod
-    def get_input_file(filename: str) -> object:
-        """Read in the input file. Currently only xmi file format."""
-        ts = InputOutput.read_typesystem()
-        file_type = InputOutput.get_file_type(filename)
-        # read the actual data file
-        with open(filename, "rb") as f:
-            data = InputOutput.input_type[file_type](f, typesystem=ts)
-        return data
-
-    @staticmethod
-    def get_input_dir(dir: str, use_custom_ts: bool = False) -> dict:
+    def get_multiple_input(dir: str) -> tuple:
         "Get a list of input files from a given directory. Currently only xmi files."
-        # load multiple files into a list of dictionaries
+        # load multiple files into a list
         dir_path = pathlib.Path(dir)
         if not dir_path.is_dir():
             raise FileNotFoundError(f"Path {dir_path} does not exist")
         # convert generator to list to check if dir is emtpy
+        # currently only xmi but maybe can be extended
         data_files = list(dir_path.glob("*.xmi"))
         if not data_files:
             raise FileNotFoundError(f"No input files found in {dir_path}")
 
-        ts_file = None
-        if use_custom_ts:
-            ts_files = list(dir_path.glob("TypeSystem.xml"))
-            if len(ts_files) > 1:
-                raise Warning("Multiple typesystems found. Please provide only one.")
-            elif len(ts_files) == 0:
-                raise FileNotFoundError(
-                    "Trying to find custom typesystem, \
-                        but no 'TypeSystem.xml' found in {}".format(
-                        dir_path
-                    )
-                )
-            ts_file = ts_files[0]
-        ts = InputOutput.read_typesystem(ts_file)
+        # look for a ts file
+        ts_files = list(dir_path.glob("TypeSystem.xml"))
+        if len(ts_files) == 0:
+            ts_files = None
+        ts_file = ts_files[0] if ts_files is not None else ts_files
+        return data_files, ts_file
 
+    @staticmethod
+    def read_cas_content(data_files: list or str, ts: object):
         data_dict = {}
+        if isinstance(data_files, str):
+            data_files = list(data_files)
         for data_file in data_files:
-            # get the file type dynamically
             try:
                 cas, file_type = InputOutput.read_cas_file(data_file, ts=ts)
                 cas, ts = InputOutput.add_custom_instance_to_ts(cas, ts)
@@ -153,12 +138,20 @@ class InputOutput:
                 logging.warning(
                     f"WARNING: skipping file '{data_file}' due to XMLSyntaxError: {e}"
                 )
+        return data_dict
 
+    @staticmethod
+    def read_data(dir: str):
+        """Convenience method to handle input reading in one go."""
+        data_files, ts_file = InputOutput.get_multiple_input(dir)
+        # read in the ts
+        ts = InputOutput.read_typesystem(ts_file)
+        data_dict = InputOutput.read_cas_content(data_files, ts)
         return data_dict
 
 
 if __name__ == "__main__":
-    data_dict = InputOutput.get_input_dir("data/Test_Data/XMI_11")
+    data_dict = InputOutput.read_data("data/Test_Data/XMI_11")
     df_instances = analyse.AnalyseOccurrence(data_dict, mode="instances").df
     df_instances.to_csv("instances_out.csv")
     # this df can now easily be filtered.
