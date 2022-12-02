@@ -121,7 +121,6 @@ class InputOutput:
         if isinstance(data_files, str):
             data_files = list(data_files)
         for data_file in data_files:
-            # get the file type dynamically
             try:
                 cas, file_type = InputOutput.read_cas_file(data_file, ts=ts)
                 cas, ts = InputOutput.add_custom_instance_to_ts(cas, ts)
@@ -139,15 +138,20 @@ class InputOutput:
                 logging.warning(
                     f"WARNING: skipping file '{data_file}' due to XMLSyntaxError: {e}"
                 )
+        return data_dict
 
+    @staticmethod
+    def read_data(dir: str):
+        """Convenience method to handle input reading in one go."""
+        data_files, ts_file = InputOutput.get_multiple_input(dir)
+        # read in the ts
+        ts = InputOutput.read_typesystem(ts_file)
+        data_dict = InputOutput.read_cas_content(data_files, ts)
         return data_dict
 
 
 if __name__ == "__main__":
-    data_files, ts_file = InputOutput.get_multiple_input("data/Test_Data/XMI_11")
-    # read in the ts
-    ts = InputOutput.read_typesystem(ts_file)
-    data_dict = InputOutput.read_cas_content(data_files, ts)
+    data_dict = InputOutput.read_data("data/Test_Data/XMI_11")
     df_instances = analyse.AnalyseOccurrence(data_dict, mode="instances").df
     df_instances.to_csv("instances_out.csv")
     # this df can now easily be filtered.
