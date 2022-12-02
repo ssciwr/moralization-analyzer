@@ -96,7 +96,7 @@ class InputOutput:
         return cas, ts
 
     @staticmethod
-    def get_multiple_input(dir: str) -> dict:
+    def get_multiple_input(dir: str) -> tuple:
         "Get a list of input files from a given directory. Currently only xmi files."
         # load multiple files into a list
         dir_path = pathlib.Path(dir)
