@@ -1,9 +1,10 @@
+"""
+Contains statistical analysis.
+"""
 from collections import defaultdict
 import pandas as pd
 import numpy as np
 import bisect
-import seaborn as sns
-import matplotlib.pyplot as plt
 import pathlib
 
 map_expressions = {
@@ -39,14 +40,13 @@ def validate_data_dict(data_dict):
 
         if missing_cats:
             raise ValueError(f"Data dict is missing categories: {missing_cats}")
-        # if list(data_file.keys()).sort() != validation_list:
-        #     raise ValueError(f"The content of the data dict under {data_file_name} does not match the validation keys.\n"+
-        #                         f"Is {list(data_file.keys())} but should be {validation_list}.")
 
 
 # select all custom Spans and store them in an ordered dict,
-# where the first dimension is the used inception category (Protagonistinnen, Forderung, etc...)
-# and the second dimension is the corresponding value of this category ('Forderer:in', 'Adresassat:in', 'Benefizient:in')
+# where the first dimension is the used inception category
+# (Protagonistinnen, Forderung, etc...)
+# and the second dimension is the corresponding value of this category
+# ('Forderer:in', 'Adresassat:in', 'Benefizient:in')
 # dict[category][entry value] = span
 def get_spans(cas: object, ts: object, span_str="custom.Span") -> defaultdict:
 
@@ -55,7 +55,8 @@ def get_spans(cas: object, ts: object, span_str="custom.Span") -> defaultdict:
 
     # list of all interesting categories
     # as there are:
-    # KAT1MoralisierendesSegment - Moralisierung explizit, Moralisierung Kontext, Moralisierung Weltwissen, Moralisierung interpretativ, Keine Moralisierung
+    # KAT1MoralisierendesSegment - Moralisierung explizit, Moralisierung Kontext,
+    # Moralisierung Weltwissen, Moralisierung interpretativ, Keine Moralisierung
     # Moralwerte - Care, Harm, Fairness, Cheating, …
     # KAT2Subjektive_Ausdrcke - Care, Harm, Fairness, Cheating, …
     # Protagonistinnen2 - Individuum, Menschen, Institution, Soziale Gruppe, OTHER
@@ -163,7 +164,7 @@ class AnalyseOccurrence:
         """Helper method to initialize a dict with the given main and sub categories."""
         for main_cat_key, main_cat_value in span_dict.items():
             for sub_cat_key, sub_cat_value in main_cat_value.items():
-                # the tuple index makes it easy to convert the dict into a pandas dataframe
+                # the tuple index makes it easy to convert the dict into a pd dataframe
                 self.instance_dict[file_name][(main_cat_key, sub_cat_key)] = len(
                     sub_cat_value
                 )
@@ -192,8 +193,6 @@ class AnalyseOccurrence:
             self.df = self.df.fillna(0)
         if self.mode == "spans":
             self.df = self.df.replace({np.nan: None})
-            # remove quotes - not sure if this is necessary
-            # self.df = self.df.applymap(lambda x: x.replace('"','') if isinstance(x, str) else x)
 
     def report_instances(self):
         """Reports number of occurrences of a category per text source."""
@@ -293,9 +292,11 @@ class AnalyseSpans:
     ):
         """Find occurrence of category in a sentence."""
         for occurrence in span_annotated_tuples:
-            # with bisect.bisect we can search for the index of the sentece in which the current category occurrence falls.
+            # with bisect.bisect we can search for the index of the
+            # sentece in which the current category occurrence falls.
             sentence_idx = bisect.bisect(sentence_span_list_per_file, occurrence)
-            # when we found a sentence index we can use this to add the sentence string to our dict and add +1 to the (main_cat_key, sub_cat_key) cell.
+            # when we found a sentence index we can use this to add the sentence string
+            # to our dict and add +1 to the (main_cat_key, sub_cat_key) cell.
             if sentence_idx > 0:
                 sentence_dict[sentence_str_list_per_file[sentence_idx - 1]][
                     (main_cat_key, sub_cat_key)
@@ -306,12 +307,14 @@ class AnalyseSpans:
     @staticmethod
     def _find_all_cat_in_paragraph(data_dict):
 
-        # sentence, main_cat, sub_cat : occurrence with the default value of 0 to allow adding of +1 at a later point.
+        # sentence, main_cat, sub_cat : occurrence with the default value of
+        # 0 to allow adding of +1 at a later point.
         sentence_dict = defaultdict(lambda: defaultdict(lambda: 0))
 
         # iterate over the data_dict entries
         for file_dict in data_dict.values():
-            # from the file dict we extract the sentence span start and end points as a list of tuples (eg [(23,45),(65,346)])
+            # from the file dict we extract the sentence span start and end
+            # points as a list of tuples (eg [(23,45),(65,346)])
             # as well as the corresponding string
             sentence_span_list_per_file = file_dict["paragraph"]["span"]
             sentence_str_list_per_file = file_dict["paragraph"]["sofa"]
@@ -324,11 +327,13 @@ class AnalyseSpans:
                     (span["begin"], span["end"])
                     for span in file_dict["data"][cat_tuple[0]][cat_tuple[1]]
                 ]
-                # if the type of span_annotated_tuples is not a list it means there is no occurrence of this category in the given file
+                # if the type of span_annotated_tuples is not a list it means
+                # there is no occurrence of this category in the given file
                 # this should only happen in the test dataset
                 if not isinstance(span_annotated_tuples, list):
                     continue
-                # now we have a list of the span beginnings and endings for each category in a given file.
+                # now we have a list of the span beginnings and endings for
+                # each category in a given file.
                 sentence_dict = AnalyseSpans._find_occurrence(
                     sentence_dict,
                     span_annotated_tuples,
@@ -357,7 +362,8 @@ class AnalyseSpans:
 
         Args:
             data_dict (dict): the dict where all categories are stored.
-            filter_docs (str, optional): The filenames for which to filter. Defaults to None.
+            filter_docs (str, optional): The filenames for which to filter.
+            Defaults to None.
 
         Returns:
             pd.DataFrame: Category occurrences per sentence.
@@ -379,86 +385,3 @@ class AnalyseSpans:
 
         df_sentence_occurrence = AnalyseSpans._find_all_cat_in_paragraph(data_dict)
         return df_sentence_occurrence
-
-
-class PlotSpans:
-    @staticmethod
-    def _get_filter_multiindex(df_sentence_occurrence: pd.DataFrame, filters):
-        """Search through the given filters and return all sub_cat_keys when a main_cat_key is given.
-
-        Args:
-            df (pd.Dataframe): The sentence occurrence dataframe.
-            filters (str, list(str)): Filter values for the dataframe.
-
-        Raises:
-            Warning: Filter not in dataframe columns
-        Returns:
-            list: the filter strings of only the sub_cat_keys
-        """
-        if not isinstance(filters, list):
-            filters = [filters]
-        sub_cat_filter = []
-        for filter in filters:
-            if filter in map_expressions:
-                filter = map_expressions[filter]
-
-            if filter in df_sentence_occurrence.columns.levels[0]:
-                [
-                    sub_cat_filter.append(key)
-                    for key in (df_sentence_occurrence[filter].keys())
-                ]
-            elif filter in df_sentence_occurrence.columns.levels[1]:
-                sub_cat_filter.append(filter)
-            else:
-                raise Warning(f"Filter key: {filter} not in dataframe columns.")
-
-        return sub_cat_filter
-
-    @staticmethod
-    def _generate_corr_df(
-        df_sentence_occurrence: pd.DataFrame, filter=None
-    ) -> pd.DataFrame:
-        if filter is None:
-            return df_sentence_occurrence.corr().sort_index(level=0)
-        else:
-            filter = PlotSpans._get_filter_multiindex(df_sentence_occurrence, filter)
-            # Couldn't figure out how to easily select columns based on the second level column name.
-            # So the df is transposed, the multiindex can be filterd using loc, and then transposed back to get the correct correlation matrix.
-            return (
-                df_sentence_occurrence.T.loc[(slice(None), filter), :]
-                .sort_index(level=0)
-                .T.corr()
-            )
-
-    @staticmethod
-    def report_occurrence_heatmap(df_sentence_occurrence: pd.DataFrame, filter=None):
-        """Returns the occurrence heatmap for the given dataframe.
-        Can also filter based on both main_cat and sub_cat keys.
-
-        Args:
-            df_sentence_occurrence (pd.DataFrame): The sentence occurrence dataframe.
-            filter (str,list(str), optional): Filter values for the dataframe. Defaults to None.
-
-        Returns:
-            plt.figure : The heatmap figure.
-        """
-
-        # df_sentence_occurrence.columns = df_sentence_occurrence.columns.droplevel()
-        plt.figure(figsize=(16, 16))
-        df_corr = PlotSpans._generate_corr_df(df_sentence_occurrence, filter=filter)
-
-        heatmap = sns.heatmap(df_corr, cmap="cividis")
-        return heatmap
-
-    @staticmethod
-    def report_occurrence_matrix(
-        df_sentence_occurrence: pd.DataFrame, filter=None
-    ) -> pd.DataFrame:
-        """
-        Returns the correlation matrix in regards to the given filters.
-        Args:
-            filter (str,list(str), optional): Filter values for the dataframe. Defaults to None.
-        Returns:
-            pd.DataFrame: Correlation matrix.
-        """
-        return PlotSpans._generate_corr_df(df_sentence_occurrence, filter)

@@ -1,4 +1,6 @@
-from ast import Raise
+"""
+Module that handles input reading.
+"""
 from cassis import load_typesystem, load_cas_from_xmi, typesystem
 import pathlib
 import importlib_resources
@@ -17,11 +19,11 @@ class InputOutput:
     input_type = {"xmi": load_cas_from_xmi}
 
     @staticmethod
-    def get_file_type(filename):
+    def get_file_type(filename: str):
         return pathlib.Path(filename).suffix[1:]
 
     @staticmethod
-    def read_typesystem(filename=None) -> object:
+    def read_typesystem(filename: str = None) -> object:
         if filename is None:
             filename = pkg / "data" / "TypeSystem.xml"
         # read in the file system types
@@ -30,7 +32,8 @@ class InputOutput:
 
         try:
             # this type exists for every typesystem created by inception
-            # otherwise a .xmi data file can be loaded as a typesystem without raising an error.
+            # otherwise a .xmi data file can be loaded as a typesystem
+            # without raising an error.
             ts.get_type("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence")
             return ts
 
@@ -38,7 +41,7 @@ class InputOutput:
             raise Warning(f"No valid type system found at {filename}")
 
     @staticmethod
-    def read_cas_file(filename, ts):
+    def read_cas_file(filename: str, ts: object):
         file_type = InputOutput.get_file_type(filename)
 
         with open(filename, "rb") as f:
@@ -59,33 +62,36 @@ class InputOutput:
         Args:
             cas (_type_): the cas object
             ts (_type_): the typesystem object
-            custom_span_type_name (str, optional): The name of the span category to be used as a base. Defaults to "custom.Span".
-            custom_span_category (str, optional): The label in the custom span category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
-            new_span_type_name (str, optional): The name of the new span category. Defaults to 'moralization.instance'.
+            custom_span_type_name (str, optional): The name of the span category
+                to be used as a base. Defaults to "custom.Span".
+            custom_span_category (str, optional): The label in the custom span
+                category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
+            new_span_type_name (str, optional): The name of the new span category.
+                Defaults to 'moralization.instance'.
 
         Returns:
             _type_: _description_
         """
         span_type = ts.get_type(custom_span_type_name)
         try:
-            instance_type = ts.create_type(name="moralization.instance")
+            instance_type = ts.create_type(name=new_span_type_name)
             ts.create_feature(
                 domainType=instance_type,
-                name="KAT1MoralisierendesSegment",
+                name=custom_span_category,
                 rangeType=str,
             )
         except ValueError:
-            instance_type = ts.get_type("moralization.instance")
+            instance_type = ts.get_type(new_span_type_name)
         for span in cas.select(span_type.name):
             if (
-                span["KAT1MoralisierendesSegment"]
-                and span["KAT1MoralisierendesSegment"] != "Keine Moralisierung"
+                span[custom_span_category]
+                and span[custom_span_category] != "Keine Moralisierung"
             ):
                 cas.add_annotation(
                     instance_type(
                         begin=span.begin,
                         end=span.end,
-                        KAT1MoralisierendesSegment=span["KAT1MoralisierendesSegment"],
+                        KAT1MoralisierendesSegment=span[custom_span_category],
                     )
                 )
         return cas, ts
@@ -101,9 +107,9 @@ class InputOutput:
         return data
 
     @staticmethod
-    def get_input_dir(dir: str, use_custom_ts=False) -> dict:
+    def get_input_dir(dir: str, use_custom_ts: bool = False) -> dict:
         "Get a list of input files from a given directory. Currently only xmi files."
-        ### load multiple files into a list of dictionaries
+        # load multiple files into a list of dictionaries
         dir_path = pathlib.Path(dir)
         if not dir_path.is_dir():
             raise FileNotFoundError(f"Path {dir_path} does not exist")
@@ -119,7 +125,10 @@ class InputOutput:
                 raise Warning("Multiple typesystems found. Please provide only one.")
             elif len(ts_files) == 0:
                 raise FileNotFoundError(
-                    f"Trying to find custom typesystem, but no 'TypeSystem.xml' found in {dir_path}"
+                    "Trying to find custom typesystem, \
+                        but no 'TypeSystem.xml' found in {}".format(
+                        dir_path
+                    )
                 )
             ts_file = ts_files[0]
         ts = InputOutput.read_typesystem(ts_file)
@@ -133,7 +142,9 @@ class InputOutput:
                 data_dict[data_file.stem] = {
                     "data": analyse.get_spans(cas, ts),
                     "file_type": file_type,
-                    "sofa": cas.sofa_string,  # note: use .sofa_string not .get_sofa() as the latter removes \n and similar markers
+                    "sofa": cas.sofa_string,
+                    # note: use .sofa_string not .get_sofa()
+                    # as the latter removes \n and similar markers
                     "paragraph": analyse.get_paragraphs(
                         cas, ts, span_str="moralization.instance"
                     ),
@@ -147,12 +158,12 @@ class InputOutput:
 
 
 if __name__ == "__main__":
-    data_dict = InputOutput.get_input_dir("data/")
-    df_instances = analyse.Analyseoccurrence(data_dict, mode="instances").df
+    data_dict = InputOutput.get_input_dir("data/Test_Data/XMI_11")
+    df_instances = analyse.AnalyseOccurrence(data_dict, mode="instances").df
     df_instances.to_csv("instances_out.csv")
     # this df can now easily be filtered.
     # print(df_instances.loc["KAT2-Subjektive Ausdrücke"])
-    df_spans = analyse.Analyseoccurrence(data_dict, mode="spans").df
+    df_spans = analyse.AnalyseOccurrence(data_dict, mode="spans").df
     df_spans.to_csv("spans_out.csv")
     #
     # analyse.get_overlap_percent(
