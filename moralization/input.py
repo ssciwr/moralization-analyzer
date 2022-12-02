@@ -107,6 +107,8 @@ class InputOutput:
         return data
 
     @staticmethod
+    # TODO this should be split into two methods, one gets the dir and
+    # one reads the data
     def get_input_dir(dir: str, use_custom_ts: bool = False) -> dict:
         "Get a list of input files from a given directory. Currently only xmi files."
         # load multiple files into a list of dictionaries
