@@ -1,4 +1,3 @@
-from ast import Raise
 from cassis import load_typesystem, load_cas_from_xmi, typesystem
 import pathlib
 import importlib_resources
@@ -30,7 +29,8 @@ class InputOutput:
 
         try:
             # this type exists for every typesystem created by inception
-            # otherwise a .xmi data file can be loaded as a typesystem without raising an error.
+            # otherwise a .xmi data file can be loaded as a typesystem
+            # without raising an error.
             ts.get_type("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence")
             return ts
 
@@ -59,9 +59,12 @@ class InputOutput:
         Args:
             cas (_type_): the cas object
             ts (_type_): the typesystem object
-            custom_span_type_name (str, optional): The name of the span category to be used as a base. Defaults to "custom.Span".
-            custom_span_category (str, optional): The label in the custom span category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
-            new_span_type_name (str, optional): The name of the new span category. Defaults to 'moralization.instance'.
+            custom_span_type_name (str, optional): The name of the span category
+            to be used as a base. Defaults to "custom.Span".
+            custom_span_category (str, optional): The label in the custom span
+            category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
+            new_span_type_name (str, optional): The name of the new span category.
+            Defaults to 'moralization.instance'.
 
         Returns:
             _type_: _description_
@@ -103,7 +106,7 @@ class InputOutput:
     @staticmethod
     def get_input_dir(dir: str, use_custom_ts=False) -> dict:
         "Get a list of input files from a given directory. Currently only xmi files."
-        ### load multiple files into a list of dictionaries
+        # load multiple files into a list of dictionaries
         dir_path = pathlib.Path(dir)
         if not dir_path.is_dir():
             raise FileNotFoundError(f"Path {dir_path} does not exist")
@@ -119,7 +122,10 @@ class InputOutput:
                 raise Warning("Multiple typesystems found. Please provide only one.")
             elif len(ts_files) == 0:
                 raise FileNotFoundError(
-                    f"Trying to find custom typesystem, but no 'TypeSystem.xml' found in {dir_path}"
+                    "Trying to find custom typesystem, \
+                        but no 'TypeSystem.xml' found in {}".format(
+                        dir_path
+                    )
                 )
             ts_file = ts_files[0]
         ts = InputOutput.read_typesystem(ts_file)
@@ -133,7 +139,9 @@ class InputOutput:
                 data_dict[data_file.stem] = {
                     "data": analyse.get_spans(cas, ts),
                     "file_type": file_type,
-                    "sofa": cas.sofa_string,  # note: use .sofa_string not .get_sofa() as the latter removes \n and similar markers
+                    "sofa": cas.sofa_string,
+                    # note: use .sofa_string not .get_sofa()
+                    # as the latter removes \n and similar markers
                     "paragraph": analyse.get_paragraphs(
                         cas, ts, span_str="moralization.instance"
                     ),
