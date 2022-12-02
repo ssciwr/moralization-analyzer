@@ -1,5 +1,4 @@
 from moralization import analyse, plot
-import pytest
 
 
 def test_PlotSpans_report_occurrence_heatmap(data_dict):
