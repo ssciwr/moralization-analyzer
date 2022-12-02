@@ -1,5 +1,5 @@
 import pytest
-import moralization
+from moralization import input
 import pathlib
 
 
@@ -14,7 +14,7 @@ def _data_path_fixture(dir_path):
 def _data_dict_fixture(dir_path):
     @pytest.fixture
     def _fixture():
-        return moralization.inout.InputOutput.get_input_dir(dir_path)
+        return input.InputOutput.get_input_dir(dir_path)
 
     return _fixture
 

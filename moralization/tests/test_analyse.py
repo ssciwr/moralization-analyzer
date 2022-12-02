@@ -1,10 +1,10 @@
-from moralization import inout, analyse
+from moralization import input, analyse
 import pytest
 
 
 def test_get_spans(data_file):
-    ts = inout.InputOutput.read_typesystem()
-    cas, file_type = inout.InputOutput.read_cas_file(data_file, ts)
+    ts = input.InputOutput.read_typesystem()
+    cas, file_type = input.InputOutput.read_cas_file(data_file, ts)
     span_dict = analyse.get_spans(cas, ts)
     assert list(span_dict.keys()) == [
         "KAT1MoralisierendesSegment",
@@ -24,8 +24,8 @@ def test_get_spans(data_file):
 
 
 def test_get_paragraphs(data_file):
-    ts = inout.InputOutput.read_typesystem()
-    cas, file_type = inout.InputOutput.read_cas_file(data_file, ts)
+    ts = input.InputOutput.read_typesystem()
+    cas, file_type = input.InputOutput.read_cas_file(data_file, ts)
     paragraph_dict = analyse.get_paragraphs(cas, ts)
     assert list(paragraph_dict.keys()) == ["span", "sofa"]
     assert len(paragraph_dict["span"]) == len(paragraph_dict["sofa"])
@@ -92,31 +92,3 @@ def test_AnalyseSpans_report_occurrence_per_paragraph(data_dict, data_file):
     assert len(df_sentence_occurrence) == 4
 
 
-def test_PlotSpans_report_occurrence_heatmap(data_dict):
-    df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
-        data_dict
-    )
-    analyse.PlotSpans.report_occurrence_heatmap(df_sentence_occurrence)
-    analyse.PlotSpans.report_occurrence_heatmap(
-        df_sentence_occurrence, filter=["KAT1MoralisierendesSegment", "Neutral", "Care"]
-    )
-    # check support for old and new category labels.
-    analyse.PlotSpans.report_occurrence_heatmap(
-        df_sentence_occurrence,
-        filter=["KAT1-Moralisierendes Segment", "Neutral", "Care"],
-    )
-
-
-def test_PlotSpans_report_occurrence_matrix(data_dict):
-    df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
-        data_dict
-    )
-    analyse.PlotSpans.report_occurrence_matrix(df_sentence_occurrence)
-    analyse.PlotSpans.report_occurrence_matrix(
-        df_sentence_occurrence, filter=["KAT1MoralisierendesSegment", "Neutral", "Care"]
-    )
-    # check support for old and new category labels.
-    analyse.PlotSpans.report_occurrence_matrix(
-        df_sentence_occurrence,
-        filter=["KAT1-Moralisierendes Segment", "Neutral", "Care"],
-    )
