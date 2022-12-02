@@ -47,4 +47,4 @@ def test_InputOutput_get_input_dir(data_dir):
         "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
         "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
     ]
-    assert testlist == correctlist
+    assert set(testlist) == set(correctlist)
