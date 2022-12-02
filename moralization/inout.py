@@ -1,3 +1,6 @@
+"""
+Module that handles input and output.
+"""
 from cassis import load_typesystem, load_cas_from_xmi, typesystem
 import pathlib
 import importlib_resources
@@ -16,11 +19,11 @@ class InputOutput:
     input_type = {"xmi": load_cas_from_xmi}
 
     @staticmethod
-    def get_file_type(filename):
+    def get_file_type(filename: str):
         return pathlib.Path(filename).suffix[1:]
 
     @staticmethod
-    def read_typesystem(filename=None) -> object:
+    def read_typesystem(filename: str = None) -> object:
         if filename is None:
             filename = pkg / "data" / "TypeSystem.xml"
         # read in the file system types
@@ -38,7 +41,7 @@ class InputOutput:
             raise Warning(f"No valid type system found at {filename}")
 
     @staticmethod
-    def read_cas_file(filename, ts):
+    def read_cas_file(filename: str, ts: object):
         file_type = InputOutput.get_file_type(filename)
 
         with open(filename, "rb") as f:
@@ -104,7 +107,7 @@ class InputOutput:
         return data
 
     @staticmethod
-    def get_input_dir(dir: str, use_custom_ts=False) -> dict:
+    def get_input_dir(dir: str, use_custom_ts: bool = False) -> dict:
         "Get a list of input files from a given directory. Currently only xmi files."
         # load multiple files into a list of dictionaries
         dir_path = pathlib.Path(dir)
@@ -155,12 +158,12 @@ class InputOutput:
 
 
 if __name__ == "__main__":
-    data_dict = InputOutput.get_input_dir("data/")
-    df_instances = analyse.Analyseoccurrence(data_dict, mode="instances").df
+    data_dict = InputOutput.get_input_dir("data/Test_Data/XMI_11")
+    df_instances = analyse.AnalyseOccurrence(data_dict, mode="instances").df
     df_instances.to_csv("instances_out.csv")
     # this df can now easily be filtered.
     # print(df_instances.loc["KAT2-Subjektive Ausdrücke"])
-    df_spans = analyse.Analyseoccurrence(data_dict, mode="spans").df
+    df_spans = analyse.AnalyseOccurrence(data_dict, mode="spans").df
     df_spans.to_csv("spans_out.csv")
     #
     # analyse.get_overlap_percent(
