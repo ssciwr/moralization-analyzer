@@ -58,6 +58,14 @@ def test_get_paragraphs(data_file):
     assert len(paragraph_dict["span"]) == len(paragraph_dict["sofa"])
 
 
+def test_list_categories():
+    # unrave a nested dict
+    mydict = {"one": {"a": 0, "b": 0}, "two": {"c": 1, "d": 1}}
+    mylist = analyse.list_categories(mydict)
+    correctlist = [("one", "a"), ("one", "b"), ("two", "c"), ("two", "d")]
+    assert mylist == correctlist
+
+
 def test_AnalyseOccurrence(data_dict):
     with pytest.raises(ValueError):
         analyse.AnalyseOccurrence({})
