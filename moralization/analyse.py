@@ -164,7 +164,7 @@ class AnalyseOccurrence:
         """Helper method to initialize a dict with the given main and sub categories."""
         for main_cat_key, main_cat_value in span_dict.items():
             for sub_cat_key, sub_cat_value in main_cat_value.items():
-                # the tuple index makes it easy to convert the dict into a pd dataframe
+                # the tuple key makes it easy to convert the dict into a pd dataframe
                 self.instance_dict[file_name][(main_cat_key, sub_cat_key)] = len(
                     sub_cat_value
                 )

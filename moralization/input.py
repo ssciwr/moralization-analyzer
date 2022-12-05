@@ -118,8 +118,8 @@ class InputOutput:
     @staticmethod
     def read_cas_content(data_files: list or str, ts: object):
         data_dict = {}
-        if isinstance(data_files, str):
-            data_files = list(data_files)
+        if not isinstance(data_files, list):
+            data_files = [data_files]
         for data_file in data_files:
             try:
                 cas, file_type = InputOutput.read_cas_file(data_file, ts=ts)
