@@ -113,28 +113,29 @@ def test_AnalyseOccurrence_get_categories(occurrence_obj):
     assert testlist[file_name][test_key] == 3
 
 
-def test_AnalyseSpans_report_occurrence_per_paragraph(data_dict, data_file):
+def test_AnalyseOccurrence_add_total(occurrence_obj):
+    file_name = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
+    occurrence_obj._initialize_df()
+    # print(occurrence_obj.df.loc[("total instances", "with invalid")])
+    occurrence_obj._add_total()
+    assert occurrence_obj.df.loc[("total instances", "with invalid")][file_name] == 79
 
+
+def test_AnalyseSpans_report_occurrence_per_paragraph(data_dict, data_file):
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict
     )
     assert len(df_sentence_occurrence) == 9
-
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict, data_file
     )
-
     assert len(df_sentence_occurrence) == 5
-
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict, "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW.xmi"
     )
-
     assert len(df_sentence_occurrence) == 5
-
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict,
         "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
     )
-
     assert len(df_sentence_occurrence) == 4
