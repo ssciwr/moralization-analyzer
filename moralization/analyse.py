@@ -245,8 +245,8 @@ class AnalyseOccurrence:
                 # span_annotated_text = [
                 #     span.replace('"', "") for span in span_annotated_text
                 # ]
-                # convert list to &-separated spans
-                span_annotated_text = " & ".join(span_annotated_text)
+                # convert list to ###-separated spans
+                span_annotated_text = " ### ".join(span_annotated_text)
                 self.df.at[
                     cat_tuple,
                     file_name,
