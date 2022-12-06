@@ -45,6 +45,6 @@ def test_InteractiveCategoryPlot(data_dict):
     heatmap.show()
 
     heatmap = plot.InteractiveCategoryPlot(
-        data_dict, plot_callback=plot.percent_matrix_heatmap
+        data_dict, plot_callback=plot.PlotSpans.report_occurrence_heatmap
     )
     heatmap.show()
