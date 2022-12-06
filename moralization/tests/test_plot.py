@@ -1,6 +1,7 @@
 from moralization import analyse, plot
 import matplotlib
 
+
 def test_PlotSpans_report_occurrence_heatmap(data_dict):
     df_sentence_occurrence = analyse.AnalyseSpans.report_occurrence_per_paragraph(
         data_dict

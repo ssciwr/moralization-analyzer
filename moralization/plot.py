@@ -8,6 +8,7 @@ from moralization import analyse as ae
 import ipywidgets
 import IPython
 
+
 class PlotSpans:
     @staticmethod
     def _get_filter_multiindex(df_paragraph_occurrence: pd.DataFrame, filters):
@@ -107,6 +108,7 @@ class InteractiveCategoryPlot:
         plot_callback: The plotting function to call. Default is `percent_matrix_heatmap`.
         figsize: The figsize tuple to pass to matplotlib
     """
+
     def __init__(self, data_dict, plot_callback=None, figsize=None):
         if plot_callback is None:
             self.plot_callback = PlotSpans.report_occurrence_heatmap
