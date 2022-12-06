@@ -155,9 +155,7 @@ class InteractiveCategoryPlot:
         with self._output:
             if change["new"]:
                 IPython.display.clear_output(wait=True)
-                fig, ax = plt.subplots(figsize=self.figsize)
                 self.plot_callback(self.df)
-                plt.show()
 
     def _filename_changed(self, change):
         new_categories = list(self._categories[change["new"]])
