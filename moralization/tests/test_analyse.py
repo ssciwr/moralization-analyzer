@@ -59,7 +59,7 @@ def test_get_paragraphs(data_file):
 
 
 def test_list_categories():
-    # unrave a nested dict
+    # unravel a nested dict
     mydict = {"one": {"a": 0, "b": 0}, "two": {"c": 1, "d": 1}}
     mylist = analyse.list_categories(mydict)
     correctlist = [("one", "a"), ("one", "b"), ("two", "c"), ("two", "d")]
@@ -124,7 +124,6 @@ def test_AnalyseOccurrence_get_categories(occurrence_obj):
 def test_AnalyseOccurrence_add_total(occurrence_obj):
     file_name = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
     occurrence_obj._initialize_df()
-    # print(occurrence_obj.df.loc[("total instances", "with invalid")])
     occurrence_obj._add_total()
     assert occurrence_obj.df.loc[("total instances", "with invalid")][file_name] == 79
 

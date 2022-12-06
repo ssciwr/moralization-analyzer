@@ -280,31 +280,28 @@ class AnalyseOccurrence:
 
 
 class AnalyseSpans:
-
-    # TODO refactor complexity
-
     @staticmethod
     def _find_occurrence(
-        sentence_dict,
+        span_dict,
         span_annotated_tuples,
-        sentence_span_list_per_file,
-        sentence_str_list_per_file,
+        span_list_per_file,
+        str_list_per_file,
         main_cat_key,
         sub_cat_key,
     ):
         """Find occurrence of category in a sentence."""
         for occurrence in span_annotated_tuples:
             # with bisect.bisect we can search for the index of the
-            # sentece in which the current category occurrence falls.
-            sentence_idx = bisect.bisect(sentence_span_list_per_file, occurrence)
-            # when we found a sentence index we can use this to add the sentence string
+            # paragraph in which the current category occurrence falls.
+            paragraph_idx = bisect.bisect(span_list_per_file, occurrence)
+            # when we found a paragraph index we can use this to add the paragraph string
             # to our dict and add +1 to the (main_cat_key, sub_cat_key) cell.
-            if sentence_idx > 0:
-                sentence_dict[sentence_str_list_per_file[sentence_idx - 1]][
+            if paragraph_idx > 0:
+                span_dict[str_list_per_file[paragraph_idx - 1]][
                     (main_cat_key, sub_cat_key)
                 ] += 1
 
-        return sentence_dict
+        return span_dict
 
     @staticmethod
     def _find_all_cat_in_paragraph(data_dict):
@@ -358,7 +355,9 @@ class AnalyseSpans:
         return df_sentence_occurrence
 
     @staticmethod
-    def report_occurrence_per_paragraph(data_dict, filter_docs=None) -> pd.DataFrame:
+    def report_occurrence_per_paragraph(
+        data_dict: dict, filter_docs=None
+    ) -> pd.DataFrame:
         """Returns a Pandas dataframe where each sentence is its own index
         and the column values are the occurrences of the different categories.
 
@@ -372,18 +371,17 @@ class AnalyseSpans:
         """
 
         validate_data_dict(data_dict)
-
+        # we need mapping to new category names
+        # we need ordering of the df
         if filter_docs is not None:
             if not isinstance(filter_docs, list):
                 filter_docs = [filter_docs]
-
             # allows use of abs path or just filename with or without extension.
             for i, filter_doc in enumerate(filter_docs):
                 filter_docs[i] = pathlib.PurePath(filter_doc).stem
-
             data_dict = {
                 filter_doc: data_dict[filter_doc] for filter_doc in filter_docs
             }
-
         df_sentence_occurrence = AnalyseSpans._find_all_cat_in_paragraph(data_dict)
+
         return df_sentence_occurrence
