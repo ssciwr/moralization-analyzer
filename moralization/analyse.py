@@ -309,8 +309,8 @@ class AnalyseSpans:
             # from the file dict we extract the sentence span start and end
             # points as a list of tuples (eg [(23,45),(65,346)])
             # as well as the corresponding string
-            sentence_span_list_per_file = file_dict["paragraph"]["span"]
-            sentence_str_list_per_file = file_dict["paragraph"]["sofa"]
+            span_list_per_file = file_dict["paragraph"]["span"]
+            str_list_per_file = file_dict["paragraph"]["sofa"]
             # get the main and sub category names
             category_names = list_categories(file_dict["data"])
             for cat_tuple in category_names:
@@ -329,23 +329,25 @@ class AnalyseSpans:
                 paragraph_dict = AnalyseSpans._find_occurrence(
                     paragraph_dict,
                     span_annotated_tuples,
-                    sentence_span_list_per_file,
-                    sentence_str_list_per_file,
+                    span_list_per_file,
+                    str_list_per_file,
                     cat_tuple[0],
                     cat_tuple[1],
                 )
         # transform dict into multicolumn pd.DataFrame
-        df_sentence_occurrence = (
+        df_paragraph_occurrence = (
             pd.DataFrame(paragraph_dict).fillna(0).sort_index(level=0).transpose()
         )
-        df_sentence_occurrence.index = df_sentence_occurrence.index.set_names(
+        df_paragraph_occurrence.index = df_paragraph_occurrence.index.set_names(
             (["Paragraph"])
         )
         # map the category names to the updated ones
-        df_sentence_occurrence = df_sentence_occurrence.rename(columns=map_expressions)
+        df_paragraph_occurrence = df_paragraph_occurrence.rename(
+            columns=map_expressions
+        )
         # sort the categories
-        df_sentence_occurrence = df_sentence_occurrence.sort_index(axis=1)
-        return df_sentence_occurrence
+        df_paragraph_occurrence = df_paragraph_occurrence.sort_index(axis=1)
+        return df_paragraph_occurrence
 
     @staticmethod
     def report_occurrence_per_paragraph(
@@ -364,7 +366,6 @@ class AnalyseSpans:
         """
 
         validate_data_dict(data_dict)
-        # we need ordering of the df
         if filter_docs is not None:
             if not isinstance(filter_docs, list):
                 filter_docs = [filter_docs]
