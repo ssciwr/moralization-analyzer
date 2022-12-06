@@ -57,7 +57,8 @@ def test_InputOutput_read_cas_content(data_dir):
         "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
     ]
     assert set(testlist) == set(correctlist)
-    assert data_dict[testlist[0]]["file_type"] == "xmi"
+    testitem = "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB"
+    assert data_dict[testitem]["file_type"] == "xmi"
     test_string = (
         "HMP05/AUG.00228 Hamburger Morgenpost, 03.08.2005, S. 5; "
         + "ALG II ist mit der Menschenwürde vereinbar ### BERLIN Das "
@@ -65,6 +66,6 @@ def test_InputOutput_read_cas_content(data_dir):
         + "grundgesetzlich garantierte Menschenwürde verletzt wird, "
         + "urteilte das Sozialgericht Berlin."
     )
-    assert data_dict[testlist[0]]["sofa"][0:920].strip() == test_string
+    assert data_dict[testitem]["sofa"][0:920].strip() == test_string
     test_paragraph_span = [(766, 919), (1112, 1332), (2573, 2724), (7083, 7159)]
-    assert data_dict[testlist[0]]["paragraph"]["span"] == test_paragraph_span
+    assert data_dict[testitem]["paragraph"]["span"] == test_paragraph_span

@@ -118,8 +118,8 @@ class InputOutput:
     @staticmethod
     def read_cas_content(data_files: list or str, ts: object):
         data_dict = {}
-        if isinstance(data_files, str):
-            data_files = list(data_files)
+        if not isinstance(data_files, list):
+            data_files = [data_files]
         for data_file in data_files:
             try:
                 cas, file_type = InputOutput.read_cas_file(data_file, ts=ts)
@@ -152,16 +152,17 @@ class InputOutput:
 
 if __name__ == "__main__":
     data_dict = InputOutput.read_data("data/Test_Data/XMI_11")
-    df_instances = analyse.AnalyseOccurrence(data_dict, mode="instances").df
-    df_instances.to_csv("instances_out.csv")
+    # df_instances = analyse.AnalyseOccurrence(data_dict, mode="instances").df
+    # df_instances.to_csv("instances_out.csv")
     # this df can now easily be filtered.
     # print(df_instances.loc["KAT2-Subjektive Ausdrücke"])
-    df_spans = analyse.AnalyseOccurrence(data_dict, mode="spans").df
-    df_spans.to_csv("spans_out.csv")
+    # df_spans = analyse.AnalyseOccurrence(data_dict, mode="spans").df
+    # df_spans.to_csv("spans_out.csv")
     #
     # analyse.get_overlap_percent(
     # "Forderer:in", "Neutral", data_dict, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
     #     )
     df_sentences = analyse.AnalyseSpans.report_occurrence_per_paragraph(data_dict)
+    print(df_sentences)
     df_sentences.to_csv("sentences_out.csv")
     print(df_sentences)
