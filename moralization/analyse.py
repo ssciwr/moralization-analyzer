@@ -128,14 +128,12 @@ class AnalyseOccurrence:
         data_dict: dict,
         mode: str = "instances",
         file_names: str = None,
-        mapping: bool = True,
     ) -> None:
 
         validate_data_dict(data_dict)
 
         self.mode = mode
         self.data_dict = data_dict
-        self.mapping = mapping
         self.mode_dict = {
             "instances": self.report_instances,
             "spans": self.report_spans,
@@ -146,9 +144,7 @@ class AnalyseOccurrence:
         # call the analysis method
         self.mode_dict[self.mode]()
         # map the df columns to the expressions given
-        # we skip this here for now if paragraph correlation is analyzed
-        if self.mapping:
-            self.map_categories()
+        self.map_categories()
 
     def _initialize_files(self, file_names: str) -> list:
         """Helper method to get file names in list."""
@@ -305,11 +301,9 @@ class AnalyseSpans:
 
     @staticmethod
     def _find_all_cat_in_paragraph(data_dict):
-
         # sentence, main_cat, sub_cat : occurrence with the default value of
         # 0 to allow adding of +1 at a later point.
         sentence_dict = defaultdict(lambda: defaultdict(lambda: 0))
-
         # iterate over the data_dict entries
         for file_dict in data_dict.values():
             # from the file dict we extract the sentence span start and end
@@ -320,7 +314,6 @@ class AnalyseSpans:
             # get the main and sub category names
             category_names = list_categories(file_dict["data"])
             for cat_tuple in category_names:
-
                 # find the beginning and end of each span as a tuple
                 span_annotated_tuples = [
                     (span["begin"], span["end"])
@@ -341,16 +334,16 @@ class AnalyseSpans:
                     cat_tuple[0],
                     cat_tuple[1],
                 )
-
         # transform dict into multicolumn pd.DataFrame
         df_sentence_occurrence = (
             pd.DataFrame(sentence_dict).fillna(0).sort_index(level=0).transpose()
         )
         df_sentence_occurrence.index = df_sentence_occurrence.index.set_names(
-            (["Sentence"])
+            (["Paragraph"])
         )
         # map the category names to the updated ones
         df_sentence_occurrence = df_sentence_occurrence.rename(columns=map_expressions)
+        # sort the categories
 
         return df_sentence_occurrence
 
@@ -371,7 +364,6 @@ class AnalyseSpans:
         """
 
         validate_data_dict(data_dict)
-        # we need mapping to new category names
         # we need ordering of the df
         if filter_docs is not None:
             if not isinstance(filter_docs, list):
@@ -383,5 +375,4 @@ class AnalyseSpans:
                 filter_doc: data_dict[filter_doc] for filter_doc in filter_docs
             }
         df_sentence_occurrence = AnalyseSpans._find_all_cat_in_paragraph(data_dict)
-
         return df_sentence_occurrence
