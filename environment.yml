@@ -11,6 +11,7 @@ dependencies:
   - click
   - importlib_metadata
   - openpyxl
+  - ipywidgets
   - pip:
     - dkpro-cassis
     - pytest-cov
