@@ -303,7 +303,7 @@ class AnalyseSpans:
     def _find_all_cat_in_paragraph(data_dict):
         # sentence, main_cat, sub_cat : occurrence with the default value of
         # 0 to allow adding of +1 at a later point.
-        sentence_dict = defaultdict(lambda: defaultdict(lambda: 0))
+        paragraph_dict = defaultdict(lambda: defaultdict(lambda: 0))
         # iterate over the data_dict entries
         for file_dict in data_dict.values():
             # from the file dict we extract the sentence span start and end
@@ -326,8 +326,8 @@ class AnalyseSpans:
                     continue
                 # now we have a list of the span beginnings and endings for
                 # each category in a given file.
-                sentence_dict = AnalyseSpans._find_occurrence(
-                    sentence_dict,
+                paragraph_dict = AnalyseSpans._find_occurrence(
+                    paragraph_dict,
                     span_annotated_tuples,
                     sentence_span_list_per_file,
                     sentence_str_list_per_file,
@@ -336,7 +336,7 @@ class AnalyseSpans:
                 )
         # transform dict into multicolumn pd.DataFrame
         df_sentence_occurrence = (
-            pd.DataFrame(sentence_dict).fillna(0).sort_index(level=0).transpose()
+            pd.DataFrame(paragraph_dict).fillna(0).sort_index(level=0).transpose()
         )
         df_sentence_occurrence.index = df_sentence_occurrence.index.set_names(
             (["Paragraph"])
@@ -344,7 +344,7 @@ class AnalyseSpans:
         # map the category names to the updated ones
         df_sentence_occurrence = df_sentence_occurrence.rename(columns=map_expressions)
         # sort the categories
-
+        df_sentence_occurrence = df_sentence_occurrence.sort_index(axis=1)
         return df_sentence_occurrence
 
     @staticmethod
