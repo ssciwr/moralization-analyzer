@@ -13,3 +13,5 @@ ipywidgets
 spacy
 jupyter
 classy-classification
+transformers
+pytorch-lightning

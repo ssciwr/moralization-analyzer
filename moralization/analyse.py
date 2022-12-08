@@ -198,7 +198,7 @@ class AnalyseOccurrence:
         if self.mode == "instances":
             self.df = self.df.fillna(0)
         if self.mode == "spans":
-            self.df = self.df.replace({np.nan: None})
+            self.df = self.df.replace({np.nan: ""})
 
     def report_instances(self):
         """Reports number of occurrences of a category per text source."""
