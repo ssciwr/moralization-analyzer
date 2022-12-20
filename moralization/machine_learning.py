@@ -1,16 +1,7 @@
-from logging import exception
 import spacy
-from spacy.tokens import DocBin
-from spacy.matcher import Matcher
-import classy_classification  # needed although not explicitly used
 import pandas as pd
 import numpy as np
-
-from moralization import InputOutput
-import glob
-import os
 import random
-import subprocess
 from collections import defaultdict
 import pathlib
 from sklearn.metrics import classification_report
@@ -19,12 +10,14 @@ import pickle
 
 class Few_Shot_Classifier:
     """
-    A few shot classifier based on https://github.com/Pandora-Intelligence/classy-classification.
+    A few shot classifier based on
+    https://github.com/Pandora-Intelligence/classy-classification.
 
     """
 
     def __init__(self, model="de_core_news_sm"):
-        """The initilization can either directly take a spacy nlp object, a saved classifier file or be empty for a new default nlp oject.
+        """The initilization can either directly take a spacy nlp object, a saved
+        classifier file or be empty for a new default nlp oject.
 
         :param nlp: Either NLP-Object, path or none, defaults to None
         :type nlp: nlp,spacy.lang.de.German or str, optional
@@ -108,7 +101,8 @@ class Few_Shot_Classifier:
 
     def validate_model(self, validation_data=None, return_df=False):
         """
-        For the moment validation data needs to have the format specified in https://github.com/Pandora-Intelligence/classy-classification.
+        For the moment validation data needs to have the format specified in
+        https://github.com/Pandora-Intelligence/classy-classification.
 
         """
         if validation_data is None:
@@ -146,7 +140,8 @@ class Few_Shot_Classifier:
                 string.split("_val")[0] for string in validation_df["true_class"]
             ]
 
-            # acc = {key:accuracy_score(validation_df[f"{key}_val"],test_df[key]) for key in test_df.keys() if key!= "pred_class"}
+            # acc = {key:accuracy_score(validation_df[f"{key}_val"],test_df[key])
+            # for key in test_df.keys() if key!= "pred_class"}
             output_df = pd.DataFrame(
                 classification_report(
                     validation_df["true_class"], test_df["pred_class"], output_dict=True
