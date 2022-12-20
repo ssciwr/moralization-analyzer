@@ -1,12 +1,12 @@
-from moralization import input, analyse
+from moralization import input_data, analyse
 import pytest
 from collections import defaultdict
 
 
 @pytest.fixture
 def get_data_dict(ts_file, data_file):
-    ts = input.InputOutput.read_typesystem(ts_file)
-    data_dict = input.InputOutput.read_cas_content(data_file, ts)
+    ts = input_data.InputOutput.read_typesystem(ts_file)
+    data_dict = input_data.InputOutput.read_cas_content(data_file, ts)
     return data_dict
 
 
@@ -30,8 +30,8 @@ def test_validate_data_dict():
 
 
 def test_get_spans(data_file):
-    ts = input.InputOutput.read_typesystem()
-    cas, _ = input.InputOutput.read_cas_file(data_file, ts)
+    ts = input_data.InputOutput.read_typesystem()
+    cas, _ = input_data.InputOutput.read_cas_file(data_file, ts)
     span_dict = analyse.get_spans(cas, ts)
     assert list(span_dict.keys()) == [
         "KAT1MoralisierendesSegment",
@@ -51,8 +51,8 @@ def test_get_spans(data_file):
 
 
 def test_get_paragraphs(data_file):
-    ts = input.InputOutput.read_typesystem()
-    cas, _ = input.InputOutput.read_cas_file(data_file, ts)
+    ts = input_data.InputOutput.read_typesystem()
+    cas, _ = input_data.InputOutput.read_cas_file(data_file, ts)
     paragraph_dict = analyse.get_paragraphs(cas, ts)
     assert list(paragraph_dict.keys()) == ["span", "sofa"]
     assert len(paragraph_dict["span"]) == len(paragraph_dict["sofa"])
