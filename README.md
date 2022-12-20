@@ -1,7 +1,7 @@
 # Automated recognition of moralization in written text
 
 ![License: MIT](https://img.shields.io/github/license/ssciwr/moralization)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ssciwr/moralization/CI)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ssciwr/moralization/ci.yml?branch=main)
 ![codecov](https://img.shields.io/codecov/c/github/ssciwr/moralization)
 ![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ssciwr_moralization&metric=alert_status)
 ![Language](https://img.shields.io/github/languages/top/ssciwr/moralization)
