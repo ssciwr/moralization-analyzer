@@ -216,6 +216,14 @@ class Spacy_Training:
         return self.working_dir / "config_filled.cfg"
 
     def train(self, use_gpu=-1, overwrite=None):
+        """Use the spacy training method to generate a new model.
+
+        :param use_gpu: enter the gpu device you want to use.
+            Keep in Mind that cuda must be correctly installed, defaults to -1
+        :type use_gpu: int, optional
+        :param overwrite: additional config overwrites, defaults to None
+        :type overwrite: _type_, optional
+        """
         from spacy.cli.train import train
 
         output = os.path.join(self.working_dir, "output")
