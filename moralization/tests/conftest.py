@@ -27,3 +27,6 @@ ts_file = _data_path_fixture(dir_path / "TypeSystem.xml")
 data_file = _data_path_fixture(
     dir_path / "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW.xmi"
 )
+config_file = _data_path_fixture(
+    pathlib.Path(__file__).parents[2].resolve() / "data" / "Training" / "config.cfg"
+)

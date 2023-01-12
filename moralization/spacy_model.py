@@ -1,88 +1,236 @@
-from logging import exception
 import spacy
 from spacy.tokens import DocBin
-from spacy.matcher import Matcher
+from spacy import displacy
 
-from moralization import InputOutput
-import glob
+from moralization.input_data import InputOutput
+from moralization.utils import is_interactive
+
 import os
-import random
-from collections import defaultdict
 import pathlib
-from sklearn.metrics import classification_report
+from pathlib import Path
+
+from spacy.cli.init_config import fill_config
+from sklearn.model_selection import train_test_split
+from tempfile import mkdtemp
 
 
-class Machine_Learning:  # name is subject to change
-    """Namespace class for Machine Learning
-    The config file can also be located in the working directory.
-    """
+class Spacy_Setup:
+    """Helper class to organize and prepare spacy trainings data from xml/xmi files."""
 
-    def __init__(self, data_dir: str, working_dir=None, config_file=None):
+    def __init__(self, data_dir, working_dir=None):
         """Handler for machine learning training and analysis
         :param data_dir: Directory with data files
-        :type data_dir: str
+        :type data_dir: str/Path
         :param working_dir: Directory where the training data, configs and results are stored., defaults to Debug value
         :type working_dir: _type_, optional
         :param config_file: Filename or path for the config file, defaults to searching in the working directory.
         :type config_file: _type_, optional
         """
+
+        self.data_dir, self.working_dir = self._setup_working_dir(data_dir, working_dir)
+
+    def _setup_working_dir(self, data_dir, working_dir):
+
         # maybe set default working_dir to tmp dir
-        data_dir = os.path.abspath(data_dir)
+        data_dir = Path(data_dir)
 
         if working_dir:
-            working_dir = os.path.abspath(working_dir)
+            working_dir = Path(working_dir)
         else:
-            working_dir = os.path.abspath("../data/Training/")
+            working_dir = Path(mkdtemp())
 
+        pathlib.Path(working_dir).mkdir(exist_ok=True)
+        return data_dir, working_dir
+
+    def convert_data_to_spacy_doc(self):
+        """convert the given xmi/xml files to a spacy specific binary filesystem.
+
+        :param output_dir: where to store generated files. If None is given the working dir will be used
+        :type output_dir: dir
+        """
+        data_dict = InputOutput.read_data(self.data_dir)
+
+        self.doc_dict = self._convert_dict_to_doc_dict(data_dict)
+
+        return self.doc_dict
+
+    def export_training_testing_data(self, output_dir=None):
+        """_summary_
+
+        :param output_dir: _description_, defaults to None
+        :type output_dir: _type_, optional
+        """
+        if output_dir is None:
+            output_dir = self.working_dir
+
+        db_train = DocBin()
+        db_dev = DocBin()
+
+        for file in self.doc_dict.values():
+            db_train.add(file["train"])
+            db_dev.add(file["dev"])
+
+        db_train.to_disk(output_dir / "train.spacy")
+        db_dev.to_disk(output_dir / "dev.spacy")
+
+    def visualize_data(self, filename=None, type="all", style="span"):
+        """Use the displacy class offered by spacy to visualize the current dataset.
+
+        :param filename:    Specify which of the loaded files should be presented, if None all files are shown.
+                            This can also take a list., defaults to None
+        :type filename: str/list, optional
+        :param type: Specify is only the trainings, the testing or all datapoints should be shown, defaults to "all"
+        :type type: str, optional
+        :param type: the visualization type given to displacy, available are "dep", "ent" and "span, defaults to "span".
+
+        """
+        if not is_interactive():
+            raise NotImplementedError(
+                "Please only use this function in a jupyter notebook for the time being."
+            )
+
+        if filename is None:
+            filename = list(self.doc_dict.keys())
+        return displacy.render(
+            [self.doc_dict[file][type] for file in filename], style=style
+        )
+
+    def _convert_dict_to_doc_dict(self, data_dict):
+
+        nlp = spacy.blank("de")
+        doc_dict = {}
+
+        for file in data_dict.keys():
+            doc_train = nlp(data_dict[file]["sofa"])
+            doc_dev = nlp(data_dict[file]["sofa"])
+            doc_all = nlp(data_dict[file]["sofa"])
+
+            ents = []
+
+            for main_cat_key, main_cat_value in data_dict[file]["data"].items():
+                if main_cat_key != "KAT5Ausformulierung":
+                    for sub_cat_label, sub_cat_span_list in main_cat_value.items():
+                        if sub_cat_label != "Dopplung":
+                            for span in sub_cat_span_list:
+                                spacy_span = doc_train.char_span(
+                                    span["begin"],
+                                    span["end"],
+                                    label=sub_cat_label,
+                                )
+                                ents.append(spacy_span)
+
+            ents_train, ents_test = train_test_split(
+                ents, test_size=0.2, random_state=42
+            )
+
+            doc_train.spans["sc"] = ents_train
+            doc_dev.spans["sc"] = ents_test
+            doc_all.spans["sc"] = ents
+
+            doc_dict[file] = {"train": doc_train, "dev": doc_dev, "all": doc_all}
+
+        return doc_dict
+
+
+class Spacy_Training:
+
+    """This class is used to configure and run spacy trainings."""
+
+    def __init__(
+        self, working_dir, training_file=None, testing_file=None, config_file=None
+    ):
+        self.working_dir = Path(working_dir)
+        self.file_dict = self._find_files(training_file, testing_file, config_file)
+
+    def _find_file(self, file):
+        if file:
+            file = Path(file)
+
+        if not file.is_file() and (self.working_dir / file).is_file():
+            file = self.working_dir / file
+
+        else:
+            raise FileNotFoundError(
+                f"""{file} could not be found as absolute path or in {self.working_dir}.
+                Available files are: {list(self.working_dir.glob('*'))}"""
+            )
+        return file
+
+    def _find_files(self, training_file, testing_file, config_file):
+
+        # use default names is no name is given.
+        if training_file is None:
+            training_file = "train.spacy"
+        if testing_file is None:
+            testing_file = "dev.spacy"
+
+        # find the files either by absolute path or search default/relativ filename.
+        training_file = self._find_file(training_file)
+        testing_file = self._find_file(testing_file)
+        config_file = self._check_config_file(config_file)
+
+        file_dict = {
+            "training": training_file,
+            "testing": testing_file,
+            "config": config_file,
+        }
+
+        return file_dict
+
+    def _check_config_file(self, config_file):
         # find config file as abs path, or as filename in the working directory.
+
         if config_file:
-            if os.path.isfile(config_file):
-                config_file = os.path.abspath(config_file)
+            config_file = Path(config_file)
+
+            if config_file.is_file():
+                config_file = Path(config_file)
             else:
-                if os.path.isfile(os.path.join(working_dir, config_file)):
-                    config_file = os.path.abspath(
-                        os.path.join(working_dir, config_file)
-                    )
+                if (self.working_dir / config_file).is_file():
+                    config_file = self.working_dir / config_file
                 else:
-                    raise Exception(
-                        f"The given config file could not be found in the working directory: {working_dir}"
+                    raise FileNotFoundError(
+                        f"The given config file could not be found in the working directory: {self.working_dir}"
                     )
 
         else:
             # search working dir for config file
-            config_files = glob.glob(os.path.join(working_dir, "*.cfg"))
+            config_files = list(self.working_dir.glob("*.cfg"))
             if len(config_files) == 1:
                 config_file = config_files[0]
             elif len(config_files) == 0:
                 raise FileNotFoundError(
-                    f"A config file was not provided and no config file could be found  in {data_dir}."
+                    f"A config file was not provided and no config file could be found  in {self.working_dir}."
                 )
             else:
                 raise Exception(
-                    f"A config file was not provided and multiple config files were found in {data_dir}. Please provide only one or specify the filename."
+                    f"""A config file was not provided and multiple config files were found in {self.working_dir}.
+                    Please provide only one or specify the filename."""
                 )
 
-        self.working_dir = working_dir
-        self.data_dir = data_dir
+        # after finding the config we use the provided spacy function to autofill all missing entries.
+        fill_config(
+            base_path=config_file, output_file=self.working_dir / "config_filled.cfg"
+        ),
 
-        self.train_file, self.test_file = self.prepare_spacy_data(
-            self.data_dir, self.working_dir
-        )
-        self.config_file = self.prepare_spacy_config(config_file, self.working_dir)
+        return self.working_dir / "config_filled.cfg"
 
-    def train(self, use_gpu=-1):
+    def train(self, use_gpu=-1, overwrite=None):
         from spacy.cli.train import train
 
         output = os.path.join(self.working_dir, "output")
         os.makedirs(output, exist_ok=True)
+        if overwrite is None:
+            overwrite = {}
 
         train(
-            config_path=self.config_file,
+            config_path=self.file_dict["config"].absolute(),
             output_path=output,
             use_gpu=use_gpu,
             overrides={
-                "paths.train": self.train_file,
-                "paths.dev": self.test_file,
+                "paths.train": self.file_dict["training"].absolute().as_posix(),
+                "paths.dev": self.file_dict["testing"].absolute().as_posix(),
+                **overwrite,
             },
         )
 
@@ -90,7 +238,7 @@ class Machine_Learning:  # name is subject to change
         from spacy.cli.evaluate import evaluate
 
         if validation_file is None:
-            validation_file = self.test_file
+            validation_file = self.file_dict["testing"].absolute()
 
         evaluation_data = evaluate(
             self._best_model(),
@@ -110,120 +258,6 @@ class Machine_Learning:  # name is subject to change
             return os.path.join(self.working_dir, "output", "model-best")
         else:
             raise FileNotFoundError(
-                f"No best model could be found in{os.path.join(self.working_dir,'output')}. Did you train your model before?"
+                f"""No best model could be found in{os.path.join(self.working_dir,'output')}.
+                Did you train your model before?"""
             )
-
-    @staticmethod
-    def prepare_spacy_data(dir_path, working_dir):
-        """Prepare data for spacy analysis.
-        :param dir_path: Path to data dir, defaults to None
-        :type dir_path: _type_, str,path
-        :raises Warning: data directory and data dict cant both be given.
-        """
-
-        pathlib.Path(working_dir).mkdir(exist_ok=True)
-
-        data_dict = InputOutput.get_input_dir(dir_path)
-
-        nlp = spacy.blank("de")
-        # nlp.add_pipe("sentencizer",config={"punct_chars":['!','.','?']})
-        db_train = DocBin()
-        db_dev = DocBin()
-
-        for file in data_dict.keys():
-            doc_train = nlp(data_dict[file]["sofa"])
-            doc_dev = nlp(data_dict[file]["sofa"])
-            ents = []
-
-            for main_cat_key, main_cat_value in data_dict[file]["data"].items():
-                if main_cat_key != "KAT5Ausformulierung":
-                    for sub_cat_label, sub_cat_span_list in main_cat_value.items():
-                        if sub_cat_label != "Dopplung":
-                            for span in sub_cat_span_list:
-                                spacy_span = doc_train.char_span(
-                                    span["begin"],
-                                    span["end"],
-                                    label=sub_cat_label,
-                                )
-                                ents.append(spacy_span)
-
-            # split data for each file in test and training
-            random.shuffle(ents)
-            ents_train = ents[: int(0.95 * len(ents))]
-            ents_test = ents[int(0.05 * len(ents)) :]
-
-            # https://explosion.ai/blog/spancat
-            # use spancat for multiple labels on the same token
-
-            doc_train.spans["sc"] = ents_train
-            db_train.add(doc_train)
-
-            doc_dev.spans["sc"] = ents_test
-            db_dev.add(doc_dev)
-
-        db_train.to_disk(os.path.join(working_dir, "train.spacy"))
-        db_dev.to_disk(os.path.join(working_dir, "dev.spacy"))
-        return os.path.join(working_dir, "train.spacy"), os.path.join(
-            working_dir, "dev.spacy"
-        )
-
-    @staticmethod
-    def prepare_spacy_config(config_file, working_dir):
-        from pathlib import Path
-        from spacy.cli.init_config import fill_config
-
-        fill_config(
-            base_path=config_file,
-            output_file=Path(os.path.join(working_dir, "config.cfg")),
-        )
-        return os.path.join(working_dir, "config.cfg")
-
-
-class Pattern_Matching:
-    def __init__(self, df_spans):
-        self.df_spans = df_spans
-        self.nlp = spacy.load("de_core_news_sm")
-        self.matcher = Matcher(self.nlp.vocab)
-
-        self._make_pattern_list()
-
-    def _make_pattern_list(self):
-        self.val_dict = defaultdict(list)
-        for id in self.df_spans.index:
-            for column in self.df_spans.columns:
-
-                if self.df_spans[column].loc[id]:
-
-                    for string in self.df_spans[column].loc[id].split("&"):
-                        pattern = []
-                        random_int = random.randint(0, 1)
-                        # take 20% of the data for validation.
-                        if string.strip() and random_int < 0.8:
-                            # for word in string.split(" "):
-
-                            # if word.strip():
-                            pattern.append({"LOWER": string.lower()})
-
-                            self.matcher.add(id[1], [pattern])
-
-                        elif string.strip() and random_int >= 0.8:
-                            self.val_dict[id].append(string)
-
-    # a problem seems to be, that some words are present in many different
-    def validate(self):
-        correct_labels = 0
-        false_labels = 0
-        for key, string_list in self.val_dict.items():
-            for string in string_list:
-                doc = self.nlp(string)
-                matches = self.matcher(doc)
-                for match_id, start, end in matches:
-                    string_id = self.nlp.vocab.strings[
-                        match_id
-                    ]  # Get string representation
-                    if string_id == key[1]:
-                        correct_labels += 1
-                    else:
-                        false_labels += 1
-
-        print(f"Correct: {correct_labels}, incorrect: {false_labels}")

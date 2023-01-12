@@ -2,5 +2,5 @@
 notebook_cell_format = '{nb_path}:code_cell#{code_cell_count}'
 extend-ignore = E203, E402
 exclude = .git,__pycache__,.ipynb_checkpoints
-max-line-length = 90
+max-line-length = 120
 max-complexity = 18

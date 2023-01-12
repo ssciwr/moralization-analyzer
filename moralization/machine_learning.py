@@ -6,6 +6,7 @@ from collections import defaultdict
 import pathlib
 from sklearn.metrics import classification_report
 import pickle
+from spacy.matcher import Matcher
 
 
 class Few_Shot_Classifier:
@@ -45,7 +46,12 @@ class Few_Shot_Classifier:
         :param data: Category Span DataFrame
         :type data: pd.DataFrame
         """
-        self.nlp.add_pipe("text_categorizer", config={"data": data, "model": model})
+        self.nlp = spacy.blank("de")
+        print(data)
+        self.nlp.add_pipe(
+            "textcat_multilabel",
+            config={"data": data["data"], "model": "de_core_news_sm"},
+        )
 
     def create_hugging_face_model(
         self, data: pd.DataFrame, model="MoritzLaurer/mDeBERTa-v3-base-mnli-xnli"
@@ -196,3 +202,53 @@ class Binary_Few_Shot_Classifier(Few_Shot_Classifier):
             self.create_hugging_face_model(data, model=model)
 
             self.data_test = data
+
+
+class Pattern_Matching:
+    def __init__(self, df_spans):
+        self.df_spans = df_spans
+        self.nlp = spacy.load("de_core_news_sm")
+        self.matcher = Matcher(self.nlp.vocab)
+
+        self._make_pattern_list()
+
+    def _make_pattern_list(self):
+        self.val_dict = defaultdict(list)
+        for id in self.df_spans.index:
+            for column in self.df_spans.columns:
+
+                if self.df_spans[column].loc[id]:
+
+                    for string in self.df_spans[column].loc[id].split("&"):
+                        pattern = []
+                        random_int = random.randint(0, 1)
+                        # take 20% of the data for validation.
+                        if string.strip() and random_int < 0.8:
+                            # for word in string.split(" "):
+
+                            # if word.strip():
+                            pattern.append({"LOWER": string.lower()})
+
+                            self.matcher.add(id[1], [pattern])
+
+                        elif string.strip() and random_int >= 0.8:
+                            self.val_dict[id].append(string)
+
+    # a problem seems to be, that some words are present in many different
+    def validate(self):
+        correct_labels = 0
+        false_labels = 0
+        for key, string_list in self.val_dict.items():
+            for string in string_list:
+                doc = self.nlp(string)
+                matches = self.matcher(doc)
+                for match_id, start, end in matches:
+                    string_id = self.nlp.vocab.strings[
+                        match_id
+                    ]  # Get string representation
+                    if string_id == key[1]:
+                        correct_labels += 1
+                    else:
+                        false_labels += 1
+
+        print(f"Correct: {correct_labels}, incorrect: {false_labels}")
