@@ -108,8 +108,6 @@ def test_Spacy_Training(data_dir, config_file):
     with pytest.raises(Exception):
         Spacy_Training(tmp_dir)
 
-    tmp_dir = mkdtemp()
-
 
 def test_Spacy_Training_training_testing(data_dir, config_file):
     tmp_dir = pathlib.Path(mkdtemp())

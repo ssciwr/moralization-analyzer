@@ -142,16 +142,16 @@ class Spacy_Training:
         self.working_dir = Path(working_dir)
         self.file_dict = self._find_files(training_file, testing_file, config_file)
 
-    def _find_file(self, file):
-        if file:
-            file = Path(file)
+    def _find_file(self, _file):
+        if _file:
+            _file = Path(_file)
 
-        if not file.is_file() and (self.working_dir / file).is_file():
-            file = self.working_dir / file
+        if not _file.is_file() and (self.working_dir / _file).is_file():
+            file = self.working_dir / _file
 
         else:
             raise FileNotFoundError(
-                f"""{file} could not be found as absolute path or in {self.working_dir}.
+                f"""{_file} could not be found as absolute path or in {self.working_dir}.
                 Available files are: {list(self.working_dir.glob('*'))}"""
             )
         return file
