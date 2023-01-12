@@ -29,10 +29,13 @@ def test_Spacy_Setup_convert_data_to_spacy(data_dir):
     # test datadir and specific file path
     test_setup = Spacy_Setup(data_dir)
     test_setup.convert_data_to_spacy_doc()
-    assert list(test_setup.doc_dict.keys()) == [
-        "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
-        "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
-    ]
+    assert (
+        list(test_setup.doc_dict.keys()).sort()
+        == [
+            "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
+            "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
+        ].sort()
+    )
 
 
 def test_Spacy_Setup_export_training_testing_data(data_dir):
