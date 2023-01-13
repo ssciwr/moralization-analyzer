@@ -203,7 +203,7 @@ class Spacy_Training:
                     f"A config file was not provided and no config file could be found  in {self.working_dir}."
                 )
             else:
-                raise Exception(
+                raise ValueError(
                     f"""A config file was not provided and multiple config files were found in {self.working_dir}.
                     Please provide only one or specify the filename."""
                 )
