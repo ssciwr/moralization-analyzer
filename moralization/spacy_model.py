@@ -14,7 +14,7 @@ from sklearn.model_selection import train_test_split
 from tempfile import mkdtemp
 
 
-class Spacy_Setup:
+class SpacySetup:
     """Helper class to organize and prepare spacy trainings data from xml/xmi files."""
 
     def __init__(self, data_dir, working_dir=None):
@@ -132,7 +132,7 @@ class Spacy_Setup:
         return doc_dict
 
 
-class Spacy_Training:
+class SpacyTraining:
 
     """This class is used to configure and run spacy trainings."""
 
