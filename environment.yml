@@ -16,3 +16,4 @@ dependencies:
     - dkpro-cassis
     - pytest-cov
     - pytest
+    - spacy

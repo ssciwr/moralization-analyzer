@@ -1,4 +1,4 @@
-from moralization.input import InputOutput
+from moralization.input_data import InputOutput
 import pytest
 
 

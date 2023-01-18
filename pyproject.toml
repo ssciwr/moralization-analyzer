@@ -33,6 +33,9 @@ dependencies = [
     "pytest",
     "pytest-cov",
     "ipywidgets",
+    "spacy",
+    "jupyter",
+    "classy_classification",
 ]
 
 [tool.setuptools.package-data]
