@@ -12,6 +12,7 @@ from pathlib import Path
 from spacy.cli.init_config import fill_config
 from sklearn.model_selection import train_test_split
 from tempfile import mkdtemp
+from collections import defaultdict
 
 
 class SpacySetup:
@@ -73,8 +74,10 @@ class SpacySetup:
         db_train.to_disk(output_dir / "train.spacy")
         db_dev.to_disk(output_dir / "dev.spacy")
 
-    def visualize_data(self, filename=None, type="all", style="span"):
+    def visualize_data(self, filename=None, type="all", style="span", spans_key="sc"):
         """Use the displacy class offered by spacy to visualize the current dataset.
+            use SpacySetup.span_keys to show possible keys or use 'sc' for all.
+
 
         :param filename:    Specify which of the loaded files should be presented, if None all files are shown.
                             This can also take a list., defaults to None
@@ -88,44 +91,87 @@ class SpacySetup:
             raise NotImplementedError(
                 "Please only use this function in a jupyter notebook for the time being."
             )
+        if isinstance(spans_key, list):
+            raise NotImplementedError(
+                "spacy does no support viewing multiple categories at once."
+            )
+            # we could manually add multiple categories to one span cat and display this new category.
+
+        if spans_key != "sc" and spans_key not in self.span_keys:
+            raise ValueError(
+                f"""The provided key: {spans_key} is not valid.
+                Please use one of the following {set(self.span_keys.keys())}"""
+            )
 
         if filename is None:
             filename = list(self.doc_dict.keys())
+        elif isinstance(filename, int):
+            filename = [list(self.doc_dict.keys())[filename]]
+        elif isinstance(filename, str):
+            filename = [filename]
+
         return displacy.render(
-            [self.doc_dict[file][type] for file in filename], style=style
+            [self.doc_dict[file][type] for file in filename],
+            style=style,
+            options={"spans_key": spans_key},
         )
 
     def _convert_dict_to_doc_dict(self, data_dict):
-
+        self.span_keys = defaultdict(list)
         nlp = spacy.blank("de")
         doc_dict = {}
-
         for file in data_dict.keys():
+            spans = defaultdict(list)
+
             doc_train = nlp(data_dict[file]["sofa"])
             doc_dev = nlp(data_dict[file]["sofa"])
             doc_all = nlp(data_dict[file]["sofa"])
 
-            ents = []
+            # ents = []
 
             for main_cat_key, main_cat_value in data_dict[file]["data"].items():
                 if main_cat_key != "KAT5Ausformulierung":
                     for sub_cat_label, sub_cat_span_list in main_cat_value.items():
                         if sub_cat_label != "Dopplung":
+                            self.span_keys[main_cat_key].append(sub_cat_label)
                             for span in sub_cat_span_list:
-                                spacy_span = doc_train.char_span(
-                                    span["begin"],
-                                    span["end"],
-                                    label=sub_cat_label,
+                                spans[main_cat_key].append(
+                                    doc_train.char_span(
+                                        span["begin"],
+                                        span["end"],
+                                        label=sub_cat_label,
+                                    )
                                 )
-                                ents.append(spacy_span)
+                                # ents.append(spacy_span)
+            spans_train = defaultdict(list)
+            spans_test = defaultdict(list)
 
-            ents_train, ents_test = train_test_split(
-                ents, test_size=0.2, random_state=42
-            )
+            for key in spans:
+                # when number of examples for a given key is 1 the split function raises an error.
+                # so the one example will only be added to the training and the all doc.
+                if len(spans[key]) == 1:
+                    doc_train.spans[key] = spans[key]
+                    doc_all.spans[key] = spans[key]
 
-            doc_train.spans["sc"] = ents_train
-            doc_dev.spans["sc"] = ents_test
-            doc_all.spans["sc"] = ents
+                else:
+                    spans_train[key], spans_test[key] = train_test_split(
+                        spans[key], test_size=0.2, random_state=42
+                    )
+
+                    doc_train.spans[key] = spans_train[key]
+                    doc_dev.spans[key] = spans_test[key]
+                    doc_all.spans[key] = spans[key]
+            # also we need to add everything to the default "sc" span key,
+            # otherwise only one category can be visualized at a time.
+            # these lists also need to be flattend
+
+            doc_train.spans["sc"] = [
+                span for spans in spans_train.values() for span in spans
+            ]
+            doc_dev.spans["sc"] = [
+                span for spans in spans_test.values() for span in spans
+            ]
+            doc_all.spans["sc"] = [span for spans in spans.values() for span in spans]
 
             doc_dict[file] = {"train": doc_train, "dev": doc_dev, "all": doc_all}
 
@@ -260,6 +306,7 @@ class SpacyTraining:
         doc = nlp(test_string)
         for span in doc.spans["sc"]:
             print(span, span.label_)
+        return doc
 
     def _best_model(self):
         if os.path.isdir(os.path.join(self.working_dir, "output", "model-best")):
