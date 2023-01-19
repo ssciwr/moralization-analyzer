@@ -51,7 +51,19 @@ class SpacySetup:
         """
         data_dict = InputOutput.read_data(self.data_dir)
 
-        self.doc_dict = self._convert_dict_to_doc_dict(data_dict)
+        merging_dict = {
+            "sc": "all",
+            "task1": ["KAT1MoralisierendesSegment"],
+            "task2": ["Moralwerte", "KAT2Subjektive_Ausdrcke"],
+            "task3": ["Protagonistinnen", "Protagonistinnen2", "Protagonistinnen3"],
+            "task4": ["KommunikativeFunktion"],
+            "task5": ["Forderung"],
+        }
+
+        data_dict = self._add_dict_cat(data_dict, merging_dict)
+        spans_dict = self._convert_dict_to_spans_dict(data_dict)
+
+        self.doc_dict = self._convert_spans_dict_to_doc_dict(data_dict, spans_dict)
 
         return self.doc_dict
 
@@ -69,7 +81,7 @@ class SpacySetup:
 
         for file in self.doc_dict.values():
             db_train.add(file["train"])
-            db_dev.add(file["dev"])
+            db_dev.add(file["test"])
 
         db_train.to_disk(output_dir / "train.spacy")
         db_dev.to_disk(output_dir / "dev.spacy")
@@ -116,64 +128,90 @@ class SpacySetup:
             options={"spans_key": spans_key},
         )
 
-    def _convert_dict_to_doc_dict(self, data_dict):
-        self.span_keys = defaultdict(list)
-        nlp = spacy.blank("de")
-        doc_dict = {}
+    def _add_dict_cat(self, data_dict, new_dict_cat):
+        """Take the new_dict_cat dict and add its key as a main_cat to data_dict.
+        The values are the total sub_dict_entries of the given list.
+
+        :param data_dict: _description_
+        :type data_dict: dict
+        :param new_dict_cat: map new category to list of existing_categories.
+        :type new_dict_cat: dict
+        """
+
         for file in data_dict.keys():
-            spans = defaultdict(list)
+            for new_main_cat, new_cat_entries in new_dict_cat.items():
+                if new_cat_entries == "all":
+                    for main_cat in list(data_dict[file]["data"].keys()):
+                        data_dict[file]["data"][new_main_cat].update(
+                            data_dict[file]["data"][main_cat]
+                        )
+                else:
+                    for old_main_cat in new_cat_entries:
+                        data_dict[file]["data"][new_main_cat].update(
+                            data_dict[file]["data"][old_main_cat]
+                        )
 
-            doc_train = nlp(data_dict[file]["sofa"])
-            doc_dev = nlp(data_dict[file]["sofa"])
-            doc_all = nlp(data_dict[file]["sofa"])
+        return data_dict
 
-            # ents = []
+    def _convert_dict_to_spans_dict(self, data_dict):
+
+        self.span_keys = defaultdict(set)
+        nlp = spacy.blank("de")
+        # defaultdict with structure:
+        # file - main_cat - all/train/test
+        spans_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+
+        for file in data_dict.keys():
+            # sort out unused categories
+            data_dict[file]["data"].pop("KAT5Ausformulierung", None)
+            for main_cat_value in data_dict[file]["data"].values():
+                main_cat_value.pop("Dopplung", None)
+
+            doc = nlp(data_dict[file]["sofa"])
 
             for main_cat_key, main_cat_value in data_dict[file]["data"].items():
-                if main_cat_key != "KAT5Ausformulierung":
-                    for sub_cat_label, sub_cat_span_list in main_cat_value.items():
-                        if sub_cat_label != "Dopplung":
-                            self.span_keys[main_cat_key].append(sub_cat_label)
-                            for span in sub_cat_span_list:
-                                spans[main_cat_key].append(
-                                    doc_train.char_span(
-                                        span["begin"],
-                                        span["end"],
-                                        label=sub_cat_label,
-                                    )
-                                )
-                                # ents.append(spacy_span)
-            spans_train = defaultdict(list)
-            spans_test = defaultdict(list)
-
-            for key in spans:
-                # when number of examples for a given key is 1 the split function raises an error.
-                # so the one example will only be added to the training and the all doc.
-                if len(spans[key]) == 1:
-                    doc_train.spans[key] = spans[key]
-                    doc_all.spans[key] = spans[key]
-
-                else:
-                    spans_train[key], spans_test[key] = train_test_split(
-                        spans[key], test_size=0.2, random_state=42
+                for sub_cat_label, sub_cat_span_list in main_cat_value.items():
+                    self.span_keys[main_cat_key].add(sub_cat_label)
+                    for span in sub_cat_span_list:
+                        spans_dict[file][main_cat_key]["all"].append(
+                            doc.char_span(
+                                span["begin"],
+                                span["end"],
+                                label=sub_cat_label,
+                            )
+                        )
+                if len(spans_dict[file][main_cat_key]["all"]) > 1:
+                    spans_train, spans_test = train_test_split(
+                        spans_dict[file][main_cat_key]["all"],
+                        test_size=0.2,
+                        random_state=42,
                     )
+                    (
+                        spans_dict[file][main_cat_key]["train"],
+                        spans_dict[file][main_cat_key]["test"],
+                    ) = (spans_train, spans_test)
+                else:
+                    spans_dict[file][main_cat_key]["train"] = spans_dict[file][
+                        main_cat_key
+                    ]["all"]
+            spans_dict[file]["doc"] = doc
 
-                    doc_train.spans[key] = spans_train[key]
-                    doc_dev.spans[key] = spans_test[key]
-                    doc_all.spans[key] = spans[key]
-            # also we need to add everything to the default "sc" span key,
-            # otherwise only one category can be visualized at a time.
-            # these lists also need to be flattend
+        return spans_dict
 
-            doc_train.spans["sc"] = [
-                span for spans in spans_train.values() for span in spans
-            ]
-            doc_dev.spans["sc"] = [
-                span for spans in spans_test.values() for span in spans
-            ]
-            doc_all.spans["sc"] = [span for spans in spans.values() for span in spans]
+    def _convert_spans_dict_to_doc_dict(self, data_dict, spans_dict):
 
-            doc_dict[file] = {"train": doc_train, "dev": doc_dev, "all": doc_all}
+        doc_dict = {}
+        for file in data_dict.keys():
+            doc = spans_dict[file].pop("doc", None)
+            doc_test = doc.copy()
+            doc_train = doc.copy()
+            doc_dict[file] = {"all": doc, "test": doc_test, "train": doc_train}
+            # each value now has the keys "all"/"train"/test, each with a list of spans
+            for main_cat_key, main_cat_values in spans_dict[file].items():
+                for usecase in ["all", "train", "test"]:
+                    doc_dict[file][usecase].spans[main_cat_key] = main_cat_values[
+                        usecase
+                    ]
 
         return doc_dict
 
