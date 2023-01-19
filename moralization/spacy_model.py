@@ -342,7 +342,8 @@ class SpacyTraining:
     def test_model_with_string(self, test_string):
         nlp = spacy.load(self._best_model())
         doc = nlp(test_string)
-        for span in doc.spans["sc"]:
+        print(doc.spans)
+        for span in doc.spans["task1"]:
             print(span, span.label_)
         return doc
 
