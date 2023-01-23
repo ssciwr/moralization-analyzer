@@ -11,9 +11,11 @@ Automated identification of text structures related to moralization.
 **_This project is currently under development!_**
 
 ## Example notebooks
+Here you can find afew short introduction notebooks.
+- [DemoNotebook_statistics](notebooks/DemoNotebook_statistics.ipynb) 
+Open in [colab](https://colab.research.google.com/github/ssciwr/moralization/blob/main/notebooks/DemoNotebook_statistics.ipynb)
 
-- [DemoNotebook_statistics](notebooks/DemoNotebook_statistics.ipynb) [![open in colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssciwr/moralization/blob/main/notebooks/DemoNotebook_statistics.ipynb)
-- [DemoNotebook_interactive_plots](notebooks/DemoNotebook_interactive_plots.ipynb) [![open in colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ssciwr/moralization/blob/main/notebooks/DemoNotebook_interactive_plots.ipynb)
+- [DemoNotebook_interactive_plots](notebooks/DemoNotebook_interactive_plots.ipynb) Open in [colab](https://colab.research.google.com/github/ssciwr/moralization/blob/main/notebooks/DemoNotebook_interactive_plots.ipynb)
 
 Based on an annotated corpus, the automatic classification of moralization constructs in written text will be investigated.
 

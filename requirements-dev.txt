@@ -1,0 +1,9 @@
+m2r2
+nbsphinx
+nbsphinx-link
+pre-commit
+pytest
+pytest-cov
+sphinx
+sphinx-click
+sphinx_rtd_theme
