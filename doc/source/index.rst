@@ -8,6 +8,7 @@ Welcome to moralization's documentation!
    :caption: Contents:
 
    intro
+   overview
    notebooks/DemoNotebook_statistics
    notebooks/DemoNotebook_interactive_plots
    notebooks/spacy_demo
