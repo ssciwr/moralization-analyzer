@@ -22,7 +22,7 @@ classifiers = [
 ]
 dependencies = [
     "pandas",
-    "numpy",
+    "numpy <= 1.19.5",
     "dkpro-cassis", 
     "matplotlib", 
     "IPython",
