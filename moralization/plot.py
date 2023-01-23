@@ -68,6 +68,7 @@ class PlotSpans:
 
         Args:
             df_sentence_occurrence (pd.DataFrame): The sentence occurrence dataframe.
+
             filter_ (str,list(str), optional): Filter values for the dataframe.
             Defaults to None.
 
@@ -88,6 +89,8 @@ class PlotSpans:
         """
         Returns the correlation matrix in regards to the given filters.
         Args:
+            df_paragraph_occurrence (pd.DataFrame): The occurence of labels per paragraph.
+
             filter_ (str,list(str), optional): Filter values for the dataframe.
             Defaults to None.
         Returns:

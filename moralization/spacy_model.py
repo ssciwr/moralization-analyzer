@@ -43,7 +43,7 @@ class SpacySetup:
         return data_dir, working_dir
 
     def convert_data_to_spacy_doc(self):
-        """convert the given xmi/xml files to a spacy specific binary filesystem.
+        """Convert the given xmi/xml files to a spacy specific binary filesystem.
 
         :param output_dir: where to store generated files. If None is given the working dir will be used
         :type output_dir: dir
@@ -55,7 +55,8 @@ class SpacySetup:
         return self.doc_dict
 
     def export_training_testing_data(self, output_dir=None):
-        """_summary_
+        """Convert a list of spacy docs to a serialisable DocBin object and save it to disk.
+        Automatically processes training and testing files.
 
         :param output_dir: _description_, defaults to None
         :type output_dir: _type_, optional
@@ -96,7 +97,14 @@ class SpacySetup:
         )
 
     def _convert_dict_to_doc_dict(self, data_dict):
+        """Custom tranformation steps to convert our data_dict into a usable spacy.doc format.
+        For this all annotations will be saved under the span_key 'sc'.
 
+        :param data_dict: The datadict generated from xmi files.
+        :type data_dict: dict
+        :return: Dict of spacy.doc objects
+        :rtype: dict
+        """
         nlp = spacy.blank("de")
         doc_dict = {}
 
