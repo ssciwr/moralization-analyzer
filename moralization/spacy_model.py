@@ -345,7 +345,12 @@ class SpacyTraining:
         print(doc.spans)
         for span in doc.spans["task1"]:
             print(span, span.label_)
-        return doc
+
+        print("ents")
+        for ent in doc.ents:
+            print(ent, ent.label_)
+
+        return doc, nlp
 
     def _best_model(self):
         if os.path.isdir(os.path.join(self.working_dir, "output", "model-best")):
