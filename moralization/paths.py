@@ -11,7 +11,14 @@ import shutil
     default=os.getcwd(),
 )
 def copy_notebooks(target):
-    """Copy example notebooks into the TARGET directory"""
+    """Copy example notebooks into the TARGET directory
+
+    Args:
+      target:
+
+    Returns:
+
+    """
 
     # Locate notebook files in the installation tree
     jupyter_dir = os.path.join(os.path.split(__file__)[0], "notebooks")

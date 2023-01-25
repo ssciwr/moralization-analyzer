@@ -20,10 +20,26 @@ class InputOutput:
 
     @staticmethod
     def get_file_type(filename: str):
+        """
+
+        Args:
+          filename: str:
+
+        Returns:
+
+        """
         return pathlib.Path(filename).suffix[1:]
 
     @staticmethod
     def read_typesystem(filename: str = None) -> object:
+        """
+
+        Args:
+          filename: str:  (Default value = None)
+
+        Returns:
+
+        """
         if filename is None:
             filename = pkg / "data" / "TypeSystem.xml"
         # read in the file system types
@@ -42,6 +58,15 @@ class InputOutput:
 
     @staticmethod
     def read_cas_file(filename: str, ts: object):
+        """
+
+        Args:
+          filename: str:
+          ts: object:
+
+        Returns:
+
+        """
         file_type = InputOutput.get_file_type(filename)
         with open(filename, "rb") as f:
             cas = InputOutput.input_type[file_type](f, typesystem=ts)
@@ -55,21 +80,21 @@ class InputOutput:
         custom_span_category="KAT1MoralisierendesSegment",
         new_span_type_name="moralization.instance",
     ):
-        """
-        Make a new annotation category from the spans in custom labeled span type.
+        """Make a new annotation category from the spans in custom labeled span type.
 
         Args:
-            cas (_type_): the cas object
-            ts (_type_): the typesystem object
-            custom_span_type_name (str, optional): The name of the span category
-                to be used as a base. Defaults to "custom.Span".
-            custom_span_category (str, optional): The label in the custom span
-                category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
-            new_span_type_name (str, optional): The name of the new span category.
-                Defaults to 'moralization.instance'.
+          cas(cassis.cas): The cas object
+          ts(cassis.TypeSysten): The typesystem object
+          custom_span_type_name(str, optional): The name of the span category
+        to be used as a base. Defaults to "custom.Span".
+          custom_span_category(str, optional): The label in the custom span
+        category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
+          new_span_type_name(str, optional): The name of the new span category.
+        Defaults to 'moralization.instance'.
 
         Returns:
-            _type_: _description_
+          _type_: _description_
+
         """
         span_type = ts.get_type(custom_span_type_name)
         try:
@@ -97,7 +122,15 @@ class InputOutput:
 
     @staticmethod
     def get_multiple_input(dir: str) -> tuple:
-        "Get a list of input files from a given directory. Currently only xmi files."
+        """
+         Get a list of input files from a given directory. Currently only xmi files.
+        Args:
+          dir: str:
+
+        Returns:
+
+        """
+
         # load multiple files into a list
         dir_path = pathlib.Path(dir)
         if not dir_path.is_dir():
@@ -117,6 +150,15 @@ class InputOutput:
 
     @staticmethod
     def read_cas_content(data_files: list or str, ts: object):
+        """
+
+        Args:
+          data_files: list or str:
+          ts: object:
+
+        Returns:
+
+        """
         data_dict = {}
         if not isinstance(data_files, list):
             data_files = [data_files]
@@ -142,7 +184,14 @@ class InputOutput:
 
     @staticmethod
     def read_data(dir: str):
-        """Convenience method to handle input reading in one go."""
+        """Convenience method to handle input reading in one go.
+
+        Args:
+          dir: str:
+
+        Returns:
+
+        """
         data_files, ts_file = InputOutput.get_multiple_input(dir)
         # read in the ts
         ts = InputOutput.read_typesystem(ts_file)

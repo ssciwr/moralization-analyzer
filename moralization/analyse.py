@@ -22,6 +22,14 @@ map_expressions = {
 
 
 def validate_data_dict(data_dict):
+    """
+
+    Args:
+      data_dict:
+
+    Returns:
+
+    """
     if not data_dict:
         raise ValueError("data_dict is empty")
     for data_file_name, data_file in data_dict.items():
@@ -49,6 +57,16 @@ def validate_data_dict(data_dict):
 # ('Forderer:in', 'Adresassat:in', 'Benefizient:in')
 # dict[category][entry value] = span
 def get_spans(cas: object, ts: object, span_str="custom.Span") -> defaultdict:
+    """
+
+    Args:
+      cas: object:
+      ts: object:
+      span_str:  (Default value = "custom.Span")
+
+    Returns:
+
+    """
 
     span_type = ts.get_type(span_str)
     span_dict = defaultdict(lambda: defaultdict(list))
@@ -98,6 +116,16 @@ def get_spans(cas: object, ts: object, span_str="custom.Span") -> defaultdict:
 
 
 def get_paragraphs(cas: object, ts: object, span_str=None) -> defaultdict:
+    """
+
+    Args:
+      cas: object:
+      ts: object:
+      span_str:  (Default value = None)
+
+    Returns:
+
+    """
     if span_str is None:
         span_type = ts.get_type(
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
@@ -112,7 +140,15 @@ def get_paragraphs(cas: object, ts: object, span_str=None) -> defaultdict:
 
 
 def list_categories(mydict: dict) -> list:
-    """Unravel the categories into a list of tuples."""
+    """Unravel the categories into a list of tuples.
+
+    Args:
+      mydict: dict:
+
+
+    Returns:
+
+    """
     mylist = []
     for main_cat_key, main_cat_value in mydict.items():
         for sub_cat_key in main_cat_value.keys():
@@ -147,7 +183,14 @@ class AnalyseOccurrence:
         self.map_categories()
 
     def _initialize_files(self, file_names: str) -> list:
-        """Helper method to get file names in list."""
+        """Helper method to get file names in list.
+
+        Args:
+          file_names: str:
+
+        Returns:
+
+        """
         # get the file names from the global dict of dicts
         if file_names is None:
             file_names = list(self.data_dict.keys())
@@ -166,7 +209,15 @@ class AnalyseOccurrence:
         self.df.index = self.df.index.set_names((["Main Category", "Sub Category"]))
 
     def _get_categories(self, span_dict, file_name):
-        """Helper method to initialize a dict with the given main and sub categories."""
+        """Helper method to initialize a dict with the given main and sub categories.
+
+        Args:
+          span_dict:
+          file_name:
+
+        Returns:
+
+        """
         # unravel the dict keys to shorten loops
         category_names = list_categories(span_dict)
         for cat_tuple in category_names:
@@ -253,6 +304,7 @@ class AnalyseOccurrence:
                 ] = span_annotated_text
 
     def report_index(self):
+        """ """
         self.report_instances()
         self.df[:] = self.df[:].astype("object")
         for file_name in self.file_names:
@@ -271,11 +323,14 @@ class AnalyseOccurrence:
                 ] = span_list
 
     def map_categories(self):
+        """ """
         self.df = self.df.rename(map_expressions)
         self._clean_df()
 
 
 class AnalyseSpans:
+    """ """
+
     @staticmethod
     def _find_occurrence(
         span_dict,
@@ -285,7 +340,19 @@ class AnalyseSpans:
         main_cat_key,
         sub_cat_key,
     ):
-        """Find occurrence of category in a sentence."""
+        """Find occurrence of category in a sentence.
+
+        Args:
+          span_dict:
+          span_annotated_tuples:
+          span_list_per_file:
+          str_list_per_file:
+          main_cat_key:
+          sub_cat_key:
+
+        Returns:
+
+        """
         for occurrence in span_annotated_tuples:
             # with bisect.bisect we can search for the index of the
             # paragraph in which the current category occurrence falls.
@@ -301,6 +368,14 @@ class AnalyseSpans:
 
     @staticmethod
     def _find_all_cat_in_paragraph(data_dict):
+        """
+
+        Args:
+          data_dict:
+
+        Returns:
+
+        """
         # sentence, main_cat, sub_cat : occurrence with the default value of
         # 0 to allow adding of +1 at a later point.
         paragraph_dict = defaultdict(lambda: defaultdict(lambda: 0))
@@ -357,12 +432,15 @@ class AnalyseSpans:
         and the column values are the occurrences of the different categories.
 
         Args:
-            data_dict (dict): the dict where all categories are stored.
-            filter_docs (str, optional): The filenames for which to filter.
-            Defaults to None.
+          data_dict(dict): the dict where all categories are stored.
+          filter_docs(str, optional): The filenames for which to filter. (Default value = None)
+          filter_docs(str, optional): The filenames for which to filter.
+        Defaults to None.
+          data_dict: dict:
 
         Returns:
-            pd.DataFrame: Category occurrences per sentence.
+          pd.DataFrame: Category occurrences per sentence.
+
         """
 
         validate_data_dict(data_dict)

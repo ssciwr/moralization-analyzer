@@ -10,19 +10,21 @@ import IPython
 
 
 class PlotSpans:
+    """ """
+
     @staticmethod
     def _get_filter_multiindex(df_paragraph_occurrence: pd.DataFrame, filters):
         """Search through the given filters and return all sub_cat_keys
         when a main_cat_key is given.
 
         Args:
-            df (pd.Dataframe): The sentence occurrence dataframe.
-            filters (str, list(str)): Filter values for the dataframe.
+          df(pd.Dataframe): The sentence occurrence dataframe.
+          filters(str): Filter values for the dataframe.
+          df_paragraph_occurrence: pd.DataFrame:
 
-        Raises:
-            Warning: Filter not in dataframe columns
         Returns:
-            list: the filter strings of only the sub_cat_keys
+          list: the filter strings of only the sub_cat_keys
+
         """
         if not isinstance(filters, list):
             filters = [filters]
@@ -47,6 +49,15 @@ class PlotSpans:
     def _generate_corr_df(
         df_paragraph_occurrence: pd.DataFrame, filter_=None
     ) -> pd.DataFrame:
+        """
+
+        Args:
+          df_paragraph_occurrence: pd.DataFrame:
+          filter_:  (Default value = None)
+
+        Returns:
+
+        """
         if filter_ is None:
             return df_paragraph_occurrence.corr().sort_index(level=0)
         else:
@@ -67,13 +78,15 @@ class PlotSpans:
         Can also filter based on both main_cat and sub_cat keys.
 
         Args:
-            df_sentence_occurrence (pd.DataFrame): The sentence occurrence dataframe.
-
-            filter_ (str,list(str), optional): Filter values for the dataframe.
-            Defaults to None.
+          df_sentence_occurrence(pd.DataFrame): The sentence occurrence dataframe.
+          filter_(str, optional): Filter values for the dataframe. (Default value = None)
+          filter_(str, optional): Filter values for the dataframe.
+        Defaults to None.
+          df_paragraph_occurrence: pd.DataFrame:
 
         Returns:
-            plt.figure : The heatmap figure.
+          plt.figure: The heatmap figure.
+
         """
 
         plt.figure(figsize=(16, 16))
@@ -86,15 +99,16 @@ class PlotSpans:
     def report_occurrence_matrix(
         df_paragraph_occurrence: pd.DataFrame, filter_=None
     ) -> pd.DataFrame:
-        """
-        Returns the correlation matrix in regards to the given filters.
-        Args:
-            df_paragraph_occurrence (pd.DataFrame): The occurence of labels per paragraph.
+        """Returns the correlation matrix in regards to the given filters.
 
-            filter_ (str,list(str), optional): Filter values for the dataframe.
-            Defaults to None.
+        Args:
+          df_paragraph_occurrence(pd.DataFrame): The occurence of labels per paragraph.
+          filter_(str, optional): Filter values for the dataframe. (Default value = None)
+          df_paragraph_occurrence: pd.DataFrame:
+
         Returns:
-            pd.DataFrame: Correlation matrix.
+          pd.DataFrame: Correlation matrix.
+
         """
         return PlotSpans._generate_corr_df(df_paragraph_occurrence, filter_)
 
@@ -106,10 +120,10 @@ class InteractiveCategoryPlot:
     The displayed plot is then automatically updated.
     A custom plotting callback can be provided to customize the plot.
 
-    Attributes:
-        data_dict: The data_dict to plot.
-        plot_callback: The plotting function to call. Default is `percent_matrix_heatmap`.
-        figsize: The figsize tuple to pass to matplotlib
+    Args:
+
+    Returns:
+
     """
 
     def __init__(self, data_dict, plot_callback=None, figsize=None):
@@ -155,12 +169,28 @@ class InteractiveCategoryPlot:
         self._category_widget.value = new_categories
 
     def _categories_changed(self, change):
+        """
+
+        Args:
+          change:
+
+        Returns:
+
+        """
         with self._output:
             if change["new"]:
                 IPython.display.clear_output(wait=True)
                 self.plot_callback(self.df)
 
     def _filename_changed(self, change):
+        """
+
+        Args:
+          change:
+
+        Returns:
+
+        """
         new_categories = list(self._categories[change["new"]])
         self._category_widget.options = new_categories
         self._category_widget.value = new_categories

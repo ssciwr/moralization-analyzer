@@ -10,5 +10,6 @@ Welcome to moralization's documentation!
    readme_link
    overview
 
-   modules
+   
    user_api
+

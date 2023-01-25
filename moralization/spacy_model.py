@@ -18,18 +18,30 @@ class SpacySetup:
     """Helper class to organize and prepare spacy trainings data from xml/xmi files."""
 
     def __init__(self, data_dir, working_dir=None):
-        """Handler for machine learning training and analysis
-        :param data_dir: Directory with data files
-        :type data_dir: str/Path
-        :param working_dir: Directory where the training data, configs and results are stored., defaults to Debug value
-        :type working_dir: _type_, optional
-        :param config_file: Filename or path for the config file, defaults to searching in the working directory.
-        :type config_file: _type_, optional
-        """
+        """Handler for machine learning training and analysis.
 
+        Args:
+          data_dir(str/Path): Directory with data files
+          working_dir(_type_, optional): Directory where the training data,
+          configs and results are stored., defaults to Debug value
+          config_file(_type_, optional): Filename or path for the config file,
+            defaults to searching in the working directory.
+
+        Returns:
+
+        """
         self.data_dir, self.working_dir = self._setup_working_dir(data_dir, working_dir)
 
     def _setup_working_dir(self, data_dir, working_dir):
+        """_summary_
+
+        Args:
+            data_dir (_type_): _description_
+            working_dir (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
 
         # maybe set default working_dir to tmp dir
         data_dir = Path(data_dir)
@@ -45,8 +57,12 @@ class SpacySetup:
     def convert_data_to_spacy_doc(self):
         """Convert the given xmi/xml files to a spacy specific binary filesystem.
 
-        :param output_dir: where to store generated files. If None is given the working dir will be used
-        :type output_dir: dir
+        Args:
+          output_dir(dir: dir): where to store generated files.
+          If None is given the working dir will be used
+
+        Returns:
+
         """
         data_dict = InputOutput.read_data(self.data_dir)
 
@@ -58,8 +74,11 @@ class SpacySetup:
         """Convert a list of spacy docs to a serialisable DocBin object and save it to disk.
         Automatically processes training and testing files.
 
-        :param output_dir: _description_, defaults to None
-        :type output_dir: _type_, optional
+        Args:
+          output_dir(_type_, optional, optional): _description_, defaults to None
+
+        Returns:
+
         """
         if output_dir is None:
             output_dir = self.working_dir
@@ -74,15 +93,20 @@ class SpacySetup:
         db_train.to_disk(output_dir / "train.spacy")
         db_dev.to_disk(output_dir / "dev.spacy")
 
-    def visualize_data(self, filename=None, type="all", style="span"):
+    def visualize_data(self, filename=None, display_type="all", style="span"):
         """Use the displacy class offered by spacy to visualize the current dataset.
 
-        :param filename:    Specify which of the loaded files should be presented, if None all files are shown.
-                            This can also take a list., defaults to None
-        :type filename: str/list, optional
-        :param type: Specify is only the trainings, the testing or all datapoints should be shown, defaults to "all"
-        :type type: str, optional
-        :param type: the visualization type given to displacy, available are "dep", "ent" and "span, defaults to "span".
+        Args:
+          filename(str/list, optional, optional): Specify which of the loaded files should be presented,
+          if None all files are shown.
+                This can also take a list., defaults to None
+          display_type(str, optional, optional): Specify is only the trainings,
+          the testing or all datapoints should be shown, defaults to "all"
+          type: the visualization type given to displacy, available are "dep", "ent" and "span,
+          defaults to "span".
+          style:  (Default value = "span")
+
+        Returns:
 
         """
         if not is_interactive():
@@ -93,17 +117,19 @@ class SpacySetup:
         if filename is None:
             filename = list(self.doc_dict.keys())
         return displacy.render(
-            [self.doc_dict[file][type] for file in filename], style=style
+            [self.doc_dict[file][display_type] for file in filename], style=style
         )
 
     def _convert_dict_to_doc_dict(self, data_dict):
         """Custom tranformation steps to convert our data_dict into a usable spacy.doc format.
         For this all annotations will be saved under the span_key 'sc'.
 
-        :param data_dict: The datadict generated from xmi files.
-        :type data_dict: dict
-        :return: Dict of spacy.doc objects
-        :rtype: dict
+        Args:
+          data_dict(dict: dict): The datadict generated from xmi files.
+
+        Returns:
+          dict: Dict of spacy.doc objects
+
         """
         nlp = spacy.blank("de")
         doc_dict = {}
@@ -151,6 +177,14 @@ class SpacyTraining:
         self.file_dict = self._find_files(training_file, testing_file, config_file)
 
     def _find_file(self, _file):
+        """
+
+        Args:
+          _file:
+
+        Returns:
+
+        """
         if _file:
             _file = Path(_file)
 
@@ -165,6 +199,16 @@ class SpacyTraining:
         return _file
 
     def _find_files(self, training_file, testing_file, config_file):
+        """
+
+        Args:
+          training_file:
+          testing_file:
+          config_file:
+
+        Returns:
+
+        """
 
         # use default names is no name is given.
         if training_file is None:
@@ -186,6 +230,14 @@ class SpacyTraining:
         return file_dict
 
     def _check_config_file(self, config_file):
+        """
+
+        Args:
+          config_file:
+
+        Returns:
+
+        """
         # find config file as abs path, or as filename in the working directory.
 
         if config_file:
@@ -226,11 +278,13 @@ class SpacyTraining:
     def train(self, use_gpu=-1, overwrite=None):
         """Use the spacy training method to generate a new model.
 
-        :param use_gpu: enter the gpu device you want to use.
-            Keep in Mind that cuda must be correctly installed, defaults to -1
-        :type use_gpu: int, optional
-        :param overwrite: additional config overwrites, defaults to None
-        :type overwrite: _type_, optional
+        Args:
+          use_gpu(int, optional, optional): enter the gpu device you want to use.
+        Keep in Mind that cuda must be correctly installed, defaults to -1
+          overwrite(_type_, optional, optional): additional config overwrites, defaults to None
+
+        Returns:
+
         """
         from spacy.cli.train import train
 
@@ -251,6 +305,14 @@ class SpacyTraining:
         )
 
     def evaluate(self, validation_file=None):
+        """
+
+        Args:
+          validation_file:  (Default value = None)
+
+        Returns:
+
+        """
         from spacy.cli.evaluate import evaluate
 
         if validation_file is None:
@@ -264,12 +326,21 @@ class SpacyTraining:
         return evaluation_data
 
     def test_model_with_string(self, test_string):
+        """
+
+        Args:
+          test_string:
+
+        Returns:
+
+        """
         nlp = spacy.load(self._best_model())
         doc = nlp(test_string)
         for span in doc.spans["sc"]:
             print(span, span.label_)
 
     def _best_model(self):
+        """ """
         if os.path.isdir(os.path.join(self.working_dir, "output", "model-best")):
             return os.path.join(self.working_dir, "output", "model-best")
         else:
