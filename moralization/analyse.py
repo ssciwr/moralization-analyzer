@@ -323,7 +323,10 @@ class AnalyseOccurrence:
                 ] = span_list
 
     def map_categories(self):
-        """ """
+        """
+        Rename Categories.
+
+        """
         self.df = self.df.rename(map_expressions)
         self._clean_df()
 

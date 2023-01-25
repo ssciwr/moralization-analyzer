@@ -29,58 +29,58 @@ class PlotSpans:
         if not isinstance(filters, list):
             filters = [filters]
         sub_cat_filter = []
-        for filter_ in filters:
-            if filter_ in ae.map_expressions:
-                filter_ = ae.map_expressions[filter_]
+        for _filter in filters:
+            if _filter in ae.map_expressions:
+                _filter = ae.map_expressions[_filter]
 
-            if filter_ in df_paragraph_occurrence.columns.levels[0]:
+            if _filter in df_paragraph_occurrence.columns.levels[0]:
                 [
                     sub_cat_filter.append(key)
-                    for key in (df_paragraph_occurrence[filter_].keys())
+                    for key in (df_paragraph_occurrence[_filter].keys())
                 ]
-            elif filter_ in df_paragraph_occurrence.columns.levels[1]:
-                sub_cat_filter.append(filter_)
+            elif _filter in df_paragraph_occurrence.columns.levels[1]:
+                sub_cat_filter.append(_filter)
             else:
-                raise Warning(f"Filter key: {filter_} not in dataframe columns.")
+                raise Warning(f"Filter key: { _filter} not in dataframe columns.")
 
         return sub_cat_filter
 
     @staticmethod
     def _generate_corr_df(
-        df_paragraph_occurrence: pd.DataFrame, filter_=None
+        df_paragraph_occurrence: pd.DataFrame, _filter=None
     ) -> pd.DataFrame:
         """
 
         Args:
           df_paragraph_occurrence: pd.DataFrame:
-          filter_:  (Default value = None)
+          _filter:  (Default value = None)
 
         Returns:
 
         """
-        if filter_ is None:
+        if _filter is None:
             return df_paragraph_occurrence.corr().sort_index(level=0)
         else:
-            filter_ = PlotSpans._get_filter_multiindex(df_paragraph_occurrence, filter_)
+            _filter = PlotSpans._get_filter_multiindex(df_paragraph_occurrence, _filter)
             # Couldn't figure out how to easily select columns based on the
             # second level column name.
             # So the df is transposed, the multiindex can be filterd using
             # loc, and then transposed back to get the correct correlation matrix.
             return (
-                df_paragraph_occurrence.T.loc[(slice(None), filter_), :]
+                df_paragraph_occurrence.T.loc[(slice(None), _filter), :]
                 .sort_index(level=0)
                 .T.corr()
             )
 
     @staticmethod
-    def report_occurrence_heatmap(df_paragraph_occurrence: pd.DataFrame, filter_=None):
+    def report_occurrence_heatmap(df_paragraph_occurrence: pd.DataFrame, _filter=None):
         """Returns the occurrence heatmap for the given dataframe.
         Can also filter based on both main_cat and sub_cat keys.
 
         Args:
           df_sentence_occurrence(pd.DataFrame): The sentence occurrence dataframe.
-          filter_(str, optional): Filter values for the dataframe. (Default value = None)
-          filter_(str, optional): Filter values for the dataframe.
+          _filter(str, optional): Filter values for the dataframe. (Default value = None)
+          _filter(str, optional): Filter values for the dataframe.
         Defaults to None.
           df_paragraph_occurrence: pd.DataFrame:
 
@@ -90,27 +90,27 @@ class PlotSpans:
         """
 
         plt.figure(figsize=(16, 16))
-        df_corr = PlotSpans._generate_corr_df(df_paragraph_occurrence, filter_=filter_)
+        df_corr = PlotSpans._generate_corr_df(df_paragraph_occurrence, _filter=_filter)
 
         heatmap = sns.heatmap(df_corr, cmap="cividis")
         return heatmap
 
     @staticmethod
     def report_occurrence_matrix(
-        df_paragraph_occurrence: pd.DataFrame, filter_=None
+        df_paragraph_occurrence: pd.DataFrame, _filter=None
     ) -> pd.DataFrame:
         """Returns the correlation matrix in regards to the given filters.
 
         Args:
           df_paragraph_occurrence(pd.DataFrame): The occurence of labels per paragraph.
-          filter_(str, optional): Filter values for the dataframe. (Default value = None)
+          _filter(str, optional): Filter values for the dataframe. (Default value = None)
           df_paragraph_occurrence: pd.DataFrame:
 
         Returns:
           pd.DataFrame: Correlation matrix.
 
         """
-        return PlotSpans._generate_corr_df(df_paragraph_occurrence, filter_)
+        return PlotSpans._generate_corr_df(df_paragraph_occurrence, _filter)
 
 
 class InteractiveCategoryPlot:
@@ -120,13 +120,16 @@ class InteractiveCategoryPlot:
     The displayed plot is then automatically updated.
     A custom plotting callback can be provided to customize the plot.
 
-    Args:
-
-    Returns:
 
     """
 
     def __init__(self, data_dict, plot_callback=None, figsize=None):
+        """
+        Args:
+            data_dict (_type_): _description_
+            plot_callback (_type_, optional): _description_. Defaults to None.
+            figsize (_type_, optional): _description_. Defaults to None.
+        """
         if plot_callback is None:
             self.plot_callback = PlotSpans.report_occurrence_heatmap
         else:

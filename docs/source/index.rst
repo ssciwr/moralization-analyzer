@@ -9,7 +9,5 @@ Welcome to moralization's documentation!
 
    readme_link
    overview
-
-   
    user_api
-
+   

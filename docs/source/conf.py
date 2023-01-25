@@ -59,7 +59,7 @@ html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
 
 # Make sure that classes are documented by their init method
-autoclass_content = "init"
+autoclass_content = "both"
 
 # This is an extension that allows us to preserve the default arguments of functions
 # as written in code without evaluating them.

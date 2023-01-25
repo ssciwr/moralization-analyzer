@@ -22,25 +22,24 @@ class SpacySetup:
 
         Args:
           data_dir(str/Path): Directory with data files
-          working_dir(_type_, optional): Directory where the training data,
+          working_dir(path, optional): Directory where the training data,
           configs and results are stored., defaults to Debug value
-          config_file(_type_, optional): Filename or path for the config file,
-            defaults to searching in the working directory.
-
-        Returns:
+          config_file(Path, optional): Filename or path for the config file,
+          defaults to searching in the working directory.
 
         """
         self.data_dir, self.working_dir = self._setup_working_dir(data_dir, working_dir)
 
     def _setup_working_dir(self, data_dir, working_dir):
-        """_summary_
+        """Check if given path is possible and initialize directory if not already present.
 
         Args:
-            data_dir (_type_): _description_
-            working_dir (_type_): _description_
+            data_dir (path): path to data directory
+            working_dir (path): path to data directory
 
         Returns:
-            _type_: _description_
+            path: path to data directory
+            path: path to working directory
         """
 
         # maybe set default working_dir to tmp dir
@@ -55,15 +54,7 @@ class SpacySetup:
         return data_dir, working_dir
 
     def convert_data_to_spacy_doc(self):
-        """Convert the given xmi/xml files to a spacy specific binary filesystem.
-
-        Args:
-          output_dir(dir: dir): where to store generated files.
-          If None is given the working dir will be used
-
-        Returns:
-
-        """
+        """Convert the given xmi/xml files to a spacy specific binary filesystem."""
         data_dict = InputOutput.read_data(self.data_dir)
 
         self.doc_dict = self._convert_dict_to_doc_dict(data_dict)
@@ -75,9 +66,9 @@ class SpacySetup:
         Automatically processes training and testing files.
 
         Args:
-          output_dir(_type_, optional, optional): _description_, defaults to None
+          output_dir(Path, optional): Path of the output directory where the data is saved, defaults to None.
+          If None the working directory is used.
 
-        Returns:
 
         """
         if output_dir is None:
@@ -99,7 +90,7 @@ class SpacySetup:
         Args:
           filename(str/list, optional, optional): Specify which of the loaded files should be presented,
           if None all files are shown.
-                This can also take a list., defaults to None
+          This can also take a list., defaults to None
           display_type(str, optional, optional): Specify is only the trainings,
           the testing or all datapoints should be shown, defaults to "all"
           type: the visualization type given to displacy, available are "dep", "ent" and "span,
