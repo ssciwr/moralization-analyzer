@@ -1,9 +1,6 @@
-m2r2
-nbsphinx
-nbsphinx-link
+myst_parser
 pre-commit
 pytest
 pytest-cov
 sphinx
-sphinx-click
 sphinx_rtd_theme

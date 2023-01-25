@@ -84,13 +84,17 @@ class InputOutput:
 
         Args:
           cas(cassis.cas): The cas object
+
           ts(cassis.TypeSysten): The typesystem object
+
           custom_span_type_name(str, optional): The name of the span category
-        to be used as a base. Defaults to "custom.Span".
+            to be used as a base. Defaults to "custom.Span".
+
           custom_span_category(str, optional): The label in the custom span
-        category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
+            category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
+
           new_span_type_name(str, optional): The name of the new span category.
-        Defaults to 'moralization.instance'.
+             Defaults to 'moralization.instance'.
 
         Returns:
           _type_: _description_
