@@ -131,4 +131,3 @@ dmypy.json
 # data files 
 data/
 .vscode/settings.json
-./data/
