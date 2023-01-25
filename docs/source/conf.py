@@ -33,10 +33,7 @@ release = "2023"
 # ones.
 extensions = [
     "sphinx.ext.autodoc",
-    "m2r2",
-    "sphinx_rtd_theme",
-    "nbsphinx",
-    "nbsphinx_link",
+    "myst_parser",
     "sphinx_click",
 ]
 
