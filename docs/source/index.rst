@@ -7,10 +7,8 @@ Welcome to moralization's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   intro
+   readme_link
    overview
-   notebooks/DemoNotebook_statistics
-   notebooks/DemoNotebook_interactive_plots
-   notebooks/spacy_demo
 
+   modules
    user_api
