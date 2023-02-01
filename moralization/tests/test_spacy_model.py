@@ -116,4 +116,5 @@ def test_SpacyTraining_training_testing(data_dir, config_file):
 
     training_test.train(overwrite={"training.max_epochs": 5})
     training_test.evaluate()
-    training_test.test_model_with_string("Dies ist ein toller Test!")
+    with pytest.raises(NotImplementedError):
+        training_test.test_model_with_string("Dies ist ein toller Test!")
