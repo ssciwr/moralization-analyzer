@@ -12,7 +12,8 @@ from pathlib import Path
 from spacy.cli.init_config import fill_config
 from sklearn.model_selection import train_test_split
 from tempfile import mkdtemp
-from collections import defaultdict, Iterable
+from collections import defaultdict
+from collections.abc import Iterable
 
 
 class SpacySetup:
