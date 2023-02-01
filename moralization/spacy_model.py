@@ -12,7 +12,7 @@ from pathlib import Path
 from spacy.cli.init_config import fill_config
 from sklearn.model_selection import train_test_split
 from tempfile import mkdtemp
-from collections import defaultdict
+from collections import defaultdict, Iterable
 
 
 class SpacySetup:
@@ -29,6 +29,7 @@ class SpacySetup:
         """
 
         self.data_dir, self.working_dir = self._setup_working_dir(data_dir, working_dir)
+        self._convert_data_to_spacy_doc()
 
     def _setup_working_dir(self, data_dir, working_dir):
 
@@ -43,7 +44,7 @@ class SpacySetup:
         pathlib.Path(working_dir).mkdir(exist_ok=True)
         return data_dir, working_dir
 
-    def convert_data_to_spacy_doc(self):
+    def _convert_data_to_spacy_doc(self):
         """convert the given xmi/xml files to a spacy specific binary filesystem.
 
         :param output_dir: where to store generated files. If None is given the working dir will be used
@@ -65,8 +66,6 @@ class SpacySetup:
 
         self.doc_dict = self._convert_spans_dict_to_doc_dict(data_dict, spans_dict)
 
-        return self.doc_dict
-
     def export_training_testing_data(self, output_dir=None):
         """_summary_
 
@@ -75,6 +74,8 @@ class SpacySetup:
         """
         if output_dir is None:
             output_dir = self.working_dir
+        elif isinstance(output_dir, str):
+            output_dir = Path(output_dir)
 
         db_train = DocBin()
         db_dev = DocBin()
@@ -86,7 +87,7 @@ class SpacySetup:
         db_train.to_disk(output_dir / "train.spacy")
         db_dev.to_disk(output_dir / "dev.spacy")
 
-    def visualize_data(self, filename=None, type="all", style="span", spans_key="sc"):
+    def visualize_data(self, filenames=None, type="all", style="span", spans_key="sc"):
         """Use the displacy class offered by spacy to visualize the current dataset.
             use SpacySetup.span_keys to show possible keys or use 'sc' for all.
 
@@ -115,13 +116,22 @@ class SpacySetup:
                 Please use one of the following {set(self.span_keys.keys())}"""
             )
 
-        if filename is None:
+        # check through given filenames and convert ints to key string
+        if filenames is None:
             filename = list(self.doc_dict.keys())
-        elif isinstance(filename, int):
-            filename = [list(self.doc_dict.keys())[filename]]
-        elif isinstance(filename, str):
-            filename = [filename]
+        elif isinstance(filenames, str):
+            filename = [filenames]
+        elif isinstance(filenames, int):
+            filename = [list(self.doc_dict.keys())[filenames]]
+        elif isinstance(filenames, Iterable):
+            filename = []
+            for file in filenames:
+                if isinstance(file, int):
+                    filename.append(list(self.doc_dict.keys())[file])
+                else:
+                    filename.append(file)
 
+        print(filename)
         return displacy.render(
             [self.doc_dict[file][type] for file in filename],
             style=style,
@@ -266,7 +276,6 @@ class SpacyTraining:
 
         if config_file:
             config_file = Path(config_file)
-
             if config_file.is_file():
                 config_file = Path(config_file)
             else:
@@ -274,7 +283,8 @@ class SpacyTraining:
                     config_file = self.working_dir / config_file
                 else:
                     raise FileNotFoundError(
-                        f"The given config file could not be found in the working directory: {self.working_dir}"
+                        "The given config file could not be found in the working directory:"
+                        + f" {self.working_dir} or under {config_file.absolute()}"
                     )
 
         else:
