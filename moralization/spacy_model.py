@@ -132,7 +132,6 @@ class SpacySetup:
                 else:
                     filename.append(file)
 
-        print(filename)
         return displacy.render(
             [self.doc_dict[file][type] for file in filename],
             style=style,
@@ -351,15 +350,16 @@ class SpacyTraining:
         return evaluation_data
 
     def test_model_with_string(self, test_string):
+        if not is_interactive():
+            raise NotImplementedError(
+                "Please only use this function in a jupyter notebook for the time being."
+            )
+
         nlp = spacy.load(self._best_model())
         doc = nlp(test_string)
-        print(doc.spans)
-        for span in doc.spans["task1"]:
-            print(span, span.label_)
 
-        print("ents")
-        for ent in doc.ents:
-            print(ent, ent.label_)
+        displacy.render(doc, style="span", options={"spans_key": "task1"})
+        displacy.render(doc, style="ent")
 
         return doc, nlp
 
