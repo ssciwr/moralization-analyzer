@@ -9,7 +9,7 @@ We provide a solution for easily reading your data into python and having it con
 In addition you can have your data visualized and perferm some statistical analysis on it.
 
 Workflow 
-_______ 
+_________
 
 
 Use `moralization.input_data.InputOutput.read("./data_dir")` to quickly load an entre directory of xmi files.
