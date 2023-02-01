@@ -16,10 +16,10 @@ def test_SpacySetup(data_dir):
 
     # test finding file by name in data_dir
     SpacySetup(
-        pathlib.Path(__file__).parents[2].resolve() / "data" / "Training",
+        pathlib.Path(__file__).parents[1].resolve() / "data",
     )
     SpacySetup(
-        pathlib.Path(__file__).parents[2].resolve() / "data" / "Training",
+        pathlib.Path(__file__).parents[1].resolve() / "data",
         working_dir=tmp_dir,
     )
 
@@ -28,7 +28,6 @@ def test_SpacySetup_convert_data_to_spacy(data_dir):
 
     # test datadir and specific file path
     test_setup = SpacySetup(data_dir)
-    test_setup.convert_data_to_spacy_doc()
     assert sorted(list(test_setup.doc_dict.keys())) == sorted(
         [
             "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
@@ -40,7 +39,6 @@ def test_SpacySetup_convert_data_to_spacy(data_dir):
 def test_SpacySetup_export_training_testing_data(data_dir):
     tmp_dir = pathlib.Path(mkdtemp())
     test_setup = SpacySetup(data_dir)
-    test_setup.convert_data_to_spacy_doc()
     test_setup.export_training_testing_data()
     assert len(list(test_setup.working_dir.glob("*.spacy"))) == 2
     test_setup.export_training_testing_data(tmp_dir)
@@ -48,7 +46,6 @@ def test_SpacySetup_export_training_testing_data(data_dir):
 
     tmp_dir = pathlib.Path(mkdtemp())
     test_setup = SpacySetup(data_dir, working_dir=tmp_dir)
-    test_setup.convert_data_to_spacy_doc()
     test_setup.export_training_testing_data()
 
     assert len(list(test_setup.working_dir.glob("*.spacy"))) == 2
@@ -56,7 +53,6 @@ def test_SpacySetup_export_training_testing_data(data_dir):
 
 def test_SpacySetup_visualize_data(data_dir):
     test_setup = SpacySetup(data_dir)
-    test_setup.convert_data_to_spacy_doc()
     with pytest.raises(NotImplementedError):
         test_setup.visualize_data()
 
@@ -65,7 +61,6 @@ def test_SpacyTraining(data_dir, config_file):
     tmp_dir = pathlib.Path(mkdtemp())
 
     test_setup = SpacySetup(data_dir, working_dir=tmp_dir)
-    test_setup.convert_data_to_spacy_doc()
     test_setup.export_training_testing_data()
     # test no config found:
     with pytest.raises(FileNotFoundError):
@@ -115,7 +110,6 @@ def test_SpacyTraining_training_testing(data_dir, config_file):
     tmp_dir = pathlib.Path(mkdtemp())
 
     test_setup = SpacySetup(data_dir, working_dir=tmp_dir)
-    test_setup.convert_data_to_spacy_doc()
     test_setup.export_training_testing_data()
     copy(config_file, tmp_dir)
     training_test = SpacyTraining(tmp_dir, config_file="config.cfg")
