@@ -25,7 +25,6 @@ def test_SpacySetup(data_dir):
 
 
 def test_SpacySetup_convert_data_to_spacy(data_dir):
-
     # test datadir and specific file path
     test_setup = SpacySetup(data_dir)
     test_setup.convert_data_to_spacy_doc()

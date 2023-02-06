@@ -30,7 +30,6 @@ class SpacySetup:
         self.data_dir, self.working_dir = self._setup_working_dir(data_dir, working_dir)
 
     def _setup_working_dir(self, data_dir, working_dir):
-
         # maybe set default working_dir to tmp dir
         data_dir = Path(data_dir)
 
@@ -96,7 +95,6 @@ class SpacySetup:
         )
 
     def _convert_dict_to_doc_dict(self, data_dict):
-
         nlp = spacy.blank("de")
         doc_dict = {}
 
@@ -157,7 +155,6 @@ class SpacyTraining:
         return _file
 
     def _find_files(self, training_file, testing_file, config_file):
-
         # use default names is no name is given.
         if training_file is None:
             training_file = "train.spacy"

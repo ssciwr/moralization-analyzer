@@ -49,7 +49,6 @@ def validate_data_dict(data_dict):
 # ('Forderer:in', 'Adresassat:in', 'Benefizient:in')
 # dict[category][entry value] = span
 def get_spans(cas: object, ts: object, span_str="custom.Span") -> defaultdict:
-
     span_type = ts.get_type(span_str)
     span_dict = defaultdict(lambda: defaultdict(list))
 
@@ -81,7 +80,6 @@ def get_spans(cas: object, ts: object, span_str="custom.Span") -> defaultdict:
     ]
 
     for span in cas.select(span_type.name):
-
         for cat in cat_list:
             # this excludes any unwanted datapoints
             # also ignore the ones with no moralization
@@ -129,7 +127,6 @@ class AnalyseOccurrence:
         mode: str = "instances",
         file_names: str = None,
     ) -> None:
-
         validate_data_dict(data_dict)
 
         self.mode = mode
