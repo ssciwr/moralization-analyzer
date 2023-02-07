@@ -349,16 +349,18 @@ class SpacyTraining:
         )
         return evaluation_data
 
-    def test_model_with_string(self, test_string):
+    def test_model_with_string(self, test_string, options=None):
         if not is_interactive():
             raise NotImplementedError(
                 "Please only use this function in a jupyter notebook for the time being."
             )
+        if options is None:
+            options = {"spans_key": "task1"}
 
         nlp = spacy.load(self._best_model())
         doc = nlp(test_string)
 
-        displacy.render(doc, style="span", options={"spans_key": "task1"})
+        displacy.render(doc, style="span", options=options)
         displacy.render(doc, style="ent")
 
         return doc, nlp
