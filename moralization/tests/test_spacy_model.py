@@ -171,3 +171,7 @@ def test_SpacyTraining_training_testing(data_dir, config_file):
     training_test.evaluate()
     with pytest.raises(NotImplementedError):
         training_test.test_model_with_string("Dies ist ein toller Test!")
+
+    training_test.save_best_model(tmp_dir / "test_model")
+    with pytest.raises(FileExistsError):
+        training_test.save_best_model(".")
