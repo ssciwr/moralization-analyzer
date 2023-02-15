@@ -51,8 +51,61 @@ def test_SpacySetup_export_training_testing_data(data_dir):
     assert len(list(test_setup.working_dir.glob("*.spacy"))) == 2
 
 
+def test_SpacySetup_manage_visualisation_filenames(data_dir):
+
+    test_setup = SpacySetup(data_dir)
+
+    # test filename logic
+    test_setup._manage_visualisation_filenames([0])
+    test_setup._manage_visualisation_filenames(0)
+    test_setup._manage_visualisation_filenames(
+        "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB"
+    )
+    test_setup._manage_visualisation_filenames(
+        ["test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB"]
+    )
+    assert (
+        sorted(test_setup._manage_visualisation_filenames([0, 1]))
+        == sorted(
+            test_setup._manage_visualisation_filenames(
+                [0, "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"]
+            )
+        )
+        == sorted(
+            test_setup._manage_visualisation_filenames(
+                [
+                    "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
+                    "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
+                ]
+            )
+        )
+        == sorted(
+            [
+                "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
+                "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
+            ]
+        )
+    )
+
+    with pytest.raises(IndexError):
+        test_setup._manage_visualisation_filenames(4)
+    with pytest.raises(IndexError):
+        test_setup._manage_visualisation_filenames("test_not_found")
+
+
 def test_SpacySetup_visualize_data(data_dir):
     test_setup = SpacySetup(data_dir)
+
+    with pytest.raises(IndexError):
+        test_setup.visualize_data(type="false_type")
+
+    with pytest.raises(ValueError):
+        test_setup.visualize_data(spans_key="false_key")
+
+    with pytest.raises(NotImplementedError):
+        test_setup.visualize_data(spans_key=["task1", "sc"])
+
+    # test NotImplementedException when not in Jupyter Notebook
     with pytest.raises(NotImplementedError):
         test_setup.visualize_data()
 
