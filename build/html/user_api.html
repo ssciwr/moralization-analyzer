@@ -87,6 +87,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#moralization.SpacyTraining"><code class="docutils literal notranslate"><span class="pre">SpacyTraining</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyTraining.evaluate"><code class="docutils literal notranslate"><span class="pre">SpacyTraining.evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyTraining.save_best_model"><code class="docutils literal notranslate"><span class="pre">SpacyTraining.save_best_model()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyTraining.test_model_with_string"><code class="docutils literal notranslate"><span class="pre">SpacyTraining.test_model_with_string()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyTraining.train"><code class="docutils literal notranslate"><span class="pre">SpacyTraining.train()</span></code></a></li>
 </ul>
@@ -358,6 +359,8 @@ Automatically processes training and testing files.</p>
 <dt>Args:</dt><dd><p>output_dir(Path, optional): Path of the output directory where the data is saved, defaults to None.
 If None the working directory is used.</p>
 </dd>
+<dt>Return:</dt><dd><p>output_dir(Path): location of the stored data.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -396,6 +399,11 @@ style:  (Default value = “span”)</p>
 </dl>
 <p>Returns:</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.SpacyTraining.save_best_model">
+<span class="sig-name descname"><span class="pre">save_best_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyTraining.save_best_model" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.SpacyTraining.test_model_with_string">
