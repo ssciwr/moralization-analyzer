@@ -363,20 +363,22 @@ If None the working directory is used.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.SpacySetup.visualize_data">
-<span class="sig-name descname"><span class="pre">visualize_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'span'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacySetup.visualize_data" title="Permalink to this definition"></a></dt>
-<dd><p>Use the displacy class offered by spacy to visualize the current dataset.</p>
-<dl class="simple">
+<span class="sig-name descname"><span class="pre">visualize_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filenames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'span'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spans_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sc'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacySetup.visualize_data" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Use the displacy class offered by spacy to visualize the current dataset.</dt><dd><p>use SpacySetup.span_keys to show possible keys or use ‘sc’ for all.</p>
+</dd>
 <dt>Args:</dt><dd><p>filename(str/list, optional, optional): Specify which of the loaded files should be presented,
 if None all files are shown.
 This can also take a list., defaults to None
 display_type(str, optional, optional): Specify is only the trainings,
-the testing or all datapoints should be shown, defaults to “all”
+the testing or all datapoints should be shown,options are: “all”, “test” and “train”. Defaults to “all”
 type: the visualization type given to displacy, available are “dep”, “ent” and “span,
 defaults to “span”.
 style:  (Default value = “span”)</p>
 </dd>
+<dt>Returns:</dt><dd><p>Displacy.render</p>
+</dd>
 </dl>
-<p>Returns:</p>
 </dd></dl>
 
 </dd></dl>
@@ -397,7 +399,7 @@ style:  (Default value = “span”)</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.SpacyTraining.test_model_with_string">
-<span class="sig-name descname"><span class="pre">test_model_with_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyTraining.test_model_with_string" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_model_with_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyTraining.test_model_with_string" title="Permalink to this definition"></a></dt>
 <dd><dl class="simple">
 <dt>Args:</dt><dd><p>test_string:</p>
 </dd>
