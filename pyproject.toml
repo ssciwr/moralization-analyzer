@@ -38,6 +38,7 @@ dependencies = [
     "classy_classification",
     "transformers",
     "pytorch-lightning",
+    "datasets",
 ]
 
 [tool.setuptools.package-data]

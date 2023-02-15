@@ -161,7 +161,7 @@ class SpacySetup:
         # use standard model to get sentence boundaries
         nlp = spacy.load(
             "de_core_news_sm",
-            exclude=["lemmatizer", "ner", "morphologizer", "parser", "attribute_ruler"],
+            exclude=["lemmatizer", "ner", "morphologizer", "attribute_ruler"],
         )
         # print(nlp.pipe_names)
         # defaultdict with structure:
