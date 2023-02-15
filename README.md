@@ -16,6 +16,8 @@ Here you can find afew short introduction notebooks on google colab.
 
 - [DemoNotebook_interactive_plots](https://colab.research.google.com/github/ssciwr/moralization/blob/main/notebooks/DemoNotebook_interactive_plots.ipynb)
 
+- [DemoNotebook_interactive_plots](https://colab.research.google.com/github/ssciwr/moralization/blob/publish_spacy_example_notebook/notebooks/DemoNotebook_SpacyDemo.ipynb)
+
 Based on an annotated corpus, the automatic classification of moralization constructs in written text will be investigated.
 
 The ability to identify different categories will be investigated:
