@@ -31,7 +31,7 @@ class SpacySetup:
 
         """
         self.data_dir, self.working_dir = self._setup_working_dir(data_dir, working_dir)
-        self._convert_data_to_spacy_doc()
+        self.convert_data_to_spacy_doc()
 
     def _setup_working_dir(self, data_dir, working_dir):
         """Check if given path is possible and initialize directory if not already present.
