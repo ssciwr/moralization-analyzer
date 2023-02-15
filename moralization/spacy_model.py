@@ -156,7 +156,14 @@ class SpacySetup:
     def _convert_dict_to_spans_dict(self, data_dict):
 
         self.span_keys = defaultdict(set)
-        nlp = spacy.blank("de")
+        # use blank model
+        # nlp = spacy.blank("de")
+        # use standard model to get sentence boundaries
+        nlp = spacy.load(
+            "de_core_news_sm",
+            exclude=["lemmatizer", "ner", "morphologizer", "parser", "attribute_ruler"],
+        )
+        # print(nlp.pipe_names)
         # defaultdict with structure:
         # file - main_cat - all/train/test
         spans_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
