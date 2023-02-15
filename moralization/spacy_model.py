@@ -88,34 +88,7 @@ class SpacySetup:
         db_train.to_disk(output_dir / "train.spacy")
         db_dev.to_disk(output_dir / "dev.spacy")
 
-    def visualize_data(self, filenames=None, type="all", style="span", spans_key="sc"):
-        """Use the displacy class offered by spacy to visualize the current dataset.
-            use SpacySetup.span_keys to show possible keys or use 'sc' for all.
-
-
-        :param filename:    Specify which of the loaded files should be presented, if None all files are shown.
-                            This can also take a list., defaults to None
-        :type filename: str/list, optional
-        :param type: Specify is only the trainings, the testing or all datapoints should be shown, defaults to "all"
-        :type type: str, optional
-        :param type: the visualization type given to displacy, available are "dep", "ent" and "span, defaults to "span".
-
-        """
-        if not is_interactive():
-            raise NotImplementedError(
-                "Please only use this function in a jupyter notebook for the time being."
-            )
-        if isinstance(spans_key, list):
-            raise NotImplementedError(
-                "spacy does no support viewing multiple categories at once."
-            )
-            # we could manually add multiple categories to one span cat and display this new category.
-
-        if spans_key != "sc" and spans_key not in self.span_keys:
-            raise ValueError(
-                f"""The provided key: {spans_key} is not valid.
-                Please use one of the following {set(self.span_keys.keys())}"""
-            )
+    def _manage_visualisation_filenames(self, filenames):
 
         # check through given filenames and convert ints to key string
         if filenames is None:
@@ -131,6 +104,53 @@ class SpacySetup:
                     filename.append(list(self.doc_dict.keys())[file])
                 else:
                     filename.append(file)
+
+        # check if all new filenames are in doc_dict.keys()
+        for file in filename:
+            if file not in list(self.doc_dict.keys()):
+                raise IndexError(
+                    f"The filename {file} is not provided in the dataset, which only has {list(self.doc_dict.keys())}."
+                )
+
+        return filename
+
+    def visualize_data(self, filenames=None, type="all", style="span", spans_key="sc"):
+        """Use the displacy class offered by spacy to visualize the current dataset.
+            use SpacySetup.span_keys to show possible keys or use 'sc' for all.
+
+
+        :param filename:    Specify which of the loaded files should be presented, if None all files are shown.
+                            This can also take a list., defaults to None
+        :type filename: str/list, optional
+        :param type: Specify is only the trainings, the testing or all datapoints should be shown, defaults to "all".
+                    options are: "all", "test" and "train".
+        :type type: str, optional
+        :param type: the visualization type given to displacy, available are "dep", "ent" and "span, defaults to "span".
+
+        """
+
+        if isinstance(spans_key, list):
+            raise NotImplementedError(
+                "spacy does no support viewing multiple categories at once."
+            )
+            # we could manually add multiple categories to one span cat and display this new category.
+
+        if spans_key != "sc" and spans_key not in self.span_keys:
+            raise ValueError(
+                f"""The provided key: {spans_key} is not valid.
+                Please use one of the following {set(self.span_keys.keys())}"""
+            )
+        if type not in ["all", "test", "train"]:
+            raise IndexError(
+                f"Type argument must be either 'all', 'test' or 'train', but is {type}"
+            )
+
+        filename = self._manage_visualisation_filenames(filenames)
+
+        if not is_interactive():
+            raise NotImplementedError(
+                "Please only use this function in a jupyter notebook for the time being."
+            )
 
         return displacy.render(
             [self.doc_dict[file][type] for file in filename],
