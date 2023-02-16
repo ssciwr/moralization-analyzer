@@ -16,3 +16,5 @@ classy-classification
 transformers
 pytorch-lightning
 datasets
+evaluate
+seqeval

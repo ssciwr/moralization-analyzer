@@ -39,6 +39,8 @@ dependencies = [
     "transformers",
     "pytorch-lightning",
     "datasets",
+    "evaluate",
+    "seqeval",
 ]
 
 [tool.setuptools.package-data]
