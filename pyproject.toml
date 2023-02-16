@@ -41,6 +41,7 @@ dependencies = [
     "datasets",
     "evaluate",
     "seqeval",
+    "accelerate",
 ]
 
 [tool.setuptools.package-data]
