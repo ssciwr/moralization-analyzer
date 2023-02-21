@@ -4,457 +4,106 @@ Contains statistical analysis.
 from collections import defaultdict
 import pandas as pd
 import numpy as np
-import bisect
-import pathlib
-
-map_expressions = {
-    "KAT1MoralisierendesSegment": "KAT1-Moralisierendes Segment",
-    "Moralwerte": "KAT2-Moralwerte",
-    "KAT2Subjektive_Ausdrcke": "KAT2-Subjektive Ausdrücke",
-    "Protagonistinnen2": "KAT3-Gruppe",
-    "Protagonistinnen": "KAT3-Rolle",
-    "Protagonistinnen3": "KAT3-own/other",
-    "KommunikativeFunktion": "KAT4-Kommunikative Funktion",
-    "Forderung": "KAT5-Forderung explizit",
-    "KAT5Ausformulierung": "KAT5-Forderung implizit",
-    "Kommentar": "KOMMENTAR",
-}
+from spacy_span_analyzer import (
+    SpanAnalyzer,
+)  # https://github.com/ljvmiranda921/spacy-span-analyzer
 
 
-def validate_data_dict(data_dict):
-    """
+def _return_span_analyzer(doc_dict):
+    doc_list = []
 
-    Args:
-      data_dict:
+    for doc in doc_dict.values():
+        # doc.spans.pop("paragraphs", None)
+        doc.spans.pop("KOMMENTAR", None)
+        doc.spans.pop("KAT5-Forderung implizit", None)
+        doc_list.append(doc)
 
-    Returns:
+    return SpanAnalyzer(doc_list)
 
-    """
-    if not data_dict:
-        raise ValueError("data_dict is empty")
-    for data_file_name, data_file in data_dict.items():
-        if not data_file:
-            raise ValueError(f"The dict content under {data_file_name} is empty.")
-        if not isinstance(data_file, dict):
-            raise ValueError(
-                f"The content of {data_file_name} is not a dict but {type(data_file)}."
+
+def _loop_over_files(doc_dict, file_filter=None):
+    df_list = []
+    if file_filter is None:
+        file_filter = doc_dict.keys()
+    elif isinstance(file_filter, str):
+        if file_filter not in doc_dict.keys():
+            raise KeyError(
+                f"The filter `{file_filter}` is not in available files: {doc_dict.keys()}."
             )
+        file_filter = [file_filter]
 
-        validation_list = ["data", "file_type", "sofa", "paragraph"]
-        missing_cats = []
-        for category in validation_list:
-            if category not in list(data_file.keys()):
-                missing_cats.append(category)
+    print(file_filter)
+    for file in file_filter:
+        df_list.append(_summarize_span_occurences(doc_dict[file]))
 
-        if missing_cats:
-            raise ValueError(f"Data dict is missing categories: {missing_cats}")
+    df_complete = pd.concat(
+        df_list,
+        keys=list(
+            zip(
+                file_filter,
+            )
+        ),
+        axis=0,
+    )
+    df_complete = df_complete.fillna(0)
+
+    return df_complete
 
 
-# select all custom Spans and store them in an ordered dict,
-# where the first dimension is the used inception category
-# (Protagonistinnen, Forderung, etc...)
-# and the second dimension is the corresponding value of this category
-# ('Forderer:in', 'Adresassat:in', 'Benefizient:in')
-# dict[category][entry value] = span
-def get_spans(cas: object, ts: object, span_str="custom.Span") -> defaultdict:
-    """
+def _summarize_span_occurences(doc):
 
-    Args:
-      cas: object:
-      ts: object:
-      span_str:  (Default value = "custom.Span")
+    # iterate over all annotation categories and write occurence per paragraph in pandas.DataFrame
+    span_categories = list(doc.spans.keys())
+    span_categories = _reduce_cat_list(span_categories)
 
-    Returns:
+    n_paragraphs = len(doc.spans["paragraphs"])
+    span_dict = defaultdict(lambda: np.zeros(n_paragraphs))
+    for span_cat in span_categories:
+        return_idx_list = _find_spans_in_paragraph(doc, span_cat)
+        for ixd, label in return_idx_list:
+            span_dict[(span_cat, label)][ixd] = +1
 
-    """
-
-    span_type = ts.get_type(span_str)
-    span_dict = defaultdict(lambda: defaultdict(list))
-
-    # list of all interesting categories
-    # as there are:
-    # KAT1MoralisierendesSegment - Moralisierung explizit, Moralisierung Kontext,
-    # Moralisierung Weltwissen, Moralisierung interpretativ, Keine Moralisierung
-    # Moralwerte - Care, Harm, Fairness, Cheating, …
-    # KAT2Subjektive_Ausdrcke - Care, Harm, Fairness, Cheating, …
-    # Protagonistinnen2 - Individuum, Menschen, Institution, Soziale Gruppe, OTHER
-    # Protagonistinnen - Forderer:in, Adressat:in, Benefizient:in, Kein Bezug
-    # Protagonistinnen3 - Own group, Other group, Neutral
-    # KommunikativeFunktion - Darstellung, Appell, Expression, Beziehung, OTHER
-    # Forderung - explizit
-    # KAT5Ausformulierung - implizit
-    # KOMMENTAR - tag for duplicates that should be excluded
-
-    cat_list = [
-        "KAT1MoralisierendesSegment",
-        "Moralwerte",
-        "KAT2Subjektive_Ausdrcke",
-        "Protagonistinnen2",
-        "Protagonistinnen",
-        "Protagonistinnen3",
-        "KommunikativeFunktion",
-        "Forderung",
-        # "KAT5Ausformulierung",
-        # "KOMMENTAR",
+    df_span = pd.DataFrame(span_dict)
+    df_span.index = [
+        paragraph.text.replace("#", "") for paragraph in doc.spans["paragraphs"]
     ]
-
-    for span in cas.select(span_type.name):
-
-        for cat in cat_list:
-            # this excludes any unwanted datapoints
-            # also ignore the ones with no moralization
-            if (
-                span[cat]
-                and span["KOMMENTAR"] != "Dopplung"
-                # and span[cat] != "Keine Moralisierung"
-            ):
-                # Here we could also exclude unnecessary information
-                span_dict[cat][span[cat]].append(span)
-    # for span_dict_key, span_dict_sub_kat in span_dict.items():
-    #     print(f"{span_dict_key}: {[key for key in span_dict_sub_kat.keys()]}")
-    return span_dict
+    return df_span
 
 
-def get_paragraphs(cas: object, ts: object, span_str=None) -> defaultdict:
-    """
+def _find_spans_in_paragraph(doc, span_cat):
 
-    Args:
-      cas: object:
-      ts: object:
-      span_str:  (Default value = None)
-
-    Returns:
-
-    """
-    if span_str is None:
-        span_type = ts.get_type(
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
-        )
-    else:
-        span_type = ts.get_type(span_str)
-    paragraph_dict = defaultdict(list)
-    for span in cas.select(span_type.name):
-        paragraph_dict["span"].append((span.begin, span.end))
-        paragraph_dict["sofa"].append(span.get_covered_text())
-    return paragraph_dict
-
-
-def list_categories(mydict: dict) -> list:
-    """Unravel the categories into a list of tuples.
-
-    Args:
-      mydict: dict:
-
-
-    Returns:
-
-    """
-    mylist = []
-    for main_cat_key, main_cat_value in mydict.items():
-        for sub_cat_key in main_cat_value.keys():
-            mylist.append((main_cat_key, sub_cat_key))
-    return mylist
-
-
-class AnalyseOccurrence:
-    """Contains statistical information methods about the data."""
-
-    def __init__(
-        self,
-        data_dict: dict,
-        mode: str = "instances",
-        file_names: str = None,
-    ) -> None:
-
-        validate_data_dict(data_dict)
-
-        self.mode = mode
-        self.data_dict = data_dict
-        self.mode_dict = {
-            "instances": self.report_instances,
-            "spans": self.report_spans,
-            "span_index": self.report_index,
-        }
-        self.file_names = self._initialize_files(file_names)
-        self.instance_dict = self._initialize_dict()
-        # call the analysis method
-        self.mode_dict[self.mode]()
-        # map the df columns to the expressions given
-        self.map_categories()
-
-    def _initialize_files(self, file_names: str) -> list:
-        """Helper method to get file names in list.
-
-        Args:
-          file_names: str:
-
-        Returns:
-
-        """
-        # get the file names from the global dict of dicts
-        if file_names is None:
-            file_names = list(self.data_dict.keys())
-        # or use the file names that were passed explicitly
-        elif isinstance(file_names, str):
-            file_names = [file_names]
-        return file_names
-
-    def _initialize_dict(self) -> defaultdict:
-        """Helper method to initialize dict."""
-        return defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
-
-    def _initialize_df(self):
-        """Helper method to initialize data frame."""
-        self.df = pd.DataFrame(self.instance_dict)
-        self.df.index = self.df.index.set_names((["Main Category", "Sub Category"]))
-
-    def _get_categories(self, span_dict, file_name):
-        """Helper method to initialize a dict with the given main and sub categories.
-
-        Args:
-          span_dict:
-          file_name:
-
-        Returns:
-
-        """
-        # unravel the dict keys to shorten loops
-        category_names = list_categories(span_dict)
-        for cat_tuple in category_names:
-            # the tuple key makes it easy to convert the dict into a pd dataframe
-            self.instance_dict[file_name][cat_tuple] = len(
-                span_dict[cat_tuple[0]][cat_tuple[1]]
-            )
-        return self.instance_dict
-
-    def _add_total(self):
-        """Helper method to set additional headers in data frame."""
-        self.df.loc[("total instances", "with invalid"), :] = self.df.sum(axis=0).values
-        self.df.loc[("total instances", "without invalid"), :] = (
-            self.df.loc[("total instances", "with invalid"), :].values
-            - self.df.loc["KAT1MoralisierendesSegment", "Keine Moralisierung"].values
+    if span_cat not in list(doc.spans.keys()):
+        raise KeyError(
+            f"Key: `{span_cat}` not found in doc.spans, which has {list(doc.spans.keys())}"
         )
 
-    def _clean_df(self):
-        """Helper method to sort data frame and clean up values."""
-        self.df = self.df.sort_values(
-            by=[
-                "Main Category",
-                "Sub Category",
-                # self.file_names[0],
-            ],
-            ascending=True,
-        )
-        # fill NaN with 0 for instances or None for spans
-        if self.mode == "instances":
-            self.df = self.df.fillna(0)
-        if self.mode == "spans":
-            self.df = self.df.replace({np.nan: None})
+    # return a list of indeces in which paragraph each span falls.
+    paragraph_list = _get_paragraphs(doc)
+    # span_index_list = [[span.start, span.end] for span in doc.spans[span_cat]]
+    return_idx_list = []
+    paragraph_idx = 0
 
-    def report_instances(self):
-        """Reports number of occurrences of a category per text source."""
-        # instances reports the number of occurrences
-        # filename: main_cat: sub_cat: instances
-        for file_name in self.file_names:
-            span_dict = self.data_dict[file_name]["data"]
-            # initilize total instances rows for easier setting later.
-            # only for mode instances
-            self.instance_dict[file_name][("total instances", "with invalid")] = 0
-            self.instance_dict[file_name][("total instances", "without invalid")] = 0
-            self.instance_dict = self._get_categories(span_dict, file_name)
-        # initialize data frame
-        self._initialize_df()
-        # add rows for total instances
-        # only do this for mode instances
-        self._add_total()
+    for span in doc.spans[span_cat]:
+        if (
+            paragraph_list[paragraph_idx][1] > span.end
+            and paragraph_list[paragraph_idx][0] < span.start
+        ):
+            return_idx_list.append((paragraph_idx, span.label_))
+        elif paragraph_idx + 1 < len(paragraph_list):
+            paragraph_idx += 1
+            return_idx_list.append((paragraph_idx, span.label_))
 
-    def report_spans(self):
-        """Reports spans of a category per text source."""
-        # span reports the spans of the annotations separated by separator-token
-        self.instance_dict = self._get_categories(
-            self.data_dict[self.file_names[0]]["data"], self.file_names[0]
-        )
-        self._initialize_df()
-        self.df[:] = self.df[:].astype("object")
-        for file_name in self.file_names:
-            span_dict = self.data_dict[file_name]["data"]
-            span_text = self.data_dict[file_name]["sofa"]
-            # use list_categories
-            category_names = list_categories(span_dict)
-            for cat_tuple in category_names:
-                # save the span begin and end character index for further analysis
-                # find the text for each span
-                span_annotated_text = [
-                    span_text[span["begin"] : span["end"]]
-                    for span in span_dict[cat_tuple[0]][cat_tuple[1]]
-                ]
-                # clean the spans from #
-                span_annotated_text = [
-                    span.replace("#", "") for span in span_annotated_text
-                ]
-                # clean the spans from "
-                # span_annotated_text = [
-                #     span.replace('"', "") for span in span_annotated_text
-                # ]
-                # convert list to ###-separated spans
-                span_annotated_text = " ### ".join(span_annotated_text)
-                self.df.at[
-                    cat_tuple,
-                    file_name,
-                ] = span_annotated_text
-
-    def report_index(self):
-        """ """
-        self.report_instances()
-        self.df[:] = self.df[:].astype("object")
-        for file_name in self.file_names:
-            span_dict = self.data_dict[file_name]["data"]
-            # use list_categories
-            category_names = list_categories(span_dict)
-            for cat_tuple in category_names:
-                # report the beginning and end of each span as a tuple
-                span_list = [
-                    (span["begin"], span["end"])
-                    for span in span_dict[cat_tuple[0]][cat_tuple[1]]
-                ]
-                self.df.at[
-                    cat_tuple,
-                    file_name,
-                ] = span_list
-
-    def map_categories(self):
-        """
-        Rename Categories.
-
-        """
-        self.df = self.df.rename(map_expressions)
-        self._clean_df()
+    return return_idx_list
 
 
-class AnalyseSpans:
-    """ """
+def _get_paragraphs(doc):
+    paragraph_list = [[span.start, span.end] for span in doc.spans["paragraphs"]]
+    return paragraph_list
 
-    @staticmethod
-    def _find_occurrence(
-        span_dict,
-        span_annotated_tuples,
-        span_list_per_file,
-        str_list_per_file,
-        main_cat_key,
-        sub_cat_key,
-    ):
-        """Find occurrence of category in a sentence.
 
-        Args:
-          span_dict:
-          span_annotated_tuples:
-          span_list_per_file:
-          str_list_per_file:
-          main_cat_key:
-          sub_cat_key:
+def _reduce_cat_list(span_categories):
+    # remove "sc", "paragraph", from list
+    span_categories.remove("sc")
+    span_categories.remove("paragraphs")
 
-        Returns:
-
-        """
-        for occurrence in span_annotated_tuples:
-            # with bisect.bisect we can search for the index of the
-            # paragraph in which the current category occurrence falls.
-            paragraph_idx = bisect.bisect(span_list_per_file, occurrence)
-            # when we found a paragraph index we can use this to add the paragraph string
-            # to our dict and add +1 to the (main_cat_key, sub_cat_key) cell.
-            if paragraph_idx > 0:
-                span_dict[str_list_per_file[paragraph_idx - 1]][
-                    (main_cat_key, sub_cat_key)
-                ] += 1
-
-        return span_dict
-
-    @staticmethod
-    def _find_all_cat_in_paragraph(data_dict):
-        """
-
-        Args:
-          data_dict:
-
-        Returns:
-
-        """
-        # sentence, main_cat, sub_cat : occurrence with the default value of
-        # 0 to allow adding of +1 at a later point.
-        paragraph_dict = defaultdict(lambda: defaultdict(lambda: 0))
-        # iterate over the data_dict entries
-        for file_dict in data_dict.values():
-            # from the file dict we extract the sentence span start and end
-            # points as a list of tuples (eg [(23,45),(65,346)])
-            # as well as the corresponding string
-            span_list_per_file = file_dict["paragraph"]["span"]
-            str_list_per_file = file_dict["paragraph"]["sofa"]
-            # get the main and sub category names
-            category_names = list_categories(file_dict["data"])
-            for cat_tuple in category_names:
-                # find the beginning and end of each span as a tuple
-                span_annotated_tuples = [
-                    (span["begin"], span["end"])
-                    for span in file_dict["data"][cat_tuple[0]][cat_tuple[1]]
-                ]
-                # if the type of span_annotated_tuples is not a list it means
-                # there is no occurrence of this category in the given file
-                # this should only happen in the test dataset
-                if not isinstance(span_annotated_tuples, list):
-                    continue
-                # now we have a list of the span beginnings and endings for
-                # each category in a given file.
-                paragraph_dict = AnalyseSpans._find_occurrence(
-                    paragraph_dict,
-                    span_annotated_tuples,
-                    span_list_per_file,
-                    str_list_per_file,
-                    cat_tuple[0],
-                    cat_tuple[1],
-                )
-        # transform dict into multicolumn pd.DataFrame
-        df_paragraph_occurrence = (
-            pd.DataFrame(paragraph_dict).fillna(0).sort_index(level=0).transpose()
-        )
-        df_paragraph_occurrence.index = df_paragraph_occurrence.index.set_names(
-            (["Paragraph"])
-        )
-        # map the category names to the updated ones
-        df_paragraph_occurrence = df_paragraph_occurrence.rename(
-            columns=map_expressions
-        )
-        # sort the categories
-        df_paragraph_occurrence = df_paragraph_occurrence.sort_index(axis=1)
-        return df_paragraph_occurrence
-
-    @staticmethod
-    def report_occurrence_per_paragraph(
-        data_dict: dict, filter_docs=None
-    ) -> pd.DataFrame:
-        """Returns a Pandas dataframe where each sentence is its own index
-        and the column values are the occurrences of the different categories.
-
-        Args:
-          data_dict(dict): the dict where all categories are stored.
-          filter_docs(str, optional): The filenames for which to filter. (Default value = None)
-          filter_docs(str, optional): The filenames for which to filter.
-        Defaults to None.
-          data_dict: dict:
-
-        Returns:
-          pd.DataFrame: Category occurrences per sentence.
-
-        """
-
-        validate_data_dict(data_dict)
-        if filter_docs is not None:
-            if not isinstance(filter_docs, list):
-                filter_docs = [filter_docs]
-            # allows use of abs path or just filename with or without extension.
-            for i, filter_doc in enumerate(filter_docs):
-                filter_docs[i] = pathlib.PurePath(filter_doc).stem
-            data_dict = {
-                filter_doc: data_dict[filter_doc] for filter_doc in filter_docs
-            }
-        df_sentence_occurrence = AnalyseSpans._find_all_cat_in_paragraph(data_dict)
-        return df_sentence_occurrence
+    return span_categories

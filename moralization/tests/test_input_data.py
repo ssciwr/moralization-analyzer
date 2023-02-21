@@ -25,12 +25,6 @@ def test_InputOutput_read_cas_file(data_file):
     assert file_type == "xmi"
 
 
-def test_InputOutput_add_custom_instance_to_ts(ts_file, data_file):
-    ts = InputOutput.read_typesystem(ts_file)
-    cas, _ = InputOutput.read_cas_file(data_file, ts)
-    cas, ts = InputOutput.add_custom_instance_to_ts(cas, ts)
-
-
 def test_InputOutput_get_multiple_input(data_dir):
     data_files, ts_file = InputOutput.get_multiple_input(data_dir)
     with pytest.raises(FileNotFoundError):
@@ -46,19 +40,34 @@ def test_InputOutput_get_multiple_input(data_dir):
     assert ts_file.parts[-1] == "TypeSystem.xml"
 
 
-def test_InputOutput_read_cas_content(data_dir):
-    data_files, ts_file = InputOutput.get_multiple_input(data_dir)
-    # read in the ts
-    ts = InputOutput.read_typesystem(ts_file)
-    data_dict = InputOutput.read_cas_content(data_files, ts)
-    testlist = list(data_dict.keys())
-    correctlist = [
-        "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
-        "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
-    ]
-    assert set(testlist) == set(correctlist)
-    testitem = "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB"
-    assert data_dict[testitem]["file_type"] == "xmi"
+def test_InputOutput_read_data(data_dir):
+    doc_dict = InputOutput.read_data(data_dir)
+    testFilenameList = sorted(doc_dict.keys())
+    correctlist = sorted(
+        [
+            "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
+            "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
+        ]
+    )
+
+    assert testFilenameList == correctlist
+
+    spans_set = {
+        "KAT1-Moralisierendes Segment",
+        "KAT3-own/other",
+        "KAT3-Rolle",
+        "KAT4-Kommunikative Funktion",
+        "KAT5-Forderung explizit",
+        "sc",
+        "KAT2-Moralwerte",
+        "KAT2-Subjektive Ausdrücke",
+        "KAT3-Gruppe",
+        "paragraphs",
+    }
+    # assert categories
+    assert set(doc_dict[correctlist[0]].spans.keys()) == spans_set
+
+    # assert spans
     test_string = (
         "HMP05/AUG.00228 Hamburger Morgenpost, 03.08.2005, S. 5; "
         + "ALG II ist mit der Menschenwürde vereinbar ### BERLIN Das "
@@ -66,6 +75,6 @@ def test_InputOutput_read_cas_content(data_dir):
         + "grundgesetzlich garantierte Menschenwürde verletzt wird, "
         + "urteilte das Sozialgericht Berlin."
     )
-    assert data_dict[testitem]["sofa"][0:920].strip() == test_string
-    test_paragraph_span = [(766, 919), (1112, 1332), (2573, 2724), (7083, 7159)]
-    assert data_dict[testitem]["paragraph"]["span"] == test_paragraph_span
+    assert doc_dict[correctlist[0]].spans["paragraphs"][0].text.strip() == test_string
+    assert doc_dict[correctlist[0]].spans["paragraphs"][0].start == 1
+    assert doc_dict[correctlist[0]].spans["paragraphs"][0].end == 45

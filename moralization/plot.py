@@ -4,113 +4,92 @@ Contains plotting functionality.
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from moralization import analyse as ae
 import ipywidgets
 import IPython
 
 
-class PlotSpans:
-    """ """
+def report_occurrence_heatmap(
+    occurence_df: pd.DataFrame, _filter=None, _type="heatmap"
+):
+    """Returns the occurrence heatmap for the given dataframe.
+    Can also filter based on both main_cat and sub_cat keys.
 
-    @staticmethod
-    def _get_filter_multiindex(df_paragraph_occurrence: pd.DataFrame, filters):
-        """Search through the given filters and return all sub_cat_keys
-        when a main_cat_key is given.
+    Args:
+        df_sentence_occurrence(pd.DataFrame): The sentence occurrence dataframe.
+        _filter(str, optional): Filter values for the dataframe. (Default value = None)
+        _filter(str, optional): Filter values for the dataframe.
+    Defaults to None.
+        df_paragraph_occurrence: pd.DataFrame:
 
-        Args:
-          df(pd.Dataframe): The sentence occurrence dataframe.
-          filters(str): Filter values for the dataframe.
-          df_paragraph_occurrence: pd.DataFrame:
+    Returns:
+        plt.figure: The heatmap figure.
 
-        Returns:
-          list: the filter strings of only the sub_cat_keys
+    """
 
-        """
-        if not isinstance(filters, list):
-            filters = [filters]
-        sub_cat_filter = []
-        for _filter in filters:
-            if _filter in ae.map_expressions:
-                _filter = ae.map_expressions[_filter]
+    if _type not in ["corr", "heatmap"]:
+        raise ValueError(
+            f"_type argument can only be `corr` or `heatmap` but is {_type}"
+        )
 
-            if _filter in df_paragraph_occurrence.columns.levels[0]:
-                [
-                    sub_cat_filter.append(key)
-                    for key in (df_paragraph_occurrence[_filter].keys())
-                ]
-            elif _filter in df_paragraph_occurrence.columns.levels[1]:
-                sub_cat_filter.append(_filter)
-            else:
-                raise Warning(f"Filter key: { _filter} not in dataframe columns.")
+    df_corr = _generate_corr_df(occurence_df, _filter=_filter)
 
-        return sub_cat_filter
-
-    @staticmethod
-    def _generate_corr_df(
-        df_paragraph_occurrence: pd.DataFrame, _filter=None
-    ) -> pd.DataFrame:
-        """
-
-        Args:
-          df_paragraph_occurrence: pd.DataFrame:
-          _filter:  (Default value = None)
-
-        Returns:
-
-        """
-        if _filter is None:
-            return df_paragraph_occurrence.corr().sort_index(level=0)
-        else:
-            _filter = PlotSpans._get_filter_multiindex(df_paragraph_occurrence, _filter)
-            # Couldn't figure out how to easily select columns based on the
-            # second level column name.
-            # So the df is transposed, the multiindex can be filterd using
-            # loc, and then transposed back to get the correct correlation matrix.
-            return (
-                df_paragraph_occurrence.T.loc[(slice(None), _filter), :]
-                .sort_index(level=0)
-                .T.corr()
-            )
-
-    @staticmethod
-    def report_occurrence_heatmap(df_paragraph_occurrence: pd.DataFrame, _filter=None):
-        """Returns the occurrence heatmap for the given dataframe.
-        Can also filter based on both main_cat and sub_cat keys.
-
-        Args:
-          df_sentence_occurrence(pd.DataFrame): The sentence occurrence dataframe.
-          _filter(str, optional): Filter values for the dataframe. (Default value = None)
-          _filter(str, optional): Filter values for the dataframe.
-        Defaults to None.
-          df_paragraph_occurrence: pd.DataFrame:
-
-        Returns:
-          plt.figure: The heatmap figure.
-
-        """
-
+    if _type == "corr":
+        return df_corr
+    elif _type == "heatmap":
         plt.figure(figsize=(16, 16))
-        df_corr = PlotSpans._generate_corr_df(df_paragraph_occurrence, _filter=_filter)
-
         heatmap = sns.heatmap(df_corr, cmap="cividis")
         return heatmap
 
-    @staticmethod
-    def report_occurrence_matrix(
-        df_paragraph_occurrence: pd.DataFrame, _filter=None
-    ) -> pd.DataFrame:
-        """Returns the correlation matrix in regards to the given filters.
 
-        Args:
-          df_paragraph_occurrence(pd.DataFrame): The occurence of labels per paragraph.
-          _filter(str, optional): Filter values for the dataframe. (Default value = None)
-          df_paragraph_occurrence: pd.DataFrame:
+def _get_filter_multiindex(occurence_df: pd.DataFrame, filters):
+    """Search through the given filters and return all sub_cat_keys
+    when a main_cat_key is given.
 
-        Returns:
-          pd.DataFrame: Correlation matrix.
+    Args:
+        df(pd.Dataframe): The sentence occurrence dataframe.
+        filters(str): Filter values for the dataframe.
+        occurence_df: pd.DataFrame:
 
-        """
-        return PlotSpans._generate_corr_df(df_paragraph_occurrence, _filter)
+    Returns:
+        list: the filter strings of only the sub_cat_keys
+
+    """
+    if not isinstance(filters, list):
+        filters = [filters]
+    sub_cat_filter = []
+    for _filter in filters:
+
+        if _filter in occurence_df.columns.levels[0]:
+            [sub_cat_filter.append(key) for key in (occurence_df[_filter].keys())]
+        elif _filter in occurence_df.columns.levels[1]:
+            sub_cat_filter.append(_filter)
+        else:
+            raise KeyError(f"Filter key: `{ _filter}` not in dataframe columns.")
+
+    return sub_cat_filter
+
+
+def _generate_corr_df(occurence_df: pd.DataFrame, _filter=None) -> pd.DataFrame:
+    """
+
+    Args:
+      df_paragraph_occurrence: pd.DataFrame:
+      _filter:  (Default value = None)
+
+    Returns:
+
+    """
+    if _filter is None:
+        return occurence_df.sort_index(level=0).corr()
+    else:
+        _filter = _get_filter_multiindex(occurence_df, _filter)
+        # Couldn't figure out how to easily select columns based on the
+        # second level column name.
+        # So the df is transposed, the multiindex can be filterd using
+        # loc, and then transposed back to get the correct correlation matrix.
+        return (
+            occurence_df.T.loc[(slice(None), _filter), :].sort_index(level=0).T.corr()
+        )
 
 
 class InteractiveCategoryPlot:
@@ -123,7 +102,7 @@ class InteractiveCategoryPlot:
 
     """
 
-    def __init__(self, data_dict, plot_callback=None, figsize=None):
+    def __init__(self, occurence_df, filenames, plot_callback=None, figsize=None):
         """
         Args:
             data_dict (_type_): _description_
@@ -131,23 +110,18 @@ class InteractiveCategoryPlot:
             figsize (_type_, optional): _description_. Defaults to None.
         """
         if plot_callback is None:
-            self.plot_callback = PlotSpans.report_occurrence_heatmap
+            self.plot_callback = report_occurrence_heatmap
         else:
             self.plot_callback = plot_callback
         self._output = ipywidgets.Output()
-        self.data_dict = data_dict
-        self.df = ae.AnalyseSpans.report_occurrence_per_paragraph(self.data_dict)
+        self.df = occurence_df
         self.figsize = figsize
         # get all possible categories for each filename
         self._categories = {}
-        filenames = list(data_dict.keys())
         for filename in filenames:
             self._categories[filename] = [
-                f"{main_kat_key}: {sub_kat_key}"
-                for main_kat_key, span_dict_sub_kat in data_dict[filename][
-                    "data"
-                ].items()
-                for sub_kat_key in span_dict_sub_kat.keys()
+                f"{main_kat_key}:: {sub_kat_key}"
+                for main_kat_key, sub_kat_key in self.df.columns
             ]
         # filename widget
         self._filename_widget = ipywidgets.Dropdown(
@@ -183,7 +157,8 @@ class InteractiveCategoryPlot:
         with self._output:
             if change["new"]:
                 IPython.display.clear_output(wait=True)
-                self.plot_callback(self.df)
+                filters = [category.split(":: ")[1] for category in change["new"]]
+                self.plot_callback(self.df, _filter=filters)
 
     def _filename_changed(self, change):
         """

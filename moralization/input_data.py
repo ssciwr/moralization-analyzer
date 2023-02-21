@@ -7,7 +7,7 @@ import importlib_resources
 import logging
 from moralization import analyse
 from lxml.etree import XMLSyntaxError
-
+import spacy
 
 pkg = importlib_resources.files("moralization")
 
@@ -73,58 +73,6 @@ class InputOutput:
         return cas, file_type
 
     @staticmethod
-    def add_custom_instance_to_ts(
-        cas,
-        ts,
-        custom_span_type_name="custom.Span",
-        custom_span_category="KAT1MoralisierendesSegment",
-        new_span_type_name="moralization.instance",
-    ):
-        """Make a new annotation category from the spans in custom labeled span type.
-
-        Args:
-          cas(cassis.cas): The cas object
-
-          ts(cassis.TypeSysten): The typesystem object
-
-          custom_span_type_name(str, optional): The name of the span category
-            to be used as a base. Defaults to "custom.Span".
-
-          custom_span_category(str, optional): The label in the custom span
-            category to be filtered for. Defaults to "KAT1MoralisierendesSegment".
-
-          new_span_type_name(str, optional): The name of the new span category.
-             Defaults to 'moralization.instance'.
-
-        Returns:
-          _type_: _description_
-
-        """
-        span_type = ts.get_type(custom_span_type_name)
-        try:
-            instance_type = ts.create_type(name=new_span_type_name)
-            ts.create_feature(
-                domainType=instance_type,
-                name=custom_span_category,
-                rangeType=str,
-            )
-        except ValueError:
-            instance_type = ts.get_type(new_span_type_name)
-        for span in cas.select(span_type.name):
-            if (
-                span[custom_span_category]
-                and span[custom_span_category] != "Keine Moralisierung"
-            ):
-                cas.add(
-                    instance_type(
-                        begin=span.begin,
-                        end=span.end,
-                        KAT1MoralisierendesSegment=span[custom_span_category],
-                    )
-                )
-        return cas, ts
-
-    @staticmethod
     def get_multiple_input(dir: str) -> tuple:
         """
          Get a list of input files from a given directory. Currently only xmi files.
@@ -153,7 +101,73 @@ class InputOutput:
         return data_files, ts_file
 
     @staticmethod
-    def read_cas_content(data_files: list or str, ts: object):
+    def cas_to_doc(cas, ts):
+        """Transforms the cassis object into a spacy doc.
+            Adds the paragraph and the different span categories to the doc object.
+            Also maps the provided labels to a more user readable format.
+        Args:
+            cas (cassis.cas): The cassis object generated from the input files
+            ts (typesystem): The provided typesytem
+
+        Returns:
+            spacy.Doc: A doc object with all the annotation categories present.
+        """
+        # list and remap of all span categories
+        map_expressions = {
+            "KAT1MoralisierendesSegment": "KAT1-Moralisierendes Segment",
+            "Moralwerte": "KAT2-Moralwerte",
+            "KAT2Subjektive_Ausdrcke": "KAT2-Subjektive Ausdrücke",
+            "Protagonistinnen2": "KAT3-Gruppe",
+            "Protagonistinnen": "KAT3-Rolle",
+            "Protagonistinnen3": "KAT3-own/other",
+            "KommunikativeFunktion": "KAT4-Kommunikative Funktion",
+            "Forderung": "KAT5-Forderung explizit",
+            #       "KAT5Ausformulierung": "KAT5-Forderung implizit",
+            #       "Kommentar": "KOMMENTAR",
+        }
+
+        nlp = spacy.blank("de")
+        doc = nlp(cas.sofa_string)
+        # add original cassis sentence as paragraph span
+        sentence_type = ts.get_type(
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
+        )
+
+        # initilize all span categories
+        doc.spans["sc"] = []
+        doc.spans["paragraphs"] = []
+        for cat in map_expressions.values():
+            doc.spans[cat] = []
+
+        paragraph_list = cas.select(sentence_type.name)
+        for paragraph in paragraph_list:
+            doc.spans["paragraphs"].append(
+                doc.char_span(
+                    paragraph.begin,
+                    paragraph.end,
+                    label="paragraph",
+                )
+            )
+        span_type = ts.get_type("custom.Span")
+
+        span_list = cas.select(span_type.name)
+        for span in span_list:
+            for cat_old, cat_new in map_expressions.items():
+                # not all of these categories have values in every span.
+                if span[cat_old]:
+                    # we need to attach each span category on its own, as well as all together in "sc"
+                    char_span = doc.char_span(
+                        span.begin,
+                        span.end,
+                        label=span[cat_old],
+                    )
+                    doc.spans[cat_new].append(char_span)
+                    doc.spans["sc"].append(char_span)
+
+        return doc
+
+    @staticmethod
+    def files_to_docs(data_files: list or str, ts: object):
         """
 
         Args:
@@ -163,28 +177,18 @@ class InputOutput:
         Returns:
 
         """
-        data_dict = {}
-        if not isinstance(data_files, list):
-            data_files = [data_files]
-        for data_file in data_files:
+        doc_dict = {}
+        for file in data_files:
             try:
-                cas, file_type = InputOutput.read_cas_file(data_file, ts=ts)
-                cas, ts = InputOutput.add_custom_instance_to_ts(cas, ts)
-                data_dict[data_file.stem] = {
-                    "data": analyse.get_spans(cas, ts),
-                    "file_type": file_type,
-                    "sofa": cas.sofa_string,
-                    # note: use .sofa_string not .get_sofa()
-                    # as the latter removes \n and similar markers
-                    "paragraph": analyse.get_paragraphs(
-                        cas, ts, span_str="moralization.instance"
-                    ),
-                }
+                cas, file_type = InputOutput.read_cas_file(file, ts)
+                doc = InputOutput.cas_to_doc(cas, ts)
+                doc_dict[file.stem] = doc
             except XMLSyntaxError as e:
                 logging.warning(
-                    f"WARNING: skipping file '{data_file}' due to XMLSyntaxError: {e}"
+                    f"WARNING: skipping file '{file}' due to XMLSyntaxError: {e}"
                 )
-        return data_dict
+
+        return doc_dict
 
     @staticmethod
     def read_data(dir: str):
@@ -199,8 +203,8 @@ class InputOutput:
         data_files, ts_file = InputOutput.get_multiple_input(dir)
         # read in the ts
         ts = InputOutput.read_typesystem(ts_file)
-        data_dict = InputOutput.read_cas_content(data_files, ts)
-        return data_dict
+        doc_dict = InputOutput.files_to_docs(data_files, ts)
+        return doc_dict
 
 
 if __name__ == "__main__":
