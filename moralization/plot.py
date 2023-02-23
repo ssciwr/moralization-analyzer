@@ -6,6 +6,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import ipywidgets
 import IPython
+from moralization.utils import is_interactive
+from spacy import displacy
 
 
 def report_occurrence_heatmap(
@@ -56,17 +58,26 @@ def _get_filter_multiindex(occurence_df: pd.DataFrame, filters):
     """
     if not isinstance(filters, list):
         filters = [filters]
-    sub_cat_filter = []
+    filter_dict = {"main": [], "sub": []}
+
     for _filter in filters:
 
+        # for main_cat_filter append all sub cats:
         if _filter in occurence_df.columns.levels[0]:
-            [sub_cat_filter.append(key) for key in (occurence_df[_filter].keys())]
+            filter_dict["main"].append(_filter)
+
         elif _filter in occurence_df.columns.levels[1]:
-            sub_cat_filter.append(_filter)
+            filter_dict["sub"].append(_filter)
+
         else:
             raise KeyError(f"Filter key: `{ _filter}` not in dataframe columns.")
 
-    return sub_cat_filter
+    if filter_dict["main"] == []:
+        filter_dict["main"] = slice(None)
+    if filter_dict["sub"] == []:
+        filter_dict["sub"] = slice(None)
+
+    return filter_dict
 
 
 def _generate_corr_df(occurence_df: pd.DataFrame, _filter=None) -> pd.DataFrame:
@@ -88,7 +99,9 @@ def _generate_corr_df(occurence_df: pd.DataFrame, _filter=None) -> pd.DataFrame:
         # So the df is transposed, the multiindex can be filterd using
         # loc, and then transposed back to get the correct correlation matrix.
         return (
-            occurence_df.T.loc[(slice(None), _filter), :].sort_index(level=0).T.corr()
+            occurence_df.T.loc[(_filter["main"], _filter["sub"]), :]
+            .sort_index(level=0)
+            .T.corr()
         )
 
 
@@ -176,3 +189,48 @@ class InteractiveCategoryPlot:
     def show(self):
         """Display the interactive plot"""
         IPython.display.display(self._display_container)
+
+
+def visualize_data(doc_dict, style="span", spans_key="sc"):
+    """Use the displacy class offered by spacy to visualize the current dataset.
+        use SpacySetup.span_keys to show possible keys or use 'sc' for all.
+
+
+    Args:
+        doc_dict(dict: doc, optional): The doc dict that is to be visualized.
+        display_type(str, optional, optional): Specify is only the trainings,
+        the testing or all datapoints should be shown,options are: "all", "test" and "train". Defaults to "all"
+        type: the visualization type given to displacy, available are "dep", "ent" and "span,
+        defaults to "span".
+        style:  (Default value = "span")
+
+    Returns:
+        Displacy.render
+    """
+
+    if isinstance(spans_key, list):
+        raise NotImplementedError(
+            "spacy does no support viewing multiple categories at once."
+        )
+        # we could manually add multiple categories to one span cat and display this new category.
+
+    if spans_key != "sc":
+        for doc in doc_dict.values():
+            if spans_key not in list(doc.spans.keys()):
+                raise ValueError(
+                    f"""The provided key: `{spans_key}` is not valid.
+                    Please use one of the following {list(doc.spans.keys())}"""
+                )
+
+    # check if spans_key is present in all docs
+
+    if not is_interactive():
+        raise NotImplementedError(
+            "Please only use this function in a jupyter notebook for the time being."
+        )
+
+    return displacy.render(
+        [doc for doc in doc_dict.values()],
+        style=style,
+        options={"spans_key": spans_key},
+    )

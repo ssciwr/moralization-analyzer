@@ -1,135 +1,109 @@
-from moralization.spacy_model import SpacySetup, SpacyTraining
+from moralization.spacy_model import SpacyTraining, SpacyDataHandler
 from tempfile import mkdtemp
 import pathlib
 import pytest
 from shutil import copy
+import re
+import spacy
 
 
-def test_SpacySetup(data_dir):
-    tmp_dir = mkdtemp()
+def test_SpacyDataHandler_export_training_testing_data(doc_dicts):
 
-    # test datadir and specific file path
-    SpacySetup(data_dir)
+    # test export default filename
+    test_handler = SpacyDataHandler()
 
-    # test data_dir, working_dir and specific file.
-    SpacySetup(data_dir, working_dir=tmp_dir)
+    test_handler.export_training_testing_data(doc_dicts[1], doc_dicts[2])
+    assert len(list(test_handler.db_files)) == 2
 
-    # test finding file by name in data_dir
-    SpacySetup(
-        pathlib.Path(__file__).parents[1].resolve() / "data",
-    )
-    SpacySetup(
-        pathlib.Path(__file__).parents[1].resolve() / "data",
-        working_dir=tmp_dir,
-    )
-
-
-def test_SpacySetup_convert_data_to_spacy(data_dir):
-
-    # test datadir and specific file path
-    test_setup = SpacySetup(data_dir)
-    assert sorted(list(test_setup.doc_dict.keys())) == sorted(
-        [
-            "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
-            "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
-        ]
-    )
-
-
-def test_SpacySetup_export_training_testing_data(data_dir):
+    # test export with dir
     tmp_dir = pathlib.Path(mkdtemp())
-    test_setup = SpacySetup(data_dir)
-    test_setup.export_training_testing_data()
-    assert len(list(test_setup.working_dir.glob("*.spacy"))) == 2
-    test_setup.export_training_testing_data(tmp_dir)
-    assert len(list(tmp_dir.glob("*.spacy"))) == 2
-
-    tmp_dir = pathlib.Path(mkdtemp())
-    test_setup = SpacySetup(data_dir, working_dir=tmp_dir)
-    test_setup.export_training_testing_data()
-
-    assert len(list(test_setup.working_dir.glob("*.spacy"))) == 2
+    test_handler.export_training_testing_data(doc_dicts[1], doc_dicts[2], tmp_dir)
+    assert list(test_handler.db_files) == list(tmp_dir.glob("*.spacy"))
 
 
-def test_SpacySetup_manage_visualisation_filenames(data_dir):
-
-    test_setup = SpacySetup(data_dir)
-
-    # test filename logic
-    test_setup._manage_visualisation_filenames([0])
-    test_setup._manage_visualisation_filenames(0)
-    test_setup._manage_visualisation_filenames(
-        "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB"
-    )
-    test_setup._manage_visualisation_filenames(
-        ["test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB"]
-    )
-    assert (
-        sorted(test_setup._manage_visualisation_filenames([0, 1]))
-        == sorted(
-            test_setup._manage_visualisation_filenames(
-                [0, "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"]
-            )
-        )
-        == sorted(
-            test_setup._manage_visualisation_filenames(
-                [
-                    "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
-                    "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
-                ]
-            )
-        )
-        == sorted(
-            [
-                "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
-                "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
-            ]
-        )
-    )
-
-    with pytest.raises(IndexError):
-        test_setup._manage_visualisation_filenames(4)
-    with pytest.raises(IndexError):
-        test_setup._manage_visualisation_filenames("test_not_found")
-
-
-def test_SpacySetup_visualize_data(data_dir):
-    test_setup = SpacySetup(data_dir)
-
-    with pytest.raises(IndexError):
-        test_setup.visualize_data(type="false_type")
-
-    with pytest.raises(ValueError):
-        test_setup.visualize_data(spans_key="false_key")
-
-    with pytest.raises(NotImplementedError):
-        test_setup.visualize_data(spans_key=["task1", "sc"])
-
-    # test NotImplementedException when not in Jupyter Notebook
-    with pytest.raises(NotImplementedError):
-        test_setup.visualize_data()
-
-
-def test_SpacyTraining(data_dir, config_file):
+def test_SpacyDataHandler_import_training_testing_data(doc_dicts):
     tmp_dir = pathlib.Path(mkdtemp())
 
-    test_setup = SpacySetup(data_dir, working_dir=tmp_dir)
-    test_setup.export_training_testing_data()
+    test_handler = SpacyDataHandler()
+    db_files = test_handler.export_training_testing_data(
+        doc_dicts[1], doc_dicts[2], tmp_dir
+    )
+    test_handler2 = SpacyDataHandler()
+
+    db_files2 = test_handler2.import_training_testing_data(tmp_dir)
+    assert db_files == db_files2
+
+    db_files3 = test_handler2.import_training_testing_data(
+        tmp_dir, "train.spacy", "dev.spacy"
+    )
+    assert db_files == db_files3
+
+    db_files4 = test_handler2.import_training_testing_data(
+        train_file=db_files[0], test_file=db_files[1]
+    )
+    assert db_files == db_files4
+
+    with pytest.raises(
+        FileNotFoundError,
+        match="Please provide either a directory or the file locations.",
+    ):
+        test_handler2.import_training_testing_data()
+
+    with pytest.raises(
+        FileNotFoundError,
+        match=re.escape(
+            "When providing a data file location, please also provide the other one."
+        ),
+    ):
+        test_handler2.import_training_testing_data(test_file="test.spacy")
+
+    with pytest.raises(TypeError):
+        test_handler2.import_training_testing_data(
+            test_file="test.xyz", train_file="test.spacy"
+        )
+
+    with pytest.raises(
+        FileNotFoundError,
+        match=re.escape("No trainings file in"),
+    ):
+        test_handler2.import_training_testing_data(
+            test_file="test1.spacy", train_file="test2.spacy"
+        )
+
+    with pytest.raises(
+        FileNotFoundError,
+        match=re.escape("No trainings file in"),
+    ):
+        test_handler2.import_training_testing_data(
+            tmp_dir, test_file="test.spacy", train_file="test2.spacy"
+        )
+
+    with pytest.raises(
+        FileNotFoundError,
+        match=re.escape("No test file in"),
+    ):
+        test_handler2.import_training_testing_data(
+            tmp_dir, test_file="test1.spacy", train_file="train.spacy"
+        )
+
+
+def test_SpacyTraining(doc_dicts, config_file):
+    tmp_dir = pathlib.Path(mkdtemp())
+
+    test_handler = SpacyDataHandler()
+    db_files = test_handler.export_training_testing_data(
+        doc_dicts[1], doc_dicts[2], tmp_dir
+    )
+
     # test no config found:
     with pytest.raises(FileNotFoundError):
-        SpacyTraining(tmp_dir)
+        SpacyTraining(tmp_dir, db_files[0], db_files[1])
 
     copy(config_file, tmp_dir)
     # test with config
-    SpacyTraining(tmp_dir, config_file="config.cfg")
-    SpacyTraining(tmp_dir, config_file=tmp_dir / "config.cfg")
+    SpacyTraining(tmp_dir, db_files[0], db_files[1], config_file="config.cfg")
+    SpacyTraining(tmp_dir, db_files[0], db_files[1], config_file=tmp_dir / "config.cfg")
 
-    SpacyTraining(
-        tmp_dir,
-        training_file="train.spacy",
-        testing_file="dev.spacy",
-        config_file="config.cfg",
-    )
     with pytest.raises(FileNotFoundError):
         SpacyTraining(
             tmp_dir,
@@ -159,15 +133,47 @@ def test_SpacyTraining(data_dir, config_file):
         SpacyTraining(tmp_dir)
 
 
-def test_SpacyTraining_training_testing(data_dir, config_file):
+def test_SpacyTraining_training_testing(doc_dicts, config_file):
     tmp_dir = pathlib.Path(mkdtemp())
 
-    test_setup = SpacySetup(data_dir, working_dir=tmp_dir)
-    test_setup.export_training_testing_data()
-    copy(config_file, tmp_dir)
-    training_test = SpacyTraining(tmp_dir, config_file="config.cfg")
+    test_handler = SpacyDataHandler()
+    db_files = test_handler.export_training_testing_data(
+        doc_dicts[1], doc_dicts[2], tmp_dir
+    )
 
-    training_test.train(overwrite={"training.max_epochs": 5})
-    training_test.evaluate()
+    training_test = SpacyTraining(
+        tmp_dir, db_files[0], db_files[1], config_file=config_file
+    )
+
+    best_model_path = pathlib.Path(
+        training_test.train(overwrite={"training.max_epochs": 5})
+    )
+    # test if filename already exists
+
+    training_test.evaluate(tmp_dir / "evaluation.json", db_files[1], best_model_path)
+    training_test.evaluate(tmp_dir / "evaluation.json", db_files[1], best_model_path)
+    assert len(list(tmp_dir.glob("*.json"))) == 2
+
+    training_test.evaluate(tmp_dir / "evaluation.json", db_files[1], best_model_path)
+
+    # # wrong validation file
+    with pytest.raises(RuntimeError):
+        training_test.evaluate(
+            tmp_dir / "evaluation.json", "nonexistend_file.xyz", best_model_path
+        )
+    with pytest.raises(FileNotFoundError):
+        training_test.evaluate(
+            tmp_dir / "evaluation.json", "nonexistend_file.spacy", best_model_path
+        )
+
+    with pytest.raises(IsADirectoryError):
+        training_test.evaluate(tmp_dir, db_files[1], best_model_path)
+
     with pytest.raises(NotImplementedError):
-        training_test.test_model_with_string("Dies ist ein toller Test!")
+        training_test.test_model_with_string(
+            best_model_path, "Dies ist ein toller Test!"
+        )
+    with pytest.raises(NotImplementedError):
+        training_test.test_model_with_string(
+            spacy.load(best_model_path), "Dies ist ein toller Test!"
+        )

@@ -9,6 +9,7 @@ from moralization import analyse
 from lxml.etree import XMLSyntaxError
 import spacy
 
+
 pkg = importlib_resources.files("moralization")
 
 
@@ -128,29 +129,40 @@ class InputOutput:
 
         nlp = spacy.blank("de")
         doc = nlp(cas.sofa_string)
+
+        doc_train = nlp(cas.sofa_string)
+        doc_test = nlp(cas.sofa_string)
+
         # add original cassis sentence as paragraph span
         sentence_type = ts.get_type(
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
         )
 
         # initilize all span categories
-        doc.spans["sc"] = []
-        doc.spans["paragraphs"] = []
-        for cat in map_expressions.values():
-            doc.spans[cat] = []
+        for doc_object in [doc, doc_train, doc_test]:
 
-        paragraph_list = cas.select(sentence_type.name)
-        for paragraph in paragraph_list:
-            doc.spans["paragraphs"].append(
-                doc.char_span(
-                    paragraph.begin,
-                    paragraph.end,
-                    label="paragraph",
+            doc_object.spans["sc"] = []
+            doc_object.spans["paragraphs"] = []
+            for cat in map_expressions.values():
+                doc_object.spans[cat] = []
+
+            paragraph_list = cas.select(sentence_type.name)
+            for paragraph in paragraph_list:
+                doc_object.spans["paragraphs"].append(
+                    doc_object.char_span(
+                        paragraph.begin,
+                        paragraph.end,
+                        label="paragraph",
+                    )
                 )
-            )
         span_type = ts.get_type("custom.Span")
 
         span_list = cas.select(span_type.name)
+
+        # every n-th entry is put as a test value
+        n_test = 5
+        n_start = 0
+
         for span in span_list:
             for cat_old, cat_new in map_expressions.items():
                 # not all of these categories have values in every span.
@@ -164,7 +176,26 @@ class InputOutput:
                     doc.spans[cat_new].append(char_span)
                     doc.spans["sc"].append(char_span)
 
-        return doc
+                    # create test and train set:
+                    n_start = n_start + 1
+                    if n_start % n_test != 0:
+                        char_span = doc_train.char_span(
+                            span.begin,
+                            span.end,
+                            label=span[cat_old],
+                        )
+                        doc_train.spans[cat_new].append(char_span)
+                        doc_train.spans["sc"].append(char_span)
+                    else:
+                        char_span = doc_test.char_span(
+                            span.begin,
+                            span.end,
+                            label=span[cat_old],
+                        )
+                        doc_test.spans[cat_new].append(char_span)
+                        doc_test.spans["sc"].append(char_span)
+
+        return doc, doc_train, doc_test
 
     @staticmethod
     def files_to_docs(data_files: list or str, ts: object):
@@ -178,16 +209,62 @@ class InputOutput:
 
         """
         doc_dict = {}
+        train_dict = {}
+        test_dict = {}
+
         for file in data_files:
             try:
                 cas, file_type = InputOutput.read_cas_file(file, ts)
-                doc = InputOutput.cas_to_doc(cas, ts)
+                doc, doc_train, doc_test = InputOutput.cas_to_doc(cas, ts)
                 doc_dict[file.stem] = doc
+                train_dict[file.stem] = doc_train
+                test_dict[file.stem] = doc_test
+
             except XMLSyntaxError as e:
                 logging.warning(
                     f"WARNING: skipping file '{file}' due to XMLSyntaxError: {e}"
                 )
 
+        return doc_dict, train_dict, test_dict
+
+    @staticmethod
+    def _merge_span_categories(doc_dict, merge_dict=None):
+        """Take the new_dict_cat dict and add its key as a main_cat to data_dict.
+        The values are the total sub_dict_entries of the given list.
+
+        Args:
+          doc_dict(dict: doc): The provided doc dict.
+          new_dict_cat(dict): map new category to list of existing_categories.
+
+        Return:
+            dict: The data_dict with new span categories.
+        """
+        if merge_dict is None:
+            merge_dict = {
+                "task1": ["KAT1-Moralisierendes Segment"],
+                "task2": ["KAT2-Moralwerte", "KAT2-Subjektive Ausdrücke"],
+                "task3": ["KAT3-Rolle", "KAT3-Gruppe", "KAT3-own/other"],
+                "task4": ["KAT4-Kommunikative Funktion"],
+                "task5": ["KAT5-Forderung explizit"],
+            }
+
+        for file in doc_dict.keys():
+
+            # initilize new span_groups
+            for cat in merge_dict.keys():
+                doc_dict[file].spans[cat] = []
+
+            for new_main_cat, new_cat_entries in merge_dict.items():
+                if new_cat_entries == "all":
+                    for main_cat in list(doc_dict[file].spans.keys()):
+                        doc_dict[file].spans[new_main_cat].extend(
+                            doc_dict[file].spans[main_cat]
+                        )
+                else:
+                    for old_main_cat in new_cat_entries:
+                        doc_dict[file].spans[new_main_cat].extend(
+                            doc_dict[file].spans[old_main_cat]
+                        )
         return doc_dict
 
     @staticmethod
@@ -195,16 +272,22 @@ class InputOutput:
         """Convenience method to handle input reading in one go.
 
         Args:
-          dir: str:
+          dir: str: Path to the data directory.
 
         Returns:
-
+            doc_dict: dict: Dictionary of with all the available data in one.
+            train_dict: dict: Dictionary with only the spans that are used for training.
+            test_dict: dict: Dictionary with only the spans that are used for testing.
         """
         data_files, ts_file = InputOutput.get_multiple_input(dir)
         # read in the ts
         ts = InputOutput.read_typesystem(ts_file)
-        doc_dict = InputOutput.files_to_docs(data_files, ts)
-        return doc_dict
+        doc_dict, train_dict, test_dict = InputOutput.files_to_docs(data_files, ts)
+
+        for dict_ in [doc_dict, train_dict, test_dict]:
+            dict_ = InputOutput._merge_span_categories(dict_)
+
+        return doc_dict, train_dict, test_dict
 
 
 if __name__ == "__main__":
