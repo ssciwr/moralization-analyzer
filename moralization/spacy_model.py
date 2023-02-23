@@ -55,7 +55,7 @@ class SpacyDataHandler:
             train_file = Path(train_file)
             test_file = Path(test_file)
             # check if files are spacy
-            if test_file.suffix != ".spacy" or test_file.suffix != ".spacy":
+            if train_file.suffix != ".spacy" or test_file.suffix != ".spacy":
                 raise TypeError("The provided files are not spacy binaries.")
 
             # if both files exists we can exit at this point.
