@@ -6,4 +6,4 @@ __version__ = metadata.version(__package__)
 del metadata
 
 
-__all__ = [DataManager]
+__all__ = ["DataManager"]
