@@ -13,3 +13,4 @@ ipywidgets
 spacy
 jupyter
 classy-classification
+spacy-span-analyzer
