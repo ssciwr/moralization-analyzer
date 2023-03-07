@@ -475,12 +475,6 @@ class SpacyTraining:
 
         return doc, nlp
 
-        print("ents")
-        for ent in doc.ents:
-            print(ent, ent.label_)
-
-        return doc, nlp
-
     def _best_model(self):
         """ """
         if os.path.isdir(os.path.join(self.working_dir, "output", "model-best")):
