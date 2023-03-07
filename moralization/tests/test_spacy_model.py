@@ -16,10 +16,10 @@ def test_SpacySetup(data_dir):
 
     # test finding file by name in data_dir
     SpacySetup(
-        pathlib.Path(__file__).parents[2].resolve() / "data" / "Training",
+        pathlib.Path(__file__).parents[1].resolve() / "data",
     )
     SpacySetup(
-        pathlib.Path(__file__).parents[2].resolve() / "data" / "Training",
+        pathlib.Path(__file__).parents[1].resolve() / "data",
         working_dir=tmp_dir,
     )
 
@@ -28,7 +28,6 @@ def test_SpacySetup_convert_data_to_spacy(data_dir):
 
     # test datadir and specific file path
     test_setup = SpacySetup(data_dir)
-    test_setup.convert_data_to_spacy_doc()
     assert sorted(list(test_setup.doc_dict.keys())) == sorted(
         [
             "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
@@ -40,7 +39,6 @@ def test_SpacySetup_convert_data_to_spacy(data_dir):
 def test_SpacySetup_export_training_testing_data(data_dir):
     tmp_dir = pathlib.Path(mkdtemp())
     test_setup = SpacySetup(data_dir)
-    test_setup.convert_data_to_spacy_doc()
     test_setup.export_training_testing_data()
     assert len(list(test_setup.working_dir.glob("*.spacy"))) == 2
     test_setup.export_training_testing_data(tmp_dir)
@@ -48,15 +46,66 @@ def test_SpacySetup_export_training_testing_data(data_dir):
 
     tmp_dir = pathlib.Path(mkdtemp())
     test_setup = SpacySetup(data_dir, working_dir=tmp_dir)
-    test_setup.convert_data_to_spacy_doc()
     test_setup.export_training_testing_data()
 
     assert len(list(test_setup.working_dir.glob("*.spacy"))) == 2
 
 
+def test_SpacySetup_manage_visualisation_filenames(data_dir):
+
+    test_setup = SpacySetup(data_dir)
+
+    # test filename logic
+    test_setup._manage_visualisation_filenames([0])
+    test_setup._manage_visualisation_filenames(0)
+    test_setup._manage_visualisation_filenames(
+        "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB"
+    )
+    test_setup._manage_visualisation_filenames(
+        ["test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB"]
+    )
+    assert (
+        sorted(test_setup._manage_visualisation_filenames([0, 1]))
+        == sorted(
+            test_setup._manage_visualisation_filenames(
+                [0, "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"]
+            )
+        )
+        == sorted(
+            test_setup._manage_visualisation_filenames(
+                [
+                    "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
+                    "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
+                ]
+            )
+        )
+        == sorted(
+            [
+                "test_data-trimmed_version_of-Gerichtsurteile-neg-AW-neu-optimiert-BB",
+                "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW",
+            ]
+        )
+    )
+
+    with pytest.raises(IndexError):
+        test_setup._manage_visualisation_filenames(4)
+    with pytest.raises(IndexError):
+        test_setup._manage_visualisation_filenames("test_not_found")
+
+
 def test_SpacySetup_visualize_data(data_dir):
     test_setup = SpacySetup(data_dir)
-    test_setup.convert_data_to_spacy_doc()
+
+    with pytest.raises(IndexError):
+        test_setup.visualize_data(type="false_type")
+
+    with pytest.raises(ValueError):
+        test_setup.visualize_data(spans_key="false_key")
+
+    with pytest.raises(NotImplementedError):
+        test_setup.visualize_data(spans_key=["task1", "sc"])
+
+    # test NotImplementedException when not in Jupyter Notebook
     with pytest.raises(NotImplementedError):
         test_setup.visualize_data()
 
@@ -65,7 +114,6 @@ def test_SpacyTraining(data_dir, config_file):
     tmp_dir = pathlib.Path(mkdtemp())
 
     test_setup = SpacySetup(data_dir, working_dir=tmp_dir)
-    test_setup.convert_data_to_spacy_doc()
     test_setup.export_training_testing_data()
     # test no config found:
     with pytest.raises(FileNotFoundError):
@@ -115,10 +163,15 @@ def test_SpacyTraining_training_testing(data_dir, config_file):
     tmp_dir = pathlib.Path(mkdtemp())
 
     test_setup = SpacySetup(data_dir, working_dir=tmp_dir)
-    test_setup.convert_data_to_spacy_doc()
     test_setup.export_training_testing_data()
     copy(config_file, tmp_dir)
     training_test = SpacyTraining(tmp_dir, config_file="config.cfg")
 
     training_test.train(overwrite={"training.max_epochs": 5})
     training_test.evaluate()
+    with pytest.raises(NotImplementedError):
+        training_test.test_model_with_string("Dies ist ein toller Test!")
+
+    training_test.save_best_model(tmp_dir / "test_model")
+    with pytest.raises(FileExistsError):
+        training_test.save_best_model(".")

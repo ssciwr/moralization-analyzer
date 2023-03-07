@@ -13,24 +13,38 @@ from spacy.cli.init_config import fill_config
 from sklearn.model_selection import train_test_split
 from tempfile import mkdtemp
 from collections import defaultdict
+from collections.abc import Iterable
+import shutil
 
 
 class SpacySetup:
     """Helper class to organize and prepare spacy trainings data from xml/xmi files."""
 
     def __init__(self, data_dir, working_dir=None):
-        """Handler for machine learning training and analysis
-        :param data_dir: Directory with data files
-        :type data_dir: str/Path
-        :param working_dir: Directory where the training data, configs and results are stored., defaults to Debug value
-        :type working_dir: _type_, optional
-        :param config_file: Filename or path for the config file, defaults to searching in the working directory.
-        :type config_file: _type_, optional
-        """
+        """Handler for machine learning training and analysis.
 
+        Args:
+          data_dir(str/Path): Directory with data files
+          working_dir(path, optional): Directory where the training data,
+          configs and results are stored., defaults to Debug value
+          config_file(Path, optional): Filename or path for the config file,
+          defaults to searching in the working directory.
+
+        """
         self.data_dir, self.working_dir = self._setup_working_dir(data_dir, working_dir)
+        self.convert_data_to_spacy_doc()
 
     def _setup_working_dir(self, data_dir, working_dir):
+        """Check if given path is possible and initialize directory if not already present.
+
+        Args:
+            data_dir (path): path to data directory
+            working_dir (path): path to data directory
+
+        Returns:
+            path: path to data directory
+            path: path to working directory
+        """
 
         # maybe set default working_dir to tmp dir
         data_dir = Path(data_dir)
@@ -44,11 +58,7 @@ class SpacySetup:
         return data_dir, working_dir
 
     def convert_data_to_spacy_doc(self):
-        """convert the given xmi/xml files to a spacy specific binary filesystem.
-
-        :param output_dir: where to store generated files. If None is given the working dir will be used
-        :type output_dir: dir
-        """
+        """Convert the given xmi/xml files to a spacy specific binary filesystem."""
         data_dict = InputOutput.read_data(self.data_dir)
 
         merging_dict = {
@@ -65,16 +75,22 @@ class SpacySetup:
 
         self.doc_dict = self._convert_spans_dict_to_doc_dict(data_dict, spans_dict)
 
-        return self.doc_dict
-
     def export_training_testing_data(self, output_dir=None):
-        """_summary_
+        """Convert a list of spacy docs to a serialisable DocBin object and save it to disk.
+        Automatically processes training and testing files.
 
-        :param output_dir: _description_, defaults to None
-        :type output_dir: _type_, optional
+        Args:
+          output_dir(Path, optional): Path of the output directory where the data is saved, defaults to None.
+          If None the working directory is used.
+
+        Return:
+            output_dir(Path): location of the stored data.
+
         """
         if output_dir is None:
             output_dir = self.working_dir
+        elif isinstance(output_dir, str):
+            output_dir = Path(output_dir)
 
         db_train = DocBin()
         db_dev = DocBin()
@@ -85,20 +101,71 @@ class SpacySetup:
 
         db_train.to_disk(output_dir / "train.spacy")
         db_dev.to_disk(output_dir / "dev.spacy")
+        return output_dir
 
-    def visualize_data(self, filename=None, type="all", style="span", spans_key="sc"):
+    def _manage_visualisation_filenames(self, filenames):
+
+        # check through given filenames and convert ints to key string
+        if filenames is None:
+            filename = list(self.doc_dict.keys())
+        elif isinstance(filenames, str):
+            filename = [filenames]
+        elif isinstance(filenames, int):
+            filename = [list(self.doc_dict.keys())[filenames]]
+        elif isinstance(filenames, Iterable):
+            filename = []
+            for file in filenames:
+                if isinstance(file, int):
+                    filename.append(list(self.doc_dict.keys())[file])
+                else:
+                    filename.append(file)
+
+        # check if all new filenames are in doc_dict.keys()
+        for file in filename:
+            if file not in list(self.doc_dict.keys()):
+                raise IndexError(
+                    f"The filename {file} is not provided in the dataset, which only has {list(self.doc_dict.keys())}."
+                )
+
+        return filename
+
+    def visualize_data(self, filenames=None, type="all", style="span", spans_key="sc"):
         """Use the displacy class offered by spacy to visualize the current dataset.
             use SpacySetup.span_keys to show possible keys or use 'sc' for all.
 
 
-        :param filename:    Specify which of the loaded files should be presented, if None all files are shown.
-                            This can also take a list., defaults to None
-        :type filename: str/list, optional
-        :param type: Specify is only the trainings, the testing or all datapoints should be shown, defaults to "all"
-        :type type: str, optional
-        :param type: the visualization type given to displacy, available are "dep", "ent" and "span, defaults to "span".
+        Args:
+          filename(str/list, optional, optional): Specify which of the loaded files should be presented,
+          if None all files are shown.
+          This can also take a list., defaults to None
+          display_type(str, optional, optional): Specify is only the trainings,
+          the testing or all datapoints should be shown,options are: "all", "test" and "train". Defaults to "all"
+          type: the visualization type given to displacy, available are "dep", "ent" and "span,
+          defaults to "span".
+          style:  (Default value = "span")
 
+        Returns:
+            Displacy.render
         """
+
+        if isinstance(spans_key, list):
+            raise NotImplementedError(
+                "spacy does no support viewing multiple categories at once."
+            )
+            # we could manually add multiple categories to one span cat and display this new category.
+
+        if spans_key != "sc" and spans_key not in self.span_keys:
+            raise ValueError(
+                f"""The provided key: {spans_key} is not valid.
+                Please use one of the following {set(self.span_keys.keys())}"""
+            )
+        if type not in ["all", "test", "train"]:
+            raise IndexError(
+                f"Type argument must be either 'all', 'test' or 'train', but is {type}"
+            )
+
+        filename = self._manage_visualisation_filenames(filenames)
+
         if not is_interactive():
             raise NotImplementedError(
                 "Please only use this function in a jupyter notebook for the time being."
@@ -115,13 +182,6 @@ class SpacySetup:
                 Please use one of the following {set(self.span_keys.keys())}"""
             )
 
-        if filename is None:
-            filename = list(self.doc_dict.keys())
-        elif isinstance(filename, int):
-            filename = [list(self.doc_dict.keys())[filename]]
-        elif isinstance(filename, str):
-            filename = [filename]
-
         return displacy.render(
             [self.doc_dict[file][type] for file in filename],
             style=style,
@@ -132,10 +192,12 @@ class SpacySetup:
         """Take the new_dict_cat dict and add its key as a main_cat to data_dict.
         The values are the total sub_dict_entries of the given list.
 
-        :param data_dict: _description_
-        :type data_dict: dict
-        :param new_dict_cat: map new category to list of existing_categories.
-        :type new_dict_cat: dict
+        Args:
+          data_dict(dict: dict): The datadict generated from xmi files.
+          new_dict_cat(dict): map new category to list of existing_categories.
+
+        Return:
+            dict: The data_dict with new span categories.
         """
 
         for file in data_dict.keys():
@@ -154,16 +216,18 @@ class SpacySetup:
         return data_dict
 
     def _convert_dict_to_spans_dict(self, data_dict):
+        """Custom tranformation steps to convert our data_dict into a usable spacy.doc format.
+        For this all annotations will be saved under the span_key 'sc'.
 
+        Args:
+          data_dict(dict: dict): The datadict generated from xmi files.
+
+        Returns:
+          dict: Dict of spacy.doc objects
+
+        """
         self.span_keys = defaultdict(set)
-        # use blank model
-        # nlp = spacy.blank("de")
-        # use standard model to get sentence boundaries
-        nlp = spacy.load(
-            "de_core_news_sm",
-            exclude=["lemmatizer", "ner", "morphologizer", "attribute_ruler"],
-        )
-        # print(nlp.pipe_names)
+        nlp = spacy.blank("de")
         # defaultdict with structure:
         # file - main_cat - all/train/test
         spans_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
@@ -234,6 +298,14 @@ class SpacyTraining:
         self.file_dict = self._find_files(training_file, testing_file, config_file)
 
     def _find_file(self, _file):
+        """
+
+        Args:
+          _file:
+
+        Returns:
+
+        """
         if _file:
             _file = Path(_file)
 
@@ -248,6 +320,16 @@ class SpacyTraining:
         return _file
 
     def _find_files(self, training_file, testing_file, config_file):
+        """
+
+        Args:
+          training_file:
+          testing_file:
+          config_file:
+
+        Returns:
+
+        """
 
         # use default names is no name is given.
         if training_file is None:
@@ -269,11 +351,18 @@ class SpacyTraining:
         return file_dict
 
     def _check_config_file(self, config_file):
+        """
+
+        Args:
+          config_file:
+
+        Returns:
+
+        """
         # find config file as abs path, or as filename in the working directory.
 
         if config_file:
             config_file = Path(config_file)
-
             if config_file.is_file():
                 config_file = Path(config_file)
             else:
@@ -281,7 +370,8 @@ class SpacyTraining:
                     config_file = self.working_dir / config_file
                 else:
                     raise FileNotFoundError(
-                        f"The given config file could not be found in the working directory: {self.working_dir}"
+                        "The given config file could not be found in the working directory:"
+                        + f" {self.working_dir} or under {config_file.absolute()}"
                     )
 
         else:
@@ -301,7 +391,8 @@ class SpacyTraining:
 
         # after finding the config we use the provided spacy function to autofill all missing entries.
         fill_config(
-            base_path=config_file, output_file=self.working_dir / "config_filled.cfg"
+            base_path=config_file,
+            output_file=self.working_dir / "config_filled.cfg",
         ),
 
         return self.working_dir / "config_filled.cfg"
@@ -309,11 +400,13 @@ class SpacyTraining:
     def train(self, use_gpu=-1, overwrite=None):
         """Use the spacy training method to generate a new model.
 
-        :param use_gpu: enter the gpu device you want to use.
-            Keep in Mind that cuda must be correctly installed, defaults to -1
-        :type use_gpu: int, optional
-        :param overwrite: additional config overwrites, defaults to None
-        :type overwrite: _type_, optional
+        Args:
+          use_gpu(int, optional, optional): enter the gpu device you want to use.
+        Keep in Mind that cuda must be correctly installed, defaults to -1
+          overwrite(_type_, optional, optional): additional config overwrites, defaults to None
+
+        Returns:
+
         """
         from spacy.cli.train import train
 
@@ -334,6 +427,14 @@ class SpacyTraining:
         )
 
     def evaluate(self, validation_file=None):
+        """
+
+        Args:
+          validation_file:  (Default value = None)
+
+        Returns:
+
+        """
         from spacy.cli.evaluate import evaluate
 
         if validation_file is None:
@@ -346,12 +447,29 @@ class SpacyTraining:
         )
         return evaluation_data
 
-    def test_model_with_string(self, test_string):
+    def test_model_with_string(self, test_string, options=None):
+        """
+
+        Args:
+          test_string:
+
+        Returns:
+
+        """
+        if not is_interactive():
+            raise NotImplementedError(
+                "Please only use this function in a jupyter notebook for the time being."
+            )
+        if options is None:
+            options = {"spans_key": "task1"}
+
         nlp = spacy.load(self._best_model())
         doc = nlp(test_string)
-        print(doc.spans)
-        for span in doc.spans["task1"]:
-            print(span, span.label_)
+
+        displacy.render(doc, style="span", options=options)
+        displacy.render(doc, style="ent")
+
+        return doc, nlp
 
         print("ents")
         for ent in doc.ents:
@@ -360,6 +478,7 @@ class SpacyTraining:
         return doc, nlp
 
     def _best_model(self):
+        """ """
         if os.path.isdir(os.path.join(self.working_dir, "output", "model-best")):
             return os.path.join(self.working_dir, "output", "model-best")
         else:
@@ -367,3 +486,11 @@ class SpacyTraining:
                 f"""No best model could be found in{os.path.join(self.working_dir,'output')}.
                 Did you train your model before?"""
             )
+
+    def save_best_model(self, output_name):
+        output_name = Path(output_name)
+        if output_name.exists():
+            raise FileExistsError(
+                f"The directory {output_name} already exists, please choose a unique name."
+            )
+        shutil.copytree(self._best_model(), output_name)
