@@ -227,7 +227,11 @@ class SpacySetup:
 
         """
         self.span_keys = defaultdict(set)
-        nlp = spacy.blank("de")
+        # nlp = spacy.blank("de")
+        nlp = spacy.load(
+            "de_core_news_sm",
+            exclude=["lemmatizer", "ner", "morphologizer", "attribute_ruler"],
+        )
         # defaultdict with structure:
         # file - main_cat - all/train/test
         spans_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
