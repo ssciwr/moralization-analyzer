@@ -131,3 +131,6 @@ dmypy.json
 # data files 
 data/
 .vscode/settings.json
+
+# notebook outputs
+notebooks/output
