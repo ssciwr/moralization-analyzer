@@ -26,9 +26,6 @@ class TransformersSetup:
         self.label_list = [
             [0 for _ in sent] for sent in self.doc_dict[example_name]["train"].sents
         ]
-        for i in range(0, 5):
-            print(self.sentence_list[i])
-            print(self.label_list[i])
 
     def generate_labels(self, example_name=None):
         # for now just select one source
