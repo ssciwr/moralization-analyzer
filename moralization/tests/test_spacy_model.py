@@ -22,7 +22,7 @@ def test_export_training_testing_data(doc_dicts):
     # test export with dir
     tmp_dir = pathlib.Path(mkdtemp())
     test_handler.export_training_testing_data(doc_dicts[1], doc_dicts[2], tmp_dir)
-    assert list(test_handler.db_files) == list(tmp_dir.glob("*.spacy"))
+    assert sorted(list(test_handler.db_files)) == sorted(list(tmp_dir.glob("*.spacy")))
 
 
 def test_import_training_testing_data(doc_dicts):
