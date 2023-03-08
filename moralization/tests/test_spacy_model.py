@@ -11,7 +11,7 @@ CONFIG_CFG = "config.cfg"
 EVALUATION_JSON = "evaluation.json"
 
 
-def test_SpacyDataHandler_export_training_testing_data(doc_dicts):
+def test_export_training_testing_data(doc_dicts):
 
     # test export default filename
     test_handler = SpacyDataHandler()
@@ -25,7 +25,7 @@ def test_SpacyDataHandler_export_training_testing_data(doc_dicts):
     assert list(test_handler.db_files) == list(tmp_dir.glob("*.spacy"))
 
 
-def test_SpacyDataHandler_import_training_testing_data(doc_dicts):
+def test_import_training_testing_data(doc_dicts):
     tmp_dir = pathlib.Path(mkdtemp())
 
     test_handler = SpacyDataHandler()
@@ -91,7 +91,7 @@ def test_SpacyDataHandler_import_training_testing_data(doc_dicts):
         )
 
 
-def test_SpacyTraining(doc_dicts, config_file):
+def test_spacy_training(doc_dicts, config_file):
     tmp_dir = pathlib.Path(mkdtemp())
 
     test_handler = SpacyDataHandler()
@@ -137,7 +137,7 @@ def test_SpacyTraining(doc_dicts, config_file):
         SpacyTraining(tmp_dir)
 
 
-def test_SpacyTraining_training_testing(doc_dicts, config_file):
+def test_training_testing(doc_dicts, config_file):
 
     tmp_dir = pathlib.Path(mkdtemp())
 

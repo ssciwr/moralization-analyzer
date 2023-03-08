@@ -6,11 +6,11 @@ import re
 import numpy as np
 
 
-def test_DataManager(data_dir):
+def test_data_manager(data_dir):
     DataManager(data_dir)
 
 
-def test_DataManager_return_analyzer_result(data_dir):
+def test_return_analyzer_result(data_dir):
     dm = DataManager(data_dir)
     dm.return_analyzer_result()
 
@@ -35,7 +35,7 @@ def test_DataManager_return_analyzer_result(data_dir):
         dm.return_analyzer_result("something_else")
 
 
-def test_DataManager_occurence_analysis(data_dir):
+def test_occurence_analysis(data_dir):
     dm = DataManager(data_dir)
     table = dm.occurence_analysis("table")
     assert table.shape == (18, 50)
@@ -47,12 +47,12 @@ def test_DataManager_occurence_analysis(data_dir):
     assert heatmap
 
 
-def test_DataManager_interactive_analysis(data_dir):
+def test_interactive_analysis(data_dir):
     dm = DataManager(data_dir)
     dm.interactive_analysis().show()
 
 
-def test_DataManager_visualize_data(data_dir):
+def test_visualize_data(data_dir):
     dm = DataManager(data_dir)
     with pytest.raises(NotImplementedError):
         dm.visualize_data(_type="all")
@@ -67,7 +67,7 @@ def test_DataManager_visualize_data(data_dir):
         dm.visualize_data(_type="blub")
 
 
-def test_DataManager_export_data_DocBin(data_dir):
+def test_export_data_DocBin(data_dir):
     dm = DataManager(data_dir)
     tmp_dir = Path(mkdtemp())
     test_files = dm.export_data_DocBin(tmp_dir)
@@ -86,7 +86,7 @@ def test_DataManager_export_data_DocBin(data_dir):
     dm.export_data_DocBin(tmp_dir / "a/")
 
 
-def test_DataManager_import_data_DocBin(data_dir):
+def test_import_data_DocBin(data_dir):
     dm = DataManager(data_dir)
     tmp_dir = Path(mkdtemp())
     dm.export_data_DocBin(tmp_dir)
@@ -97,7 +97,7 @@ def test_DataManager_import_data_DocBin(data_dir):
     assert dm.spacy_docbin_files == dm2.spacy_docbin_files
 
 
-def test_DataManager_spacy_train(data_dir, config_file):
+def test_spacy_train(data_dir, config_file):
     dm = DataManager(data_dir)
     tmp_dir = Path(mkdtemp())
     test_files = dm.export_data_DocBin(tmp_dir)
