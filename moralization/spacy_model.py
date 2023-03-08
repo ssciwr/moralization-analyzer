@@ -13,13 +13,19 @@ import shutil
 class SpacyDataHandler:
     """Helper class to organize and prepare spacy trainings data."""
 
-    def export_training_testing_data(self, train_dict, test_dict, output_dir=None):
+    def export_training_testing_data(
+        self, train_dict, test_dict, output_dir=None, overwrite=False
+    ):
         """Convert a list of spacy docs to a serialisable DocBin object and save it to disk.
         Automatically processes training and testing files.
 
         Args:
-          output_dir(list[Path], optional): Path of the output directory where the data is saved, defaults to None.
-          If None the working directory is used.
+            train_dict(dict): internally handled data storage.
+            test_dict(dict): internally handled data storage.
+            output_dir(list[Path], optional): Path of the output directory where the data is saved, defaults to None.
+            If None the working directory is used.
+            overwrite(bool, optional): wether or not the spacy files should be written
+            even if files are already present.
         Return:
             db_files(list[Path]) the location of the written files.
         """
@@ -28,6 +34,20 @@ class SpacyDataHandler:
             output_dir = Path(mkdtemp())
         else:
             output_dir = Path(output_dir)
+            output_dir.mkdir(exist_ok=True)
+
+        train_filename = output_dir / "train.spacy"
+        dev_filename = output_dir / "dev.spacy"
+
+        # check if files already exists, only if overwrite is False:
+
+        if overwrite is False:
+            if train_filename.exists() or dev_filename.exists():
+                raise FileExistsError(
+                    "The given directory already has a training and testing file."
+                    + " Please choose a new directory or set overwrite to True."
+                    + f"Given directory is: {output_dir}"
+                )
 
         db_train = DocBin()
         db_test = DocBin()
@@ -35,9 +55,10 @@ class SpacyDataHandler:
         for doc_train, doc_test in zip(train_dict.values(), test_dict.values()):
             db_train.add(doc_train)
             db_test.add(doc_test)
-        db_train.to_disk(output_dir / "train.spacy")
-        db_test.to_disk(output_dir / "dev.spacy")
-        self.db_files = [output_dir / "train.spacy", output_dir / "dev.spacy"]
+
+        db_train.to_disk(train_filename)
+        db_test.to_disk(dev_filename)
+        self.db_files = [train_filename, dev_filename]
         return self.db_files
 
     def _check_files(self, input_dir=None, train_file=None, test_file=None):

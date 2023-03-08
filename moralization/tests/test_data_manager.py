@@ -77,6 +77,14 @@ def test_DataManager_export_data_DocBin(data_dir):
     assert dm.spacy_docbin_files[1].stem == "dev"
     assert dm.spacy_docbin_files == list(tmp_dir.glob("*.spacy"))
 
+    # check if overwrite protection is triggered.
+    with pytest.raises(FileExistsError):
+        dm.export_data_DocBin(tmp_dir)
+    dm.export_data_DocBin(tmp_dir, overwrite=True)
+
+    # check for uninitilized directory
+    dm.export_data_DocBin(tmp_dir / "a/")
+
 
 def test_DataManager_import_data_DocBin(data_dir):
     dm = DataManager(data_dir)

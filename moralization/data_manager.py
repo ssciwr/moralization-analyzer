@@ -94,18 +94,19 @@ class DataManager:
 
         return visualize_data(return_dict[_type], spans_key=spans_key)
 
-    def export_data_DocBin(self, output_dir=None):
-        # TODO add check if files already exist, maybe add custom filenames
+    def export_data_DocBin(self, output_dir=None, overwrite=False):
         """Export the currently loaded docs as a spacy binary. This is used in spacy training.
 
         Args:
             output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
+            overwrite(bool, optional): wether or not the spacy files should be written
+            even if files are already present.
 
         Returns:
             list[Path]: A list of the train and test files path.
         """
         self.spacy_docbin_files = SpacyDataHandler().export_training_testing_data(
-            self.train_dict, self.test_dict, output_dir
+            self.train_dict, self.test_dict, output_dir, overwrite=overwrite
         )
         return self.spacy_docbin_files
 

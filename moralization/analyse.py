@@ -79,7 +79,6 @@ def _find_spans_in_paragraph(doc, span_cat):
 
     # return a list of indeces in which paragraph each span falls.
     paragraph_list = _get_paragraphs(doc)
-    # span_index_list = [[span.start, span.end] for span in doc.spans[span_cat]]
     return_idx_list = []
     paragraph_idx = 0
 

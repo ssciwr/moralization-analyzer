@@ -67,7 +67,7 @@ def test_report_occurrence_heatmap(doc_dicts, monkeypatch):
 
     # test corr wrong filter
     with pytest.raises(KeyError):
-        corr_df = plot.report_occurrence_heatmap(df, _filter="test", _type="corr")
+        plot.report_occurrence_heatmap(df, _filter="test", _type="corr")
 
     # test corr with filter main cat:
     corr_df = plot.report_occurrence_heatmap(df, _filter="KAT3-Gruppe", _type="corr")
