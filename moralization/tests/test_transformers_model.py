@@ -29,3 +29,7 @@ def test_generate_labels(data_dir):
     test_obj.get_data_lists(example_name=example_name)
     test_obj.generate_labels(example_name=example_name)
     assert test_obj.labels[10] == 0
+    assert test_obj.labels[624] == 2
+    assert test_obj.labels[625] == 1
+    assert test_obj.labels[671] == 1
+    assert test_obj.labels[672] == 0

@@ -45,7 +45,9 @@ class TransformersSetup:
         self.labels = [0 for _ in self.doc_dict[example_name]["train"]]
         for span in self.doc_dict[example_name]["train"].spans["task1"]:
             if span.label_ in selected_labels:
-                self.labels[span.start + 1 : span.end] = [1] * (span.end - span.start)
+                self.labels[span.start + 1 : span.end + 1] = [1] * (
+                    span.end - span.start
+                )
                 # mark the beginning of a span with 2
                 self.labels[span.start] = 2
 
