@@ -36,6 +36,7 @@ dependencies = [
     "spacy",
     "jupyter",
     "classy_classification",
+    "spacy-span-analyzer",
 ]
 
 [tool.setuptools.package-data]
