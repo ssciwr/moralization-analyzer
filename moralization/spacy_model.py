@@ -7,6 +7,7 @@ from pathlib import Path
 from spacy.cli.init_config import fill_config
 from tempfile import mkdtemp
 from moralization.plot import visualize_data
+import shutil
 
 
 class SpacyDataHandler:
@@ -19,6 +20,8 @@ class SpacyDataHandler:
         Args:
           output_dir(list[Path], optional): Path of the output directory where the data is saved, defaults to None.
           If None the working directory is used.
+        Return:
+            db_files(list[Path]) the location of the written files.
         """
 
         if output_dir is None:
@@ -154,7 +157,8 @@ class SpacyTraining:
 
         # after finding the config we use the provided spacy function to autofill all missing entries.
         fill_config(
-            base_path=config_file, output_file=self.working_dir / "config_filled.cfg"
+            base_path=config_file,
+            output_file=self.working_dir / "config_filled.cfg",
         ),
 
         return self.working_dir / "config_filled.cfg"
@@ -247,3 +251,11 @@ class SpacyTraining:
                 f"""No best model could be found in{os.path.join(self.working_dir,'output')}.
                 Did you train your model before?"""
             )
+
+    def save_best_model(self, output_name):
+        output_name = Path(output_name)
+        if output_name.exists():
+            raise FileExistsError(
+                f"The directory {output_name} already exists, please choose a unique name."
+            )
+        shutil.copytree(self._best_model(), output_name)

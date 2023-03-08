@@ -1,4 +1,4 @@
-from moralization import InputOutput
+from moralization.input_data import InputOutput
 from moralization.analyse import _loop_over_files, _return_span_analyzer
 from moralization.plot import (
     report_occurrence_heatmap,
