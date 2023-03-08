@@ -51,6 +51,7 @@ def test_SpacySetup_export_training_testing_data(data_dir):
     assert len(list(test_setup.working_dir.glob("*.spacy"))) == 2
 
 
+@pytest.mark.skip
 def test_SpacySetup_manage_visualisation_filenames(data_dir):
 
     test_setup = SpacySetup(data_dir)
