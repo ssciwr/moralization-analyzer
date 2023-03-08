@@ -42,6 +42,7 @@ def test__find_spans_in_paragraph(doc_dicts):
 
 def test_summarize_span_occurences(doc_dicts):
     doc = list(doc_dicts[0].values())[0]
+
     df = analyse._summarize_span_occurences(doc)
     # check occurences of first row
     assert list(df.iloc[0].values) == [

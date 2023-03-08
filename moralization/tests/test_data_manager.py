@@ -75,7 +75,7 @@ def test_export_data_DocBin(data_dir):
     assert test_files[1].stem == "dev"
     assert dm.spacy_docbin_files[0].stem == "train"
     assert dm.spacy_docbin_files[1].stem == "dev"
-    assert dm.spacy_docbin_files == list(tmp_dir.glob("*.spacy"))
+    assert sorted(dm.spacy_docbin_files) == sorted(list(tmp_dir.glob("*.spacy")))
 
     # check if overwrite protection is triggered.
     with pytest.raises(FileExistsError):

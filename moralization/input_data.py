@@ -90,7 +90,8 @@ class InputOutput:
             raise FileNotFoundError(f"Path {dir_path} does not exist")
         # convert generator to list to check if dir is emtpy
         # currently only xmi but maybe can be extended
-        data_files = list(dir_path.glob("*.xmi"))
+        # also sort the input files.
+        data_files = sorted(list(dir_path.glob("*.xmi")))
         if not data_files:
             raise FileNotFoundError(f"No input files found in {dir_path}")
 
