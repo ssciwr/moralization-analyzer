@@ -7,6 +7,10 @@ import re
 import spacy
 
 
+CONFIG_CFG = "config.cfg"
+EVALUATION_JSON = "evaluation.json"
+
+
 def test_SpacyDataHandler_export_training_testing_data(doc_dicts):
 
     # test export default filename
@@ -101,22 +105,22 @@ def test_SpacyTraining(doc_dicts, config_file):
 
     copy(config_file, tmp_dir)
     # test with config
-    SpacyTraining(tmp_dir, db_files[0], db_files[1], config_file="config.cfg")
-    SpacyTraining(tmp_dir, db_files[0], db_files[1], config_file=tmp_dir / "config.cfg")
+    SpacyTraining(tmp_dir, db_files[0], db_files[1], config_file=CONFIG_CFG)
+    SpacyTraining(tmp_dir, db_files[0], db_files[1], config_file=tmp_dir / CONFIG_CFG)
 
     with pytest.raises(FileNotFoundError):
         SpacyTraining(
             tmp_dir,
             training_file="noshow.spacy",
             testing_file="dev.spacy",
-            config_file="config.cfg",
+            config_file=CONFIG_CFG,
         )
     with pytest.raises(FileNotFoundError):
         SpacyTraining(
             tmp_dir,
             training_file="train.spacy",
             testing_file="noshow.spacy",
-            config_file="config.cfg",
+            config_file=CONFIG_CFG,
         )
     with pytest.raises(FileNotFoundError):
         SpacyTraining(
@@ -134,6 +138,7 @@ def test_SpacyTraining(doc_dicts, config_file):
 
 
 def test_SpacyTraining_training_testing(doc_dicts, config_file):
+
     tmp_dir = pathlib.Path(mkdtemp())
 
     test_handler = SpacyDataHandler()
@@ -150,20 +155,20 @@ def test_SpacyTraining_training_testing(doc_dicts, config_file):
     )
     # test if filename already exists
 
-    training_test.evaluate(tmp_dir / "evaluation.json", db_files[1], best_model_path)
-    training_test.evaluate(tmp_dir / "evaluation.json", db_files[1], best_model_path)
+    training_test.evaluate(tmp_dir / EVALUATION_JSON, db_files[1], best_model_path)
+    training_test.evaluate(tmp_dir / EVALUATION_JSON, db_files[1], best_model_path)
     assert len(list(tmp_dir.glob("*.json"))) == 2
 
-    training_test.evaluate(tmp_dir / "evaluation.json", db_files[1], best_model_path)
+    training_test.evaluate(tmp_dir / EVALUATION_JSON, db_files[1], best_model_path)
 
     # # wrong validation file
     with pytest.raises(RuntimeError):
         training_test.evaluate(
-            tmp_dir / "evaluation.json", "nonexistend_file.xyz", best_model_path
+            tmp_dir / EVALUATION_JSON, "nonexistend_file.xyz", best_model_path
         )
     with pytest.raises(FileNotFoundError):
         training_test.evaluate(
-            tmp_dir / "evaluation.json", "nonexistend_file.spacy", best_model_path
+            tmp_dir / EVALUATION_JSON, "nonexistend_file.spacy", best_model_path
         )
 
     with pytest.raises(IsADirectoryError):

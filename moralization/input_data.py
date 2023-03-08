@@ -126,8 +126,7 @@ class InputOutput:
             #       "KAT5Ausformulierung": "KAT5-Forderung implizit",
             #       "Kommentar": "KOMMENTAR",
         }
-
-        nlp = spacy.blank("de")
+        nlp = spacy.load("de_core_news_sm")
         doc = nlp(cas.sofa_string)
 
         doc_train = nlp(cas.sofa_string)
@@ -159,6 +158,14 @@ class InputOutput:
 
         span_list = cas.select(span_type.name)
 
+        doc, doc_train, doc_test = InputOutput._split_train_test(
+            doc, doc_train, doc_test, span_list, map_expressions
+        )
+
+        return doc, doc_train, doc_test
+
+    @staticmethod
+    def _split_train_test(doc, doc_train, doc_test, span_list, map_expressions):
         # every n-th entry is put as a test value
         n_test = 5
         n_start = 0
