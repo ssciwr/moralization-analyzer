@@ -46,17 +46,48 @@
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html">Automated recognition of moralization in written text</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Text managment and automatic span annotation.</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#moralization.DataManager"><code class="docutils literal notranslate"><span class="pre">DataManager</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.export_data_DocBin"><code class="docutils literal notranslate"><span class="pre">DataManager.export_data_DocBin()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.import_data_DocBin"><code class="docutils literal notranslate"><span class="pre">DataManager.import_data_DocBin()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_analysis()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.occurence_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.occurence_analysis()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.return_analyzer_result"><code class="docutils literal notranslate"><span class="pre">DataManager.return_analyzer_result()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.spacy_import_model"><code class="docutils literal notranslate"><span class="pre">DataManager.spacy_import_model()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.spacy_test_string"><code class="docutils literal notranslate"><span class="pre">DataManager.spacy_test_string()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.spacy_train"><code class="docutils literal notranslate"><span class="pre">DataManager.spacy_train()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.spacy_validation"><code class="docutils literal notranslate"><span class="pre">DataManager.spacy_validation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.visualize_data"><code class="docutils literal notranslate"><span class="pre">DataManager.visualize_data()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#moralization.AnalyseOccurrence"><code class="docutils literal notranslate"><span class="pre">AnalyseOccurrence</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.AnalyseOccurrence.map_categories"><code class="docutils literal notranslate"><span class="pre">AnalyseOccurrence.map_categories()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.AnalyseOccurrence.report_index"><code class="docutils literal notranslate"><span class="pre">AnalyseOccurrence.report_index()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.AnalyseOccurrence.report_instances"><code class="docutils literal notranslate"><span class="pre">AnalyseOccurrence.report_instances()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.AnalyseOccurrence.report_spans"><code class="docutils literal notranslate"><span class="pre">AnalyseOccurrence.report_spans()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#moralization.AnalyseSpans"><code class="docutils literal notranslate"><span class="pre">AnalyseSpans</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.AnalyseSpans.report_occurrence_per_paragraph"><code class="docutils literal notranslate"><span class="pre">AnalyseSpans.report_occurrence_per_paragraph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#moralization.InputOutput"><code class="docutils literal notranslate"><span class="pre">InputOutput</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.InputOutput.add_custom_instance_to_ts"><code class="docutils literal notranslate"><span class="pre">InputOutput.add_custom_instance_to_ts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.InputOutput.get_file_type"><code class="docutils literal notranslate"><span class="pre">InputOutput.get_file_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.InputOutput.get_multiple_input"><code class="docutils literal notranslate"><span class="pre">InputOutput.get_multiple_input()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.InputOutput.input_type"><code class="docutils literal notranslate"><span class="pre">InputOutput.input_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.InputOutput.read_cas_content"><code class="docutils literal notranslate"><span class="pre">InputOutput.read_cas_content()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.InputOutput.read_cas_file"><code class="docutils literal notranslate"><span class="pre">InputOutput.read_cas_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.InputOutput.read_data"><code class="docutils literal notranslate"><span class="pre">InputOutput.read_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.InputOutput.read_typesystem"><code class="docutils literal notranslate"><span class="pre">InputOutput.read_typesystem()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#moralization.InteractiveCategoryPlot"><code class="docutils literal notranslate"><span class="pre">InteractiveCategoryPlot</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.InteractiveCategoryPlot.show"><code class="docutils literal notranslate"><span class="pre">InteractiveCategoryPlot.show()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#moralization.PlotSpans"><code class="docutils literal notranslate"><span class="pre">PlotSpans</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.PlotSpans.report_occurrence_heatmap"><code class="docutils literal notranslate"><span class="pre">PlotSpans.report_occurrence_heatmap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.PlotSpans.report_occurrence_matrix"><code class="docutils literal notranslate"><span class="pre">PlotSpans.report_occurrence_matrix()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#moralization.SpacySetup"><code class="docutils literal notranslate"><span class="pre">SpacySetup</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacySetup.convert_data_to_spacy_doc"><code class="docutils literal notranslate"><span class="pre">SpacySetup.convert_data_to_spacy_doc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacySetup.export_training_testing_data"><code class="docutils literal notranslate"><span class="pre">SpacySetup.export_training_testing_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacySetup.visualize_data"><code class="docutils literal notranslate"><span class="pre">SpacySetup.visualize_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#moralization.SpacyTraining"><code class="docutils literal notranslate"><span class="pre">SpacyTraining</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyTraining.evaluate"><code class="docutils literal notranslate"><span class="pre">SpacyTraining.evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyTraining.save_best_model"><code class="docutils literal notranslate"><span class="pre">SpacyTraining.save_best_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyTraining.test_model_with_string"><code class="docutils literal notranslate"><span class="pre">SpacyTraining.test_model_with_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyTraining.train"><code class="docutils literal notranslate"><span class="pre">SpacyTraining.train()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -93,93 +124,307 @@
 <div class="toctree-wrapper compound">
 </div>
 <span class="target" id="module-moralization"></span><dl class="py class">
-<dt class="sig sig-object py" id="moralization.DataManager">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">DataManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="moralization.AnalyseOccurrence">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">AnalyseOccurrence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'instances'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.AnalyseOccurrence" title="Permalink to this definition"></a></dt>
+<dd><p>Contains statistical information methods about the data.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.AnalyseOccurrence.map_categories">
+<span class="sig-name descname"><span class="pre">map_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.AnalyseOccurrence.map_categories" title="Permalink to this definition"></a></dt>
+<dd><p>Rename Categories.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.AnalyseOccurrence.report_index">
+<span class="sig-name descname"><span class="pre">report_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.AnalyseOccurrence.report_index" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.AnalyseOccurrence.report_instances">
+<span class="sig-name descname"><span class="pre">report_instances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.AnalyseOccurrence.report_instances" title="Permalink to this definition"></a></dt>
+<dd><p>Reports number of occurrences of a category per text source.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.AnalyseOccurrence.report_spans">
+<span class="sig-name descname"><span class="pre">report_spans</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.AnalyseOccurrence.report_spans" title="Permalink to this definition"></a></dt>
+<dd><p>Reports spans of a category per text source.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moralization.AnalyseSpans">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">AnalyseSpans</span></span><a class="headerlink" href="#moralization.AnalyseSpans" title="Permalink to this definition"></a></dt>
 <dd><dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.export_data_DocBin">
-<span class="sig-name descname"><span class="pre">export_data_DocBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.export_data_DocBin" title="Permalink to this definition"></a></dt>
-<dd><p>Export the currently loaded docs as a spacy binary. This is used in spacy training.</p>
+<dt class="sig sig-object py" id="moralization.AnalyseSpans.report_occurrence_per_paragraph">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">report_occurrence_per_paragraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_docs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#moralization.AnalyseSpans.report_occurrence_per_paragraph" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a Pandas dataframe where each sentence is its own index
+and the column values are the occurrences of the different categories.</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
-overwrite(bool, optional): wether or not the spacy files should be written
-even if files are already present.</p>
+<dt>Args:</dt><dd><p>data_dict(dict): the dict where all categories are stored.
+filter_docs(str, optional): The filenames for which to filter. (Default value = None)
+filter_docs(str, optional): The filenames for which to filter.</p>
 </dd>
-<dt>Returns:</dt><dd><p>list[Path]: A list of the train and test files path.</p>
+<dt>Defaults to None.</dt><dd><p>data_dict: dict:</p>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.import_data_DocBin">
-<span class="sig-name descname"><span class="pre">import_data_DocBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.import_data_DocBin" title="Permalink to this definition"></a></dt>
-<dd><dl class="simple">
-<dt>Load spacy files from a given directory, from absolute path,</dt><dd><p>from relative path of given directory or from relative path of current working directory.</p>
-</dd>
-<dt>Args:</dt><dd><p>input_dir (Path, optional): Lookup directory. Defaults to None.
-train_file (Path, optional): Absolute or relative path. Defaults to None.
-test_file (Path, optional): Absolute or relative path. Defaults to None.</p>
-</dd>
-<dt>Returns:</dt><dd><p>list[Path]: A list of the train and test files path.</p>
+<dt>Returns:</dt><dd><p>pd.DataFrame: Category occurrences per sentence.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.interactive_analysis">
-<span class="sig-name descname"><span class="pre">interactive_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.interactive_analysis" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.occurence_analysis">
-<span class="sig-name descname"><span class="pre">occurence_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'table'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.occurence_analysis" title="Permalink to this definition"></a></dt>
-<dd><dl class="simple">
-<dt>Returns the occurence df, occurence_corr_table or heatmap of the dataset.</dt><dd><p>optionally one can filter by filename(s).</p>
-</dd>
-<dt>Args:</dt><dd><p>_type (str, optional): Either “table”, “corr” or “heatmap”, defaults to table.
-filter (str/list(str), optional): Filename filters. Defaults to None.</p>
-</dd>
-<dt>Returns:</dt><dd><p>pd.DataFrame: occurence dataframe per paragraph.</p>
-</dd>
-</dl>
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="moralization.InputOutput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">InputOutput</span></span><a class="headerlink" href="#moralization.InputOutput" title="Permalink to this definition"></a></dt>
+<dd><p>Namespace class to handle input and output.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.return_analyzer_result">
-<span class="sig-name descname"><span class="pre">return_analyzer_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'frequency'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.return_analyzer_result" title="Permalink to this definition"></a></dt>
-<dd><p>Returns the result of the spacy_span-analyzer.</p>
+<dt class="sig sig-object py" id="moralization.InputOutput.add_custom_instance_to_ts">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_custom_instance_to_ts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_span_type_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'custom.Span'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_span_category</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KAT1MoralisierendesSegment'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_span_type_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'moralization.instance'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.InputOutput.add_custom_instance_to_ts" title="Permalink to this definition"></a></dt>
+<dd><p>Make a new annotation category from the spans in custom labeled span type.</p>
+<dl>
+<dt>Args:</dt><dd><p>cas(cassis.cas): The cas object</p>
+<p>ts(cassis.TypeSysten): The typesystem object</p>
 <dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt>result_type (str, optional): Can be <cite>frequency</cite>, <cite>length</cite>,</dt><dd><p><cite>span_distinctiveness</cite> or <cite>boundary_distinctiveness</cite>. Defaults to “frequency”.</p>
+<dt>custom_span_type_name(str, optional): The name of the span category</dt><dd><p>to be used as a base. Defaults to “custom.Span”.</p>
+</dd>
+<dt>custom_span_category(str, optional): The label in the custom span</dt><dd><p>category to be filtered for. Defaults to “KAT1MoralisierendesSegment”.</p>
+</dd>
+<dt>new_span_type_name(str, optional): The name of the new span category.</dt><dd><p>Defaults to ‘moralization.instance’.</p>
 </dd>
 </dl>
+</dd>
+<dt>Returns:</dt><dd><p>_type_: _description_</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.spacy_import_model">
-<span class="sig-name descname"><span class="pre">spacy_import_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.spacy_import_model" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="moralization.InputOutput.get_file_type">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_file_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.InputOutput.get_file_type" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><p>filename: str:</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.InputOutput.get_multiple_input">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_multiple_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#moralization.InputOutput.get_multiple_input" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Get a list of input files from a given directory. Currently only xmi files.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dir: str:</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moralization.InputOutput.input_type">
+<span class="sig-name descname"><span class="pre">input_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'xmi':</span> <span class="pre">&lt;function</span> <span class="pre">load_cas_from_xmi&gt;}</span></em><a class="headerlink" href="#moralization.InputOutput.input_type" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.spacy_test_string">
-<span class="sig-name descname"><span class="pre">spacy_test_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'span'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.spacy_test_string" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="moralization.InputOutput.read_cas_content">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_cas_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.InputOutput.read_cas_content" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><p>data_files: list or str:
+ts: object:</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.InputOutput.read_cas_file">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_cas_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.InputOutput.read_cas_file" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><p>filename: str:
+ts: object:</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.InputOutput.read_data">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.InputOutput.read_data" title="Permalink to this definition"></a></dt>
+<dd><p>Convenience method to handle input reading in one go.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dir: str:</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.InputOutput.read_typesystem">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_typesystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#moralization.InputOutput.read_typesystem" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><p>filename: str:  (Default value = None)</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moralization.InteractiveCategoryPlot">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">InteractiveCategoryPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.InteractiveCategoryPlot" title="Permalink to this definition"></a></dt>
+<dd><p>Interactive plotting class for use in Jupyter notebooks</p>
+<p>User selects the filename and categories to plot using GUI widgets.
+The displayed plot is then automatically updated.
+A custom plotting callback can be provided to customize the plot.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data_dict (_type_): _description_
+plot_callback (_type_, optional): _description_. Defaults to None.
+figsize (_type_, optional): _description_. Defaults to None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.InteractiveCategoryPlot.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.InteractiveCategoryPlot.show" title="Permalink to this definition"></a></dt>
+<dd><p>Display the interactive plot</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moralization.PlotSpans">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">PlotSpans</span></span><a class="headerlink" href="#moralization.PlotSpans" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="moralization.PlotSpans.report_occurrence_heatmap">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">report_occurrence_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_paragraph_occurrence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.PlotSpans.report_occurrence_heatmap" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the occurrence heatmap for the given dataframe.
+Can also filter based on both main_cat and sub_cat keys.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df_sentence_occurrence(pd.DataFrame): The sentence occurrence dataframe.
+_filter(str, optional): Filter values for the dataframe. (Default value = None)
+_filter(str, optional): Filter values for the dataframe.</p>
+</dd>
+<dt>Defaults to None.</dt><dd><p>df_paragraph_occurrence: pd.DataFrame:</p>
+</dd>
+<dt>Returns:</dt><dd><p>plt.figure: The heatmap figure.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.PlotSpans.report_occurrence_matrix">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">report_occurrence_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_paragraph_occurrence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#moralization.PlotSpans.report_occurrence_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the correlation matrix in regards to the given filters.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df_paragraph_occurrence(pd.DataFrame): The occurence of labels per paragraph.
+_filter(str, optional): Filter values for the dataframe. (Default value = None)
+df_paragraph_occurrence: pd.DataFrame:</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: Correlation matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moralization.SpacySetup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">SpacySetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacySetup" title="Permalink to this definition"></a></dt>
+<dd><p>Helper class to organize and prepare spacy trainings data from xml/xmi files.</p>
+<p>Handler for machine learning training and analysis.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data_dir(str/Path): Directory with data files
+working_dir(path, optional): Directory where the training data,
+configs and results are stored., defaults to Debug value
+config_file(Path, optional): Filename or path for the config file,
+defaults to searching in the working directory.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.SpacySetup.convert_data_to_spacy_doc">
+<span class="sig-name descname"><span class="pre">convert_data_to_spacy_doc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacySetup.convert_data_to_spacy_doc" title="Permalink to this definition"></a></dt>
+<dd><p>Convert the given xmi/xml files to a spacy specific binary filesystem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.SpacySetup.export_training_testing_data">
+<span class="sig-name descname"><span class="pre">export_training_testing_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacySetup.export_training_testing_data" title="Permalink to this definition"></a></dt>
+<dd><p>Convert a list of spacy docs to a serialisable DocBin object and save it to disk.
+Automatically processes training and testing files.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>output_dir(Path, optional): Path of the output directory where the data is saved, defaults to None.
+If None the working directory is used.</p>
+</dd>
+<dt>Return:</dt><dd><p>output_dir(Path): location of the stored data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.SpacySetup.visualize_data">
+<span class="sig-name descname"><span class="pre">visualize_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filenames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'span'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spans_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sc'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacySetup.visualize_data" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Use the displacy class offered by spacy to visualize the current dataset.</dt><dd><p>use SpacySetup.span_keys to show possible keys or use ‘sc’ for all.</p>
+</dd>
+<dt>Args:</dt><dd><p>filename(str/list, optional, optional): Specify which of the loaded files should be presented,
+if None all files are shown.
+This can also take a list., defaults to None
+display_type(str, optional, optional): Specify is only the trainings,
+the testing or all datapoints should be shown,options are: “all”, “test” and “train”. Defaults to “all”
+type: the visualization type given to displacy, available are “dep”, “ent” and “span,
+defaults to “span”.
+style:  (Default value = “span”)</p>
+</dd>
+<dt>Returns:</dt><dd><p>Displacy.render</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moralization.SpacyTraining">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">SpacyTraining</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">working_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">testing_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyTraining" title="Permalink to this definition"></a></dt>
+<dd><p>This class is used to configure and run spacy trainings.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.SpacyTraining.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validation_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyTraining.evaluate" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><p>validation_file:  (Default value = None)</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.SpacyTraining.save_best_model">
+<span class="sig-name descname"><span class="pre">save_best_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyTraining.save_best_model" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.spacy_train">
-<span class="sig-name descname"><span class="pre">spacy_train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">working_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.spacy_train" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="moralization.SpacyTraining.test_model_with_string">
+<span class="sig-name descname"><span class="pre">test_model_with_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyTraining.test_model_with_string" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><p>test_string:</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.spacy_validation">
-<span class="sig-name descname"><span class="pre">spacy_validation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validation_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.spacy_validation" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.visualize_data">
-<span class="sig-name descname"><span class="pre">visualize_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spans_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sc'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.visualize_data" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="moralization.SpacyTraining.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyTraining.train" title="Permalink to this definition"></a></dt>
+<dd><p>Use the spacy training method to generate a new model.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>use_gpu(int, optional, optional): enter the gpu device you want to use.</p>
+</dd>
+<dt>Keep in Mind that cuda must be correctly installed, defaults to -1</dt><dd><p>overwrite(_type_, optional, optional): additional config overwrites, defaults to None</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
 
 </dd></dl>
 
