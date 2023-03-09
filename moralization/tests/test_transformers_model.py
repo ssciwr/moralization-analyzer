@@ -1,4 +1,5 @@
 from moralization.transformers_model import TransformersSetup
+import pytest
 
 
 def test_TransformersSetup(data_dir):
@@ -86,3 +87,11 @@ def test_lists_to_df(data_dir):
     test_obj.structure_labels()
     test_obj.lists_to_df()
     assert test_obj.train_test_set["train"].shape == (60, 2)
+
+
+def test_init_model():
+    test_obj = TransformersSetup()
+    test_obj.init_model()
+    assert test_obj.tokenizer.is_fast
+    with pytest.raises(ValueError):
+        test_obj.init_model(model_name="Testing")

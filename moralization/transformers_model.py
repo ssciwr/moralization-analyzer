@@ -1,6 +1,7 @@
 from moralization import spacy_model
 import pandas as pd
 import datasets
+from transformers import AutoTokenizer  # , AutoModelForTokenClassification
 
 
 class TransformersSetup:
@@ -79,6 +80,18 @@ class TransformersSetup:
         raw_data_set = datasets.Dataset.from_pandas(df)
         # split in train test
         self.train_test_set = raw_data_set.train_test_split(test_size=0.1)
+
+    def init_model(self, model_name="bert-base-cased"):
+        try:
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        except ValueError:
+            raise ValueError(
+                "Could not initiate tokenizer - please check your model name"
+            )
+        if not self.tokenizer.is_fast:
+            raise ValueError(
+                "Please use a different model that provices a fast tokenizer"
+            )
 
 
 if __name__ == "__main__":
