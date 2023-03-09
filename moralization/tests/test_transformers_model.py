@@ -33,3 +33,45 @@ def test_generate_labels(data_dir):
     assert test_obj.labels[625] == 1
     assert test_obj.labels[671] == 1
     assert test_obj.labels[672] == 0
+
+
+def test_structure_labels(data_dir):
+    test_obj = TransformersSetup()
+    test_obj.get_doc_dict(data_dir)
+    example_name = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
+    test_obj.get_data_lists(example_name=example_name)
+    test_obj.generate_labels(example_name=example_name)
+    test_obj.structure_labels()
+    ref_sentence = ["Ich", "zitiere", "mal", "einen", "Kollegen", ":"]
+    ref_labels = [0, 0, 0, 0, 0, -100]
+    ref_labels2 = [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -100,
+        1,
+        -100,
+        -100,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -100,
+        1,
+        1,
+        1,
+        -100,
+        1,
+        1,
+        1,
+        1,
+        -100,
+    ]
+    assert test_obj.sentence_list[7] == ref_sentence
+    assert test_obj.label_list[7] == ref_labels
+    assert test_obj.label_list[44] == ref_labels2

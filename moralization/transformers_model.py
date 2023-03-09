@@ -65,9 +65,6 @@ class TransformersSetup:
                 if self.token_list[m][i].is_punct:
                     self.label_list[m][i] = -100
                 j = j + 1
-        for i in range(0, 10):
-            print(self.sentence_list[i])
-            print(self.label_list[i])
 
 
 if __name__ == "__main__":
