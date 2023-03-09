@@ -75,3 +75,14 @@ def test_structure_labels(data_dir):
     assert test_obj.sentence_list[7] == ref_sentence
     assert test_obj.label_list[7] == ref_labels
     assert test_obj.label_list[44] == ref_labels2
+
+
+def test_lists_to_df(data_dir):
+    test_obj = TransformersSetup()
+    test_obj.get_doc_dict(data_dir)
+    example_name = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
+    test_obj.get_data_lists(example_name=example_name)
+    test_obj.generate_labels(example_name=example_name)
+    test_obj.structure_labels()
+    test_obj.lists_to_df()
+    assert test_obj.train_test_set["train"].shape == (60, 2)

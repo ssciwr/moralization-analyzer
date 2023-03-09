@@ -1,4 +1,6 @@
 from moralization import spacy_model
+import pandas as pd
+import datasets
 
 
 class TransformersSetup:
@@ -42,6 +44,7 @@ class TransformersSetup:
             "Moralisierung interpretativ",
         ]
         # create a list as long as tokens
+        # we need to do this for all the data, not just train
         self.labels = [0 for _ in self.doc_dict[example_name]["train"]]
         for span in self.doc_dict[example_name]["train"].spans["task1"]:
             if span.label_ in selected_labels:
@@ -65,6 +68,17 @@ class TransformersSetup:
                 if self.token_list[m][i].is_punct:
                     self.label_list[m][i] = -100
                 j = j + 1
+
+    def lists_to_df(self):
+        # at this point we can write the text into a df to load into datasets
+        # later it can be published as such on huggingface datasets
+        # column heads are sentence, labels
+        df = pd.DataFrame(
+            zip(self.sentence_list, self.label_list), columns=["Sentences", "Labels"]
+        )
+        raw_data_set = datasets.Dataset.from_pandas(df)
+        # split in train test
+        self.train_test_set = raw_data_set.train_test_split(test_size=0.1)
 
 
 if __name__ == "__main__":
