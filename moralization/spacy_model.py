@@ -1,343 +1,141 @@
 import spacy
 from spacy.tokens import DocBin
-from spacy import displacy
-
-from moralization.input_data import InputOutput
-from moralization.utils import is_interactive
 
 import os
-import pathlib
 from pathlib import Path
 
 from spacy.cli.init_config import fill_config
-from sklearn.model_selection import train_test_split
 from tempfile import mkdtemp
-from collections import defaultdict
-from collections.abc import Iterable
+from moralization.plot import visualize_data
 import shutil
 
 
-class SpacySetup:
-    """Helper class to organize and prepare spacy trainings data from xml/xmi files."""
+class SpacyDataHandler:
+    """Helper class to organize and prepare spacy trainings data."""
 
-    def __init__(self, data_dir, working_dir=None):
-        """Handler for machine learning training and analysis.
-
-        Args:
-          data_dir(str/Path): Directory with data files
-          working_dir(path, optional): Directory where the training data,
-          configs and results are stored., defaults to Debug value
-          config_file(Path, optional): Filename or path for the config file,
-          defaults to searching in the working directory.
-
-        """
-        self.data_dir, self.working_dir = self._setup_working_dir(data_dir, working_dir)
-        self.convert_data_to_spacy_doc()
-
-    def _setup_working_dir(self, data_dir, working_dir):
-        """Check if given path is possible and initialize directory if not already present.
-
-        Args:
-            data_dir (path): path to data directory
-            working_dir (path): path to data directory
-
-        Returns:
-            path: path to data directory
-            path: path to working directory
-        """
-
-        # maybe set default working_dir to tmp dir
-        data_dir = Path(data_dir)
-
-        if working_dir:
-            working_dir = Path(working_dir)
-        else:
-            working_dir = Path(mkdtemp())
-
-        pathlib.Path(working_dir).mkdir(exist_ok=True)
-        return data_dir, working_dir
-
-    def convert_data_to_spacy_doc(self):
-        """Convert the given xmi/xml files to a spacy specific binary filesystem."""
-        data_dict = InputOutput.read_data(self.data_dir)
-
-        merging_dict = {
-            "sc": "all",
-            "task1": ["KAT1MoralisierendesSegment"],
-            "task2": ["Moralwerte", "KAT2Subjektive_Ausdrcke"],
-            "task3": ["Protagonistinnen", "Protagonistinnen2", "Protagonistinnen3"],
-            "task4": ["KommunikativeFunktion"],
-            "task5": ["Forderung"],
-        }
-
-        data_dict = self._add_dict_cat(data_dict, merging_dict)
-        spans_dict = self._convert_dict_to_spans_dict(data_dict)
-
-        self.doc_dict = self._convert_spans_dict_to_doc_dict(data_dict, spans_dict)
-
-    def export_training_testing_data(self, output_dir=None):
+    def export_training_testing_data(
+        self, train_dict, test_dict, output_dir=None, overwrite=False
+    ):
         """Convert a list of spacy docs to a serialisable DocBin object and save it to disk.
         Automatically processes training and testing files.
 
         Args:
-          output_dir(Path, optional): Path of the output directory where the data is saved, defaults to None.
-          If None the working directory is used.
-
+            train_dict(dict): internally handled data storage.
+            test_dict(dict): internally handled data storage.
+            output_dir(list[Path], optional): Path of the output directory where the data is saved, defaults to None.
+            If None the working directory is used.
+            overwrite(bool, optional): wether or not the spacy files should be written
+            even if files are already present.
         Return:
-            output_dir(Path): location of the stored data.
-
+            db_files(list[Path]) the location of the written files.
         """
+
         if output_dir is None:
-            output_dir = self.working_dir
-        elif isinstance(output_dir, str):
+            output_dir = Path(mkdtemp())
+        else:
             output_dir = Path(output_dir)
+            output_dir.mkdir(exist_ok=True)
 
-        db_train = DocBin()
-        db_dev = DocBin()
+        train_filename = output_dir / "train.spacy"
+        dev_filename = output_dir / "dev.spacy"
 
-        for file in self.doc_dict.values():
-            db_train.add(file["train"])
-            db_dev.add(file["test"])
+        # check if files already exists, only if overwrite is False:
 
-        db_train.to_disk(output_dir / "train.spacy")
-        db_dev.to_disk(output_dir / "dev.spacy")
-        return output_dir
-
-    def _manage_visualisation_filenames(self, filenames):
-
-        # check through given filenames and convert ints to key string
-        if filenames is None:
-            filename = list(self.doc_dict.keys())
-        elif isinstance(filenames, str):
-            filename = [filenames]
-        elif isinstance(filenames, int):
-            filename = [list(self.doc_dict.keys())[filenames]]
-        elif isinstance(filenames, Iterable):
-            filename = []
-            for file in filenames:
-                if isinstance(file, int):
-                    filename.append(list(self.doc_dict.keys())[file])
-                else:
-                    filename.append(file)
-
-        # check if all new filenames are in doc_dict.keys()
-        for file in filename:
-            if file not in list(self.doc_dict.keys()):
-                raise IndexError(
-                    f"The filename {file} is not provided in the dataset, which only has {list(self.doc_dict.keys())}."
+        if overwrite is False:
+            if train_filename.exists() or dev_filename.exists():
+                raise FileExistsError(
+                    "The given directory already has a training and testing file."
+                    + " Please choose a new directory or set overwrite to True."
+                    + f"Given directory is: {output_dir}"
                 )
 
-        return filename
+        db_train = DocBin()
+        db_test = DocBin()
 
-    def visualize_data(self, filenames=None, type="all", style="span", spans_key="sc"):
-        """Use the displacy class offered by spacy to visualize the current dataset.
-            use SpacySetup.span_keys to show possible keys or use 'sc' for all.
+        for doc_train, doc_test in zip(train_dict.values(), test_dict.values()):
+            db_train.add(doc_train)
+            db_test.add(doc_test)
 
+        db_train.to_disk(train_filename)
+        db_test.to_disk(dev_filename)
+        self.db_files = [train_filename, dev_filename]
+        return self.db_files
 
-        Args:
-          filename(str/list, optional, optional): Specify which of the loaded files should be presented,
-          if None all files are shown.
-          This can also take a list., defaults to None
-          display_type(str, optional, optional): Specify is only the trainings,
-          the testing or all datapoints should be shown,options are: "all", "test" and "train". Defaults to "all"
-          type: the visualization type given to displacy, available are "dep", "ent" and "span,
-          defaults to "span".
-          style:  (Default value = "span")
-
-        Returns:
-            Displacy.render
-        """
-
-        if isinstance(spans_key, list):
-            raise NotImplementedError(
-                "spacy does no support viewing multiple categories at once."
-            )
-            # we could manually add multiple categories to one span cat and display this new category.
-
-        if spans_key != "sc" and spans_key not in self.span_keys:
-            raise ValueError(
-                f"""The provided key: {spans_key} is not valid.
-                Please use one of the following {set(self.span_keys.keys())}"""
-            )
-        if type not in ["all", "test", "train"]:
-            raise IndexError(
-                f"Type argument must be either 'all', 'test' or 'train', but is {type}"
+    def _check_files(self, input_dir=None, train_file=None, test_file=None):
+        if input_dir is None and test_file is None and train_file is None:
+            raise FileNotFoundError(
+                "Please provide either a directory or the file locations."
             )
 
-        filename = self._manage_visualisation_filenames(filenames)
-
-        if not is_interactive():
-            raise NotImplementedError(
-                "Please only use this function in a jupyter notebook for the time being."
+        if (train_file is not None and test_file is None) or (
+            train_file is None and test_file is not None
+        ):
+            raise FileNotFoundError(
+                "When providing a data file location, please also provide the other one."
+                + f"Currently `train_file` is {train_file} and `test_file` is {test_file}"
             )
 
-        return displacy.render(
-            [self.doc_dict[file][type] for file in filename],
-            style=style,
-            options={"spans_key": spans_key},
-        )
+        if train_file and test_file:
+            train_file = Path(train_file)
+            test_file = Path(test_file)
+            # check if files are spacy
+            if train_file.suffix != ".spacy" or test_file.suffix != ".spacy":
+                raise TypeError("The provided files are not spacy binaries.")
 
-    def _add_dict_cat(self, data_dict, new_dict_cat):
-        """Take the new_dict_cat dict and add its key as a main_cat to data_dict.
-        The values are the total sub_dict_entries of the given list.
+            # if both files exists we can exit at this point.
+            if train_file.exists() and test_file.exists():
+                return train_file, test_file
 
-        Args:
-          data_dict(dict: dict): The datadict generated from xmi files.
-          new_dict_cat(dict): map new category to list of existing_categories.
+        # if no files are given use the default values
+        else:
+            train_file = Path("train.spacy")
+            test_file = Path("dev.spacy")
 
-        Return:
-            dict: The data_dict with new span categories.
-        """
+        # if not we search in the current or given working directory
+        if input_dir is None:
+            input_dir = Path.cwd()
+        else:
+            input_dir = Path(input_dir)
 
-        for file in data_dict.keys():
-            for new_main_cat, new_cat_entries in new_dict_cat.items():
-                if new_cat_entries == "all":
-                    for main_cat in list(data_dict[file]["data"].keys()):
-                        data_dict[file]["data"][new_main_cat].update(
-                            data_dict[file]["data"][main_cat]
-                        )
-                else:
-                    for old_main_cat in new_cat_entries:
-                        data_dict[file]["data"][new_main_cat].update(
-                            data_dict[file]["data"][old_main_cat]
-                        )
+        # search the directory for the files.
 
-        return data_dict
+        input_dir = Path(input_dir)
+        if (input_dir / train_file).exists():
+            db_train = input_dir / train_file
+        else:
+            raise FileNotFoundError(f"No trainings file in {input_dir}.")
 
-    def _convert_dict_to_spans_dict(self, data_dict):
-        """Custom tranformation steps to convert our data_dict into a usable spacy.doc format.
-        For this all annotations will be saved under the span_key 'sc'.
+        if (input_dir / test_file).exists():
+            db_test = input_dir / test_file
+        else:
+            raise FileNotFoundError(f"No test file in {input_dir}.")
 
-        Args:
-          data_dict(dict: dict): The datadict generated from xmi files.
+        return db_train, db_test
 
-        Returns:
-          dict: Dict of spacy.doc objects
-
-        """
-        self.span_keys = defaultdict(set)
-        nlp = spacy.blank("de")
-        # defaultdict with structure:
-        # file - main_cat - all/train/test
-        spans_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
-
-        for file in data_dict.keys():
-            # sort out unused categories
-            data_dict[file]["data"].pop("KAT5Ausformulierung", None)
-            for main_cat_value in data_dict[file]["data"].values():
-                main_cat_value.pop("Dopplung", None)
-
-            doc = nlp(data_dict[file]["sofa"])
-
-            for main_cat_key, main_cat_value in data_dict[file]["data"].items():
-                for sub_cat_label, sub_cat_span_list in main_cat_value.items():
-                    self.span_keys[main_cat_key].add(sub_cat_label)
-                    for span in sub_cat_span_list:
-                        spans_dict[file][main_cat_key]["all"].append(
-                            doc.char_span(
-                                span["begin"],
-                                span["end"],
-                                label=sub_cat_label,
-                            )
-                        )
-                if len(spans_dict[file][main_cat_key]["all"]) > 1:
-                    spans_train, spans_test = train_test_split(
-                        spans_dict[file][main_cat_key]["all"],
-                        test_size=0.2,
-                        random_state=42,
-                    )
-                    (
-                        spans_dict[file][main_cat_key]["train"],
-                        spans_dict[file][main_cat_key]["test"],
-                    ) = (spans_train, spans_test)
-                else:
-                    spans_dict[file][main_cat_key]["train"] = spans_dict[file][
-                        main_cat_key
-                    ]["all"]
-            spans_dict[file]["doc"] = doc
-
-        return spans_dict
-
-    def _convert_spans_dict_to_doc_dict(self, data_dict, spans_dict):
-
-        doc_dict = {}
-        for file in data_dict.keys():
-            doc = spans_dict[file].pop("doc", None)
-            doc_test = doc.copy()
-            doc_train = doc.copy()
-            doc_dict[file] = {"all": doc, "test": doc_test, "train": doc_train}
-            # each value now has the keys "all"/"train"/test, each with a list of spans
-            for main_cat_key, main_cat_values in spans_dict[file].items():
-                for usecase in ["all", "train", "test"]:
-                    doc_dict[file][usecase].spans[main_cat_key] = main_cat_values[
-                        usecase
-                    ]
-
-        return doc_dict
+    def import_training_testing_data(
+        self, input_dir=None, train_file=None, test_file=None
+    ):
+        db_train, db_test = self._check_files(input_dir, train_file, test_file)
+        self.db_files = [db_train, db_test]
+        return self.db_files
 
 
 class SpacyTraining:
 
     """This class is used to configure and run spacy trainings."""
 
-    def __init__(
-        self, working_dir, training_file=None, testing_file=None, config_file=None
-    ):
+    def __init__(self, working_dir, training_file, testing_file, config_file=None):
         self.working_dir = Path(working_dir)
-        self.file_dict = self._find_files(training_file, testing_file, config_file)
+        self.working_dir.mkdir(exist_ok=True)
+        self.config_file = self._check_config_file(config_file)
+        self.training_file = Path(training_file)
+        self.testing_file = Path(testing_file)
 
-    def _find_file(self, _file):
-        """
+        if not self.training_file.exists():
+            raise FileNotFoundError(f"The file {self.training_file} does not exist.")
 
-        Args:
-          _file:
-
-        Returns:
-
-        """
-        if _file:
-            _file = Path(_file)
-
-        if not _file.is_file() and (self.working_dir / _file).is_file():
-            _file = self.working_dir / _file
-
-        else:
-            raise FileNotFoundError(
-                f"""{_file} could not be found as absolute path or in {self.working_dir}.
-                Available files are: {list(self.working_dir.glob('*'))}"""
-            )
-        return _file
-
-    def _find_files(self, training_file, testing_file, config_file):
-        """
-
-        Args:
-          training_file:
-          testing_file:
-          config_file:
-
-        Returns:
-
-        """
-
-        # use default names is no name is given.
-        if training_file is None:
-            training_file = "train.spacy"
-        if testing_file is None:
-            testing_file = "dev.spacy"
-
-        # find the files either by absolute path or search default/relativ filename.
-        training_file = self._find_file(training_file)
-        testing_file = self._find_file(testing_file)
-        config_file = self._check_config_file(config_file)
-
-        file_dict = {
-            "training": training_file,
-            "testing": testing_file,
-            "config": config_file,
-        }
-
-        return file_dict
+        if not self.testing_file.exists():
+            raise FileNotFoundError(f"The file {self.testing_file} does not exist.")
 
     def _check_config_file(self, config_file):
         """
@@ -405,60 +203,65 @@ class SpacyTraining:
             overwrite = {}
 
         train(
-            config_path=self.file_dict["config"].absolute(),
+            config_path=self.config_file.absolute(),
             output_path=output,
             use_gpu=use_gpu,
             overrides={
-                "paths.train": self.file_dict["training"].absolute().as_posix(),
-                "paths.dev": self.file_dict["testing"].absolute().as_posix(),
+                "paths.train": self.training_file.absolute().as_posix(),
+                "paths.dev": self.testing_file.absolute().as_posix(),
                 **overwrite,
             },
         )
 
-    def evaluate(self, validation_file=None):
-        """
+        return self._best_model()
 
-        Args:
-          validation_file:  (Default value = None)
+    @staticmethod
+    def evaluate(output_file, validation_file, model):
 
-        Returns:
-
-        """
         from spacy.cli.evaluate import evaluate
 
-        if validation_file is None:
-            validation_file = self.file_dict["testing"].absolute()
+        output_file = Path(output_file)
+        validation_file = Path(validation_file)
+
+        if output_file.is_dir():
+            raise IsADirectoryError(
+                "spacy.evaluate needs an output file not a directory."
+            )
+
+        if output_file.exists():
+            i = 1
+            while output_file.exists():
+                print(output_file)
+                output_file = output_file.parents[0] / f"evaluation_{i}.json"
+                i = i + 1
+
+        if validation_file.suffix != ".spacy":
+            raise RuntimeError(f"The file '{validation_file}' is not a spacy binary.")
+
+        if not validation_file.exists():
+            raise FileNotFoundError(f"The file '{validation_file}' does not exist.")
 
         evaluation_data = evaluate(
-            self._best_model(),
+            model,
             validation_file,
-            output=os.path.join(self.working_dir, "output", "evaluation"),
+            output=output_file,
         )
         return evaluation_data
 
-    def test_model_with_string(self, test_string, options=None):
-        """
+    @staticmethod
+    def test_model_with_string(
+        model,
+        test_string,
+        style="span",
+    ):
+        if isinstance(model, str) or isinstance(model, Path):
+            model = spacy.load(model)
 
-        Args:
-          test_string:
-
-        Returns:
-
-        """
-        if not is_interactive():
-            raise NotImplementedError(
-                "Please only use this function in a jupyter notebook for the time being."
-            )
-        if options is None:
-            options = {"spans_key": "task1"}
-
-        nlp = spacy.load(self._best_model())
-        doc = nlp(test_string)
-
-        displacy.render(doc, style="span", options=options)
-        displacy.render(doc, style="ent")
-
-        return doc, nlp
+        doc_dict = {"test_doc": model(test_string)}
+        # this should only ever have one spans key
+        # I hope..
+        spans_key = list(doc_dict["test_doc"].spans.keys())[0]
+        return visualize_data(doc_dict, style=style, spans_key=spans_key)
 
     def _best_model(self):
         """ """
