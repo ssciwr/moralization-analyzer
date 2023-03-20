@@ -217,7 +217,6 @@ class SpacyTraining:
 
     @staticmethod
     def evaluate(output_file, validation_file, model):
-
         from spacy.cli.evaluate import evaluate
 
         output_file = Path(output_file)
