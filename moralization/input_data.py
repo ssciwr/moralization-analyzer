@@ -9,6 +9,14 @@ from moralization import analyse
 from lxml.etree import XMLSyntaxError
 import spacy
 
+try:
+    import de_core_news_sm
+except ImportError:
+    logging.warning(
+        "Required Spacy model 'de_core_news_sm' was not found. Attempting to download it.."
+    )
+    spacy.cli.download("de_core_news_sm")
+    import de_core_news_sm
 
 pkg = importlib_resources.files("moralization")
 
@@ -127,7 +135,7 @@ class InputOutput:
             #       "KAT5Ausformulierung": "KAT5-Forderung implizit",
             #       "Kommentar": "KOMMENTAR",
         }
-        nlp = spacy.load("de_core_news_sm")
+        nlp = de_core_news_sm.load()
         doc = nlp(cas.sofa_string)
 
         doc_train = nlp(cas.sofa_string)
