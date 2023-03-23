@@ -10,10 +10,11 @@ on:
   
 jobs:
   test:
+    name: "${{ matrix.os }} :: ${{ matrix.python-version }}"
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-latest]
         python-version: [3.9]
     steps:
     - name: Checkout repository
@@ -30,7 +31,7 @@ jobs:
     - name: Run pytest
       run: |
         cd moralization
-        python -m pytest -s --cov=. --cov-report=xml
+        python -m pytest -v -s --cov=. --cov-report=xml
     - name: Upload coverage
       uses: codecov/codecov-action@v3
       with:
