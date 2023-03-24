@@ -1,6 +1,7 @@
 import pytest
 from moralization import input_data
 from moralization.data_manager import DataManager
+from moralization.spacy_model_manager import SpacyModelManager
 import pathlib
 
 
@@ -27,16 +28,16 @@ def config_file(data_dir):
 
 
 @pytest.fixture(scope="session")
-def model_path(data_dir, config_file, tmp_path_factory) -> pathlib.Path:
+def spacy_model_path(data_dir, config_file, tmp_path_factory) -> pathlib.Path:
     """
-    Returns a temporary path containing a trained model.
+    Returns a temporary path containing a trained SpacyModelManager model.
     This is only created once and re-used for the entire pytest session.
     """
-    dm = DataManager(data_dir)
-    dm.export_data_DocBin()
-    tmp_path = tmp_path_factory.mktemp("model")
-    dm.spacy_train(working_dir=tmp_path, config=config_file, n_epochs=1)
-    yield tmp_path / "output" / "model-best"
+    data_manager = DataManager(data_dir)
+    model_path = tmp_path_factory.mktemp("spacy_model") / "my_model"
+    model = SpacyModelManager(model_path, config_file)
+    model.train(data_manager, overrides={"training.max_epochs": 5})
+    yield model_path
 
 
 @pytest.fixture

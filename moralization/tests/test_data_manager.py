@@ -95,35 +95,3 @@ def test_import_data_DocBin(data_dir):
     dm2.import_data_DocBin((tmp_dir))
 
     assert dm.spacy_docbin_files == dm2.spacy_docbin_files
-
-
-def test_spacy_train(data_dir, config_file):
-    dm = DataManager(data_dir)
-    tmp_dir = Path(mkdtemp())
-    test_files = dm.export_data_DocBin(tmp_dir)
-    dm.spacy_train(working_dir=tmp_dir, config=config_file, n_epochs=5)
-    assert (tmp_dir / "output" / "model-best").exists()
-
-    # also test spacy_import_model
-    dm2 = DataManager(data_dir)
-    dm2.spacy_import_model(tmp_dir / "output" / "model-best")
-    assert dm2.spacy_model_path == dm.spacy_model_path
-
-    # test spacy_validation
-    dm.spacy_validation()
-    dm.spacy_validation(test_files[1])
-    dm.spacy_validation(working_dir=tmp_dir)
-
-    # test no validation file:
-    with pytest.raises(FileNotFoundError):
-        dm2.spacy_validation(working_dir=tmp_dir)
-
-    # test spacy_test_with_string
-
-    with pytest.raises(NotImplementedError):
-        dm.spacy_test_string("Dies ist ein toller Test!")
-
-    dm3 = DataManager(data_dir)
-
-    with pytest.raises(ValueError):
-        dm3.spacy_test_string("Dies ist ein toller Test!")
