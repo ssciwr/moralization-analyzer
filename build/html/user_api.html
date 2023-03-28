@@ -51,15 +51,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_analysis()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.occurence_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.occurence_analysis()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.return_analyzer_result"><code class="docutils literal notranslate"><span class="pre">DataManager.return_analyzer_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.spacy_import_model"><code class="docutils literal notranslate"><span class="pre">DataManager.spacy_import_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.spacy_test_string"><code class="docutils literal notranslate"><span class="pre">DataManager.spacy_test_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.spacy_train"><code class="docutils literal notranslate"><span class="pre">DataManager.spacy_train()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.spacy_validation"><code class="docutils literal notranslate"><span class="pre">DataManager.spacy_validation()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.visualize_data"><code class="docutils literal notranslate"><span class="pre">DataManager.visualize_data()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#moralization.SpacyModelManager"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyModelManager.evaluate"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager.evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyModelManager.publish"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager.publish()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyModelManager.save"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager.save()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyModelManager.test"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager.test()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyModelManager.train"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager.train()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -104,7 +100,7 @@
 <dd><p>Export the currently loaded docs as a spacy binary. This is used in spacy training.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
-overwrite(bool, optional): whether or not the spacy files should be written
+overwrite(bool, optional): wether or not the spacy files should be written
 even if files are already present.</p>
 </dd>
 <dt>Returns:</dt><dd><p>list[Path]: A list of the train and test files path.</p>
@@ -160,83 +156,29 @@ filter (str/list(str), optional): Filename filters. Defaults to None.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.spacy_import_model">
+<span class="sig-name descname"><span class="pre">spacy_import_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.spacy_import_model" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.spacy_test_string">
+<span class="sig-name descname"><span class="pre">spacy_test_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'span'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.spacy_test_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.spacy_train">
+<span class="sig-name descname"><span class="pre">spacy_train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">working_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.spacy_train" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.spacy_validation">
+<span class="sig-name descname"><span class="pre">spacy_validation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validation_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.spacy_validation" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.visualize_data">
 <span class="sig-name descname"><span class="pre">visualize_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spans_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sc'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.visualize_data" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="moralization.SpacyModelManager">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">SpacyModelManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_config_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_existing_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager" title="Permalink to this definition"></a></dt>
-<dd><p>Create, import, modify, train and publish spacy models.</p>
-<p>Models can be trained on data from a DataManager, and published to hugging face.</p>
-<p>Imports an existing model from the <cite>model_path</cite> folder if found.</p>
-<p>If the <cite>model_path</cite> folder does not exist, or if <cite>base_config_file</cite>
-is supplied, or if <cite>overwrite_existing_files</cite> is True,
-creates a new model in the <cite>model_path</cite> folder.</p>
-<p>Resulting folder structure inside <cite>model_path</cite>:</p>
-<ul class="simple">
-<li><p>/config.cfg: model config file</p></li>
-<li><p>/meta.json: user-editable metadata (also exported to trained models)</p></li>
-</ul>
-<p>If the model has been trained the folder will also contain:</p>
-<ul class="simple">
-<li><p>/data/train.spacy: training dataset generated by DataManager</p></li>
-<li><p>/data/dev.spacy: testing dataset generated by DataManager</p></li>
-<li><p>/model-best/config.cfg: best trained model</p></li>
-<li><p>/model-last/config.cfg: last trained model</p></li>
-</ul>
-<dl class="simple">
-<dt>Args:</dt><dd><p>model_path (str or Path): Folder where the model is (or will be) stored
-base_config_file (str or Path, optional): If supplied this base config will be used to create a new model
-overwrite_existing_files (bool): If true any existing files in <cite>model_path</cite> are removed</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.SpacyModelManager.evaluate">
-<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#moralization.DataManager" title="moralization.data_manager.DataManager"><span class="pre">DataManager</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#moralization.SpacyModelManager.evaluate" title="Permalink to this definition"></a></dt>
-<dd><p>Evaluate the model against the test dataset in <cite>data_manager</cite></p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.SpacyModelManager.publish">
-<span class="sig-name descname"><span class="pre">publish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hugging_face_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#moralization.SpacyModelManager.publish" title="Permalink to this definition"></a></dt>
-<dd><p>Publish the model to Hugging Face.</p>
-<p>This requires a User Access Token from <a class="reference external" href="https://huggingface.co/">https://huggingface.co/</a></p>
-<p>The token can either be passed via the <cite>hugging_face_token</cite> argument,
-or it can be set via the <cite>HUGGING_FACE_TOKEN</cite> environment variable.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>hugging_face_token (str, optional): Hugging Face User Access Token</p>
-</dd>
-<dt>Returns:</dt><dd><p>dict: URLs of the published model and the pip-installable wheel</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.SpacyModelManager.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager.save" title="Permalink to this definition"></a></dt>
-<dd><p>Save any changes made to the model metadata.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.SpacyModelManager.test">
-<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'span'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager.test" title="Permalink to this definition"></a></dt>
-<dd><p>Test the model output with a test string</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.SpacyModelManager.train">
-<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#moralization.DataManager" title="moralization.data_manager.DataManager"><span class="pre">DataManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overrides</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager.train" title="Permalink to this definition"></a></dt>
-<dd><p>Train the model on the data contained in <cite>data_manager</cite>.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>data_manager (DataManager): the DataManager that contains the training data
-use_gpu (int): The index of the GPU to use (default: -1 which means no GPU)
-overrides (dict): An optional dictionary of parameters to override in the model config</p>
-</dd>
-</dl>
-</dd></dl>
 
 </dd></dl>
 
