@@ -148,7 +148,6 @@ class InputOutput:
 
         # initilize all span categories
         for doc_object in [doc, doc_train, doc_test]:
-
             doc_object.spans["sc"] = []
             doc_object.spans["paragraphs"] = []
             for cat in map_expressions.values():
@@ -265,7 +264,6 @@ class InputOutput:
             }
 
         for file in doc_dict.keys():
-
             # initilize new span_groups
             for cat in merge_dict.keys():
                 doc_dict[file].spans[cat] = []

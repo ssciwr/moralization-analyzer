@@ -41,7 +41,6 @@ def test_get_multiple_input(data_dir):
 
 
 def test_span_merge(doc_dicts):
-
     all_categories = [
         "sc",
         "paragraphs",
@@ -131,7 +130,6 @@ def test_read_data(data_dir):
     for train_file, test_file, main_file in zip(
         train_dict.values(), test_dict.values(), doc_dict.values()
     ):
-
         assert len(main_file.spans["sc"]) == len(test_file.spans["sc"]) + len(
             train_file.spans["sc"]
         )

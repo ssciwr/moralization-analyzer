@@ -10,7 +10,6 @@ EVALUATION_JSON = "evaluation.json"
 
 
 def test_export_training_testing_data(doc_dicts):
-
     # test export default filename
     test_handler = SpacyDataHandler()
 
