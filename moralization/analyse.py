@@ -51,7 +51,6 @@ def _loop_over_files(doc_dict, file_filter=None):
 
 
 def _summarize_span_occurences(doc):
-
     # iterate over all annotation categories and write occurence per paragraph in pandas.DataFrame
     span_categories = list(doc.spans.keys())
     span_categories = _reduce_cat_list(span_categories)
@@ -71,7 +70,6 @@ def _summarize_span_occurences(doc):
 
 
 def _find_spans_in_paragraph(doc, span_cat):
-
     if span_cat not in list(doc.spans.keys()):
         raise KeyError(
             f"Key: `{span_cat}` not found in doc.spans, which has {list(doc.spans.keys())}"

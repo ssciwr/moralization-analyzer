@@ -139,7 +139,6 @@ def test_InteractiveCategoryPlot(doc_dicts):
 
 
 def test_spacy_datah_andler_visualize_data(doc_dicts):
-
     with pytest.raises(NotImplementedError):
         plot.visualize_data(doc_dicts[0], spans_key=["task1", "sc"])
 
