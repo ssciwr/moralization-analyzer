@@ -19,3 +19,4 @@ dependencies:
     - spacy
     - spacy_span_analyzer
     - textacy
+    - spacy-huggingface-hub

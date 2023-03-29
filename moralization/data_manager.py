@@ -5,10 +5,8 @@ from moralization.plot import (
     InteractiveCategoryPlot,
     visualize_data,
 )
-from moralization.spacy_model import SpacyDataHandler, SpacyTraining
+from moralization.spacy_data_handler import SpacyDataHandler
 import pandas as pd
-import spacy
-from pathlib import Path
 
 
 class DataManager:
@@ -18,7 +16,6 @@ class DataManager:
 
         self.analyzer = None
         self.spacy_docbin_files = None
-        self.spacy_model = None
 
     def occurence_analysis(self, _type="table", cat_filter=None, file_filter=None):
         """Returns the occurence df, occurence_corr_table or heatmap of the dataset.
@@ -99,7 +96,7 @@ class DataManager:
 
         Args:
             output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
-            overwrite(bool, optional): wether or not the spacy files should be written
+            overwrite(bool, optional): whether or not the spacy files should be written
             even if files are already present.
 
         Returns:
@@ -126,67 +123,3 @@ class DataManager:
             input_dir, train_file, test_file
         )
         return self.spacy_docbin_files
-
-    def spacy_train(
-        self, working_dir=None, config=None, n_epochs=None, use_gpu=-1, overwrite=None
-    ):
-        if self.spacy_docbin_files is None:
-            raise FileNotFoundError(
-                "No spacy docbin files are loaded, please first run either `export_data_DocBin` or"
-                + " `import_data_DocBin`."
-            )
-        if overwrite is None:
-            overwrite = {}
-        spacy_training = SpacyTraining(
-            working_dir,
-            training_file=self.spacy_docbin_files[0],
-            testing_file=self.spacy_docbin_files[1],
-            config_file=config,
-        )
-        if n_epochs is not None:
-            overwrite["training.max_epochs"] = n_epochs
-
-        spacy_model_path = spacy_training.train(use_gpu=use_gpu, overwrite=overwrite)
-        self.spacy_model_path = Path(spacy_model_path)
-        self.spacy_model = spacy.load(self.spacy_model_path)
-
-    def spacy_import_model(self, model_path):
-        self.spacy_model_path = Path(model_path)
-
-        self.spacy_model = spacy.load(self.spacy_model_path)
-
-    def spacy_validation(self, validation_file=None, working_dir=None):
-        if self.spacy_model is None:
-            raise ValueError(
-                "No spacy model is loaded, please run `spacy_train` or `import_spacy_model` first."
-            )
-
-        if working_dir is None:
-            output_file = Path(self.spacy_model_path).parents[0] / "evaluation.json"
-        else:
-            output_file = Path(working_dir) / "evaluation.json"
-
-        if validation_file is None:
-            if self.spacy_docbin_files is None:
-                raise FileNotFoundError(
-                    "No validation file was provided and none was found in 'DataManager.spacy_docbin_files'. "
-                    + "Either provide a validation file as a function argument or run either "
-                    + "`DataManager.export_data_DocBin` or `DataManager.import_data_DocBin`."
-                )
-
-            validation_file = self.spacy_docbin_files[1]
-
-        return SpacyTraining.evaluate(
-            output_file=output_file,
-            validation_file=validation_file,
-            model=self.spacy_model_path,
-        )
-
-    def spacy_test_string(self, test_string, style="span"):
-
-        if self.spacy_model is None:
-            raise ValueError(
-                "No spacy model is loaded, please run `spacy_train` or `import_spacy_model` first."
-            )
-
-        SpacyTraining.test_model_with_string(self.spacy_model, test_string, style)

@@ -18,11 +18,10 @@ pip install git+https://github.com/ssciwr/moralization.git
 
 ## Example notebooks
 Here you can find a few short introduction notebooks on google colab.
-- [DemoNotebook_statistics](https://colab.research.google.com/github/ssciwr/moralization/blob/main/notebooks/DemoNotebook_statistics.ipynb)
 
 - [DemoNotebook_interactive_plots](https://colab.research.google.com/github/ssciwr/moralization/blob/main/notebooks/DemoNotebook_interactive_plots.ipynb)
 
-- [DemoNotebook_interactive_plots](https://colab.research.google.com/github/ssciwr/moralization/blob/main/notebooks/DemoNotebook_SpacyDemo.ipynb)
+- [DemoNotebook_spacy_model](https://colab.research.google.com/github/ssciwr/moralization/blob/main/notebooks/DemoNotebook_spacy_model.ipynb)
 
 Based on an annotated corpus, the automatic classification of moralization constructs in written text will be investigated.
 
