@@ -3,6 +3,7 @@ import matplotlib
 from moralization.analyse import _loop_over_files
 import pytest
 import seaborn as sns
+from moralization.data_manager import DataManager
 
 
 def test_report_occurrence_heatmap(doc_dicts, monkeypatch):
@@ -113,6 +114,19 @@ def test_report_occurrence_heatmap(doc_dicts, monkeypatch):
         df, _filter="KAT3-Gruppe", _type="heatmap"
     )
     assert heatmap_columns_filtered == filtered_columns_main
+
+
+def test_InteractiveAnalyzerResults(data_dir):
+    matplotlib.use("Agg")
+
+    dm = DataManager(data_dir)
+    test_interactive = plot.InteractiveAnalyzerResults(dm.return_analyzer_result("all"))
+    test_interactive.visualize_analyzer_result()
+
+    with pytest.raises(KeyError):
+        test_interactive.visualize_analyzer_result(span_label="test")
+    with pytest.raises(KeyError):
+        test_interactive.visualize_analyzer_result(analysis_type="test")
 
 
 def test_InteractiveCategoryPlot(doc_dicts):

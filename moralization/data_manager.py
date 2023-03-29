@@ -167,8 +167,9 @@ class DataManager:
 
                 warning_str = (
                     f"The following span categories have a {analyzer_result_label}"
+                    + f" of less then {threshold}. \n"
                 )
-                +f" of less then {threshold}. \n"
+
                 warning_str += (
                     "Be warned that this might result in poor quality data. \n"
                 )
