@@ -141,6 +141,14 @@ def test_spacy_model_manager_publish_invalid_token_arg(spacy_model_path):
     assert "token" in str(e.value).lower()
 
 
+def test_spacy_model_manager_publish_missing_metadata(spacy_model_path):
+    model = SpacyModelManager(spacy_model_path)
+    model.metadata["author"] = ""
+    with pytest.raises(RuntimeError) as e:
+        model.publish()
+    assert "author" in str(e.value).lower()
+
+
 def test_spacy_model_manager_publish_mock_push(spacy_model_path, monkeypatch, tmp_path):
     def mock_spacy_huggingface_hub_push(whl_path: Path):
         whl_path.rename(tmp_path / whl_path.name)

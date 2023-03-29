@@ -30,12 +30,21 @@ def config_file(data_dir):
 @pytest.fixture(scope="session")
 def spacy_model_path(data_dir, config_file, tmp_path_factory) -> pathlib.Path:
     """
-    Returns a temporary path containing a trained SpacyModelManager model.
+    Returns a temporary path containing a trained SpacyModelManager model with valid metadata.
     This is only created once and re-used for the entire pytest session.
     """
     data_manager = DataManager(data_dir)
     model_path = tmp_path_factory.mktemp("spacy_model") / "my_model"
     model = SpacyModelManager(model_path, config_file)
+    model.metadata = {
+        "name": "pytest_pipeline",
+        "version": "0.1.2",
+        "description": "Test pipeline generated for testing",
+        "author": "SSC",
+        "email": "ssc@iwr.uni-heidelberg.de",
+        "url": "https://ssc.iwr.uni-heidelberg.de/",
+        "license": "MIT",
+    }
     model.train(data_manager, overrides={"training.max_epochs": 5})
     yield model_path
 

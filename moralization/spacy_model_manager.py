@@ -213,6 +213,11 @@ class SpacyModelManager:
             dict: URLs of the published model and the pip-installable wheel
         """
         self._check_model_is_trained_before_it_can_be("published")
+        for key, value in self.metadata.items():
+            if value == "":
+                raise RuntimeError(
+                    f"Metadata '{key}' is not set - all metadata needs to be set before publishing a model."
+                )
         self.save()
         if hugging_face_token is None:
             hugging_face_token = os.environ.get("HUGGING_FACE_TOKEN")
