@@ -62,7 +62,6 @@ def _get_filter_multiindex(occurence_df: pd.DataFrame, filters):
     filter_dict = {"main": [], "sub": []}
 
     for _filter in filters:
-
         # for main_cat_filter append all sub cats:
         if _filter in occurence_df.columns.levels[0]:
             filter_dict["main"].append(_filter)

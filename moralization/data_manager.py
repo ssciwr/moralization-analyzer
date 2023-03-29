@@ -89,7 +89,6 @@ class DataManager:
         return interactive_analysis.show()
 
     def visualize_data(self, _type: str, spans_key="sc"):
-
         # type can only be all, train or test
         if _type not in ["all", "train", "test"]:
             raise KeyError(
