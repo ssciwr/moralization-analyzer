@@ -163,7 +163,6 @@ class DataManager:
                 .to_dict()
             )
             if under_threshold:
-
                 warning_str = (
                     f"The following span categories have a {analyzer_result_label}"
                     + f" of less then {threshold}. \n"
