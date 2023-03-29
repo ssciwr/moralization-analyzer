@@ -4,7 +4,10 @@ from moralization.plot import (
     report_occurrence_heatmap,
     InteractiveCategoryPlot,
     visualize_data,
+    InteractiveAnalyzerResults,
 )
+import logging
+
 from moralization.spacy_data_handler import SpacyDataHandler
 import pandas as pd
 
@@ -47,7 +50,7 @@ class DataManager:
         self.occurence_df = _loop_over_files(self.doc_dict)
 
         heatmap = InteractiveCategoryPlot(self.occurence_df, list(self.doc_dict.keys()))
-        return heatmap
+        return heatmap.show()
 
     def return_analyzer_result(self, result_type="frequency"):
         """Returns the result of the spacy_span-analyzer.
@@ -55,25 +58,35 @@ class DataManager:
 
         Args:
             result_type (str, optional): Can be `frequency`, `length`,
-              `span_distinctiveness` or `boundary_distinctiveness`. Defaults to "frequency".
+              `span_distinctiveness`, `boundary_distinctiveness` or "all". Defaults to "frequency".
         """
 
         if self.analyzer is None:
             self.analyzer = _return_span_analyzer(self.doc_dict)
 
         return_dict = {
-            "frequency": self.analyzer.frequency,
-            "length": self.analyzer.length,
-            "span_distinctiveness": self.analyzer.span_distinctiveness,
-            "boundary_distinctiveness": self.analyzer.boundary_distinctiveness,
+            "frequency": pd.DataFrame(self.analyzer.frequency).fillna(0),
+            "length": pd.DataFrame(self.analyzer.length).fillna(0),
+            "span_distinctiveness": pd.DataFrame(
+                self.analyzer.span_distinctiveness
+            ).fillna(0),
+            "boundary_distinctiveness": pd.DataFrame(
+                self.analyzer.boundary_distinctiveness
+            ).fillna(0),
         }
 
-        if result_type not in list(return_dict.keys()):
+        if result_type not in list(return_dict.keys()) and result_type != "all":
             raise KeyError(
                 f"result_type '{result_type}' not in '{list(return_dict.keys())}'."
             )
-
+        if result_type == "all":
+            return return_dict
         return pd.DataFrame(return_dict[result_type]).fillna(0)
+
+    def interactive_data_analysis(self):
+        all_analysis = self.return_analyzer_result("all")
+        interactive_analysis = InteractiveAnalyzerResults(all_analysis)
+        return interactive_analysis.show()
 
     def visualize_data(self, _type: str, spans_key="sc"):
 
@@ -106,6 +119,26 @@ class DataManager:
             self.train_dict, self.test_dict, output_dir, overwrite=overwrite
         )
         return self.spacy_docbin_files
+
+    def check_data_integrity(self):
+        # thresholds:
+        NEW_LABEL_THRESHOLD = 50
+
+        logging.debug("Checking data integrity:")
+
+        logging.debug("Check span cat occurences:")
+        occurence_df = self.return_analyzer_result("occurence")
+        under_threshold = (
+            occurence_df[occurence_df < NEW_LABEL_THRESHOLD][occurence_df > 0]["sc"]
+            .dropna()
+            .to_dict()
+        )
+        if under_threshold:
+            logging.warning(
+                f"The following span categories have less then {NEW_LABEL_THRESHOLD} entries. "
+                + "Be warned that this might result in poor quality data."
+                + +f"{under_threshold}"
+            )
 
     def import_data_DocBin(self, input_dir=None, train_file=None, test_file=None):
         """Load spacy files from a given directory, from absolute path,
