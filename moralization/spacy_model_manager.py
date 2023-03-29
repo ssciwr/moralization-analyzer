@@ -156,6 +156,7 @@ class SpacyModelManager:
         data_manager: DataManager,
         use_gpu: int = -1,
         overrides: Optional[Dict] = None,
+        check_data_integrity=True,
     ):
         """Train the model on the data contained in `data_manager`.
 
@@ -163,12 +164,15 @@ class SpacyModelManager:
             data_manager (DataManager): the DataManager that contains the training data
             use_gpu (int): The index of the GPU to use (default: -1 which means no GPU)
             overrides (dict): An optional dictionary of parameters to override in the model config
+            check_data_integrity (bool): Wether or not to test the data integrity.
         """
         self.save()
         if overrides is None:
             overrides = {}
         # use data from data_manager for training
-        data_train, data_dev = self._get_data_manager_docbin_files(data_manager)
+        data_train, data_dev = self._get_data_manager_docbin_files(
+            data_manager, check_data_integrity=check_data_integrity
+        )
         overrides["paths.train"] = str(data_train)
         overrides["paths.dev"] = str(data_dev)
         spacy.cli.train.train(
@@ -235,7 +239,9 @@ class SpacyModelManager:
         if not self._best_model_path.is_dir():
             raise RuntimeError(f"Model must be trained before it can be {action}.")
 
-    def _get_data_manager_docbin_files(self, data_manager: DataManager) -> List[Path]:
+    def _get_data_manager_docbin_files(
+        self, data_manager: DataManager, check_data_integrity=True
+    ) -> List[Path]:
         """
         Returns `[train_data_path, dev_data_path]` from data_manager.
 
@@ -248,5 +254,7 @@ class SpacyModelManager:
         if not data_files_exist:
             data_path = self._model_path.resolve() / "data"
             Path(data_path).mkdir(parents=True, exist_ok=True)
-            data_manager.export_data_DocBin(data_path, overwrite=True)
+            data_manager.export_data_DocBin(
+                data_path, overwrite=True, check_data_integrity=check_data_integrity
+            )
         return data_manager.spacy_docbin_files

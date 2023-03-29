@@ -104,41 +104,79 @@ class DataManager:
 
         return visualize_data(return_dict[_type], spans_key=spans_key)
 
-    def export_data_DocBin(self, output_dir=None, overwrite=False):
+    def export_data_DocBin(
+        self, output_dir=None, overwrite=False, check_data_integrity=True
+    ):
         """Export the currently loaded docs as a spacy binary. This is used in spacy training.
 
         Args:
             output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
             overwrite(bool, optional): whether or not the spacy files should be written
             even if files are already present.
+            check_data_integrity (bool): Wether or not to test the data integrity.
+
 
         Returns:
             list[Path]: A list of the train and test files path.
         """
+        if check_data_integrity:
+            self.check_data_integrity()
+
         self.spacy_docbin_files = SpacyDataHandler().export_training_testing_data(
             self.train_dict, self.test_dict, output_dir, overwrite=overwrite
         )
         return self.spacy_docbin_files
 
     def check_data_integrity(self):
+        """This function checks the data and compares it to the spacy thresholds for label count,
+        span distinctiveness and boundary distinctiveness.
+
+        If a value is found to be insufficient a warning will be raised.
+
+        By default this function will be called when starting a training.
+
+        """
         # thresholds:
         NEW_LABEL_THRESHOLD = 50
+        SPAN_DISTINCT_THRESHOLD = 1
+        BOUNDARY_DISTINCT_THRESHOLD = 1
 
-        logging.debug("Checking data integrity:")
+        logging.info("Checking data integrity:")
 
-        logging.debug("Check span cat occurences:")
-        occurence_df = self.return_analyzer_result("occurence")
-        under_threshold = (
-            occurence_df[occurence_df < NEW_LABEL_THRESHOLD][occurence_df > 0]["sc"]
-            .dropna()
-            .to_dict()
-        )
-        if under_threshold:
-            logging.warning(
-                f"The following span categories have less then {NEW_LABEL_THRESHOLD} entries. "
-                + "Be warned that this might result in poor quality data."
-                + +f"{under_threshold}"
+        thresholds = [
+            NEW_LABEL_THRESHOLD,
+            SPAN_DISTINCT_THRESHOLD,
+            BOUNDARY_DISTINCT_THRESHOLD,
+        ]
+        analyzer_result_labels = [
+            "frequency",
+            "span_distinctiveness",
+            "boundary_distinctiveness",
+        ]
+
+        for threshold, analyzer_result_label in zip(thresholds, analyzer_result_labels):
+            logging.info("Check span cat frequency:")
+            analyzer_df = self.return_analyzer_result(analyzer_result_label)
+
+            under_threshold = (
+                analyzer_df[analyzer_df < threshold][analyzer_df > 0]["sc"]
+                .dropna()
+                .to_dict()
             )
+            if under_threshold:
+
+                warning_str = (
+                    f"The following span categories have a {analyzer_result_label}"
+                )
+                +f" of less then {threshold}. \n"
+                warning_str += (
+                    "Be warned that this might result in poor quality data. \n"
+                )
+
+                for key, value in under_threshold.items():
+                    warning_str += f"\t {key} : {value} \n"
+
+                logging.warning(warning_str)
 
     def import_data_DocBin(self, input_dir=None, train_file=None, test_file=None):
         """Load spacy files from a given directory, from absolute path,
