@@ -182,10 +182,16 @@ class SpacyModelManager:
             overrides=overrides,
         )
 
-    def evaluate(self, data_manager: DataManager) -> Dict[str, Any]:
+    def evaluate(
+        self,
+        data_manager: DataManager,
+        check_data_integrity=True,
+    ) -> Dict[str, Any]:
         """Evaluate the model against the test dataset in `data_manager`"""
         self._check_model_is_trained_before_it_can_be("evaluated")
-        _, data_dev = self._get_data_manager_docbin_files(data_manager)
+        _, data_dev = self._get_data_manager_docbin_files(
+            data_manager, check_data_integrity=check_data_integrity
+        )
         return spacy.cli.evaluate(str(self._best_model_path), data_dev)
 
     def save(self):

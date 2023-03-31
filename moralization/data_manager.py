@@ -156,23 +156,44 @@ class DataManager:
         ]
 
         for threshold, analyzer_result_label in zip(thresholds, analyzer_result_labels):
-            logging.info(f"Check span cat {analyzer_result_label}:")
+            logging.info(f"Check analyzer category {analyzer_result_label}:")
+            warning_str = (
+                f"The following span categories have a {analyzer_result_label}"
+                + f" of less then {threshold}. \n"
+            )
 
             if analyzer_result_label == "relativ_frequency":
+                # for this we need to iterate over each span cat induvidually.
                 analyzer_df = self.return_analyzer_result("frequency")
 
-                logging.info("Checking if any labels are disproportionately rare ")
+                for column in analyzer_df.columns:
+                    warning_str += f"Checking if any labels are disproportionately rare in span_cat '{column}':\n"
 
-                max_occurence = analyzer_df[analyzer_df > 0]["sc"].max()
-                max_occurence_label = str(
-                    analyzer_df.loc[analyzer_df["sc"] == max_occurence]["sc"].index
-                )
+                    max_occurence = analyzer_df[analyzer_df > 0][column].max()
+                    max_occurence_label = str(
+                        analyzer_df.loc[analyzer_df[column] == max_occurence][
+                            column
+                        ].index
+                    )
 
-                under_threshold_df = analyzer_df["sc"][analyzer_df["sc"] > 0][
-                    analyzer_df["sc"] < max_occurence * RELATIV_THRESHOLD
-                ].dropna()
-                under_threshold_df = under_threshold_df / max_occurence
-                under_threshold_dict = under_threshold_df.to_dict()
+                    under_threshold_df = analyzer_df[column][analyzer_df[column] > 0][
+                        analyzer_df[column] < max_occurence * RELATIV_THRESHOLD
+                    ].dropna()
+
+                    under_threshold_df = under_threshold_df / max_occurence
+                    under_threshold_dict = under_threshold_df.to_dict()
+                    if under_threshold_dict:
+                        warning_str += (
+                            f"Compared to the maximal occurence of {max_occurence} in "
+                            + f"{max_occurence_label}. \n"
+                        )
+
+                        for key, value in under_threshold_dict.items():
+                            warning_str += f"\t {key} : {round(value,3)} \n"
+                        logging.warning(warning_str)
+                        under_threshold_dict = None
+                    else:
+                        warning_str += "\t No problem found.\n"
 
             else:
                 analyzer_df = self.return_analyzer_result(analyzer_result_label)
@@ -183,22 +204,13 @@ class DataManager:
                     .to_dict()
                 )
 
-            if under_threshold_dict:
-                warning_str = (
-                    f"The following span categories have a {analyzer_result_label}"
-                    + f" of less then {threshold}. \n"
-                )
-                if analyzer_result_label == "relativ_frequency":
-                    warning_str += f"Compared to the maximal occurence of {max_occurence} in {max_occurence_label}. \n"
-
+                for key, value in under_threshold_dict.items():
+                    warning_str += f"\t {key} : {round(value,3)} \n"
                 warning_str += (
                     "Be warned that this might result in poor quality data. \n"
                 )
-
-                for key, value in under_threshold_dict.items():
-                    warning_str += f"\t {key} : {round(value,3)} \n"
-
-                logging.warning(warning_str)
+                if under_threshold_dict:
+                    logging.warning(warning_str)
 
     def import_data_DocBin(self, input_dir=None, train_file=None, test_file=None):
         """Load spacy files from a given directory, from absolute path,
