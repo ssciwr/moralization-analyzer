@@ -106,7 +106,7 @@
 <dd><p>This function checks the data and compares it to the spacy thresholds for label count,
 span distinctiveness and boundary distinctiveness.</p>
 <p>If a value is found to be insufficient a warning will be raised.</p>
-<p>By default this function will be called when starting a training.</p>
+<p>By default this function will be called when training data is exported</p>
 </dd></dl>
 
 <dl class="py method">
@@ -117,7 +117,7 @@ span distinctiveness and boundary distinctiveness.</p>
 <dt>Args:</dt><dd><p>output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
 overwrite(bool, optional): whether or not the spacy files should be written
 even if files are already present.
-check_data_integrity (bool): Wether or not to test the data integrity.</p>
+check_data_integrity (bool): Whether or not to test the data integrity.</p>
 </dd>
 <dt>Returns:</dt><dd><p>list[Path]: A list of the train and test files path.</p>
 </dd>
@@ -212,7 +212,7 @@ overwrite_existing_files (bool): If true any existing files in <cite>model_path<
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.SpacyModelManager.evaluate">
-<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#moralization.DataManager" title="moralization.data_manager.DataManager"><span class="pre">DataManager</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#moralization.SpacyModelManager.evaluate" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#moralization.DataManager" title="moralization.data_manager.DataManager"><span class="pre">DataManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_data_integrity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#moralization.SpacyModelManager.evaluate" title="Permalink to this definition"></a></dt>
 <dd><p>Evaluate the model against the test dataset in <cite>data_manager</cite></p>
 </dd></dl>
 
@@ -251,7 +251,7 @@ or it can be set via the <cite>HUGGING_FACE_TOKEN</cite> environment variable.</
 <dt>Args:</dt><dd><p>data_manager (DataManager): the DataManager that contains the training data
 use_gpu (int): The index of the GPU to use (default: -1 which means no GPU)
 overrides (dict): An optional dictionary of parameters to override in the model config
-check_data_integrity (bool): Wether or not to test the data integrity.</p>
+check_data_integrity (bool): Whether or not to test the data integrity.</p>
 </dd>
 </dl>
 </dd></dl>
