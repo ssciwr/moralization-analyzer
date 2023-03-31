@@ -139,41 +139,64 @@ class DataManager:
         NEW_LABEL_THRESHOLD = 50
         SPAN_DISTINCT_THRESHOLD = 1
         BOUNDARY_DISTINCT_THRESHOLD = 1
-
+        RELATIV_THRESHOLD = 0.2
         logging.info("Checking data integrity:")
 
         thresholds = [
             NEW_LABEL_THRESHOLD,
+            RELATIV_THRESHOLD,
             SPAN_DISTINCT_THRESHOLD,
             BOUNDARY_DISTINCT_THRESHOLD,
         ]
         analyzer_result_labels = [
             "frequency",
+            "relativ_frequency",
             "span_distinctiveness",
             "boundary_distinctiveness",
         ]
 
         for threshold, analyzer_result_label in zip(thresholds, analyzer_result_labels):
-            logging.info("Check span cat frequency:")
-            analyzer_df = self.return_analyzer_result(analyzer_result_label)
+            logging.info(f"Check span cat {analyzer_result_label}:")
 
-            under_threshold = (
-                analyzer_df[analyzer_df < threshold][analyzer_df > 0]["sc"]
-                .dropna()
-                .to_dict()
-            )
-            if under_threshold:
+            if analyzer_result_label == "relativ_frequency":
+                analyzer_df = self.return_analyzer_result("frequency")
+
+                logging.info("Checking if any labels are disproportionately rare ")
+
+                max_occurence = analyzer_df[analyzer_df > 0]["sc"].max()
+                max_occurence_label = str(
+                    analyzer_df.loc[analyzer_df["sc"] == max_occurence]["sc"].index
+                )
+
+                under_threshold_df = analyzer_df["sc"][analyzer_df["sc"] > 0][
+                    analyzer_df["sc"] < max_occurence * RELATIV_THRESHOLD
+                ].dropna()
+                under_threshold_df = under_threshold_df / max_occurence
+                under_threshold_dict = under_threshold_df.to_dict()
+
+            else:
+                analyzer_df = self.return_analyzer_result(analyzer_result_label)
+
+                under_threshold_dict = (
+                    analyzer_df[analyzer_df < threshold][analyzer_df > 0]["sc"]
+                    .dropna()
+                    .to_dict()
+                )
+
+            if under_threshold_dict:
                 warning_str = (
                     f"The following span categories have a {analyzer_result_label}"
                     + f" of less then {threshold}. \n"
                 )
+                if analyzer_result_label == "relativ_frequency":
+                    warning_str += f"Compared to the maximal occurence of {max_occurence} in {max_occurence_label}. \n"
 
                 warning_str += (
                     "Be warned that this might result in poor quality data. \n"
                 )
 
-                for key, value in under_threshold.items():
-                    warning_str += f"\t {key} : {value} \n"
+                for key, value in under_threshold_dict.items():
+                    warning_str += f"\t {key} : {round(value,3)} \n"
 
                 logging.warning(warning_str)
 
