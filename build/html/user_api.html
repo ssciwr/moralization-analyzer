@@ -106,7 +106,7 @@
 <dd><p>This function checks the data and compares it to the spacy thresholds for label count,
 span distinctiveness and boundary distinctiveness.</p>
 <p>If a value is found to be insufficient a warning will be raised.</p>
-<p>By default this function will be called when training data is exported</p>
+<p>By default this function will be called when starting a training.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -117,7 +117,7 @@ span distinctiveness and boundary distinctiveness.</p>
 <dt>Args:</dt><dd><p>output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
 overwrite(bool, optional): whether or not the spacy files should be written
 even if files are already present.
-check_data_integrity (bool): Whether or not to test the data integrity.</p>
+check_data_integrity (bool): Wether or not to test the data integrity.</p>
 </dd>
 <dt>Returns:</dt><dd><p>list[Path]: A list of the train and test files path.</p>
 </dd>
@@ -251,7 +251,7 @@ or it can be set via the <cite>HUGGING_FACE_TOKEN</cite> environment variable.</
 <dt>Args:</dt><dd><p>data_manager (DataManager): the DataManager that contains the training data
 use_gpu (int): The index of the GPU to use (default: -1 which means no GPU)
 overrides (dict): An optional dictionary of parameters to override in the model config
-check_data_integrity (bool): Whether or not to test the data integrity.</p>
+check_data_integrity (bool): Wether or not to test the data integrity.</p>
 </dd>
 </dl>
 </dd></dl>
