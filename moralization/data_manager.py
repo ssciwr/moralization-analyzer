@@ -112,7 +112,7 @@ class DataManager:
             output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
             overwrite(bool, optional): whether or not the spacy files should be written
             even if files are already present.
-            check_data_integrity (bool): Wether or not to test the data integrity.
+            check_data_integrity (bool): Whether or not to test the data integrity.
 
 
         Returns:
@@ -132,7 +132,7 @@ class DataManager:
 
         If a value is found to be insufficient a warning will be raised.
 
-        By default this function will be called when starting a training.
+        By default this function will be called when training data is exported
 
         """
         # thresholds:
