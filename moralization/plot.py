@@ -8,6 +8,7 @@ import ipywidgets
 import IPython
 from moralization.utils import is_interactive
 from spacy import displacy
+import seaborn as sn
 
 
 def report_occurrence_heatmap(
@@ -102,6 +103,84 @@ def _generate_corr_df(occurence_df: pd.DataFrame, _filter=None) -> pd.DataFrame:
             .sort_index(level=0)
             .T.corr()
         )
+
+
+class InteractiveAnalyzerResults:
+    """Interactive plotting tool for the DataAnalyzer in jupyter notebooks"""
+
+    def __init__(self, analyzer_results_all, figsize=(15, 7)):
+        self.analyzer_results_all = analyzer_results_all
+        self.figsize = figsize
+
+        # setup widgets
+        self._output = ipywidgets.Output()
+
+        self._analysis_type_widget = ipywidgets.Dropdown(
+            options=list(self.analyzer_results_all.keys()),
+            value=list(self.analyzer_results_all.keys())[0],
+        )
+
+        self._spancat_widget = ipywidgets.Dropdown(
+            options=list(self.analyzer_results_all["frequency"].keys()),
+            value="paragraphs",
+        )
+
+        self._display_container = ipywidgets.HBox(
+            [
+                ipywidgets.VBox([self._analysis_type_widget, self._spancat_widget]),
+                self._output,
+            ]
+        )
+
+        # add observer
+        self._spancat_widget.observe(self._value_changed, names="value")
+        self._analysis_type_widget.observe(self._value_changed, names="value")
+
+        # this ensures we get a graph when first calling the function.
+        self._spancat_widget.value = "sc"
+
+    def _value_changed(self, change):
+        with self._output:
+            if change["new"]:
+                IPython.display.clear_output(wait=True)
+                span_label = self._spancat_widget.value
+                analysis_type = self._analysis_type_widget.value
+                self.visualize_analyzer_result(
+                    span_label=span_label, analysis_type=analysis_type
+                )
+
+    def show(self):
+        """Display the interactive plot"""
+        IPython.display.display(self._display_container)
+
+    def visualize_analyzer_result(self, span_label="sc", analysis_type="frequency"):
+        """
+
+        Args:
+            data_manager_all (dict): The returned analyzer results for all 4 types as a dict.
+            span_label (str, optional): The span label which should be shown. Defaults to "sc".
+            analysis_type (str, optional): Can be `frequency`, `length`,
+                `span_distinctiveness` or `boundary_distinctiveness`. Defaults to "frequency".
+        """
+
+        if analysis_type not in list(self.analyzer_results_all.keys()):
+            raise KeyError(
+                f"key {analysis_type} not in analyzer_results_all, which only has"
+                + f"{list(self.analyzer_results_all.keys())}"
+            )
+
+        if span_label not in self.analyzer_results_all[analysis_type].keys():
+            raise KeyError(f"{span_label} is not present in the given dataset.")
+
+        df = self.analyzer_results_all[analysis_type][span_label]
+        # we don't need this column.
+        df = df.drop("paragraph")
+
+        plt.figure(figsize=(10, 6))
+        plt.title(f"span {analysis_type}")
+        plt.xticks(rotation=90)
+        sn.scatterplot(df)
+        return plt.show()
 
 
 class InteractiveCategoryPlot:

@@ -4,9 +4,13 @@ from moralization.plot import (
     report_occurrence_heatmap,
     InteractiveCategoryPlot,
     visualize_data,
+    InteractiveAnalyzerResults,
 )
+import logging
+
 from moralization.spacy_data_handler import SpacyDataHandler
 import pandas as pd
+import numpy as np
 
 
 class DataManager:
@@ -55,25 +59,62 @@ class DataManager:
 
         Args:
             result_type (str, optional): Can be `frequency`, `length`,
-              `span_distinctiveness` or `boundary_distinctiveness`. Defaults to "frequency".
+              `span_distinctiveness`, `boundary_distinctiveness` or "all". Defaults to "frequency".
         """
 
+        # cache return dict as well as the analyzer object
         if self.analyzer is None:
             self.analyzer = _return_span_analyzer(self.doc_dict)
+            dict_entries = [
+                "frequency",
+                "length",
+                "span_distinctiveness",
+                "boundary_distinctiveness",
+            ]
+            return_dict = {}
+            # this allows us to catch numpy runtime warning.
+            with np.errstate(all="raise"):
+                for entry in dict_entries:
+                    try:
+                        return_dict[entry] = pd.DataFrame(
+                            self.analyzer.__getattribute__(entry)
+                        ).fillna(0)
 
-        return_dict = {
-            "frequency": self.analyzer.frequency,
-            "length": self.analyzer.length,
-            "span_distinctiveness": self.analyzer.span_distinctiveness,
-            "boundary_distinctiveness": self.analyzer.boundary_distinctiveness,
-        }
+                    except FloatingPointError:
+                        logging.warning(
+                            f"Numpy FloatingPointError in {entry}!\n"
+                            + "Most likely a category has to few entries to perform mean analysis on."
+                            + " Check further output to find the culprit."
+                        )
+                        # after  raised warning continue without further warning.
+                        with np.errstate(all="ignore"):
+                            return_dict[entry] = pd.DataFrame(
+                                self.analyzer.__getattribute__(entry)
+                            ).fillna(0)
 
-        if result_type not in list(return_dict.keys()):
+                    except RuntimeWarning as e:
+                        logging.warning(
+                            f"Numpy RuntimeWarning in {entry}!\n {e}\n"
+                            + "However for unknown reasons this catch is currently not supported by numpy..."
+                        )
+
+            self.analyzer_return_dict = return_dict
+
+        if (
+            result_type not in list(self.analyzer_return_dict.keys())
+            and result_type != "all"
+        ):
             raise KeyError(
-                f"result_type '{result_type}' not in '{list(return_dict.keys())}'."
+                f"result_type '{result_type}' not in '{list(self.analyzer_return_dict.keys())}'."
             )
+        if result_type == "all":
+            return self.analyzer_return_dict
+        return pd.DataFrame(self.analyzer_return_dict[result_type]).fillna(0)
 
-        return pd.DataFrame(return_dict[result_type]).fillna(0)
+    def interactive_data_analysis(self):
+        all_analysis = self.return_analyzer_result("all")
+        interactive_analysis = InteractiveAnalyzerResults(all_analysis)
+        return interactive_analysis.show()
 
     def visualize_data(self, _type: str, spans_key="sc"):
         # type can only be all, train or test
@@ -90,21 +131,135 @@ class DataManager:
 
         return visualize_data(return_dict[_type], spans_key=spans_key)
 
-    def export_data_DocBin(self, output_dir=None, overwrite=False):
+    def export_data_DocBin(
+        self, output_dir=None, overwrite=False, check_data_integrity=True
+    ):
         """Export the currently loaded docs as a spacy binary. This is used in spacy training.
 
         Args:
             output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
             overwrite(bool, optional): whether or not the spacy files should be written
             even if files are already present.
+            check_data_integrity (bool): Whether or not to test the data integrity.
+
 
         Returns:
             list[Path]: A list of the train and test files path.
         """
+        if check_data_integrity:
+            data_failed_check = self.check_data_integrity()
+            if data_failed_check:
+                raise ValueError(
+                    "The given data did not pass the integrity check. Please check the provided output.\n"
+                    + "if you want to continue with your data set `check_data_integrity=False`"
+                )
+
         self.spacy_docbin_files = SpacyDataHandler().export_training_testing_data(
             self.train_dict, self.test_dict, output_dir, overwrite=overwrite
         )
         return self.spacy_docbin_files
+
+    def _check_relativ_frequency(
+        self,
+        threshold,
+    ):
+        analyzer_df = self.return_analyzer_result("frequency")
+        warning_str = ""
+        for column in analyzer_df.columns:
+            warning_str += "----------------\n"
+            warning_str += f"Checking if any labels are disproportionately rare in span_cat '{column}':\n"
+
+            max_occurence = analyzer_df[analyzer_df > 0][column].max()
+            max_occurence_label = str(
+                analyzer_df.loc[analyzer_df[column] == max_occurence][column].index
+            )
+
+            under_threshold_df = analyzer_df[column][analyzer_df[column] > 0][
+                analyzer_df[column] < max_occurence * threshold
+            ].dropna()
+
+            under_threshold_df = under_threshold_df / max_occurence
+            under_threshold_dict = under_threshold_df.to_dict()
+            if under_threshold_dict:
+                warning_str += (
+                    f"Compared to the maximal occurence of {max_occurence} in "
+                    + f"{max_occurence_label}. \n"
+                )
+
+                for key, value in under_threshold_dict.items():
+                    warning_str += f"\t {key} : {round(value,3)} \n"
+                logging.warning(warning_str)
+                under_threshold_dict = None
+
+                data_integrity_failed = True
+            else:
+                warning_str += "\t No problem found.\n"
+        return warning_str, data_integrity_failed
+
+    def check_data_integrity(self):
+        """This function checks the data and compares it to the spacy thresholds for label count,
+        span distinctiveness and boundary distinctiveness.
+
+        If a value is found to be insufficient a warning will be raised.
+
+        By default this function will be called when training data is exported
+
+        """
+
+        data_integrity_failed = False
+
+        # thresholds:
+        NEW_LABEL_THRESHOLD = 50
+        SPAN_DISTINCT_THRESHOLD = 1
+        BOUNDARY_DISTINCT_THRESHOLD = 1
+        RELATIV_THRESHOLD = 0.2
+        logging.info("Checking data integrity:")
+
+        thresholds = [
+            NEW_LABEL_THRESHOLD,
+            RELATIV_THRESHOLD,
+            SPAN_DISTINCT_THRESHOLD,
+            BOUNDARY_DISTINCT_THRESHOLD,
+        ]
+        analyzer_result_labels = [
+            "frequency",
+            "relativ_frequency",
+            "span_distinctiveness",
+            "boundary_distinctiveness",
+        ]
+
+        for threshold, analyzer_result_label in zip(thresholds, analyzer_result_labels):
+            logging.info(f"Check analyzer category {analyzer_result_label}:")
+            warning_str = (
+                f"\nThe following span categories have a {analyzer_result_label}"
+                + f" of less then {threshold}. \n"
+            )
+
+            if analyzer_result_label == "relativ_frequency":
+                # for this we need to iterate over each span cat induvidually.
+                _warning_str, data_integrity_failed = self._check_relativ_frequency(
+                    threshold=RELATIV_THRESHOLD
+                )
+                warning_str += _warning_str
+            else:
+                analyzer_df = self.return_analyzer_result(analyzer_result_label)
+
+                under_threshold_dict = (
+                    analyzer_df[analyzer_df < threshold][analyzer_df > 0]["sc"]
+                    .dropna()
+                    .to_dict()
+                )
+
+                for key, value in under_threshold_dict.items():
+                    warning_str += f"\t {key} : {round(value,3)} \n"
+                warning_str += (
+                    "Be warned that this might result in poor quality data. \n"
+                )
+                if under_threshold_dict:
+                    logging.warning(warning_str)
+                    data_integrity_failed = True
+
+        return data_integrity_failed
 
     def import_data_DocBin(self, input_dir=None, train_file=None, test_file=None):
         """Load spacy files from a given directory, from absolute path,
