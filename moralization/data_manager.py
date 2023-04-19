@@ -51,7 +51,7 @@ class DataManager:
         self.occurence_df = _loop_over_files(self.doc_dict)
 
         heatmap = InteractiveCategoryPlot(self.occurence_df, list(self.doc_dict.keys()))
-        return heatmap.show()
+        return heatmap
 
     def return_analyzer_result(self, result_type="frequency"):
         """Returns the result of the spacy_span-analyzer.
@@ -159,6 +159,40 @@ class DataManager:
         )
         return self.spacy_docbin_files
 
+    def _check_relativ_frequency(self, RELATIV_THRESHOLD):
+        analyzer_df = self.return_analyzer_result("frequency")
+        warning_str = ""
+        for column in analyzer_df.columns:
+            warning_str += "----------------\n"
+            warning_str += f"Checking if any labels are disproportionately rare in span_cat '{column}':\n"
+
+            max_occurence = analyzer_df[analyzer_df > 0][column].max()
+            max_occurence_label = str(
+                analyzer_df.loc[analyzer_df[column] == max_occurence][column].index
+            )
+
+            under_threshold_df = analyzer_df[column][analyzer_df[column] > 0][
+                analyzer_df[column] < max_occurence * RELATIV_THRESHOLD
+            ].dropna()
+
+            under_threshold_df = under_threshold_df / max_occurence
+            under_threshold_dict = under_threshold_df.to_dict()
+            if under_threshold_dict:
+                warning_str += (
+                    f"Compared to the maximal occurence of {max_occurence} in "
+                    + f"{max_occurence_label}. \n"
+                )
+
+                for key, value in under_threshold_dict.items():
+                    warning_str += f"\t {key} : {round(value,3)} \n"
+                logging.warning(warning_str)
+                under_threshold_dict = None
+
+                data_integrity_failed = True
+            else:
+                warning_str += "\t No problem found.\n"
+        return warning_str, data_integrity_failed
+
     def check_data_integrity(self):
         """This function checks the data and compares it to the spacy thresholds for label count,
         span distinctiveness and boundary distinctiveness.
@@ -200,40 +234,10 @@ class DataManager:
 
             if analyzer_result_label == "relativ_frequency":
                 # for this we need to iterate over each span cat induvidually.
-                analyzer_df = self.return_analyzer_result("frequency")
-
-                for column in analyzer_df.columns:
-                    warning_str += "----------------\n"
-                    warning_str += f"Checking if any labels are disproportionately rare in span_cat '{column}':\n"
-
-                    max_occurence = analyzer_df[analyzer_df > 0][column].max()
-                    max_occurence_label = str(
-                        analyzer_df.loc[analyzer_df[column] == max_occurence][
-                            column
-                        ].index
-                    )
-
-                    under_threshold_df = analyzer_df[column][analyzer_df[column] > 0][
-                        analyzer_df[column] < max_occurence * RELATIV_THRESHOLD
-                    ].dropna()
-
-                    under_threshold_df = under_threshold_df / max_occurence
-                    under_threshold_dict = under_threshold_df.to_dict()
-                    if under_threshold_dict:
-                        warning_str += (
-                            f"Compared to the maximal occurence of {max_occurence} in "
-                            + f"{max_occurence_label}. \n"
-                        )
-
-                        for key, value in under_threshold_dict.items():
-                            warning_str += f"\t {key} : {round(value,3)} \n"
-                        logging.warning(warning_str)
-                        under_threshold_dict = None
-
-                        data_integrity_failed = True
-                    else:
-                        warning_str += "\t No problem found.\n"
-                    # warning_str += "----------------\n"
+                _warning_str, data_integrity_failed = self._check_relativ_frequency(
+                    RELATIV_THRESHOLD
+                )
+                warning_str += _warning_str
             else:
                 analyzer_df = self.return_analyzer_result(analyzer_result_label)
 
