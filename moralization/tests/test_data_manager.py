@@ -107,4 +107,8 @@ def test_lists_to_df(data_dir):
     tdh.generate_labels(doc_dict=doc_dict, example_name=example_name)
     sentence_list, label_list = tdh.structure_labels()
     dm.lists_to_df(sentence_list, label_list)
-    # assert gen_instance.train_test_set["train"].shape == (60, 2)
+    data_frame = dm.data_in_frame
+    ref_sentence = ['"', 'Dann', 'kann', 'man', 'die', 'KMK', 'auflösen', '"', '#', '#', '#']
+    assert data_frame["Sentences"][3] == ref_sentence
+    ref_labels = [-100, 0, 0, 0, 0, 0, 0, -100, -100, -100, -100]
+    assert data_frame["Labels"][3] == ref_labels
