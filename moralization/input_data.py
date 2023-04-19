@@ -214,8 +214,10 @@ class InputOutput:
                     # char_span returns None when the given indices do not match a token begin and end.
                     # e.G ".Ich" instead of ". Ich"
                     elif char_span is None:
-                        logging_warning = f"The char span for {span.get_covered_text()}({span}) returned None.\n"
-                        logging_warning += f"It might be due to a mismatch between char indices. \n{span}\n"
+                        logging_warning = f"The char span for {span.get_covered_text()} ({span}) returned None.\n"
+                        logging_warning += (
+                            "It might be due to a mismatch between char indices. \n"
+                        )
                         if logging.root.level > logging.DEBUG:
                             logging_warning += "Skipping span! Enable Debug Logging for more information."
 
@@ -228,7 +230,7 @@ class InputOutput:
                                     alignment_mode="expand",
                                     label=span[cat_old],
 
-                                )}'"""
+                                )}'\n"""
                         )
 
                     # create test and train set:
