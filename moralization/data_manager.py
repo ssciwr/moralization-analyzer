@@ -159,7 +159,10 @@ class DataManager:
         )
         return self.spacy_docbin_files
 
-    def _check_relativ_frequency(self, RELATIV_THRESHOLD):
+    def _check_relativ_frequency(
+        self,
+        threshold,
+    ):
         analyzer_df = self.return_analyzer_result("frequency")
         warning_str = ""
         for column in analyzer_df.columns:
@@ -172,7 +175,7 @@ class DataManager:
             )
 
             under_threshold_df = analyzer_df[column][analyzer_df[column] > 0][
-                analyzer_df[column] < max_occurence * RELATIV_THRESHOLD
+                analyzer_df[column] < max_occurence * threshold
             ].dropna()
 
             under_threshold_df = under_threshold_df / max_occurence
@@ -235,7 +238,7 @@ class DataManager:
             if analyzer_result_label == "relativ_frequency":
                 # for this we need to iterate over each span cat induvidually.
                 _warning_str, data_integrity_failed = self._check_relativ_frequency(
-                    RELATIV_THRESHOLD
+                    threshold=RELATIV_THRESHOLD
                 )
                 warning_str += _warning_str
             else:
