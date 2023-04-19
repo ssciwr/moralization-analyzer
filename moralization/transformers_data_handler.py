@@ -61,7 +61,7 @@ class TransformersDataHandler:
 
     def structure_labels(self):
         """Structure the tokens from one long list into a nested list for sentences. Required for transformers training.
-        
+
         Returns:
             sentence_list (list): A nested list of the tokens (nested by sentence).
             label_list (list): A nested list of the labels (nested by sentence).
