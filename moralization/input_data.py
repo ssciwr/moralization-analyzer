@@ -214,13 +214,14 @@ class InputOutput:
                     # char_span returns None when the given indices do not match a token begin and end.
                     # e.G ".Ich" instead of ". Ich"
                     elif char_span is None:
-                        logging.warning(
-                            f"The char span for {span.get_covered_text()}({span}) returned None. "
-                            + f"It might be due to a mismatch between char indices. \n{span}"
-                            + "Skipping span! Enable Debug Logging for more information."
-                        )
+                        logging_warning = f"The char span for {span.get_covered_text()}({span}) returned None.\n"
+                        logging_warning += f"It might be due to a mismatch between char indices. \n{span}\n"
+                        if logging.root.level > logging.DEBUG:
+                            logging_warning += "Skipping span! Enable Debug Logging for more information."
+
+                        logging.warning(logging_warning)
                         logging.debug(
-                            f"""Token should be: \n \t'{span.get_covered_text()}', but is \n \t'{
+                            f"""Token should be: \n \t'{span.get_covered_text()}', but is '{
                                     doc.char_span(
                                     span.begin,
                                     span.end,
@@ -250,7 +251,7 @@ class InputOutput:
         test_dict = {}
 
         for file in data_files:
-            logging.info(f"Reading {file}")
+            logging.info(f"Reading ./{file}")
             try:
                 cas, file_type = InputOutput.read_cas_file(file, ts)
                 doc, doc_train, doc_test = InputOutput.cas_to_doc(cas, ts)
