@@ -39,7 +39,10 @@ dependencies = [
     "classy_classification",
     "spacy-span-analyzer",
     "textacy",
-    "wheel"
+    "wheel",
+    "datasets",
+    "transformers",
+
 ]
 
 [tool.setuptools.package-data]
