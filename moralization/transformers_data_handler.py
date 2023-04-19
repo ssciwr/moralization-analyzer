@@ -1,12 +1,19 @@
 from moralization import data_manager
-import pandas as pd
-import datasets
 
 
 class TransformersDataHandler:
     """Helper class to organize and prepare data for transformer models."""
 
     def get_data_lists(self, doc_dict, example_name=None):
+        """Convert the data from doc object to lists. Required for transformers training.
+
+        Set the lists of tokens and labels for transformers training, with a nested list of sentences and tokens, and an equally nested list of labels that are initiated to zero.
+
+        Args:
+            doc_dict (dict, required): The dictionary of doc objects for each data source.
+            example_name (str, optional): A single data source should be selected for conversion. Defaults to None.
+
+        """
         # for now just select one source
         if example_name is None:
             example_name = sorted(list(doc_dict.keys()))[0]
@@ -20,12 +27,20 @@ class TransformersDataHandler:
         self.label_list = [[0 for _ in sent] for sent in doc_dict[example_name].sents]
 
     def generate_labels(self, doc_dict, example_name=None):
+        """Generate the labels from the annotated tokens in one long list. Required for transformers training.
+
+        Args:
+            doc_dict (dict, required): The dictionary of doc objects for each data source.
+            example_name (str, optional): A single data source should be selected for conversion. Defaults to None.
+
+        """
         # for now just select one source
         if example_name is None:
             example_name = sorted(list(doc_dict.keys()))[0]
         # generate the labels based on the current list of tokens
         # now set all Moralisierung, Moralisierung Kontext,
         # Moralisierung explizit, Moralisierung interpretativ, Moralisierung Weltwissen to 1
+        # here we actually need to select by task
         selected_labels = [
             "Moralisierung",
             "Moralisierung Kontext",
@@ -34,7 +49,7 @@ class TransformersDataHandler:
             "Moralisierung interpretativ",
         ]
         # create a list as long as tokens
-        # we need to do this for all the data, not just train
+        # we need to do this for all the data, example
         self.labels = [0 for _ in doc_dict[example_name]]
         for span in doc_dict[example_name].spans["task1"]:
             if span.label_ in selected_labels:
@@ -45,6 +60,12 @@ class TransformersDataHandler:
                 self.labels[span.start] = 2
 
     def structure_labels(self):
+        """Structure the tokens from one long list into a nested list for sentences. Required for transformers training.
+        
+        Returns:
+            sentence_list (list): A nested list of the tokens (nested by sentence).
+            label_list (list): A nested list of the labels (nested by sentence).
+        """
         # labels now needs to be structured the same way as label_list
         # set the label at beginning of sentence to 2 if it is 1
         # also punctuation is included in the moralization label - we
@@ -58,32 +79,4 @@ class TransformersDataHandler:
                 if self.token_list[m][i].is_punct:
                     self.label_list[m][i] = -100
                 j = j + 1
-
-    def lists_to_df(self):
-        # at this point we can write the text into a df to load into datasets
-        # later it can be published as such on huggingface datasets
-        # column heads are sentence, labels
-        df = pd.DataFrame(
-            zip(self.sentence_list, self.label_list), columns=["Sentences", "Labels"]
-        )
-        raw_data_set = datasets.Dataset.from_pandas(df)
-        # split in train test
-        self.train_test_set = raw_data_set.train_test_split(test_size=0.1)
-
-    def init_model(self, model_name="bert-base-cased"):
-        try:
-            self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-        except ValueError:
-            raise ValueError(
-                "Could not initiate tokenizer - please check your model name"
-            )
-        if not self.tokenizer.is_fast:
-            raise ValueError(
-                "Please use a different model that provices a fast tokenizer"
-            )
-
-
-if __name__ == "__main__":
-    obj = TransformersSetup()
-    obj.get_doc_dict("data/All_Data/XMI_11")
-    obj.get_data_lists()
+        return self.sentence_list, self.label_list

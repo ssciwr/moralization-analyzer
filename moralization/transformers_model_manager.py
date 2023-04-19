@@ -48,6 +48,18 @@ class TransformersModelManager:
             _create_model(self._model_path, base_config_file, overwrite_existing_files)
         self.metadata = _import_or_create_metadata(self._model_path)
 
+    def init_model(self, model_name="bert-base-cased"):
+        try:
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        except ValueError:
+            raise ValueError(
+                "Could not initiate tokenizer - please check your model name"
+            )
+        if not self.tokenizer.is_fast:
+            raise ValueError(
+                "Please use a different model that provices a fast tokenizer"
+            )
+
     def __repr__(self) -> str:
         name = f"{self.metadata['name']}-{self.metadata['version']}"
         path = f"{self._model_path.resolve()}"

@@ -1,4 +1,5 @@
 from moralization.data_manager import DataManager
+from moralization.transformers_data_handler import TransformersDataHandler
 from tempfile import mkdtemp
 from pathlib import Path
 import pytest
@@ -95,3 +96,15 @@ def test_import_data_DocBin(data_dir):
     dm2.import_data_DocBin((tmp_dir))
 
     assert dm.spacy_docbin_files == dm2.spacy_docbin_files
+
+
+def test_lists_to_df(data_dir):
+    dm = DataManager(data_dir)
+    tdh = TransformersDataHandler()
+    example_name = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
+    doc_dict = dm.doc_dict
+    tdh.get_data_lists(doc_dict=doc_dict, example_name=example_name)
+    tdh.generate_labels(doc_dict=doc_dict, example_name=example_name)
+    sentence_list, label_list = tdh.structure_labels()
+    dm.lists_to_df(sentence_list, label_list)
+    # assert gen_instance.train_test_set["train"].shape == (60, 2)

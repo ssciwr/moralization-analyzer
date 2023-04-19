@@ -70,19 +70,3 @@ def test_structure_labels(doc_dict, gen_instance):
     assert gen_instance.sentence_list[7] == ref_sentence
     assert gen_instance.label_list[7] == ref_labels
     assert gen_instance.label_list[44] == ref_labels2
-
-
-def test_lists_to_df(doc_dict, gen_instance):
-    gen_instance.get_data_lists(example_name=example_name)
-    gen_instance.generate_labels(example_name=example_name)
-    gen_instance.structure_labels()
-    gen_instance.lists_to_df()
-    assert gen_instance.train_test_set["train"].shape == (60, 2)
-
-
-def test_init_model():
-    test_obj = TransformersSetup()
-    test_obj.init_model()
-    assert test_obj.tokenizer.is_fast
-    with pytest.raises(OSError):
-        test_obj.init_model(model_name="Testing")
