@@ -22,7 +22,9 @@ def test_spacy_model_manager_train_new_model(tmp_path, data_dir):
     assert not (model_path / "model-last").is_dir()
     data_manager = DataManager(data_dir)
     # train model
-    model.train(data_manager, overrides={"training.max_epochs": 5})
+    model.train(
+        data_manager, overrides={"training.max_epochs": 5}, check_data_integrity=False
+    )
     # evaluate trained model
     evaluation = model.evaluate(data_manager)
     assert "Moralisierung" in evaluation["spans_sc_per_type"]

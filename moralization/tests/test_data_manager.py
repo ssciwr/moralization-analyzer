@@ -80,7 +80,7 @@ def test_visualize_data(data_dir):
 def test_export_data_DocBin(data_dir):
     dm = DataManager(data_dir)
     tmp_dir = Path(mkdtemp())
-    test_files = dm.export_data_DocBin(tmp_dir)
+    test_files = dm.export_data_DocBin(tmp_dir, check_data_integrity=False)
     assert test_files[0].stem == "train"
     assert test_files[1].stem == "dev"
     assert dm.spacy_docbin_files[0].stem == "train"
@@ -89,17 +89,22 @@ def test_export_data_DocBin(data_dir):
 
     # check if overwrite protection is triggered.
     with pytest.raises(FileExistsError):
-        dm.export_data_DocBin(tmp_dir)
-    dm.export_data_DocBin(tmp_dir, overwrite=True)
+        dm.export_data_DocBin(tmp_dir, check_data_integrity=False)
+
+    # check integrity check working
+    with pytest.raises(ValueError):
+        dm.export_data_DocBin(tmp_dir, check_data_integrity=True)
+
+    dm.export_data_DocBin(tmp_dir, overwrite=True, check_data_integrity=False)
 
     # check for uninitilized directory
-    dm.export_data_DocBin(tmp_dir / "a/")
+    dm.export_data_DocBin(tmp_dir / "a/", check_data_integrity=False)
 
 
 def test_import_data_DocBin(data_dir):
     dm = DataManager(data_dir)
     tmp_dir = Path(mkdtemp())
-    dm.export_data_DocBin(tmp_dir)
+    dm.export_data_DocBin(tmp_dir, check_data_integrity=False)
 
     dm2 = DataManager(data_dir)
     dm2.import_data_DocBin((tmp_dir))
