@@ -4,11 +4,12 @@ Contains plotting functionality.
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import ipywidgets
-import IPython
 from moralization.utils import is_interactive
 from spacy import displacy
-import seaborn as sn
+
+from dash import dcc, html, Input, Output
+from jupyter_dash import JupyterDash
+import plotly.express as px
 
 
 def report_occurrence_heatmap(
@@ -108,79 +109,62 @@ def _generate_corr_df(occurence_df: pd.DataFrame, _filter=None) -> pd.DataFrame:
 class InteractiveAnalyzerResults:
     """Interactive plotting tool for the DataAnalyzer in jupyter notebooks"""
 
-    def __init__(self, analyzer_results_all, figsize=(15, 7)):
+    def __init__(self, analyzer_results_all):
         self.analyzer_results_all = analyzer_results_all
-        self.figsize = figsize
 
-        # setup widgets
-        self._output = ipywidgets.Output()
-
-        self._analysis_type_widget = ipywidgets.Dropdown(
-            options=list(self.analyzer_results_all.keys()),
-            value=list(self.analyzer_results_all.keys())[0],
-        )
-
-        self._spancat_widget = ipywidgets.Dropdown(
-            options=list(self.analyzer_results_all["frequency"].keys()),
-            value="paragraphs",
-        )
-
-        self._display_container = ipywidgets.HBox(
-            [
-                ipywidgets.VBox([self._analysis_type_widget, self._spancat_widget]),
-                self._output,
+        self.app = JupyterDash("DataAnalyzer")
+        self.app.layout = html.Div(
+            children=[
+                html.Div(
+                    [
+                        "Interactive analyser results",
+                        dcc.Dropdown(
+                            options=list(self.analyzer_results_all.keys()),
+                            value=list(self.analyzer_results_all.keys())[0],
+                            id="dropdown_analyzer_key",
+                        ),
+                        dcc.Dropdown(id="dropdown_analyzer_span_cat", multi=True),
+                    ],
+                    style={"width": "40%"},
+                ),
+                dcc.Graph(id="graph_output"),
             ]
         )
 
-        # add observer
-        self._spancat_widget.observe(self._value_changed, names="value")
-        self._analysis_type_widget.observe(self._value_changed, names="value")
+        self.app.callback(
+            Output("dropdown_analyzer_span_cat", "options"),
+            Output("dropdown_analyzer_span_cat", "value"),
+            Input("dropdown_analyzer_key", "value"),
+        )(self.change_analyzer_key)
 
-        # this ensures we get a graph when first calling the function.
-        self._spancat_widget.value = "sc"
+        self.app.callback(
+            Output("graph_output", "figure"),
+            Input("dropdown_analyzer_key", "value"),
+            Input("dropdown_analyzer_span_cat", "value"),
+        )(self.update_graph)
 
-    def _value_changed(self, change):
-        with self._output:
-            if change["new"]:
-                IPython.display.clear_output(wait=True)
-                span_label = self._spancat_widget.value
-                analysis_type = self._analysis_type_widget.value
-                self.visualize_analyzer_result(
-                    span_label=span_label, analysis_type=analysis_type
-                )
+    def change_analyzer_key(self, key_input):
+        analyzer_span_cat = sorted(list(self.analyzer_results_all[key_input].keys()))
+        return analyzer_span_cat, analyzer_span_cat[0]
+
+    def update_graph(self, input_analyzer_key, input_analyzer_span_cat):
+        analyzer_result = self.analyzer_results_all[input_analyzer_key][
+            input_analyzer_span_cat
+        ]
+        fig = px.scatter(
+            analyzer_result,
+            labels={"value": input_analyzer_key, "variable": "chosen categories"},
+        )
+        return fig
 
     def show(self):
         """Display the interactive plot"""
-        IPython.display.display(self._display_container)
-
-    def visualize_analyzer_result(self, span_label="sc", analysis_type="frequency"):
-        """
-
-        Args:
-            data_manager_all (dict): The returned analyzer results for all 4 types as a dict.
-            span_label (str, optional): The span label which should be shown. Defaults to "sc".
-            analysis_type (str, optional): Can be `frequency`, `length`,
-                `span_distinctiveness` or `boundary_distinctiveness`. Defaults to "frequency".
-        """
-
-        if analysis_type not in list(self.analyzer_results_all.keys()):
-            raise KeyError(
-                f"key {analysis_type} not in analyzer_results_all, which only has"
-                + f"{list(self.analyzer_results_all.keys())}"
-            )
-
-        if span_label not in self.analyzer_results_all[analysis_type].keys():
-            raise KeyError(f"{span_label} is not present in the given dataset.")
-
-        df = self.analyzer_results_all[analysis_type][span_label]
-        # we don't need this column.
-        df = df.drop("paragraph")
-
-        plt.figure(figsize=(10, 6))
-        plt.title(f"span {analysis_type}")
-        plt.xticks(rotation=90)
-        sn.scatterplot(df)
-        return plt.show()
+        return self.app.run_server(
+            debug=True,
+            port=8051,
+            mode="inline",
+            use_reloader=False,
+        )
 
 
 class InteractiveCategoryPlot:
@@ -193,80 +177,126 @@ class InteractiveCategoryPlot:
 
     """
 
-    def __init__(self, occurence_df, filenames, plot_callback=None, figsize=None):
+    def __init__(self, data_manager):
         """
         Args:
             data_dict (_type_): _description_
             plot_callback (_type_, optional): _description_. Defaults to None.
             figsize (_type_, optional): _description_. Defaults to None.
         """
-        if plot_callback is None:
-            self.plot_callback = report_occurrence_heatmap
-        else:
-            self.plot_callback = plot_callback
-        self._output = ipywidgets.Output()
-        self.df = occurence_df
-        self.figsize = figsize
-        # get all possible categories for each filename
-        self._categories = {}
-        for filename in filenames:
-            self._categories[filename] = [
-                f"{main_kat_key}:: {sub_kat_key}"
-                for main_kat_key, sub_kat_key in self.df.columns
-            ]
-        # filename widget
-        self._filename_widget = ipywidgets.Dropdown(
-            options=filenames, value=filenames[0]
-        )
-        self._filename_widget.observe(self._filename_changed, names="value")
-        # categories widget
-        new_categories = self._categories[self._filename_widget.value]
-        self._category_widget = ipywidgets.SelectMultiple(
-            options=new_categories,
-            rows=len(new_categories) + 1,
-            description="",
-            disabled=False,
-        )
-        self._display_container = ipywidgets.HBox(
+        self.data_manager = data_manager
+        self.app = JupyterDash("Heatmap")
+        self.app.layout = html.Div(
             [
-                ipywidgets.VBox([self._filename_widget, self._category_widget]),
-                self._output,
+                html.Div(
+                    children=[
+                        dcc.Dropdown(
+                            options=list(data_manager.doc_dict.keys()),
+                            value=list(data_manager.doc_dict.keys()),
+                            id="dropdown_filenames",
+                            multi=True,
+                        ),
+                        dcc.Dropdown(options=[], id="dropdown_span_cat", multi=True),
+                    ],
+                    id="div_dropdown",
+                    style={"width": "40%", "display": "inline-block"},
+                ),
+                dcc.Checklist(
+                    options=["sub_cat1", "sub_cat2"],
+                    inline=True,
+                    id="checklist_subcat",
+                    style={"width": "40%"},
+                ),
+                html.Div(
+                    children=[
+                        dcc.Graph(id="graph_output"),
+                    ],
+                    id="div_output",
+                    style={"width": "100%"},
+                ),
             ]
         )
-        self._category_widget.observe(self._categories_changed, names="value")
-        self._category_widget.value = new_categories
 
-    def _categories_changed(self, change):
-        """
+        # normal dash decorators don't work inside functions.
+        self.app.callback(
+            Output("dropdown_span_cat", "options"),
+            Output("dropdown_span_cat", "value"),
+            Input("dropdown_filenames", "value"),
+        )(self.update_filename)
 
-        Args:
-          change:
+        self.app.callback(
+            Output("checklist_subcat", "options"),
+            Output("checklist_subcat", "value"),
+            Input("dropdown_span_cat", "value"),
+            prevent_initial_call=True,
+        )(self.update_category)
 
-        Returns:
+        self.app.callback(
+            Output("graph_output", "figure"),
+            Input("checklist_subcat", "value"),
+            prevent_initial_call=True,
+        )(self.update_subcat)
 
-        """
-        with self._output:
-            if change["new"]:
-                IPython.display.clear_output(wait=True)
-                filters = [category.split(":: ")[1] for category in change["new"]]
-                self.plot_callback(self.df, _filter=filters)
+    # end init
 
-    def _filename_changed(self, change):
-        """
+    def update_filename(self, input_files):
+        if input_files == []:
+            return [0], 0
 
-        Args:
-          change:
+        # raise Warning("something")
+        self.table = self.data_manager.occurence_analysis(
+            "table", file_filter=input_files
+        )
+        main_cat_list = sorted(list(set(self.table.T.index.get_level_values(0))))
+        return main_cat_list, main_cat_list[0]
 
-        Returns:
+    def update_category(self, span_cats):
+        if span_cats == 0:
+            return ["please select a filename"], ["please select a filename"]
 
-        """
-        new_categories = list(self._categories[change["new"]])
-        self._category_widget.options = new_categories
-        self._category_widget.value = new_categories
+        if isinstance(span_cats, str):
+            span_cats = [span_cats]
+        main_sub_combination = []
+        for span_cat in span_cats:
+            for cat in self.table[span_cat].columns:
+                main_sub_combination.append(
+                    {"label": cat, "value": f"{span_cat}___{cat}"}
+                )
+        return main_sub_combination, [
+            values["value"] for values in main_sub_combination
+        ]
 
-    def show(self):
-        """Display the interactive plot"""
-        IPython.display.display(self._display_container)
+    def update_subcat(self, subcats):
+        if subcats == []:
+            return []
+
+        # filtered_table = app.table_corr[span_cat].loc[subcats]
+        multi_index = [subcat.split("___") for subcat in subcats]
+        labels = [index[1] for index in multi_index]
+
+        filtered_table = self.table[multi_index]
+        filtered_corr = filtered_table.corr()
+        fig = px.imshow(
+            filtered_corr, x=labels, y=labels, zmin=-1, zmax=1, width=600, height=600
+        )
+        return fig
+
+    def run_app(self):
+        self.app.run_server(debug=True, mode="inline", use_reloader=False)
+
+
+class InteractiveVisualisation:
+    def __init__(self, data_manager):
+        self.data_manager = data_manager
+        self.app = JupyterDash("DataAnalyzer")
+
+        self.app.layout = html.Div(["Interactive Visualisation"])
+
+    def change_mode(self, mode):
+        span_cats = []
+
+        for doc in self.data_manager.doc_dict.values():
+            [span_cats.append(span_cat) for span_cat in doc.keys()]
 
 
 def visualize_data(doc_dict, style="span", spans_key="sc"):

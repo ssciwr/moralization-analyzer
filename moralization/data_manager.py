@@ -47,11 +47,12 @@ class DataManager:
                 self.occurence_df, _type=_type, _filter=cat_filter
             )
 
-    def interactive_analysis(self):
+    def interactive_correlation_analysis(self):
         self.occurence_df = _loop_over_files(self.doc_dict)
 
-        heatmap = InteractiveCategoryPlot(self.occurence_df, list(self.doc_dict.keys()))
-        return heatmap
+        # heatmap = InteractiveCategoryPlot(self.occurence_df, list(self.doc_dict.keys()))
+        heatmap = InteractiveCategoryPlot(self)
+        return heatmap.run_app()
 
     def return_analyzer_result(self, result_type="frequency"):
         """Returns the result of the spacy_span-analyzer.

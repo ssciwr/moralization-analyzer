@@ -12,6 +12,8 @@ dependencies:
   - importlib_metadata
   - openpyxl
   - ipywidgets
+  - dash
+  - jupyter-dash
   - pip:
     - dkpro-cassis
     - pytest-cov
