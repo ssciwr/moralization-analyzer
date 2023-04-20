@@ -14,21 +14,22 @@ import plotly.express as px
 def report_occurrence_heatmap(
     occurence_df: pd.DataFrame, _filter=None, _type="heatmap"
 ):
-    """Returns the occurrence heatmap for the given dataframe.
+    """Returns the occurrence heatmap or correlation dataframe for the given dataframe.
     Can also filter based on both main_cat and sub_cat keys.
 
     Args:
-        df_sentence_occurrence(pd.DataFrame): The sentence occurrence dataframe.
-        _filter(str, optional): Filter values for the dataframe. (Default value = None)
-        _filter(str, optional): Filter values for the dataframe.
-    Defaults to None.
-        df_paragraph_occurrence: pd.DataFrame:
+        occurence_df (pd.DataFrame): The sentence occurrence dataframe.
+        _filter (str, optional): Filter values for the dataframe. (Default value = None)
+        _type (str, optional): Type of output to generate. It can be 'heatmap' or 'corr'.
+            Defaults to 'heatmap'.
+
+    Raises:
+        ValueError: If the _type argument is not 'corr' or 'heatmap'.
 
     Returns:
-        plt.figure: The heatmap figure.
+        Union[pd.DataFrame, plt.figure]: The heatmap figure or the correlation dataframe.
 
     """
-
     if _type not in ["corr", "heatmap"]:
         raise ValueError(
             f"_type argument can only be `corr` or `heatmap` but is {_type}"
@@ -109,6 +110,12 @@ class InteractiveAnalyzerResults:
     """Interactive plotting tool for the DataAnalyzer in jupyter notebooks"""
 
     def __init__(self, analyzer_results_all):
+        """
+        Initializes the InteractiveAnalyzerResults class.
+
+        Args:
+            analyzer_results_all: A dictionary containing the analyzer results for all categories and spans.
+        """
         self.analyzer_results_all = analyzer_results_all
 
         self.app = JupyterDash("DataAnalyzer")
@@ -143,10 +150,29 @@ class InteractiveAnalyzerResults:
         )(self.update_graph)
 
     def change_analyzer_key(self, key_input):
+        """
+        Changes the analyzer key in response to a user selection.
+
+        Args:
+            key_input: The user-selected analyzer key.
+
+        Returns:
+            A tuple containing the analyzer span categories and the first category in the list.
+        """
         analyzer_span_cat = sorted(list(self.analyzer_results_all[key_input].keys()))
         return analyzer_span_cat, analyzer_span_cat[0]
 
     def update_graph(self, input_analyzer_key, input_analyzer_span_cat):
+        """
+        Updates the graph in response to a user selection.
+
+        Args:
+            input_analyzer_key: The user-selected analyzer key.
+            input_analyzer_span_cat: The user-selected analyzer span category.
+
+        Returns:
+            A plotly figure.
+        """
         analyzer_result = self.analyzer_results_all[input_analyzer_key][
             input_analyzer_span_cat
         ]
@@ -157,36 +183,40 @@ class InteractiveAnalyzerResults:
         return fig
 
     def show(self):
-        """Display the interactive plot"""
+        """
+        Displays the interactive plot.
+        """
         return self.app.run_server(
             debug=True,
-            port=8051,
+            port=8053,
             mode="inline",
             use_reloader=False,
         )
 
 
 class InteractiveCategoryPlot:
-    """Interactive plotting class for use in Jupyter notebooks
+    """Interactive plotting class for use in Jupyter notebooks.
 
     User selects the filename and categories to plot using GUI widgets.
     The displayed plot is then automatically updated.
     A custom plotting callback can be provided to customize the plot.
 
-
+    Attributes:
+        data_manager (DataManager): The DataManager object containing the data.
+        app (JupyterDash): The JupyterDash application.
     """
 
     def __init__(self, data_manager):
-        """
+        """Initialize the InteractiveCategoryPlot object.
+
         Args:
-            data_dict (_type_): _description_
-            plot_callback (_type_, optional): _description_. Defaults to None.
-            figsize (_type_, optional): _description_. Defaults to None.
+            data_manager (DataManager): The DataManager object containing the data.
         """
         self.data_manager = data_manager
         self.app = JupyterDash("Heatmap")
         self.app.layout = html.Div(
             [
+                # Dropdown for selecting filenames
                 html.Div(
                     children=[
                         dcc.Dropdown(
@@ -195,17 +225,20 @@ class InteractiveCategoryPlot:
                             id="dropdown_filenames",
                             multi=True,
                         ),
+                        # Dropdown for selecting main categories
                         dcc.Dropdown(options=[], id="dropdown_span_cat", multi=True),
                     ],
                     id="div_dropdown",
                     style={"width": "40%", "display": "inline-block"},
                 ),
+                # Checklist for selecting subcategories
                 dcc.Checklist(
                     options=["sub_cat1", "sub_cat2"],
                     inline=True,
                     id="checklist_subcat",
                     style={"width": "40%"},
                 ),
+                # Graph output for displaying the heatmap
                 html.Div(
                     children=[
                         dcc.Graph(id="graph_output"),
@@ -216,7 +249,7 @@ class InteractiveCategoryPlot:
             ]
         )
 
-        # normal dash decorators don't work inside functions.
+        # Dash callbacks for updating the GUI components
         self.app.callback(
             Output("dropdown_span_cat", "options"),
             Output("dropdown_span_cat", "value"),
@@ -236,13 +269,18 @@ class InteractiveCategoryPlot:
             prevent_initial_call=True,
         )(self.update_subcat)
 
-    # end init
-
     def update_filename(self, input_files):
+        """Update the dropdown options for selecting main categories.
+
+        Args:
+            input_files (list): The list of selected filenames.
+
+        Returns:
+            tuple: The main category list and the default main category.
+        """
         if input_files == []:
             return [0], 0
 
-        # raise Warning("something")
         self.table = self.data_manager.occurence_analysis(
             "table", file_filter=input_files
         )
@@ -250,37 +288,71 @@ class InteractiveCategoryPlot:
         return main_cat_list, main_cat_list[0]
 
     def update_category(self, span_cats):
+        """Updates the categories available for selection in the Dash app.
+
+        Args:
+            span_cats (list or str): List of span categories or a single span category.
+
+        Returns:
+            tuple: A tuple containing two lists. The first list contains a dictionary of
+                main_category-sub_category combinations
+                as 'label' and 'value' respectively.
+                The second list contains the values of the 'value' key in the first list.
+        """
+        # Check if span_cats is empty or None
         if span_cats == 0 or span_cats is None or span_cats == []:
             return ["please select a filename"], ["please select a filename"]
 
+        # Check if span_cats is a single string, and convert to list if necessary
         if isinstance(span_cats, str):
             span_cats = [span_cats]
+
+        # Generate a list of main category-sub category combinations as a list of dictionaries
         main_sub_combination = []
         for span_cat in span_cats:
             for cat in self.table[span_cat].columns:
+                # Add a dictionary with 'label' and 'value' keys to the list
                 main_sub_combination.append(
                     {"label": cat, "value": f"{span_cat}___{cat}"}
                 )
+
+        # Return a tuple containing the main_sub_combination list and a list of its 'value' keys
         return main_sub_combination, [
             values["value"] for values in main_sub_combination
         ]
 
     def update_subcat(self, subcats):
+        """Generates a correlation heatmap for selected subcategories of a given category.
+
+        Args:
+            subcats (list): List of subcategories selected by the user.
+
+        Returns:
+            plotly.graph_objs._figure.Figure: A correlation heatmap showing the correlation
+            between the selected subcategories.
+        """
+        # Check if subcats is empty
         if subcats == []:
             return []
 
-        # filtered_table = app.table_corr[span_cat].loc[subcats]
+        # Split the subcategories into main category and subcategory labels
         multi_index = [subcat.split("___") for subcat in subcats]
         labels = [index[1] for index in multi_index]
 
+        # Filter the table based on the selected subcategories and calculate the correlation
         filtered_table = self.table[multi_index]
         filtered_corr = filtered_table.corr()
+
+        # Generate a correlation heatmap using Plotly
         fig = px.imshow(
             filtered_corr, x=labels, y=labels, zmin=-1, zmax=1, width=600, height=600
         )
+
+        # Return the correlation heatmap
         return fig
 
     def run_app(self):
+        """Runs the Dash app with the specified settings."""
         self.app.run_server(debug=True, mode="inline", use_reloader=False)
 
 
