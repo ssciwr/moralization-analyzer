@@ -143,3 +143,5 @@ class DataManager:
         if split:
             # split in train test
             self.train_test_set = self.raw_data_set.train_test_split(test_size=0.1)
+
+    # here we also need a method to publish the dataset to hugging face
