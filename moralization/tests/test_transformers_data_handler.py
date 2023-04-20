@@ -70,3 +70,12 @@ def test_structure_labels(doc_dict, gen_instance):
     assert gen_instance.sentence_list[7] == ref_sentence
     assert gen_instance.label_list[7] == ref_labels
     assert gen_instance.label_list[44] == ref_labels2
+
+
+def test_init_tokenizer(gen_instance):
+    gen_instance.init_tokenizer()
+    assert gen_instance.tokenizer.is_fast
+    with pytest.raises(OSError):
+        gen_instance.init_tokenizer(model_name="abcd")
+    with pytest.raises(ValueError):
+        gen_instance.init_tokenizer(kwargs={"use_fast": False})
