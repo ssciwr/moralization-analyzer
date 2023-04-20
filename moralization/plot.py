@@ -4,7 +4,6 @@ Contains plotting functionality.
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from moralization.utils import is_interactive
 from spacy import displacy
 
 from dash import dcc, html, Input, Output, State
@@ -117,7 +116,7 @@ class InteractiveAnalyzerResults:
             children=[
                 html.Div(
                     [
-                        "Interactive analyser results",
+                        "Interactive analyzer results",
                         dcc.Dropdown(
                             options=list(self.analyzer_results_all.keys()),
                             value=list(self.analyzer_results_all.keys())[0],
@@ -251,7 +250,7 @@ class InteractiveCategoryPlot:
         return main_cat_list, main_cat_list[0]
 
     def update_category(self, span_cats):
-        if span_cats == 0:
+        if span_cats == 0 or span_cats is None or span_cats == []:
             return ["please select a filename"], ["please select a filename"]
 
         if isinstance(span_cats, str):
@@ -287,9 +286,16 @@ class InteractiveCategoryPlot:
 
 class InteractiveVisualization:
     def __init__(self, data_manager):
+        """
+        Initializes InteractiveVisualization with a DataManager instance and creates the JupyterDash app.
+
+        Args:
+            data_manager (DataManager): An instance of DataManager.
+        """
         self.data_manager = data_manager
         self.app = JupyterDash("DataVisualizer")
 
+        # Define the layout of the app
         self.app.layout = html.Div(
             [
                 "Interactive Visualization",
@@ -299,12 +305,14 @@ class InteractiveVisualization:
             ]
         )
 
+        # Define the callback to update the dropdown_span_cat options and default value based on the selected mode
         self.app.callback(
             Output("dropdown_span_cat", "options"),
             Output("dropdown_span_cat", "value"),
             Input("dropdown_mode", "value"),
         )(self.change_mode)
 
+        # Define the callback to update the visualization based on the selected span category and mode
         self.app.callback(
             Output("markdown_displacy", "children"),
             Input("dropdown_span_cat", "value"),
@@ -312,8 +320,21 @@ class InteractiveVisualization:
         )(self.change_span_cat)
 
     def change_mode(self, mode):
+        """
+        Changes the mode of the visualization.
+
+        This method retrieves the span categories for the selected mode and returns them as
+        options for the dropdown_span_cat dropdown.
+
+        Args:
+            mode (str): The selected mode of the visualization.
+
+        Returns:
+            A tuple containing a list of span categories and the default value for the dropdown_span_cat.
+        """
         span_cats = []
 
+        # Retrieve the span categories for the selected mode
         for doc in self.data_manager.doc_dict.values():
             [span_cats.append(span_cat) for span_cat in list(doc.spans.keys())]
 
@@ -321,11 +342,26 @@ class InteractiveVisualization:
         return sorted(span_cats), "sc"
 
     def change_span_cat(self, span_cat, mode):
+        """
+        Changes the selected span category.
+
+        This method visualizes the selected span category for the selected mode and returns the
+        visualized data as an HTML document.
+
+        Args:
+            span_cat (str): The selected span category.
+            mode (str): The selected mode of the visualization.
+
+        Returns:
+            The visualized data as an HTML document.
+        """
+        # Visualize the selected span category for the selected mode
         html_doc = self.data_manager.visualize_data(_type=mode, spans_key=span_cat)
         html_doc = html_doc.replace("\n", " ")
         return html_doc
 
     def run_app(self):
+        """Runs the JupyterDash application."""
         self.app.run_server(
             debug=True,
             port=8052,
@@ -340,38 +376,39 @@ def visualize_data(doc_dict, style="span", spans_key="sc"):
 
 
     Args:
-        doc_dict(dict: doc, optional): The doc dict that is to be visualized.
-        display_type(str, optional, optional): Specify is only the trainings,
-        the testing or all datapoints should be shown,options are: "all", "test" and "train". Defaults to "all"
-        type: the visualization type given to displacy, available are "dep", "ent" and "span,
-        defaults to "span".
-        style:  (Default value = "span")
+        doc_dict (dict): A dictionary of Spacy Doc objects.
+        style (str, optional): The visualization type given to `displacy`. Available options
+            are "dep", "ent", and "span". Defaults to "span".
+        spans_key (str, optional): The key of the span category that should be visualized. If
+            set to "sc", all span categories in the Spacy Doc objects will be visualized.
+            Defaults to "sc".
+    Raises:
+        NotImplementedError: Raised if multiple categories are passed in `spans_key`, as
+            `displacy` does not support viewing multiple categories at once.
+        ValueError: Raised if `spans_key` is not a valid span category in any of the Spacy
+            Doc objects in `doc_dict`.
 
     Returns:
-        Displacy.render
+        displacy.render: Renders a visualization of the Spacy Doc objects.
     """
 
     if isinstance(spans_key, list):
-        raise NotImplementedError(
-            "spacy does no support viewing multiple categories at once."
-        )
-        # we could manually add multiple categories to one span cat and display this new category.
+        # `displacy` does not support viewing multiple categories at once, so we raise an
+        # error if a list is passed in `spans_key`.
+        raise NotImplementedError("Multiple categories cannot be viewed at once.")
 
+    # If `spans_key` is set to a specific span category, we check if it is a valid category
+    # in any of the Spacy Doc objects in `doc_dict`.
     if spans_key != "sc":
         for doc in doc_dict.values():
             if spans_key not in list(doc.spans.keys()):
                 raise ValueError(
-                    f"""The provided key: `{spans_key}` is not valid.
-                    Please use one of the following {list(doc.spans.keys())}"""
+                    f"The provided key: `{spans_key}` is not valid. "
+                    f"Please use one of the following: {list(doc.spans.keys())}"
                 )
 
-    # check if spans_key is present in all docs
-
-    if not is_interactive():
-        raise NotImplementedError(
-            "Please only use this function in a jupyter notebook for the time being."
-        )
-
+    # Finally, we call `displacy.render` with the `doc_dict` values and the specified
+    # options.
     return displacy.render(
         [doc for doc in doc_dict.values()],
         style=style,
