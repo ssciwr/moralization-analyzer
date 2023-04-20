@@ -32,7 +32,6 @@ def _loop_over_files(doc_dict, file_filter=None):
             )
         file_filter = [file_filter]
 
-    print(file_filter)
     for file in file_filter:
         df_list.append(_summarize_span_occurences(doc_dict[file]))
 

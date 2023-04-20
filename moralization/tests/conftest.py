@@ -45,7 +45,9 @@ def spacy_model_path(data_dir, config_file, tmp_path_factory) -> pathlib.Path:
         "url": "https://ssc.iwr.uni-heidelberg.de/",
         "license": "MIT",
     }
-    model.train(data_manager, overrides={"training.max_epochs": 5})
+    model.train(
+        data_manager, overrides={"training.max_epochs": 5}, check_data_integrity=False
+    )
     yield model_path
 
 

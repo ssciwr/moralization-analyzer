@@ -131,6 +131,5 @@ dmypy.json
 # data files 
 data/
 .vscode/settings.json
+notebooks/my_model/
 
-# model files
-notebooks/my_model

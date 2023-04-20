@@ -183,32 +183,57 @@ class InputOutput:
                 # not all of these categories have values in every span.
                 if span[cat_old]:
                     # we need to attach each span category on its own, as well as all together in "sc"
+
                     char_span = doc.char_span(
                         span.begin,
                         span.end,
                         label=span[cat_old],
                     )
-                    doc.spans[cat_new].append(char_span)
-                    doc.spans["sc"].append(char_span)
+                    if char_span:
+                        doc.spans[cat_new].append(char_span)
+                        doc.spans["sc"].append(char_span)
+                        n_start = n_start + 1
+
+                        if n_start % n_test != 0:
+                            char_span_train = doc_train.char_span(
+                                span.begin,
+                                span.end,
+                                label=span[cat_old],
+                            )
+                            doc_train.spans[cat_new].append(char_span_train)
+                            doc_train.spans["sc"].append(char_span_train)
+                        else:
+                            char_span_test = doc_test.char_span(
+                                span.begin,
+                                span.end,
+                                label=span[cat_old],
+                            )
+                            doc_test.spans[cat_new].append(char_span_test)
+                            doc_test.spans["sc"].append(char_span_test)
+
+                    # char_span returns None when the given indices do not match a token begin and end.
+                    # e.G ".Ich" instead of ". Ich"
+                    elif char_span is None:
+                        logging_warning = f"The char span for {span.get_covered_text()} ({span}) returned None.\n"
+                        logging_warning += (
+                            "It might be due to a mismatch between char indices. \n"
+                        )
+                        if logging.root.level > logging.DEBUG:
+                            logging_warning += "Skipping span! Enable Debug Logging for more information."
+
+                        logging.warning(logging_warning)
+                        logging.debug(
+                            f"""Token should be: \n \t'{span.get_covered_text()}', but is '{
+                                    doc.char_span(
+                                    span.begin,
+                                    span.end,
+                                    alignment_mode="expand",
+                                    label=span[cat_old],
+
+                                )}'\n"""
+                        )
 
                     # create test and train set:
-                    n_start = n_start + 1
-                    if n_start % n_test != 0:
-                        char_span = doc_train.char_span(
-                            span.begin,
-                            span.end,
-                            label=span[cat_old],
-                        )
-                        doc_train.spans[cat_new].append(char_span)
-                        doc_train.spans["sc"].append(char_span)
-                    else:
-                        char_span = doc_test.char_span(
-                            span.begin,
-                            span.end,
-                            label=span[cat_old],
-                        )
-                        doc_test.spans[cat_new].append(char_span)
-                        doc_test.spans["sc"].append(char_span)
 
         return doc, doc_train, doc_test
 
@@ -228,6 +253,7 @@ class InputOutput:
         test_dict = {}
 
         for file in data_files:
+            logging.info(f"Reading ./{file}")
             try:
                 cas, file_type = InputOutput.read_cas_file(file, ts)
                 doc, doc_train, doc_test = InputOutput.cas_to_doc(cas, ts)
