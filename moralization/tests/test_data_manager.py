@@ -19,6 +19,7 @@ def get_transformers_lists(data_dir):
     sentence_list, label_list = tdh.structure_labels()
     return dm, sentence_list, label_list
 
+
 def test_data_manager(data_dir):
     DataManager(data_dir)
 
@@ -123,9 +124,11 @@ def test_import_data_DocBin(data_dir):
 
     assert dm.spacy_docbin_files == dm2.spacy_docbin_files
 
+
 def test_check_data_integrity(data_dir):
     dm = DataManager(data_dir)
     dm.check_data_integrity()
+
 
 def test_lists_to_df(get_transformers_lists):
     dm = get_transformers_lists[0]
@@ -133,7 +136,19 @@ def test_lists_to_df(get_transformers_lists):
     label_list = get_transformers_lists[2]
     dm.lists_to_df(sentence_list, label_list)
     data_frame = dm.data_in_frame
-    ref_sentence = ['"', 'Dann', 'kann', 'man', 'die', 'KMK', 'auflösen', '"', '#', '#', '#']
+    ref_sentence = [
+        '"',
+        "Dann",
+        "kann",
+        "man",
+        "die",
+        "KMK",
+        "auflösen",
+        '"',
+        "#",
+        "#",
+        "#",
+    ]
     assert data_frame["Sentences"][3] == ref_sentence
     ref_labels = [-100, 0, 0, 0, 0, 0, 0, -100, -100, -100, -100]
     assert data_frame["Labels"][3] == ref_labels
@@ -145,7 +160,19 @@ def test_df_to_dataset(get_transformers_lists, data_dir):
     label_list = get_transformers_lists[2]
     dm.lists_to_df(sentence_list, label_list)
     dm.df_to_dataset()
-    ref_sentence = ['"', 'Dann', 'kann', 'man', 'die', 'KMK', 'auflösen', '"', '#', '#', '#']
+    ref_sentence = [
+        '"',
+        "Dann",
+        "kann",
+        "man",
+        "die",
+        "KMK",
+        "auflösen",
+        '"',
+        "#",
+        "#",
+        "#",
+    ]
     assert dm.raw_data_set["Sentences"][3] == ref_sentence
     ref_labels = [-100, 0, 0, 0, 0, 0, 0, -100, -100, -100, -100]
     assert dm.raw_data_set["Labels"][3] == ref_labels

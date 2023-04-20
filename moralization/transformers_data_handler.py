@@ -81,17 +81,14 @@ class TransformersDataHandler:
                     self.label_list[m][i] = -100
                 j = j + 1
         return self.sentence_list, self.label_list
-    
+
     def init_tokenizer(self, model_name="bert-base-cased", kwargs={}):
         try:
             self.tokenizer = AutoTokenizer.from_pretrained(model_name, **kwargs)
-        except OSError: 
+        except OSError:
             # here we also need more exceptions for no network etc
-            raise OSError(
-                "Could not initiate tokenizer - please check your model name"
-            )
+            raise OSError("Could not initiate tokenizer - please check your model name")
         if not self.tokenizer.is_fast:
             raise ValueError(
                 "Please use a different model that provices a fast tokenizer"
             )
-
