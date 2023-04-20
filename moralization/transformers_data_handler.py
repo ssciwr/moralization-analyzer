@@ -1,4 +1,3 @@
-from moralization import data_manager
 from transformers import AutoTokenizer
 
 
@@ -8,7 +7,8 @@ class TransformersDataHandler:
     def get_data_lists(self, doc_dict, example_name=None):
         """Convert the data from doc object to lists. Required for transformers training.
 
-        Set the lists of tokens and labels for transformers training, with a nested list of sentences and tokens, and an equally nested list of labels that are initiated to zero.
+        Set the lists of tokens and labels for transformers training, with a nested list of
+        sentences and tokens, and an equally nested list of labels that are initiated to zero.
 
         Args:
             doc_dict (dict, required): The dictionary of doc objects for each data source.
