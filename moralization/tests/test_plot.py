@@ -1,5 +1,4 @@
 from moralization import plot
-import matplotlib
 from moralization.analyse import _loop_over_files
 import pytest
 import seaborn as sns
@@ -117,45 +116,188 @@ def test_report_occurrence_heatmap(doc_dicts, monkeypatch):
 
 
 def test_InteractiveAnalyzerResults(data_dir):
-    matplotlib.use("Agg")
-
     dm = DataManager(data_dir)
-    test_interactive = plot.InteractiveAnalyzerResults(dm.return_analyzer_result("all"))
-    test_interactive.visualize_analyzer_result()
 
-    with pytest.raises(KeyError):
-        test_interactive.visualize_analyzer_result(span_label="test")
-    with pytest.raises(KeyError):
-        test_interactive.visualize_analyzer_result(analysis_type="test")
-
-
-def test_InteractiveCategoryPlot(doc_dicts):
-    df = _loop_over_files(doc_dicts[0])
-    filenames = list(doc_dicts[0].keys())
-
-    # removes automatic window opening by matplotlib
-    matplotlib.use("Agg")
-
-    heatmap = plot.InteractiveCategoryPlot(df, filenames, figsize=(15, 10))
-    heatmap.show()
-
-    heatmap = plot.InteractiveCategoryPlot(
-        df,
-        filenames,
-    )
-    heatmap.show()
-
-    heatmap = plot.InteractiveCategoryPlot(
-        df, filenames, plot_callback=plot.report_occurrence_heatmap
+    test_interactive_analyzer = plot.InteractiveAnalyzerResults(
+        dm.return_analyzer_result("all")
     )
 
-    heatmap.show()
+    span_key_list = sorted(
+        [
+            "KAT1-Moralisierendes Segment",
+            "KAT2-Moralwerte",
+            "KAT2-Subjektive Ausdrücke",
+            "KAT3-Gruppe",
+            "KAT3-Rolle",
+            "KAT3-own/other",
+            "KAT4-Kommunikative Funktion",
+            "KAT5-Forderung explizit",
+            "paragraphs",
+            "sc",
+            "task1",
+            "task2",
+            "task3",
+            "task4",
+            "task5",
+        ]
+    )
+
+    for mode in [
+        "frequency",
+        "length",
+        "span_distinctiveness",
+        "boundary_distinctiveness",
+    ]:
+        # test dropdown
+        assert (
+            sorted(test_interactive_analyzer.change_analyzer_key(mode)[0])
+            == span_key_list
+        )
+        assert (
+            test_interactive_analyzer.change_analyzer_key(mode)[1]
+            == "KAT1-Moralisierendes Segment"
+        )
+
+        # test graph
+        test_interactive_analyzer.update_graph(mode, span_key_list)
+        test_interactive_analyzer.update_graph(mode, "sc")
+
+    with pytest.raises(KeyError):
+        test_interactive_analyzer.change_analyzer_key("bla")[0]
+        test_interactive_analyzer.update_graph("bla", "sc")
 
 
-def test_spacy_datah_andler_visualize_data(doc_dicts):
+def test_InteractiveCategoryPlot(data_dir):
+    dm = DataManager(data_dir)
+    span_key_list = sorted(
+        [
+            "KAT1-Moralisierendes Segment",
+            "KAT2-Moralwerte",
+            "KAT2-Subjektive Ausdrücke",
+            "KAT3-Gruppe",
+            "KAT3-Rolle",
+            "KAT3-own/other",
+            "KAT4-Kommunikative Funktion",
+            "KAT5-Forderung explizit",
+            "task1",
+            "task2",
+            "task3",
+            "task4",
+            "task5",
+        ]
+    )
+    file_names = list(dm.doc_dict.keys())
+
+    test_interactive_heatmap = plot.InteractiveCategoryPlot(dm)
+    assert test_interactive_heatmap.update_filename(file_names) == (
+        span_key_list,
+        span_key_list[0],
+    )
+    assert test_interactive_heatmap.update_filename(file_names[0]) == (
+        span_key_list,
+        span_key_list[0],
+    )
+    assert test_interactive_heatmap.update_filename([]) == (
+        [0],
+        0,
+    )
+
+    assert test_interactive_heatmap.update_category(span_key_list[:2]) == (
+        [
+            {
+                "label": "Moralisierung explizit",
+                "value": "KAT1-Moralisierendes Segment___Moralisierung explizit",
+            },
+            {
+                "label": "Keine Moralisierung",
+                "value": "KAT1-Moralisierendes Segment___Keine Moralisierung",
+            },
+            {
+                "label": "Moralisierung",
+                "value": "KAT1-Moralisierendes Segment___Moralisierung",
+            },
+            {"label": "Care", "value": "KAT2-Moralwerte___Care"},
+        ],
+        [
+            "KAT1-Moralisierendes Segment___Moralisierung explizit",
+            "KAT1-Moralisierendes Segment___Keine Moralisierung",
+            "KAT1-Moralisierendes Segment___Moralisierung",
+            "KAT2-Moralwerte___Care",
+        ],
+    )
+    assert test_interactive_heatmap.update_category(span_key_list[0]) == (
+        [
+            {
+                "label": "Moralisierung explizit",
+                "value": "KAT1-Moralisierendes Segment___Moralisierung explizit",
+            },
+            {
+                "label": "Keine Moralisierung",
+                "value": "KAT1-Moralisierendes Segment___Keine Moralisierung",
+            },
+            {
+                "label": "Moralisierung",
+                "value": "KAT1-Moralisierendes Segment___Moralisierung",
+            },
+        ],
+        [
+            "KAT1-Moralisierendes Segment___Moralisierung explizit",
+            "KAT1-Moralisierendes Segment___Keine Moralisierung",
+            "KAT1-Moralisierendes Segment___Moralisierung",
+        ],
+    )
+    assert test_interactive_heatmap.update_category([]) == (
+        ["please select a filename"],
+        ["please select a filename"],
+    )
+    assert test_interactive_heatmap.update_category(0) == (
+        ["please select a filename"],
+        ["please select a filename"],
+    )
+
+    test_interactive_heatmap.update_subcat(
+        test_interactive_heatmap.update_category(span_key_list[0])[1]
+    )
+    test_interactive_heatmap.update_subcat(
+        test_interactive_heatmap.update_category(span_key_list[:2])[1]
+    )
+
+
+def test_InteractiveVisualization(data_dir):
+    span_key_list = sorted(
+        [
+            "KAT1-Moralisierendes Segment",
+            "KAT2-Moralwerte",
+            "KAT2-Subjektive Ausdrücke",
+            "KAT3-Gruppe",
+            "KAT3-Rolle",
+            "KAT3-own/other",
+            "KAT4-Kommunikative Funktion",
+            "KAT5-Forderung explizit",
+            "paragraphs",
+            "sc",
+            "task1",
+            "task2",
+            "task3",
+            "task4",
+            "task5",
+        ]
+    )
+    dm = DataManager(data_dir)
+
+    test_interactive_vis = plot.InteractiveVisualization(dm)
+
+    for mode in ["all", "test", "train"]:
+        assert test_interactive_vis.change_mode(mode) == (span_key_list, "sc")
+
+        test_interactive_vis.change_span_cat(span_key_list[0], mode)
+        with pytest.raises(ValueError):
+            test_interactive_vis.change_span_cat("", mode)
+
+
+def test_spacy_data_handler_visualize_data(doc_dicts):
     with pytest.raises(NotImplementedError):
         plot.visualize_data(doc_dicts[0], spans_key=["task1", "sc"])
 
-    # test NotImplementedException when not in Jupyter Notebook
-    with pytest.raises(NotImplementedError):
-        plot.visualize_data(doc_dicts[0])
+    plot.visualize_data(doc_dicts[0])
+    plot.visualize_data(doc_dicts[0], spans_key="task2")
