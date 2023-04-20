@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from moralization.utils import is_interactive
 from spacy import displacy
 
-from dash import dcc, html, Input, Output
+from dash import dcc, html, Input, Output, State
 from jupyter_dash import JupyterDash
 import plotly.express as px
 
@@ -285,18 +285,53 @@ class InteractiveCategoryPlot:
         self.app.run_server(debug=True, mode="inline", use_reloader=False)
 
 
-class InteractiveVisualisation:
+class InteractiveVisualization:
     def __init__(self, data_manager):
         self.data_manager = data_manager
-        self.app = JupyterDash("DataAnalyzer")
+        self.app = JupyterDash("DataVisualizer")
 
-        self.app.layout = html.Div(["Interactive Visualisation"])
+        self.app.layout = html.Div(
+            [
+                "Interactive Visualization",
+                dcc.Dropdown(["all", "train", "test"], value="all", id="dropdown_mode"),
+                dcc.Dropdown(id="dropdown_span_cat"),
+                dcc.Markdown(id="markdown_displacy", dangerously_allow_html=True),
+            ]
+        )
+
+        self.app.callback(
+            Output("dropdown_span_cat", "options"),
+            Output("dropdown_span_cat", "value"),
+            Input("dropdown_mode", "value"),
+        )(self.change_mode)
+
+        self.app.callback(
+            Output("markdown_displacy", "children"),
+            Input("dropdown_span_cat", "value"),
+            State("dropdown_mode", "value"),
+        )(self.change_span_cat)
 
     def change_mode(self, mode):
         span_cats = []
 
         for doc in self.data_manager.doc_dict.values():
-            [span_cats.append(span_cat) for span_cat in doc.keys()]
+            [span_cats.append(span_cat) for span_cat in list(doc.spans.keys())]
+
+        span_cats = list(set(span_cats))
+        return sorted(span_cats), "sc"
+
+    def change_span_cat(self, span_cat, mode):
+        html_doc = self.data_manager.visualize_data(_type=mode, spans_key=span_cat)
+        html_doc = html_doc.replace("\n", " ")
+        return html_doc
+
+    def run_app(self):
+        self.app.run_server(
+            debug=True,
+            port=8052,
+            mode="inline",
+            use_reloader=False,
+        )
 
 
 def visualize_data(doc_dict, style="span", spans_key="sc"):

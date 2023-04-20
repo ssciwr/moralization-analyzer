@@ -5,6 +5,7 @@ from moralization.plot import (
     InteractiveCategoryPlot,
     visualize_data,
     InteractiveAnalyzerResults,
+    InteractiveVisualization,
 )
 import logging
 
@@ -116,6 +117,10 @@ class DataManager:
         all_analysis = self.return_analyzer_result("all")
         interactive_analysis = InteractiveAnalyzerResults(all_analysis)
         return interactive_analysis.show()
+
+    def interactive_data_visualization(self):
+        interactive_visualization = InteractiveVisualization(self)
+        return interactive_visualization.run_app()
 
     def visualize_data(self, _type: str, spans_key="sc"):
         # type can only be all, train or test
