@@ -51,7 +51,6 @@ class DataManager:
     def interactive_correlation_analysis(self):
         self.occurence_df = _loop_over_files(self.doc_dict)
 
-        # heatmap = InteractiveCategoryPlot(self.occurence_df, list(self.doc_dict.keys()))
         heatmap = InteractiveCategoryPlot(self)
         return heatmap.run_app()
 
