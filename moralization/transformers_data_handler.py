@@ -72,13 +72,13 @@ class TransformersDataHandler:
         # also punctuation is included in the moralization label - we
         # definitely need to set those labels to -100
         j = 0
-        for m in range(len(self.label_list)):
-            for i in range(len(self.label_list[m])):
-                self.label_list[m][i] = self.labels[j]
+        for sent_labels, sent_tokens in zip(self.label_list, self.token_list):
+            for i in range(len(sent_labels)):
+                sent_labels[i] = self.labels[j]
                 if i == 0 and self.labels[j] == 1:
-                    self.label_list[m][i] = 2
-                if self.token_list[m][i].is_punct:
-                    self.label_list[m][i] = -100
+                    sent_labels[i] = 2
+                if sent_tokens[i].is_punct:
+                    sent_labels[i] = -100
                 j = j + 1
         return self.sentence_list, self.label_list
 
