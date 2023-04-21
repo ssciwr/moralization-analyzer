@@ -47,11 +47,12 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#moralization.DataManager"><code class="docutils literal notranslate"><span class="pre">DataManager</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.check_data_integrity"><code class="docutils literal notranslate"><span class="pre">DataManager.check_data_integrity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.df_to_dataset"><code class="docutils literal notranslate"><span class="pre">DataManager.df_to_dataset()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.export_data_DocBin"><code class="docutils literal notranslate"><span class="pre">DataManager.export_data_DocBin()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.import_data_DocBin"><code class="docutils literal notranslate"><span class="pre">DataManager.import_data_DocBin()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_correlation_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_correlation_analysis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_analysis()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_data_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_data_analysis()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_data_visualization"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_data_visualization()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.lists_to_df"><code class="docutils literal notranslate"><span class="pre">DataManager.lists_to_df()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.occurence_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.occurence_analysis()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.return_analyzer_result"><code class="docutils literal notranslate"><span class="pre">DataManager.return_analyzer_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.visualize_data"><code class="docutils literal notranslate"><span class="pre">DataManager.visualize_data()</span></code></a></li>
@@ -111,6 +112,11 @@ span distinctiveness and boundary distinctiveness.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.df_to_dataset">
+<span class="sig-name descname"><span class="pre">df_to_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.df_to_dataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.export_data_DocBin">
 <span class="sig-name descname"><span class="pre">export_data_DocBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_data_integrity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.export_data_DocBin" title="Permalink to this definition"></a></dt>
 <dd><p>Export the currently loaded docs as a spacy binary. This is used in spacy training.</p>
@@ -141,8 +147,8 @@ test_file (Path, optional): Absolute or relative path. Defaults to None.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.interactive_correlation_analysis">
-<span class="sig-name descname"><span class="pre">interactive_correlation_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.interactive_correlation_analysis" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="moralization.DataManager.interactive_analysis">
+<span class="sig-name descname"><span class="pre">interactive_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.interactive_analysis" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -151,9 +157,17 @@ test_file (Path, optional): Absolute or relative path. Defaults to None.</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.interactive_data_visualization">
-<span class="sig-name descname"><span class="pre">interactive_data_visualization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.interactive_data_visualization" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="moralization.DataManager.lists_to_df">
+<span class="sig-name descname"><span class="pre">lists_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.lists_to_df" title="Permalink to this definition"></a></dt>
+<dd><p>Convert nested lists of tokens and labels into a pandas dataframe.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>sentence_list (list): A nested list of the tokens (nested by sentence).
+label_list (list): A nested list of the labels (nested by sentence).</p>
+</dd>
+<dt>Returns:</dt><dd><p>data_in_frame (dataframe): A list of the train and test files path.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.occurence_analysis">
@@ -191,7 +205,7 @@ filter (str/list(str), optional): Filename filters. Defaults to None.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="moralization.SpacyModelManager">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">SpacyModelManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_config_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_existing_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">SpacyModelManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_config_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_existing_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager" title="Permalink to this definition"></a></dt>
 <dd><p>Create, import, modify, train and publish spacy models.</p>
 <p>Models can be trained on data from a DataManager, and published to hugging face.</p>
 <p>Imports an existing model from the <cite>model_path</cite> folder if found.</p>
