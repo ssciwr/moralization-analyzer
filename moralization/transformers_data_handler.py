@@ -82,7 +82,9 @@ class TransformersDataHandler:
                 j = j + 1
         return self.sentence_list, self.label_list
 
-    def init_tokenizer(self, model_name="bert-base-cased", kwargs={}):
+    def init_tokenizer(self, model_name="bert-base-cased", kwargs=None):
+        if kwargs is None:
+            kwargs = {}
         try:
             self.tokenizer = AutoTokenizer.from_pretrained(model_name, **kwargs)
         except OSError:
