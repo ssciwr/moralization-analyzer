@@ -10,6 +10,7 @@ import logging
 
 from moralization.spacy_data_handler import SpacyDataHandler
 import pandas as pd
+import datasets
 import numpy as np
 
 
@@ -277,3 +278,25 @@ class DataManager:
             input_dir, train_file, test_file
         )
         return self.spacy_docbin_files
+
+    def lists_to_df(self, sentence_list, label_list):
+        """Convert nested lists of tokens and labels into a pandas dataframe.
+
+        Args:
+            sentence_list (list): A nested list of the tokens (nested by sentence).
+            label_list (list): A nested list of the labels (nested by sentence).
+
+        Returns:
+            data_in_frame (dataframe): A list of the train and test files path.
+        """
+        self.data_in_frame = pd.DataFrame(
+            zip(sentence_list, label_list), columns=["Sentences", "Labels"]
+        )
+
+    def df_to_dataset(self, split=True):
+        self.raw_data_set = datasets.Dataset.from_pandas(self.data_in_frame)
+        if split:
+            # split in train test
+            self.train_test_set = self.raw_data_set.train_test_split(test_size=0.1)
+
+    # here we also need a method to publish the dataset to hugging face
