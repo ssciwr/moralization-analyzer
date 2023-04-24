@@ -83,6 +83,13 @@ class TransformersDataHandler:
         return self.sentence_list, self.label_list
 
     def init_tokenizer(self, model_name="bert-base-cased", kwargs=None):
+        """Initialize the tokenizer that goes along with the selected model.
+        Only fast tokenizers can be used.
+
+        Args:
+            model_name (str, required): The name of the model that will be used for training.
+            kwargs (dict, optional): Keyword arguments to pass to the tokenizer.
+        """
         if kwargs is None:
             kwargs = {}
         try:
@@ -94,3 +101,45 @@ class TransformersDataHandler:
             raise ValueError(
                 "Please use a different model that provices a fast tokenizer"
             )
+
+    def tokenize(self, wordlist: list):
+        self.inputs = self.tokenizer(wordlist, is_split_into_words=True)
+
+    def _align_labels_with_tokens(labels, word_ids):
+        """Helper method to expand the label list so that it matches the new tokens."""
+        # beginning of a span needs a different label than inside
+        # of a span: multi-label classification
+        # punctuation is ignored in the calculation of metrics: set to -100
+        new_labels = []
+        current_id = None
+        for word_id in word_ids:
+            if word_id != current_id:
+                # next word
+                current_id = word_id
+                # punctuation should be ignored
+                new_label = -100 if word_id is None else labels[word_id]
+                new_labels.append(new_label)
+            else:
+                # Same word as previous token
+                new_label = labels[word_id]
+                # If the label is 2 we change it to 1
+                if new_label == 2:
+                    new_label -= 1
+                new_labels.append(new_label)
+        return new_labels
+
+        # def tokenize_and_align_labels(examples):
+        # tokenized_inputs = tokenizer(
+        # examples["Sentences"], truncation=True, is_split_into_words=True
+        # )
+        # all_labels = examples["Labels"]
+        # new_labels = []
+        # tokens = []
+        # for i, labels in enumerate(all_labels):
+        # word_ids = tokenized_inputs.word_ids(i)
+        # tokens.append(tokenized_inputs.tokens(i))
+        # new_labels.append(align_labels_with_tokens(labels, word_ids))
+        #
+        # tokenized_inputs["labels"] = new_labels
+        # tokenized_inputs["tokens"] = tokens
+        # return tokenized_inputs

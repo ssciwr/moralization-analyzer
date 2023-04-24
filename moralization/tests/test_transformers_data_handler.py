@@ -1,6 +1,7 @@
 from moralization.transformers_data_handler import TransformersDataHandler
 import pytest
 from moralization import DataManager
+from datasets import load_dataset
 
 EXAMPLE_NAME = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
 
@@ -79,3 +80,14 @@ def test_init_tokenizer(gen_instance):
         gen_instance.init_tokenizer(model_name="abcd")
     with pytest.raises(ValueError):
         gen_instance.init_tokenizer(kwargs={"use_fast": False})
+
+
+def test_tokenize_labels():
+    raw_dataset = load_dataset("iulusoy/test-data")
+    tdh = TransformersDataHandler()
+    tdh.init_tokenizer()
+    tdh.tokenize(raw_dataset["test"]["word"])
+    assert tdh.inputs["input_ids"][0] == 101
+    assert tdh.inputs["input_ids"][2] == 1821
+    assert tdh.inputs["input_ids"][-1] == 102
+    assert len(set(tdh.inputs["attention_mask"])) == 1
