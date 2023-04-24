@@ -17,6 +17,11 @@ def gen_instance():
     return TransformersDataHandler()
 
 
+@pytest.fixture(scope="module")
+def raw_dataset():
+    return load_dataset("iulusoy/test-data")
+
+
 def test_get_data_lists(doc_dict, gen_instance):
     gen_instance.get_data_lists(doc_dict=doc_dict, example_name=EXAMPLE_NAME)
     assert gen_instance.label_list[0] == [0]
@@ -82,8 +87,7 @@ def test_init_tokenizer(gen_instance):
         gen_instance.init_tokenizer(kwargs={"use_fast": False})
 
 
-def test_tokenize_labels():
-    raw_dataset = load_dataset("iulusoy/test-data")
+def test_tokenize(raw_dataset):
     tdh = TransformersDataHandler()
     tdh.init_tokenizer()
     tdh.tokenize(raw_dataset["test"]["word"])
@@ -91,3 +95,37 @@ def test_tokenize_labels():
     assert tdh.inputs["input_ids"][2] == 1821
     assert tdh.inputs["input_ids"][-1] == 102
     assert len(set(tdh.inputs["attention_mask"])) == 1
+    new_tokens = tdh.inputs.tokens()
+    ref_tokens = [
+        "[CLS]",
+        "I",
+        "am",
+        "working",
+        "on",
+        "the",
+        "#",
+        "#",
+        "#",
+        "moral",
+        "##ization",
+        "project",
+        ".",
+        "[SEP]",
+    ]
+    assert new_tokens == ref_tokens
+
+
+def test_align_labels_with_tokens(raw_dataset):
+    tdh = TransformersDataHandler()
+    tdh.init_tokenizer()
+    tdh.tokenize(raw_dataset["test"]["word"])
+    new_labels = tdh._align_labels_with_tokens(
+        raw_dataset["test"]["label"], tdh.inputs.word_ids()
+    )
+    print(new_labels)
+    assert new_labels[0] == -100
+    assert new_labels[2] == 0
+    assert new_labels[3] == 2
+    assert new_labels[4] == 1
+    assert new_labels[10] == 1
+    assert new_labels[-1] == -100

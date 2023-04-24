@@ -105,27 +105,21 @@ class TransformersDataHandler:
     def tokenize(self, wordlist: list):
         self.inputs = self.tokenizer(wordlist, is_split_into_words=True)
 
-    def _align_labels_with_tokens(labels, word_ids):
+    def _align_labels_with_tokens(self, labels: list, word_ids: list):
         """Helper method to expand the label list so that it matches the new tokens."""
-        # beginning of a span needs a different label than inside
-        # of a span: multi-label classification
+        # beginning of a span needs a label of 2
+        # inside a span label of 1
         # punctuation is ignored in the calculation of metrics: set to -100
-        new_labels = []
-        current_id = None
-        for word_id in word_ids:
-            if word_id != current_id:
-                # next word
-                current_id = word_id
-                # punctuation should be ignored
-                new_label = -100 if word_id is None else labels[word_id]
-                new_labels.append(new_label)
-            else:
-                # Same word as previous token
-                new_label = labels[word_id]
-                # If the label is 2 we change it to 1
-                if new_label == 2:
-                    new_label -= 1
-                new_labels.append(new_label)
+        new_labels = [
+            -100 if word_id is None else labels[word_id] for word_id in word_ids
+        ]
+        # if the beginning of a span has been split into two tokens,
+        # make sure that the label "2" only appears once
+        # seems to me we need to use enumerate
+        new_labels = [
+            1 if label == 2 and new_labels[i - 1] == 2 and i >= 1 else label
+            for i, label in enumerate(new_labels)
+        ]
         return new_labels
 
         # def tokenize_and_align_labels(examples):
