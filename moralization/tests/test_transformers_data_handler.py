@@ -129,3 +129,7 @@ def test_align_labels_with_tokens(raw_dataset):
     assert new_labels[4] == 1
     assert new_labels[10] == 1
     assert new_labels[-1] == -100
+    tdh.tokenize(["moralization"])
+    new_labels = tdh._align_labels_with_tokens([2, 2], tdh.inputs.word_ids())
+    ref_labels = [-100, 2, 1, -100]
+    assert new_labels == ref_labels
