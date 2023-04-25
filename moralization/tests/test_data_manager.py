@@ -4,7 +4,6 @@ from pathlib import Path
 import pytest
 import re
 import numpy as np
-import matplotlib
 
 
 def test_data_manager(data_dir):
@@ -48,30 +47,36 @@ def test_occurence_analysis(data_dir):
     assert heatmap
 
 
-def test_interactive_analysis(data_dir):
-    matplotlib.use("Agg")
-
+def test_interactive_correlation_analysis(data_dir):
     dm = DataManager(data_dir)
-    dm.interactive_analysis()
+    with pytest.raises(EnvironmentError):
+        dm.interactive_correlation_analysis()
+
+
+def test_interactive_data_visualization(data_dir):
+    dm = DataManager(data_dir)
+    with pytest.raises(EnvironmentError):
+        dm.interactive_data_visualization()
 
 
 def test_interactive_data_analysis(data_dir):
-    matplotlib.use("Agg")
-
     dm = DataManager(data_dir)
-    dm.interactive_data_analysis()
+    with pytest.raises(EnvironmentError):
+        dm.interactive_data_analysis()
 
 
 def test_visualize_data(data_dir):
     dm = DataManager(data_dir)
-    with pytest.raises(NotImplementedError):
-        dm.visualize_data(_type="all")
+    dm.visualize_data(_type="all")
+
+    dm.visualize_data(_type="test")
+
+    dm.visualize_data(_type="train")
+
+    dm.visualize_data(_type="all", spans_key="task1")
 
     with pytest.raises(NotImplementedError):
-        dm.visualize_data(_type="test")
-
-    with pytest.raises(NotImplementedError):
-        dm.visualize_data(_type="train")
+        dm.visualize_data(_type="all", spans_key=["task1", "task2"])
 
     with pytest.raises(KeyError):
         dm.visualize_data(_type="blub")
