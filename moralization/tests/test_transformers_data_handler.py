@@ -22,6 +22,14 @@ def raw_dataset():
     return load_dataset("iulusoy/test-data")
 
 
+@pytest.fixture(scope="module")
+def train_test_dataset(raw_dataset):
+    # dataset = raw_dataset['test']
+    return load_dataset("iulusoy/test-data", split="test").train_test_split(
+        test_size=0.1
+    )
+
+
 def test_get_data_lists(doc_dict, gen_instance):
     gen_instance.get_data_lists(doc_dict=doc_dict, example_name=EXAMPLE_NAME)
     assert gen_instance.label_list[0] == [0]
@@ -113,6 +121,10 @@ def test_tokenize(raw_dataset):
         "[SEP]",
     ]
     assert new_tokens == ref_tokens
+    # try with no wordlist
+    tdh.token_list = raw_dataset["test"]["word"]
+    tdh.tokenize()
+    assert new_tokens == ref_tokens
 
 
 def test_align_labels_with_tokens(raw_dataset):
@@ -154,3 +166,9 @@ def test_add_labels_to_inputs(raw_dataset):
     tdh.label_list = labels_list
     tdh.add_labels_to_inputs()
     assert tdh.inputs["labels"] == ref_labels
+
+
+def test_map_dataset(train_test_dataset):
+    tdh = TransformersDataHandler()
+    tdh.init_tokenizer()
+    tdh.map_dataset

@@ -102,7 +102,9 @@ class TransformersDataHandler:
                 "Please use a different model that provices a fast tokenizer"
             )
 
-    def tokenize(self, wordlist: list):
+    def tokenize(self, wordlist: list = None):
+        if wordlist is None:
+            wordlist = self.token_list
         self.inputs = self.tokenizer(
             wordlist, truncation=True, is_split_into_words=True
         )
@@ -142,3 +144,17 @@ class TransformersDataHandler:
             new_labels.append(self._align_labels_with_tokens(label, word_ids))
         # add new_labels to the tokenized data
         self.inputs["labels"] = new_labels
+
+    def tokenize_and_align(self):
+        self.init_tokenizer()
+        self.tokenize()
+        self.add_labels_to_inputs
+        return self.inputs
+
+    def map_dataset(self, train_test_set):
+        tokenized_datasets = train_test_set.map(
+            self.tokenize_and_align,
+            batched=True,
+            remove_columns=train_test_set["train"].column_names,
+        )
+        return tokenized_datasets
