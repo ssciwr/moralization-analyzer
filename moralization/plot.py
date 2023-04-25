@@ -5,10 +5,11 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from spacy import displacy
-
 from dash import dcc, html, Input, Output, State
 from jupyter_dash import JupyterDash
 import plotly.express as px
+
+from moralization.utils import is_interactive
 
 
 def report_occurrence_heatmap(
@@ -182,10 +183,15 @@ class InteractiveAnalyzerResults:
         )
         return fig
 
-    def show(self):
+    def run_app(self):
         """
         Displays the interactive plot.
         """
+        if not is_interactive():
+            raise EnvironmentError(
+                "Dash GUI is only available in an Ipython environment like Jupyter notebooks."
+            )
+
         return self.app.run_server(
             debug=True,
             port=8053,
@@ -353,6 +359,11 @@ class InteractiveCategoryPlot:
 
     def run_app(self):
         """Runs the Dash app with the specified settings."""
+        if not is_interactive():
+            raise EnvironmentError(
+                "Dash GUI is only available in an Ipython environment like Jupyter notebooks."
+            )
+
         self.app.run_server(debug=True, mode="inline", use_reloader=False)
 
 
@@ -433,6 +444,11 @@ class InteractiveVisualization:
         return html_doc
 
     def run_app(self):
+        if not is_interactive():
+            raise EnvironmentError(
+                "Dash GUI is only available in an Ipython environment like Jupyter notebooks."
+            )
+
         """Runs the JupyterDash application."""
         self.app.run_server(
             debug=True,
@@ -455,8 +471,7 @@ def visualize_data(doc_dict, style="span", spans_key="sc"):
             set to "sc", all span categories in the Spacy Doc objects will be visualized.
             Defaults to "sc".
     Raises:
-        NotImplementedError: Raised if multiple categories are passed in `spans_key`, as
-            `displacy` does not support viewing multiple categories at once.
+
         ValueError: Raised if `spans_key` is not a valid span category in any of the Spacy
             Doc objects in `doc_dict`.
 
