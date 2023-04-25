@@ -42,6 +42,9 @@ dependencies = [
     "wheel", 
     "dash",
     "jupyter-dash",
+    "datasets",
+    "transformers",
+
 ]
 
 [tool.setuptools.package-data]
