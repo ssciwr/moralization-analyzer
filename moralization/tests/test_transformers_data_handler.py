@@ -122,7 +122,6 @@ def test_align_labels_with_tokens(raw_dataset):
     new_labels = tdh._align_labels_with_tokens(
         raw_dataset["test"]["label"], tdh.inputs.word_ids()
     )
-    print(new_labels)
     assert new_labels[0] == -100
     assert new_labels[2] == 0
     assert new_labels[3] == 2
@@ -133,3 +132,25 @@ def test_align_labels_with_tokens(raw_dataset):
     new_labels = tdh._align_labels_with_tokens([2, 2], tdh.inputs.word_ids())
     ref_labels = [-100, 2, 1, -100]
     assert new_labels == ref_labels
+
+
+def test_add_labels_to_inputs(raw_dataset):
+    tdh = TransformersDataHandler()
+    tdh.init_tokenizer()
+    tdh.tokenize(raw_dataset["test"]["word"])
+    # test if list of strings is working
+    tdh.add_labels_to_inputs(labels=raw_dataset["test"]["label"])
+    ref_labels = [[-100, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, -100]]
+    assert tdh.inputs["labels"] == ref_labels
+    # test if list of list is working
+    tdh.inputs = None
+    tdh.tokenize(raw_dataset["test"]["word"])
+    labels_list = [[0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 0]]
+    tdh.add_labels_to_inputs(labels=labels_list)
+    assert tdh.inputs["labels"] == ref_labels
+    # test if labels from self is working
+    tdh.inputs = None
+    tdh.tokenize(raw_dataset["test"]["word"])
+    tdh.label_list = labels_list
+    tdh.add_labels_to_inputs()
+    assert tdh.inputs["labels"] == ref_labels

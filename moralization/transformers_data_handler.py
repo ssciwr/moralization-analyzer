@@ -103,7 +103,9 @@ class TransformersDataHandler:
             )
 
     def tokenize(self, wordlist: list):
-        self.inputs = self.tokenizer(wordlist, is_split_into_words=True)
+        self.inputs = self.tokenizer(
+            wordlist, truncation=True, is_split_into_words=True
+        )
 
     def _align_labels_with_tokens(self, labels: list, word_ids: list):
         """Helper method to expand the label list so that it matches the new tokens."""
@@ -122,18 +124,21 @@ class TransformersDataHandler:
         ]
         return new_labels
 
-        # def tokenize_and_align_labels(examples):
-        # tokenized_inputs = tokenizer(
-        # examples["Sentences"], truncation=True, is_split_into_words=True
-        # )
-        # all_labels = examples["Labels"]
-        # new_labels = []
-        # tokens = []
-        # for i, labels in enumerate(all_labels):
-        # word_ids = tokenized_inputs.word_ids(i)
-        # tokens.append(tokenized_inputs.tokens(i))
-        # new_labels.append(align_labels_with_tokens(labels, word_ids))
-        #
-        # tokenized_inputs["labels"] = new_labels
-        # tokenized_inputs["tokens"] = tokens
-        # return tokenized_inputs
+    def add_labels_to_inputs(self, labels=None):
+        """Expand the label list to match the tokens after tokenization by
+        selected tokenizer."""
+        if labels is None:
+            labels = self.label_list
+        # make sure that it is a nested list to iterate over,
+        # otherwise add a layer
+        # do we need this?
+        # maybe enough to check if labels[0] is a list?
+        # does it cost us to iterate over all the data?
+        labels = [labels] if not isinstance(labels[0], list) else labels
+        labels = [[i] if not isinstance(i, list) else i for i in labels]
+        new_labels = []
+        for i, label in enumerate(labels):
+            word_ids = self.inputs.word_ids(i)
+            new_labels.append(self._align_labels_with_tokens(label, word_ids))
+        # add new_labels to the tokenized data
+        self.inputs["labels"] = new_labels
