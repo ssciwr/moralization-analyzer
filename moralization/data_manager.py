@@ -115,7 +115,7 @@ class DataManager:
     def interactive_data_analysis(self):
         all_analysis = self.return_analyzer_result("all")
         interactive_analysis = InteractiveAnalyzerResults(all_analysis)
-        return interactive_analysis.show()
+        return interactive_analysis.run_app()
 
     def interactive_data_visualization(self):
         interactive_visualization = InteractiveVisualization(self)
