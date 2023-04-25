@@ -57,7 +57,7 @@ class DataManager:
 
     def return_analyzer_result(self, result_type="frequency"):
         """Returns the result of the spacy_span-analyzer.
-
+            If no analyzer has been created yet, a new one will be generated and stored.
 
         Args:
             result_type (str, optional): Can be `frequency`, `length`,
@@ -113,7 +113,7 @@ class DataManager:
             return self.analyzer_return_dict
         return pd.DataFrame(self.analyzer_return_dict[result_type]).fillna(0)
 
-    def interactive_data_analysis(self):
+    def interactive_data_analysis(self) -> InteractiveAnalyzerResults:
         all_analysis = self.return_analyzer_result("all")
         interactive_analysis = InteractiveAnalyzerResults(all_analysis)
         return interactive_analysis.run_app()
