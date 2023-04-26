@@ -1,7 +1,7 @@
 from moralization.transformers_data_handler import TransformersDataHandler
 import pytest
 from moralization import DataManager
-from datasets import load_dataset
+from datasets import load_dataset, Dataset, DatasetDict
 
 EXAMPLE_NAME = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
 
@@ -23,11 +23,22 @@ def raw_dataset():
 
 
 @pytest.fixture(scope="module")
-def train_test_dataset(raw_dataset):
+def train_test_dataset():
     # dataset = raw_dataset['test']
     return load_dataset("iulusoy/test-data", split="test").train_test_split(
         test_size=0.1
     )
+
+
+@pytest.fixture
+def long_dataset():
+    datadict = {
+        "word": [["random", "words", "for", "testing"], ["and", "some", "more", "#"]],
+        "label": [[0, 2, 1, 1], [0, 0, 0, 0]],
+    }
+    ds = Dataset.from_dict(datadict, split="train")
+    ds_dict = DatasetDict({"train": ds})
+    return ds_dict
 
 
 def test_get_data_lists(doc_dict, gen_instance):
@@ -127,6 +138,21 @@ def test_tokenize(raw_dataset):
     assert new_tokens == ref_tokens
 
 
+def test_check_is_nested():
+    tdh = TransformersDataHandler()
+    sample = ["something"]
+    ref_result = [["something"]]
+    sample = tdh._check_is_nested(sample)
+    assert sample == ref_result
+    sample = [["something"]]
+    sample = tdh._check_is_nested(sample)
+    assert sample == ref_result
+    sample = [["something"], "something"]
+    ref_result = [["something"], ["something"]]
+    sample = tdh._check_is_nested(sample)
+    assert sample == ref_result
+
+
 def test_align_labels_with_tokens(raw_dataset):
     tdh = TransformersDataHandler()
     tdh.init_tokenizer()
@@ -152,7 +178,7 @@ def test_add_labels_to_inputs(raw_dataset):
     tdh.tokenize(raw_dataset["test"]["word"])
     # test if list of strings is working
     tdh.add_labels_to_inputs(labels=raw_dataset["test"]["label"])
-    ref_labels = [[-100, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, -100]]
+    ref_labels = [-100, 0, 1, 2, 1, 1, 1, 1, 0, 1, 0, -100]
     assert tdh.inputs["labels"] == ref_labels
     # test if list of list is working
     tdh.inputs = None
@@ -168,7 +194,20 @@ def test_add_labels_to_inputs(raw_dataset):
     assert tdh.inputs["labels"] == ref_labels
 
 
-def test_map_dataset(train_test_dataset):
+def test_map_dataset(train_test_dataset, long_dataset):
     tdh = TransformersDataHandler()
     tdh.init_tokenizer()
-    tdh.map_dataset()
+    tokenized_dataset = tdh.map_dataset(train_test_dataset)
+    assert isinstance(tokenized_dataset["train"], Dataset)
+    # try with more than one sentence
+    del tdh
+    tdh = TransformersDataHandler()
+    tdh.init_tokenizer()
+    tokenized_dataset = tdh.map_dataset(long_dataset)
+    ref_input_ids = [
+        [101, 7091, 1734, 1111, 5193, 102],
+        [101, 1105, 1199, 1167, 108, 102],
+    ]
+    ref_labels = [[-100, 0, 2, 1, 1, -100], [-100, 0, 0, 0, 0, -100]]
+    assert tokenized_dataset["train"]["input_ids"] == ref_input_ids
+    assert tokenized_dataset["train"]["labels"] == ref_labels

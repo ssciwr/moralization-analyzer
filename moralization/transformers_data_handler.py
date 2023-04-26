@@ -105,9 +105,22 @@ class TransformersDataHandler:
     def tokenize(self, wordlist: list = None):
         if wordlist is None:
             wordlist = self.token_list
+        wordlist = self._check_is_nested(wordlist)
         self.inputs = self.tokenizer(
             wordlist, truncation=True, is_split_into_words=True
         )
+
+    def _check_is_nested(self, list_to_check: list) -> list:
+        # make sure that data is a nested list,
+        # otherwise add a layer
+        # do we need this?
+        # maybe enough to check if list_to_check[0] is a list?
+        # does it cost us to iterate over all the data?
+        list_to_check = (
+            [list_to_check] if not isinstance(list_to_check[0], list) else list_to_check
+        )
+        list_to_check = [[i] if not isinstance(i, list) else i for i in list_to_check]
+        return list_to_check
 
     def _align_labels_with_tokens(self, labels: list, word_ids: list):
         """Helper method to expand the label list so that it matches the new tokens."""
@@ -131,24 +144,19 @@ class TransformersDataHandler:
         selected tokenizer."""
         if labels is None:
             labels = self.label_list
-        # make sure that it is a nested list to iterate over,
-        # otherwise add a layer
-        # do we need this?
-        # maybe enough to check if labels[0] is a list?
-        # does it cost us to iterate over all the data?
-        labels = [labels] if not isinstance(labels[0], list) else labels
-        labels = [[i] if not isinstance(i, list) else i for i in labels]
+        labels = self._check_is_nested(labels)
         new_labels = []
         for i, label in enumerate(labels):
             word_ids = self.inputs.word_ids(i)
+            # new_labels = self._align_labels_with_tokens(label, word_ids)
             new_labels.append(self._align_labels_with_tokens(label, word_ids))
         # add new_labels to the tokenized data
         self.inputs["labels"] = new_labels
 
-    def tokenize_and_align(self):
+    def tokenize_and_align(self, examples):
         self.init_tokenizer()
-        self.tokenize()
-        self.add_labels_to_inputs()
+        self.tokenize(examples["word"])
+        self.add_labels_to_inputs(examples["label"])
         return self.inputs
 
     def map_dataset(self, train_test_set):
