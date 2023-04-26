@@ -148,7 +148,7 @@ class TransformersDataHandler:
     def tokenize_and_align(self):
         self.init_tokenizer()
         self.tokenize()
-        self.add_labels_to_inputs
+        self.add_labels_to_inputs()
         return self.inputs
 
     def map_dataset(self, train_test_set):

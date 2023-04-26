@@ -171,4 +171,4 @@ def test_add_labels_to_inputs(raw_dataset):
 def test_map_dataset(train_test_dataset):
     tdh = TransformersDataHandler()
     tdh.init_tokenizer()
-    tdh.map_dataset
+    tdh.map_dataset()
