@@ -24,7 +24,6 @@ def raw_dataset():
 
 @pytest.fixture(scope="module")
 def train_test_dataset():
-    # dataset = raw_dataset['test']
     return load_dataset("iulusoy/test-data", split="test").train_test_split(
         test_size=0.1
     )
@@ -110,10 +109,10 @@ def test_tokenize(raw_dataset):
     tdh = TransformersDataHandler()
     tdh.init_tokenizer()
     tdh.tokenize(raw_dataset["test"]["word"])
-    assert tdh.inputs["input_ids"][0] == 101
-    assert tdh.inputs["input_ids"][2] == 1821
-    assert tdh.inputs["input_ids"][-1] == 102
-    assert len(set(tdh.inputs["attention_mask"])) == 1
+    assert tdh.inputs["input_ids"][0][0] == 101
+    assert tdh.inputs["input_ids"][0][2] == 1821
+    assert tdh.inputs["input_ids"][0][-1] == 102
+    assert len(set(tdh.inputs["attention_mask"][0])) == 1
     new_tokens = tdh.inputs.tokens()
     ref_tokens = [
         "[CLS]",
@@ -178,7 +177,7 @@ def test_add_labels_to_inputs(raw_dataset):
     tdh.tokenize(raw_dataset["test"]["word"])
     # test if list of strings is working
     tdh.add_labels_to_inputs(labels=raw_dataset["test"]["label"])
-    ref_labels = [-100, 0, 1, 2, 1, 1, 1, 1, 0, 1, 0, -100]
+    ref_labels = [[-100, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, -100]]
     assert tdh.inputs["labels"] == ref_labels
     # test if list of list is working
     tdh.inputs = None

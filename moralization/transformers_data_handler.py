@@ -148,7 +148,6 @@ class TransformersDataHandler:
         new_labels = []
         for i, label in enumerate(labels):
             word_ids = self.inputs.word_ids(i)
-            # new_labels = self._align_labels_with_tokens(label, word_ids)
             new_labels.append(self._align_labels_with_tokens(label, word_ids))
         # add new_labels to the tokenized data
         self.inputs["labels"] = new_labels
