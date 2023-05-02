@@ -50,8 +50,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.df_to_dataset"><code class="docutils literal notranslate"><span class="pre">DataManager.df_to_dataset()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.export_data_DocBin"><code class="docutils literal notranslate"><span class="pre">DataManager.export_data_DocBin()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.import_data_DocBin"><code class="docutils literal notranslate"><span class="pre">DataManager.import_data_DocBin()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_analysis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_correlation_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_correlation_analysis()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_data_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_data_analysis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_data_visualization"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_data_visualization()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.lists_to_df"><code class="docutils literal notranslate"><span class="pre">DataManager.lists_to_df()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.occurence_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.occurence_analysis()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.return_analyzer_result"><code class="docutils literal notranslate"><span class="pre">DataManager.return_analyzer_result()</span></code></a></li>
@@ -147,13 +148,18 @@ test_file (Path, optional): Absolute or relative path. Defaults to None.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.interactive_analysis">
-<span class="sig-name descname"><span class="pre">interactive_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.interactive_analysis" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="moralization.DataManager.interactive_correlation_analysis">
+<span class="sig-name descname"><span class="pre">interactive_correlation_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8051</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.interactive_correlation_analysis" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.interactive_data_analysis">
-<span class="sig-name descname"><span class="pre">interactive_data_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.interactive_data_analysis" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">interactive_data_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8053</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">InteractiveAnalyzerResults</span></span></span><a class="headerlink" href="#moralization.DataManager.interactive_data_analysis" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.interactive_data_visualization">
+<span class="sig-name descname"><span class="pre">interactive_data_visualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8052</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.interactive_data_visualization" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -186,8 +192,9 @@ filter (str/list(str), optional): Filename filters. Defaults to None.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.return_analyzer_result">
 <span class="sig-name descname"><span class="pre">return_analyzer_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'frequency'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.return_analyzer_result" title="Permalink to this definition"></a></dt>
-<dd><p>Returns the result of the spacy_span-analyzer.</p>
-<dl class="simple">
+<dd><dl class="simple">
+<dt>Returns the result of the spacy_span-analyzer.</dt><dd><p>If no analyzer has been created yet, a new one will be generated and stored.</p>
+</dd>
 <dt>Args:</dt><dd><dl class="simple">
 <dt>result_type (str, optional): Can be <cite>frequency</cite>, <cite>length</cite>,</dt><dd><p><cite>span_distinctiveness</cite>, <cite>boundary_distinctiveness</cite> or “all”. Defaults to “frequency”.</p>
 </dd>
