@@ -183,7 +183,7 @@ class InteractiveAnalyzerResults:
         )
         return fig
 
-    def run_app(self):
+    def run_app(self, port=8053):
         """
         Displays the interactive plot.
         """
@@ -194,7 +194,7 @@ class InteractiveAnalyzerResults:
 
         return self.app.run_server(
             debug=True,
-            port=8053,
+            port=port,
             mode="inline",
             use_reloader=False,
         )
@@ -357,14 +357,14 @@ class InteractiveCategoryPlot:
         # Return the correlation heatmap
         return fig
 
-    def run_app(self):
+    def run_app(self, port=8051):
         """Runs the Dash app with the specified settings."""
         if not is_interactive():
             raise EnvironmentError(
                 "Dash GUI is only available in an Ipython environment like Jupyter notebooks."
             )
 
-        self.app.run_server(debug=True, mode="inline", use_reloader=False)
+        self.app.run_server(debug=True, mode="inline", use_reloader=False, port=port)
 
 
 class InteractiveVisualization:
@@ -443,7 +443,7 @@ class InteractiveVisualization:
         html_doc = html_doc.replace("\n", " ")
         return html_doc
 
-    def run_app(self):
+    def run_app(self, port=8052):
         if not is_interactive():
             raise EnvironmentError(
                 "Dash GUI is only available in an Ipython environment like Jupyter notebooks."
@@ -452,7 +452,7 @@ class InteractiveVisualization:
         """Runs the JupyterDash application."""
         self.app.run_server(
             debug=True,
-            port=8052,
+            port=property(),
             mode="inline",
             use_reloader=False,
         )

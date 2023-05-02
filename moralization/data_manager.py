@@ -49,12 +49,6 @@ class DataManager:
                 self.occurence_df, _type=_type, _filter=cat_filter
             )
 
-    def interactive_correlation_analysis(self):
-        self.occurence_df = _loop_over_files(self.doc_dict)
-
-        heatmap = InteractiveCategoryPlot(self)
-        return heatmap.run_app()
-
     def return_analyzer_result(self, result_type="frequency"):
         """Returns the result of the spacy_span-analyzer.
             If no analyzer has been created yet, a new one will be generated and stored.
@@ -113,14 +107,20 @@ class DataManager:
             return self.analyzer_return_dict
         return pd.DataFrame(self.analyzer_return_dict[result_type]).fillna(0)
 
-    def interactive_data_analysis(self) -> InteractiveAnalyzerResults:
+    def interactive_correlation_analysis(self, port=8051):
+        self.occurence_df = _loop_over_files(self.doc_dict)
+
+        heatmap = InteractiveCategoryPlot(self)
+        return heatmap.run_app(port=port)
+
+    def interactive_data_analysis(self, port=8053) -> InteractiveAnalyzerResults:
         all_analysis = self.return_analyzer_result("all")
         interactive_analysis = InteractiveAnalyzerResults(all_analysis)
-        return interactive_analysis.run_app()
+        return interactive_analysis.run_app(port=port)
 
-    def interactive_data_visualization(self):
+    def interactive_data_visualization(self, port=8052):
         interactive_visualization = InteractiveVisualization(self)
-        return interactive_visualization.run_app()
+        return interactive_visualization.run_app(port=port)
 
     def visualize_data(self, _type: str, spans_key="sc"):
         # type can only be all, train or test
