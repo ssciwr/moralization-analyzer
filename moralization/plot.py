@@ -452,7 +452,7 @@ class InteractiveVisualization:
         """Runs the JupyterDash application."""
         self.app.run_server(
             debug=True,
-            port=property(),
+            port=port,
             mode="inline",
             use_reloader=False,
         )
