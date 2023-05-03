@@ -137,7 +137,7 @@ class TransformersDataHandler:
         # make sure that the label "2" only appears once
         # seems to me we need to use enumerate
         new_labels = [
-            1 if label == 2 and new_labels[i - 1] == 2 and i >= 1 else label
+            1 if label == 2 and i >= 1 and new_labels[i - 1] == 2 else label
             for i, label in enumerate(new_labels)
         ]
         return new_labels
