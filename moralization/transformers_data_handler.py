@@ -119,7 +119,8 @@ class TransformersDataHandler:
         list_to_check = (
             [list_to_check] if not isinstance(list_to_check[0], list) else list_to_check
         )
-        list_to_check = [[i] if not isinstance(i, list) else i for i in list_to_check]
+        if not all(isinstance(i, list) for i in list_to_check):
+            list_to_check = [[i] if not isinstance(i, list) else i for i in list_to_check]
         return list_to_check
 
     def _align_labels_with_tokens(self, labels: list, word_ids: list):
