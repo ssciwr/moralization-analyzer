@@ -1,6 +1,7 @@
 from moralization.transformers_model_manager import TransformersModelManager
 import pytest
 from datasets import load_dataset, Dataset, DatasetDict
+from transformers import DataCollatorForTokenClassification
 
 
 @pytest.fixture
@@ -143,3 +144,13 @@ def test_map_dataset(train_test_dataset, long_dataset):
     ref_labels = [[-100, 0, 2, 1, 1, -100], [-100, 0, 0, 0, 0, -100]]
     assert tokenized_dataset["train"]["input_ids"] == ref_input_ids
     assert tokenized_dataset["train"]["labels"] == ref_labels
+
+
+def test_init_data_collator(gen_instance):
+    gen_instance.init_tokenizer()
+    gen_instance.init_data_collator()
+    print(type(gen_instance.data_collator))
+    assert type(gen_instance.data_collator) == DataCollatorForTokenClassification
+    assert gen_instance.data_collator.padding
+    assert gen_instance.data_collator.return_tensors == "pt"
+    assert not gen_instance.data_collator.pad_to_multiple_of
