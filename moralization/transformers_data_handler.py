@@ -1,4 +1,5 @@
 from transformers import AutoTokenizer
+from typing import List
 
 
 class TransformersDataHandler:
@@ -102,7 +103,7 @@ class TransformersDataHandler:
                 "Please use a different model that provices a fast tokenizer"
             )
 
-    def tokenize(self, wordlist: list = None):
+    def tokenize(self, wordlist: List = None):
         if wordlist is None:
             wordlist = self.token_list
         wordlist = self._check_is_nested(wordlist)
@@ -110,7 +111,7 @@ class TransformersDataHandler:
             wordlist, truncation=True, is_split_into_words=True
         )
 
-    def _check_is_nested(self, list_to_check: list) -> list:
+    def _check_is_nested(self, list_to_check: List) -> list:
         # make sure that data is a nested list,
         # otherwise add a layer
         # do we need this?
@@ -125,7 +126,7 @@ class TransformersDataHandler:
             ]
         return list_to_check
 
-    def _align_labels_with_tokens(self, labels: list, word_ids: list):
+    def _align_labels_with_tokens(self, labels: List, word_ids: List):
         """Helper method to expand the label list so that it matches the new tokens."""
         # beginning of a span needs a label of 2
         # inside a span label of 1

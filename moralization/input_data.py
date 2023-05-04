@@ -8,6 +8,7 @@ import logging
 from moralization import analyse
 from lxml.etree import XMLSyntaxError
 import spacy
+from typing import List
 
 try:
     import de_core_news_sm
@@ -238,7 +239,7 @@ class InputOutput:
         return doc, doc_train, doc_test
 
     @staticmethod
-    def files_to_docs(data_files: list or str, ts: object):
+    def files_to_docs(data_files: List or str, ts: object):
         """
 
         Args:
