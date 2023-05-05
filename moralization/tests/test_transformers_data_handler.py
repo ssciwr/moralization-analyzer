@@ -1,7 +1,6 @@
 from moralization.transformers_data_handler import TransformersDataHandler
 import pytest
 from moralization import DataManager
-from datasets import Dataset, DatasetDict
 
 EXAMPLE_NAME = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
 
@@ -17,22 +16,14 @@ def gen_instance():
     return TransformersDataHandler()
 
 
-@pytest.fixture
-def long_dataset():
-    datadict = {
-        "word": [["random", "words", "for", "testing"], ["and", "some", "more", "#"]],
-        "label": [[0, 2, 1, 1], [0, 0, 0, 0]],
-    }
-    ds = Dataset.from_dict(datadict, split="train")
-    ds_dict = DatasetDict({"train": ds})
-    return ds_dict
-
-
 def test_get_data_lists(doc_dict, gen_instance):
     gen_instance.get_data_lists(doc_dict=doc_dict, example_name=EXAMPLE_NAME)
     assert gen_instance.label_list[0] == [0]
     assert gen_instance.sentence_list[2][0] == "JUL.02661"
     assert gen_instance.token_list[1][0].text == "T07"
+    gen_instance.get_data_lists(doc_dict=doc_dict, example_name=None)
+    assert len(gen_instance.label_list) == 36
+    assert gen_instance.token_list[3][0].text == "BERLIN"
 
 
 def test_generate_labels(doc_dict, gen_instance):
@@ -43,6 +34,10 @@ def test_generate_labels(doc_dict, gen_instance):
     assert gen_instance.labels[625] == 1
     assert gen_instance.labels[671] == 1
     assert gen_instance.labels[672] == 0
+    gen_instance.get_data_lists(doc_dict=doc_dict, example_name=None)
+    gen_instance.generate_labels(doc_dict=doc_dict, example_name=None)
+    assert len(gen_instance.labels) == 500
+    assert gen_instance.labels[10] == 0
 
 
 def test_structure_labels(doc_dict, gen_instance):
