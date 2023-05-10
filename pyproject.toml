@@ -45,7 +45,7 @@ dependencies = [
     "seqeval",
     "torch",
     "evaluate",
-
+    "accelerate",
 ]
 
 [tool.setuptools.package-data]

@@ -1,11 +1,14 @@
 from transformers import AutoTokenizer
 from transformers import DataCollatorForTokenClassification
 from transformers import AutoModelForTokenClassification
+from transformers import tokenization_utils_base
+from datasets import DatasetDict, formatting
 from typing import List
 import evaluate
 import numpy as np
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
+from accelerate import Accelerator
 
 
 class TransformersModelManager:
@@ -27,7 +30,7 @@ class TransformersModelManager:
         """
         self.model_name = model_name
 
-    def init_tokenizer(self, model_name=None, kwargs=None):
+    def init_tokenizer(self, model_name=None, kwargs=None) -> None:
         """Initialize the tokenizer that goes along with the selected model.
         Only fast tokenizers can be used.
 
@@ -51,15 +54,25 @@ class TransformersModelManager:
                 "Please use a different model that provices a fast tokenizer"
             )
 
-    def tokenize(self, wordlist: List = None):
-        if wordlist is None:
-            wordlist = self.token_list
+    def tokenize(self, wordlist: List) -> None:
+        """Tokenize the pre-tokenized inputs with the selected tokenizer.
+
+        Args:
+            wordlist (list, required): The list of words that will be tokenized.
+            The list is checked for nesting, the tokenizer expects a nested list of lists.
+        """
         wordlist = self._check_is_nested(wordlist)
         self.inputs = self.tokenizer(
             wordlist, truncation=True, is_split_into_words=True
         )
 
-    def _check_is_nested(self, list_to_check: List) -> list:
+    def _check_is_nested(self, list_to_check: List) -> List:
+        """Check the pre-tokenized list of words for nesting.
+
+        Args:
+            wordlist (list, required): The list of words that will be tokenized.
+            The list is checked for nesting, the tokenizer expects a nested list of lists.
+        """
         # make sure that data is a nested list,
         # otherwise add a layer
         # do we need this?
@@ -74,8 +87,14 @@ class TransformersModelManager:
             ]
         return list_to_check
 
-    def _align_labels_with_tokens(self, labels: List, word_ids: List):
-        """Helper method to expand the label list so that it matches the new tokens."""
+    def _align_labels_with_tokens(self, labels: List, word_ids: List) -> List:
+        """Expand the label list so that it matches the new tokens.
+
+        Args:
+            labels (list, required): The list of labels that needs to be aligned.
+            word_ids (list, required): The word ids of the tokenized words, mapping
+            tokenized to pre-tokenized data.
+        """
         # beginning of a span needs a label of 2
         # inside a span label of 1
         # punctuation is ignored in the calculation of metrics: set to -100
@@ -91,11 +110,13 @@ class TransformersModelManager:
         ]
         return new_labels
 
-    def add_labels_to_inputs(self, labels=None):
+    def add_labels_to_inputs(self, labels: List) -> None:
         """Expand the label list to match the tokens after tokenization by
-        selected tokenizer."""
-        if labels is None:
-            labels = self.label_list
+        selected tokenizer. Add to inputs.
+
+        Args:
+            labels (list, required): The nested list of labels that needs to be aligned.
+        """
         labels = self._check_is_nested(labels)
         new_labels = []
         for i, label in enumerate(labels):
@@ -104,13 +125,34 @@ class TransformersModelManager:
         # add new_labels to the tokenized data
         self.inputs["labels"] = new_labels
 
-    def tokenize_and_align(self, examples):
+    def tokenize_and_align(
+        self, examples: formatting.formatting.LazyBatch
+    ) -> tokenization_utils_base.BatchEncoding:
+        """Tokenize the word list and align the label list to the new tokens.
+
+        Args:
+            examples (batch, required): The batch of pre-tokenized words
+            and labels that needs to be aligned.
+
+        Returns:
+            inputs (BatchEncoding): The encoded tokens, labels, etc, after tokenization
+        """
         self.init_tokenizer()
         self.tokenize(examples["word"])
         self.add_labels_to_inputs(examples["label"])
+        print(type(self.inputs))
+
         return self.inputs
 
-    def map_dataset(self, train_test_set):
+    def map_dataset(self, train_test_set: DatasetDict) -> DatasetDict:
+        """Apply the tokenization to the complete dataset using a mapping function.
+
+        Args:
+            train_test_set (DatasetDict, required): The nested list of labels that needs to be aligned.
+
+        Returns:
+            tokenized_datasets (DatasetDict): The tokenized and label-aligned dataset.
+        """
         tokenized_datasets = train_test_set.map(
             self.tokenize_and_align,
             batched=True,
@@ -200,3 +242,14 @@ class TransformersModelManager:
         if not kwargs:
             kwargs = {}
         self.optimizer = AdamW(self.model.parameters(), lr=learning_rate, **kwargs)
+
+    def load_accelerator(self):
+        accelerator = Accelerator()
+        (
+            self.model,
+            self.optimizer,
+            self.train_dataloader,
+            self.eval_dataloader,
+        ) = accelerator.prepare(
+            self.model, self.optimizer, self.train_dataloader, self.eval_dataloader
+        )
