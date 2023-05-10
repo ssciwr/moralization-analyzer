@@ -5,6 +5,7 @@ from typing import List
 import evaluate
 import numpy as np
 from torch.utils.data import DataLoader
+from torch.optim import AdamW
 
 
 class TransformersModelManager:
@@ -126,16 +127,14 @@ class TransformersModelManager:
         batch = self.data_collator([item for item in tokenized_datasets["train"]])
         return batch
 
-    def load_evaluation_metric(self, label_names=None, eval_metric=None):
+    def load_evaluation_metric(self, label_names=None, eval_metric="seqeval"):
+        # default is sequential evaluation
+        # for other metrics, please see
+        # https://huggingface.co/docs/evaluate/choosing_a_metric
         if not label_names:
             self.label_names = ["0", "M", "M-BEG"]
         else:
             self.label_names = label_names
-        if not eval_metric:
-            # default is sequential evaluation
-            # for other metrics, please see
-            # https://huggingface.co/docs/evaluate/choosing_a_metric
-            eval_metric = "seqeval"
         self.metric = evaluate.load(eval_metric)
 
     def compute_metrics(self, eval_preds):
@@ -196,3 +195,8 @@ class TransformersModelManager:
             collate_fn=self.data_collator,
             batch_size=batch_size,
         )
+
+    def load_optimizer(self, learning_rate=2e-5, kwargs=None):
+        if not kwargs:
+            kwargs = {}
+        self.optimizer = AdamW(self.model.parameters(), lr=learning_rate, **kwargs)

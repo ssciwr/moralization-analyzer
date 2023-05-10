@@ -230,3 +230,16 @@ def test_load_dataloader(gen_instance, train_test_dataset):
     gen_instance.load_dataloader(tokenized_dataset, batch_size=16)
     assert gen_instance.train_dataloader.batch_size == 16
     assert gen_instance.eval_dataloader.batch_size == 16
+
+
+def test_load_optimizer(gen_instance):
+    gen_instance.label_names = ["A", "B", "C"]
+    gen_instance.set_id2label()
+    gen_instance.set_label2id()
+    gen_instance.load_model()
+    gen_instance.load_optimizer()
+    assert gen_instance.optimizer.defaults["lr"] == 2e-5
+    gen_instance.load_optimizer(learning_rate=1e-3)
+    assert gen_instance.optimizer.defaults["lr"] == 1e-3
+    gen_instance.load_optimizer(kwargs={"weight_decay": 0.015})
+    assert gen_instance.optimizer.defaults["weight_decay"] == 0.015
