@@ -117,3 +117,7 @@ class TransformersModelManager:
         self.data_collator = DataCollatorForTokenClassification(
             tokenizer=self.tokenizer
         )
+
+    def create_batch(self, tokenized_datasets):
+        batch = self.data_collator([item for item in tokenized_datasets["train"]])
+        return batch

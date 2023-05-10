@@ -154,3 +154,16 @@ def test_init_data_collator(gen_instance):
     assert gen_instance.data_collator.padding
     assert gen_instance.data_collator.return_tensors == "pt"
     assert not gen_instance.data_collator.pad_to_multiple_of
+
+
+def test_create_batch(gen_instance, long_dataset):
+    gen_instance.init_tokenizer()
+    tokenized_datasets = gen_instance.map_dataset(long_dataset)
+    gen_instance.init_data_collator()
+    batch = gen_instance.create_batch(tokenized_datasets)
+    ref_labels = [-100, 0, 2, 1, 1, -100]
+    assert batch["labels"][0].tolist() == ref_labels
+    ref_input_ids = [101, 7091, 1734, 1111, 5193, 102]
+    assert batch["input_ids"][0].tolist() == ref_input_ids
+    ref_attention_mask = [1, 1, 1, 1, 1, 1]
+    assert batch["attention_mask"][0].tolist() == ref_attention_mask
