@@ -39,7 +39,9 @@ dependencies = [
     "classy_classification",
     "spacy-span-analyzer",
     "textacy",
-    "wheel",
+    "wheel", 
+    "dash",
+    "jupyter-dash",
     "datasets",
     "transformers",
 
