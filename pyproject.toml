@@ -42,6 +42,8 @@ dependencies = [
     "wheel",
     "datasets",
     "transformers",
+    "seqeval",
+    "torch",
 
 ]
 

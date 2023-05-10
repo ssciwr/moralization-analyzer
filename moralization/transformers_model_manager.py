@@ -1,6 +1,10 @@
 from transformers import AutoTokenizer
 from transformers import DataCollatorForTokenClassification
+from transformers import AutoModelForTokenClassification
 from typing import List
+import evaluate
+import numpy as np
+from torch.utils.data import DataLoader
 
 
 class TransformersModelManager:
@@ -121,3 +125,74 @@ class TransformersModelManager:
     def create_batch(self, tokenized_datasets):
         batch = self.data_collator([item for item in tokenized_datasets["train"]])
         return batch
+
+    def load_evaluation_metric(self, label_names=None, eval_metric=None):
+        if not label_names:
+            self.label_names = ["0", "M", "M-BEG"]
+        else:
+            self.label_names = label_names
+        if not eval_metric:
+            # default is sequential evaluation
+            # for other metrics, please see
+            # https://huggingface.co/docs/evaluate/choosing_a_metric
+            eval_metric = "seqeval"
+        self.metric = evaluate.load(eval_metric)
+
+    def compute_metrics(self, eval_preds):
+        logits, labels = eval_preds
+        predictions = np.argmax(logits, axis=-1)
+        print(predictions)
+        # Remove ignored index (special tokens) and convert to labels
+        # we need this since seqeval operates on strings and not integers
+        true_labels = [
+            [self.label_names[m] for m in label if m != -100] for label in labels
+        ]
+        true_predictions = [
+            [self.label_names[p] for (p, m) in zip(prediction, label) if m != -100]
+            for prediction, label in zip(predictions, labels)
+        ]
+        all_metrics = self.metric.compute(
+            predictions=true_predictions, references=true_labels
+        )
+        return {
+            "precision": all_metrics["overall_precision"],
+            "recall": all_metrics["overall_recall"],
+            "f1": all_metrics["overall_f1"],
+            "accuracy": all_metrics["overall_accuracy"],
+        }
+
+    def set_id2label(self):
+        if not hasattr(self, "label_names"):
+            raise ValueError("Please set the label names first!")
+        self.id2label = {i: label for i, label in enumerate(self.label_names)}
+
+    def set_label2id(self):
+        if not hasattr(self, "id2label"):
+            raise ValueError("Please set id2label first!")
+        self.label2id = {v: k for k, v in self.id2label.items()}
+
+    def load_model(self, model_name=None):
+        if model_name is None:
+            model_name = self.model_name
+        try:
+            self.model = AutoModelForTokenClassification.from_pretrained(
+                model_name,
+                id2label=self.id2label,
+                label2id=self.label2id,
+            )
+        except OSError:
+            # here we also need more exceptions for no network etc
+            raise OSError("Could not initiate model - please check your model name")
+
+    def load_dataloader(self, tokenized_datasets, batch_size=8):
+        self.train_dataloader = DataLoader(
+            tokenized_datasets["train"],
+            shuffle=True,
+            collate_fn=self.data_collator,
+            batch_size=batch_size,
+        )
+        self.eval_dataloader = DataLoader(
+            tokenized_datasets["test"],
+            collate_fn=self.data_collator,
+            batch_size=batch_size,
+        )

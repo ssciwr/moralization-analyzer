@@ -149,7 +149,6 @@ def test_map_dataset(train_test_dataset, long_dataset):
 def test_init_data_collator(gen_instance):
     gen_instance.init_tokenizer()
     gen_instance.init_data_collator()
-    print(type(gen_instance.data_collator))
     assert type(gen_instance.data_collator) == DataCollatorForTokenClassification
     assert gen_instance.data_collator.padding
     assert gen_instance.data_collator.return_tensors == "pt"
@@ -167,3 +166,67 @@ def test_create_batch(gen_instance, long_dataset):
     assert batch["input_ids"][0].tolist() == ref_input_ids
     ref_attention_mask = [1, 1, 1, 1, 1, 1]
     assert batch["attention_mask"][0].tolist() == ref_attention_mask
+
+
+def test_load_evaluation_metric(gen_instance):
+    gen_instance.load_evaluation_metric()
+    assert gen_instance.metric.module_type == "metric"
+    assert gen_instance.metric.name == "seqeval"
+    assert gen_instance.label_names == ["0", "M", "M-BEG"]
+    test_labels = ["0", "A", "B", "C"]
+    gen_instance.load_evaluation_metric(label_names=test_labels)
+    assert gen_instance.label_names == test_labels
+    assert gen_instance.metric.name == "seqeval"
+    gen_instance.load_evaluation_metric(label_names=None, eval_metric="precision")
+    assert gen_instance.metric.name == "precision"
+
+
+@pytest.mark.skip
+def test_compute_metrics(gen_instance):
+    gen_instance.load_evaluation_metric()
+    eval_preds = None
+    metrics = gen_instance.compute_metrics(eval_preds)
+    assert metrics
+
+
+def test_set_id2label(gen_instance):
+    with pytest.raises(ValueError):
+        gen_instance.set_id2label()
+    gen_instance.label_names = ["A", "B", "C"]
+    gen_instance.set_id2label()
+    assert gen_instance.id2label == {0: "A", 1: "B", 2: "C"}
+
+
+def test_set_label2id(gen_instance):
+    with pytest.raises(ValueError):
+        gen_instance.set_label2id()
+    gen_instance.label_names = ["A", "B", "C"]
+    gen_instance.set_id2label()
+    gen_instance.set_label2id()
+    assert gen_instance.id2label == {0: "A", 1: "B", 2: "C"}
+    assert gen_instance.label2id == {"A": 0, "B": 1, "C": 2}
+
+
+def test_load_model(gen_instance):
+    gen_instance.label_names = ["A", "B", "C"]
+    gen_instance.set_id2label()
+    gen_instance.set_label2id()
+    gen_instance.load_model()
+    assert gen_instance.model.name_or_path == "bert-base-cased"
+    assert gen_instance.model.num_labels == 3
+    gen_instance.load_model(model_name="bert-base-uncased")
+    assert gen_instance.model.name_or_path == "bert-base-uncased"
+    with pytest.raises(OSError):
+        gen_instance.load_model(model_name="ber-base-uncased")
+
+
+def test_load_dataloader(gen_instance, train_test_dataset):
+    gen_instance.init_tokenizer()
+    tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
+    gen_instance.init_data_collator()
+    gen_instance.load_dataloader(tokenized_dataset)
+    assert gen_instance.train_dataloader.batch_size == 8
+    assert gen_instance.eval_dataloader.batch_size == 8
+    gen_instance.load_dataloader(tokenized_dataset, batch_size=16)
+    assert gen_instance.train_dataloader.batch_size == 16
+    assert gen_instance.eval_dataloader.batch_size == 16
