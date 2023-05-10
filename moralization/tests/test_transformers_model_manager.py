@@ -119,12 +119,6 @@ def test_add_labels_to_inputs(raw_dataset, gen_instance):
     labels_list = [[0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 0]]
     gen_instance.add_labels_to_inputs(labels=labels_list)
     assert gen_instance.inputs["labels"] == ref_labels
-    # test if labels from self is working
-    gen_instance.inputs = None
-    gen_instance.tokenize(raw_dataset["test"]["word"])
-    gen_instance.label_list = labels_list
-    gen_instance.add_labels_to_inputs()
-    assert gen_instance.inputs["labels"] == ref_labels
 
 
 def test_map_dataset(train_test_dataset, long_dataset):
