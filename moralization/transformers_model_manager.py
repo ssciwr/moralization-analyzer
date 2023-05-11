@@ -160,16 +160,38 @@ class TransformersModelManager:
         )
         return tokenized_datasets
 
-    def init_data_collator(self):
+    def init_data_collator(self, kwargs: dict = None) -> None:
+        """Initializes the Data Collator that will form batches from the data
+        for the training.
+
+        Args:
+            kwargs (dict, optional): Keyword arguments to be passed to the data collator.
+            Only arguments other than `tokenizer`.
+        """
+        if not kwargs:
+            kwargs = {}
         self.data_collator = DataCollatorForTokenClassification(
-            tokenizer=self.tokenizer
+            tokenizer=self.tokenizer, **kwargs
         )
 
-    def create_batch(self, tokenized_datasets):
+    def create_batch(
+        self, tokenized_datasets: DatasetDict
+    ) -> tokenization_utils_base.BatchEncoding:
+        """Creates the batches from the tokenized datasets using the Data Collator."""
         batch = self.data_collator([item for item in tokenized_datasets["train"]])
         return batch
 
-    def load_evaluation_metric(self, label_names=None, eval_metric="seqeval"):
+    def load_evaluation_metric(
+        self, label_names: List = None, eval_metric: str = "seqeval"
+    ) -> None:
+        """Loads the evaluation metric to determine scores for the training.
+
+        Args:
+            label_names (list, optional): Label names as strings for the labels to be trained. If
+            the evaluation metric is sequential evaluation, strings are required. For other metrics,
+            please consult the evaluate documentation: https://huggingface.co/docs/evaluate/choosing_a_metric
+            eval_metric (str, optional): Evaluation metric to be used, defaults to `seqeval`.
+        """
         # default is sequential evaluation
         # for other metrics, please see
         # https://huggingface.co/docs/evaluate/choosing_a_metric
@@ -179,7 +201,12 @@ class TransformersModelManager:
             self.label_names = label_names
         self.metric = evaluate.load(eval_metric)
 
-    def compute_metrics(self, eval_preds):
+    def compute_metrics(self, eval_preds: tuple) -> dict:
+        """Convenience function to compute and return the metrics.
+
+        Args:
+            eval_preds (tuple, required): The predicted and actual labels as a tuple.
+        """
         logits, labels = eval_preds
         predictions = np.argmax(logits, axis=-1)
         print(predictions)
@@ -202,17 +229,27 @@ class TransformersModelManager:
             "accuracy": all_metrics["overall_accuracy"],
         }
 
-    def set_id2label(self):
+    def set_id2label(self) -> None:
+        """Creates a map from label id (integer) to label name (string)."""
+
         if not hasattr(self, "label_names"):
             raise ValueError("Please set the label names first!")
         self.id2label = {i: label for i, label in enumerate(self.label_names)}
 
-    def set_label2id(self):
+    def set_label2id(self) -> None:
+        """Creates a map from label name (string) to label id (integer)."""
+
         if not hasattr(self, "id2label"):
             raise ValueError("Please set id2label first!")
         self.label2id = {v: k for k, v in self.id2label.items()}
 
-    def load_model(self, model_name=None):
+    def load_model(self, model_name: str = None) -> None:
+        """Loads the model to be finetuned in the training.
+
+        Args:
+            model_name (str, optional): The name of the model to be used in the training.
+            Defaults to "bert-base-cased".
+        """
         if model_name is None:
             model_name = self.model_name
         try:
@@ -225,7 +262,16 @@ class TransformersModelManager:
             # here we also need more exceptions for no network etc
             raise OSError("Could not initiate model - please check your model name")
 
-    def load_dataloader(self, tokenized_datasets, batch_size=8):
+    def load_dataloader(
+        self, tokenized_datasets: DatasetDict, batch_size: int = 8
+    ) -> None:
+        """Loads the pytorch dataloader for the train and test data, that loads the data into batches.
+
+        Args:
+            tokenized_datasets (DatasetDict, required): The tokenized train and test datasets.
+            batch_size (int, optional): Batch size that the data will be processed in. Defaults
+            to 8.
+        """
         self.train_dataloader = DataLoader(
             tokenized_datasets["train"],
             shuffle=True,
@@ -238,12 +284,22 @@ class TransformersModelManager:
             batch_size=batch_size,
         )
 
-    def load_optimizer(self, learning_rate=2e-5, kwargs=None):
+    def load_optimizer(self, learning_rate: float = 2e-5, kwargs: dict = None) -> None:
+        """Load the AdamW adaptive optimizer that handles the optimization process.
+
+        Args:
+            learning_rate (float, optional): Learning rate to be used in the optimization. Defaults to
+            2e-5.
+            kwargs (dict, ootional): Further keyword arguments other than learning rate to be passed to the
+            optimizer.
+        """
         if not kwargs:
             kwargs = {}
         self.optimizer = AdamW(self.model.parameters(), lr=learning_rate, **kwargs)
 
-    def load_accelerator(self):
+    def load_accelerator(self) -> None:
+        """Loads the accelerator that enables PyTorch to run on any distributed configuration, handles all
+        cuda and device placements."""
         accelerator = Accelerator()
         (
             self.model,

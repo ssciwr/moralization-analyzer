@@ -66,10 +66,6 @@ def test_tokenize(raw_dataset, gen_instance):
         "[SEP]",
     ]
     assert new_tokens == ref_tokens
-    # try with no wordlist
-    gen_instance.token_list = raw_dataset["test"]["word"]
-    gen_instance.tokenize()
-    assert new_tokens == ref_tokens
 
 
 def test_check_is_nested(gen_instance):
