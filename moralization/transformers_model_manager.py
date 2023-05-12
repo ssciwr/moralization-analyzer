@@ -301,7 +301,7 @@ class TransformersModelManager:
         Args:
             learning_rate (float, optional): Learning rate to be used in the optimization. Defaults to
             2e-5.
-            kwargs (dict, ootional): Further keyword arguments other than learning rate to be passed to the
+            kwargs (dict, optional): Further keyword arguments other than learning rate to be passed to the
             optimizer.
         """
         if not kwargs:
