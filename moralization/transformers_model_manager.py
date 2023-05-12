@@ -220,7 +220,6 @@ class TransformersModelManager:
         """
         logits, labels = eval_preds
         predictions = np.argmax(logits, axis=-1)
-        print(predictions)
         # Remove ignored index (special tokens) and convert to labels
         # we need this since seqeval operates on strings and not integers
         true_labels = [
