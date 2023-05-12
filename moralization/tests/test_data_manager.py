@@ -134,8 +134,7 @@ def test_lists_to_df(get_transformers_lists):
     dm = get_transformers_lists[0]
     sentence_list = get_transformers_lists[1]
     label_list = get_transformers_lists[2]
-    dm.lists_to_df(sentence_list, label_list)
-    data_frame = dm.data_in_frame
+    data_frame = dm.lists_to_df(sentence_list, label_list)
     ref_sentence = [
         '"',
         "Dann",
@@ -158,8 +157,9 @@ def test_df_to_dataset(get_transformers_lists, data_dir):
     dm = get_transformers_lists[0]
     sentence_list = get_transformers_lists[1]
     label_list = get_transformers_lists[2]
-    dm.lists_to_df(sentence_list, label_list)
-    dm.df_to_dataset()
+    data_frame = dm.lists_to_df(sentence_list, label_list)
+    raw_data_set = dm.df_to_dataset(data_frame, split=False)
+    train_test_set = dm.df_to_dataset(data_frame)
     ref_sentence = [
         '"',
         "Dann",
@@ -173,12 +173,8 @@ def test_df_to_dataset(get_transformers_lists, data_dir):
         "#",
         "#",
     ]
-    assert dm.raw_data_set["Sentences"][3] == ref_sentence
+    assert raw_data_set["Sentences"][3] == ref_sentence
     ref_labels = [-100, 0, 0, 0, 0, 0, 0, -100, -100, -100, -100]
-    assert dm.raw_data_set["Labels"][3] == ref_labels
-    assert dm.train_test_set
-    assert dm.train_test_set["test"]
-    dm_nosplit = DataManager(data_dir)
-    dm_nosplit.lists_to_df(sentence_list, label_list)
-    dm_nosplit.df_to_dataset(split=False)
-    assert not hasattr(dm_nosplit, "train_test_set")
+    assert raw_data_set["Labels"][3] == ref_labels
+    assert train_test_set["test"]
+    assert train_test_set["train"]

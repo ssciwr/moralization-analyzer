@@ -146,7 +146,6 @@ def test_init_data_collator(gen_instance):
 
 
 def test_create_batch(gen_instance, long_dataset):
-    gen_instance.init_tokenizer()
     tokenized_datasets = gen_instance.map_dataset(long_dataset)
     gen_instance.init_data_collator()
     batch = gen_instance.create_batch(tokenized_datasets)

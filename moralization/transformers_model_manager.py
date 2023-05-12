@@ -138,21 +138,32 @@ class TransformersModelManager:
             inputs (BatchEncoding): The encoded tokens, labels, etc, after tokenization
         """
         self.init_tokenizer()
-        self.tokenize(examples["word"])
-        self.add_labels_to_inputs(examples["label"])
+        self.tokenize(examples[self.token_column_name])
+        self.add_labels_to_inputs(examples[self.label_column_name])
         print(type(self.inputs))
 
         return self.inputs
 
-    def map_dataset(self, train_test_set: DatasetDict) -> DatasetDict:
+    def map_dataset(
+        self,
+        train_test_set: DatasetDict,
+        token_column_name: str = "word",
+        label_column_name: str = "label",
+    ) -> DatasetDict:
         """Apply the tokenization to the complete dataset using a mapping function.
 
         Args:
             train_test_set (DatasetDict, required): The nested list of labels that needs to be aligned.
+            token_column_name (str, optional): The name of the column containing the sentences/tokens.
+            Defaults to "word".
+            label_column_name (str): The name of the column containing the labels.
+            Defaults to "label".
 
         Returns:
             tokenized_datasets (DatasetDict): The tokenized and label-aligned dataset.
         """
+        self.token_column_name = token_column_name
+        self.label_column_name = label_column_name
         tokenized_datasets = train_test_set.map(
             self.tokenize_and_align,
             batched=True,
