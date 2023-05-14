@@ -44,7 +44,10 @@ dependencies = [
     "jupyter-dash",
     "datasets",
     "transformers",
-
+    "seqeval",
+    "torch",
+    "evaluate",
+    "accelerate",
 ]
 
 [tool.setuptools.package-data]

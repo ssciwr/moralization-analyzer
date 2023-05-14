@@ -294,14 +294,17 @@ class DataManager:
         Returns:
             data_in_frame (dataframe): A list of the train and test files path.
         """
-        self.data_in_frame = pd.DataFrame(
+        data_in_frame = pd.DataFrame(
             zip(sentence_list, label_list), columns=["Sentences", "Labels"]
         )
+        return data_in_frame
 
-    def df_to_dataset(self, split=True):
-        self.raw_data_set = datasets.Dataset.from_pandas(self.data_in_frame)
+    def df_to_dataset(self, data_in_frame, split=True):
+        raw_data_set = datasets.Dataset.from_pandas(data_in_frame)
         if split:
             # split in train test
-            self.train_test_set = self.raw_data_set.train_test_split(test_size=0.1)
+            train_test_set = raw_data_set.train_test_split(test_size=0.1)
+            return train_test_set
+        return raw_data_set
 
     # here we also need a method to publish the dataset to hugging face
