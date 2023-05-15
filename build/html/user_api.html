@@ -84,11 +84,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.load_evaluation_metric"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.load_evaluation_metric()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.load_model"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.load_model()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.load_optimizer"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.load_optimizer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.load_scheduler"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.load_scheduler()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.map_dataset"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.map_dataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.postprocess"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.postprocess()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.set_id2label"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.set_id2label()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.set_label2id"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.set_label2id()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.tokenize"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.tokenize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.tokenize_and_align"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.tokenize_and_align()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.train"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.train()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -470,6 +473,18 @@ optimizer.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.load_scheduler">
+<span class="sig-name descname"><span class="pre">load_scheduler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scheduler_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_train_epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.load_scheduler" title="Permalink to this definition"></a></dt>
+<dd><p>Load the scheduler that handles the adjustement of the learning rate during the training.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>scheduler_name (string, optional): Type of scheduler to be used that adjusts the learning
+rate During the training. Defaults to “linear”.
+num_train_epochs (int, optional): The number of training steps to do. Defaults to 3.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="moralization.TransformersModelManager.map_dataset">
 <span class="sig-name descname"><span class="pre">map_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_test_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DatasetDict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_column_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'word'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_column_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'label'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DatasetDict</span></span></span><a class="headerlink" href="#moralization.TransformersModelManager.map_dataset" title="Permalink to this definition"></a></dt>
 <dd><p>Apply the tokenization to the complete dataset using a mapping function.</p>
@@ -484,6 +499,11 @@ Defaults to “label”.</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.postprocess">
+<span class="sig-name descname"><span class="pre">postprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.postprocess" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.TransformersModelManager.set_id2label">
@@ -520,6 +540,11 @@ and labels that needs to be aligned.</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.train" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
