@@ -232,3 +232,25 @@ def test_load_optimizer(gen_instance):
     assert gen_instance.optimizer.defaults["lr"] == 1e-3
     gen_instance.load_optimizer(kwargs={"weight_decay": 0.015})
     assert gen_instance.optimizer.defaults["weight_decay"] == 0.015
+
+
+def test_load_scheduler(gen_instance, train_test_dataset):
+    gen_instance.init_tokenizer()
+    tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
+    gen_instance.init_data_collator()
+    gen_instance.load_dataloader(tokenized_dataset)
+    gen_instance.label_names = ["A", "B", "C"]
+    gen_instance.set_id2label()
+    gen_instance.set_label2id()
+    gen_instance.load_model()
+    gen_instance.load_optimizer()
+    gen_instance.load_scheduler()
+    assert gen_instance.lr_scheduler.base_lrs == [2e-5]
+    assert gen_instance.num_training_steps == 3
+    # now test the exceptions
+    del gen_instance.optimizer
+    with pytest.raises(ValueError):
+        gen_instance.load_scheduler()
+    del gen_instance.train_dataloader
+    with pytest.raises(ValueError):
+        gen_instance.load_scheduler()

@@ -2,6 +2,8 @@ from transformers import AutoTokenizer
 from transformers import DataCollatorForTokenClassification
 from transformers import AutoModelForTokenClassification
 from transformers import tokenization_utils_base
+from transformers import get_scheduler
+from transformers import pipeline  # noqa
 from datasets import DatasetDict, formatting
 from typing import List
 import evaluate
@@ -9,6 +11,8 @@ import numpy as np
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
 from accelerate import Accelerator
+from tqdm.auto import tqdm
+from torch import no_grad
 
 
 class TransformersModelManager:
@@ -310,12 +314,132 @@ class TransformersModelManager:
     def load_accelerator(self) -> None:
         """Loads the accelerator that enables PyTorch to run on any distributed configuration, handles all
         cuda and device placements."""
-        accelerator = Accelerator()
+        self.accelerator = Accelerator()
         (
             self.model,
             self.optimizer,
             self.train_dataloader,
             self.eval_dataloader,
-        ) = accelerator.prepare(
+        ) = self.accelerator.prepare(
             self.model, self.optimizer, self.train_dataloader, self.eval_dataloader
         )
+
+    def load_scheduler(self, scheduler_name: str = "linear", num_train_epochs: int = 3):
+        """Load the scheduler that handles the adjustement of the learning rate during the training.
+
+        Args:
+            scheduler_name (string, optional): Type of scheduler to be used that adjusts the learning
+            rate During the training. Defaults to "linear".
+            num_train_epochs (int, optional): The number of training steps to do. Defaults to 3.
+        """
+
+        self.num_train_epochs = num_train_epochs
+        try:
+            self.num_update_steps_per_epoch = len(self.train_dataloader)
+        except AttributeError:
+            raise ValueError(
+                "Dataloader not initialized. Please load the dataloader first."
+            )
+        if not hasattr(self, "optimizer"):
+            raise ValueError(
+                "Optimizer not initialized. Please load the optimizer first."
+            )
+        self.num_training_steps = num_train_epochs * self.num_update_steps_per_epoch
+        self.lr_scheduler = get_scheduler(
+            name=scheduler_name,
+            optimizer=self.optimizer,
+            num_warmup_steps=0,
+            num_training_steps=self.num_training_steps,
+        )
+
+    def postprocess(self, predictions, labels):
+        predictions = predictions.detach().cpu().clone().numpy()
+        labels = labels.detach().cpu().clone().numpy()
+        if not self.label_names:
+            raise ValueError("Label names not set!")
+        # Remove ignored index (special tokens) and convert to labels
+        true_labels = [
+            [self.label_names[m] for m in label if m != -100] for label in labels
+        ]
+        true_predictions = [
+            [self.label_names[p] for (p, m) in zip(prediction, label) if m != -100]
+            for prediction, label in zip(predictions, labels)
+        ]
+        return true_labels, true_predictions
+
+    def train(self):
+        progress_bar = tqdm(range(self.num_training_steps))
+        output_dir = "."
+
+        for epoch in range(self.num_train_epochs):
+            # Training
+            self.model.train()
+            for batch in self.train_dataloader:
+                outputs = self.model(**batch)
+                loss = outputs.loss
+                self.accelerator.backward(loss)
+
+                self.optimizer.step()
+                self.lr_scheduler.step()
+                self.optimizer.zero_grad()
+                progress_bar.update(1)
+
+            # Evaluation
+            self.model.eval()
+            for batch in self.eval_dataloader:
+                with no_grad():
+                    outputs = self.model(**batch)
+
+                predictions = outputs.logits.argmax(dim=-1)
+                labels = batch["labels"]
+
+                # Necessary to pad predictions and labels for being gathered
+                predictions = self.accelerator.pad_across_processes(
+                    predictions, dim=1, pad_index=-100
+                )
+                labels = self.accelerator.pad_across_processes(
+                    labels, dim=1, pad_index=-100
+                )
+
+                predictions_gathered = self.accelerator.gather(predictions)
+                labels_gathered = self.accelerator.gather(labels)
+
+                true_predictions, true_labels = self.postprocess(
+                    predictions_gathered, labels_gathered
+                )
+                self.metric.add_batch(
+                    predictions=true_predictions, references=true_labels
+                )
+
+            results = self.metric.compute()
+            print(
+                f"epoch {epoch}:",
+                {
+                    key: results[f"overall_{key}"]
+                    for key in ["precision", "recall", "f1", "accuracy"]
+                },
+            )
+
+            # Save and upload
+            self.accelerator.wait_for_everyone()
+            unwrapped_model = self.accelerator.unwrap_model(self.model)
+            unwrapped_model.save_pretrained(
+                output_dir, save_function=self.accelerator.save
+            )
+            if self.accelerator.is_main_process:
+                self.tokenizer.save_pretrained(output_dir)
+        #         repo.push_to_hub(
+        #             commit_message=f"Training in progress epoch {epoch}", blocking=False
+        #         )
+
+    # accelerator.wait_for_everyone()
+    # unwrapped_model = accelerator.unwrap_model(model)
+    # unwrapped_model.save_pretrained(output_dir, save_function=accelerator.save)
+    #
+    #
+    # # Replace this with your own checkpoint
+    # model_checkpoint = "."
+    # token_classifier = pipeline(
+    #     "token-classification", model=model_checkpoint, aggregation_strategy="simple"
+    # )
+    # token_classifier("Das Arbeitslosengeld ist nicht hoch genug da man ungleiche Standards propagiert.")
