@@ -170,14 +170,6 @@ def test_load_evaluation_metric(gen_instance):
     assert gen_instance.metric.name == "precision"
 
 
-@pytest.mark.skip
-def test_compute_metrics(gen_instance):
-    gen_instance.load_evaluation_metric()
-    eval_preds = None
-    metrics = gen_instance.compute_metrics(eval_preds)
-    assert metrics
-
-
 def test_set_id2label(gen_instance):
     with pytest.raises(ValueError):
         gen_instance.set_id2label()
@@ -256,13 +248,8 @@ def test_load_scheduler(gen_instance, train_test_dataset):
         gen_instance.load_scheduler()
 
 
-def test_postprocess(gen_instance):
-    pass
-
-
-def test_train(gen_instance, train_test_dataset, tmp_path):
-    model_path = tmp_path
-    gen_instance._model_dir = model_path
+def test_train_evaluate(gen_instance, train_test_dataset):
+    model_path = gen_instance._model_path
     gen_instance.init_tokenizer()
     tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
     gen_instance.init_data_collator()
@@ -279,3 +266,5 @@ def test_train(gen_instance, train_test_dataset, tmp_path):
     assert (model_path / "pytorch_model.bin").is_file()
     assert (model_path / "special_tokens_map.json").is_file()
     assert (model_path / "config.json").is_file()
+    evaluate_result = gen_instance.evaluate("Python ist toll.", model_path=model_path)
+    assert evaluate_result[0]["score"]

@@ -438,11 +438,14 @@ class TransformersModelManager:
         if self.accelerator.is_main_process:
             self.tokenizer.save_pretrained(self._model_path)
 
-    def evaluate(self):
-        model_checkpoint = self._model_path
+    def evaluate(self, token: str, model_path: Union[str, Path] = None):
+        if not model_path:
+            model_checkpoint = self._model_path
+        else:
+            model_checkpoint = model_path
         token_classifier = pipeline(
             "token-classification",
             model=model_checkpoint,
             aggregation_strategy="simple",
         )
-        token_classifier("Python ist toll.")
+        return token_classifier(token)
