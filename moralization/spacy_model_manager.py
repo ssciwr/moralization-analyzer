@@ -1,6 +1,5 @@
-import huggingface_hub
+from __future__ import annotations
 import spacy_huggingface_hub
-import os
 import json
 import spacy
 from pathlib import Path
@@ -10,6 +9,7 @@ import tempfile
 import re
 import logging
 from moralization.data_manager import DataManager
+from moralization.model_manager import ModelManager
 from moralization.plot import visualize_data
 import shutil
 
@@ -74,7 +74,7 @@ def _import_or_create_metadata(model_path: Path) -> Dict[str, Any]:
 
 
 def _create_model(
-    model_path: Union[str, Path],
+    model_path: Path,
     config_file: Optional[Union[str, Path]] = None,
     overwrite: bool = False,
 ):
@@ -99,7 +99,7 @@ def _create_model(
         spacy.cli.fill_config(model_path / "config.cfg", Path(config_file))
 
 
-class SpacyModelManager:
+class SpacyModelManager(ModelManager):
     """
     Create, import, modify, train and publish spacy models.
 
@@ -136,35 +136,34 @@ class SpacyModelManager:
             base_config_file (str or Path, optional): If supplied this base config will be used to create a new model
             overwrite_existing_files (bool): If true any existing files in `model_path` are removed
         """
-        self._model_path = Path(model_path)
-        self._best_model_path = self._model_path / "model-best"
-        self._last_model_path = self._model_path / "model-last"
+        super().__init__(model_path)
+        self._best_model_path = self.model_path / "model-best"
+        self._last_model_path = self.model_path / "model-last"
         existing_model = (
-            self._model_path.is_dir() and (self._model_path / "config.cfg").is_file()
+            self.model_path.is_dir() and (self.model_path / "config.cfg").is_file()
         )
         if base_config_file or overwrite_existing_files or not existing_model:
-            _create_model(self._model_path, base_config_file, overwrite_existing_files)
-        self.metadata = _import_or_create_metadata(self._model_path)
+            _create_model(self.model_path, base_config_file, overwrite_existing_files)
+        self.metadata = _import_or_create_metadata(self.model_path)
 
     def __repr__(self) -> str:
         name = f"{self.metadata['name']}-{self.metadata['version']}"
-        path = f"{self._model_path.resolve()}"
-        return f"SpacyModelManager('{path}' [{name}])"
+        return f"SpacyModelManager('{self.model_path.resolve()}' [{name}])"
 
     def train(
         self,
         data_manager: DataManager,
+        check_data_integrity=True,
         use_gpu: int = -1,
         overrides: Optional[Dict] = None,
-        check_data_integrity=True,
     ):
         """Train the model on the data contained in `data_manager`.
 
         Args:
             data_manager (DataManager): the DataManager that contains the training data
+            check_data_integrity (bool): Whether to test the data integrity.
             use_gpu (int): The index of the GPU to use (default: -1 which means no GPU)
             overrides (dict): An optional dictionary of parameters to override in the model config
-            check_data_integrity (bool): Whether or not to test the data integrity.
         """
         self.save()
         if overrides is None:
@@ -176,8 +175,8 @@ class SpacyModelManager:
         overrides["paths.train"] = str(data_train)
         overrides["paths.dev"] = str(data_dev)
         spacy.cli.train.train(
-            self._model_path / "config.cfg",
-            self._model_path,
+            self.model_path / "config.cfg",
+            self.model_path,
             use_gpu=use_gpu,
             overrides=overrides,
         )
@@ -197,7 +196,7 @@ class SpacyModelManager:
     def save(self):
         """Save any changes made to the model metadata."""
         self.metadata["name"] = _make_valid_package_name(self.metadata.get("name"))
-        with open(self._model_path / "meta.json", "w") as f:
+        with open(self.model_path / "meta.json", "w") as f:
             json.dump(self.metadata, f)
         for model_path in [self._best_model_path, self._last_model_path]:
             _update_spacy_model_meta(model_path, self.metadata)
@@ -209,7 +208,7 @@ class SpacyModelManager:
         doc_dict = {"test_doc": nlp(test_string)}
         return visualize_data(doc_dict, style=style)
 
-    def publish(self, hugging_face_token: Optional[str] = None) -> Dict[str, str]:
+    def publish(self, hugging_face_token: Optional[str] = None) -> str:
         """Publish the model to Hugging Face.
 
         This requires a User Access Token from https://huggingface.co/
@@ -220,7 +219,7 @@ class SpacyModelManager:
         Args:
             hugging_face_token (str, optional): Hugging Face User Access Token
         Returns:
-            dict: URLs of the published model and the pip-installable wheel
+            str: The URL of the published model
         """
         self._check_model_is_trained_before_it_can_be("published")
         for key, value in self.metadata.items():
@@ -229,13 +228,7 @@ class SpacyModelManager:
                     f"Metadata '{key}' is not set - all metadata needs to be set before publishing a model."
                 )
         self.save()
-        if hugging_face_token is None:
-            hugging_face_token = os.environ.get("HUGGING_FACE_TOKEN")
-        if hugging_face_token is None:
-            raise ValueError(
-                "API TOKEN required: pass as string or set the HUGGING_FACE_TOKEN environment variable."
-            )
-        huggingface_hub.login(token=hugging_face_token)
+        self._login_to_huggingface(hugging_face_token)
         with tempfile.TemporaryDirectory() as tmpdir:
             # convert model to a python package including binary wheel
             package_path = Path(tmpdir)
@@ -244,7 +237,8 @@ class SpacyModelManager:
             nlp = spacy.load(self._best_model_path)
             wheel_path = _construct_wheel_path(package_path, nlp.meta)
             # push the package to hugging face
-            return spacy_huggingface_hub.push(wheel_path)
+            url_dict = spacy_huggingface_hub.push(wheel_path)
+            return url_dict.get("url", "")
 
     def _check_model_is_trained_before_it_can_be(self, action: str = "used"):
         if not self._best_model_path.is_dir():
@@ -263,7 +257,7 @@ class SpacyModelManager:
             [data_file.is_file() for data_file in data_files]
         )
         if not data_files_exist:
-            data_path = self._model_path.resolve() / "data"
+            data_path = self.model_path.resolve() / "data"
             Path(data_path).mkdir(parents=True, exist_ok=True)
             data_manager.export_data_DocBin(
                 data_path, overwrite=True, check_data_integrity=check_data_integrity
