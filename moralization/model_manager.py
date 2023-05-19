@@ -10,7 +10,7 @@ class ModelManager(ABC):
     """
     Create, import, modify, train and publish a model.
 
-    Models can be trained on data from a DataManager, and published to hugging face.
+    Models can be trained on data from a DataManager, and published to Hugging Face.
     """
 
     @abstractmethod
@@ -20,7 +20,7 @@ class ModelManager(ABC):
     @property
     def model_path(self) -> Path:
         """
-        The folder where the model is stored
+        The folder where the model is stored.
         """
         return self._model_path
 
@@ -38,7 +38,7 @@ class ModelManager(ABC):
 
     @abstractmethod
     def evaluate(self, data_manager: DataManager) -> Dict[str, Any]:
-        """Evaluate the model against the test dataset in `data_manager`
+        """Evaluate the model against the test dataset in `data_manager`.
         Args:
             data_manager (DataManager): the DataManager that contains the training data
         """
@@ -51,7 +51,7 @@ class ModelManager(ABC):
 
     @abstractmethod
     def test(self, test_string: str, style: str = "span"):
-        """Test the model output with a test string"""
+        """Test the model output with a test string."""
         raise NotImplementedError
 
     @abstractmethod
