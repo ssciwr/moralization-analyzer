@@ -2,8 +2,6 @@ from moralization.transformers_data_handler import TransformersDataHandler
 import pytest
 from moralization import DataManager
 
-EXAMPLE_NAME = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
-
 
 @pytest.fixture
 def doc_dict(data_dir):
@@ -17,32 +15,30 @@ def gen_instance():
 
 
 def test_get_data_lists(doc_dict, gen_instance):
-    gen_instance.get_data_lists(doc_dict=doc_dict, example_name=EXAMPLE_NAME)
+    gen_instance.get_data_lists(doc_dict=doc_dict)
+    # relying on that the dict is sorted by insertion for the wr
+    print(gen_instance.label_list[0])
+    print(gen_instance.sentence_list[2][0])
+    print(gen_instance.token_list[1][0].text)
     assert gen_instance.label_list[0] == [0]
-    assert gen_instance.sentence_list[2][0] == "JUL.02661"
-    assert gen_instance.token_list[1][0].text == "T07"
-    gen_instance.get_data_lists(doc_dict=doc_dict, example_name=None)
-    assert len(gen_instance.label_list) == 36
-    assert gen_instance.token_list[3][0].text == "BERLIN"
+    assert gen_instance.sentence_list[2][0] == "ALG"
+    assert gen_instance.token_list[1][0].text == "HMP05"
 
 
 def test_generate_labels(doc_dict, gen_instance):
-    gen_instance.get_data_lists(doc_dict=doc_dict, example_name=EXAMPLE_NAME)
-    gen_instance.generate_labels(doc_dict=doc_dict, example_name=EXAMPLE_NAME)
-    assert gen_instance.labels[10] == 0
-    assert gen_instance.labels[624] == 2
-    assert gen_instance.labels[625] == 1
-    assert gen_instance.labels[671] == 1
-    assert gen_instance.labels[672] == 0
-    gen_instance.get_data_lists(doc_dict=doc_dict, example_name=None)
-    gen_instance.generate_labels(doc_dict=doc_dict, example_name=None)
-    assert len(gen_instance.labels) == 500
-    assert gen_instance.labels[10] == 0
+    gen_instance.get_data_lists(doc_dict=doc_dict)
+    gen_instance.generate_labels(doc_dict=doc_dict)
+    assert gen_instance.labels[510] == 0
+    assert gen_instance.labels[1124] == 2
+    assert gen_instance.labels[1125] == 1
+    assert gen_instance.labels[1171] == 1
+    assert gen_instance.labels[1172] == 0
+    assert len(gen_instance.labels) == 1346
 
 
 def test_structure_labels(doc_dict, gen_instance):
-    gen_instance.get_data_lists(doc_dict=doc_dict, example_name=EXAMPLE_NAME)
-    gen_instance.generate_labels(doc_dict=doc_dict, example_name=EXAMPLE_NAME)
+    gen_instance.get_data_lists(doc_dict=doc_dict)
+    gen_instance.generate_labels(doc_dict=doc_dict)
     gen_instance.structure_labels()
     ref_sentence = ["Ich", "zitiere", "mal", "einen", "Kollegen", ":"]
     ref_labels = [0, 0, 0, 0, 0, -100]
@@ -74,6 +70,6 @@ def test_structure_labels(doc_dict, gen_instance):
         1,
         -100,
     ]
-    assert gen_instance.sentence_list[7] == ref_sentence
-    assert gen_instance.label_list[7] == ref_labels
-    assert gen_instance.label_list[44] == ref_labels2
+    assert gen_instance.sentence_list[43] == ref_sentence
+    assert gen_instance.label_list[43] == ref_labels
+    assert gen_instance.label_list[80] == ref_labels2
