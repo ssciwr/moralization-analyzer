@@ -1,22 +1,9 @@
 from moralization.data_manager import DataManager
-from moralization.transformers_data_handler import TransformersDataHandler
 from tempfile import mkdtemp
 from pathlib import Path
 import pytest
 import re
 import numpy as np
-
-
-@pytest.fixture
-def get_transformers_lists(data_dir):
-    dm = DataManager(data_dir)
-    tdh = TransformersDataHandler()
-    example_name = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
-    doc_dict = dm.doc_dict
-    tdh.get_data_lists(doc_dict=doc_dict, example_name=example_name)
-    tdh.generate_labels(doc_dict=doc_dict, example_name=example_name)
-    sentence_list, label_list = tdh.structure_labels()
-    return dm, sentence_list, label_list
 
 
 def test_data_manager(data_dir):
@@ -135,51 +122,46 @@ def test_check_data_integrity(data_dir):
     dm.check_data_integrity()
 
 
-def test_lists_to_df(get_transformers_lists):
-    dm = get_transformers_lists[0]
-    sentence_list = get_transformers_lists[1]
-    label_list = get_transformers_lists[2]
-    data_frame = dm.lists_to_df(sentence_list, label_list)
+def test_docdict_to_lists(data_dir):
+    dm = DataManager(data_dir)
+    dm.docdict_to_lists()
     ref_sentence = [
-        '"',
-        "Dann",
-        "kann",
-        "man",
-        "die",
-        "KMK",
-        "auflösen",
-        '"',
-        "#",
-        "#",
-        "#",
+        "SEP.01673",
+        "Hamburger",
+        "Morgenpost",
+        ",",
+        "16.09.2007",
+        ",",
+        "S.",
+        "46",
+        ";",
     ]
+    ref_labels = [0, 0, 0, -100, 0, -100, 0, 0, -100]
+    assert dm.sentence_list[32] == ref_sentence
+    assert dm.label_list[32] == ref_labels
+
+
+def test_lists_to_df(data_dir):
+    dm = DataManager(data_dir)
+    dm.docdict_to_lists()
+    data_frame = dm.lists_to_df()
+    ref_sentence = ["BERLIN"]
+    print(data_frame["Sentences"][3])
+    print(data_frame["Labels"][3])
     assert data_frame["Sentences"][3] == ref_sentence
-    ref_labels = [-100, 0, 0, 0, 0, 0, 0, -100, -100, -100, -100]
+    ref_labels = [0]
     assert data_frame["Labels"][3] == ref_labels
 
 
-def test_df_to_dataset(get_transformers_lists, data_dir):
-    dm = get_transformers_lists[0]
-    sentence_list = get_transformers_lists[1]
-    label_list = get_transformers_lists[2]
-    data_frame = dm.lists_to_df(sentence_list, label_list)
+def test_df_to_dataset(data_dir):
+    dm = DataManager(data_dir)
+    dm.docdict_to_lists()
+    data_frame = dm.lists_to_df()
     raw_data_set = dm.df_to_dataset(data_frame, split=False)
     train_test_set = dm.df_to_dataset(data_frame)
-    ref_sentence = [
-        '"',
-        "Dann",
-        "kann",
-        "man",
-        "die",
-        "KMK",
-        "auflösen",
-        '"',
-        "#",
-        "#",
-        "#",
-    ]
+    ref_sentence = ["BERLIN"]
     assert raw_data_set["Sentences"][3] == ref_sentence
-    ref_labels = [-100, 0, 0, 0, 0, 0, 0, -100, -100, -100, -100]
+    ref_labels = [0]
     assert raw_data_set["Labels"][3] == ref_labels
     assert train_test_set["test"]
     assert train_test_set["train"]

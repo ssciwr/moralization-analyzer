@@ -1,7 +1,10 @@
+from typing import Dict, List, Tuple
+
+
 class TransformersDataHandler:
     """Helper class to organize and prepare data for transformer models."""
 
-    def get_data_lists(self, doc_dict):
+    def get_data_lists(self, doc_dict: Dict) -> None:
         """Convert the data from doc object to lists. Required for transformers training.
 
         Set the lists of tokens and labels for transformers training, with a nested list of
@@ -29,7 +32,7 @@ class TransformersDataHandler:
             self.token_list.extend(token_list)
             self.label_list.extend(label_list)
 
-    def generate_labels(self, doc_dict):
+    def generate_labels(self, doc_dict: Dict) -> None:
         """Generate the labels from the annotated tokens in one long list. Required for transformers training.
 
         Args:
@@ -60,7 +63,7 @@ class TransformersDataHandler:
                     labels[span.start] = 2
             self.labels.extend(labels)
 
-    def structure_labels(self):
+    def structure_labels(self) -> Tuple[List, List]:
         """Structure the tokens from one long list into a nested list for sentences. Required for transformers training.
 
         Returns:

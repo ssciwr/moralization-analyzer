@@ -10,6 +10,7 @@ from moralization.plot import (
 import logging
 
 from moralization.spacy_data_handler import SpacyDataHandler
+from moralization.transformers_data_handler import TransformersDataHandler
 import pandas as pd
 import datasets
 import numpy as np
@@ -284,18 +285,23 @@ class DataManager:
         )
         return self.spacy_docbin_files
 
-    def lists_to_df(self, sentence_list, label_list):
-        """Convert nested lists of tokens and labels into a pandas dataframe.
+    def docdict_to_lists(self):
+        """Convert the dictionary of doc objects to nested lists."""
 
-        Args:
-            sentence_list (list): A nested list of the tokens (nested by sentence).
-            label_list (list): A nested list of the labels (nested by sentence).
+        # for now work with instantiation
+        tdh = TransformersDataHandler()
+        tdh.get_data_lists(self.doc_dict)
+        tdh.generate_labels(self.doc_dict)
+        self.sentence_list, self.label_list = tdh.structure_labels()
+
+    def lists_to_df(self):
+        """Convert nested lists of tokens and labels into a pandas dataframe.
 
         Returns:
             data_in_frame (dataframe): A list of the train and test files path.
         """
         data_in_frame = pd.DataFrame(
-            zip(sentence_list, label_list), columns=["Sentences", "Labels"]
+            zip(self.sentence_list, self.label_list), columns=["Sentences", "Labels"]
         )
         return data_in_frame
 
