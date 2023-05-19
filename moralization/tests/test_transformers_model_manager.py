@@ -266,5 +266,8 @@ def test_train_evaluate(gen_instance, train_test_dataset):
     assert (model_path / "pytorch_model.bin").is_file()
     assert (model_path / "special_tokens_map.json").is_file()
     assert (model_path / "config.json").is_file()
-    evaluate_result = gen_instance.evaluate("Python ist toll.", model_path=model_path)
+    evaluate_result = gen_instance.evaluate("Python ist toll.")
     assert evaluate_result[0]["score"]
+    del gen_instance._model_path
+    with pytest.raises(ValueError):
+        evaluate_result = gen_instance.evaluate("Python ist toll.")

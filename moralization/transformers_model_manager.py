@@ -16,6 +16,9 @@ from tqdm.auto import tqdm
 from torch import no_grad
 
 
+IGNORED_LABEL = -100
+
+
 class TransformersModelManager:
     """
     Create, import, modify, train and publish transformers models.
@@ -107,7 +110,8 @@ class TransformersModelManager:
         # inside a span label of 1
         # punctuation is ignored in the calculation of metrics: set to -100
         new_labels = [
-            -100 if word_id is None else labels[word_id] for word_id in word_ids
+            IGNORED_LABEL if word_id is None else labels[word_id]
+            for word_id in word_ids
         ]
         # if the beginning of a span has been split into two tokens,
         # make sure that the label "2" only appears once
@@ -231,10 +235,15 @@ class TransformersModelManager:
         # Remove ignored index (special tokens) and convert to labels
         # we need this since seqeval operates on strings and not integers
         true_labels = [
-            [self.label_names[m] for m in label if m != -100] for label in labels
+            [self.label_names[m] for m in label if m != IGNORED_LABEL]
+            for label in labels
         ]
         true_predictions = [
-            [self.label_names[p] for (p, m) in zip(prediction, label) if m != -100]
+            [
+                self.label_names[p]
+                for (p, m) in zip(prediction, label)
+                if m != IGNORED_LABEL
+            ]
             for prediction, label in zip(predictions, labels)
         ]
         all_metrics = self.metric.compute(
@@ -365,10 +374,15 @@ class TransformersModelManager:
             raise ValueError("Label names not set!")
         # Remove ignored index (special tokens) and convert to labels
         true_labels = [
-            [self.label_names[m] for m in label if m != -100] for label in labels
+            [self.label_names[m] for m in label if m != IGNORED_LABEL]
+            for label in labels
         ]
         true_predictions = [
-            [self.label_names[p] for (p, m) in zip(prediction, label) if m != -100]
+            [
+                self.label_names[p]
+                for (p, m) in zip(prediction, label)
+                if m != IGNORED_LABEL
+            ]
             for prediction, label in zip(predictions, labels)
         ]
         return true_labels, true_predictions
@@ -415,10 +429,10 @@ class TransformersModelManager:
             labels = batch["labels"]
             # Necessary to pad predictions and labels for being gathered
             predictions = self.accelerator.pad_across_processes(
-                predictions, dim=1, pad_index=-100
+                predictions, dim=1, pad_index=IGNORED_LABEL
             )
             labels = self.accelerator.pad_across_processes(
-                labels, dim=1, pad_index=-100
+                labels, dim=1, pad_index=IGNORED_LABEL
             )
             predictions_gathered = self.accelerator.gather(predictions)
             labels_gathered = self.accelerator.gather(labels)
@@ -438,14 +452,14 @@ class TransformersModelManager:
         if self.accelerator.is_main_process:
             self.tokenizer.save_pretrained(self._model_path)
 
-    def evaluate(self, token: str, model_path: Union[str, Path] = None):
-        if not model_path:
-            model_checkpoint = self._model_path
-        else:
-            model_checkpoint = model_path
+    def evaluate(self, token: str):
+        if not hasattr(self, "_model_path"):
+            raise ValueError(
+                "Please initiate the class first with a path to the model that you want to evaluate"
+            )
         token_classifier = pipeline(
             "token-classification",
-            model=model_checkpoint,
+            model=self._model_path,
             aggregation_strategy="simple",
         )
         return token_classifier(token)
