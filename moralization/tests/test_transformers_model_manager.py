@@ -5,8 +5,8 @@ from transformers import DataCollatorForTokenClassification
 
 
 @pytest.fixture
-def gen_instance():
-    return TransformersModelManager()
+def gen_instance(tmp_path):
+    return TransformersModelManager(tmp_path)
 
 
 @pytest.fixture(scope="module")
@@ -117,14 +117,14 @@ def test_add_labels_to_inputs(raw_dataset, gen_instance):
     assert gen_instance.inputs["labels"] == ref_labels
 
 
-def test_map_dataset(train_test_dataset, long_dataset):
-    tmm = TransformersModelManager()
+def test_map_dataset(train_test_dataset, long_dataset, tmp_path):
+    tmm = TransformersModelManager(tmp_path)
     tmm.init_tokenizer()
     tokenized_dataset = tmm.map_dataset(train_test_dataset)
     assert isinstance(tokenized_dataset["train"], Dataset)
     # try with more than one sentence
     del tmm
-    tmm = TransformersModelManager()
+    tmm = TransformersModelManager(tmp_path)
     tmm.init_tokenizer()
     tokenized_dataset = tmm.map_dataset(long_dataset)
     ref_input_ids = [
@@ -168,14 +168,6 @@ def test_load_evaluation_metric(gen_instance):
     assert gen_instance.metric.name == "seqeval"
     gen_instance.load_evaluation_metric(label_names=None, eval_metric="precision")
     assert gen_instance.metric.name == "precision"
-
-
-@pytest.mark.skip
-def test_compute_metrics(gen_instance):
-    gen_instance.load_evaluation_metric()
-    eval_preds = None
-    metrics = gen_instance.compute_metrics(eval_preds)
-    assert metrics
 
 
 def test_set_id2label(gen_instance):
@@ -232,3 +224,50 @@ def test_load_optimizer(gen_instance):
     assert gen_instance.optimizer.defaults["lr"] == 1e-3
     gen_instance.load_optimizer(kwargs={"weight_decay": 0.015})
     assert gen_instance.optimizer.defaults["weight_decay"] == 0.015
+
+
+def test_load_scheduler(gen_instance, train_test_dataset):
+    gen_instance.init_tokenizer()
+    tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
+    gen_instance.init_data_collator()
+    gen_instance.load_dataloader(tokenized_dataset)
+    gen_instance.label_names = ["A", "B", "C"]
+    gen_instance.set_id2label()
+    gen_instance.set_label2id()
+    gen_instance.load_model()
+    gen_instance.load_optimizer()
+    gen_instance.load_scheduler()
+    assert gen_instance.lr_scheduler.base_lrs == [2e-5]
+    assert gen_instance.num_training_steps == 3
+    # now test the exceptions
+    del gen_instance.optimizer
+    with pytest.raises(ValueError):
+        gen_instance.load_scheduler()
+    del gen_instance.train_dataloader
+    with pytest.raises(ValueError):
+        gen_instance.load_scheduler()
+
+
+def test_train_evaluate(gen_instance, train_test_dataset):
+    model_path = gen_instance._model_path
+    gen_instance.init_tokenizer()
+    tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
+    gen_instance.init_data_collator()
+    gen_instance.load_evaluation_metric()
+    gen_instance.set_id2label()
+    gen_instance.set_label2id()
+    gen_instance.load_model()
+    gen_instance.load_dataloader(tokenized_dataset)
+    gen_instance.load_optimizer()
+    gen_instance.load_accelerator()
+    gen_instance.load_scheduler(num_train_epochs=1)
+    gen_instance.train()
+    assert gen_instance.results["overall_precision"] == 0.0
+    assert (model_path / "pytorch_model.bin").is_file()
+    assert (model_path / "special_tokens_map.json").is_file()
+    assert (model_path / "config.json").is_file()
+    evaluate_result = gen_instance.evaluate("Python ist toll.")
+    assert evaluate_result[0]["score"]
+    del gen_instance._model_path
+    with pytest.raises(ValueError):
+        evaluate_result = gen_instance.evaluate("Python ist toll.")

@@ -2,13 +2,21 @@ from transformers import AutoTokenizer
 from transformers import DataCollatorForTokenClassification
 from transformers import AutoModelForTokenClassification
 from transformers import tokenization_utils_base
+from transformers import get_scheduler
+from transformers import pipeline  # noqa
 from datasets import DatasetDict, formatting
-from typing import List
+from typing import Union, List, Dict
 import evaluate
+from pathlib import Path
 import numpy as np
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
 from accelerate import Accelerator
+from tqdm.auto import tqdm
+from torch import no_grad
+
+
+IGNORED_LABEL = -100
 
 
 class TransformersModelManager:
@@ -20,14 +28,17 @@ class TransformersModelManager:
 
     def __init__(
         self,
+        model_path: Union[str, Path],
         model_name: str = "bert-base-cased",
     ) -> None:
         """
         Import an existing model from `model_name` from Hugging Face.
 
         Args:
+            model_path (str or Path): Folder where the model is (or will be) stored
             model_name (str): Name of the pretrained model
         """
+        self._model_path = Path(model_path)
         self.model_name = model_name
 
     def init_tokenizer(self, model_name=None, kwargs=None) -> None:
@@ -99,7 +110,8 @@ class TransformersModelManager:
         # inside a span label of 1
         # punctuation is ignored in the calculation of metrics: set to -100
         new_labels = [
-            -100 if word_id is None else labels[word_id] for word_id in word_ids
+            IGNORED_LABEL if word_id is None else labels[word_id]
+            for word_id in word_ids
         ]
         # if the beginning of a span has been split into two tokens,
         # make sure that the label "2" only appears once
@@ -171,7 +183,7 @@ class TransformersModelManager:
         )
         return tokenized_datasets
 
-    def init_data_collator(self, kwargs: dict = None) -> None:
+    def init_data_collator(self, kwargs: Dict = None) -> None:
         """Initializes the Data Collator that will form batches from the data
         for the training.
 
@@ -212,7 +224,7 @@ class TransformersModelManager:
             self.label_names = label_names
         self.metric = evaluate.load(eval_metric)
 
-    def compute_metrics(self, eval_preds: tuple) -> dict:
+    def compute_metrics(self, eval_preds: tuple) -> Dict:
         """Convenience function to compute and return the metrics.
 
         Args:
@@ -223,10 +235,15 @@ class TransformersModelManager:
         # Remove ignored index (special tokens) and convert to labels
         # we need this since seqeval operates on strings and not integers
         true_labels = [
-            [self.label_names[m] for m in label if m != -100] for label in labels
+            [self.label_names[m] for m in label if m != IGNORED_LABEL]
+            for label in labels
         ]
         true_predictions = [
-            [self.label_names[p] for (p, m) in zip(prediction, label) if m != -100]
+            [
+                self.label_names[p]
+                for (p, m) in zip(prediction, label)
+                if m != IGNORED_LABEL
+            ]
             for prediction, label in zip(predictions, labels)
         ]
         all_metrics = self.metric.compute(
@@ -294,7 +311,7 @@ class TransformersModelManager:
             batch_size=batch_size,
         )
 
-    def load_optimizer(self, learning_rate: float = 2e-5, kwargs: dict = None) -> None:
+    def load_optimizer(self, learning_rate: float = 2e-5, kwargs: Dict = None) -> None:
         """Load the AdamW adaptive optimizer that handles the optimization process.
 
         Args:
@@ -310,12 +327,139 @@ class TransformersModelManager:
     def load_accelerator(self) -> None:
         """Loads the accelerator that enables PyTorch to run on any distributed configuration, handles all
         cuda and device placements."""
-        accelerator = Accelerator()
+        self.accelerator = Accelerator()
         (
             self.model,
             self.optimizer,
             self.train_dataloader,
             self.eval_dataloader,
-        ) = accelerator.prepare(
+        ) = self.accelerator.prepare(
             self.model, self.optimizer, self.train_dataloader, self.eval_dataloader
         )
+
+    def load_scheduler(
+        self, scheduler_name: str = "linear", num_train_epochs: int = 3
+    ) -> None:
+        """Load the scheduler that handles the adjustement of the learning rate during the training.
+
+        Args:
+            scheduler_name (string, optional): Type of scheduler to be used that adjusts the learning
+            rate During the training. Defaults to "linear".
+            num_train_epochs (int, optional): The number of training steps to do. Defaults to 3.
+        """
+
+        self.num_train_epochs = num_train_epochs
+        try:
+            self.num_update_steps_per_epoch = len(self.train_dataloader)
+        except AttributeError:
+            raise ValueError(
+                "Dataloader not initialized. Please load the dataloader first."
+            )
+        if not hasattr(self, "optimizer"):
+            raise ValueError(
+                "Optimizer not initialized. Please load the optimizer first."
+            )
+        self.num_training_steps = num_train_epochs * self.num_update_steps_per_epoch
+        self.lr_scheduler = get_scheduler(
+            name=scheduler_name,
+            optimizer=self.optimizer,
+            num_warmup_steps=0,
+            num_training_steps=self.num_training_steps,
+        )
+
+    def postprocess(self, predictions, labels):
+        predictions = predictions.detach().cpu().clone().numpy()
+        labels = labels.detach().cpu().clone().numpy()
+        if not self.label_names:
+            raise ValueError("Label names not set!")
+        # Remove ignored index (special tokens) and convert to labels
+        true_labels = [
+            [self.label_names[m] for m in label if m != IGNORED_LABEL]
+            for label in labels
+        ]
+        true_predictions = [
+            [
+                self.label_names[p]
+                for (p, m) in zip(prediction, label)
+                if m != IGNORED_LABEL
+            ]
+            for prediction, label in zip(predictions, labels)
+        ]
+        return true_labels, true_predictions
+
+    def train(self) -> None:
+        """Train a model using the pre-loaded components."""
+
+        # show a progress bar
+        progress_bar = tqdm(range(self.num_training_steps))
+
+        for epoch in range(self.num_train_epochs):
+            # set the mode to training
+            self.model.train()
+            for batch in self.train_dataloader:
+                outputs = self.model(**batch)
+                loss = outputs.loss
+                self.accelerator.backward(loss)
+                self.optimizer.step()
+                self.lr_scheduler.step()
+                self.optimizer.zero_grad()
+                progress_bar.update(1)
+
+            # Evaluation
+            self._evaluate_model()
+
+            self.results = self.metric.compute()
+            print(
+                f"epoch {epoch}:",
+                {
+                    key: self.results[f"overall_{key}"]
+                    for key in ["precision", "recall", "f1", "accuracy"]
+                },
+            )
+
+            self.save()
+
+    def _evaluate_model(self):
+        # set mode to evaluation
+        self.model.eval()
+        for batch in self.eval_dataloader:
+            with no_grad():
+                outputs = self.model(**batch)
+            predictions = outputs.logits.argmax(dim=-1)
+            labels = batch["labels"]
+            # Necessary to pad predictions and labels for being gathered
+            predictions = self.accelerator.pad_across_processes(
+                predictions, dim=1, pad_index=IGNORED_LABEL
+            )
+            labels = self.accelerator.pad_across_processes(
+                labels, dim=1, pad_index=IGNORED_LABEL
+            )
+            predictions_gathered = self.accelerator.gather(predictions)
+            labels_gathered = self.accelerator.gather(labels)
+            true_predictions, true_labels = self.postprocess(
+                predictions_gathered, labels_gathered
+            )
+            self.metric.add_batch(predictions=true_predictions, references=true_labels)
+
+    def save(self):
+        # Save the model to model path
+        self.accelerator.wait_for_everyone()
+        unwrapped_model = self.accelerator.unwrap_model(self.model)
+        unwrapped_model.save_pretrained(
+            self._model_path, save_function=self.accelerator.save
+        )
+        # the below is executed only once in main process
+        if self.accelerator.is_main_process:
+            self.tokenizer.save_pretrained(self._model_path)
+
+    def evaluate(self, token: str):
+        if not hasattr(self, "_model_path"):
+            raise ValueError(
+                "Please initiate the class first with a path to the model that you want to evaluate"
+            )
+        token_classifier = pipeline(
+            "token-classification",
+            model=self._model_path,
+            aggregation_strategy="simple",
+        )
+        return token_classifier(token)
