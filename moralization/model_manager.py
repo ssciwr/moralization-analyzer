@@ -34,7 +34,7 @@ class ModelManager(ABC):
         Args:
             data_manager (DataManager): the DataManager that contains the training data
         """
-        raise NotImplementedError
+        pass
 
     @abstractmethod
     def evaluate(self, data_manager: DataManager) -> Dict[str, Any]:
@@ -42,17 +42,17 @@ class ModelManager(ABC):
         Args:
             data_manager (DataManager): the DataManager that contains the training data
         """
-        raise NotImplementedError
+        pass
 
     @abstractmethod
     def save(self) -> None:
         """Save any changes made to the model."""
-        raise NotImplementedError
+        pass
 
     @abstractmethod
     def test(self, test_string: str, style: str = "span"):
         """Test the model output with a test string."""
-        raise NotImplementedError
+        pass
 
     @abstractmethod
     def publish(self, hugging_face_token: Optional[str] = None) -> str:
@@ -68,7 +68,7 @@ class ModelManager(ABC):
         Returns:
             str: URL of the published model
         """
-        raise NotImplementedError
+        pass
 
     def _login_to_huggingface(self, hugging_face_token: Optional[str] = None) -> None:
         """Login to hugging face using the supplied token
