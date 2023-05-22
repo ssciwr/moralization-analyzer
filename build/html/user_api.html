@@ -48,7 +48,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#moralization.DataManager"><code class="docutils literal notranslate"><span class="pre">DataManager</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.check_data_integrity"><code class="docutils literal notranslate"><span class="pre">DataManager.check_data_integrity()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.df_to_dataset"><code class="docutils literal notranslate"><span class="pre">DataManager.df_to_dataset()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.docdict_to_lists"><code class="docutils literal notranslate"><span class="pre">DataManager.docdict_to_lists()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.export_data_DocBin"><code class="docutils literal notranslate"><span class="pre">DataManager.export_data_DocBin()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.import_data_DocBin"><code class="docutils literal notranslate"><span class="pre">DataManager.import_data_DocBin()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_correlation_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_correlation_analysis()</span></code></a></li>
@@ -148,12 +147,6 @@ span distinctiveness and boundary distinctiveness.</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.docdict_to_lists">
-<span class="sig-name descname"><span class="pre">docdict_to_lists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.docdict_to_lists" title="Permalink to this definition"></a></dt>
-<dd><p>Convert the dictionary of doc objects to nested lists.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.export_data_DocBin">
 <span class="sig-name descname"><span class="pre">export_data_DocBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_data_integrity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.export_data_DocBin" title="Permalink to this definition"></a></dt>
 <dd><p>Export the currently loaded docs as a spacy binary. This is used in spacy training.</p>
@@ -200,9 +193,12 @@ test_file (Path, optional): Absolute or relative path. Defaults to None.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.lists_to_df">
-<span class="sig-name descname"><span class="pre">lists_to_df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.lists_to_df" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">lists_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.lists_to_df" title="Permalink to this definition"></a></dt>
 <dd><p>Convert nested lists of tokens and labels into a pandas dataframe.</p>
 <dl class="simple">
+<dt>Args:</dt><dd><p>sentence_list (list): A nested list of the tokens (nested by sentence).
+label_list (list): A nested list of the labels (nested by sentence).</p>
+</dd>
 <dt>Returns:</dt><dd><p>data_in_frame (dataframe): A list of the train and test files path.</p>
 </dd>
 </dl>
@@ -278,7 +274,7 @@ overwrite_existing_files (bool): If true any existing files in <cite>model_path<
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.SpacyModelManager.publish">
-<span class="sig-name descname"><span class="pre">publish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hugging_face_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#moralization.SpacyModelManager.publish" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">publish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hugging_face_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#moralization.SpacyModelManager.publish" title="Permalink to this definition"></a></dt>
 <dd><p>Publish the model to Hugging Face.</p>
 <p>This requires a User Access Token from <a class="reference external" href="https://huggingface.co/">https://huggingface.co/</a></p>
 <p>The token can either be passed via the <cite>hugging_face_token</cite> argument,
@@ -286,7 +282,7 @@ or it can be set via the <cite>HUGGING_FACE_TOKEN</cite> environment variable.</
 <dl class="simple">
 <dt>Args:</dt><dd><p>hugging_face_token (str, optional): Hugging Face User Access Token</p>
 </dd>
-<dt>Returns:</dt><dd><p>dict: URLs of the published model and the pip-installable wheel</p>
+<dt>Returns:</dt><dd><p>str: The URL of the published model</p>
 </dd>
 </dl>
 </dd></dl>
@@ -305,13 +301,13 @@ or it can be set via the <cite>HUGGING_FACE_TOKEN</cite> environment variable.</
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.SpacyModelManager.train">
-<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#moralization.DataManager" title="moralization.data_manager.DataManager"><span class="pre">DataManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overrides</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_data_integrity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager.train" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#moralization.DataManager" title="moralization.data_manager.DataManager"><span class="pre">DataManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_data_integrity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overrides</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager.train" title="Permalink to this definition"></a></dt>
 <dd><p>Train the model on the data contained in <cite>data_manager</cite>.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>data_manager (DataManager): the DataManager that contains the training data
+check_data_integrity (bool): Whether to test the data integrity.
 use_gpu (int): The index of the GPU to use (default: -1 which means no GPU)
-overrides (dict): An optional dictionary of parameters to override in the model config
-check_data_integrity (bool): Whether or not to test the data integrity.</p>
+overrides (dict): An optional dictionary of parameters to override in the model config</p>
 </dd>
 </dl>
 </dd></dl>
@@ -324,29 +320,31 @@ check_data_integrity (bool): Whether or not to test the data integrity.</p>
 <dd><p>Helper class to organize and prepare data for transformer models.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.TransformersDataHandler.generate_labels">
-<span class="sig-name descname"><span class="pre">generate_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moralization.TransformersDataHandler.generate_labels" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">generate_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">example_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersDataHandler.generate_labels" title="Permalink to this definition"></a></dt>
 <dd><p>Generate the labels from the annotated tokens in one long list. Required for transformers training.</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>doc_dict (dict, required): The dictionary of doc objects for each data source.</p>
+<dt>Args:</dt><dd><p>doc_dict (dict, required): The dictionary of doc objects for each data source.
+example_name (str, optional): A single data source should be selected for conversion. Defaults to None.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.TransformersDataHandler.get_data_lists">
-<span class="sig-name descname"><span class="pre">get_data_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moralization.TransformersDataHandler.get_data_lists" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_data_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">example_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersDataHandler.get_data_lists" title="Permalink to this definition"></a></dt>
 <dd><p>Convert the data from doc object to lists. Required for transformers training.</p>
 <p>Set the lists of tokens and labels for transformers training, with a nested list of
 sentences and tokens, and an equally nested list of labels that are initiated to zero.</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>doc_dict (dict, required): The dictionary of doc objects for each data source.</p>
+<dt>Args:</dt><dd><p>doc_dict (dict, required): The dictionary of doc objects for each data source.
+example_name (str, optional): A single data source should be selected for conversion. Defaults to None.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.TransformersDataHandler.structure_labels">
-<span class="sig-name descname"><span class="pre">structure_labels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#moralization.TransformersDataHandler.structure_labels" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">structure_labels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersDataHandler.structure_labels" title="Permalink to this definition"></a></dt>
 <dd><p>Structure the tokens from one long list into a nested list for sentences. Required for transformers training.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>sentence_list (list): A nested list of the tokens (nested by sentence).
