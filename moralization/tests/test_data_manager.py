@@ -4,6 +4,13 @@ from pathlib import Path
 import pytest
 import re
 import numpy as np
+from datasets import load_dataset
+
+
+@pytest.fixture
+def get_dataset():
+    data_set = load_dataset("iulusoy/test-data")
+    return data_set
 
 
 def test_data_manager(data_dir):
@@ -165,3 +172,12 @@ def test_df_to_dataset(data_dir):
     assert raw_data_set["Labels"][3] == ref_labels
     assert train_test_set["test"]
     assert train_test_set["train"]
+
+
+def test_push_dataset_to_hub(data_dir, get_dataset, monkeypatch):
+    dm = DataManager(data_dir)
+    # check metadata has been written
+    # update metadata and check i
+    monkeypatch.delenv("HUGGING_FACE_TOKEN", raising=False)
+    with pytest.raises(ValueError):
+        dm.push_dataset_to_hub(get_dataset["test"])

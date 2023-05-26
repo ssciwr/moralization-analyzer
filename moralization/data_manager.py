@@ -8,12 +8,14 @@ from moralization.plot import (
     InteractiveVisualization,
 )
 import logging
-
+import os
 from moralization.spacy_data_handler import SpacyDataHandler
 from moralization.transformers_data_handler import TransformersDataHandler
 import pandas as pd
 import datasets
 import numpy as np
+from typing import Dict, Optional
+import huggingface_hub
 
 
 class DataManager:
@@ -313,4 +315,45 @@ class DataManager:
             return train_test_set
         return raw_data_set
 
-    # here we also need a method to publish the dataset to hugging face
+    def push_dataset_to_hub(
+        self, data_set: datasets.Dataset, hugging_face_token: Optional[str] = None
+    ) -> Dict[str, str]:
+        """Publish the dataset to Hugging Face.
+
+        This requires a User Access Token from https://huggingface.co/
+
+        The token can either be passed via the `hugging_face_token` argument,
+        or it can be set via the `HUGGING_FACE_TOKEN` environment variable.
+
+        Args:
+            data_set (Dataset): The Dataset to be published to Hugging Face. Please
+            note that this is a Dataset object and not a DatasetDict object, meaning
+            that if you have already split your dataset into test and train, you can
+            either push test and train separately or need to concatenate them using "+".
+            hugging_face_token (str, optional): Hugging Face User Access Token
+        Returns:
+            dict: URLs of the published dataset
+        """
+        self.print_dataset_info(data_set)
+        if hugging_face_token is None:
+            hugging_face_token = os.environ.get("HUGGING_FACE_TOKEN")
+        if hugging_face_token is None:
+            raise ValueError(
+                "API TOKEN required: pass as string or set the HUGGING_FACE_TOKEN environment variable."
+            )
+        huggingface_hub.login(token=hugging_face_token)
+        data_set.push_to_hub()
+
+    def print_dataset_info(self, data_set):
+        print("The following dataset metadata has been set:")
+        print("Description:", data_set.info.description)
+        print("Version:", data_set.info.version)
+        print("License:", data_set.info.license)
+        print("Citation:", data_set.info.citation)
+        print("homepage:", data_set.info.homepage)
+
+    def update_dataset_metadata(
+        self, data_set: datasets.Dataset, metadata: Dict
+    ) -> None:
+        # check that the metadata keys are allowed entries for DatasetInfo object
+        pass
