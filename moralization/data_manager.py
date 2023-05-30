@@ -368,7 +368,7 @@ class DataManager:
         data_set: datasets.Dataset,
         description: str = None,
         version: str = None,
-        license: str = None,
+        license_: str = None,
         citation: str = None,
         homepage: str = None,
     ) -> datasets.Dataset:
@@ -395,8 +395,8 @@ class DataManager:
         if version:
             print("Version: old - {} new - {}".format(data_set.info.version, version))
             data_set.info.version = version
-        if license:
-            print("License: old - {} new - {}".format(data_set.info.license, license))
+        if license_:
+            print("License: old - {} new - {}".format(data_set.info.license, license_))
             data_set.info.license = license
         if citation:
             print(

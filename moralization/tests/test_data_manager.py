@@ -194,9 +194,9 @@ def test_set_dataset_info(data_dir, get_dataset):
     version = "0.0.1"
     dataset = dm.set_dataset_info(get_dataset["test"], version=version)
     assert dataset.info.version == version
-    license = "MIT"
-    dataset = dm.set_dataset_info(get_dataset["test"], license=license)
-    assert dataset.info.license == license
+    license_ = "MIT"
+    dataset = dm.set_dataset_info(get_dataset["test"], license_=license_)
+    assert dataset.info.license == license_
     citation = "My-DOI"
     dataset = dm.set_dataset_info(get_dataset["test"], citation=citation)
     assert dataset.info.citation == citation
