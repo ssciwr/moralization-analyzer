@@ -316,7 +316,10 @@ class DataManager:
         return raw_data_set
 
     def push_dataset_to_hub(
-        self, data_set: datasets.Dataset, hugging_face_token: Optional[str] = None
+        self,
+        data_set: datasets.Dataset,
+        repo_id: str,
+        hugging_face_token: Optional[str] = None,
     ) -> Dict[str, str]:
         """Publish the dataset to Hugging Face.
 
@@ -330,9 +333,9 @@ class DataManager:
             note that this is a Dataset object and not a DatasetDict object, meaning
             that if you have already split your dataset into test and train, you can
             either push test and train separately or need to concatenate them using "+".
+            repo_id (str): The name of the repository that you are pushing to.
+            This can either be a new repository or an existing one.
             hugging_face_token (str, optional): Hugging Face User Access Token
-        Returns:
-            dict: URLs of the published dataset
         """
         self.print_dataset_info(data_set)
         if hugging_face_token is None:
@@ -342,9 +345,17 @@ class DataManager:
                 "API TOKEN required: pass as string or set the HUGGING_FACE_TOKEN environment variable."
             )
         huggingface_hub.login(token=hugging_face_token)
-        data_set.push_to_hub()
+        data_set.push_to_hub(repo_id=repo_id)
+        print(
+            "If you have not yet set up a README (dataset card) for your dataset, please do so on Hugging Face Hub!"
+        )
 
-    def print_dataset_info(self, data_set):
+    def print_dataset_info(self, data_set: datasets.Dataset) -> None:
+        """Print information set in the dataset.
+
+        Args:
+            data_set (Dataset): The Dataset object of which the information is to be printed.
+        """
         print("The following dataset metadata has been set:")
         print("Description:", data_set.info.description)
         print("Version:", data_set.info.version)
@@ -352,8 +363,49 @@ class DataManager:
         print("Citation:", data_set.info.citation)
         print("homepage:", data_set.info.homepage)
 
-    def update_dataset_metadata(
-        self, data_set: datasets.Dataset, metadata: Dict
-    ) -> None:
-        # check that the metadata keys are allowed entries for DatasetInfo object
-        pass
+    def set_dataset_info(
+        self,
+        data_set: datasets.Dataset,
+        description: str = None,
+        version: str = None,
+        license: str = None,
+        citation: str = None,
+        homepage: str = None,
+    ) -> datasets.Dataset:
+        """Update the information set in the dataset.
+
+        Args:
+            data_set (Dataset): The Dataset object of which the information is to be updated.
+            description (str, optional): The new description to be updated. Optional, defaults to None.
+            version (str, optional): The new version to be updated. Optional, defaults to None.
+            license (str, optional): The new license to be updated. Optional, defaults to None.
+            citation (str, optional): The new citation to be updated. Optional, defaults to None.
+            homepage (str, optional): The new homepage to be updated. Optional, defaults to None.
+        Returns:
+            Dataset: The updated Dataset object.
+        """
+        print("Updating the following dataset metadata:")
+        if description:
+            print(
+                "Description: old - {} new - {}".format(
+                    data_set.info.description, description
+                )
+            )
+            data_set.info.description = description
+        if version:
+            print("Version: old - {} new - {}".format(data_set.info.version, version))
+            data_set.info.version = version
+        if license:
+            print("License: old - {} new - {}".format(data_set.info.license, license))
+            data_set.info.license = license
+        if citation:
+            print(
+                "Citation: old - {} new - {}".format(data_set.info.citation, citation)
+            )
+            data_set.info.citation = citation
+        if homepage:
+            print(
+                "homepage: old - {} new - {}".format(data_set.info.homepage, homepage)
+            )
+            data_set.info.homepage = homepage
+        return data_set

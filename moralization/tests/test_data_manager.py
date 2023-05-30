@@ -176,8 +176,30 @@ def test_df_to_dataset(data_dir):
 
 def test_push_dataset_to_hub(data_dir, get_dataset, monkeypatch):
     dm = DataManager(data_dir)
-    # check metadata has been written
-    # update metadata and check i
+    repo_id = "test-data-2"
+    dm.push_dataset_to_hub(get_dataset["test"], repo_id)
     monkeypatch.delenv("HUGGING_FACE_TOKEN", raising=False)
     with pytest.raises(ValueError):
-        dm.push_dataset_to_hub(get_dataset["test"])
+        dm.push_dataset_to_hub(get_dataset["test"], repo_id)
+
+
+def test_set_dataset_info(data_dir, get_dataset):
+    dm = DataManager(data_dir)
+    description = "Something"
+    dataset = dm.set_dataset_info(get_dataset["test"], description=description)
+    assert dataset.info.description == description
+    description = "Something else"
+    dataset = dm.set_dataset_info(get_dataset["test"], description=description)
+    assert dataset.info.description == description
+    version = "0.0.1"
+    dataset = dm.set_dataset_info(get_dataset["test"], version=version)
+    assert dataset.info.version == version
+    license = "MIT"
+    dataset = dm.set_dataset_info(get_dataset["test"], license=license)
+    assert dataset.info.license == license
+    citation = "My-DOI"
+    dataset = dm.set_dataset_info(get_dataset["test"], citation=citation)
+    assert dataset.info.citation == citation
+    homepage = "My-homepage"
+    dataset = dm.set_dataset_info(get_dataset["test"], homepage=homepage)
+    assert dataset.info.homepage == homepage
