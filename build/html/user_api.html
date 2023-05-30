@@ -61,7 +61,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.print_dataset_info"><code class="docutils literal notranslate"><span class="pre">DataManager.print_dataset_info()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.push_dataset_to_hub"><code class="docutils literal notranslate"><span class="pre">DataManager.push_dataset_to_hub()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.return_analyzer_result"><code class="docutils literal notranslate"><span class="pre">DataManager.return_analyzer_result()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.update_dataset_metadata"><code class="docutils literal notranslate"><span class="pre">DataManager.update_dataset_metadata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.set_dataset_info"><code class="docutils literal notranslate"><span class="pre">DataManager.set_dataset_info()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.visualize_data"><code class="docutils literal notranslate"><span class="pre">DataManager.visualize_data()</span></code></a></li>
 </ul>
 </li>
@@ -229,12 +229,17 @@ filter (str/list(str), optional): Filename filters. Defaults to None.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.print_dataset_info">
-<span class="sig-name descname"><span class="pre">print_dataset_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_set</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.print_dataset_info" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">print_dataset_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dataset</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moralization.DataManager.print_dataset_info" title="Permalink to this definition"></a></dt>
+<dd><p>Print information set in the dataset.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data_set (Dataset): The Dataset object of which the information is to be printed.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.push_dataset_to_hub">
-<span class="sig-name descname"><span class="pre">push_dataset_to_hub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hugging_face_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#moralization.DataManager.push_dataset_to_hub" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">push_dataset_to_hub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hugging_face_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#moralization.DataManager.push_dataset_to_hub" title="Permalink to this definition"></a></dt>
 <dd><p>Publish the dataset to Hugging Face.</p>
 <p>This requires a User Access Token from <a class="reference external" href="https://huggingface.co/">https://huggingface.co/</a></p>
 <p>The token can either be passed via the <cite>hugging_face_token</cite> argument,
@@ -244,9 +249,9 @@ or it can be set via the <cite>HUGGING_FACE_TOKEN</cite> environment variable.</
 note that this is a Dataset object and not a DatasetDict object, meaning
 that if you have already split your dataset into test and train, you can
 either push test and train separately or need to concatenate them using “+”.
+repo_id (str): The name of the repository that you are pushing to.
+This can either be a new repository or an existing one.
 hugging_face_token (str, optional): Hugging Face User Access Token</p>
-</dd>
-<dt>Returns:</dt><dd><p>dict: URLs of the published dataset</p>
 </dd>
 </dl>
 </dd></dl>
@@ -266,9 +271,21 @@ hugging_face_token (str, optional): Hugging Face User Access Token</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="moralization.DataManager.update_dataset_metadata">
-<span class="sig-name descname"><span class="pre">update_dataset_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moralization.DataManager.update_dataset_metadata" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="moralization.DataManager.set_dataset_info">
+<span class="sig-name descname"><span class="pre">set_dataset_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">citation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">homepage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dataset</span></span></span><a class="headerlink" href="#moralization.DataManager.set_dataset_info" title="Permalink to this definition"></a></dt>
+<dd><p>Update the information set in the dataset.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data_set (Dataset): The Dataset object of which the information is to be updated.
+description (str, optional): The new description to be updated. Optional, defaults to None.
+version (str, optional): The new version to be updated. Optional, defaults to None.
+license (str, optional): The new license to be updated. Optional, defaults to None.
+citation (str, optional): The new citation to be updated. Optional, defaults to None.
+homepage (str, optional): The new homepage to be updated. Optional, defaults to None.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Dataset: The updated Dataset object.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.visualize_data">
