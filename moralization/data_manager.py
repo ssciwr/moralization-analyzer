@@ -302,23 +302,22 @@ class DataManager:
         Returns:
             data_in_frame (dataframe): A list of the train and test files path.
         """
-        data_in_frame = pd.DataFrame(
+        self.data_in_frame = pd.DataFrame(
             zip(self.sentence_list, self.label_list), columns=["Sentences", "Labels"]
         )
-        return data_in_frame
 
-    def df_to_dataset(self, data_in_frame, split=True):
-        raw_data_set = datasets.Dataset.from_pandas(data_in_frame)
+    def df_to_dataset(self, data_in_frame: pd.DataFrame = None, split: bool = True):
+        if not data_in_frame:
+            data_in_frame = self.data_in_frame
+        self.raw_data_set = datasets.Dataset.from_pandas(data_in_frame)
         if split:
             # split in train test
-            train_test_set = raw_data_set.train_test_split(test_size=0.1)
-            return train_test_set
-        return raw_data_set
+            self.train_test_set = self.raw_data_set.train_test_split(test_size=0.1)
 
     def push_dataset_to_hub(
         self,
-        data_set: datasets.Dataset,
         repo_id: str,
+        data_set: datasets.Dataset = None,
         hugging_face_token: Optional[str] = None,
     ) -> Dict[str, str]:
         """Publish the dataset to Hugging Face.
@@ -329,14 +328,18 @@ class DataManager:
         or it can be set via the `HUGGING_FACE_TOKEN` environment variable.
 
         Args:
-            data_set (Dataset): The Dataset to be published to Hugging Face. Please
+            repo_id (str): The name of the repository that you are pushing to.
+            This can either be a new repository or an existing one.
+            data_set (Dataset, optional): The Dataset to be published to Hugging Face. Please
             note that this is a Dataset object and not a DatasetDict object, meaning
             that if you have already split your dataset into test and train, you can
             either push test and train separately or need to concatenate them using "+".
-            repo_id (str): The name of the repository that you are pushing to.
-            This can either be a new repository or an existing one.
+            If not set, the raw dataset that is connected to the DataManager instance will
+            be used.
             hugging_face_token (str, optional): Hugging Face User Access Token
         """
+        if not data_set:
+            data_set = self.raw_data_set
         self.print_dataset_info(data_set)
         if hugging_face_token is None:
             hugging_face_token = os.environ.get("HUGGING_FACE_TOKEN")
@@ -350,12 +353,16 @@ class DataManager:
             "If you have not yet set up a README (dataset card) for your dataset, please do so on Hugging Face Hub!"
         )
 
-    def print_dataset_info(self, data_set: datasets.Dataset) -> None:
+    def print_dataset_info(self, data_set: datasets.Dataset = None) -> None:
         """Print information set in the dataset.
 
         Args:
-            data_set (Dataset): The Dataset object of which the information is to be printed.
+            data_set (Dataset, optional): The Dataset object of which the information
+            is to be printed. Defaults to the raw dataset associated with the DataManager
+            instance.
         """
+        if not data_set:
+            data_set = self.raw_data_set
         print("The following dataset metadata has been set:")
         print("Description:", data_set.info.description)
         print("Version:", data_set.info.version)
@@ -365,7 +372,7 @@ class DataManager:
 
     def set_dataset_info(
         self,
-        data_set: datasets.Dataset,
+        data_set: datasets.Dataset = None,
         description: str = None,
         version: str = None,
         license_: str = None,
@@ -375,7 +382,8 @@ class DataManager:
         """Update the information set in the dataset.
 
         Args:
-            data_set (Dataset): The Dataset object of which the information is to be updated.
+            data_set (Dataset, optional): The Dataset object of which the information is to be updated.
+            Defaults to the raw dataset associated with the DataManager instance.
             description (str, optional): The new description to be updated. Optional, defaults to None.
             version (str, optional): The new version to be updated. Optional, defaults to None.
             license (str, optional): The new license to be updated. Optional, defaults to None.
@@ -384,6 +392,8 @@ class DataManager:
         Returns:
             Dataset: The updated Dataset object.
         """
+        if not data_set:
+            data_set = self.raw_data_set
         print("Updating the following dataset metadata:")
         if description:
             print(
@@ -397,7 +407,7 @@ class DataManager:
             data_set.info.version = version
         if license_:
             print("License: old - {} new - {}".format(data_set.info.license, license_))
-            data_set.info.license = license
+            data_set.info.license = license_
         if citation:
             print(
                 "Citation: old - {} new - {}".format(data_set.info.citation, citation)

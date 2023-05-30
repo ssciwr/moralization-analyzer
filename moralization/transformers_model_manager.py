@@ -14,6 +14,7 @@ from torch.optim import AdamW
 from accelerate import Accelerator
 from tqdm.auto import tqdm
 from torch import no_grad
+from moralization.data_manager import DataManager
 
 
 IGNORED_LABEL = -100
@@ -40,6 +41,9 @@ class TransformersModelManager:
         """
         self._model_path = Path(model_path)
         self.model_name = model_name
+        # set up all the preprocessing for the dataset
+        self.init_tokenizer()
+        self.init_data_collator()
 
     def init_tokenizer(self, model_name=None, kwargs=None) -> None:
         """Initialize the tokenizer that goes along with the selected model.
@@ -149,7 +153,6 @@ class TransformersModelManager:
         Returns:
             inputs (BatchEncoding): The encoded tokens, labels, etc, after tokenization
         """
-        self.init_tokenizer()
         self.tokenize(examples[self.token_column_name])
         self.add_labels_to_inputs(examples[self.label_column_name])
         print(type(self.inputs))
@@ -387,8 +390,20 @@ class TransformersModelManager:
         ]
         return true_labels, true_predictions
 
+    def _prepare_data(self, data_manager: DataManager):
+        # train_test_dataset = data_manager.df_to_dataset()
+        # tokenized_dataset = self.map_dataset(
+        # train_test_set=train_test_dataset,
+        # token_column_name="Sentences",
+        # label_column_name="Labels",
+        # )
+        pass
+
     def train(self) -> None:
         """Train a model using the pre-loaded components."""
+
+        # initialize all components and prepare the dataset.
+        # self._prepare_data()
 
         # show a progress bar
         progress_bar = tqdm(range(self.num_training_steps))

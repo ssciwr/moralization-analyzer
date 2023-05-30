@@ -33,7 +33,6 @@ def long_dataset():
 
 
 def test_init_tokenizer(gen_instance):
-    gen_instance.init_tokenizer()
     assert gen_instance.tokenizer.is_fast
     with pytest.raises(OSError):
         gen_instance.init_tokenizer(model_name="abcd")
@@ -42,7 +41,6 @@ def test_init_tokenizer(gen_instance):
 
 
 def test_tokenize(raw_dataset, gen_instance):
-    gen_instance.init_tokenizer()
     gen_instance.tokenize(raw_dataset["test"]["word"])
     assert gen_instance.inputs["input_ids"][0][0] == 101
     assert gen_instance.inputs["input_ids"][0][2] == 1821
@@ -83,7 +81,6 @@ def test_check_is_nested(gen_instance):
 
 
 def test_align_labels_with_tokens(raw_dataset, gen_instance):
-    gen_instance.init_tokenizer()
     gen_instance.tokenize(raw_dataset["test"]["word"])
     new_labels = gen_instance._align_labels_with_tokens(
         raw_dataset["test"]["label"], gen_instance.inputs.word_ids()
@@ -103,7 +100,6 @@ def test_align_labels_with_tokens(raw_dataset, gen_instance):
 
 
 def test_add_labels_to_inputs(raw_dataset, gen_instance):
-    gen_instance.init_tokenizer()
     gen_instance.tokenize(raw_dataset["test"]["word"])
     # test if list of strings is working
     gen_instance.add_labels_to_inputs(labels=raw_dataset["test"]["label"])
@@ -119,13 +115,11 @@ def test_add_labels_to_inputs(raw_dataset, gen_instance):
 
 def test_map_dataset(train_test_dataset, long_dataset, tmp_path):
     tmm = TransformersModelManager(tmp_path)
-    tmm.init_tokenizer()
     tokenized_dataset = tmm.map_dataset(train_test_dataset)
     assert isinstance(tokenized_dataset["train"], Dataset)
     # try with more than one sentence
     del tmm
     tmm = TransformersModelManager(tmp_path)
-    tmm.init_tokenizer()
     tokenized_dataset = tmm.map_dataset(long_dataset)
     ref_input_ids = [
         [101, 7091, 1734, 1111, 5193, 102],
@@ -137,8 +131,6 @@ def test_map_dataset(train_test_dataset, long_dataset, tmp_path):
 
 
 def test_init_data_collator(gen_instance):
-    gen_instance.init_tokenizer()
-    gen_instance.init_data_collator()
     assert type(gen_instance.data_collator) == DataCollatorForTokenClassification
     assert gen_instance.data_collator.padding
     assert gen_instance.data_collator.return_tensors == "pt"
@@ -202,7 +194,6 @@ def test_load_model(gen_instance):
 
 
 def test_load_dataloader(gen_instance, train_test_dataset):
-    gen_instance.init_tokenizer()
     tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
     gen_instance.init_data_collator()
     gen_instance.load_dataloader(tokenized_dataset)
@@ -227,7 +218,6 @@ def test_load_optimizer(gen_instance):
 
 
 def test_load_scheduler(gen_instance, train_test_dataset):
-    gen_instance.init_tokenizer()
     tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
     gen_instance.init_data_collator()
     gen_instance.load_dataloader(tokenized_dataset)
@@ -250,7 +240,6 @@ def test_load_scheduler(gen_instance, train_test_dataset):
 
 def test_train_evaluate(gen_instance, train_test_dataset):
     model_path = gen_instance._model_path
-    gen_instance.init_tokenizer()
     tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
     gen_instance.init_data_collator()
     gen_instance.load_evaluation_metric()

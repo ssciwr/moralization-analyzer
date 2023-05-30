@@ -33,6 +33,7 @@ jobs:
         HUGGING_FACE_TOKEN: ${{ secrets.HUGGING_FACE_TOKEN }}
       run: |
         cd moralization
+        if [ -z "$HUGGING_FACE_TOKEN" ]; then echo "not defined"; else echo "defined"; fi
         python -m pytest -v -s --cov=. --cov-report=xml
     - name: Upload coverage
       uses: codecov/codecov-action@v3

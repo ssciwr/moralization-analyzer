@@ -151,36 +151,39 @@ def test_docdict_to_lists(data_dir):
 def test_lists_to_df(data_dir):
     dm = DataManager(data_dir)
     dm.docdict_to_lists()
-    data_frame = dm.lists_to_df()
+    dm.lists_to_df()
     ref_sentence = ["BERLIN"]
-    print(data_frame["Sentences"][3])
-    print(data_frame["Labels"][3])
-    assert data_frame["Sentences"][3] == ref_sentence
+    assert dm.data_in_frame["Sentences"][3] == ref_sentence
     ref_labels = [0]
-    assert data_frame["Labels"][3] == ref_labels
+    assert dm.data_in_frame["Labels"][3] == ref_labels
 
 
 def test_df_to_dataset(data_dir):
     dm = DataManager(data_dir)
     dm.docdict_to_lists()
-    data_frame = dm.lists_to_df()
-    raw_data_set = dm.df_to_dataset(data_frame, split=False)
-    train_test_set = dm.df_to_dataset(data_frame)
+    dm.lists_to_df()
+    dm.df_to_dataset(split=False)
     ref_sentence = ["BERLIN"]
-    assert raw_data_set["Sentences"][3] == ref_sentence
+    assert dm.raw_data_set["Sentences"][3] == ref_sentence
     ref_labels = [0]
-    assert raw_data_set["Labels"][3] == ref_labels
-    assert train_test_set["test"]
-    assert train_test_set["train"]
+    dm.df_to_dataset()
+    assert dm.raw_data_set["Labels"][3] == ref_labels
+    assert dm.train_test_set["test"]
+    assert dm.train_test_set["train"]
 
 
-def test_push_dataset_to_hub(data_dir, get_dataset, monkeypatch):
+def test_push_dataset_to_hub(data_dir, monkeypatch):
     dm = DataManager(data_dir)
     repo_id = "test-data-2"
-    dm.push_dataset_to_hub(get_dataset["test"], repo_id)
+    dm.docdict_to_lists()
+    dm.lists_to_df()
+    dm.df_to_dataset(split=False)
+    dm.push_dataset_to_hub(repo_id)
+    dataset = dm.raw_data_set
+    dm.push_dataset_to_hub(repo_id, dataset)
     monkeypatch.delenv("HUGGING_FACE_TOKEN", raising=False)
     with pytest.raises(ValueError):
-        dm.push_dataset_to_hub(get_dataset["test"], repo_id)
+        dm.push_dataset_to_hub(repo_id)
 
 
 def test_set_dataset_info(data_dir, get_dataset):
@@ -202,4 +205,10 @@ def test_set_dataset_info(data_dir, get_dataset):
     assert dataset.info.citation == citation
     homepage = "My-homepage"
     dataset = dm.set_dataset_info(get_dataset["test"], homepage=homepage)
+    assert dataset.info.homepage == homepage
+    dm = DataManager(data_dir)
+    dm.docdict_to_lists()
+    dm.lists_to_df()
+    dm.df_to_dataset(split=False)
+    dataset = dm.set_dataset_info(homepage=homepage)
     assert dataset.info.homepage == homepage
