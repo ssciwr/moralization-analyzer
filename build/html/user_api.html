@@ -86,6 +86,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.evaluate"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.evaluate()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.init_data_collator"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.init_data_collator()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.init_tokenizer"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.init_tokenizer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.load"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.load()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.load_accelerator"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.load_accelerator()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.load_dataloader"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.load_dataloader()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.load_evaluation_metric"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.load_evaluation_metric()</span></code></a></li>
@@ -94,9 +95,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.load_scheduler"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.load_scheduler()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.map_dataset"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.map_dataset()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.postprocess"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.postprocess()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.publish"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.publish()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.save"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.save()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.set_id2label"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.set_id2label()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.set_label2id"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.set_label2id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.test"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.test()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.tokenize"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.tokenize()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.tokenize_and_align"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.tokenize_and_align()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.train"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.train()</span></code></a></li>
@@ -454,7 +457,12 @@ selected tokenizer. Add to inputs.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.TransformersModelManager.evaluate">
 <span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.evaluate" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Evaluate the model against the test dataset in <cite>data_manager</cite>.
+Args:</p>
+<blockquote>
+<div><p>data_manager (DataManager): the DataManager that contains the training data</p>
+</div></blockquote>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.TransformersModelManager.init_data_collator">
@@ -481,6 +489,11 @@ kwargs (dict, optional): Keyword arguments to pass to the tokenizer.</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.load" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.TransformersModelManager.load_accelerator">
@@ -571,9 +584,25 @@ Defaults to “label”.</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.publish">
+<span class="sig-name descname"><span class="pre">publish</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.publish" title="Permalink to this definition"></a></dt>
+<dd><p>Publish the model to Hugging Face.</p>
+<p>This requires a User Access Token from <a class="reference external" href="https://huggingface.co/">https://huggingface.co/</a></p>
+<p>The token can either be passed via the <cite>hugging_face_token</cite> argument,
+or it can be set via the <cite>HUGGING_FACE_TOKEN</cite> environment variable.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>hugging_face_token (str, optional): Hugging Face User Access Token</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: URL of the published model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="moralization.TransformersModelManager.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.save" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Save any changes made to the model.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.TransformersModelManager.set_id2label">
@@ -585,6 +614,12 @@ Defaults to “label”.</p>
 <dt class="sig sig-object py" id="moralization.TransformersModelManager.set_label2id">
 <span class="sig-name descname"><span class="pre">set_label2id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moralization.TransformersModelManager.set_label2id" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a map from label name (string) to label id (integer).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.test" title="Permalink to this definition"></a></dt>
+<dd><p>Test the model output with a test string.</p>
 </dd></dl>
 
 <dl class="py method">
