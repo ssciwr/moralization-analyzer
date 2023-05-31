@@ -314,12 +314,11 @@ class TransformersModelManager:
             batch_size=batch_size,
         )
 
-    def load_optimizer(self, learning_rate: float = 2e-5, kwargs: Dict = None) -> None:
+    def load_optimizer(self, learning_rate: float, kwargs: Dict = None) -> None:
         """Load the AdamW adaptive optimizer that handles the optimization process.
 
         Args:
-            learning_rate (float, optional): Learning rate to be used in the optimization. Defaults to
-            2e-5.
+            learning_rate (float): Learning rate to be used in the optimization.
             kwargs (dict, optional): Further keyword arguments other than learning rate to be passed to the
             optimizer.
         """
@@ -390,21 +389,49 @@ class TransformersModelManager:
         ]
         return true_labels, true_predictions
 
-    def _prepare_data(self, data_manager: DataManager):
-        # train_test_dataset = data_manager.df_to_dataset()
-        # tokenized_dataset = self.map_dataset(
-        # train_test_set=train_test_dataset,
-        # token_column_name="Sentences",
-        # label_column_name="Labels",
-        # )
-        pass
+    def _prepare_data(
+        self, data_manager: DataManager, token_column_name: str, label_column_name: str
+    ) -> DatasetDict:
+        train_test_dataset = data_manager.train_test_set
+        tokenized_dataset = self.map_dataset(
+            train_test_set=train_test_dataset,
+            token_column_name=token_column_name,
+            label_column_name=label_column_name,
+        )
+        print(type(tokenized_dataset))
+        return tokenized_dataset
 
-    def train(self) -> None:
+    def _initialize(
+        self,
+        tokenized_dataset: DatasetDict,
+        num_train_epochs: int,
+        learning_rate: float,
+    ) -> None:
+        self.init_data_collator()
+        self.load_evaluation_metric()
+        self.set_id2label()
+        self.set_label2id()
+        self.load_model()
+        self.load_dataloader(tokenized_dataset)
+        self.load_optimizer(learning_rate)
+        self.load_accelerator()
+        self.load_scheduler(num_train_epochs=num_train_epochs)
+
+    def train(
+        self,
+        data_manager: DataManager,
+        token_column_name: str,
+        label_column_name: str,
+        num_train_epochs: int = 5,
+        learning_rate: float = 2e-5,
+    ) -> None:
         """Train a model using the pre-loaded components."""
 
         # initialize all components and prepare the dataset.
-        # self._prepare_data()
-
+        tokenized_dataset = self._prepare_data(
+            data_manager, token_column_name, label_column_name
+        )
+        self._initialize(tokenized_dataset, num_train_epochs, learning_rate)
         # show a progress bar
         progress_bar = tqdm(range(self.num_training_steps))
 

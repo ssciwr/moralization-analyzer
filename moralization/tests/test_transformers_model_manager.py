@@ -1,4 +1,5 @@
 from moralization.transformers_model_manager import TransformersModelManager
+from moralization.data_manager import DataManager
 import pytest
 from datasets import load_dataset, Dataset, DatasetDict
 from transformers import DataCollatorForTokenClassification
@@ -7,6 +8,15 @@ from transformers import DataCollatorForTokenClassification
 @pytest.fixture
 def gen_instance(tmp_path):
     return TransformersModelManager(tmp_path)
+
+
+@pytest.fixture
+def gen_instance_dm(data_dir):
+    dm = DataManager(data_dir)
+    dm.docdict_to_lists()
+    dm.lists_to_df()
+    dm.df_to_dataset(split=True)
+    return dm
 
 
 @pytest.fixture(scope="module")
@@ -238,19 +248,19 @@ def test_load_scheduler(gen_instance, train_test_dataset):
         gen_instance.load_scheduler()
 
 
-def test_train_evaluate(gen_instance, train_test_dataset):
+def test_train_evaluate(data_dir, gen_instance, gen_instance_dm):
     model_path = gen_instance._model_path
-    tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
-    gen_instance.init_data_collator()
-    gen_instance.load_evaluation_metric()
-    gen_instance.set_id2label()
-    gen_instance.set_label2id()
-    gen_instance.load_model()
-    gen_instance.load_dataloader(tokenized_dataset)
-    gen_instance.load_optimizer()
-    gen_instance.load_accelerator()
-    gen_instance.load_scheduler(num_train_epochs=1)
-    gen_instance.train()
+    token_column_name = "Sentences"
+    label_column_name = "Labels"
+    num_train_epochs = 1
+    learning_rate = 1e-5
+    gen_instance.train(
+        gen_instance_dm,
+        token_column_name,
+        label_column_name,
+        num_train_epochs,
+        learning_rate,
+    )
     assert gen_instance.results["overall_precision"] == 0.0
     assert (model_path / "pytorch_model.bin").is_file()
     assert (model_path / "special_tokens_map.json").is_file()
