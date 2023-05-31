@@ -73,12 +73,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyModelManager.train"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager.train()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#moralization.TransformersDataHandler"><code class="docutils literal notranslate"><span class="pre">TransformersDataHandler</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersDataHandler.generate_labels"><code class="docutils literal notranslate"><span class="pre">TransformersDataHandler.generate_labels()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersDataHandler.get_data_lists"><code class="docutils literal notranslate"><span class="pre">TransformersDataHandler.get_data_lists()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersDataHandler.structure_labels"><code class="docutils literal notranslate"><span class="pre">TransformersDataHandler.structure_labels()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="#moralization.TransformersModelManager"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.add_labels_to_inputs"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.add_labels_to_inputs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.compute_metrics"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.compute_metrics()</span></code></a></li>
@@ -371,45 +365,6 @@ or it can be set via the <cite>HUGGING_FACE_TOKEN</cite> environment variable.</
 check_data_integrity (bool): Whether to test the data integrity.
 use_gpu (int): The index of the GPU to use (default: -1 which means no GPU)
 overrides (dict): An optional dictionary of parameters to override in the model config</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="moralization.TransformersDataHandler">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">TransformersDataHandler</span></span><a class="headerlink" href="#moralization.TransformersDataHandler" title="Permalink to this definition"></a></dt>
-<dd><p>Helper class to organize and prepare data for transformer models.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.TransformersDataHandler.generate_labels">
-<span class="sig-name descname"><span class="pre">generate_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moralization.TransformersDataHandler.generate_labels" title="Permalink to this definition"></a></dt>
-<dd><p>Generate the labels from the annotated tokens in one long list. Required for transformers training.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>doc_dict (dict, required): The dictionary of doc objects for each data source.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.TransformersDataHandler.get_data_lists">
-<span class="sig-name descname"><span class="pre">get_data_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moralization.TransformersDataHandler.get_data_lists" title="Permalink to this definition"></a></dt>
-<dd><p>Convert the data from doc object to lists. Required for transformers training.</p>
-<p>Set the lists of tokens and labels for transformers training, with a nested list of
-sentences and tokens, and an equally nested list of labels that are initiated to zero.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>doc_dict (dict, required): The dictionary of doc objects for each data source.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="moralization.TransformersDataHandler.structure_labels">
-<span class="sig-name descname"><span class="pre">structure_labels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#moralization.TransformersDataHandler.structure_labels" title="Permalink to this definition"></a></dt>
-<dd><p>Structure the tokens from one long list into a nested list for sentences. Required for transformers training.</p>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>sentence_list (list): A nested list of the tokens (nested by sentence).
-label_list (list): A nested list of the labels (nested by sentence).</p>
 </dd>
 </dl>
 </dd></dl>
