@@ -15,12 +15,13 @@ from accelerate import Accelerator
 from tqdm.auto import tqdm
 from torch import no_grad
 from moralization.data_manager import DataManager
+from moralization.model_manager import ModelManager
 
 
 IGNORED_LABEL = -100
 
 
-class TransformersModelManager:
+class TransformersModelManager(ModelManager):
     """
     Create, import, modify, train and publish transformers models.
 
@@ -39,11 +40,14 @@ class TransformersModelManager:
             model_path (str or Path): Folder where the model is (or will be) stored
             model_name (str): Name of the pretrained model
         """
+        super().__init__(model_path)
         self._model_path = Path(model_path)
         self.model_name = model_name
         # set up all the preprocessing for the dataset
         self.init_tokenizer()
         self.init_data_collator()
+        # set up metadata
+        # self.metadata = self._import_or_create_metadata(self.model_path)
 
     def init_tokenizer(self, model_name=None, kwargs=None) -> None:
         """Initialize the tokenizer that goes along with the selected model.
@@ -507,3 +511,12 @@ class TransformersModelManager:
             aggregation_strategy="simple",
         )
         return token_classifier(token)
+
+    def test(self):
+        pass
+
+    def load(self):
+        pass
+
+    def publish(self):
+        pass

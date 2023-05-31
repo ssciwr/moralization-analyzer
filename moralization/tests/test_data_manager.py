@@ -186,6 +186,14 @@ def test_push_dataset_to_hub(data_dir, monkeypatch):
         dm.push_dataset_to_hub(repo_id)
 
 
+def test_print_dataset_info(data_dir):
+    dm = DataManager(data_dir)
+    dm.docdict_to_lists()
+    dm.lists_to_df()
+    dm.df_to_dataset(split=True)
+    dm.print_dataset_info()
+
+
 def test_set_dataset_info(data_dir, get_dataset):
     dm = DataManager(data_dir)
     description = "Something"
