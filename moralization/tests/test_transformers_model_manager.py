@@ -216,14 +216,10 @@ def test_load_dataloader(gen_instance, train_test_dataset):
 
 def test_load_optimizer(gen_instance):
     gen_instance.label_names = ["A", "B", "C"]
-    gen_instance.set_id2label()
-    gen_instance.set_label2id()
     gen_instance.load_model()
-    gen_instance.load_optimizer()
-    assert gen_instance.optimizer.defaults["lr"] == 2e-5
     gen_instance.load_optimizer(learning_rate=1e-3)
     assert gen_instance.optimizer.defaults["lr"] == 1e-3
-    gen_instance.load_optimizer(kwargs={"weight_decay": 0.015})
+    gen_instance.load_optimizer(learning_rate=1e-3, kwargs={"weight_decay": 0.015})
     assert gen_instance.optimizer.defaults["weight_decay"] == 0.015
 
 
@@ -235,20 +231,20 @@ def test_load_scheduler(gen_instance, train_test_dataset):
     gen_instance.set_id2label()
     gen_instance.set_label2id()
     gen_instance.load_model()
-    gen_instance.load_optimizer()
-    gen_instance.load_scheduler()
+    gen_instance.load_optimizer(learning_rate=2e-5)
+    gen_instance.load_scheduler(num_train_epochs=3)
     assert gen_instance.lr_scheduler.base_lrs == [2e-5]
     assert gen_instance.num_training_steps == 3
     # now test the exceptions
     del gen_instance.optimizer
     with pytest.raises(ValueError):
-        gen_instance.load_scheduler()
+        gen_instance.load_scheduler(num_train_epochs=3)
     del gen_instance.train_dataloader
     with pytest.raises(ValueError):
-        gen_instance.load_scheduler()
+        gen_instance.load_scheduler(num_train_epochs=3)
 
 
-def test_train_evaluate(data_dir, gen_instance, gen_instance_dm):
+def test_train_evaluate(gen_instance, gen_instance_dm):
     model_path = gen_instance._model_path
     token_column_name = "Sentences"
     label_column_name = "Labels"

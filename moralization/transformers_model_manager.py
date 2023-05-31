@@ -280,6 +280,8 @@ class TransformersModelManager:
             model_name (str, optional): The name of the model to be used in the training.
             Defaults to "bert-base-cased".
         """
+        self.set_id2label()
+        self.set_label2id()
         if model_name is None:
             model_name = self.model_name
         try:
@@ -340,14 +342,16 @@ class TransformersModelManager:
         )
 
     def load_scheduler(
-        self, scheduler_name: str = "linear", num_train_epochs: int = 3
+        self,
+        num_train_epochs: int,
+        scheduler_name: str = "linear",
     ) -> None:
         """Load the scheduler that handles the adjustement of the learning rate during the training.
 
         Args:
+            num_train_epochs (int): The number of training steps to do. Defaults to 3.
             scheduler_name (string, optional): Type of scheduler to be used that adjusts the learning
-            rate During the training. Defaults to "linear".
-            num_train_epochs (int, optional): The number of training steps to do. Defaults to 3.
+            rate during the training. Defaults to "linear".
         """
 
         self.num_train_epochs = num_train_epochs
@@ -401,7 +405,7 @@ class TransformersModelManager:
         print(type(tokenized_dataset))
         return tokenized_dataset
 
-    def _initialize(
+    def _initialize_training(
         self,
         tokenized_dataset: DatasetDict,
         num_train_epochs: int,
@@ -409,8 +413,6 @@ class TransformersModelManager:
     ) -> None:
         self.init_data_collator()
         self.load_evaluation_metric()
-        self.set_id2label()
-        self.set_label2id()
         self.load_model()
         self.load_dataloader(tokenized_dataset)
         self.load_optimizer(learning_rate)
@@ -431,7 +433,7 @@ class TransformersModelManager:
         tokenized_dataset = self._prepare_data(
             data_manager, token_column_name, label_column_name
         )
-        self._initialize(tokenized_dataset, num_train_epochs, learning_rate)
+        self._initialize_training(tokenized_dataset, num_train_epochs, learning_rate)
         # show a progress bar
         progress_bar = tqdm(range(self.num_training_steps))
 
