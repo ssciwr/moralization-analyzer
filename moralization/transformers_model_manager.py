@@ -14,12 +14,14 @@ from torch.optim import AdamW
 from accelerate import Accelerator
 from tqdm.auto import tqdm
 from torch import no_grad
+from moralization.data_manager import DataManager
+from moralization.model_manager import ModelManager
 
 
 IGNORED_LABEL = -100
 
 
-class TransformersModelManager:
+class TransformersModelManager(ModelManager):
     """
     Create, import, modify, train and publish transformers models.
 
@@ -30,6 +32,7 @@ class TransformersModelManager:
         self,
         model_path: Union[str, Path],
         model_name: str = "bert-base-cased",
+        label_names: List = ["0", "M", "M-BEG"],
     ) -> None:
         """
         Import an existing model from `model_name` from Hugging Face.
@@ -38,10 +41,21 @@ class TransformersModelManager:
             model_path (str or Path): Folder where the model is (or will be) stored
             model_name (str): Name of the pretrained model
         """
-        self._model_path = Path(model_path)
+        super().__init__(model_path)
         self.model_name = model_name
+        # somewhere we should check that the label names length is same as number of different labels
+        # this however can only be done after the `train` etc method is called with the data
+        # and load model that uses the label names is already done at init
+        # should be done when the tokenization is accessed and label list expanded?
+        self.label_names = label_names
+        # set up all the preprocessing for the dataset
+        self._init_tokenizer()
+        self._init_data_collator()
+        self._load_model()
+        # set up metadata
+        # self.metadata = self._import_or_create_metadata(self.model_path)
 
-    def init_tokenizer(self, model_name=None, kwargs=None) -> None:
+    def _init_tokenizer(self, model_name=None, kwargs=None) -> None:
         """Initialize the tokenizer that goes along with the selected model.
         Only fast tokenizers can be used.
 
@@ -120,6 +134,9 @@ class TransformersModelManager:
             1 if label == 2 and i >= 1 and new_labels[i - 1] == 2 else label
             for i, label in enumerate(new_labels)
         ]
+        # find out how many unique labels
+        # doesn't quite work as not every dataset entry has all labels
+        # unique_labels = np.unique(new_labels)
         return new_labels
 
     def add_labels_to_inputs(self, labels: List) -> None:
@@ -149,11 +166,8 @@ class TransformersModelManager:
         Returns:
             inputs (BatchEncoding): The encoded tokens, labels, etc, after tokenization
         """
-        self.init_tokenizer()
         self.tokenize(examples[self.token_column_name])
         self.add_labels_to_inputs(examples[self.label_column_name])
-        print(type(self.inputs))
-
         return self.inputs
 
     def map_dataset(
@@ -183,7 +197,7 @@ class TransformersModelManager:
         )
         return tokenized_datasets
 
-    def init_data_collator(self, kwargs: Dict = None) -> None:
+    def _init_data_collator(self, kwargs: Dict = None) -> None:
         """Initializes the Data Collator that will form batches from the data
         for the training.
 
@@ -204,24 +218,17 @@ class TransformersModelManager:
         batch = self.data_collator([item for item in tokenized_datasets["train"]])
         return batch
 
-    def load_evaluation_metric(
-        self, label_names: List = None, eval_metric: str = "seqeval"
-    ) -> None:
+    def _load_evaluation_metric(self, eval_metric: str = "seqeval") -> None:
         """Loads the evaluation metric to determine scores for the training.
 
         Args:
-            label_names (list, optional): Label names as strings for the labels to be trained. If
-            the evaluation metric is sequential evaluation, strings are required. For other metrics,
+            eval_metric (str, optional): Evaluation metric to be used, defaults to `seqeval`. If
+            the evaluation metric is sequential evaluation, strings are required for the label names. For other metrics,
             please consult the evaluate documentation: https://huggingface.co/docs/evaluate/choosing_a_metric
-            eval_metric (str, optional): Evaluation metric to be used, defaults to `seqeval`.
         """
         # default is sequential evaluation
         # for other metrics, please see
         # https://huggingface.co/docs/evaluate/choosing_a_metric
-        if not label_names:
-            self.label_names = ["0", "M", "M-BEG"]
-        else:
-            self.label_names = label_names
         self.metric = evaluate.load(eval_metric)
 
     def compute_metrics(self, eval_preds: tuple) -> Dict:
@@ -256,27 +263,23 @@ class TransformersModelManager:
             "accuracy": all_metrics["overall_accuracy"],
         }
 
-    def set_id2label(self) -> None:
+    def _set_id2label(self) -> None:
         """Creates a map from label id (integer) to label name (string)."""
-
-        if not hasattr(self, "label_names"):
-            raise ValueError("Please set the label names first!")
         self.id2label = {i: label for i, label in enumerate(self.label_names)}
 
-    def set_label2id(self) -> None:
+    def _set_label2id(self) -> None:
         """Creates a map from label name (string) to label id (integer)."""
-
-        if not hasattr(self, "id2label"):
-            raise ValueError("Please set id2label first!")
         self.label2id = {v: k for k, v in self.id2label.items()}
 
-    def load_model(self, model_name: str = None) -> None:
+    def _load_model(self, model_name: str = None) -> None:
         """Loads the model to be finetuned in the training.
 
         Args:
             model_name (str, optional): The name of the model to be used in the training.
             Defaults to "bert-base-cased".
         """
+        self._set_id2label()
+        self._set_label2id()
         if model_name is None:
             model_name = self.model_name
         try:
@@ -289,7 +292,7 @@ class TransformersModelManager:
             # here we also need more exceptions for no network etc
             raise OSError("Could not initiate model - please check your model name")
 
-    def load_dataloader(
+    def _load_dataloader(
         self, tokenized_datasets: DatasetDict, batch_size: int = 8
     ) -> None:
         """Loads the pytorch dataloader for the train and test data, that loads the data into batches.
@@ -311,12 +314,11 @@ class TransformersModelManager:
             batch_size=batch_size,
         )
 
-    def load_optimizer(self, learning_rate: float = 2e-5, kwargs: Dict = None) -> None:
+    def _load_optimizer(self, learning_rate: float, kwargs: Dict = None) -> None:
         """Load the AdamW adaptive optimizer that handles the optimization process.
 
         Args:
-            learning_rate (float, optional): Learning rate to be used in the optimization. Defaults to
-            2e-5.
+            learning_rate (float): Learning rate to be used in the optimization.
             kwargs (dict, optional): Further keyword arguments other than learning rate to be passed to the
             optimizer.
         """
@@ -324,7 +326,7 @@ class TransformersModelManager:
             kwargs = {}
         self.optimizer = AdamW(self.model.parameters(), lr=learning_rate, **kwargs)
 
-    def load_accelerator(self) -> None:
+    def _load_accelerator(self) -> None:
         """Loads the accelerator that enables PyTorch to run on any distributed configuration, handles all
         cuda and device placements."""
         self.accelerator = Accelerator()
@@ -337,15 +339,17 @@ class TransformersModelManager:
             self.model, self.optimizer, self.train_dataloader, self.eval_dataloader
         )
 
-    def load_scheduler(
-        self, scheduler_name: str = "linear", num_train_epochs: int = 3
+    def _load_scheduler(
+        self,
+        num_train_epochs: int,
+        scheduler_name: str = "linear",
     ) -> None:
         """Load the scheduler that handles the adjustement of the learning rate during the training.
 
         Args:
+            num_train_epochs (int): The number of training steps to do. Defaults to 3.
             scheduler_name (string, optional): Type of scheduler to be used that adjusts the learning
-            rate During the training. Defaults to "linear".
-            num_train_epochs (int, optional): The number of training steps to do. Defaults to 3.
+            rate during the training. Defaults to "linear".
         """
 
         self.num_train_epochs = num_train_epochs
@@ -370,8 +374,6 @@ class TransformersModelManager:
     def postprocess(self, predictions, labels):
         predictions = predictions.detach().cpu().clone().numpy()
         labels = labels.detach().cpu().clone().numpy()
-        if not self.label_names:
-            raise ValueError("Label names not set!")
         # Remove ignored index (special tokens) and convert to labels
         true_labels = [
             [self.label_names[m] for m in label if m != IGNORED_LABEL]
@@ -387,9 +389,45 @@ class TransformersModelManager:
         ]
         return true_labels, true_predictions
 
-    def train(self) -> None:
+    def _prepare_data(
+        self, data_manager: DataManager, token_column_name: str, label_column_name: str
+    ) -> DatasetDict:
+        train_test_dataset = data_manager.train_test_set
+        tokenized_dataset = self.map_dataset(
+            train_test_set=train_test_dataset,
+            token_column_name=token_column_name,
+            label_column_name=label_column_name,
+        )
+        return tokenized_dataset
+
+    def _initialize_training(
+        self,
+        tokenized_dataset: DatasetDict,
+        num_train_epochs: int,
+        learning_rate: float,
+    ) -> None:
+        self._init_data_collator()
+        self._load_evaluation_metric()
+        self._load_dataloader(tokenized_dataset)
+        self._load_optimizer(learning_rate)
+        self._load_accelerator()
+        self._load_scheduler(num_train_epochs=num_train_epochs)
+
+    def train(
+        self,
+        data_manager: DataManager,
+        token_column_name: str,
+        label_column_name: str,
+        num_train_epochs: int = 5,
+        learning_rate: float = 2e-5,
+    ) -> None:
         """Train a model using the pre-loaded components."""
 
+        # initialize all components and prepare the dataset.
+        tokenized_dataset = self._prepare_data(
+            data_manager, token_column_name, label_column_name
+        )
+        self._initialize_training(tokenized_dataset, num_train_epochs, learning_rate)
         # show a progress bar
         progress_bar = tqdm(range(self.num_training_steps))
 
@@ -463,3 +501,9 @@ class TransformersModelManager:
             aggregation_strategy="simple",
         )
         return token_classifier(token)
+
+    def test(self):
+        pass
+
+    def publish(self):
+        pass

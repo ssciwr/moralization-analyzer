@@ -1,4 +1,5 @@
 from moralization.transformers_model_manager import TransformersModelManager
+from moralization.data_manager import DataManager
 import pytest
 from datasets import load_dataset, Dataset, DatasetDict
 from transformers import DataCollatorForTokenClassification
@@ -7,6 +8,13 @@ from transformers import DataCollatorForTokenClassification
 @pytest.fixture
 def gen_instance(tmp_path):
     return TransformersModelManager(tmp_path)
+
+
+@pytest.fixture
+def gen_instance_dm(data_dir):
+    dm = DataManager(data_dir)
+    dm.df_to_dataset(split=True)
+    return dm
 
 
 @pytest.fixture(scope="module")
@@ -33,16 +41,14 @@ def long_dataset():
 
 
 def test_init_tokenizer(gen_instance):
-    gen_instance.init_tokenizer()
     assert gen_instance.tokenizer.is_fast
     with pytest.raises(OSError):
-        gen_instance.init_tokenizer(model_name="abcd")
+        gen_instance._init_tokenizer(model_name="abcd")
     with pytest.raises(ValueError):
-        gen_instance.init_tokenizer(kwargs={"use_fast": False})
+        gen_instance._init_tokenizer(kwargs={"use_fast": False})
 
 
 def test_tokenize(raw_dataset, gen_instance):
-    gen_instance.init_tokenizer()
     gen_instance.tokenize(raw_dataset["test"]["word"])
     assert gen_instance.inputs["input_ids"][0][0] == 101
     assert gen_instance.inputs["input_ids"][0][2] == 1821
@@ -83,7 +89,6 @@ def test_check_is_nested(gen_instance):
 
 
 def test_align_labels_with_tokens(raw_dataset, gen_instance):
-    gen_instance.init_tokenizer()
     gen_instance.tokenize(raw_dataset["test"]["word"])
     new_labels = gen_instance._align_labels_with_tokens(
         raw_dataset["test"]["label"], gen_instance.inputs.word_ids()
@@ -103,7 +108,6 @@ def test_align_labels_with_tokens(raw_dataset, gen_instance):
 
 
 def test_add_labels_to_inputs(raw_dataset, gen_instance):
-    gen_instance.init_tokenizer()
     gen_instance.tokenize(raw_dataset["test"]["word"])
     # test if list of strings is working
     gen_instance.add_labels_to_inputs(labels=raw_dataset["test"]["label"])
@@ -119,13 +123,11 @@ def test_add_labels_to_inputs(raw_dataset, gen_instance):
 
 def test_map_dataset(train_test_dataset, long_dataset, tmp_path):
     tmm = TransformersModelManager(tmp_path)
-    tmm.init_tokenizer()
     tokenized_dataset = tmm.map_dataset(train_test_dataset)
     assert isinstance(tokenized_dataset["train"], Dataset)
     # try with more than one sentence
     del tmm
     tmm = TransformersModelManager(tmp_path)
-    tmm.init_tokenizer()
     tokenized_dataset = tmm.map_dataset(long_dataset)
     ref_input_ids = [
         [101, 7091, 1734, 1111, 5193, 102],
@@ -137,8 +139,6 @@ def test_map_dataset(train_test_dataset, long_dataset, tmp_path):
 
 
 def test_init_data_collator(gen_instance):
-    gen_instance.init_tokenizer()
-    gen_instance.init_data_collator()
     assert type(gen_instance.data_collator) == DataCollatorForTokenClassification
     assert gen_instance.data_collator.padding
     assert gen_instance.data_collator.return_tensors == "pt"
@@ -147,7 +147,6 @@ def test_init_data_collator(gen_instance):
 
 def test_create_batch(gen_instance, long_dataset):
     tokenized_datasets = gen_instance.map_dataset(long_dataset)
-    gen_instance.init_data_collator()
     batch = gen_instance.create_batch(tokenized_datasets)
     ref_labels = [-100, 0, 2, 1, 1, -100]
     assert batch["labels"][0].tolist() == ref_labels
@@ -157,111 +156,75 @@ def test_create_batch(gen_instance, long_dataset):
     assert batch["attention_mask"][0].tolist() == ref_attention_mask
 
 
-def test_load_evaluation_metric(gen_instance):
-    gen_instance.load_evaluation_metric()
+def test_load_evaluation_metric(gen_instance, tmp_path):
+    gen_instance._load_evaluation_metric()
     assert gen_instance.metric.module_type == "metric"
     assert gen_instance.metric.name == "seqeval"
     assert gen_instance.label_names == ["0", "M", "M-BEG"]
-    test_labels = ["0", "A", "B", "C"]
-    gen_instance.load_evaluation_metric(label_names=test_labels)
-    assert gen_instance.label_names == test_labels
-    assert gen_instance.metric.name == "seqeval"
-    gen_instance.load_evaluation_metric(label_names=None, eval_metric="precision")
+    gen_instance._load_evaluation_metric(eval_metric="precision")
     assert gen_instance.metric.name == "precision"
-
-
-def test_set_id2label(gen_instance):
-    with pytest.raises(ValueError):
-        gen_instance.set_id2label()
-    gen_instance.label_names = ["A", "B", "C"]
-    gen_instance.set_id2label()
-    assert gen_instance.id2label == {0: "A", 1: "B", 2: "C"}
-
-
-def test_set_label2id(gen_instance):
-    with pytest.raises(ValueError):
-        gen_instance.set_label2id()
-    gen_instance.label_names = ["A", "B", "C"]
-    gen_instance.set_id2label()
-    gen_instance.set_label2id()
-    assert gen_instance.id2label == {0: "A", 1: "B", 2: "C"}
-    assert gen_instance.label2id == {"A": 0, "B": 1, "C": 2}
 
 
 def test_load_model(gen_instance):
     gen_instance.label_names = ["A", "B", "C"]
-    gen_instance.set_id2label()
-    gen_instance.set_label2id()
-    gen_instance.load_model()
+    gen_instance._load_model()
     assert gen_instance.model.name_or_path == "bert-base-cased"
     assert gen_instance.model.num_labels == 3
-    gen_instance.load_model(model_name="bert-base-uncased")
+    gen_instance._load_model(model_name="bert-base-uncased")
     assert gen_instance.model.name_or_path == "bert-base-uncased"
     with pytest.raises(OSError):
-        gen_instance.load_model(model_name="ber-base-uncased")
+        gen_instance._load_model(model_name="ber-base-uncased")
 
 
 def test_load_dataloader(gen_instance, train_test_dataset):
-    gen_instance.init_tokenizer()
     tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
-    gen_instance.init_data_collator()
-    gen_instance.load_dataloader(tokenized_dataset)
+    gen_instance._load_dataloader(tokenized_dataset)
     assert gen_instance.train_dataloader.batch_size == 8
     assert gen_instance.eval_dataloader.batch_size == 8
-    gen_instance.load_dataloader(tokenized_dataset, batch_size=16)
+    gen_instance._load_dataloader(tokenized_dataset, batch_size=16)
     assert gen_instance.train_dataloader.batch_size == 16
     assert gen_instance.eval_dataloader.batch_size == 16
 
 
 def test_load_optimizer(gen_instance):
     gen_instance.label_names = ["A", "B", "C"]
-    gen_instance.set_id2label()
-    gen_instance.set_label2id()
-    gen_instance.load_model()
-    gen_instance.load_optimizer()
-    assert gen_instance.optimizer.defaults["lr"] == 2e-5
-    gen_instance.load_optimizer(learning_rate=1e-3)
+    gen_instance._load_optimizer(learning_rate=1e-3)
     assert gen_instance.optimizer.defaults["lr"] == 1e-3
-    gen_instance.load_optimizer(kwargs={"weight_decay": 0.015})
+    gen_instance._load_optimizer(learning_rate=1e-3, kwargs={"weight_decay": 0.015})
     assert gen_instance.optimizer.defaults["weight_decay"] == 0.015
 
 
 def test_load_scheduler(gen_instance, train_test_dataset):
-    gen_instance.init_tokenizer()
     tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
-    gen_instance.init_data_collator()
-    gen_instance.load_dataloader(tokenized_dataset)
+    gen_instance._load_dataloader(tokenized_dataset)
     gen_instance.label_names = ["A", "B", "C"]
-    gen_instance.set_id2label()
-    gen_instance.set_label2id()
-    gen_instance.load_model()
-    gen_instance.load_optimizer()
-    gen_instance.load_scheduler()
+    gen_instance._load_model()
+    gen_instance._load_optimizer(learning_rate=2e-5)
+    gen_instance._load_scheduler(num_train_epochs=3)
     assert gen_instance.lr_scheduler.base_lrs == [2e-5]
     assert gen_instance.num_training_steps == 3
     # now test the exceptions
     del gen_instance.optimizer
     with pytest.raises(ValueError):
-        gen_instance.load_scheduler()
+        gen_instance._load_scheduler(num_train_epochs=3)
     del gen_instance.train_dataloader
     with pytest.raises(ValueError):
-        gen_instance.load_scheduler()
+        gen_instance._load_scheduler(num_train_epochs=3)
 
 
-def test_train_evaluate(gen_instance, train_test_dataset):
+def test_train_evaluate(gen_instance, gen_instance_dm):
     model_path = gen_instance._model_path
-    gen_instance.init_tokenizer()
-    tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
-    gen_instance.init_data_collator()
-    gen_instance.load_evaluation_metric()
-    gen_instance.set_id2label()
-    gen_instance.set_label2id()
-    gen_instance.load_model()
-    gen_instance.load_dataloader(tokenized_dataset)
-    gen_instance.load_optimizer()
-    gen_instance.load_accelerator()
-    gen_instance.load_scheduler(num_train_epochs=1)
-    gen_instance.train()
+    token_column_name = "Sentences"
+    label_column_name = "Labels"
+    num_train_epochs = 1
+    learning_rate = 1e-5
+    gen_instance.train(
+        gen_instance_dm,
+        token_column_name,
+        label_column_name,
+        num_train_epochs,
+        learning_rate,
+    )
     assert gen_instance.results["overall_precision"] == 0.0
     assert (model_path / "pytorch_model.bin").is_file()
     assert (model_path / "special_tokens_map.json").is_file()

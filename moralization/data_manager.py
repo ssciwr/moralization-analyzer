@@ -8,11 +8,14 @@ from moralization.plot import (
     InteractiveVisualization,
 )
 import logging
-
+import os
 from moralization.spacy_data_handler import SpacyDataHandler
+from moralization.transformers_data_handler import TransformersDataHandler
 import pandas as pd
 import datasets
 import numpy as np
+from typing import Dict, Optional
+import huggingface_hub
 
 
 class DataManager:
@@ -22,6 +25,9 @@ class DataManager:
 
         self.analyzer = None
         self.spacy_docbin_files = None
+        # generate the data lists and data frame
+        self._docdict_to_lists()
+        self._lists_to_df()
 
     def occurence_analysis(self, _type="table", cat_filter=None, file_filter=None):
         """Returns the occurence df, occurence_corr_table or heatmap of the dataset.
@@ -284,27 +290,135 @@ class DataManager:
         )
         return self.spacy_docbin_files
 
-    def lists_to_df(self, sentence_list, label_list):
-        """Convert nested lists of tokens and labels into a pandas dataframe.
+    def _docdict_to_lists(self):
+        """Convert the dictionary of doc objects to nested lists."""
 
-        Args:
-            sentence_list (list): A nested list of the tokens (nested by sentence).
-            label_list (list): A nested list of the labels (nested by sentence).
+        # for now work with instantiation
+        tdh = TransformersDataHandler()
+        tdh.get_data_lists(self.doc_dict)
+        tdh.generate_labels(self.doc_dict)
+        self.sentence_list, self.label_list = tdh.structure_labels()
+
+    def _lists_to_df(self):
+        """Convert nested lists of tokens and labels into a pandas dataframe.
 
         Returns:
             data_in_frame (dataframe): A list of the train and test files path.
         """
-        data_in_frame = pd.DataFrame(
-            zip(sentence_list, label_list), columns=["Sentences", "Labels"]
+        self.data_in_frame = pd.DataFrame(
+            zip(self.sentence_list, self.label_list), columns=["Sentences", "Labels"]
         )
-        return data_in_frame
 
-    def df_to_dataset(self, data_in_frame, split=True):
-        raw_data_set = datasets.Dataset.from_pandas(data_in_frame)
+    def df_to_dataset(self, data_in_frame: pd.DataFrame = None, split: bool = True):
+        if not data_in_frame:
+            data_in_frame = self.data_in_frame
+        self.raw_data_set = datasets.Dataset.from_pandas(data_in_frame)
         if split:
             # split in train test
-            train_test_set = raw_data_set.train_test_split(test_size=0.1)
-            return train_test_set
-        return raw_data_set
+            self.train_test_set = self.raw_data_set.train_test_split(test_size=0.1)
 
-    # here we also need a method to publish the dataset to hugging face
+    def publish(
+        self,
+        repo_id: str,
+        data_set: datasets.Dataset = None,
+        hugging_face_token: Optional[str] = None,
+    ) -> Dict[str, str]:
+        """Publish the dataset to Hugging Face.
+
+        This requires a User Access Token from https://huggingface.co/
+
+        The token can either be passed via the `hugging_face_token` argument,
+        or it can be set via the `HUGGING_FACE_TOKEN` environment variable.
+
+        Args:
+            repo_id (str): The name of the repository that you are pushing to.
+            This can either be a new repository or an existing one.
+            data_set (Dataset, optional): The Dataset to be published to Hugging Face. Please
+            note that this is a Dataset object and not a DatasetDict object, meaning
+            that if you have already split your dataset into test and train, you can
+            either push test and train separately or need to concatenate them using "+".
+            If not set, the raw dataset that is connected to the DataManager instance will
+            be used.
+            hugging_face_token (str, optional): Hugging Face User Access Token
+        """
+        if not data_set:
+            data_set = self.raw_data_set
+        self.print_dataset_info(data_set)
+        if hugging_face_token is None:
+            hugging_face_token = os.environ.get("HUGGING_FACE_TOKEN")
+        if hugging_face_token is None:
+            raise ValueError(
+                "API TOKEN required: pass as string or set the HUGGING_FACE_TOKEN environment variable."
+            )
+        huggingface_hub.login(token=hugging_face_token)
+        data_set.push_to_hub(repo_id=repo_id)
+        print(
+            "If you have not yet set up a README (dataset card) for your dataset, please do so on Hugging Face Hub!"
+        )
+
+    def print_dataset_info(self, data_set: datasets.Dataset = None) -> None:
+        """Print information set in the dataset.
+
+        Args:
+            data_set (Dataset, optional): The Dataset object of which the information
+            is to be printed. Defaults to the raw dataset associated with the DataManager
+            instance.
+        """
+        if not data_set:
+            data_set = self.raw_data_set
+        print("The following dataset metadata has been set:")
+        print("Description:", data_set.info.description)
+        print("Version:", data_set.info.version)
+        print("License:", data_set.info.license)
+        print("Citation:", data_set.info.citation)
+        print("homepage:", data_set.info.homepage)
+
+    def set_dataset_info(
+        self,
+        data_set: datasets.Dataset = None,
+        description: str = None,
+        version: str = None,
+        license_: str = None,
+        citation: str = None,
+        homepage: str = None,
+    ) -> datasets.Dataset:
+        """Update the information set in the dataset.
+
+        Args:
+            data_set (Dataset, optional): The Dataset object of which the information is to be updated.
+            Defaults to the raw dataset associated with the DataManager instance.
+            description (str, optional): The new description to be updated. Optional, defaults to None.
+            version (str, optional): The new version to be updated. Optional, defaults to None.
+            license (str, optional): The new license to be updated. Optional, defaults to None.
+            citation (str, optional): The new citation to be updated. Optional, defaults to None.
+            homepage (str, optional): The new homepage to be updated. Optional, defaults to None.
+        Returns:
+            Dataset: The updated Dataset object.
+        """
+        if not data_set:
+            data_set = self.raw_data_set
+        print("Updating the following dataset metadata:")
+        if description:
+            print(
+                "Description: old - {} new - {}".format(
+                    data_set.info.description, description
+                )
+            )
+            data_set.info.description = description
+        if version:
+            print("Version: old - {} new - {}".format(data_set.info.version, version))
+            data_set.info.version = version
+        if license_:
+            print("License: old - {} new - {}".format(data_set.info.license, license_))
+            data_set.info.license = license_
+        if citation:
+            print(
+                "Citation: old - {} new - {}".format(data_set.info.citation, citation)
+            )
+            data_set.info.citation = citation
+        if homepage:
+            print(
+                "homepage: old - {} new - {}".format(data_set.info.homepage, homepage)
+            )
+            data_set.info.homepage = homepage
+        return data_set

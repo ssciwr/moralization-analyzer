@@ -1,7 +1,10 @@
+from typing import Dict, List, Tuple
+
+
 class TransformersDataHandler:
     """Helper class to organize and prepare data for transformer models."""
 
-    def get_data_lists(self, doc_dict, example_name=None):
+    def get_data_lists(self, doc_dict: Dict) -> None:
         """Convert the data from doc object to lists. Required for transformers training.
 
         Set the lists of tokens and labels for transformers training, with a nested list of
@@ -9,32 +12,33 @@ class TransformersDataHandler:
 
         Args:
             doc_dict (dict, required): The dictionary of doc objects for each data source.
-            example_name (str, optional): A single data source should be selected for conversion. Defaults to None.
 
         """
-        # for now just select one source
-        if example_name is None:
-            example_name = sorted(list(doc_dict.keys()))[0]
-        self.sentence_list = [
-            [token.text for token in sent] for sent in doc_dict[example_name].sents
-        ]
-        self.token_list = [
-            [token for token in sent] for sent in doc_dict[example_name].sents
-        ]
-        # initialize nested label list to 0
-        self.label_list = [[0 for _ in sent] for sent in doc_dict[example_name].sents]
+        # Create a list of all the sentences for all sources.
+        self.sentence_list = []
+        self.token_list = []
+        self.label_list = []
+        for example_name in doc_dict.keys():
+            sentence_list = [
+                [token.text for token in sent] for sent in doc_dict[example_name].sents
+            ]
+            token_list = [
+                [token for token in sent] for sent in doc_dict[example_name].sents
+            ]
+            # initialize nested label list to 0
+            label_list = [[0 for _ in sent] for sent in doc_dict[example_name].sents]
+            # extend the main lists for all the sources by the lists for the single sources
+            self.sentence_list.extend(sentence_list)
+            self.token_list.extend(token_list)
+            self.label_list.extend(label_list)
 
-    def generate_labels(self, doc_dict, example_name=None):
+    def generate_labels(self, doc_dict: Dict) -> None:
         """Generate the labels from the annotated tokens in one long list. Required for transformers training.
 
         Args:
             doc_dict (dict, required): The dictionary of doc objects for each data source.
-            example_name (str, optional): A single data source should be selected for conversion. Defaults to None.
 
         """
-        # for now just select one source
-        if example_name is None:
-            example_name = sorted(list(doc_dict.keys()))[0]
         # generate the labels based on the current list of tokens
         # now set all Moralisierung, Moralisierung Kontext,
         # Moralisierung explizit, Moralisierung interpretativ, Moralisierung Weltwissen to 1
@@ -47,17 +51,19 @@ class TransformersDataHandler:
             "Moralisierung interpretativ",
         ]
         # create a list as long as tokens
-        # we need to do this for all the data, example
-        self.labels = [0 for _ in doc_dict[example_name]]
-        for span in doc_dict[example_name].spans["task1"]:
-            if span.label_ in selected_labels:
-                self.labels[span.start + 1 : span.end + 1] = [1] * (
-                    span.end - span.start
-                )
-                # mark the beginning of a span with 2
-                self.labels[span.start] = 2
+        self.labels = []
+        for example_name in doc_dict.keys():
+            labels = [0 for _ in doc_dict[example_name]]
+            for span in doc_dict[example_name].spans["task1"]:
+                if span.label_ in selected_labels:
+                    labels[span.start + 1 : span.end + 1] = [1] * (
+                        span.end - span.start
+                    )
+                    # mark the beginning of a span with 2
+                    labels[span.start] = 2
+            self.labels.extend(labels)
 
-    def structure_labels(self):
+    def structure_labels(self) -> Tuple[List, List]:
         """Structure the tokens from one long list into a nested list for sentences. Required for transformers training.
 
         Returns:

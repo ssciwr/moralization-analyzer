@@ -1,22 +1,16 @@
 from moralization.data_manager import DataManager
-from moralization.transformers_data_handler import TransformersDataHandler
 from tempfile import mkdtemp
 from pathlib import Path
 import pytest
 import re
 import numpy as np
+from datasets import load_dataset
 
 
 @pytest.fixture
-def get_transformers_lists(data_dir):
-    dm = DataManager(data_dir)
-    tdh = TransformersDataHandler()
-    example_name = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
-    doc_dict = dm.doc_dict
-    tdh.get_data_lists(doc_dict=doc_dict, example_name=example_name)
-    tdh.generate_labels(doc_dict=doc_dict, example_name=example_name)
-    sentence_list, label_list = tdh.structure_labels()
-    return dm, sentence_list, label_list
+def get_dataset():
+    data_set = load_dataset("iulusoy/test-data")
+    return data_set
 
 
 def test_data_manager(data_dir):
@@ -135,51 +129,83 @@ def test_check_data_integrity(data_dir):
     dm.check_data_integrity()
 
 
-def test_lists_to_df(get_transformers_lists):
-    dm = get_transformers_lists[0]
-    sentence_list = get_transformers_lists[1]
-    label_list = get_transformers_lists[2]
-    data_frame = dm.lists_to_df(sentence_list, label_list)
+def test_docdict_to_lists(data_dir):
+    dm = DataManager(data_dir)
     ref_sentence = [
-        '"',
-        "Dann",
-        "kann",
-        "man",
-        "die",
-        "KMK",
-        "auflösen",
-        '"',
-        "#",
-        "#",
-        "#",
+        "SEP.01673",
+        "Hamburger",
+        "Morgenpost",
+        ",",
+        "16.09.2007",
+        ",",
+        "S.",
+        "46",
+        ";",
     ]
-    assert data_frame["Sentences"][3] == ref_sentence
-    ref_labels = [-100, 0, 0, 0, 0, 0, 0, -100, -100, -100, -100]
-    assert data_frame["Labels"][3] == ref_labels
+    ref_labels = [0, 0, 0, -100, 0, -100, 0, 0, -100]
+    assert dm.sentence_list[32] == ref_sentence
+    assert dm.label_list[32] == ref_labels
 
 
-def test_df_to_dataset(get_transformers_lists, data_dir):
-    dm = get_transformers_lists[0]
-    sentence_list = get_transformers_lists[1]
-    label_list = get_transformers_lists[2]
-    data_frame = dm.lists_to_df(sentence_list, label_list)
-    raw_data_set = dm.df_to_dataset(data_frame, split=False)
-    train_test_set = dm.df_to_dataset(data_frame)
-    ref_sentence = [
-        '"',
-        "Dann",
-        "kann",
-        "man",
-        "die",
-        "KMK",
-        "auflösen",
-        '"',
-        "#",
-        "#",
-        "#",
-    ]
-    assert raw_data_set["Sentences"][3] == ref_sentence
-    ref_labels = [-100, 0, 0, 0, 0, 0, 0, -100, -100, -100, -100]
-    assert raw_data_set["Labels"][3] == ref_labels
-    assert train_test_set["test"]
-    assert train_test_set["train"]
+def test_lists_to_df(data_dir):
+    dm = DataManager(data_dir)
+    ref_sentence = ["BERLIN"]
+    assert dm.data_in_frame["Sentences"][3] == ref_sentence
+    ref_labels = [0]
+    assert dm.data_in_frame["Labels"][3] == ref_labels
+
+
+def test_df_to_dataset(data_dir):
+    dm = DataManager(data_dir)
+    dm.df_to_dataset(split=False)
+    ref_sentence = ["BERLIN"]
+    assert dm.raw_data_set["Sentences"][3] == ref_sentence
+    ref_labels = [0]
+    dm.df_to_dataset()
+    assert dm.raw_data_set["Labels"][3] == ref_labels
+    assert dm.train_test_set["test"]
+    assert dm.train_test_set["train"]
+
+
+def test_publish(data_dir, monkeypatch):
+    dm = DataManager(data_dir)
+    repo_id = "test-data-2"
+    dm.df_to_dataset(split=False)
+    dm.publish(repo_id)
+    dataset = dm.raw_data_set
+    dm.publish(repo_id, dataset)
+    monkeypatch.delenv("HUGGING_FACE_TOKEN", raising=False)
+    with pytest.raises(ValueError):
+        dm.publish(repo_id)
+
+
+def test_print_dataset_info(data_dir):
+    dm = DataManager(data_dir)
+    dm.df_to_dataset(split=True)
+    dm.print_dataset_info()
+
+
+def test_set_dataset_info(data_dir, get_dataset):
+    dm = DataManager(data_dir)
+    description = "Something"
+    dataset = dm.set_dataset_info(get_dataset["test"], description=description)
+    assert dataset.info.description == description
+    description = "Something else"
+    dataset = dm.set_dataset_info(get_dataset["test"], description=description)
+    assert dataset.info.description == description
+    version = "0.0.1"
+    dataset = dm.set_dataset_info(get_dataset["test"], version=version)
+    assert dataset.info.version == version
+    license_ = "MIT"
+    dataset = dm.set_dataset_info(get_dataset["test"], license_=license_)
+    assert dataset.info.license == license_
+    citation = "My-DOI"
+    dataset = dm.set_dataset_info(get_dataset["test"], citation=citation)
+    assert dataset.info.citation == citation
+    homepage = "My-homepage"
+    dataset = dm.set_dataset_info(get_dataset["test"], homepage=homepage)
+    assert dataset.info.homepage == homepage
+    dm = DataManager(data_dir)
+    dm.df_to_dataset(split=False)
+    dataset = dm.set_dataset_info(homepage=homepage)
+    assert dataset.info.homepage == homepage
