@@ -25,6 +25,9 @@ class DataManager:
 
         self.analyzer = None
         self.spacy_docbin_files = None
+        # generate the data lists and data frame
+        self._docdict_to_lists()
+        self._lists_to_df()
 
     def occurence_analysis(self, _type="table", cat_filter=None, file_filter=None):
         """Returns the occurence df, occurence_corr_table or heatmap of the dataset.
@@ -287,7 +290,7 @@ class DataManager:
         )
         return self.spacy_docbin_files
 
-    def docdict_to_lists(self):
+    def _docdict_to_lists(self):
         """Convert the dictionary of doc objects to nested lists."""
 
         # for now work with instantiation
@@ -296,7 +299,7 @@ class DataManager:
         tdh.generate_labels(self.doc_dict)
         self.sentence_list, self.label_list = tdh.structure_labels()
 
-    def lists_to_df(self):
+    def _lists_to_df(self):
         """Convert nested lists of tokens and labels into a pandas dataframe.
 
         Returns:
@@ -314,7 +317,7 @@ class DataManager:
             # split in train test
             self.train_test_set = self.raw_data_set.train_test_split(test_size=0.1)
 
-    def push_dataset_to_hub(
+    def publish(
         self,
         repo_id: str,
         data_set: datasets.Dataset = None,

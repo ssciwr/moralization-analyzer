@@ -13,8 +13,6 @@ def gen_instance(tmp_path):
 @pytest.fixture
 def gen_instance_dm(data_dir):
     dm = DataManager(data_dir)
-    dm.docdict_to_lists()
-    dm.lists_to_df()
     dm.df_to_dataset(split=True)
     return dm
 
@@ -45,9 +43,9 @@ def long_dataset():
 def test_init_tokenizer(gen_instance):
     assert gen_instance.tokenizer.is_fast
     with pytest.raises(OSError):
-        gen_instance.init_tokenizer(model_name="abcd")
+        gen_instance._init_tokenizer(model_name="abcd")
     with pytest.raises(ValueError):
-        gen_instance.init_tokenizer(kwargs={"use_fast": False})
+        gen_instance._init_tokenizer(kwargs={"use_fast": False})
 
 
 def test_tokenize(raw_dataset, gen_instance):
@@ -149,7 +147,6 @@ def test_init_data_collator(gen_instance):
 
 def test_create_batch(gen_instance, long_dataset):
     tokenized_datasets = gen_instance.map_dataset(long_dataset)
-    gen_instance.init_data_collator()
     batch = gen_instance.create_batch(tokenized_datasets)
     ref_labels = [-100, 0, 2, 1, 1, -100]
     assert batch["labels"][0].tolist() == ref_labels
@@ -159,89 +156,60 @@ def test_create_batch(gen_instance, long_dataset):
     assert batch["attention_mask"][0].tolist() == ref_attention_mask
 
 
-def test_load_evaluation_metric(gen_instance):
-    gen_instance.load_evaluation_metric()
+def test_load_evaluation_metric(gen_instance, tmp_path):
+    gen_instance._load_evaluation_metric()
     assert gen_instance.metric.module_type == "metric"
     assert gen_instance.metric.name == "seqeval"
     assert gen_instance.label_names == ["0", "M", "M-BEG"]
-    test_labels = ["0", "A", "B", "C"]
-    gen_instance.load_evaluation_metric(label_names=test_labels)
-    assert gen_instance.label_names == test_labels
-    assert gen_instance.metric.name == "seqeval"
-    gen_instance.load_evaluation_metric(label_names=None, eval_metric="precision")
+    gen_instance._load_evaluation_metric(eval_metric="precision")
     assert gen_instance.metric.name == "precision"
-
-
-def test_set_id2label(gen_instance):
-    with pytest.raises(ValueError):
-        gen_instance.set_id2label()
-    gen_instance.label_names = ["A", "B", "C"]
-    gen_instance.set_id2label()
-    assert gen_instance.id2label == {0: "A", 1: "B", 2: "C"}
-
-
-def test_set_label2id(gen_instance):
-    with pytest.raises(ValueError):
-        gen_instance.set_label2id()
-    gen_instance.label_names = ["A", "B", "C"]
-    gen_instance.set_id2label()
-    gen_instance.set_label2id()
-    assert gen_instance.id2label == {0: "A", 1: "B", 2: "C"}
-    assert gen_instance.label2id == {"A": 0, "B": 1, "C": 2}
 
 
 def test_load_model(gen_instance):
     gen_instance.label_names = ["A", "B", "C"]
-    gen_instance.set_id2label()
-    gen_instance.set_label2id()
-    gen_instance.load_model()
+    gen_instance._load_model()
     assert gen_instance.model.name_or_path == "bert-base-cased"
     assert gen_instance.model.num_labels == 3
-    gen_instance.load_model(model_name="bert-base-uncased")
+    gen_instance._load_model(model_name="bert-base-uncased")
     assert gen_instance.model.name_or_path == "bert-base-uncased"
     with pytest.raises(OSError):
-        gen_instance.load_model(model_name="ber-base-uncased")
+        gen_instance._load_model(model_name="ber-base-uncased")
 
 
 def test_load_dataloader(gen_instance, train_test_dataset):
     tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
-    gen_instance.init_data_collator()
-    gen_instance.load_dataloader(tokenized_dataset)
+    gen_instance._load_dataloader(tokenized_dataset)
     assert gen_instance.train_dataloader.batch_size == 8
     assert gen_instance.eval_dataloader.batch_size == 8
-    gen_instance.load_dataloader(tokenized_dataset, batch_size=16)
+    gen_instance._load_dataloader(tokenized_dataset, batch_size=16)
     assert gen_instance.train_dataloader.batch_size == 16
     assert gen_instance.eval_dataloader.batch_size == 16
 
 
 def test_load_optimizer(gen_instance):
     gen_instance.label_names = ["A", "B", "C"]
-    gen_instance.load_model()
-    gen_instance.load_optimizer(learning_rate=1e-3)
+    gen_instance._load_optimizer(learning_rate=1e-3)
     assert gen_instance.optimizer.defaults["lr"] == 1e-3
-    gen_instance.load_optimizer(learning_rate=1e-3, kwargs={"weight_decay": 0.015})
+    gen_instance._load_optimizer(learning_rate=1e-3, kwargs={"weight_decay": 0.015})
     assert gen_instance.optimizer.defaults["weight_decay"] == 0.015
 
 
 def test_load_scheduler(gen_instance, train_test_dataset):
     tokenized_dataset = gen_instance.map_dataset(train_test_dataset)
-    gen_instance.init_data_collator()
-    gen_instance.load_dataloader(tokenized_dataset)
+    gen_instance._load_dataloader(tokenized_dataset)
     gen_instance.label_names = ["A", "B", "C"]
-    gen_instance.set_id2label()
-    gen_instance.set_label2id()
-    gen_instance.load_model()
-    gen_instance.load_optimizer(learning_rate=2e-5)
-    gen_instance.load_scheduler(num_train_epochs=3)
+    gen_instance._load_model()
+    gen_instance._load_optimizer(learning_rate=2e-5)
+    gen_instance._load_scheduler(num_train_epochs=3)
     assert gen_instance.lr_scheduler.base_lrs == [2e-5]
     assert gen_instance.num_training_steps == 3
     # now test the exceptions
     del gen_instance.optimizer
     with pytest.raises(ValueError):
-        gen_instance.load_scheduler(num_train_epochs=3)
+        gen_instance._load_scheduler(num_train_epochs=3)
     del gen_instance.train_dataloader
     with pytest.raises(ValueError):
-        gen_instance.load_scheduler(num_train_epochs=3)
+        gen_instance._load_scheduler(num_train_epochs=3)
 
 
 def test_train_evaluate(gen_instance, gen_instance_dm):
