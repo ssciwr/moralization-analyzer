@@ -41,7 +41,6 @@ class TransformersModelManager(ModelManager):
             model_name (str): Name of the pretrained model
         """
         super().__init__(model_path)
-        self._model_path = Path(model_path)
         self.model_name = model_name
         # set up all the preprocessing for the dataset
         self.init_tokenizer()
