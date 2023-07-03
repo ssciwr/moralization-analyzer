@@ -113,19 +113,11 @@ def test_spacy_model_manager_modify_metadata_unfixable_invalid_names(spacy_model
         assert "invalid" in str(e.value).lower()
 
 
-def test_spacy_model_manager_publish_untrained(data_dir, tmp_path):
+def test_spacy_model_manager_publish_untrained(tmp_path):
     model = SpacyModelManager(tmp_path / "my_model")
     with pytest.raises(RuntimeError) as e:
         model.publish()
     assert "trained" in str(e.value).lower()
-
-
-def test_spacy_model_manager_publish_no_token(spacy_model_path, monkeypatch):
-    monkeypatch.delenv("HUGGING_FACE_TOKEN", raising=False)
-    model = SpacyModelManager(spacy_model_path)
-    with pytest.raises(ValueError) as e:
-        model.publish()
-    assert "token" in str(e.value).lower()
 
 
 def test_spacy_model_manager_publish_invalid_token_env(spacy_model_path, monkeypatch):

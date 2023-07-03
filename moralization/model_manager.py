@@ -73,16 +73,14 @@ class ModelManager(ABC):
     def _login_to_huggingface(self, hugging_face_token: Optional[str] = None) -> None:
         """Login to hugging face using the supplied token
 
-        The token can either be passed via the `hugging_face_token` argument,
-        or it can be set via the `HUGGING_FACE_TOKEN` environment variable.
+                The token can either be passed via the `hugging_face_token` argument,
+                or it can be set via the `HUGGING_FACE_TOKEN` environment variable.
 
-        Args:
-            hugging_face_token (str, optional): Hugging Face User Access Token
-        """
+                Args:
+                    hugging_face_token (str, optional): Hugging Face User Access Token
+        0"""
         if hugging_face_token is None:
             hugging_face_token = os.environ.get("HUGGING_FACE_TOKEN")
         if hugging_face_token is None:
-            raise ValueError(
-                "API TOKEN required: pass as string or set the HUGGING_FACE_TOKEN environment variable."
-            )
+            print("Obtaining token directly from user..")
         huggingface_hub.login(token=hugging_face_token)
