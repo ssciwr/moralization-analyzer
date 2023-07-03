@@ -329,6 +329,7 @@ class DataManager:
 
         The token can either be passed via the `hugging_face_token` argument,
         or it can be set via the `HUGGING_FACE_TOKEN` environment variable.
+        If the token is not set, a prompt will pop up where it can be provided.
 
         Args:
             repo_id (str): The name of the repository that you are pushing to.
@@ -339,7 +340,7 @@ class DataManager:
             either push test and train separately or need to concatenate them using "+".
             If not set, the raw dataset that is connected to the DataManager instance will
             be used.
-            hugging_face_token (str, optional): Hugging Face User Access Token
+            hugging_face_token (str, optional): Hugging Face User Access Token.
         """
         if not data_set:
             data_set = self.raw_data_set
@@ -347,9 +348,7 @@ class DataManager:
         if hugging_face_token is None:
             hugging_face_token = os.environ.get("HUGGING_FACE_TOKEN")
         if hugging_face_token is None:
-            raise ValueError(
-                "API TOKEN required: pass as string or set the HUGGING_FACE_TOKEN environment variable."
-            )
+            print("Obtaining token directly from user..")
         huggingface_hub.login(token=hugging_face_token)
         data_set.push_to_hub(repo_id=repo_id)
         print(

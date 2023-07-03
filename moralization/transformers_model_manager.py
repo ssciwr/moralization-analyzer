@@ -5,7 +5,7 @@ from transformers import tokenization_utils_base
 from transformers import get_scheduler
 from transformers import pipeline  # noqa
 from datasets import DatasetDict, formatting
-from typing import Union, List, Dict
+from typing import Union, List, Dict, Optional
 import evaluate
 from pathlib import Path
 import numpy as np
@@ -505,5 +505,30 @@ class TransformersModelManager(ModelManager):
     def test(self):
         pass
 
-    def publish(self):
-        pass
+    def _check_model_is_trained_before_it_can_be(self, action: str = "used"):
+        model_file = self._model_path / "pytorch_model.bin"
+        if not model_file.exists():
+            raise RuntimeError(f"Model must be trained before it can be {action}.")
+
+    def publish(self, hugging_face_token: Optional[str] = None) -> str:
+        """Publish the model to Hugging Face.
+
+        This requires a User Access Token from https://huggingface.co/
+
+        The token can either be passed via the `hugging_face_token` argument,
+        or it can be set via the `HUGGING_FACE_TOKEN` environment variable. If
+        no token is provided, a command prompt will open to request the token.
+
+        Args:
+            hugging_face_token (str, optional): Hugging Face User Access Token
+        Returns:
+            str: The URL of the published model
+        """
+        self._check_model_is_trained_before_it_can_be("published")
+        for key, value in self.metadata.items():
+            if value == "":
+                raise RuntimeError(
+                    f"Metadata '{key}' is not set - all metadata needs to be set before publishing a model."
+                )
+        self.save()
+        self._login_to_huggingface(hugging_face_token)

@@ -167,16 +167,13 @@ def test_df_to_dataset(data_dir):
     assert dm.train_test_set["train"]
 
 
-def test_publish(data_dir, monkeypatch):
+def test_publish(data_dir):
     dm = DataManager(data_dir)
     repo_id = "test-data-2"
     dm.df_to_dataset(split=False)
     dm.publish(repo_id)
     dataset = dm.raw_data_set
     dm.publish(repo_id, dataset)
-    monkeypatch.delenv("HUGGING_FACE_TOKEN", raising=False)
-    with pytest.raises(ValueError):
-        dm.publish(repo_id)
 
 
 def test_print_dataset_info(data_dir):
