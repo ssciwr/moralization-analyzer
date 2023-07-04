@@ -5,7 +5,7 @@ from transformers import tokenization_utils_base
 from transformers import get_scheduler
 from transformers import pipeline  # noqa
 from datasets import DatasetDict, formatting
-from typing import Union, List, Dict, Optional
+from typing import Union, List, Dict, Optional, Any
 import evaluate
 from pathlib import Path
 import numpy as np
@@ -16,9 +16,45 @@ from tqdm.auto import tqdm
 from torch import no_grad
 from moralization.data_manager import DataManager
 from moralization.model_manager import ModelManager
+import json
+from huggingface_hub import HfApi
 
 
 IGNORED_LABEL = -100
+
+
+def _update_model_meta(model_path: Path, metadata: Dict):
+    """
+    Update matching keys in the README.md file with values from the supplied metadata dict.
+    """
+    meta_file = model_path / "README.md"
+    if not meta_file.is_file():
+        return
+    with open(meta_file) as f:
+        meta = json.load(f)
+        for k, v in metadata.items():
+            if k in meta:
+                meta[k] = v
+    with open(meta_file, "w") as f:
+        json.dump(meta, f)
+
+
+def _import_or_create_metadata(model_path: Path) -> Dict[str, Any]:
+    meta_file = model_path / "README.md"
+    default_metadata = {
+        "name": "pipeline",
+        "version": "0.0.0",
+        "description": "",
+        "author": "",
+        "email": "",
+        "url": "",
+        "license": "",
+    }
+    if not meta_file.is_file():
+        with open(meta_file, "w") as f:
+            json.dump(default_metadata, f)
+    with open(meta_file) as f:
+        return json.load(f)
 
 
 class TransformersModelManager(ModelManager):
@@ -43,6 +79,8 @@ class TransformersModelManager(ModelManager):
         """
         super().__init__(model_path)
         self.model_name = model_name
+        self.metadata = _import_or_create_metadata(self.model_path)
+        self._model_is_trained = False
         # somewhere we should check that the label names length is same as number of different labels
         # this however can only be done after the `train` etc method is called with the data
         # and load model that uses the label names is already done at init
@@ -456,6 +494,7 @@ class TransformersModelManager(ModelManager):
             )
 
             self.save()
+        self._model_is_trained = True
 
     def _evaluate_model(self):
         # set mode to evaluation
@@ -480,15 +519,28 @@ class TransformersModelManager(ModelManager):
             self.metric.add_batch(predictions=true_predictions, references=true_labels)
 
     def save(self):
+        """Save the model to the set model path.
+        If a model already exists in that path, it will be overwritten."""
+        model_file = self.model_path / "pytorch_model.bin"
+        if model_file.exists():
+            print(
+                "Model file already existing at specified model path {} - will be overwritten.".format(
+                    self.model_path
+                )
+            )
+        # save the metadata
+        with open(self.model_path / "README.md", "w") as f:
+            json.dump(self.metadata, f)
+        _update_model_meta(self.model_path, self.metadata)
         # Save the model to model path
         self.accelerator.wait_for_everyone()
         unwrapped_model = self.accelerator.unwrap_model(self.model)
         unwrapped_model.save_pretrained(
-            self._model_path, save_function=self.accelerator.save
+            self.model_path, save_function=self.accelerator.save
         )
         # the below is executed only once in main process
         if self.accelerator.is_main_process:
-            self.tokenizer.save_pretrained(self._model_path)
+            self.tokenizer.save_pretrained(self.model_path)
 
     def evaluate(self, token: str):
         if not hasattr(self, "_model_path"):
@@ -497,7 +549,7 @@ class TransformersModelManager(ModelManager):
             )
         token_classifier = pipeline(
             "token-classification",
-            model=self._model_path,
+            model=self.model_path,
             aggregation_strategy="simple",
         )
         return token_classifier(token)
@@ -506,8 +558,7 @@ class TransformersModelManager(ModelManager):
         pass
 
     def _check_model_is_trained_before_it_can_be(self, action: str = "used"):
-        model_file = self._model_path / "pytorch_model.bin"
-        if not model_file.exists():
+        if not self._model_is_trained:
             raise RuntimeError(f"Model must be trained before it can be {action}.")
 
     def publish(self, hugging_face_token: Optional[str] = None) -> str:
@@ -524,11 +575,21 @@ class TransformersModelManager(ModelManager):
         Returns:
             str: The URL of the published model
         """
-        self._check_model_is_trained_before_it_can_be("published")
+        # self._check_model_is_trained_before_it_can_be("published")
         for key, value in self.metadata.items():
             if value == "":
                 raise RuntimeError(
                     f"Metadata '{key}' is not set - all metadata needs to be set before publishing a model."
                 )
-        self.save()
+        # self.save()
         self._login_to_huggingface(hugging_face_token)
+        self.model.push_to_hub("test-model")
+        # also push the README metadata
+        api = HfApi()
+        myurl = api.upload_file(
+            path_or_fileobj="README.md",
+            path_in_repo="README.md",
+            repo_id="iulusoy/test-model",
+            repo_type="model",
+        )
+        return myurl
