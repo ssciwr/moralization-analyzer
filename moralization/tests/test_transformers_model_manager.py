@@ -7,7 +7,7 @@ from moralization.data_manager import DataManager
 import pytest
 from datasets import load_dataset, Dataset, DatasetDict
 from transformers import DataCollatorForTokenClassification
-import yaml
+import frontmatter
 
 
 @pytest.fixture
@@ -47,31 +47,30 @@ def long_dataset():
 
 def test_update_model_meta(tmp_path):
     # create a temp README file
-    meta = [
-        {
-            "language": ["en"],
-            "thumbnail": None,
-            "tags": ["token classification"],
-            "license": "MIT",
-            "datasets": ["iulusoy/test-data-3"],
-            "metrics": ["seqeval"],
-        },
-        {},
-    ]
+    meta = {
+        "language": ["en"],
+        "thumbnail": None,
+        "tags": ["token classification"],
+        "license": "MIT",
+        "datasets": ["iulusoy/test-data-3"],
+        "metrics": ["seqeval"],
+    }
     meta_file = tmp_path / "README.md"
-    with open(meta_file, "w") as f:
-        yaml.dump_all(meta, f, default_flow_style=False)
+    post = frontmatter.Post(content="# My model", **meta)
+    with open(meta_file, "wb") as f:
+        frontmatter.dump(post, f)
     _update_model_meta(tmp_path, {"license": "MIT"})
     with open(meta_file) as f:
-        meta_changed = list(yaml.safe_load_all(f))
-    assert meta_changed[0]["language"] == ["en"]
-    assert meta_changed[0]["license"] == "MIT"
+        meta_changed = frontmatter.load(f)
+    assert meta_changed["language"] == ["en"]
+    assert meta_changed["license"] == "MIT"
+    assert str(meta_changed) == "# My model"
 
 
 def test_import_or_create_metadata(tmp_path):
     meta = _import_or_create_metadata(tmp_path)
-    assert meta[0]["language"] == ["en"]
-    assert meta[0]["license"] == "mit"
+    assert meta["language"] == ["en"]
+    assert meta["license"] == "mit"
     meta_file = tmp_path / "README.md"
     assert meta_file.is_file()
 

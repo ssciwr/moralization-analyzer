@@ -5,7 +5,7 @@ from transformers import tokenization_utils_base
 from transformers import get_scheduler
 from transformers import pipeline  # noqa
 from datasets import DatasetDict, formatting
-from typing import Union, List, Dict, Optional, Any
+from typing import Union, List, Dict, Optional
 import evaluate
 from pathlib import Path
 import numpy as np
@@ -16,14 +16,14 @@ from tqdm.auto import tqdm
 from torch import no_grad
 from moralization.data_manager import DataManager
 from moralization.model_manager import ModelManager
-import yaml
+import frontmatter
 from huggingface_hub import HfApi
 
 
 IGNORED_LABEL = -100
 
 
-def _update_model_meta(model_path: Path, metadata: Dict):
+def _update_model_meta(model_path: Path, metadata: frontmatter.Post):
     """
     Update matching keys in the README.md file with values from the supplied metadata dict.
     """
@@ -31,33 +31,31 @@ def _update_model_meta(model_path: Path, metadata: Dict):
     if not meta_file.is_file():
         return
     with open(meta_file) as f:
-        meta = list(yaml.safe_load_all(f))
-    print(meta)
-    for k, v in metadata.items():
-        if k in meta[0]:
-            meta[0][k] = v
-    with open(meta_file, "w") as f:
-        yaml.dump_all(meta, f, default_flow_style=False)
+        meta = frontmatter.load(f)
+    for k in metadata.keys():
+        if k in meta:
+            meta[k] = metadata[k]
+    with open(meta_file, "wb") as f:
+        frontmatter.dump(meta, f)
 
 
-def _import_or_create_metadata(model_path: Path) -> Dict[str, Any]:
+def _import_or_create_metadata(model_path: Path) -> frontmatter.Post:
     meta_file = model_path / "README.md"
-    default_metadata = [
-        {
-            "language": ["en"],
-            "thumbnail": None,
-            "tags": ["token classification"],
-            "license": "mit",
-            "datasets": ["iulusoy/test-data-3"],
-            "metrics": ["seqeval"],
-        },
-        {},
-    ]
+    default_metadata = {
+        "language": ["en"],
+        "thumbnail": None,
+        "tags": ["token-classification"],
+        "license": "mit",
+        "datasets": ["iulusoy/test-data-3"],
+        "metrics": ["seqeval"],
+    }
+    default_content = "# Model description"
+    meta = frontmatter.Post(content=default_content, **default_metadata)
     if not meta_file.is_file():
-        with open(meta_file, "w") as f:
-            yaml.dump_all(default_metadata, f, default_flow_style=False)
+        with open(meta_file, "wb") as f:
+            frontmatter.dump(meta, f)
     with open(meta_file) as f:
-        return list(yaml.safe_load_all(f))
+        return frontmatter.load(f)
 
 
 class TransformersModelManager(ModelManager):
@@ -93,8 +91,6 @@ class TransformersModelManager(ModelManager):
         self._init_tokenizer()
         self._init_data_collator()
         self._load_model()
-        # set up metadata
-        # self.metadata = self._import_or_create_metadata(self.model_path)
 
     def _init_tokenizer(self, model_name=None, kwargs=None) -> None:
         """Initialize the tokenizer that goes along with the selected model.
@@ -532,10 +528,6 @@ class TransformersModelManager(ModelManager):
                 )
             )
         # save the metadata
-        with open(self.model_path / "README.md", "w") as f:
-            f.write("---\n")
-            yaml.dump(self.metadata, f)
-            f.write("---\n")
         _update_model_meta(self.model_path, self.metadata)
         # Save the model to model path
         self.accelerator.wait_for_everyone()
@@ -581,7 +573,8 @@ class TransformersModelManager(ModelManager):
             str: The URL of the published model
         """
         # self._check_model_is_trained_before_it_can_be("published")
-        for key, value in self.metadata.items():
+        # metadata is a Post object and we cannot simply iterate over items()
+        for key, value in zip(self.metadata.keys(), self.metadata.values()):
             if value == "":
                 raise RuntimeError(
                     f"Metadata '{key}' is not set - all metadata needs to be set before publishing a model."
@@ -598,3 +591,8 @@ class TransformersModelManager(ModelManager):
             repo_type="model",
         )
         return myurl
+
+
+if __name__ == "__main__":
+    meta = _import_or_create_metadata(Path("./notebooks"))
+    print(meta["license"])
