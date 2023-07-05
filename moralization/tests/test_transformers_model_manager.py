@@ -1,8 +1,13 @@
 from moralization.transformers_model_manager import TransformersModelManager
+from moralization.transformers_model_manager import (
+    _import_or_create_metadata,
+    _update_model_meta,
+)
 from moralization.data_manager import DataManager
 import pytest
 from datasets import load_dataset, Dataset, DatasetDict
 from transformers import DataCollatorForTokenClassification
+import yaml
 
 
 @pytest.fixture
@@ -38,6 +43,37 @@ def long_dataset():
     ds = Dataset.from_dict(datadict, split="train")
     ds_dict = DatasetDict({"train": ds})
     return ds_dict
+
+
+def test_update_model_meta(tmp_path):
+    # create a temp README file
+    meta = [
+        {
+            "language": ["en"],
+            "thumbnail": None,
+            "tags": ["token classification"],
+            "license": "MIT",
+            "datasets": ["iulusoy/test-data-3"],
+            "metrics": ["seqeval"],
+        },
+        {},
+    ]
+    meta_file = tmp_path / "README.md"
+    with open(meta_file, "w") as f:
+        yaml.dump_all(meta, f, default_flow_style=False)
+    _update_model_meta(tmp_path, {"license": "MIT"})
+    with open(meta_file) as f:
+        meta_changed = list(yaml.safe_load_all(f))
+    assert meta_changed[0]["language"] == ["en"]
+    assert meta_changed[0]["license"] == "MIT"
+
+
+def test_import_or_create_metadata(tmp_path):
+    meta = _import_or_create_metadata(tmp_path)
+    assert meta[0]["language"] == ["en"]
+    assert meta[0]["license"] == "mit"
+    meta_file = tmp_path / "README.md"
+    assert meta_file.is_file()
 
 
 def test_init_tokenizer(gen_instance):

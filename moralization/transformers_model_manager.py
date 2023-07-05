@@ -16,7 +16,7 @@ from tqdm.auto import tqdm
 from torch import no_grad
 from moralization.data_manager import DataManager
 from moralization.model_manager import ModelManager
-import json
+import yaml
 from huggingface_hub import HfApi
 
 
@@ -31,30 +31,33 @@ def _update_model_meta(model_path: Path, metadata: Dict):
     if not meta_file.is_file():
         return
     with open(meta_file) as f:
-        meta = json.load(f)
-        for k, v in metadata.items():
-            if k in meta:
-                meta[k] = v
+        meta = list(yaml.safe_load_all(f))
+    print(meta)
+    for k, v in metadata.items():
+        if k in meta[0]:
+            meta[0][k] = v
     with open(meta_file, "w") as f:
-        json.dump(meta, f)
+        yaml.dump_all(meta, f, default_flow_style=False)
 
 
 def _import_or_create_metadata(model_path: Path) -> Dict[str, Any]:
     meta_file = model_path / "README.md"
-    default_metadata = {
-        "name": "pipeline",
-        "version": "0.0.0",
-        "description": "",
-        "author": "",
-        "email": "",
-        "url": "",
-        "license": "",
-    }
+    default_metadata = [
+        {
+            "language": ["en"],
+            "thumbnail": None,
+            "tags": ["token classification"],
+            "license": "mit",
+            "datasets": ["iulusoy/test-data-3"],
+            "metrics": ["seqeval"],
+        },
+        {},
+    ]
     if not meta_file.is_file():
         with open(meta_file, "w") as f:
-            json.dump(default_metadata, f)
+            yaml.dump_all(default_metadata, f, default_flow_style=False)
     with open(meta_file) as f:
-        return json.load(f)
+        return list(yaml.safe_load_all(f))
 
 
 class TransformersModelManager(ModelManager):
@@ -530,7 +533,9 @@ class TransformersModelManager(ModelManager):
             )
         # save the metadata
         with open(self.model_path / "README.md", "w") as f:
-            json.dump(self.metadata, f)
+            f.write("---\n")
+            yaml.dump(self.metadata, f)
+            f.write("---\n")
         _update_model_meta(self.model_path, self.metadata)
         # Save the model to model path
         self.accelerator.wait_for_everyone()
