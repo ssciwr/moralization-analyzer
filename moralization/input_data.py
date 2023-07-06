@@ -5,7 +5,6 @@ from cassis import load_typesystem, load_cas_from_xmi, typesystem
 import pathlib
 import importlib_resources
 import logging
-from moralization import analyse
 from lxml.etree import XMLSyntaxError
 import spacy
 from typing import List
@@ -329,21 +328,3 @@ class InputOutput:
             dict_ = InputOutput._merge_span_categories(dict_)
 
         return doc_dict, train_dict, test_dict
-
-
-if __name__ == "__main__":
-    data_dict = InputOutput.read_data("data/Test_Data/XMI_11")
-    # df_instances = analyse.AnalyseOccurrence(data_dict, mode="instances").df
-    # df_instances.to_csv("instances_out.csv")
-    # this df can now easily be filtered.
-    # print(df_instances.loc["KAT2-Subjektive Ausdrücke"])
-    # df_spans = analyse.AnalyseOccurrence(data_dict, mode="spans").df
-    # df_spans.to_csv("spans_out.csv")
-    #
-    # analyse.get_overlap_percent(
-    # "Forderer:in", "Neutral", data_dict, "Gerichtsurteile-neg-AW-neu-optimiert-BB"
-    #     )
-    df_sentences = analyse.AnalyseSpans.report_occurrence_per_paragraph(data_dict)
-    print(df_sentences)
-    df_sentences.to_csv("sentences_out.csv")
-    print(df_sentences)
