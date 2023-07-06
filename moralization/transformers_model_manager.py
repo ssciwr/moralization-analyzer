@@ -81,8 +81,8 @@ class TransformersModelManager(ModelManager):
         """
         super().__init__(model_path)
         self.model_name = model_name
-        self.metadata = _import_or_create_metadata(self.model_path)
         self._model_is_trained = False
+        self.metadata = _import_or_create_metadata(self.model_path)
         # somewhere we should check that the label names length is same as number of different labels
         # this however can only be done after the `train` etc method is called with the data
         # and load model that uses the label names is already done at init
