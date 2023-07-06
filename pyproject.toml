@@ -48,7 +48,7 @@ dependencies = [
     "torch",
     "evaluate",
     "accelerate",
-    "frontmatter",
+    "python-frontmatter",
 ]
 
 [tool.setuptools.package-data]

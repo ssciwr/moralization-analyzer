@@ -17,7 +17,6 @@ from torch import no_grad
 from moralization.data_manager import DataManager
 from moralization.model_manager import ModelManager
 import frontmatter
-from frontmatter import Post
 from huggingface_hub import HfApi
 import shutil
 
@@ -41,7 +40,7 @@ def _update_model_meta(model_path: Path, metadata: dict):
         frontmatter.dump(meta, f)
 
 
-def _import_or_create_metadata(model_path: Path) -> Post:
+def _import_or_create_metadata(model_path: Path) -> frontmatter.Post:
     meta_file = model_path / "README.md"
     default_metadata = {
         "language": ["en"],
@@ -52,7 +51,7 @@ def _import_or_create_metadata(model_path: Path) -> Post:
         "metrics": ["seqeval"],
     }
     default_content = "# Model description"
-    meta = Post(content=default_content, **default_metadata)
+    meta = frontmatter.Post(content=default_content, **default_metadata)
     if not meta_file.is_file():
         with open(meta_file, "wb") as f:
             frontmatter.dump(meta, f)
