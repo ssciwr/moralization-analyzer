@@ -47,6 +47,8 @@ def long_dataset():
 
 
 def test_update_model_meta(tmp_path):
+    # check with no file present
+    _update_model_meta(tmp_path, {"license": "MIT"})
     # create a temp README file
     meta = {
         "language": ["en"],
@@ -305,3 +307,10 @@ def test_publish(gen_instance):
     commit = gen_instance.publish(repo_name="temp", hf_namespace="iulusoy")
     assert commit.commit_message == "Upload BertForTokenClassification"
     api.delete_repo(repo_id="iulusoy/temp")
+
+
+def test_publish_missing_metadata(gen_instance):
+    # test for missing metadata
+    gen_instance.metadata["license"] = None
+    with pytest.raises(RuntimeError):
+        gen_instance.publish(repo_name="temp", hf_namespace="iulusoy")
