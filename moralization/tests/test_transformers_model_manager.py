@@ -1,8 +1,14 @@
 from moralization.transformers_model_manager import TransformersModelManager
+from moralization.transformers_model_manager import (
+    _import_or_create_metadata,
+    _update_model_meta,
+)
 from moralization.data_manager import DataManager
 import pytest
 from datasets import load_dataset, Dataset, DatasetDict
 from transformers import DataCollatorForTokenClassification
+import frontmatter
+from huggingface_hub import HfApi
 
 
 @pytest.fixture
@@ -38,6 +44,38 @@ def long_dataset():
     ds = Dataset.from_dict(datadict, split="train")
     ds_dict = DatasetDict({"train": ds})
     return ds_dict
+
+
+def test_update_model_meta(tmp_path):
+    # check with no file present
+    _update_model_meta(tmp_path, {"license": "MIT"})
+    # create a temp README file
+    meta = {
+        "language": ["en"],
+        "thumbnail": None,
+        "tags": ["token classification"],
+        "license": "MIT",
+        "datasets": ["iulusoy/test-data-3"],
+        "metrics": ["seqeval"],
+    }
+    meta_file = tmp_path / "README.md"
+    post = frontmatter.Post(content="# My model", **meta)
+    with open(meta_file, "wb") as f:
+        frontmatter.dump(post, f)
+    _update_model_meta(tmp_path, {"license": "MIT"})
+    with open(meta_file) as f:
+        meta_changed = frontmatter.load(f)
+    assert meta_changed["language"] == ["en"]
+    assert meta_changed["license"] == "MIT"
+    assert str(meta_changed) == "# My model"
+
+
+def test_import_or_create_metadata(tmp_path):
+    meta = _import_or_create_metadata(tmp_path)
+    assert meta["language"] == ["en"]
+    assert meta["license"] == "mit"
+    meta_file = tmp_path / "README.md"
+    assert meta_file.is_file()
 
 
 def test_init_tokenizer(gen_instance):
@@ -234,3 +272,45 @@ def test_train_evaluate(gen_instance, gen_instance_dm):
     del gen_instance._model_path
     with pytest.raises(ValueError):
         evaluate_result = gen_instance.evaluate("Python ist toll.")
+
+
+def test_publish(gen_instance):
+    with pytest.raises(ValueError):
+        gen_instance.publish()
+    with pytest.raises(ValueError):
+        gen_instance.publish(repo_name="temp")
+    with pytest.raises(ValueError):
+        gen_instance.publish(hf_namespace="user")
+    with pytest.raises(RuntimeError):
+        gen_instance.publish(repo_name="temp", hf_namespace="iulusoy")
+    gen_instance._model_is_trained = True
+    # now publish with a new repo name
+    # create mock files to publish
+    p = gen_instance.model_path / "README.md"
+    p.write_text("something")
+    p = gen_instance.model_path / "config.json"
+    p.write_text("something")
+    p = gen_instance.model_path / "pytorch_model.bin"
+    p.write_text("something")
+    url = gen_instance.publish(
+        repo_name="temp", hf_namespace="iulusoy", create_new_repo=True
+    )
+    assert url == "https://huggingface.co/iulusoy/temp/tree/main/"
+    # delete the repo again
+    api = HfApi()
+    # check that existing folder is not overwritten
+    with pytest.raises(ValueError):
+        gen_instance.publish(
+            repo_name="temp", hf_namespace="iulusoy", create_new_repo=True
+        )
+    # now push to existing repo
+    commit = gen_instance.publish(repo_name="temp", hf_namespace="iulusoy")
+    assert commit.commit_message == "Upload BertForTokenClassification"
+    api.delete_repo(repo_id="iulusoy/temp")
+
+
+def test_publish_missing_metadata(gen_instance):
+    # test for missing metadata
+    gen_instance.metadata["license"] = None
+    with pytest.raises(RuntimeError):
+        gen_instance.publish(repo_name="temp", hf_namespace="iulusoy")

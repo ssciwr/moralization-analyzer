@@ -5,7 +5,7 @@ from transformers import tokenization_utils_base
 from transformers import get_scheduler
 from transformers import pipeline  # noqa
 from datasets import DatasetDict, formatting
-from typing import Union, List, Dict
+from typing import Union, List, Dict, Optional
 import evaluate
 from pathlib import Path
 import numpy as np
@@ -16,9 +16,47 @@ from tqdm.auto import tqdm
 from torch import no_grad
 from moralization.data_manager import DataManager
 from moralization.model_manager import ModelManager
+import frontmatter
+from huggingface_hub import HfApi
+import shutil
 
 
 IGNORED_LABEL = -100
+
+
+def _update_model_meta(model_path: Path, metadata: dict):
+    """
+    Update matching keys in the README.md file with values from the supplied metadata dict.
+    """
+    meta_file = model_path / "README.md"
+    if not meta_file.is_file():
+        return
+    with open(meta_file) as f:
+        meta = frontmatter.load(f)
+    for k in metadata.keys():
+        if k in meta:
+            meta[k] = metadata[k]
+    with open(meta_file, "wb") as f:
+        frontmatter.dump(meta, f)
+
+
+def _import_or_create_metadata(model_path: Path) -> frontmatter.Post:
+    meta_file = model_path / "README.md"
+    default_metadata = {
+        "language": ["en"],
+        "thumbnail": None,
+        "tags": ["token-classification"],
+        "license": "mit",
+        "datasets": ["iulusoy/test-data-3"],
+        "metrics": ["seqeval"],
+    }
+    default_content = "# Model description"
+    meta = frontmatter.Post(content=default_content, **default_metadata)
+    if not meta_file.is_file():
+        with open(meta_file, "wb") as f:
+            frontmatter.dump(meta, f)
+    with open(meta_file) as f:
+        return frontmatter.load(f)
 
 
 class TransformersModelManager(ModelManager):
@@ -43,6 +81,8 @@ class TransformersModelManager(ModelManager):
         """
         super().__init__(model_path)
         self.model_name = model_name
+        self._model_is_trained = False
+        self.metadata = _import_or_create_metadata(self.model_path)
         # somewhere we should check that the label names length is same as number of different labels
         # this however can only be done after the `train` etc method is called with the data
         # and load model that uses the label names is already done at init
@@ -52,8 +92,6 @@ class TransformersModelManager(ModelManager):
         self._init_tokenizer()
         self._init_data_collator()
         self._load_model()
-        # set up metadata
-        # self.metadata = self._import_or_create_metadata(self.model_path)
 
     def _init_tokenizer(self, model_name=None, kwargs=None) -> None:
         """Initialize the tokenizer that goes along with the selected model.
@@ -456,6 +494,7 @@ class TransformersModelManager(ModelManager):
             )
 
             self.save()
+        self._model_is_trained = True
 
     def _evaluate_model(self):
         # set mode to evaluation
@@ -480,15 +519,26 @@ class TransformersModelManager(ModelManager):
             self.metric.add_batch(predictions=true_predictions, references=true_labels)
 
     def save(self):
+        """Save the model to the set model path.
+        If a model already exists in that path, it will be overwritten."""
+        model_file = self.model_path / "pytorch_model.bin"
+        if model_file.exists():
+            print(
+                "Model file already existing at specified model path {} - will be overwritten.".format(
+                    self.model_path
+                )
+            )
+        # save the metadata
+        _update_model_meta(self.model_path, self.metadata)
         # Save the model to model path
         self.accelerator.wait_for_everyone()
         unwrapped_model = self.accelerator.unwrap_model(self.model)
         unwrapped_model.save_pretrained(
-            self._model_path, save_function=self.accelerator.save
+            self.model_path, save_function=self.accelerator.save
         )
         # the below is executed only once in main process
         if self.accelerator.is_main_process:
-            self.tokenizer.save_pretrained(self._model_path)
+            self.tokenizer.save_pretrained(self.model_path)
 
     def evaluate(self, token: str):
         if not hasattr(self, "_model_path"):
@@ -497,7 +547,7 @@ class TransformersModelManager(ModelManager):
             )
         token_classifier = pipeline(
             "token-classification",
-            model=self._model_path,
+            model=self.model_path,
             aggregation_strategy="simple",
         )
         return token_classifier(token)
@@ -505,5 +555,78 @@ class TransformersModelManager(ModelManager):
     def test(self):
         pass
 
-    def publish(self):
-        pass
+    def _check_model_is_trained_before_it_can_be(self, action: str = "used"):
+        if not self._model_is_trained:
+            raise RuntimeError(f"Model must be trained before it can be {action}.")
+
+    def publish(
+        self,
+        repo_name: str = None,
+        hf_namespace: str = None,
+        hugging_face_token: Optional[str] = None,
+        create_new_repo: bool = False,
+    ) -> str:
+        """Publish the model to Hugging Face.
+
+        This requires a User Access Token from https://huggingface.co/
+
+        The token can either be passed via the `hugging_face_token` argument,
+        or it can be set via the `HUGGING_FACE_TOKEN` environment variable. If
+        no token is provided, a command prompt will open to request the token.
+
+        Args:
+            repo_name (str, required): The repository name on Hugging Face to push to. Can be a new
+                repository.
+            hf_namespace (str, required): The namespace on Hugging Face under which the repository is
+                located (or shall be created).
+            hugging_face_token (str, optional): Hugging Face User Access Token
+            create_new_repo (bool, optional): Create a new repository with new model card
+                on Hugging Face.
+        Returns:
+            str: The URL of the published model.
+        """
+        # check that repository name was provided, else error out
+        if not repo_name:
+            raise ValueError("Please provide a repository name.")
+        if not hf_namespace:
+            raise ValueError(
+                "Please provide a Hugging Face namespace under which the repository is or should be located."
+            )
+        self._check_model_is_trained_before_it_can_be("published")
+        self._login_to_huggingface(hugging_face_token)
+        repo_id = hf_namespace + "/" + repo_name
+        if not create_new_repo:
+            myurl = self.model.push_to_hub(repo_id)
+        else:
+            # also push the README metadata if this is a new repo
+            # metadata is a Post object and we cannot simply iterate over items()
+            for key, value in zip(self.metadata.keys(), self.metadata.values()):
+                if value == "":
+                    raise RuntimeError(
+                        f"Metadata '{key}' is not set - all metadata needs to be set before publishing a model."
+                    )
+            # create a local directory with all files to upload
+            repo_dir = self.model_path / repo_name
+            try:
+                repo_dir.mkdir()
+            except FileExistsError:
+                print(
+                    "A local directory with name {} already exists in {}: {}".format(
+                        repo_name, self.model_path, repo_dir
+                    )
+                )
+                raise ValueError(
+                    "Either move the folder to a different name or choose a different name for the repository."
+                )
+            # now move all necessary files to that folder
+            files_to_move = ["README.md", "config.json", "pytorch_model.bin"]
+            for file in files_to_move:
+                shutil.copy(self.model_path / file, repo_dir)
+            api = HfApi()
+            _ = api.create_repo(repo_id=repo_id)
+            myurl = api.upload_folder(
+                folder_path=repo_dir,
+                repo_id=repo_id,
+                repo_type="model",
+            )
+        return myurl

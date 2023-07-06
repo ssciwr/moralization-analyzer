@@ -214,7 +214,8 @@ class SpacyModelManager(ModelManager):
         This requires a User Access Token from https://huggingface.co/
 
         The token can either be passed via the `hugging_face_token` argument,
-        or it can be set via the `HUGGING_FACE_TOKEN` environment variable.
+        or it can be set via the `HUGGING_FACE_TOKEN` environment variable. If
+        no token is provided, a command prompt will open to request the token.
 
         Args:
             hugging_face_token (str, optional): Hugging Face User Access Token
