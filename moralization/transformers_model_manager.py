@@ -18,12 +18,13 @@ from moralization.data_manager import DataManager
 from moralization.model_manager import ModelManager
 import frontmatter
 from huggingface_hub import HfApi
+import shutil
 
 
 IGNORED_LABEL = -100
 
 
-def _update_model_meta(model_path: Path, metadata: frontmatter.Post):
+def _update_model_meta(model_path: Path, metadata: dict):
     """
     Update matching keys in the README.md file with values from the supplied metadata dict.
     """
@@ -558,7 +559,12 @@ class TransformersModelManager(ModelManager):
         if not self._model_is_trained:
             raise RuntimeError(f"Model must be trained before it can be {action}.")
 
-    def publish(self, hugging_face_token: Optional[str] = None) -> str:
+    def publish(
+        self,
+        repo_name: str = None,
+        hugging_face_token: Optional[str] = None,
+        create_new_repo: bool = False,
+    ) -> str:
         """Publish the model to Hugging Face.
 
         This requires a User Access Token from https://huggingface.co/
@@ -568,31 +574,54 @@ class TransformersModelManager(ModelManager):
         no token is provided, a command prompt will open to request the token.
 
         Args:
+            repo_name (str, required): The repository name on Hugging Face to push to. Can be a new
+                repository.
             hugging_face_token (str, optional): Hugging Face User Access Token
+            create_new_repo (bool, optional): Create a new repository with new model card
+                on Hugging Face.
         Returns:
-            str: The URL of the published model
+            str: The URL of the published model.
         """
-        # self._check_model_is_trained_before_it_can_be("published")
-        # metadata is a Post object and we cannot simply iterate over items()
-        for key, value in zip(self.metadata.keys(), self.metadata.values()):
-            if value == "":
-                raise RuntimeError(
-                    f"Metadata '{key}' is not set - all metadata needs to be set before publishing a model."
-                )
-        # self.save()
+        # check that repository name was provided, else error out
+        if not repo_name:
+            raise ValueError(
+                "Please provide a repository name if pushing to a new repo."
+            )
+        self._check_model_is_trained_before_it_can_be("published")
         self._login_to_huggingface(hugging_face_token)
-        self.model.push_to_hub("test-model")
-        # also push the README metadata
-        api = HfApi()
-        myurl = api.upload_file(
-            path_or_fileobj="README.md",
-            path_in_repo="README.md",
-            repo_id="iulusoy/test-model",
-            repo_type="model",
-        )
+        if not create_new_repo:
+            myurl = self.model.push_to_hub(repo_name)
+        else:
+            # also push the README metadata if this is a new repo
+            # metadata is a Post object and we cannot simply iterate over items()
+            for key, value in zip(self.metadata.keys(), self.metadata.values()):
+                if value == "":
+                    raise RuntimeError(
+                        f"Metadata '{key}' is not set - all metadata needs to be set before publishing a model."
+                    )
+            # create a local directory with all files to upload
+            repo_dir = self.model_path / repo_name
+            try:
+                repo_dir.mkdir()
+            except FileExistsError:
+                print(
+                    "A local directory with name {} already exists in {}".format(
+                        repo_name, self.model_path
+                    )
+                )
+                print(
+                    "Either move the folder to a different name or choose a different name for the repository."
+                )
+            # now move all necessary files to that folder
+            files_to_move = ["README.md", "config.json", "pytorch_model.bin"]
+            for file in files_to_move:
+                shutil.copy(self.model_path / file, repo_dir)
+            api = HfApi()
+            api.create_repo(repo_id=repo_name)
+            myurl = api.upload_folder(
+                folder_path=repo_dir,
+                repo_id="iulusoy/" + repo_name,
+                repo_type="model",
+                run_as_future=True,
+            )
         return myurl
-
-
-if __name__ == "__main__":
-    meta = _import_or_create_metadata(Path("./notebooks"))
-    print(meta["license"])
