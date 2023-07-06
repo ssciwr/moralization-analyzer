@@ -8,6 +8,7 @@ import pytest
 from datasets import load_dataset, Dataset, DatasetDict
 from transformers import DataCollatorForTokenClassification
 import frontmatter
+from huggingface_hub import HfApi
 
 
 @pytest.fixture
@@ -269,3 +270,38 @@ def test_train_evaluate(gen_instance, gen_instance_dm):
     del gen_instance._model_path
     with pytest.raises(ValueError):
         evaluate_result = gen_instance.evaluate("Python ist toll.")
+
+
+def test_publish(gen_instance):
+    with pytest.raises(ValueError):
+        gen_instance.publish()
+    with pytest.raises(ValueError):
+        gen_instance.publish(repo_name="temp")
+    with pytest.raises(ValueError):
+        gen_instance.publish(hf_namespace="user")
+    with pytest.raises(RuntimeError):
+        gen_instance.publish(repo_name="temp", hf_namespace="iulusoy")
+    gen_instance._model_is_trained = True
+    # now publish with a new repo name
+    # create mock files to publish
+    p = gen_instance.model_path / "README.md"
+    p.write_text("something")
+    p = gen_instance.model_path / "config.json"
+    p.write_text("something")
+    p = gen_instance.model_path / "pytorch_model.bin"
+    p.write_text("something")
+    url = gen_instance.publish(
+        repo_name="temp", hf_namespace="iulusoy", create_new_repo=True
+    )
+    assert url == "https://huggingface.co/iulusoy/temp/tree/main/"
+    # delete the repo again
+    api = HfApi()
+    # check that existing folder is not overwritten
+    with pytest.raises(ValueError):
+        gen_instance.publish(
+            repo_name="temp", hf_namespace="iulusoy", create_new_repo=True
+        )
+    # now push to existing repo
+    commit = gen_instance.publish(repo_name="temp", hf_namespace="iulusoy")
+    assert commit.commit_message == "Upload BertForTokenClassification"
+    api.delete_repo(repo_id="iulusoy/temp")

@@ -17,6 +17,7 @@ from torch import no_grad
 from moralization.data_manager import DataManager
 from moralization.model_manager import ModelManager
 import frontmatter
+from frontmatter import Post
 from huggingface_hub import HfApi
 import shutil
 
@@ -40,7 +41,7 @@ def _update_model_meta(model_path: Path, metadata: dict):
         frontmatter.dump(meta, f)
 
 
-def _import_or_create_metadata(model_path: Path) -> frontmatter.Post:
+def _import_or_create_metadata(model_path: Path) -> Post:
     meta_file = model_path / "README.md"
     default_metadata = {
         "language": ["en"],
@@ -51,7 +52,7 @@ def _import_or_create_metadata(model_path: Path) -> frontmatter.Post:
         "metrics": ["seqeval"],
     }
     default_content = "# Model description"
-    meta = frontmatter.Post(content=default_content, **default_metadata)
+    meta = Post(content=default_content, **default_metadata)
     if not meta_file.is_file():
         with open(meta_file, "wb") as f:
             frontmatter.dump(meta, f)
@@ -562,6 +563,7 @@ class TransformersModelManager(ModelManager):
     def publish(
         self,
         repo_name: str = None,
+        hf_namespace: str = None,
         hugging_face_token: Optional[str] = None,
         create_new_repo: bool = False,
     ) -> str:
@@ -576,6 +578,8 @@ class TransformersModelManager(ModelManager):
         Args:
             repo_name (str, required): The repository name on Hugging Face to push to. Can be a new
                 repository.
+            hf_namespace (str, required): The namespace on Hugging Face under which the repository is
+                located (or shall be created).
             hugging_face_token (str, optional): Hugging Face User Access Token
             create_new_repo (bool, optional): Create a new repository with new model card
                 on Hugging Face.
@@ -584,13 +588,16 @@ class TransformersModelManager(ModelManager):
         """
         # check that repository name was provided, else error out
         if not repo_name:
+            raise ValueError("Please provide a repository name.")
+        if not hf_namespace:
             raise ValueError(
-                "Please provide a repository name if pushing to a new repo."
+                "Please provide a Hugging Face namespace under which the repository is or should be located."
             )
         self._check_model_is_trained_before_it_can_be("published")
         self._login_to_huggingface(hugging_face_token)
+        repo_id = hf_namespace + "/" + repo_name
         if not create_new_repo:
-            myurl = self.model.push_to_hub(repo_name)
+            myurl = self.model.push_to_hub(repo_id)
         else:
             # also push the README metadata if this is a new repo
             # metadata is a Post object and we cannot simply iterate over items()
@@ -605,11 +612,11 @@ class TransformersModelManager(ModelManager):
                 repo_dir.mkdir()
             except FileExistsError:
                 print(
-                    "A local directory with name {} already exists in {}".format(
-                        repo_name, self.model_path
+                    "A local directory with name {} already exists in {}: {}".format(
+                        repo_name, self.model_path, repo_dir
                     )
                 )
-                print(
+                raise ValueError(
                     "Either move the folder to a different name or choose a different name for the repository."
                 )
             # now move all necessary files to that folder
@@ -617,11 +624,10 @@ class TransformersModelManager(ModelManager):
             for file in files_to_move:
                 shutil.copy(self.model_path / file, repo_dir)
             api = HfApi()
-            api.create_repo(repo_id=repo_name)
+            _ = api.create_repo(repo_id=repo_id)
             myurl = api.upload_folder(
                 folder_path=repo_dir,
-                repo_id="iulusoy/" + repo_name,
+                repo_id=repo_id,
                 repo_type="model",
-                run_as_future=True,
             )
         return myurl
