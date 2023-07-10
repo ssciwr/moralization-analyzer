@@ -129,7 +129,7 @@ class InputOutput:
         return data_files, ts_file
 
     @staticmethod
-    def cas_to_doc(cas, ts):
+    def cas_to_doc(cas, ts, language):
         """Transforms the cassis object into a spacy doc.
             Adds the paragraph and the different span categories to the doc object.
             Also maps the provided labels to a more user readable format.
@@ -153,7 +153,20 @@ class InputOutput:
             #       "KAT5Ausformulierung": "KAT5-Forderung implizit",
             #       "Kommentar": "KOMMENTAR",
         }
-        nlp = de_core_news_sm.load()
+
+        supported_languages = ['english', 'french', 'german', 'italian']
+        if language not in supported_languages:
+            raise ValueError("Your language is not supported. It must be one of {}".format(supported_languages))
+        
+        if language == 'english':
+            nlp = en_core_web_sm.load()
+        elif language == 'french':
+            nlp = fr_core_news_sm.load()
+        elif language == 'german':
+            nlp = de_core_news_sm.load()
+        elif language == 'italian':
+            nlp = it_core_news_sm.load()
+
         doc = nlp(cas.sofa_string)
 
         doc_train = nlp(cas.sofa_string)
@@ -256,7 +269,7 @@ class InputOutput:
         return doc, doc_train, doc_test
 
     @staticmethod
-    def files_to_docs(data_files: List or str, ts: object):
+    def files_to_docs(data_files: List or str, ts: object, language: str):
         """
 
         Args:
@@ -274,7 +287,7 @@ class InputOutput:
             logging.info(f"Reading ./{file}")
             try:
                 cas, file_type = InputOutput.read_cas_file(file, ts)
-                doc, doc_train, doc_test = InputOutput.cas_to_doc(cas, ts)
+                doc, doc_train, doc_test = InputOutput.cas_to_doc(cas, ts, language)
                 doc_dict[file.stem] = doc
                 train_dict[file.stem] = doc_train
                 test_dict[file.stem] = doc_test
@@ -326,7 +339,7 @@ class InputOutput:
         return doc_dict
 
     @staticmethod
-    def read_data(dir: str):
+    def read_data(dir: str, language: str):
         """Convenience method to handle input reading in one go.
 
         Args:
@@ -340,7 +353,7 @@ class InputOutput:
         data_files, ts_file = InputOutput.get_multiple_input(dir)
         # read in the ts
         ts = InputOutput.read_typesystem(ts_file)
-        doc_dict, train_dict, test_dict = InputOutput.files_to_docs(data_files, ts)
+        doc_dict, train_dict, test_dict = InputOutput.files_to_docs(data_files, ts, language)
 
         for dict_ in [doc_dict, train_dict, test_dict]:
             dict_ = InputOutput._merge_span_categories(dict_)
