@@ -10,31 +10,13 @@ import spacy
 from typing import List
 
 try:
-    # german
     import de_core_news_sm
-    # english
-    import en_core_web_sm
-    # french
-    import fr_core_news_sm
-    # italian
-    import it_core_news_sm
-
 except ImportError:
     logging.warning(
-        "Required Spacy model was not found. Attempting to download it.."
+        "Required Spacy model 'de_core_news_sm' was not found. Attempting to download it.."
     )
-    # german
     spacy.cli.download("de_core_news_sm")
     import de_core_news_sm
-    # english
-    spacy.cli.download("en_core_web_sm")
-    import en_core_web_sm
-    # french
-    spacy.cli.download("fr_core_news_sm")
-    import fr_core_news_sm
-    # italian
-    spacy.cli.download("it_core_news_sm")
-    import it_core_news_sm
 
 pkg = importlib_resources.files("moralization")
 
@@ -129,7 +111,7 @@ class InputOutput:
         return data_files, ts_file
 
     @staticmethod
-    def cas_to_doc(cas, ts, language):
+    def cas_to_doc(cas, ts):
         """Transforms the cassis object into a spacy doc.
             Adds the paragraph and the different span categories to the doc object.
             Also maps the provided labels to a more user readable format.
@@ -149,24 +131,11 @@ class InputOutput:
             "Protagonistinnen": "KAT3-Rolle",
             "Protagonistinnen3": "KAT3-own/other",
             "KommunikativeFunktion": "KAT4-Kommunikative Funktion",
-            "Forderung": "KAT5-Forderung_explizit",
+            "Forderung": "KAT5-Forderung explizit",
             #       "KAT5Ausformulierung": "KAT5-Forderung implizit",
             #       "Kommentar": "KOMMENTAR",
         }
-
-        supported_languages = ['english', 'french', 'german', 'italian']
-        if language not in supported_languages:
-            raise ValueError("Your language is not supported. It must be one of {}".format(supported_languages))
-        
-        if language == 'english':
-            nlp = en_core_web_sm.load()
-        elif language == 'french':
-            nlp = fr_core_news_sm.load()
-        elif language == 'german':
-            nlp = de_core_news_sm.load()
-        elif language == 'italian':
-            nlp = it_core_news_sm.load()
-
+        nlp = de_core_news_sm.load()
         doc = nlp(cas.sofa_string)
 
         doc_train = nlp(cas.sofa_string)
@@ -269,7 +238,7 @@ class InputOutput:
         return doc, doc_train, doc_test
 
     @staticmethod
-    def files_to_docs(data_files: List or str, ts: object, language: str):
+    def files_to_docs(data_files: List or str, ts: object):
         """
 
         Args:
@@ -287,7 +256,7 @@ class InputOutput:
             logging.info(f"Reading ./{file}")
             try:
                 cas, file_type = InputOutput.read_cas_file(file, ts)
-                doc, doc_train, doc_test = InputOutput.cas_to_doc(cas, ts, language)
+                doc, doc_train, doc_test = InputOutput.cas_to_doc(cas, ts)
                 doc_dict[file.stem] = doc
                 train_dict[file.stem] = doc_train
                 test_dict[file.stem] = doc_test
@@ -339,7 +308,7 @@ class InputOutput:
         return doc_dict
 
     @staticmethod
-    def read_data(dir: str, language: str):
+    def read_data(dir: str):
         """Convenience method to handle input reading in one go.
 
         Args:
@@ -353,7 +322,7 @@ class InputOutput:
         data_files, ts_file = InputOutput.get_multiple_input(dir)
         # read in the ts
         ts = InputOutput.read_typesystem(ts_file)
-        doc_dict, train_dict, test_dict = InputOutput.files_to_docs(data_files, ts, language)
+        doc_dict, train_dict, test_dict = InputOutput.files_to_docs(data_files, ts)
 
         for dict_ in [doc_dict, train_dict, test_dict]:
             dict_ = InputOutput._merge_span_categories(dict_)
