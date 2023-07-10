@@ -19,8 +19,8 @@ import huggingface_hub
 
 
 class DataManager:
-    def __init__(self, data_dir):
-        doc_dicts = InputOutput.read_data(data_dir)
+    def __init__(self, data_dir, language):
+        doc_dicts = InputOutput.read_data(data_dir, language)
         self.doc_dict, self.train_dict, self.test_dict = doc_dicts
 
         self.analyzer = None
