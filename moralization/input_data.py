@@ -12,26 +12,30 @@ from typing import List
 try:
     # german
     import de_core_news_sm
+
     # english
     import en_core_web_sm
+
     # french
     import fr_core_news_sm
+
     # italian
     import it_core_news_sm
 
 except ImportError:
-    logging.warning(
-        "Required Spacy model was not found. Attempting to download it.."
-    )
+    logging.warning("Required Spacy model was not found. Attempting to download it..")
     # german
     spacy.cli.download("de_core_news_sm")
     import de_core_news_sm
+
     # english
     spacy.cli.download("en_core_web_sm")
     import en_core_web_sm
+
     # french
     spacy.cli.download("fr_core_news_sm")
     import fr_core_news_sm
+
     # italian
     spacy.cli.download("it_core_news_sm")
     import it_core_news_sm
@@ -154,17 +158,21 @@ class InputOutput:
             #       "Kommentar": "KOMMENTAR",
         }
 
-        supported_languages = ['english', 'french', 'german', 'italian']
+        supported_languages = ["english", "french", "german", "italian"]
         if language not in supported_languages:
-            raise ValueError("Your language is not supported. It must be one of {}".format(supported_languages))
-        
-        if language == 'english':
+            raise ValueError(
+                "Your language is not supported. It must be one of {}".format(
+                    supported_languages
+                )
+            )
+
+        if language == "english":
             nlp = en_core_web_sm.load()
-        elif language == 'french':
+        elif language == "french":
             nlp = fr_core_news_sm.load()
-        elif language == 'german':
+        elif language == "german":
             nlp = de_core_news_sm.load()
-        elif language == 'italian':
+        elif language == "italian":
             nlp = it_core_news_sm.load()
 
         doc = nlp(cas.sofa_string)
@@ -353,7 +361,9 @@ class InputOutput:
         data_files, ts_file = InputOutput.get_multiple_input(dir)
         # read in the ts
         ts = InputOutput.read_typesystem(ts_file)
-        doc_dict, train_dict, test_dict = InputOutput.files_to_docs(data_files, ts, language)
+        doc_dict, train_dict, test_dict = InputOutput.files_to_docs(
+            data_files, ts, language
+        )
 
         for dict_ in [doc_dict, train_dict, test_dict]:
             dict_ = InputOutput._merge_span_categories(dict_)
