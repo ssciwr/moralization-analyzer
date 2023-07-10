@@ -10,13 +10,31 @@ import spacy
 from typing import List
 
 try:
+    # german
     import de_core_news_sm
+    # english
+    import en_core_web_sm
+    # french
+    import fr_core_news_sm
+    # italian
+    import it_core_news_sm
+
 except ImportError:
     logging.warning(
-        "Required Spacy model 'de_core_news_sm' was not found. Attempting to download it.."
+        "Required Spacy model was not found. Attempting to download it.."
     )
+    # german
     spacy.cli.download("de_core_news_sm")
     import de_core_news_sm
+    # english
+    spacy.cli.download("en_core_web_sm")
+    import en_core_web_sm
+    # french
+    spacy.cli.download("fr_core_news_sm")
+    import fr_core_news_sm
+    # italian
+    spacy.cli.download("it_core_news_sm")
+    import it_core_news_sm
 
 pkg = importlib_resources.files("moralization")
 
@@ -131,7 +149,7 @@ class InputOutput:
             "Protagonistinnen": "KAT3-Rolle",
             "Protagonistinnen3": "KAT3-own/other",
             "KommunikativeFunktion": "KAT4-Kommunikative Funktion",
-            "Forderung": "KAT5-Forderung explizit",
+            "Forderung": "KAT5-Forderung_explizit",
             #       "KAT5Ausformulierung": "KAT5-Forderung implizit",
             #       "Kommentar": "KOMMENTAR",
         }
