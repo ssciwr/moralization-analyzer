@@ -14,7 +14,50 @@ def get_dataset():
 
 
 def test_data_manager(data_dir):
-    DataManager(data_dir)
+    dm = DataManager(data_dir)
+    assert dm.doc_dict
+    assert not dm.selected_labels
+    assert not dm.task
+    dm = DataManager(data_dir, selected_labels="all", task="task2")
+    print(dm.data_in_frame["Sentences"][1])
+    print(dm.data_in_frame["Labels"][1])
+    ref_sentence = [
+        "HMP05",
+        "/",
+        "AUG.00228",
+        "Hamburger",
+        "Morgenpost",
+        ",",
+        "03.08.2005",
+        ",",
+        "S.",
+        "5",
+        ";",
+    ]
+    ref_label = [0, -100, 0, 0, 0, -100, 0, -100, 0, 0, -100]
+    assert dm.data_in_frame["Sentences"][1] == ref_sentence
+    assert dm.data_in_frame["Labels"][1] == ref_label
+    dm = DataManager(data_dir, selected_labels="Fairness", task="task2")
+    ref_sentence = [
+        "Dies",
+        "führe",
+        "zur",
+        "#",
+        "Ausgrenzung",
+        ",",
+        "#",
+        "die",
+        "Menschenwürde",
+        "und",
+        "das",
+        "Sozialstaatsprinzip",
+        "seien",
+        "verletzt",
+        ".",
+    ]
+    ref_label = [0, 0, 0, -100, 0, -100, -100, 0, 0, 0, 2, 1, 1, 0, -100]
+    assert dm.data_in_frame["Sentences"][8] == ref_sentence
+    assert dm.data_in_frame["Labels"][8] == ref_label
 
 
 def test_return_analyzer_result(data_dir):
