@@ -75,6 +75,8 @@ def _import_or_create_metadata(model_path: Path) -> Dict[str, Any]:
 
 def _create_model(
     model_path: Path,
+    language: str,
+    task: str,
     config_file: Optional[Union[str, Path]] = None,
     overwrite: bool = False,
 ):
@@ -93,7 +95,9 @@ def _create_model(
             )
     Path(model_path).mkdir(parents=True)
     if config_file is None:
-        config = spacy.cli.init_config(lang="de", pipeline=["spancat"])
+        config = spacy.cli.init_config(lang=language, pipeline=["spancat"])
+        # set the task (label class) to train on
+        config["components"]["spancat"]["spans_key"] = task
         spacy_cli_save_config(config, model_path / "config.cfg", silent=True)
     else:
         spacy.cli.fill_config(model_path / "config.cfg", Path(config_file))
@@ -109,6 +113,8 @@ class SpacyModelManager(ModelManager):
     def __init__(
         self,
         model_path: Union[str, Path],
+        language: str = "de",
+        task: str = "task1",
         base_config_file: Optional[Union[str, Path]] = None,
         overwrite_existing_files: bool = False,
     ):
@@ -133,6 +139,10 @@ class SpacyModelManager(ModelManager):
 
         Args:
             model_path (str or Path): Folder where the model is (or will be) stored
+            language (str, optional): Language abbreviation or language model that will be finetuned.
+                Defaults to spaCy's default German model.
+            task (str, optional): Task that is selected for the training. Defaults to
+                task1: Training on all labels of category 1.
             base_config_file (str or Path, optional): If supplied this base config will be used to create a new model
             overwrite_existing_files (bool): If true any existing files in `model_path` are removed
         """
@@ -143,7 +153,13 @@ class SpacyModelManager(ModelManager):
             self.model_path.is_dir() and (self.model_path / "config.cfg").is_file()
         )
         if base_config_file or overwrite_existing_files or not existing_model:
-            _create_model(self.model_path, base_config_file, overwrite_existing_files)
+            _create_model(
+                self.model_path,
+                language,
+                task,
+                base_config_file,
+                overwrite_existing_files,
+            )
         self.metadata = _import_or_create_metadata(self.model_path)
 
     def __repr__(self) -> str:
