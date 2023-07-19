@@ -249,3 +249,18 @@ def test_set_dataset_info(data_dir, get_dataset):
     dm.df_to_dataset(split=False)
     dataset = dm.set_dataset_info(homepage=homepage)
     assert dataset.info.homepage == homepage
+
+
+def test_pull_dataset(tmp_path):
+    dm = DataManager(tmp_path, skip_read=True)
+    raw_data = dm.pull_dataset(dataset_name="rotten_tomatoes")
+    print(dm.data_in_frame)
+    print(raw_data)
+    assert raw_data.column_names == ["text", "label"]
+    assert raw_data.num_rows == 8530
+    ref_text = """the gorgeously elaborate continuation of " the lord of the rings " \
+        trilogy is so huge that a column of words cannot adequately describe co-writer/director \
+            peter jackson's expanded vision of j . r . r . tolkien's middle-earth ."""
+    ref_label = 1
+    assert dm.data_in_frame["text"][1] == ref_text
+    assert dm.data_in_frame["label"][1] == ref_label
