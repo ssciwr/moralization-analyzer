@@ -1,4 +1,4 @@
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Union
 
 
 class TransformersDataHandler:
@@ -32,35 +32,50 @@ class TransformersDataHandler:
             self.token_list.extend(token_list)
             self.label_list.extend(label_list)
 
-    def generate_labels(self, doc_dict: Dict) -> None:
+    def generate_labels(
+        self, doc_dict: Dict, selected_labels: Union[List, str] = None, task: str = None
+    ) -> None:
         """Generate the labels from the annotated tokens in one long list. Required for transformers training.
 
         Args:
             doc_dict (dict, required): The dictionary of doc objects for each data source.
-
+            selected_labels (Union[list, str], optional): The labels that should be combined in the training. Default: [
+                "Moralisierung", "Moralisierung Kontext", "Moralisierung Weltwissen", "Moralisierung explizit",
+                "Moralisierung interpretativ",]. You can select "all" to choose all labels for a given task.
+                Note that this will not produce relevant results for task1 as "Keine Moralisierung" is also a label.
+            task (string, optional): The task from which the labels are selected. Default is task 1 (category
+                1 "KAT1-Moralisierendes Segment").
         """
         # generate the labels based on the current list of tokens
         # now set all Moralisierung, Moralisierung Kontext,
         # Moralisierung explizit, Moralisierung interpretativ, Moralisierung Weltwissen to 1
         # here we actually need to select by task
-        selected_labels = [
-            "Moralisierung",
-            "Moralisierung Kontext",
-            "Moralisierung Weltwissen",
-            "Moralisierung explizit",
-            "Moralisierung interpretativ",
-        ]
+        if not selected_labels:
+            # the problem is that "keine Moralisierung" is also a label
+            # in general we could just pick all labels of a category
+            # but for Kat1 this would not work
+            selected_labels = [
+                "Moralisierung",
+                "Moralisierung Kontext",
+                "Moralisierung Weltwissen",
+                "Moralisierung explizit",
+                "Moralisierung interpretativ",
+            ]
+        if not task:
+            task = "task1"
         # create a list as long as tokens
         self.labels = []
         for example_name in doc_dict.keys():
             labels = [0 for _ in doc_dict[example_name]]
-            for span in doc_dict[example_name].spans["task1"]:
-                if span.label_ in selected_labels:
+            for span in doc_dict[example_name].spans[task]:
+                if selected_labels == "all" or span.label_ in selected_labels:
                     labels[span.start + 1 : span.end + 1] = [1] * (
                         span.end - span.start
                     )
                     # mark the beginning of a span with 2
                     labels[span.start] = 2
+                else:
+                    print(span.label_, "not in selected labels")
             self.labels.extend(labels)
 
     def structure_labels(self) -> Tuple[List, List]:
