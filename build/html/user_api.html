@@ -255,22 +255,15 @@ hugging_face_token (str, optional): Hugging Face User Access Token.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.pull_dataset">
-<span class="sig-name descname"><span class="pre">pull_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'train'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dataset</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DatasetDict</span></span></span><a class="headerlink" href="#moralization.DataManager.pull_dataset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">pull_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.pull_dataset" title="Permalink to this definition"></a></dt>
 <dd><p>Method to pull existing dataset from Hugging Face.</p>
 <dl>
 <dt>Args:</dt><dd><p>dataset_name (str): Name of the dataset to pull.
-split (str, optional): The split of the dataset to pull.</p>
+revision (str, optional): The revision number of the dataset</p>
 <blockquote>
-<div><p>Defaults to “train”. Other options are “test”, “train”,
-or “None”, where the latter will return a DatasetDict.</p>
-</div></blockquote>
-<dl class="simple">
-<dt>revision (str, optional): The revision number of the dataset</dt><dd><p>that should be pulled. If not set, the default version from
+<div><p>that should be pulled. If not set, the default version from
 the “main” branch will be pulled.</p>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><p>Union[Dataset, DatasetDict]: The dataset from Hugging Face.</p>
+</div></blockquote>
 </dd>
 </dl>
 </dd></dl>
