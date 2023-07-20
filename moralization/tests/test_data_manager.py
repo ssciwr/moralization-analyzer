@@ -250,10 +250,10 @@ def test_set_dataset_info(data_dir, get_dataset):
 
 
 def test_pull_dataset(tmp_path):
-    dm = DataManager(tmp_path, skip_read=True)
-    raw_data = dm.pull_dataset(dataset_name="rotten_tomatoes")
-    assert raw_data.column_names == ["text", "label"]
-    assert raw_data.num_rows == 8530
+    dm = DataManager(tmp_path.as_posix(), skip_read=True)
+    dm.pull_dataset(dataset_name="rotten_tomatoes")
+    assert dm.raw_data_set.column_names["train"] == ["text", "label"]
+    assert dm.raw_data_set["train"].num_rows == 8530
     ref_text = "the gorgeo"
     ref_label = 1
     assert dm.data_in_frame["text"][1][0:10] == ref_text

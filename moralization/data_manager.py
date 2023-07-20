@@ -465,30 +465,43 @@ class DataManager:
             data_set.info.homepage = homepage
         return data_set
 
-    def pull_dataset(
-        self, dataset_name: str, split: str = "train", revision: str = None
-    ) -> Union[datasets.Dataset, datasets.DatasetDict]:
+    def pull_dataset(self, dataset_name: str, revision: str = None):
         """Method to pull existing dataset from Hugging Face.
 
         Args:
             dataset_name (str): Name of the dataset to pull.
-            split (str, optional): The split of the dataset to pull.
-                Defaults to "train". Other options are "test", "train",
-                or "None", where the latter will return a DatasetDict.
             revision (str, optional): The revision number of the dataset
                 that should be pulled. If not set, the default version from
-                the "main" branch will be pulled.
-        Returns:
-            Union[Dataset, DatasetDict]: The dataset from Hugging Face."""
-        raw_data = datasets.load_dataset(
-            path=dataset_name, split=split, revision=revision, cache_dir=self.data_dir
-        )
-        if isinstance(raw_data, datasets.Dataset):
-            self.data_in_frame = pd.DataFrame(raw_data)
-            self.column_names = raw_data.column_names
-        if isinstance(raw_data, datasets.DatasetDict):
-            print("Your dataset is in DatasetDict format")
-            print(
-                "Please select a section of the dataset to proceed using the split keyword"
+                the "main" branch will be pulled."""
+        # check if dataset is already downloaded
+        try:
+            self.raw_data_set = datasets.load_dataset(
+                path=self.data_dir + dataset_name,
+                split=None,
+                revision=revision,
+                cache_dir=self.data_dir,
             )
-        return raw_data
+            print("Found dataset already downloaded to disk")
+        except FileNotFoundError:
+            print("Downloading dataset from Hugging Face")
+            self.raw_data_set = datasets.load_dataset(
+                path=dataset_name,
+                split=None,
+                revision=revision,
+                cache_dir=self.data_dir,
+            )
+        if isinstance(self.raw_data_set, datasets.Dataset):
+            print(
+                "Your dataset is in Dataset format - will now be split into test and train"
+            )
+            self.data_in_frame = pd.DataFrame(self.raw_data_set)
+            self.column_names = self.raw_data_set.column_names
+            self.train_test_set = self.raw_data_set.train_test_split(test_size=0.1)
+        if isinstance(self.raw_data_set, datasets.DatasetDict):
+            print(
+                "Your dataset is in DatasetDict format - will keep the split into test and train"
+            )
+            self.data_in_frame = pd.DataFrame(self.raw_data_set["train"])
+            self.data_in_frame.append(pd.DataFrame(self.raw_data_set["test"]))
+            self.column_names = self.raw_data_set.column_names["train"]
+            self.train_test_set = self.raw_data_set
