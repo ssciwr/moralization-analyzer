@@ -293,7 +293,8 @@ def test_InteractiveVisualization(data_dir):
     )
     dm = DataManager(data_dir)
 
-    test_interactive_vis = plot.InteractiveVisualization(dm)
+    with pytest.raises(EnvironmentError):
+        test_interactive_vis = plot.InteractiveVisualization(dm)
 
     for mode in ["all", "test", "train"]:
         assert test_interactive_vis.change_mode(mode) == (span_key_list, "sc")

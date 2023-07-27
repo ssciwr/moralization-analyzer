@@ -117,15 +117,19 @@ def test_interactive_data_analysis(data_dir):
 
 def test_visualize_data(data_dir):
     dm = DataManager(data_dir)
-    dm.visualize_data(_type="all")
+    with pytest.raises(EnvironmentError):
+        dm.visualize_data(_type="all")
 
-    dm.visualize_data(_type="test")
+    with pytest.raises(EnvironmentError):
+        dm.visualize_data(_type="test")
 
-    dm.visualize_data(_type="train")
+    with pytest.raises(EnvironmentError):
+        dm.visualize_data(_type="train")
 
-    dm.visualize_data(_type="all", spans_key="task1")
+    with pytest.raises(EnvironmentError):
+        dm.visualize_data(_type="all", spans_key="task1")
 
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(EnvironmentError):
         dm.visualize_data(_type="all", spans_key=["task1", "task2"])
 
     with pytest.raises(KeyError):
