@@ -8,6 +8,8 @@ from spacy import displacy
 from dash import dcc, html, Input, Output, State
 from jupyter_dash import JupyterDash
 import plotly.express as px
+import plotly.figure_factory as ff
+
 import numpy as np
 from moralization.utils import is_interactive
 
@@ -377,10 +379,42 @@ class InteractiveCategoryPlot:
         filtered_table = self.table[multi_index]
         filtered_corr = filtered_table.corr()
 
-        # Generate a correlation heatmap using Plotly
-        fig = px.imshow(
-            filtered_corr, x=labels, y=labels, zmin=-1, zmax=1, width=600, height=600
+        # create a mask to hide the upper triangle
+        mask = np.triu(np.ones_like(filtered_corr, dtype=bool))
+        df_mask = filtered_corr.mask(mask).round(3)
+
+        fig = ff.create_annotated_heatmap(
+            z=df_mask.to_numpy(),
+            x=labels,
+            y=labels,
+            colorscale=px.colors.diverging.RdBu,
+            font_colors=["black"],
+            hoverinfo="none",  # Shows hoverinfo for null values
+            showscale=True,
+            zmin=-1,
+            zmax=1,
+            ygap=1,
+            xgap=1,
         )
+
+        fig.update_xaxes(side="bottom")
+
+        fig.update_layout(
+            title_text="Heatmap",
+            title_x=0.5,
+            xaxis_showgrid=False,
+            yaxis_showgrid=False,
+            xaxis_zeroline=False,
+            yaxis_zeroline=False,
+            yaxis_autorange="reversed",
+            template="plotly_white",
+        )
+
+        # NaN values are not handled automatically and are displayed in the figure
+        # So we need to get rid of the text manually
+        for i in range(len(fig.layout.annotations)):
+            if fig.layout.annotations[i].text == "nan":
+                fig.layout.annotations[i].text = ""
 
         # Return the correlation heatmap
         return fig
