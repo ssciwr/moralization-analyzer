@@ -21,12 +21,15 @@ import huggingface_hub
 
 
 class DataManager:
-    def __init__(self, data_dir):
+    def __init__(self, data_dir, selected_labels=None, task=None):
         doc_dicts = InputOutput.read_data(data_dir)
         self.doc_dict, self.train_dict, self.test_dict = doc_dicts
-
+        # what are these? why set to None?
         self.analyzer = None
         self.spacy_docbin_files = None
+        # select the labels and task for the dataset
+        self.selected_labels = selected_labels
+        self.task = task
         # generate the data lists and data frame
         self._docdict_to_lists()
         self._lists_to_df()
@@ -313,7 +316,7 @@ class DataManager:
         # for now work with instantiation
         tdh = TransformersDataHandler()
         tdh.get_data_lists(self.doc_dict)
-        tdh.generate_labels(self.doc_dict)
+        tdh.generate_labels(self.doc_dict, self.selected_labels, self.task)
         self.sentence_list, self.label_list = tdh.structure_labels()
 
     def _lists_to_df(self):
