@@ -240,13 +240,13 @@ class InteractiveCategoryPlot:
         app (JupyterDash): The JupyterDash application.
     """
 
-    def __init__(self, data_manager, occurence_df):
+    def __init__(self, data_manager):
         """Initialize the InteractiveCategoryPlot object.
 
         Args:
             data_manager (DataManager): The DataManager object containing the data.
         """
-        self.occurence_df = occurence_df
+        self.data_manager = data_manager
         self.app = JupyterDash("Heatmap")
         self.app.layout = html.Div(
             [
@@ -315,7 +315,9 @@ class InteractiveCategoryPlot:
         if input_files == []:
             return [0], 0
 
-        self.table = self.occurence_analysis("table", file_filter=input_files)
+        self.table = self.data_manager.occurence_analysis(
+            "table", file_filter=input_files
+        )
         main_cat_list = sorted(list(set(self.table.T.index.get_level_values(0))))
         return main_cat_list, main_cat_list[0]
 

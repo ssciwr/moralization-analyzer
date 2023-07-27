@@ -116,9 +116,7 @@ class DataManager:
         return pd.DataFrame(self.analyzer_return_dict[result_type]).fillna(0)
 
     def interactive_correlation_analysis(self, port=8051):
-        occurence_df = _loop_over_files(self.doc_dict)
-
-        heatmap = InteractiveCategoryPlot(occurence_df)
+        heatmap = InteractiveCategoryPlot(self)
         return heatmap.run_app(port=port)
 
     def return_categories(self):
