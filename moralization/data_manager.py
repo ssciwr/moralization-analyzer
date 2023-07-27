@@ -74,7 +74,7 @@ class DataManager:
         Returns:
             pd.DataFrame: occurence dataframe per paragraph.
         """
-        if not self.doc_dict:
+        if not hasattr(self, "doc_dict"):
             raise ValueError(
                 "The data analysis can only be carried out for xmi data, not datasets pulled from the Hugging Face Hub."
             )
@@ -99,7 +99,7 @@ class DataManager:
             result_type (str, optional): Can be `frequency`, `length`,
               `span_distinctiveness`, `boundary_distinctiveness` or "all". Defaults to "frequency".
         """
-        if not self.doc_dict:
+        if not hasattr(self, "doc_dict"):
             raise ValueError(
                 "The data analysis can only be carried out for xmi data, not datasets pulled from the Hugging Face Hub."
             )
@@ -168,7 +168,7 @@ class DataManager:
         return interactive_visualization.run_app(port=port)
 
     def visualize_data(self, _type: str, spans_key="sc"):
-        if not self.doc_dict:
+        if not hasattr(self, "doc_dict"):
             raise ValueError(
                 "The data analysis can only be carried out for xmi data, not datasets pulled from the Hugging Face Hub."
             )

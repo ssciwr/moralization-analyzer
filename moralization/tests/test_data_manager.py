@@ -82,6 +82,11 @@ def test_return_analyzer_result(data_dir):
     with pytest.raises(KeyError, match=re.escape("result_type")):
         dm.return_analyzer_result("something_else")
 
+    # check that with pulled df from Hugging Face this will not work
+    dm = DataManager(data_dir, skip_read=True)
+    with pytest.raises(ValueError):
+        dm.occurence_analysis("table")
+
 
 def test_occurence_analysis(data_dir):
     dm = DataManager(data_dir)
@@ -93,6 +98,11 @@ def test_occurence_analysis(data_dir):
 
     heatmap = dm.occurence_analysis("heatmap")
     assert heatmap
+
+    # check that with pulled df from Hugging Face this will not work
+    dm = DataManager(data_dir, skip_read=True)
+    with pytest.raises(ValueError):
+        dm.occurence_analysis("table")
 
 
 def test_interactive_correlation_analysis(data_dir):
@@ -128,6 +138,11 @@ def test_visualize_data(data_dir):
 
     with pytest.raises(KeyError):
         dm.visualize_data(_type="blub")
+
+    # check that with pulled df from Hugging Face this will not work
+    dm = DataManager(data_dir, skip_read=True)
+    with pytest.raises(ValueError):
+        dm.occurence_analysis("table")
 
 
 def test_export_data_DocBin(data_dir):
@@ -258,3 +273,6 @@ def test_pull_dataset(tmp_path):
     ref_label = 1
     assert dm.data_in_frame["text"][1][0:10] == ref_text
     assert dm.data_in_frame["label"][1] == ref_label
+
+    # check if it reuses downloaded dataset if it is already there
+    raw_data = dm.pull_dataset(dataset_name="rotten_tomatoes")
