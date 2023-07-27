@@ -478,6 +478,10 @@ def visualize_data(doc_dict, style="span", spans_key="sc"):
     Returns:
         displacy.render: Renders a visualization of the Spacy Doc objects.
     """
+    if not is_interactive():
+        raise EnvironmentError(
+            "This function is only supported in an interactive python environment like Jupyter notebooks."
+        )
 
     if isinstance(spans_key, list):
         # `displacy` does not support viewing multiple categories at once, so we raise an
@@ -500,4 +504,5 @@ def visualize_data(doc_dict, style="span", spans_key="sc"):
         [doc for doc in doc_dict.values()],
         style=style,
         options={"spans_key": spans_key},
+        jupyter=True,
     )

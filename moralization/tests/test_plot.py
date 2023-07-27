@@ -296,8 +296,9 @@ def test_InteractiveVisualization(data_dir):
 
 
 def test_spacy_data_handler_visualize_data(doc_dicts):
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(EnvironmentError):
         plot.visualize_data(doc_dicts[0], spans_key=["task1", "sc"])
-
-    plot.visualize_data(doc_dicts[0])
-    plot.visualize_data(doc_dicts[0], spans_key="task2")
+    with pytest.raises(EnvironmentError):
+        plot.visualize_data(doc_dicts[0])
+    with pytest.raises(EnvironmentError):
+        plot.visualize_data(doc_dicts[0], spans_key="task2")
