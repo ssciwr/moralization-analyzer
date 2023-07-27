@@ -35,7 +35,7 @@ def spacy_model_path(data_dir, config_file, tmp_path_factory) -> pathlib.Path:
     """
     data_manager = DataManager(data_dir)
     model_path = tmp_path_factory.mktemp("spacy_model") / "my_model"
-    model = SpacyModelManager(model_path, config_file)
+    model = SpacyModelManager(model_path, base_config_file=config_file)
     model.metadata = {
         "name": "pytest_pipeline",
         "version": "0.1.2",

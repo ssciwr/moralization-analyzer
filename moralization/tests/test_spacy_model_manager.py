@@ -27,7 +27,29 @@ def test_spacy_model_manager_train_new_model(tmp_path, data_dir):
     )
     # evaluate trained model
     evaluation = model.evaluate(data_manager)
-    assert "Moralisierung" in evaluation["spans_sc_per_type"]
+    assert "Moralisierung" in evaluation["spans_task1_per_type"]
+
+
+def test_spacy_model_manager_train_new_model_task(tmp_path, data_dir):
+    # non-existent model_path: new model created with default config/meta
+    model_path = tmp_path / "idontexist"
+    assert not model_path.is_dir()
+    model = SpacyModelManager(model_path, language="en", task="task2")
+    assert str(model_path) in str(model)
+    assert model_path.is_dir()
+    assert (model_path / "config.cfg").is_file()
+    assert (model_path / "meta.json").is_file()
+    # model is not yet trained
+    assert not (model_path / "model-best").is_dir()
+    assert not (model_path / "model-last").is_dir()
+    data_manager = DataManager(data_dir)
+    # train model
+    model.train(
+        data_manager, overrides={"training.max_epochs": 5}, check_data_integrity=False
+    )
+    # evaluate trained model
+    evaluation = model.evaluate(data_manager)
+    assert "Fairness" in evaluation["spans_task2_per_type"]
 
 
 def test_spacy_model_manager_existing_invalid_model_path(tmp_path):
