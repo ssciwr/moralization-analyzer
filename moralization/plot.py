@@ -8,7 +8,7 @@ from spacy import displacy
 from dash import dcc, html, Input, Output, State
 from jupyter_dash import JupyterDash
 import plotly.express as px
-
+import numpy as np
 from moralization.utils import is_interactive
 
 
@@ -110,7 +110,7 @@ def _generate_corr_df(occurence_df: pd.DataFrame, _filter=None) -> pd.DataFrame:
 class InteractiveAnalyzerResults:
     """Interactive plotting tool for the DataAnalyzer in jupyter notebooks"""
 
-    def __init__(self, analyzer_results_all):
+    def __init__(self, analyzer_results_all, categories_dict):
         """
         Initializes the InteractiveAnalyzerResults class.
 
@@ -118,7 +118,7 @@ class InteractiveAnalyzerResults:
             analyzer_results_all: A dictionary containing the analyzer results for all categories and spans.
         """
         self.analyzer_results_all = analyzer_results_all
-
+        self.categories_dict = categories_dict
         self.app = JupyterDash("DataAnalyzer")
         self.app.layout = html.Div(
             children=[
@@ -142,6 +142,7 @@ class InteractiveAnalyzerResults:
             Output("dropdown_analyzer_span_cat", "options"),
             Output("dropdown_analyzer_span_cat", "value"),
             Input("dropdown_analyzer_key", "value"),
+            State("dropdown_analyzer_span_cat", "value"),
         )(self.change_analyzer_key)
 
         self.app.callback(
@@ -150,7 +151,7 @@ class InteractiveAnalyzerResults:
             Input("dropdown_analyzer_span_cat", "value"),
         )(self.update_graph)
 
-    def change_analyzer_key(self, key_input):
+    def change_analyzer_key(self, key_input, current_cat_value):
         """
         Changes the analyzer key in response to a user selection.
 
@@ -161,7 +162,10 @@ class InteractiveAnalyzerResults:
             A tuple containing the analyzer span categories and the first category in the list.
         """
         analyzer_span_cat = sorted(list(self.analyzer_results_all[key_input].keys()))
-        return analyzer_span_cat, analyzer_span_cat[0]
+
+        if current_cat_value is None:
+            current_cat_value = analyzer_span_cat[0]
+        return analyzer_span_cat, current_cat_value
 
     def update_graph(self, input_analyzer_key, input_analyzer_span_cat):
         """
@@ -174,11 +178,35 @@ class InteractiveAnalyzerResults:
         Returns:
             A plotly figure.
         """
-        analyzer_result = self.analyzer_results_all[input_analyzer_key][
-            input_analyzer_span_cat
-        ]
+
+        if isinstance(input_analyzer_span_cat, str):
+            input_analyzer_span_cat = [input_analyzer_span_cat]
+
+        if "sc" not in input_analyzer_span_cat:
+            analyzer_result = self.analyzer_results_all[input_analyzer_key][
+                input_analyzer_span_cat
+            ]
+
+            # concat all sub categories for the given span cats.
+
+            sub_cats = []
+            for cat in input_analyzer_span_cat:
+                sub_cats += self.categories_dict[cat]
+
+            # filter only the relevant subcategories by transposing the dataframe,
+            # filtering the columns and transposing back
+            filtered_results = (
+                analyzer_result[input_analyzer_span_cat]
+                .T[sub_cats]
+                .T.replace(0, np.nan)
+            )
+        else:
+            filtered_results = self.analyzer_results_all[input_analyzer_key][
+                input_analyzer_span_cat
+            ]
+
         fig = px.scatter(
-            analyzer_result,
+            filtered_results,
             labels={"value": input_analyzer_key, "variable": "chosen categories"},
         )
         return fig

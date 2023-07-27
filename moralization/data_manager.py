@@ -7,6 +7,8 @@ from moralization.plot import (
     InteractiveAnalyzerResults,
     InteractiveVisualization,
 )
+from collections import defaultdict
+
 import logging
 import os
 from moralization.spacy_data_handler import SpacyDataHandler
@@ -50,12 +52,12 @@ class DataManager:
                 f"_type argument can only be `table`, `corr` or `heatmap` but is {_type}"
             )
 
-        self.occurence_df = _loop_over_files(self.doc_dict, file_filter=file_filter)
+        occurence_df = _loop_over_files(self.doc_dict, file_filter=file_filter)
         if _type == "table":
-            return self.occurence_df
+            return occurence_df
         else:
             return report_occurrence_heatmap(
-                self.occurence_df, _type=_type, _filter=cat_filter
+                occurence_df, _type=_type, _filter=cat_filter
             )
 
     def return_analyzer_result(self, result_type="frequency"):
@@ -117,14 +119,29 @@ class DataManager:
         return pd.DataFrame(self.analyzer_return_dict[result_type]).fillna(0)
 
     def interactive_correlation_analysis(self, port=8051):
-        self.occurence_df = _loop_over_files(self.doc_dict)
-
         heatmap = InteractiveCategoryPlot(self)
         return heatmap.run_app(port=port)
 
+    def return_categories(self):
+        """Returns a dict of all categories in the dataset.
+
+        Returns:
+            dict: A list of all categories in the dataset.
+        """
+        occurence_df = _loop_over_files(self.doc_dict)
+        multi_column = occurence_df.columns
+
+        category_dict = defaultdict(list)
+        for column in multi_column:
+            category_dict[column[0]].append(column[1])
+
+        return category_dict
+
     def interactive_data_analysis(self, port=8053) -> InteractiveAnalyzerResults:
         all_analysis = self.return_analyzer_result("all")
-        interactive_analysis = InteractiveAnalyzerResults(all_analysis)
+
+        categories_dict = self.return_categories()
+        interactive_analysis = InteractiveAnalyzerResults(all_analysis, categories_dict)
         return interactive_analysis.run_app(port=port)
 
     def interactive_data_visualization(self, port=8052):
