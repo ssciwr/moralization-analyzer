@@ -58,6 +58,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.occurence_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.occurence_analysis()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.print_dataset_info"><code class="docutils literal notranslate"><span class="pre">DataManager.print_dataset_info()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.publish"><code class="docutils literal notranslate"><span class="pre">DataManager.publish()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.pull_dataset"><code class="docutils literal notranslate"><span class="pre">DataManager.pull_dataset()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.return_analyzer_result"><code class="docutils literal notranslate"><span class="pre">DataManager.return_analyzer_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.set_dataset_info"><code class="docutils literal notranslate"><span class="pre">DataManager.set_dataset_info()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.visualize_data"><code class="docutils literal notranslate"><span class="pre">DataManager.visualize_data()</span></code></a></li>
@@ -121,8 +122,31 @@
 </div>
 <span class="target" id="module-moralization"></span><dl class="py class">
 <dt class="sig sig-object py" id="moralization.DataManager">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">DataManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager" title="Permalink to this definition"></a></dt>
-<dd><dl class="py method">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">DataManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_read</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize the Datamanager that handles the data transformations.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data_dir (str): The data directory where the data is located, or where the pulled dataset</dt><dd><p>should be stored.</p>
+</dd>
+<dt>skip_read (bool, optional): If this is set to True, no data reading will be attempted. Use</dt><dd><p>this if pulling a dataset from Hugging Face. Defaults to False.</p>
+</dd>
+<dt>selected_labels (Union[str, list]): The labels used in the training. Either “all”, which will</dt><dd><p>return all labels of a given task, or a list of selected labels, such as [“Cheating”, “Fairness”].
+If you provide a list, this is independent of the task.
+Defaults to None, in which case all labels for all categories are selected.</p>
+</dd>
+<dt>task (str): The task to train on. The options are</dt><dd><p>“task1”: [“KAT1-Moralisierendes Segment”]
+“task2”: [“KAT2-Moralwerte”, “KAT2-Subjektive Ausdrücke”]
+“task3”: [“KAT3-Rolle”, “KAT3-Gruppe”, “KAT3-own/other”]
+“task4”: [“KAT4-Kommunikative Funktion”]
+“task5”: [“KAT5-Forderung explizit”]
+or None. Defaults to None.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>A DataManager object.</p>
+</dd>
+</dl>
+<dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.check_data_integrity">
 <span class="sig-name descname"><span class="pre">check_data_integrity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.check_data_integrity" title="Permalink to this definition"></a></dt>
 <dd><p>This function checks the data and compares it to the spacy thresholds for label count,
@@ -225,6 +249,21 @@ either push test and train separately or need to concatenate them using “+”.
 If not set, the raw dataset that is connected to the DataManager instance will
 be used.
 hugging_face_token (str, optional): Hugging Face User Access Token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.pull_dataset">
+<span class="sig-name descname"><span class="pre">pull_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.pull_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Method to pull existing dataset from Hugging Face.</p>
+<dl>
+<dt>Args:</dt><dd><p>dataset_name (str): Name of the dataset to pull.
+revision (str, optional): The revision number of the dataset</p>
+<blockquote>
+<div><p>that should be pulled. If not set, the default version from
+the “main” branch will be pulled.</p>
+</div></blockquote>
 </dd>
 </dl>
 </dd></dl>
