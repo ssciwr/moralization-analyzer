@@ -465,31 +465,26 @@ class DataManager:
             data_set.info.homepage = homepage
         return data_set
 
-    def pull_dataset(self, dataset_name: str, revision: str = None):
+    def pull_dataset(self, dataset_name: str, revision: str = None, split: str = None):
         """Method to pull existing dataset from Hugging Face.
 
         Args:
             dataset_name (str): Name of the dataset to pull.
             revision (str, optional): The revision number of the dataset
                 that should be pulled. If not set, the default version from
-                the "main" branch will be pulled."""
-        # check if dataset is already downloaded
-        try:
-            self.raw_data_set = datasets.load_dataset(
-                path=self.data_dir + dataset_name,
-                split=None,
-                revision=revision,
-                cache_dir=self.data_dir,
-            )
-            print("Found dataset already downloaded to disk")
-        except FileNotFoundError:
-            print("Downloading dataset from Hugging Face")
-            self.raw_data_set = datasets.load_dataset(
-                path=dataset_name,
-                split=None,
-                revision=revision,
-                cache_dir=self.data_dir,
-            )
+                the "main" branch will be pulled.
+            split (str, optional): Select a specific split of the dataset to pull.
+                Depending on the dataset, this can be "train", "test", "validation",
+                to be split into new test and train sets after the pull.
+                Can also be set to None , pulling the full dataset with existing splits.
+                Defaults to None."""
+        # this should check if dataset is already downloaded
+        self.raw_data_set = datasets.load_dataset(
+            path=dataset_name,
+            split=split,
+            revision=revision,
+            cache_dir=self.data_dir,
+        )
         if isinstance(self.raw_data_set, datasets.Dataset):
             print(
                 "Your dataset is in Dataset format - will now be split into test and train"
@@ -498,10 +493,20 @@ class DataManager:
             self.column_names = self.raw_data_set.column_names
             self.train_test_set = self.raw_data_set.train_test_split(test_size=0.1)
         if isinstance(self.raw_data_set, datasets.DatasetDict):
-            print(
-                "Your dataset is in DatasetDict format - will keep the split into test and train"
-            )
-            self.data_in_frame = pd.DataFrame(self.raw_data_set["train"])
-            self.data_in_frame.append(pd.DataFrame(self.raw_data_set["test"]))
-            self.column_names = self.raw_data_set.column_names["train"]
+            print("Your dataset is in DatasetDict format - will keep the split")
+            # check if the split contains train
+            if "train" in self.raw_data_set:
+                print("Found train split - ")
+                self.data_in_frame = pd.DataFrame(self.raw_data_set["train"])
+                self.column_names = self.raw_data_set.column_names["train"]
+            if "test" in self.raw_data_set:
+                print("Found test split - ")
+                self.data_in_frame = pd.concat(
+                    [self.data_in_frame, pd.DataFrame(self.raw_data_set["test"])]
+                )
+            if "validation" in self.raw_data_set:
+                print("Found validation split - ")
+                self.data_in_frame = pd.concat(
+                    [self.data_in_frame, pd.DataFrame(self.raw_data_set["validation"])]
+                )
             self.train_test_set = self.raw_data_set
