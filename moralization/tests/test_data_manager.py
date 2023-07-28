@@ -273,6 +273,5 @@ def test_pull_dataset(tmp_path):
     ref_label = 1
     assert dm.data_in_frame["text"].iloc[1][0:10] == ref_text
     assert dm.data_in_frame["label"].iloc[1] == ref_label
-    dm = DataManager("/home/iulusoy", skip_read=True)
     # check for Dataset type
     dm.pull_dataset(dataset_name="iulusoy/test-data-2", split="train")
