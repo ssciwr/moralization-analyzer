@@ -85,24 +85,28 @@ def test_return_analyzer_result(data_dir):
     # check that with pulled df from Hugging Face this will not work
     dm = DataManager(data_dir, skip_read=True)
     with pytest.raises(ValueError):
-        dm.occurence_analysis("table")
+        dm.occurrence_analysis("table")
 
 
-def test_occurence_analysis(data_dir):
+def test_occurrence_analysis(data_dir):
     dm = DataManager(data_dir)
-    table = dm.occurence_analysis("table")
+    table = dm.occurrence_analysis("table")
     assert table.shape == (18, 50)
 
-    corr = dm.occurence_analysis("corr")
+    corr = dm.occurrence_analysis("corr")
     assert corr.shape == (50, 50)
 
-    heatmap = dm.occurence_analysis("heatmap")
+    heatmap = dm.occurrence_analysis("heatmap")
     assert heatmap
+
+    dm = DataManager(data_dir, skip_read=True)
+    with pytest.raises(ValueError):
+        dm.occurrence_analysis()
 
     # check that with pulled df from Hugging Face this will not work
     dm = DataManager(data_dir, skip_read=True)
     with pytest.raises(ValueError):
-        dm.occurence_analysis("table")
+        dm.occurrence_analysis("table")
 
 
 def test_interactive_correlation_analysis(data_dir):
@@ -142,7 +146,7 @@ def test_visualize_data(data_dir):
     # check that with pulled df from Hugging Face this will not work
     dm = DataManager(data_dir, skip_read=True)
     with pytest.raises(ValueError):
-        dm.occurence_analysis("table")
+        dm.visualize_data(_type="all")
 
 
 def test_export_data_DocBin(data_dir):
@@ -223,13 +227,20 @@ def test_df_to_dataset(data_dir):
     assert dm.train_test_set["train"]
 
 
-def test_publish(data_dir):
+def test_publish_dataset(data_dir):
     dm = DataManager(data_dir)
     repo_id = "test-data-2"
     dm.df_to_dataset(split=False)
     dm.publish(repo_id)
     dataset = dm.raw_data_set
     dm.publish(repo_id, dataset)
+
+
+def test_publish_datasetdict(tmp_path):
+    dm = DataManager(tmp_path.as_posix(), skip_read=True)
+    dm.pull_dataset(dataset_name="rotten_tomatoes")
+    repo_id = "test-datasetdict-2"
+    dm.publish(repo_id)
 
 
 def test_print_dataset_info(data_dir):
