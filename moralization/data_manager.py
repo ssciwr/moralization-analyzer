@@ -14,26 +14,56 @@ from moralization.transformers_data_handler import TransformersDataHandler
 import pandas as pd
 import datasets
 import numpy as np
-from typing import Dict, Optional
+from typing import Dict, Optional, Union
 import huggingface_hub
 
 
 class DataManager:
-    def __init__(self, data_dir, selected_labels=None, task=None):
-        doc_dicts = InputOutput.read_data(data_dir)
-        self.doc_dict, self.train_dict, self.test_dict = doc_dicts
+    def __init__(
+        self,
+        data_dir: str,
+        skip_read: bool = False,
+        selected_labels: Union[list, str] = None,
+        task: str = None,
+    ):
+        """Initialize the Datamanager that handles the data transformations.
+
+        Args:
+            data_dir (str): The data directory where the data is located, or where the pulled dataset
+                should be stored.
+            skip_read (bool, optional): If this is set to True, no data reading will be attempted. Use
+                this if pulling a dataset from Hugging Face. Defaults to False.
+            selected_labels (Union[str, list]): The labels used in the training. Either "all", which will
+                return all labels of a given task, or a list of selected labels, such as ["Cheating", "Fairness"].
+                If you provide a list, this is independent of the task.
+                Defaults to None, in which case all labels for all categories are selected.
+            task (str): The task to train on. The options are
+                "task1": ["KAT1-Moralisierendes Segment"]
+                "task2": ["KAT2-Moralwerte", "KAT2-Subjektive Ausdrücke"]
+                "task3": ["KAT3-Rolle", "KAT3-Gruppe", "KAT3-own/other"]
+                "task4": ["KAT4-Kommunikative Funktion"]
+                "task5": ["KAT5-Forderung explizit"]
+                or None. Defaults to None.
+
+        Returns:
+            A DataManager object.
+        """
         # what are these? why set to None?
+        self.data_dir = data_dir
         self.analyzer = None
         self.spacy_docbin_files = None
         # select the labels and task for the dataset
         self.selected_labels = selected_labels
         self.task = task
-        # generate the data lists and data frame
-        self._docdict_to_lists()
-        self._lists_to_df()
+        if not skip_read:
+            doc_dicts = InputOutput.read_data(self.data_dir)
+            self.doc_dict, self.train_dict, self.test_dict = doc_dicts
+            # generate the data lists and data frame
+            self._docdict_to_lists()
+            self._lists_to_df()
 
-    def occurence_analysis(self, _type="table", cat_filter=None, file_filter=None):
-        """Returns the occurence df, occurence_corr_table or heatmap of the dataset.
+    def occurrence_analysis(self, _type="table", cat_filter=None, file_filter=None):
+        """Returns the occurrence df, occurrence_corr_table or heatmap of the dataset.
             optionally one can filter by filename(s).
 
 
@@ -42,20 +72,23 @@ class DataManager:
             filter (str/list(str), optional): Filename filters. Defaults to None.
 
         Returns:
-            pd.DataFrame: occurence dataframe per paragraph.
+            pd.DataFrame: occurrence dataframe per paragraph.
         """
-
+        if not hasattr(self, "doc_dict"):
+            raise ValueError(
+                "The data analysis can only be carried out for xmi data, not datasets pulled from the Hugging Face Hub."
+            )
         if _type not in ["table", "corr", "heatmap"]:
             raise ValueError(
                 f"_type argument can only be `table`, `corr` or `heatmap` but is {_type}"
             )
 
-        self.occurence_df = _loop_over_files(self.doc_dict, file_filter=file_filter)
+        self.occurrence_df = _loop_over_files(self.doc_dict, file_filter=file_filter)
         if _type == "table":
-            return self.occurence_df
+            return self.occurrence_df
         else:
             return report_occurrence_heatmap(
-                self.occurence_df, _type=_type, _filter=cat_filter
+                self.occurrence_df, _type=_type, _filter=cat_filter
             )
 
     def return_analyzer_result(self, result_type="frequency"):
@@ -66,7 +99,10 @@ class DataManager:
             result_type (str, optional): Can be `frequency`, `length`,
               `span_distinctiveness`, `boundary_distinctiveness` or "all". Defaults to "frequency".
         """
-
+        if not hasattr(self, "doc_dict"):
+            raise ValueError(
+                "The data analysis can only be carried out for xmi data, not datasets pulled from the Hugging Face Hub."
+            )
         # cache return dict as well as the analyzer object
         if self.analyzer is None:
             self.analyzer = _return_span_analyzer(self.doc_dict)
@@ -117,7 +153,7 @@ class DataManager:
         return pd.DataFrame(self.analyzer_return_dict[result_type]).fillna(0)
 
     def interactive_correlation_analysis(self, port=8051):
-        self.occurence_df = _loop_over_files(self.doc_dict)
+        self.occurrence_df = _loop_over_files(self.doc_dict)
 
         heatmap = InteractiveCategoryPlot(self)
         return heatmap.run_app(port=port)
@@ -132,6 +168,10 @@ class DataManager:
         return interactive_visualization.run_app(port=port)
 
     def visualize_data(self, _type: str, spans_key="sc"):
+        if not hasattr(self, "doc_dict"):
+            raise ValueError(
+                "The data analysis can only be carried out for xmi data, not datasets pulled from the Hugging Face Hub."
+            )
         # type can only be all, train or test
         if _type not in ["all", "train", "test"]:
             raise KeyError(
@@ -184,21 +224,21 @@ class DataManager:
             warning_str += "----------------\n"
             warning_str += f"Checking if any labels are disproportionately rare in span_cat '{column}':\n"
 
-            max_occurence = analyzer_df[analyzer_df > 0][column].max()
-            max_occurence_label = str(
-                analyzer_df.loc[analyzer_df[column] == max_occurence][column].index
+            max_occurrence = analyzer_df[analyzer_df > 0][column].max()
+            max_occurrence_label = str(
+                analyzer_df.loc[analyzer_df[column] == max_occurrence][column].index
             )
 
             under_threshold_df = analyzer_df[column][analyzer_df[column] > 0][
-                analyzer_df[column] < max_occurence * threshold
+                analyzer_df[column] < max_occurrence * threshold
             ].dropna()
 
-            under_threshold_df = under_threshold_df / max_occurence
+            under_threshold_df = under_threshold_df / max_occurrence
             under_threshold_dict = under_threshold_df.to_dict()
             if under_threshold_dict:
                 warning_str += (
-                    f"Compared to the maximal occurence of {max_occurence} in "
-                    + f"{max_occurence_label}. \n"
+                    f"Compared to the maximal occurrence of {max_occurrence} in "
+                    + f"{max_occurrence_label}. \n"
                 )
 
                 for key, value in under_threshold_dict.items():
@@ -218,7 +258,6 @@ class DataManager:
         If a value is found to be insufficient a warning will be raised.
 
         By default this function will be called when training data is exported
-
         """
 
         data_integrity_failed = False
@@ -311,6 +350,7 @@ class DataManager:
         self.data_in_frame = pd.DataFrame(
             zip(self.sentence_list, self.label_list), columns=["Sentences", "Labels"]
         )
+        self.column_names = ["Sentences", "Labels"]
 
     def df_to_dataset(self, data_in_frame: pd.DataFrame = None, split: bool = True):
         if not data_in_frame:
@@ -368,12 +408,19 @@ class DataManager:
         """
         if not data_set:
             data_set = self.raw_data_set
+        if not hasattr(self, "data_set_info"):
+            # check for Dataset or DatasetDict
+            if isinstance(data_set, datasets.Dataset):
+                self.data_set_info = data_set.info
+            elif isinstance(data_set, datasets.DatasetDict):
+                # the datasetdict should at the very least contain the training data
+                self.data_set_info = data_set["train"].info
         print("The following dataset metadata has been set:")
-        print("Description:", data_set.info.description)
-        print("Version:", data_set.info.version)
-        print("License:", data_set.info.license)
-        print("Citation:", data_set.info.citation)
-        print("homepage:", data_set.info.homepage)
+        print("Description:", self.data_set_info.description)
+        print("Version:", self.data_set_info.version)
+        print("License:", self.data_set_info.license)
+        print("Citation:", self.data_set_info.citation)
+        print("homepage:", self.data_set_info.homepage)
 
     def set_dataset_info(
         self,
@@ -399,28 +446,99 @@ class DataManager:
         """
         if not data_set:
             data_set = self.raw_data_set
+        if not hasattr(self, "data_set_info"):
+            # check for Dataset or DatasetDict
+            if isinstance(data_set, datasets.Dataset):
+                self.data_set_info = data_set.info
+            elif isinstance(data_set, datasets.DatasetDict):
+                # the datasetdict should at the very least contain the training data
+                self.data_set_info = data_set["train"].info
         print("Updating the following dataset metadata:")
         if description:
             print(
                 "Description: old - {} new - {}".format(
-                    data_set.info.description, description
+                    self.data_set_info.description, description
                 )
             )
-            data_set.info.description = description
+            self.data_set_info.description = description
         if version:
-            print("Version: old - {} new - {}".format(data_set.info.version, version))
-            data_set.info.version = version
+            print(
+                "Version: old - {} new - {}".format(self.data_set_info.version, version)
+            )
+            self.data_set_info.version = version
         if license_:
-            print("License: old - {} new - {}".format(data_set.info.license, license_))
-            data_set.info.license = license_
+            print(
+                "License: old - {} new - {}".format(
+                    self.data_set_info.license, license_
+                )
+            )
+            self.data_set_info.license = license_
         if citation:
             print(
-                "Citation: old - {} new - {}".format(data_set.info.citation, citation)
+                "Citation: old - {} new - {}".format(
+                    self.data_set_info.citation, citation
+                )
             )
-            data_set.info.citation = citation
+            self.data_set_info.citation = citation
         if homepage:
             print(
-                "homepage: old - {} new - {}".format(data_set.info.homepage, homepage)
+                "homepage: old - {} new - {}".format(
+                    self.data_set_info.homepage, homepage
+                )
             )
-            data_set.info.homepage = homepage
+            self.data_set_info.homepage = homepage
         return data_set
+
+    def pull_dataset(self, dataset_name: str, revision: str = None, split: str = None):
+        """Method to pull existing dataset from Hugging Face.
+
+        Args:
+            dataset_name (str): Name of the dataset to pull.
+            revision (str, optional): The revision number of the dataset
+                that should be pulled. If not set, the default version from
+                the "main" branch will be pulled.
+            split (str, optional): Select a specific split of the dataset to pull.
+                Depending on the dataset, this can be "train", "test", "validation",
+                to be split into new test and train sets after the pull.
+                Can also be set to None , pulling the full dataset with existing splits.
+                Defaults to None."""
+        # this should check if dataset is already downloaded
+        self.raw_data_set = datasets.load_dataset(
+            path=dataset_name,
+            split=split,
+            revision=revision,
+            cache_dir=self.data_dir,
+        )
+        if isinstance(self.raw_data_set, datasets.Dataset):
+            print(
+                "Your dataset is in Dataset format - will now be split into test and train"
+            )
+            self.data_in_frame = pd.DataFrame(self.raw_data_set)
+            self.column_names = self.raw_data_set.column_names
+            self.train_test_set = self.raw_data_set.train_test_split(test_size=0.1)
+        if isinstance(self.raw_data_set, datasets.DatasetDict):
+            print("Your dataset is in DatasetDict format - will keep the split")
+            # check if the split contains train
+            if "train" in self.raw_data_set:
+                print("Found train split - ")
+                self.data_in_frame = self.raw_data_set["train"].to_pandas()
+                self.column_names = self.raw_data_set.column_names["train"]
+            if "test" in self.raw_data_set:
+                print("Found test split - ")
+                self.data_in_frame = pd.concat(
+                    [self.data_in_frame, self.raw_data_set["test"].to_pandas()]
+                )
+            if "validation" in self.raw_data_set:
+                print("Found validation split - ")
+                self.data_in_frame = pd.concat(
+                    [self.data_in_frame, self.raw_data_set["validation"].to_pandas()]
+                )
+            self.train_test_set = self.raw_data_set
+
+
+if __name__ == "__main__":
+    dm = DataManager("/home/iulusoy/", skip_read=True)
+    dm.pull_dataset(dataset_name="rotten_tomatoes")
+    # now try to push this to new repo
+    repo_id = "test-datasetdict"
+    dm.publish(repo_id)
