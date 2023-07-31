@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Union, Optional, Dict, Any
 from moralization.data_manager import DataManager
-from moralization.utils import is_interactive
 import os
 import huggingface_hub
 
@@ -84,8 +83,6 @@ class ModelManager(ABC):
             hugging_face_token = os.environ.get("HUGGING_FACE_TOKEN")
         if hugging_face_token is None:
             print("Obtaining token directly from user..")
-            # either from terminal
-            # perform notebook login to skip annoying error messages
-            if is_interactive:
-                huggingface_hub.notebook_login()
-        huggingface_hub.login(token=hugging_face_token)
+            huggingface_hub.login()
+        else:
+            huggingface_hub.login(token=hugging_face_token)

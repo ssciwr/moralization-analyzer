@@ -272,6 +272,25 @@ def test_train_evaluate(gen_instance, gen_instance_dm):
     del gen_instance._model_path
     with pytest.raises(ValueError):
         evaluate_result = gen_instance.evaluate("Python ist toll.")
+    # check that column names throw error if not given correctly
+    label_column_name = "something"
+    with pytest.raises(ValueError):
+        gen_instance.train(
+            gen_instance_dm,
+            token_column_name,
+            label_column_name,
+            num_train_epochs,
+            learning_rate,
+        )
+    token_column_name = "something"
+    with pytest.raises(ValueError):
+        gen_instance.train(
+            gen_instance_dm,
+            token_column_name,
+            label_column_name,
+            num_train_epochs,
+            learning_rate,
+        )
 
 
 def test_publish(gen_instance):
