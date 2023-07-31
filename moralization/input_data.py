@@ -35,7 +35,7 @@ def spacy_load_model(language_model):
         try:
             spacy.cli.download(language_model)
         except SystemExit:
-            raise ValueError(
+            raise SystemExit(
                 "Model {} could not be found - please check that you selected one of \
                              the models from spaCy: https://spacy.io/usage/models".format(
                     language_model
