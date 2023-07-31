@@ -1,5 +1,12 @@
-from moralization.input_data import InputOutput
+from moralization.input_data import InputOutput, spacy_load_model
 import pytest
+
+
+def test_spacy_load_model():
+    nlp = spacy_load_model("en_core_web_sm")
+    assert nlp
+    with pytest.raises(ValueError):
+        spacy_load_model("en_core_web")
 
 
 def test_get_file_type(data_dir):

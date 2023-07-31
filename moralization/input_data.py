@@ -9,16 +9,40 @@ from lxml.etree import XMLSyntaxError
 import spacy
 from typing import List
 
-try:
-    import de_core_news_sm
-except ImportError:
-    logging.warning(
-        "Required Spacy model 'de_core_news_sm' was not found. Attempting to download it.."
-    )
-    spacy.cli.download("de_core_news_sm")
-    import de_core_news_sm
 
 pkg = importlib_resources.files("moralization")
+
+
+def spacy_load_model(language_model):
+    """Load the model for the selected language,
+    download the model if it is missing.
+
+    Args:
+        language_model (str): The language model that should be loaded
+            (corresponding to the language of the corpus).
+
+    Returns:
+        spaCy nlp object used downstream to parse the input files."""
+    try:
+        nlp = spacy.load(language_model)
+    except OSError:
+        logging.warning(
+            "Required spaCy model {} was not found. \
+                        Attempting to download it..".format(
+                language_model
+            )
+        )
+        try:
+            spacy.cli.download(language_model)
+        except SystemExit:
+            raise ValueError(
+                "Model {} could not be found - please check that you selected one of \
+                             the models from spaCy: https://spacy.io/usage/models".format(
+                    language_model
+                )
+            )
+        nlp = spacy.load(language_model)
+    return nlp
 
 
 class InputOutput:
@@ -111,13 +135,15 @@ class InputOutput:
         return data_files, ts_file
 
     @staticmethod
-    def cas_to_doc(cas, ts):
+    def cas_to_doc(cas, ts, language_model: str = "de_core_news_sm"):
         """Transforms the cassis object into a spacy doc.
             Adds the paragraph and the different span categories to the doc object.
             Also maps the provided labels to a more user readable format.
         Args:
             cas (cassis.cas): The cassis object generated from the input files
             ts (typesystem): The provided typesytem
+            language_model (str, optional): Language model of the corpus that is being read.
+                Defaults to "de_core_news_sm" (small German model).
 
         Returns:
             spacy.Doc: A doc object with all the annotation categories present.
@@ -135,7 +161,8 @@ class InputOutput:
             #       "KAT5Ausformulierung": "KAT5-Forderung implizit",
             #       "Kommentar": "KOMMENTAR",
         }
-        nlp = de_core_news_sm.load()
+
+        nlp = spacy_load_model(language_model)
         doc = nlp(cas.sofa_string)
 
         doc_train = nlp(cas.sofa_string)
@@ -238,12 +265,16 @@ class InputOutput:
         return doc, doc_train, doc_test
 
     @staticmethod
-    def files_to_docs(data_files: List or str, ts: object):
+    def files_to_docs(
+        data_files: List or str, ts: object, language_model: str = "de_core_news_sm"
+    ):
         """
 
         Args:
           data_files: list or str:
           ts: object:
+            language_model (str, optional): Language model of the corpus that is being read.
+                Defaults to "de_core_news_sm" (small German model).
 
         Returns:
 
@@ -256,7 +287,9 @@ class InputOutput:
             logging.info(f"Reading ./{file}")
             try:
                 cas, file_type = InputOutput.read_cas_file(file, ts)
-                doc, doc_train, doc_test = InputOutput.cas_to_doc(cas, ts)
+                doc, doc_train, doc_test = InputOutput.cas_to_doc(
+                    cas, ts, language_model
+                )
                 doc_dict[file.stem] = doc
                 train_dict[file.stem] = doc_train
                 test_dict[file.stem] = doc_test
@@ -308,21 +341,25 @@ class InputOutput:
         return doc_dict
 
     @staticmethod
-    def read_data(dir: str):
+    def read_data(dir: str, language_model: str = "de_core_news_sm"):
         """Convenience method to handle input reading in one go.
 
         Args:
-          dir: str: Path to the data directory.
+          dir (str): Path to the data directory.
+          language_model (str, optional): Language model of the corpus that is being read.
+            Defaults to "de_core_news_sm" (German).
 
         Returns:
-            doc_dict: dict: Dictionary of with all the available data in one.
-            train_dict: dict: Dictionary with only the spans that are used for training.
-            test_dict: dict: Dictionary with only the spans that are used for testing.
+            doc_dict (dict): Dictionary of with all the available data in one.
+            train_dict (dict): Dictionary with only the spans that are used for training.
+            test_dict (dict): Dictionary with only the spans that are used for testing.
         """
         data_files, ts_file = InputOutput.get_multiple_input(dir)
         # read in the ts
         ts = InputOutput.read_typesystem(ts_file)
-        doc_dict, train_dict, test_dict = InputOutput.files_to_docs(data_files, ts)
+        doc_dict, train_dict, test_dict = InputOutput.files_to_docs(
+            data_files, ts, language_model=language_model
+        )
 
         for dict_ in [doc_dict, train_dict, test_dict]:
             dict_ = InputOutput._merge_span_categories(dict_)
