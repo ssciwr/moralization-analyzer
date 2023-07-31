@@ -204,8 +204,25 @@ class TransformersModelManager(ModelManager):
         Returns:
             inputs (BatchEncoding): The encoded tokens, labels, etc, after tokenization
         """
-        self.tokenize(examples[self.token_column_name])
-        self.add_labels_to_inputs(examples[self.label_column_name])
+        # check if token column name and label column name are correct for the dataset
+        try:
+            self.tokenize(examples[self.token_column_name])
+        except KeyError:
+            raise ValueError(
+                "Could not find token column name {} in your dataset - \
+                    please check your input. Found column names {}".format(
+                    self.token_column_name, examples.keys()
+                )
+            )
+        try:
+            self.add_labels_to_inputs(examples[self.label_column_name])
+        except KeyError:
+            raise ValueError(
+                "Could not find label column name {} in your dataset - \
+                    please check your input. Found column names {}".format(
+                    self.label_column_name, examples.keys()
+                )
+            )
         return self.inputs
 
     def map_dataset(
