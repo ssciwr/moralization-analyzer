@@ -34,7 +34,7 @@ class DataManager:
         self._docdict_to_lists()
         self._lists_to_df()
 
-    def occurence_analysis(self, _type="table", cat_filter=None, file_filter=None):
+    def occurrence_analysis(self, _type="table", cat_filter=None, file_filter=None):
         """Returns the occurence df, occurence_corr_table or heatmap of the dataset.
             optionally one can filter by filename(s).
 
