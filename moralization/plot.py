@@ -5,8 +5,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from spacy import displacy
-from dash import dcc, html, Input, Output, State
-from jupyter_dash import JupyterDash
+from dash import dcc, html, Input, Output, State, Dash
 import plotly.express as px
 import plotly.figure_factory as ff
 
@@ -121,7 +120,7 @@ class InteractiveAnalyzerResults:
         """
         self.analyzer_results_all = analyzer_results_all
         self.categories_dict = categories_dict
-        self.app = JupyterDash("DataAnalyzer")
+        self.app = Dash("DataAnalyzer")
         self.app.layout = html.Div(
             children=[
                 html.Div(
@@ -239,7 +238,7 @@ class InteractiveCategoryPlot:
 
     Attributes:
         data_manager (DataManager): The DataManager object containing the data.
-        app (JupyterDash): The JupyterDash application.
+        app (Dash): The Dash application.
     """
 
     def __init__(self, data_manager):
@@ -249,7 +248,7 @@ class InteractiveCategoryPlot:
             data_manager (DataManager): The DataManager object containing the data.
         """
         self.data_manager = data_manager
-        self.app = JupyterDash("Heatmap")
+        self.app = Dash("Heatmap")
         self.app.layout = html.Div(
             [
                 # Dropdown for selecting filenames
@@ -432,13 +431,13 @@ class InteractiveCategoryPlot:
 class InteractiveVisualization:
     def __init__(self, data_manager):
         """
-        Initializes InteractiveVisualization with a DataManager instance and creates the JupyterDash app.
+        Initializes InteractiveVisualization with a DataManager instance and creates the Dash app.
 
         Args:
             data_manager (DataManager): An instance of DataManager.
         """
         self.data_manager = data_manager
-        self.app = JupyterDash("DataVisualizer")
+        self.app = Dash("DataVisualizer")
 
         # Define the layout of the app
         self.app.layout = html.Div(
@@ -511,7 +510,7 @@ class InteractiveVisualization:
                 "Dash GUI is only available in an Ipython environment like Jupyter notebooks."
             )
 
-        """Runs the JupyterDash application."""
+        """Runs the Dash application."""
         self.app.run_server(
             debug=True,
             port=port,
@@ -562,9 +561,17 @@ def visualize_data(doc_dict, style="span", spans_key="sc"):
 
     # Finally, we call `displacy.render` with the `doc_dict` values and the specified
     # options.
+
+    import os
+
+    if os.getenv("COLAB_RELEASE_TAG"):
+        displacy_jupyter_style = True
+    else:
+        displacy_jupyter_style = False
+
     return displacy.render(
         [doc for doc in doc_dict.values()],
         style=style,
         options={"spans_key": spans_key},
-        jupyter=True,
+        jupyter=displacy_jupyter_style,
     )
