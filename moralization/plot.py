@@ -316,7 +316,7 @@ class InteractiveCategoryPlot:
         if input_files == []:
             return [0], 0
 
-        self.table = self.data_manager.occurence_analysis(
+        self.table = self.data_manager.occurrence_analysis(
             "table", file_filter=input_files
         )
         main_cat_list = sorted(list(set(self.table.T.index.get_level_values(0))))
