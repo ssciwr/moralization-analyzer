@@ -34,8 +34,8 @@ class DataManager:
         self._docdict_to_lists()
         self._lists_to_df()
 
-    def occurence_analysis(self, _type="table", cat_filter=None, file_filter=None):
-        """Returns the occurence df, occurence_corr_table or heatmap of the dataset.
+    def occurrence_analysis(self, _type="table", cat_filter=None, file_filter=None):
+        """Returns the occurrence df, occurrence_corr_table or heatmap of the dataset.
             optionally one can filter by filename(s).
 
 
@@ -44,7 +44,7 @@ class DataManager:
             filter (str/list(str), optional): Filename filters. Defaults to None.
 
         Returns:
-            pd.DataFrame: occurence dataframe per paragraph.
+            pd.DataFrame: occurrence dataframe per paragraph.
         """
 
         if _type not in ["table", "corr", "heatmap"]:
@@ -52,12 +52,12 @@ class DataManager:
                 f"_type argument can only be `table`, `corr` or `heatmap` but is {_type}"
             )
 
-        occurence_df = _loop_over_files(self.doc_dict, file_filter=file_filter)
+        occurrence_df = _loop_over_files(self.doc_dict, file_filter=file_filter)
         if _type == "table":
-            return occurence_df
+            return occurrence_df
         else:
             return report_occurrence_heatmap(
-                occurence_df, _type=_type, _filter=cat_filter
+                occurrence_df, _type=_type, _filter=cat_filter
             )
 
     def return_analyzer_result(self, result_type="frequency"):
@@ -128,8 +128,8 @@ class DataManager:
         Returns:
             dict: A list of all categories in the dataset.
         """
-        occurence_df = _loop_over_files(self.doc_dict)
-        multi_column = occurence_df.columns
+        occurrence_df = _loop_over_files(self.doc_dict)
+        multi_column = occurrence_df.columns
 
         category_dict = defaultdict(list)
         for column in multi_column:
@@ -144,13 +144,14 @@ class DataManager:
         interactive_analysis = InteractiveAnalyzerResults(all_analysis, categories_dict)
         return interactive_analysis.run_app(port=port)
 
-    def interactive_data_visualization(self, port=8052, run_on_colab=True):
-        interactive_visualization = InteractiveVisualization(
-            self, run_on_colab=run_on_colab
-        )
+    def interactive_data_visualization(
+        self,
+        port=8052,
+    ):
+        interactive_visualization = InteractiveVisualization(self)
         return interactive_visualization.run_app(port=port)
 
-    def visualize_data(self, _type: str, spans_key="sc", run_on_colab=True):
+    def visualize_data(self, _type: str, spans_key="sc"):
         # type can only be all, train or test
         if _type not in ["all", "train", "test"]:
             raise KeyError(
@@ -163,9 +164,7 @@ class DataManager:
             "test": self.test_dict,
         }
 
-        return visualize_data(
-            return_dict[_type], spans_key=spans_key, run_on_colab=run_on_colab
-        )
+        return visualize_data(return_dict[_type], spans_key=spans_key)
 
     def export_data_DocBin(
         self, output_dir=None, overwrite=False, check_data_integrity=True
@@ -205,21 +204,21 @@ class DataManager:
             warning_str += "----------------\n"
             warning_str += f"Checking if any labels are disproportionately rare in span_cat '{column}':\n"
 
-            max_occurence = analyzer_df[analyzer_df > 0][column].max()
-            max_occurence_label = str(
-                analyzer_df.loc[analyzer_df[column] == max_occurence][column].index
+            max_occurrence = analyzer_df[analyzer_df > 0][column].max()
+            max_occurrence_label = str(
+                analyzer_df.loc[analyzer_df[column] == max_occurrence][column].index
             )
 
             under_threshold_df = analyzer_df[column][analyzer_df[column] > 0][
-                analyzer_df[column] < max_occurence * threshold
+                analyzer_df[column] < max_occurrence * threshold
             ].dropna()
 
-            under_threshold_df = under_threshold_df / max_occurence
+            under_threshold_df = under_threshold_df / max_occurrence
             under_threshold_dict = under_threshold_df.to_dict()
             if under_threshold_dict:
                 warning_str += (
-                    f"Compared to the maximal occurence of {max_occurence} in "
-                    + f"{max_occurence_label}. \n"
+                    f"Compared to the maximal occurrence of {max_occurrence} in "
+                    + f"{max_occurrence_label}. \n"
                 )
 
                 for key, value in under_threshold_dict.items():

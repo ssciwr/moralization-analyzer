@@ -429,7 +429,7 @@ class InteractiveCategoryPlot:
 
 
 class InteractiveVisualization:
-    def __init__(self, data_manager, run_on_colab=True):
+    def __init__(self, data_manager):
         """
         Initializes InteractiveVisualization with a DataManager instance and creates the Dash app.
 
@@ -438,7 +438,6 @@ class InteractiveVisualization:
         """
         self.data_manager = data_manager
         self.app = Dash("DataVisualizer")
-        self.run_on_colab = run_on_colab
         # Define the layout of the app
         self.app.layout = html.Div(
             [
@@ -500,9 +499,7 @@ class InteractiveVisualization:
             The visualized data as an HTML document.
         """
         # Visualize the selected span category for the selected mode
-        html_doc = self.data_manager.visualize_data(
-            _type=mode, spans_key=span_cat, run_on_colab=self.run_on_colab
-        )
+        html_doc = self.data_manager.visualize_data(_type=mode, spans_key=span_cat)
         html_doc = html_doc.replace("\n", " ")
         return html_doc
 
@@ -521,7 +518,7 @@ class InteractiveVisualization:
         )
 
 
-def visualize_data(doc_dict, style="span", spans_key="sc", run_on_colab=True):
+def visualize_data(doc_dict, style="span", spans_key="sc"):
     """Use the displacy class offered by spacy to visualize the current dataset.
         use SpacySetup.span_keys to show possible keys or use 'sc' for all.
 
@@ -568,5 +565,4 @@ def visualize_data(doc_dict, style="span", spans_key="sc", run_on_colab=True):
         [doc for doc in doc_dict.values()],
         style=style,
         options={"spans_key": spans_key},
-        jupyter=run_on_colab,
     )
