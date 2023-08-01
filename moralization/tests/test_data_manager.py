@@ -19,8 +19,6 @@ def test_data_manager(data_dir):
     assert not dm.selected_labels
     assert not dm.task
     dm = DataManager(data_dir, selected_labels="all", task="task2")
-    print(dm.data_in_frame["Sentences"][1])
-    print(dm.data_in_frame["Labels"][1])
     ref_sentence = [
         "HMP05",
         "/",
@@ -84,6 +82,11 @@ def test_return_analyzer_result(data_dir):
     with pytest.raises(KeyError, match=re.escape("result_type")):
         dm.return_analyzer_result("something_else")
 
+    # check that with pulled df from Hugging Face this will not work
+    dm = DataManager(data_dir, skip_read=True)
+    with pytest.raises(ValueError):
+        dm.occurrence_analysis("table")
+
 
 def test_occurrence_analysis(data_dir):
     dm = DataManager(data_dir)
@@ -95,6 +98,15 @@ def test_occurrence_analysis(data_dir):
 
     heatmap = dm.occurrence_analysis("heatmap")
     assert heatmap
+
+    dm = DataManager(data_dir, skip_read=True)
+    with pytest.raises(ValueError):
+        dm.occurrence_analysis()
+
+    # check that with pulled df from Hugging Face this will not work
+    dm = DataManager(data_dir, skip_read=True)
+    with pytest.raises(ValueError):
+        dm.occurrence_analysis("table")
 
 
 def test_interactive_correlation_analysis(data_dir):
@@ -134,6 +146,11 @@ def test_visualize_data(data_dir):
 
     with pytest.raises(KeyError):
         dm.visualize_data(_type="blub")
+
+    # check that with pulled df from Hugging Face this will not work
+    dm = DataManager(data_dir, skip_read=True)
+    with pytest.raises(ValueError):
+        dm.visualize_data(_type="all")
 
 
 def test_export_data_DocBin(data_dir):
@@ -214,13 +231,20 @@ def test_df_to_dataset(data_dir):
     assert dm.train_test_set["train"]
 
 
-def test_publish(data_dir):
+def test_publish_dataset(data_dir):
     dm = DataManager(data_dir)
     repo_id = "test-data-2"
     dm.df_to_dataset(split=False)
     dm.publish(repo_id)
     dataset = dm.raw_data_set
     dm.publish(repo_id, dataset)
+
+
+def test_publish_datasetdict(tmp_path):
+    dm = DataManager(tmp_path.as_posix(), skip_read=True)
+    dm.pull_dataset(dataset_name="rotten_tomatoes")
+    repo_id = "test-datasetdict-2"
+    dm.publish(repo_id)
 
 
 def test_print_dataset_info(data_dir):
@@ -253,3 +277,16 @@ def test_set_dataset_info(data_dir, get_dataset):
     dm.df_to_dataset(split=False)
     dataset = dm.set_dataset_info(homepage=homepage)
     assert dataset.info.homepage == homepage
+
+
+def test_pull_dataset(tmp_path):
+    dm = DataManager(tmp_path.as_posix(), skip_read=True)
+    dm.pull_dataset(dataset_name="rotten_tomatoes")
+    assert dm.raw_data_set.column_names["train"] == ["text", "label"]
+    assert dm.raw_data_set["train"].num_rows == 8530
+    ref_text = "the gorgeo"
+    ref_label = 1
+    assert dm.data_in_frame["text"].iloc[1][0:10] == ref_text
+    assert dm.data_in_frame["label"].iloc[1] == ref_label
+    # check for Dataset type
+    dm.pull_dataset(dataset_name="iulusoy/test-data-2", split="train")

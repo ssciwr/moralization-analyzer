@@ -40,11 +40,11 @@ def test__find_spans_in_paragraph(doc_dicts):
     assert spans_idx[0] == (0, "Moralisierung explizit")
 
 
-def test_summarize_span_occurences(doc_dicts):
+def test_summarize_span_occurrences(doc_dicts):
     doc = list(doc_dicts[0].values())[0]
 
-    df = analyse._summarize_span_occurences(doc)
-    # check occurences of first row
+    df = analyse._summarize_span_occurrences(doc)
+    # check occurrences of first row
     assert list(df.iloc[0].values) == [
         1.0,
         0.0,

@@ -83,4 +83,6 @@ class ModelManager(ABC):
             hugging_face_token = os.environ.get("HUGGING_FACE_TOKEN")
         if hugging_face_token is None:
             print("Obtaining token directly from user..")
-        huggingface_hub.login(token=hugging_face_token)
+            huggingface_hub.login()
+        else:
+            huggingface_hub.login(token=hugging_face_token)

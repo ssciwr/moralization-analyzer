@@ -14,13 +14,13 @@ from moralization.utils import is_interactive
 
 
 def report_occurrence_heatmap(
-    occurence_df: pd.DataFrame, _filter=None, _type="heatmap"
+    occurrence_df: pd.DataFrame, _filter=None, _type="heatmap"
 ):
     """Returns the occurrence heatmap or correlation dataframe for the given dataframe.
     Can also filter based on both main_cat and sub_cat keys.
 
     Args:
-        occurence_df (pd.DataFrame): The sentence occurrence dataframe.
+        occurrence_df (pd.DataFrame): The sentence occurrence dataframe.
         _filter (str, optional): Filter values for the dataframe. (Default value = None)
         _type (str, optional): Type of output to generate. It can be 'heatmap' or 'corr'.
             Defaults to 'heatmap'.
@@ -37,7 +37,7 @@ def report_occurrence_heatmap(
             f"_type argument can only be `corr` or `heatmap` but is {_type}"
         )
 
-    df_corr = _generate_corr_df(occurence_df, _filter=_filter)
+    df_corr = _generate_corr_df(occurrence_df, _filter=_filter)
 
     if _type == "corr":
         return df_corr
@@ -47,14 +47,14 @@ def report_occurrence_heatmap(
         return heatmap
 
 
-def _get_filter_multiindex(occurence_df: pd.DataFrame, filters):
+def _get_filter_multiindex(occurrence_df: pd.DataFrame, filters):
     """Search through the given filters and return all sub_cat_keys
     when a main_cat_key is given.
 
     Args:
         df(pd.Dataframe): The sentence occurrence dataframe.
         filters(str): Filter values for the dataframe.
-        occurence_df: pd.DataFrame:
+        occurrence_df: pd.DataFrame:
 
     Returns:
         list: the filter strings of only the sub_cat_keys
@@ -66,10 +66,10 @@ def _get_filter_multiindex(occurence_df: pd.DataFrame, filters):
 
     for _filter in filters:
         # for main_cat_filter append all sub cats:
-        if _filter in occurence_df.columns.levels[0]:
+        if _filter in occurrence_df.columns.levels[0]:
             filter_dict["main"].append(_filter)
 
-        elif _filter in occurence_df.columns.levels[1]:
+        elif _filter in occurrence_df.columns.levels[1]:
             filter_dict["sub"].append(_filter)
 
         else:
@@ -83,7 +83,7 @@ def _get_filter_multiindex(occurence_df: pd.DataFrame, filters):
     return filter_dict
 
 
-def _generate_corr_df(occurence_df: pd.DataFrame, _filter=None) -> pd.DataFrame:
+def _generate_corr_df(occurrence_df: pd.DataFrame, _filter=None) -> pd.DataFrame:
     """
 
     Args:
@@ -94,15 +94,15 @@ def _generate_corr_df(occurence_df: pd.DataFrame, _filter=None) -> pd.DataFrame:
 
     """
     if _filter is None:
-        return occurence_df.sort_index(level=0).corr()
+        return occurrence_df.sort_index(level=0).corr()
     else:
-        _filter = _get_filter_multiindex(occurence_df, _filter)
+        _filter = _get_filter_multiindex(occurrence_df, _filter)
         # Couldn't figure out how to easily select columns based on the
         # second level column name.
         # So the df is transposed, the multiindex can be filterd using
         # loc, and then transposed back to get the correct correlation matrix.
         return (
-            occurence_df.T.loc[(_filter["main"], _filter["sub"]), :]
+            occurrence_df.T.loc[(_filter["main"], _filter["sub"]), :]
             .sort_index(level=0)
             .T.corr()
         )

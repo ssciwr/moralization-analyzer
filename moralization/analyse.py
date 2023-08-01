@@ -33,7 +33,7 @@ def _loop_over_files(doc_dict, file_filter=None):
         file_filter = [file_filter]
 
     for file in file_filter:
-        df_list.append(_summarize_span_occurences(doc_dict[file]))
+        df_list.append(_summarize_span_occurrences(doc_dict[file]))
 
     df_complete = pd.concat(
         df_list,
@@ -49,8 +49,8 @@ def _loop_over_files(doc_dict, file_filter=None):
     return df_complete
 
 
-def _summarize_span_occurences(doc):
-    # iterate over all annotation categories and write occurence per paragraph in pandas.DataFrame
+def _summarize_span_occurrences(doc):
+    # iterate over all annotation categories and write occurrence per paragraph in pandas.DataFrame
     span_categories = list(doc.spans.keys())
     span_categories = _reduce_cat_list(span_categories)
 
