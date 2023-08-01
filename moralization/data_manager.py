@@ -182,8 +182,8 @@ class DataManager:
             list[Path]: A list of the train and test files path.
         """
         if check_data_integrity:
-            data_failed_check = self.check_data_integrity()
-            if data_failed_check:
+            data_integrity = self.check_data_integrity()
+            if not data_integrity:
                 raise ValueError(
                     "The given data did not pass the integrity check. Please check the provided output.\n"
                     + "if you want to continue with your data set `check_data_integrity=False`"
@@ -226,10 +226,13 @@ class DataManager:
                 logging.warning(warning_str)
                 under_threshold_dict = None
 
-                data_integrity_failed = True
+                data_integrity = False
             else:
                 warning_str += "\t No problem found.\n"
-        return warning_str, data_integrity_failed
+                logging.warning(warning_str)
+                data_integrity = True
+
+        return warning_str, data_integrity
 
     def check_data_integrity(self):
         """This function checks the data and compares it to the spacy thresholds for label count,
@@ -241,7 +244,7 @@ class DataManager:
 
         """
 
-        data_integrity_failed = False
+        data_integrity = True
 
         # thresholds:
         NEW_LABEL_THRESHOLD = 50
@@ -272,7 +275,7 @@ class DataManager:
 
             if analyzer_result_label == "relativ_frequency":
                 # for this we need to iterate over each span cat induvidually.
-                _warning_str, data_integrity_failed = self._check_relativ_frequency(
+                _warning_str, data_integrity = self._check_relativ_frequency(
                     threshold=RELATIV_THRESHOLD
                 )
                 warning_str += _warning_str
@@ -292,8 +295,7 @@ class DataManager:
                 )
                 if under_threshold_dict:
                     logging.warning(warning_str)
-                    data_integrity_failed = True
-
+                    data_integrity_failed = False
         return data_integrity_failed
 
     def import_data_DocBin(self, input_dir=None, train_file=None, test_file=None):

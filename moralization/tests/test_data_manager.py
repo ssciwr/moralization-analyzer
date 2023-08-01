@@ -85,15 +85,15 @@ def test_return_analyzer_result(data_dir):
         dm.return_analyzer_result("something_else")
 
 
-def test_occurence_analysis(data_dir):
+def test_occurrence_analysis(data_dir):
     dm = DataManager(data_dir)
-    table = dm.occurence_analysis("table")
+    table = dm.occurrence_analysis("table")
     assert table.shape == (18, 50)
 
-    corr = dm.occurence_analysis("corr")
+    corr = dm.occurrence_analysis("corr")
     assert corr.shape == (50, 50)
 
-    heatmap = dm.occurence_analysis("heatmap")
+    heatmap = dm.occurrence_analysis("heatmap")
     assert heatmap
 
 
