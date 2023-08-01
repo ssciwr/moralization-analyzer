@@ -34,7 +34,7 @@ class DataManager:
         self._docdict_to_lists()
         self._lists_to_df()
 
-    def occurrence_analysis(self, _type="table", cat_filter=None, file_filter=None):
+    def occurence_analysis(self, _type="table", cat_filter=None, file_filter=None):
         """Returns the occurence df, occurence_corr_table or heatmap of the dataset.
             optionally one can filter by filename(s).
 
@@ -144,11 +144,13 @@ class DataManager:
         interactive_analysis = InteractiveAnalyzerResults(all_analysis, categories_dict)
         return interactive_analysis.run_app(port=port)
 
-    def interactive_data_visualization(self, port=8052):
-        interactive_visualization = InteractiveVisualization(self)
+    def interactive_data_visualization(self, port=8052, run_on_colab=True):
+        interactive_visualization = InteractiveVisualization(
+            self, run_on_colab=run_on_colab
+        )
         return interactive_visualization.run_app(port=port)
 
-    def visualize_data(self, _type: str, spans_key="sc"):
+    def visualize_data(self, _type: str, spans_key="sc", run_on_colab=True):
         # type can only be all, train or test
         if _type not in ["all", "train", "test"]:
             raise KeyError(
@@ -161,7 +163,9 @@ class DataManager:
             "test": self.test_dict,
         }
 
-        return visualize_data(return_dict[_type], spans_key=spans_key)
+        return visualize_data(
+            return_dict[_type], spans_key=spans_key, run_on_colab=run_on_colab
+        )
 
     def export_data_DocBin(
         self, output_dir=None, overwrite=False, check_data_integrity=True
