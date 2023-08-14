@@ -139,8 +139,8 @@ class SpacyModelManager(ModelManager):
 
         Args:
             model_path (str or Path): Folder where the model is (or will be) stored
-            language (str, optional): Language abbreviation or language model that will be finetuned.
-                Defaults to spaCy's default German model.
+            language (str, optional): Language that will be finetuned.
+                Defaults to spaCy's small German model.
             task (str, optional): Task that is selected for the training. Defaults to
                 task1: Training on all labels of category 1.
             base_config_file (str or Path, optional): If supplied this base config will be used to create a new model

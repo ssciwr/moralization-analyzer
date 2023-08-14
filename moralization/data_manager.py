@@ -22,6 +22,7 @@ class DataManager:
     def __init__(
         self,
         data_dir: str,
+        language_model: str = "de_core_news_sm",
         skip_read: bool = False,
         selected_labels: Union[list, str] = None,
         task: str = None,
@@ -31,6 +32,8 @@ class DataManager:
         Args:
             data_dir (str): The data directory where the data is located, or where the pulled dataset
                 should be stored.
+            language_model (str, optional): Language model for sentencizing the corpus that is being read.
+                Defaults to "de_core_news_sm" (small German).
             skip_read (bool, optional): If this is set to True, no data reading will be attempted. Use
                 this if pulling a dataset from Hugging Face. Defaults to False.
             selected_labels (Union[str, list]): The labels used in the training. Either "all", which will
@@ -56,7 +59,9 @@ class DataManager:
         self.selected_labels = selected_labels
         self.task = task
         if not skip_read:
-            doc_dicts = InputOutput.read_data(self.data_dir)
+            doc_dicts = InputOutput.read_data(
+                self.data_dir, language_model=language_model
+            )
             self.doc_dict, self.train_dict, self.test_dict = doc_dicts
             # generate the data lists and data frame
             self._docdict_to_lists()
