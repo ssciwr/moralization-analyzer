@@ -177,7 +177,7 @@ def test_map_dataset(train_test_dataset, long_dataset, tmp_path):
 
 
 def test_init_data_collator(gen_instance):
-    assert type(gen_instance.data_collator) == DataCollatorForTokenClassification
+    assert isinstance(gen_instance.data_collator, DataCollatorForTokenClassification)
     assert gen_instance.data_collator.padding
     assert gen_instance.data_collator.return_tensors == "pt"
     assert not gen_instance.data_collator.pad_to_multiple_of
