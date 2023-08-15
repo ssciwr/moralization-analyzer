@@ -119,7 +119,7 @@ def test_InteractiveAnalyzerResults(data_dir):
     dm = DataManager(data_dir)
 
     test_interactive_analyzer = plot.InteractiveAnalyzerResults(
-        dm.return_analyzer_result("all")
+        dm.return_analyzer_result("all"), dm.return_categories()
     )
 
     span_key_list = sorted(
@@ -150,11 +150,17 @@ def test_InteractiveAnalyzerResults(data_dir):
     ]:
         # test dropdown
         assert (
-            sorted(test_interactive_analyzer.change_analyzer_key(mode)[0])
+            sorted(
+                test_interactive_analyzer.change_analyzer_key(
+                    mode, "KAT1-Moralisierendes Segment"
+                )[0]
+            )
             == span_key_list
         )
         assert (
-            test_interactive_analyzer.change_analyzer_key(mode)[1]
+            test_interactive_analyzer.change_analyzer_key(
+                mode, "KAT1-Moralisierendes Segment"
+            )[1]
             == "KAT1-Moralisierendes Segment"
         )
 
@@ -163,7 +169,9 @@ def test_InteractiveAnalyzerResults(data_dir):
         test_interactive_analyzer.update_graph(mode, "sc")
 
     with pytest.raises(KeyError):
-        test_interactive_analyzer.change_analyzer_key("bla")[0]
+        test_interactive_analyzer.change_analyzer_key(
+            "bla", "KAT1-Moralisierendes Segment"
+        )[0]
         test_interactive_analyzer.update_graph("bla", "sc")
 
 
@@ -284,20 +292,24 @@ def test_InteractiveVisualization(data_dir):
         ]
     )
     dm = DataManager(data_dir)
-
     test_interactive_vis = plot.InteractiveVisualization(dm)
+
+    with pytest.raises(EnvironmentError):
+        test_interactive_vis.run_app()
 
     for mode in ["all", "test", "train"]:
         assert test_interactive_vis.change_mode(mode) == (span_key_list, "sc")
+        with pytest.raises(EnvironmentError):
+            test_interactive_vis.change_span_cat(span_key_list[0], mode)
 
-        test_interactive_vis.change_span_cat(span_key_list[0], mode)
-        with pytest.raises(ValueError):
+        with pytest.raises(EnvironmentError):
             test_interactive_vis.change_span_cat("", mode)
 
 
 def test_spacy_data_handler_visualize_data(doc_dicts):
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(EnvironmentError):
         plot.visualize_data(doc_dicts[0], spans_key=["task1", "sc"])
-
-    plot.visualize_data(doc_dicts[0])
-    plot.visualize_data(doc_dicts[0], spans_key="task2")
+    with pytest.raises(EnvironmentError):
+        plot.visualize_data(doc_dicts[0])
+    with pytest.raises(EnvironmentError):
+        plot.visualize_data(doc_dicts[0], spans_key="task2")

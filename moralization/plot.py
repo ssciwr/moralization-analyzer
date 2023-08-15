@@ -5,10 +5,11 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from spacy import displacy
-from dash import dcc, html, Input, Output, State
-from jupyter_dash import JupyterDash
+from dash import dcc, html, Input, Output, State, Dash
 import plotly.express as px
+import plotly.figure_factory as ff
 
+import numpy as np
 from moralization.utils import is_interactive
 
 
@@ -110,7 +111,7 @@ def _generate_corr_df(occurrence_df: pd.DataFrame, _filter=None) -> pd.DataFrame
 class InteractiveAnalyzerResults:
     """Interactive plotting tool for the DataAnalyzer in jupyter notebooks"""
 
-    def __init__(self, analyzer_results_all):
+    def __init__(self, analyzer_results_all, categories_dict):
         """
         Initializes the InteractiveAnalyzerResults class.
 
@@ -118,8 +119,8 @@ class InteractiveAnalyzerResults:
             analyzer_results_all: A dictionary containing the analyzer results for all categories and spans.
         """
         self.analyzer_results_all = analyzer_results_all
-
-        self.app = JupyterDash("DataAnalyzer")
+        self.categories_dict = categories_dict
+        self.app = Dash("DataAnalyzer")
         self.app.layout = html.Div(
             children=[
                 html.Div(
@@ -142,6 +143,7 @@ class InteractiveAnalyzerResults:
             Output("dropdown_analyzer_span_cat", "options"),
             Output("dropdown_analyzer_span_cat", "value"),
             Input("dropdown_analyzer_key", "value"),
+            State("dropdown_analyzer_span_cat", "value"),
         )(self.change_analyzer_key)
 
         self.app.callback(
@@ -150,7 +152,7 @@ class InteractiveAnalyzerResults:
             Input("dropdown_analyzer_span_cat", "value"),
         )(self.update_graph)
 
-    def change_analyzer_key(self, key_input):
+    def change_analyzer_key(self, key_input, current_cat_value):
         """
         Changes the analyzer key in response to a user selection.
 
@@ -161,7 +163,10 @@ class InteractiveAnalyzerResults:
             A tuple containing the analyzer span categories and the first category in the list.
         """
         analyzer_span_cat = sorted(list(self.analyzer_results_all[key_input].keys()))
-        return analyzer_span_cat, analyzer_span_cat[0]
+
+        if current_cat_value is None:
+            current_cat_value = analyzer_span_cat[0]
+        return analyzer_span_cat, current_cat_value
 
     def update_graph(self, input_analyzer_key, input_analyzer_span_cat):
         """
@@ -174,11 +179,35 @@ class InteractiveAnalyzerResults:
         Returns:
             A plotly figure.
         """
-        analyzer_result = self.analyzer_results_all[input_analyzer_key][
-            input_analyzer_span_cat
-        ]
+
+        if isinstance(input_analyzer_span_cat, str):
+            input_analyzer_span_cat = [input_analyzer_span_cat]
+
+        if "sc" not in input_analyzer_span_cat:
+            analyzer_result = self.analyzer_results_all[input_analyzer_key][
+                input_analyzer_span_cat
+            ]
+
+            # concat all sub categories for the given span cats.
+
+            sub_cats = []
+            for cat in input_analyzer_span_cat:
+                sub_cats += self.categories_dict[cat]
+
+            # filter only the relevant subcategories by transposing the dataframe,
+            # filtering the columns and transposing back
+            filtered_results = (
+                analyzer_result[input_analyzer_span_cat]
+                .T[sub_cats]
+                .T.replace(0, np.nan)
+            )
+        else:
+            filtered_results = self.analyzer_results_all[input_analyzer_key][
+                input_analyzer_span_cat
+            ]
+
         fig = px.scatter(
-            analyzer_result,
+            filtered_results,
             labels={"value": input_analyzer_key, "variable": "chosen categories"},
         )
         return fig
@@ -209,7 +238,7 @@ class InteractiveCategoryPlot:
 
     Attributes:
         data_manager (DataManager): The DataManager object containing the data.
-        app (JupyterDash): The JupyterDash application.
+        app (Dash): The Dash application.
     """
 
     def __init__(self, data_manager):
@@ -219,7 +248,7 @@ class InteractiveCategoryPlot:
             data_manager (DataManager): The DataManager object containing the data.
         """
         self.data_manager = data_manager
-        self.app = JupyterDash("Heatmap")
+        self.app = Dash("Heatmap")
         self.app.layout = html.Div(
             [
                 # Dropdown for selecting filenames
@@ -349,10 +378,42 @@ class InteractiveCategoryPlot:
         filtered_table = self.table[multi_index]
         filtered_corr = filtered_table.corr()
 
-        # Generate a correlation heatmap using Plotly
-        fig = px.imshow(
-            filtered_corr, x=labels, y=labels, zmin=-1, zmax=1, width=600, height=600
+        # create a mask to hide the upper triangle
+        mask = np.triu(np.ones_like(filtered_corr, dtype=bool))
+        df_mask = filtered_corr.mask(mask).round(3)
+
+        fig = ff.create_annotated_heatmap(
+            z=df_mask.to_numpy(),
+            x=labels,
+            y=labels,
+            colorscale=px.colors.diverging.RdBu,
+            font_colors=["black"],
+            hoverinfo="none",  # Shows hoverinfo for null values
+            showscale=True,
+            zmin=-1,
+            zmax=1,
+            ygap=1,
+            xgap=1,
         )
+
+        fig.update_xaxes(side="bottom")
+
+        fig.update_layout(
+            title_text="Heatmap",
+            title_x=0.5,
+            xaxis_showgrid=False,
+            yaxis_showgrid=False,
+            xaxis_zeroline=False,
+            yaxis_zeroline=False,
+            yaxis_autorange="reversed",
+            template="plotly_white",
+        )
+
+        # NaN values are not handled automatically and are displayed in the figure
+        # So we need to get rid of the text manually
+        for i in range(len(fig.layout.annotations)):
+            if fig.layout.annotations[i].text == "nan":
+                fig.layout.annotations[i].text = ""
 
         # Return the correlation heatmap
         return fig
@@ -370,14 +431,13 @@ class InteractiveCategoryPlot:
 class InteractiveVisualization:
     def __init__(self, data_manager):
         """
-        Initializes InteractiveVisualization with a DataManager instance and creates the JupyterDash app.
+        Initializes InteractiveVisualization with a DataManager instance and creates the Dash app.
 
         Args:
             data_manager (DataManager): An instance of DataManager.
         """
         self.data_manager = data_manager
-        self.app = JupyterDash("DataVisualizer")
-
+        self.app = Dash("DataVisualizer")
         # Define the layout of the app
         self.app.layout = html.Div(
             [
@@ -449,7 +509,7 @@ class InteractiveVisualization:
                 "Dash GUI is only available in an Ipython environment like Jupyter notebooks."
             )
 
-        """Runs the JupyterDash application."""
+        """Runs the Dash application."""
         self.app.run_server(
             debug=True,
             port=port,
@@ -478,6 +538,10 @@ def visualize_data(doc_dict, style="span", spans_key="sc"):
     Returns:
         displacy.render: Renders a visualization of the Spacy Doc objects.
     """
+    if not is_interactive():
+        raise EnvironmentError(
+            "This function is only supported in an interactive python environment like Jupyter notebooks."
+        )
 
     if isinstance(spans_key, list):
         # `displacy` does not support viewing multiple categories at once, so we raise an
@@ -496,6 +560,7 @@ def visualize_data(doc_dict, style="span", spans_key="sc"):
 
     # Finally, we call `displacy.render` with the `doc_dict` values and the specified
     # options.
+
     return displacy.render(
         [doc for doc in doc_dict.values()],
         style=style,

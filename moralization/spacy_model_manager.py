@@ -217,12 +217,12 @@ class SpacyModelManager(ModelManager):
         for model_path in [self._best_model_path, self._last_model_path]:
             _update_spacy_model_meta(model_path, self.metadata)
 
-    def test(self, test_string: str, style: str = "span"):
+    def test(self, test_string: str, style: str = "span", spans_key="sc"):
         """Test the model output with a test string"""
         self._check_model_is_trained_before_it_can_be("tested")
         nlp = spacy.load(self._best_model_path)
         doc_dict = {"test_doc": nlp(test_string)}
-        return visualize_data(doc_dict, style=style)
+        return visualize_data(doc_dict, style=style, spans_key=spans_key)
 
     def publish(self, hugging_face_token: Optional[str] = None) -> str:
         """Publish the model to Hugging Face.

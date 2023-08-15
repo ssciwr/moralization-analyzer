@@ -129,15 +129,19 @@ def test_interactive_data_analysis(data_dir):
 
 def test_visualize_data(data_dir):
     dm = DataManager(data_dir)
-    dm.visualize_data(_type="all")
+    with pytest.raises(EnvironmentError):
+        dm.visualize_data(_type="all")
 
-    dm.visualize_data(_type="test")
+    with pytest.raises(EnvironmentError):
+        dm.visualize_data(_type="test")
 
-    dm.visualize_data(_type="train")
+    with pytest.raises(EnvironmentError):
+        dm.visualize_data(_type="train")
 
-    dm.visualize_data(_type="all", spans_key="task1")
+    with pytest.raises(EnvironmentError):
+        dm.visualize_data(_type="all", spans_key="task1")
 
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(EnvironmentError):
         dm.visualize_data(_type="all", spans_key=["task1", "task2"])
 
     with pytest.raises(KeyError):
@@ -186,7 +190,8 @@ def test_import_data_DocBin(data_dir):
 
 def test_check_data_integrity(data_dir):
     dm = DataManager(data_dir)
-    dm.check_data_integrity()
+    result = dm.check_data_integrity()
+    assert result is False
 
 
 def test_docdict_to_lists(data_dir):

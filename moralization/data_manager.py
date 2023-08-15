@@ -7,6 +7,8 @@ from moralization.plot import (
     InteractiveAnalyzerResults,
     InteractiveVisualization,
 )
+from collections import defaultdict
+
 import logging
 import os
 from moralization.spacy_data_handler import SpacyDataHandler
@@ -88,12 +90,12 @@ class DataManager:
                 f"_type argument can only be `table`, `corr` or `heatmap` but is {_type}"
             )
 
-        self.occurrence_df = _loop_over_files(self.doc_dict, file_filter=file_filter)
+        occurrence_df = _loop_over_files(self.doc_dict, file_filter=file_filter)
         if _type == "table":
-            return self.occurrence_df
+            return occurrence_df
         else:
             return report_occurrence_heatmap(
-                self.occurrence_df, _type=_type, _filter=cat_filter
+                occurrence_df, _type=_type, _filter=cat_filter
             )
 
     def return_analyzer_result(self, result_type="frequency"):
@@ -158,17 +160,35 @@ class DataManager:
         return pd.DataFrame(self.analyzer_return_dict[result_type]).fillna(0)
 
     def interactive_correlation_analysis(self, port=8051):
-        self.occurrence_df = _loop_over_files(self.doc_dict)
-
         heatmap = InteractiveCategoryPlot(self)
         return heatmap.run_app(port=port)
 
+    def return_categories(self):
+        """Returns a dict of all categories in the dataset.
+
+        Returns:
+            dict: A list of all categories in the dataset.
+        """
+        occurrence_df = _loop_over_files(self.doc_dict)
+        multi_column = occurrence_df.columns
+
+        category_dict = defaultdict(list)
+        for column in multi_column:
+            category_dict[column[0]].append(column[1])
+
+        return category_dict
+
     def interactive_data_analysis(self, port=8053) -> InteractiveAnalyzerResults:
         all_analysis = self.return_analyzer_result("all")
-        interactive_analysis = InteractiveAnalyzerResults(all_analysis)
+
+        categories_dict = self.return_categories()
+        interactive_analysis = InteractiveAnalyzerResults(all_analysis, categories_dict)
         return interactive_analysis.run_app(port=port)
 
-    def interactive_data_visualization(self, port=8052):
+    def interactive_data_visualization(
+        self,
+        port=8052,
+    ):
         interactive_visualization = InteractiveVisualization(self)
         return interactive_visualization.run_app(port=port)
 
@@ -207,8 +227,8 @@ class DataManager:
             list[Path]: A list of the train and test files path.
         """
         if check_data_integrity:
-            data_failed_check = self.check_data_integrity()
-            if data_failed_check:
+            data_integrity = self.check_data_integrity()
+            if not data_integrity:
                 raise ValueError(
                     "The given data did not pass the integrity check. Please check the provided output.\n"
                     + "if you want to continue with your data set `check_data_integrity=False`"
@@ -225,6 +245,8 @@ class DataManager:
     ):
         analyzer_df = self.return_analyzer_result("frequency")
         warning_str = ""
+        frequency_integrity = True
+
         for column in analyzer_df.columns:
             warning_str += "----------------\n"
             warning_str += f"Checking if any labels are disproportionately rare in span_cat '{column}':\n"
@@ -251,10 +273,11 @@ class DataManager:
                 logging.warning(warning_str)
                 under_threshold_dict = None
 
-                data_integrity_failed = True
+                frequency_integrity = False
             else:
                 warning_str += "\t No problem found.\n"
-        return warning_str, data_integrity_failed
+                logging.warning(warning_str)
+        return warning_str, frequency_integrity
 
     def check_data_integrity(self):
         """This function checks the data and compares it to the spacy thresholds for label count,
@@ -264,8 +287,6 @@ class DataManager:
 
         By default this function will be called when training data is exported
         """
-
-        data_integrity_failed = False
 
         # thresholds:
         NEW_LABEL_THRESHOLD = 50
@@ -287,6 +308,8 @@ class DataManager:
             "boundary_distinctiveness",
         ]
 
+        data_integrity = True
+
         for threshold, analyzer_result_label in zip(thresholds, analyzer_result_labels):
             logging.info(f"Check analyzer category {analyzer_result_label}:")
             warning_str = (
@@ -296,10 +319,15 @@ class DataManager:
 
             if analyzer_result_label == "relativ_frequency":
                 # for this we need to iterate over each span cat induvidually.
-                _warning_str, data_integrity_failed = self._check_relativ_frequency(
+                _warning_str, frequency_integrity = self._check_relativ_frequency(
                     threshold=RELATIV_THRESHOLD
                 )
                 warning_str += _warning_str
+                # set data_integrity to false if any of the checks fail.
+                print(frequency_integrity)
+                if frequency_integrity is False:
+                    data_integrity = False
+
             else:
                 analyzer_df = self.return_analyzer_result(analyzer_result_label)
 
@@ -316,9 +344,10 @@ class DataManager:
                 )
                 if under_threshold_dict:
                     logging.warning(warning_str)
-                    data_integrity_failed = True
 
-        return data_integrity_failed
+                    # set data_integrity to false if any of the checks fail.
+                    data_integrity = False
+        return data_integrity
 
     def import_data_DocBin(self, input_dir=None, train_file=None, test_file=None):
         """Load spacy files from a given directory, from absolute path,
