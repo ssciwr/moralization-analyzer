@@ -190,7 +190,8 @@ def test_import_data_DocBin(data_dir):
 
 def test_check_data_integrity(data_dir):
     dm = DataManager(data_dir)
-    dm.check_data_integrity()
+    result = dm.check_data_integrity()
+    assert result is False
 
 
 def test_docdict_to_lists(data_dir):

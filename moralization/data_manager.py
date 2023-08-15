@@ -266,13 +266,13 @@ class DataManager:
                 logging.warning(warning_str)
                 under_threshold_dict = None
 
-                data_integrity = False
+                frequency_integrity = False
             else:
                 warning_str += "\t No problem found.\n"
                 logging.warning(warning_str)
-                data_integrity = True
+                frequency_integrity = True
 
-        return warning_str, data_integrity
+        return warning_str, frequency_integrity
 
     def check_data_integrity(self):
         """This function checks the data and compares it to the spacy thresholds for label count,
@@ -282,8 +282,6 @@ class DataManager:
 
         By default this function will be called when training data is exported
         """
-
-        data_integrity = True
 
         # thresholds:
         NEW_LABEL_THRESHOLD = 50
@@ -305,6 +303,8 @@ class DataManager:
             "boundary_distinctiveness",
         ]
 
+        data_integrity = True
+
         for threshold, analyzer_result_label in zip(thresholds, analyzer_result_labels):
             logging.info(f"Check analyzer category {analyzer_result_label}:")
             warning_str = (
@@ -314,10 +314,14 @@ class DataManager:
 
             if analyzer_result_label == "relativ_frequency":
                 # for this we need to iterate over each span cat induvidually.
-                _warning_str, data_integrity = self._check_relativ_frequency(
+                _warning_str, frequency_integrity = self._check_relativ_frequency(
                     threshold=RELATIV_THRESHOLD
                 )
                 warning_str += _warning_str
+                # set data_integrity to false if any of the checks fail.
+                if frequency_integrity is False:
+                    data_integrity = False
+
             else:
                 analyzer_df = self.return_analyzer_result(analyzer_result_label)
 
@@ -334,8 +338,10 @@ class DataManager:
                 )
                 if under_threshold_dict:
                     logging.warning(warning_str)
-                    data_integrity_failed = False
-        return data_integrity_failed
+
+                    # set data_integrity to false if any of the checks fail.
+                    data_integrity = False
+        return data_integrity
 
     def import_data_DocBin(self, input_dir=None, train_file=None, test_file=None):
         """Load spacy files from a given directory, from absolute path,
