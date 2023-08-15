@@ -245,6 +245,8 @@ class DataManager:
     ):
         analyzer_df = self.return_analyzer_result("frequency")
         warning_str = ""
+        frequency_integrity = True
+
         for column in analyzer_df.columns:
             warning_str += "----------------\n"
             warning_str += f"Checking if any labels are disproportionately rare in span_cat '{column}':\n"
@@ -275,8 +277,6 @@ class DataManager:
             else:
                 warning_str += "\t No problem found.\n"
                 logging.warning(warning_str)
-                frequency_integrity = True
-
         return warning_str, frequency_integrity
 
     def check_data_integrity(self):
@@ -324,6 +324,7 @@ class DataManager:
                 )
                 warning_str += _warning_str
                 # set data_integrity to false if any of the checks fail.
+                print(frequency_integrity)
                 if frequency_integrity is False:
                     data_integrity = False
 
