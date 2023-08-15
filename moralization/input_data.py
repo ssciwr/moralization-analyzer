@@ -13,7 +13,7 @@ from typing import List
 pkg = importlib_resources.files("moralization")
 
 
-def spacy_load_model(language_model):
+def spacy_load_model(language_model) -> object:
     """Load the model for the selected language,
     download the model if it is missing.
 
@@ -52,9 +52,9 @@ class InputOutput:
     input_type = {"xmi": load_cas_from_xmi}
 
     @staticmethod
-    def get_file_type(filename: str):
+    def get_file_type(filename: str) -> str:
         """
-
+        Get the file extension of a given filename.
         Args:
           filename: str:
 
@@ -66,12 +66,14 @@ class InputOutput:
     @staticmethod
     def read_typesystem(filename: str = None) -> object:
         """
-
+        Read in the typesystem from a given file.
+        Also checks if a default type can be read from the
         Args:
-          filename: str:  (Default value = None)
+          filename: str:  path to the typesystem file.
+          If none the provided default typesystem will be used.(Default value = None)
 
         Returns:
-
+            typesystem: The typesystem object.
         """
         if filename is None:
             filename = pkg / "data" / "TypeSystem.xml"
@@ -90,15 +92,17 @@ class InputOutput:
             raise Warning(f"No valid type system found at {filename}")
 
     @staticmethod
-    def read_cas_file(filename: str, ts: object):
+    def read_cas_file(filename: str, ts: object) -> tuple:
         """
+        Select and read a given cas file.
+        Needs a typesystem to run.
 
         Args:
-          filename: str:
-          ts: object:
+          filename: str: Filepath to the cas file.
+          ts: object: Typesystem object
 
         Returns:
-
+            tuple: cas object and file type.
         """
         file_type = InputOutput.get_file_type(filename)
         with open(filename, "rb") as f:
@@ -110,10 +114,10 @@ class InputOutput:
         """
          Get a list of input files from a given directory. Currently only xmi files.
         Args:
-          dir: str:
+          dir: str: dir path.
 
         Returns:
-
+            tuple: list of input files and typesystem file.
         """
 
         # load multiple files into a list
@@ -200,7 +204,24 @@ class InputOutput:
         return doc, doc_train, doc_test
 
     @staticmethod
-    def _split_train_test(doc, doc_train, doc_test, span_list, map_expressions):
+    def _split_train_test(
+        doc, doc_train, doc_test, span_list, map_expressions
+    ) -> tuple:
+        """Split the data into a train and test set.
+        Args:
+
+            doc (spacy.Doc): The doc object with all the annotation categories present.
+            doc_train (spacy.Doc): The doc object with all the annotation categories present.
+            doc_test (spacy.Doc): The doc object with all the annotation categories present.
+            span_list (list): List of all spans in the document.
+            map_expressions (dict): Dictionary of all span categories and their remapped names.
+
+        Returns:
+            doc_dict (dict): Dictionary of with all the available data in one.
+            train_dict (dict): Dictionary with only the spans that are used for training.
+            test_dict (dict): Dictionary with only the spans that are used for testing.
+
+        """
         # every n-th entry is put as a test value
         n_test = 5
         n_start = 0
@@ -267,16 +288,19 @@ class InputOutput:
     @staticmethod
     def files_to_docs(
         data_files: List or str, ts: object, language_model: str = "de_core_news_sm"
-    ):
+    ) -> tuple:
         """
 
         Args:
-          data_files: list or str:
-          ts: object:
+          data_files: list or str: List of input files or path to a directory.
+          ts: object: Typesystem object.
             language_model (str, optional): Language model of the corpus that is being read.
                 Defaults to "de_core_news_sm" (small German model).
 
         Returns:
+            doc_dict (dict): Dictionary of with all the available data in one.
+            train_dict (dict): Dictionary with only the spans that are used for training.
+            test_dict (dict): Dictionary with only the spans that are used for testing.
 
         """
         doc_dict = {}
@@ -302,7 +326,7 @@ class InputOutput:
         return doc_dict, train_dict, test_dict
 
     @staticmethod
-    def _merge_span_categories(doc_dict, merge_dict=None):
+    def _merge_span_categories(doc_dict, merge_dict=None) -> dict:
         """Take the new_dict_cat dict and add its key as a main_cat to data_dict.
         The values are the total sub_dict_entries of the given list.
 
