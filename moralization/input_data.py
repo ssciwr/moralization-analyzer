@@ -1,7 +1,7 @@
 """
 Module that handles input reading.
 """
-from cassis import load_typesystem, load_cas_from_xmi, typesystem
+from cassis import load_typesystem, load_cas_from_xmi, typesystem, Cas
 import pathlib
 import importlib_resources
 import logging
@@ -13,7 +13,7 @@ from typing import List
 pkg = importlib_resources.files("moralization")
 
 
-def spacy_load_model(language_model) -> object:
+def spacy_load_model(language_model) -> spacy.Language:
     """Load the model for the selected language,
     download the model if it is missing.
 
@@ -64,7 +64,7 @@ class InputOutput:
         return pathlib.Path(filename).suffix[1:]
 
     @staticmethod
-    def read_typesystem(filename: str = None) -> object:
+    def read_typesystem(filename: str = None) -> spacy.TypeSystem:
         """
         Read in the typesystem from a given file.
         Also checks if a default type can be read from the
@@ -73,7 +73,7 @@ class InputOutput:
           If none the provided default typesystem will be used.(Default value = None)
 
         Returns:
-            typesystem: The typesystem object.
+            spacy.TypeSystem: The typesystem object.
         """
         if filename is None:
             filename = pkg / "data" / "TypeSystem.xml"
@@ -92,14 +92,14 @@ class InputOutput:
             raise Warning(f"No valid type system found at {filename}")
 
     @staticmethod
-    def read_cas_file(filename: str, ts: object) -> tuple:
+    def read_cas_file(filename: str, ts: spacy.TypeSystem) -> tuple:
         """
         Select and read a given cas file.
         Needs a typesystem to run.
 
         Args:
           filename: str: Filepath to the cas file.
-          ts: object: Typesystem object
+          ts: spacy.TypeSystem: Typesystem object.
 
         Returns:
             tuple: cas object and file type.
@@ -139,18 +139,20 @@ class InputOutput:
         return data_files, ts_file
 
     @staticmethod
-    def cas_to_doc(cas, ts, language_model: str = "de_core_news_sm"):
+    def cas_to_doc(
+        cas: Cas, ts: typesystem, language_model: str = "de_core_news_sm"
+    ) -> spacy.language:
         """Transforms the cassis object into a spacy doc.
             Adds the paragraph and the different span categories to the doc object.
             Also maps the provided labels to a more user readable format.
         Args:
-            cas (cassis.cas): The cassis object generated from the input files
-            ts (typesystem): The provided typesytem
+            cas (cassis.Cas): The cassis object generated from the input files
+            ts (cassos.TypeSystem): The provided type system
             language_model (str, optional): Language model of the corpus that is being read.
                 Defaults to "de_core_news_sm" (small German model).
 
         Returns:
-            spacy.Doc: A doc object with all the annotation categories present.
+            spacy.language: A doc object with all the annotation categories present.
         """
         # list and remap of all span categories
         map_expressions = {
@@ -210,9 +212,9 @@ class InputOutput:
         """Split the data into a train and test set.
         Args:
 
-            doc (spacy.Doc): The doc object with all the annotation categories present.
-            doc_train (spacy.Doc): The doc object with all the annotation categories present.
-            doc_test (spacy.Doc): The doc object with all the annotation categories present.
+            doc (spacy.language): The doc object with all the annotation categories present.
+            doc_train (spacy.language): The doc object with all the annotation categories present.
+            doc_test (spacy.language): The doc object with all the annotation categories present.
             span_list (list): List of all spans in the document.
             map_expressions (dict): Dictionary of all span categories and their remapped names.
 
@@ -287,13 +289,13 @@ class InputOutput:
 
     @staticmethod
     def files_to_docs(
-        data_files: List or str, ts: object, language_model: str = "de_core_news_sm"
+        data_files: List or str, ts: typesystem, language_model: str = "de_core_news_sm"
     ) -> tuple:
         """
 
         Args:
           data_files: list or str: List of input files or path to a directory.
-          ts: object: Typesystem object.
+          ts: cassis.TypeSystem: Typesystem object.
             language_model (str, optional): Language model of the corpus that is being read.
                 Defaults to "de_core_news_sm" (small German model).
 
@@ -326,7 +328,7 @@ class InputOutput:
         return doc_dict, train_dict, test_dict
 
     @staticmethod
-    def _merge_span_categories(doc_dict, merge_dict=None) -> dict:
+    def _merge_span_categories(doc_dict: dict, merge_dict=None) -> dict:
         """Take the new_dict_cat dict and add its key as a main_cat to data_dict.
         The values are the total sub_dict_entries of the given list.
 
