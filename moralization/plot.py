@@ -462,7 +462,7 @@ class InteractiveVisualization:
             State("dropdown_mode", "value"),
         )(self.change_span_cat)
 
-    def change_mode(self, mode):
+    def change_mode(self, mode) -> tuple:
         """
         Changes the mode of the visualization.
 
@@ -484,7 +484,7 @@ class InteractiveVisualization:
         span_cats = list(set(span_cats))
         return sorted(span_cats), "sc"
 
-    def change_span_cat(self, span_cat, mode):
+    def change_span_cat(self, span_cat, mode) -> str:
         """
         Changes the selected span category.
 
