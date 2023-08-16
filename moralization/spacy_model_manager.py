@@ -222,7 +222,9 @@ class SpacyModelManager(ModelManager):
         self._check_model_is_trained_before_it_can_be("tested")
         nlp = spacy.load(self._best_model_path)
         doc_dict = {"test_doc": nlp(test_string)}
-        return visualize_data(doc_dict, style=style, spans_key=spans_key)
+        return visualize_data(
+            doc_dict, style=style, spans_key=spans_key, use_notebook=True
+        )
 
     def publish(self, hugging_face_token: Optional[str] = None) -> str:
         """Publish the model to Hugging Face.

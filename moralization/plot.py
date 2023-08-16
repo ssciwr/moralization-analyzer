@@ -518,7 +518,7 @@ class InteractiveVisualization:
         )
 
 
-def visualize_data(doc_dict, style="span", spans_key="sc"):
+def visualize_data(doc_dict, style="span", spans_key="sc", use_notebook=False):
     """Use the displacy class offered by spacy to visualize the current dataset.
         use SpacySetup.span_keys to show possible keys or use 'sc' for all.
 
@@ -530,6 +530,8 @@ def visualize_data(doc_dict, style="span", spans_key="sc"):
         spans_key (str, optional): The key of the span category that should be visualized. If
             set to "sc", all span categories in the Spacy Doc objects will be visualized.
             Defaults to "sc".
+        use_notebook (bool, optional): Whether the visualization should be displayed directly in a notebook.
+                Note: For dash apps this needs to be False
     Raises:
 
         ValueError: Raised if `spans_key` is not a valid span category in any of the Spacy
@@ -565,4 +567,5 @@ def visualize_data(doc_dict, style="span", spans_key="sc"):
         [doc for doc in doc_dict.values()],
         style=style,
         options={"spans_key": spans_key},
+        jupyter=use_notebook,
     )
