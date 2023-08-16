@@ -98,7 +98,7 @@ def _get_paragraphs(doc: language) -> list:
     return paragraph_list
 
 
-def _reduce_cat_list(span_categories: dict) -> dict:
+def _reduce_cat_list(span_categories: list) -> list:
     # remove "sc", "paragraph", from list
     span_categories.remove("sc")
     span_categories.remove("paragraphs")
