@@ -64,7 +64,7 @@ class InputOutput:
         return pathlib.Path(filename).suffix[1:]
 
     @staticmethod
-    def read_typesystem(filename: str = None) -> spacy.TypeSystem:
+    def read_typesystem(filename: str = None) -> typesystem:
         """
         Read in the typesystem from a given file.
         Also checks if a default type can be read from the
@@ -73,7 +73,7 @@ class InputOutput:
           If none the provided default typesystem will be used.(Default value = None)
 
         Returns:
-            spacy.TypeSystem: The typesystem object.
+            cassis.TypeSystem: The typesystem object.
         """
         if filename is None:
             filename = pkg / "data" / "TypeSystem.xml"
@@ -92,7 +92,7 @@ class InputOutput:
             raise Warning(f"No valid type system found at {filename}")
 
     @staticmethod
-    def read_cas_file(filename: str, ts: spacy.TypeSystem) -> tuple:
+    def read_cas_file(filename: str, ts: typesystem) -> tuple:
         """
         Select and read a given cas file.
         Needs a typesystem to run.
