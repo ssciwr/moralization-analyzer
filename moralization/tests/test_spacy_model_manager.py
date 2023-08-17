@@ -32,7 +32,7 @@ def test_spacy_model_manager_train_new_model(tmp_path, data_dir):
     path_to_config = model_path / "config.cfg"
     # save model to other path
     model_path = tmp_path / "idontexist2"
-    model = SpacyModelManager(model_path, base_config_file=path_to_config.as_posix())
+    _ = SpacyModelManager(model_path, base_config_file=path_to_config.as_posix())
     # try with config not found
     with pytest.raises(ValueError):
         SpacyModelManager(
