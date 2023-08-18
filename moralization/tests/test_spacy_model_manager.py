@@ -28,6 +28,16 @@ def test_spacy_model_manager_train_new_model(tmp_path, data_dir):
     # evaluate trained model
     evaluation = model.evaluate(data_manager)
     assert "Moralisierung explizit" in evaluation["spans_task1_per_type"]
+    # create instance with pre-existing config
+    path_to_config = model_path / "config.cfg"
+    # save model to other path
+    model_path = tmp_path / "idontexist2"
+    _ = SpacyModelManager(model_path, base_config_file=path_to_config.as_posix())
+    # try with config not found
+    with pytest.raises(ValueError):
+        SpacyModelManager(
+            model_path, base_config_file="./config", overwrite_existing_files=True
+        )
 
 
 def test_spacy_model_manager_train_new_model_task(tmp_path, data_dir):
