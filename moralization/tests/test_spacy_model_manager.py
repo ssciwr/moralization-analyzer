@@ -27,7 +27,7 @@ def test_spacy_model_manager_train_new_model(tmp_path, data_dir):
     )
     # evaluate trained model
     evaluation = model.evaluate(data_manager)
-    assert "Moralisierung" in evaluation["spans_task1_per_type"]
+    assert "Moralisierung explizit" in evaluation["spans_task1_per_type"]
 
 
 def test_spacy_model_manager_train_new_model_task(tmp_path, data_dir):

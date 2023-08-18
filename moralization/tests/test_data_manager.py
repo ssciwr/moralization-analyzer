@@ -63,16 +63,16 @@ def test_return_analyzer_result(data_dir):
     dm.return_analyzer_result()
 
     test1 = dm.return_analyzer_result("frequency")
-    assert test1.shape == (25, 15)
+    assert test1.shape == (23, 15)
 
     test2 = dm.return_analyzer_result("length")
-    assert test2.shape == (25, 15)
+    assert test2.shape == (23, 15)
 
     test3 = dm.return_analyzer_result("span_distinctiveness")
-    assert test3.shape == (25, 15)
+    assert test3.shape == (23, 15)
 
     test4 = dm.return_analyzer_result("boundary_distinctiveness")
-    assert test4.shape == (25, 15)
+    assert test4.shape == (23, 15)
 
     assert not np.array_equal(test1.values, test2.values)
     assert not np.array_equal(test2.values, test3.values)
@@ -91,10 +91,10 @@ def test_return_analyzer_result(data_dir):
 def test_occurrence_analysis(data_dir):
     dm = DataManager(data_dir)
     table = dm.occurrence_analysis("table")
-    assert table.shape == (18, 50)
+    assert table.shape == (18, 46)
 
     corr = dm.occurrence_analysis("corr")
-    assert corr.shape == (50, 50)
+    assert corr.shape == (46, 46)
 
     heatmap = dm.occurrence_analysis("heatmap")
     assert heatmap

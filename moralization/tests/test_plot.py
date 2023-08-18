@@ -11,8 +11,6 @@ def test_report_occurrence_heatmap(doc_dicts, monkeypatch):
     # test corr without filter
     corr_df = plot.report_occurrence_heatmap(df, _type="corr")
     all_columns = [
-        ("KAT1-Moralisierendes Segment", "Keine Moralisierung"),
-        ("KAT1-Moralisierendes Segment", "Moralisierung"),
         ("KAT1-Moralisierendes Segment", "Moralisierung explizit"),
         ("KAT1-Moralisierendes Segment", "Moralisierung interpretativ"),
         ("KAT2-Moralwerte", "Care"),
@@ -41,8 +39,6 @@ def test_report_occurrence_heatmap(doc_dicts, monkeypatch):
         ("KAT4-Kommunikative Funktion", "Appell"),
         ("KAT4-Kommunikative Funktion", "Darstellung"),
         ("KAT5-Forderung explizit", "explizit"),
-        ("task1", "Keine Moralisierung"),
-        ("task1", "Moralisierung"),
         ("task1", "Moralisierung explizit"),
         ("task1", "Moralisierung interpretativ"),
         ("task2", "Care"),
@@ -216,20 +212,10 @@ def test_InteractiveCategoryPlot(data_dir):
                 "label": "Moralisierung explizit",
                 "value": "KAT1-Moralisierendes Segment___Moralisierung explizit",
             },
-            {
-                "label": "Keine Moralisierung",
-                "value": "KAT1-Moralisierendes Segment___Keine Moralisierung",
-            },
-            {
-                "label": "Moralisierung",
-                "value": "KAT1-Moralisierendes Segment___Moralisierung",
-            },
             {"label": "Care", "value": "KAT2-Moralwerte___Care"},
         ],
         [
             "KAT1-Moralisierendes Segment___Moralisierung explizit",
-            "KAT1-Moralisierendes Segment___Keine Moralisierung",
-            "KAT1-Moralisierendes Segment___Moralisierung",
             "KAT2-Moralwerte___Care",
         ],
     )
@@ -239,19 +225,9 @@ def test_InteractiveCategoryPlot(data_dir):
                 "label": "Moralisierung explizit",
                 "value": "KAT1-Moralisierendes Segment___Moralisierung explizit",
             },
-            {
-                "label": "Keine Moralisierung",
-                "value": "KAT1-Moralisierendes Segment___Keine Moralisierung",
-            },
-            {
-                "label": "Moralisierung",
-                "value": "KAT1-Moralisierendes Segment___Moralisierung",
-            },
         ],
         [
             "KAT1-Moralisierendes Segment___Moralisierung explizit",
-            "KAT1-Moralisierendes Segment___Keine Moralisierung",
-            "KAT1-Moralisierendes Segment___Moralisierung",
         ],
     )
     assert test_interactive_heatmap.update_category([]) == (

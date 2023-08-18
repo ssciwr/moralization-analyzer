@@ -36,7 +36,7 @@ def test__find_spans_in_paragraph(doc_dicts):
     spans_idx = analyse._find_spans_in_paragraph(doc, span_key)
     print(spans_idx)
 
-    assert len(spans_idx) == 11
+    assert len(spans_idx) == 3
     assert spans_idx[0] == (0, "Moralisierung explizit")
 
 
@@ -45,10 +45,8 @@ def test_summarize_span_occurrences(doc_dicts):
 
     df = analyse._summarize_span_occurrences(doc)
     # check occurrences of first row
-    assert list(df.iloc[0].values) == [
+    ref_values = [
         1.0,
-        0.0,
-        0.0,
         1.0,
         0.0,
         0.0,
@@ -63,8 +61,6 @@ def test_summarize_span_occurrences(doc_dicts):
         0.0,
         0.0,
         1.0,
-        0.0,
-        0.0,
         1.0,
         0.0,
         0.0,
@@ -78,12 +74,10 @@ def test_summarize_span_occurrences(doc_dicts):
         0.0,
         0.0,
     ]
-
+    assert list(df.iloc[0].values) == ref_values
     column_names = list(df.columns)
     real_names = [
         ("KAT1-Moralisierendes Segment", "Moralisierung explizit"),
-        ("KAT1-Moralisierendes Segment", "Keine Moralisierung"),
-        ("KAT1-Moralisierendes Segment", "Moralisierung"),
         ("KAT2-Moralwerte", "Care"),
         ("KAT2-Subjektive Ausdrücke", "Fairness"),
         ("KAT2-Subjektive Ausdrücke", "Oppression"),
