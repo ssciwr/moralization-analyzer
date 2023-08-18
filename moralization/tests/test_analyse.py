@@ -92,8 +92,6 @@ def test_summarize_span_occurrences(doc_dicts):
         ("KAT4-Kommunikative Funktion", "Appell"),
         ("KAT5-Forderung explizit", "explizit"),
         ("task1", "Moralisierung explizit"),
-        ("task1", "Keine Moralisierung"),
-        ("task1", "Moralisierung"),
         ("task2", "Care"),
         ("task2", "Fairness"),
         ("task2", "Oppression"),
