@@ -152,6 +152,15 @@ class SpacyModelManager(ModelManager):
         existing_model = (
             self.model_path.is_dir() and (self.model_path / "config.cfg").is_file()
         )
+        # if another config was provided, check that it exists
+        if base_config_file:
+            config_file = Path(base_config_file)
+            if not config_file.is_file():
+                raise ValueError(
+                    "The config file that you provided does not exist. Please check your input. {}".format(
+                        base_config_file
+                    )
+                )
         if base_config_file or overwrite_existing_files or not existing_model:
             _create_model(
                 self.model_path,
