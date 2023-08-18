@@ -242,7 +242,6 @@ class InputOutput:
                         span.end,
                         label=span[cat_old],
                     )
-                    print(span[cat_old])
                     if char_span:
                         doc.spans[cat_new].append(char_span)
                         doc.spans["sc"].append(char_span)
