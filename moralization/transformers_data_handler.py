@@ -40,7 +40,7 @@ class TransformersDataHandler:
         Args:
             doc_dict (dict, required): The dictionary of doc objects for each data source.
             selected_labels (Union[list, str], optional): The labels that should be combined in the training. Default: [
-                "Moralisierung", "Moralisierung Kontext", "Moralisierung Weltwissen", "Moralisierung explizit",
+                "Moralisierung Kontext", "Moralisierung Weltwissen", "Moralisierung explizit",
                 "Moralisierung interpretativ",]. You can select "all" to choose all labels for a given task.
                 Note that this will not produce relevant results for task1 as "Keine Moralisierung" is also a label.
             task (string, optional): The task from which the labels are selected. Default is task 1 (category
@@ -55,7 +55,6 @@ class TransformersDataHandler:
             # in general we could just pick all labels of a category
             # but for Kat1 this would not work
             selected_labels = [
-                "Moralisierung",
                 "Moralisierung Kontext",
                 "Moralisierung Weltwissen",
                 "Moralisierung explizit",
