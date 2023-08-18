@@ -571,8 +571,6 @@ class DataManager:
 
 
 if __name__ == "__main__":
-    dm = DataManager("/home/iulusoy/", skip_read=True)
-    dm.pull_dataset(dataset_name="rotten_tomatoes")
-    # now try to push this to new repo
-    repo_id = "test-datasetdict"
-    dm.publish(repo_id)
+    dm = DataManager(
+        "/home/inga/projects/moralization-project/moralization/data/Test_Data/XMI_11"
+    )

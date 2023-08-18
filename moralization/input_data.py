@@ -164,51 +164,77 @@ class InputOutput:
 
         nlp = spacy_load_model(language_model)
         doc = nlp(cas.sofa_string)
+        # initalize the SpanGroup objects
+        doc.spans["sc"] = []
+        doc.spans["paragraphs"] = []
+        for cat in map_expressions.values():
+            doc.spans[cat] = []
 
-        doc_train = nlp(cas.sofa_string)
-        doc_test = nlp(cas.sofa_string)
-
-        # add original cassis sentence as paragraph span
+        # now put the paragraphs (instances/segments) into the SpanGroup "paragraphs"
+        # these are defined as cas sentences in the input
         sentence_type = ts.get_type(
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
         )
+        paragraph_list = cas.select(sentence_type.name)
+        doc = InputOutput._get_paragraphs(doc, paragraph_list)
 
-        # initilize all span categories
-        for doc_object in [doc, doc_train, doc_test]:
-            doc_object.spans["sc"] = []
-            doc_object.spans["paragraphs"] = []
-            for cat in map_expressions.values():
-                doc_object.spans[cat] = []
-
-            paragraph_list = cas.select(sentence_type.name)
-            for paragraph in paragraph_list:
-                doc_object.spans["paragraphs"].append(
-                    doc_object.char_span(
-                        paragraph.begin,
-                        paragraph.end,
-                        label="paragraph",
-                    )
-                )
+        # now put the different categories of the custom spans (ie Kat1, etc) into
+        # SpanGroups
         span_type = ts.get_type("custom.Span")
-
         span_list = cas.select(span_type.name)
+        # now assign the spans and labels in the doc object from the cas object
+        doc = InputOutput._assign_span_labels(doc, span_list, map_expressions)
 
-        doc, doc_train, doc_test = InputOutput._split_train_test(
-            doc, doc_train, doc_test, span_list, map_expressions
-        )
+        # TODO now split into test and train set - not sure if we can do it at this stage
+        # as it is a doc object for each file source that would need to be split
+        # alternatively ???
+        doc_train, doc_test = InputOutput._split_train_test(doc)
 
         return doc, doc_train, doc_test
 
     @staticmethod
-    def _split_train_test(doc, doc_train, doc_test, span_list, map_expressions):
-        # every n-th entry is put as a test value
-        n_test = 5
-        n_start = 0
+    def _get_paragraphs(doc, paragraph_list):
+        # add original cassis sentence as paragraph span
+        for paragraph in paragraph_list:
+            doc.spans["paragraphs"].append(
+                doc.char_span(
+                    paragraph.begin,
+                    paragraph.end,
+                    label="paragraph",
+                )
+            )
+        return doc
 
+    @staticmethod
+    def _warn_empty_span(doc, span, cat_old):
+        logging_warning = (
+            f"The char span for {span.get_covered_text()} ({span}) returned None.\n"
+        )
+        logging_warning += "It might be due to a mismatch between char indices. \n"
+        if logging.root.level > logging.DEBUG:
+            logging_warning += (
+                "Skipping span! Enable Debug Logging for more information."
+            )
+        logging.warning(logging_warning)
+        logging.debug(
+            f"""Token should be: \n \t'{span.get_covered_text()}', but is '{
+                    doc.char_span(
+                    span.begin,
+                    span.end,
+                    alignment_mode="expand",
+                    label=span[cat_old],
+                )}'\n"""
+        )
+
+    @staticmethod
+    def _assign_span_labels(doc, span_list, map_expressions):
+        # put the custom spans into the categories
+        # we also need to delete "Moralisierung" and "Keine Moralisierung"
+        labels_to_delete = ["Keine Moralisierung", "Moralisierung"]
         for span in span_list:
             for cat_old, cat_new in map_expressions.items():
                 # not all of these categories have values in every span.
-                if span[cat_old]:
+                if span[cat_old] and span[cat_old] not in labels_to_delete:
                     # we need to attach each span category on its own, as well as all together in "sc"
 
                     char_span = doc.char_span(
@@ -216,53 +242,28 @@ class InputOutput:
                         span.end,
                         label=span[cat_old],
                     )
+                    print(span[cat_old])
                     if char_span:
                         doc.spans[cat_new].append(char_span)
                         doc.spans["sc"].append(char_span)
-                        n_start = n_start + 1
-
-                        if n_start % n_test != 0:
-                            char_span_train = doc_train.char_span(
-                                span.begin,
-                                span.end,
-                                label=span[cat_old],
-                            )
-                            doc_train.spans[cat_new].append(char_span_train)
-                            doc_train.spans["sc"].append(char_span_train)
-                        else:
-                            char_span_test = doc_test.char_span(
-                                span.begin,
-                                span.end,
-                                label=span[cat_old],
-                            )
-                            doc_test.spans[cat_new].append(char_span_test)
-                            doc_test.spans["sc"].append(char_span_test)
 
                     # char_span returns None when the given indices do not match a token begin and end.
                     # e.G ".Ich" instead of ". Ich"
+                    # TODO @Gwydion can you explain again which ones are relevant here
+                    # in the above example, there was a space missing after the "."?
+                    # Was it like this in the original data?
+                    # print a warning that this span cannot be used
                     elif char_span is None:
-                        logging_warning = f"The char span for {span.get_covered_text()} ({span}) returned None.\n"
-                        logging_warning += (
-                            "It might be due to a mismatch between char indices. \n"
-                        )
-                        if logging.root.level > logging.DEBUG:
-                            logging_warning += "Skipping span! Enable Debug Logging for more information."
+                        InputOutput._warn_empty_span(doc, span, cat_old)
 
-                        logging.warning(logging_warning)
-                        logging.debug(
-                            f"""Token should be: \n \t'{span.get_covered_text()}', but is '{
-                                    doc.char_span(
-                                    span.begin,
-                                    span.end,
-                                    alignment_mode="expand",
-                                    label=span[cat_old],
+        return doc
 
-                                )}'\n"""
-                        )
-
-                    # create test and train set:
-
-        return doc, doc_train, doc_test
+    @staticmethod
+    def _split_train_test(doc):
+        # create test and train set
+        doc_train = doc
+        doc_test = doc
+        return doc_train, doc_test
 
     @staticmethod
     def files_to_docs(
