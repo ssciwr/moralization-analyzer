@@ -36,9 +36,28 @@ def test_generate_labels(doc_dict, gen_instance):
     assert len(gen_instance.labels) == 1346
 
 
+def test_generate_spans_task1(doc_dict, gen_instance):
+    gen_instance.get_data_lists(doc_dict=doc_dict)
+    gen_instance.generate_labels(doc_dict=doc_dict)
+    gen_instance.generate_spans(doc_dict=doc_dict)
+    assert gen_instance.span_list[0] == []
+    assert gen_instance.span_list[4] == [(23, 44, "Moralisierung explizit")]
+    gen_instance.get_data_lists(doc_dict=doc_dict)
+    gen_instance.generate_labels(doc_dict=doc_dict, task="task2")
+    gen_instance.generate_spans(doc_dict=doc_dict, task="task2")
+    assert gen_instance.span_list[3] == []
+    assert gen_instance.span_list[4] == [(33, 37, "Care")]
+    assert gen_instance.span_list[8] == [
+        (109, 111, "Care"),
+        (106, 107, "Oppression"),
+        (112, 114, "Fairness"),
+    ]
+
+
 def test_structure_labels(doc_dict, gen_instance):
     gen_instance.get_data_lists(doc_dict=doc_dict)
     gen_instance.generate_labels(doc_dict=doc_dict)
+    gen_instance.generate_spans(doc_dict=doc_dict)
     gen_instance.structure_labels()
     ref_sentence = ["Ich", "zitiere", "mal", "einen", "Kollegen", ":"]
     ref_labels = [0, 0, 0, 0, 0, -100]

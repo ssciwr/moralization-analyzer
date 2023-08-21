@@ -278,6 +278,8 @@ class SpacyModelManager(ModelManager):
 
         If the supplied DataManager has no docbin files we first export them to `model_path/data`.
         """
+        # data_files = data_manager.export_data_DocBin()
+        # TODO handle the export and import into model
         data_files = data_manager.spacy_docbin_files
         data_files_exist = data_files is not None and all(
             [data_file.is_file() for data_file in data_files]

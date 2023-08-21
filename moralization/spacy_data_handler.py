@@ -1,10 +1,25 @@
 from spacy.tokens import DocBin
 from pathlib import Path
 from tempfile import mkdtemp
+import datasets
 
 
 class SpacyDataHandler:
-    """Helper class to organize and prepare spacy trainings data."""
+    """Helper class to organize and prepare spacy train and test data."""
+
+    def docbin_from_dataset(data_set: datasets.Dataset) -> DocBin:
+        """Create a DocBin from a Dataset.
+
+        Args:
+            data_set (datasets.Dataset): The dataset to be converted into a DocBin.
+
+        Returns:
+            DocBin: The spacy formatted data."""
+
+        # print(data_set["Sentences"])
+        # print(data_set["Spans"])
+        # nlp = spacy.blank("en")
+        pass
 
     def export_training_testing_data(
         self, train_dict, test_dict, output_dir=None, overwrite=False

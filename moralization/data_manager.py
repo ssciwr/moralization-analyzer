@@ -29,7 +29,7 @@ class DataManager:
         selected_labels: Union[list, str] = None,
         task: str = None,
     ):
-        """Initialize the Datamanager that handles the data transformations.
+        """Initialize the DataManager that handles the data transformations.
 
         Args:
             data_dir (str): The data directory where the data is located, or where the pulled dataset
@@ -68,6 +68,7 @@ class DataManager:
             # generate the data lists and data frame
             self._docdict_to_lists()
             self._lists_to_df()
+            self.df_to_dataset()
 
     def occurrence_analysis(self, _type="table", cat_filter=None, file_filter=None):
         """Returns the occurrence df, occurrence_corr_table or heatmap of the dataset.
@@ -214,14 +215,15 @@ class DataManager:
     def export_data_DocBin(
         self, output_dir=None, overwrite=False, check_data_integrity=True
     ):
-        """Export the currently loaded docs as a spacy binary. This is used in spacy training.
+        """Export the currently loaded dataset as a spacy binary. This is used in spacy training.
 
         Args:
             output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
-            overwrite(bool, optional): whether or not the spacy files should be written
-            even if files are already present.
-            check_data_integrity (bool): Whether or not to test the data integrity.
-
+            overwrite(bool, optional): If True, spacy files are written even if files are already present.
+                Defaults to False.
+            check_data_integrity (bool): Whether or not to test the data integrity. If the data integrity
+                check fails, then no output is written. Skip the test by setting to False. In this case,
+                the output is always generated even if the data does not pass the quality check.
 
         Returns:
             list[Path]: A list of the train and test files path.
@@ -233,7 +235,9 @@ class DataManager:
                     "The given data did not pass the integrity check. Please check the provided output.\n"
                     + "if you want to continue with your data set `check_data_integrity=False`"
                 )
-
+        # generate the DocBin files from the train and test split of the dataset object,
+        # and optionally from validate if present
+        # train_data = SpacyDataHandler.docbin_from_dataset(self.train_test_set["train"])
         self.spacy_docbin_files = SpacyDataHandler().export_training_testing_data(
             self.train_dict, self.test_dict, output_dir, overwrite=overwrite
         )
@@ -369,11 +373,12 @@ class DataManager:
     def _docdict_to_lists(self):
         """Convert the dictionary of doc objects to nested lists."""
 
-        # for now work with instantiation
+        # TODO for now work with instantiation
         tdh = TransformersDataHandler()
         tdh.get_data_lists(self.doc_dict)
         tdh.generate_labels(self.doc_dict, self.selected_labels, self.task)
-        self.sentence_list, self.label_list = tdh.structure_labels()
+        tdh.generate_spans(self.doc_dict, self.selected_labels, self.task)
+        self.sentence_list, self.label_list, self.span_list = tdh.structure_labels()
 
     def _lists_to_df(self):
         """Convert nested lists of tokens and labels into a pandas dataframe.
@@ -382,7 +387,9 @@ class DataManager:
             data_in_frame (dataframe): A list of the train and test files path.
         """
         self.data_in_frame = pd.DataFrame(
-            zip(self.sentence_list, self.label_list), columns=["Sentences", "Labels"]
+            zip(self.sentence_list, self.label_list),
+            columns=["Sentences", "Labels"]
+            # zip(self.sentence_list, self.label_list, self.span_list), columns=["Sentences", "Labels", "Spans"]
         )
         self.column_names = ["Sentences", "Labels"]
 
@@ -572,5 +579,8 @@ class DataManager:
 
 if __name__ == "__main__":
     dm = DataManager(
-        "/home/inga/projects/moralization-project/moralization/data/Test_Data/XMI_11"
+        "/home/iulusoy/projects/moralization-project/moralization/data/Test_Data/XMI_11",
+        # "/home/iulusoy/projects/moralization-project/moralization/data/All_Data/XMI_11"
+        task="task2",
     )
+    dm.export_data_DocBin(check_data_integrity=False)

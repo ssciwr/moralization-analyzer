@@ -16,7 +16,9 @@ class TransformersDataHandler:
         """
         # Create a list of all the sentences for all sources.
         self.sentence_list = []
+        # Create a list of all the tokens.
         self.token_list = []
+        # Create a list of all the labels.
         self.label_list = []
         for example_name in doc_dict.keys():
             sentence_list = [
@@ -42,7 +44,6 @@ class TransformersDataHandler:
             selected_labels (Union[list, str], optional): The labels that should be combined in the training. Default: [
                 "Moralisierung Kontext", "Moralisierung Weltwissen", "Moralisierung explizit",
                 "Moralisierung interpretativ",]. You can select "all" to choose all labels for a given task.
-                Note that this will not produce relevant results for task1 as "Keine Moralisierung" is also a label.
             task (string, optional): The task from which the labels are selected. Default is task 1 (category
                 1 "KAT1-Moralisierendes Segment").
         """
@@ -51,15 +52,8 @@ class TransformersDataHandler:
         # Moralisierung explizit, Moralisierung interpretativ, Moralisierung Weltwissen to 1
         # here we actually need to select by task
         if not selected_labels:
-            # the problem is that "keine Moralisierung" is also a label
-            # in general we could just pick all labels of a category
-            # but for Kat1 this would not work
-            selected_labels = [
-                "Moralisierung Kontext",
-                "Moralisierung Weltwissen",
-                "Moralisierung explizit",
-                "Moralisierung interpretativ",
-            ]
+            # if not set, we select all
+            selected_labels = "all"
         if not task:
             task = "task1"
         # create a list as long as tokens
@@ -77,8 +71,70 @@ class TransformersDataHandler:
                     print(span.label_, "not in selected labels")
             self.labels.extend(labels)
 
+    def generate_spans(
+        self, doc_dict: Dict, selected_labels: Union[List, str] = None, task: str = None
+    ) -> None:
+        """Generate the spans from the annotated tokens in a nested list. Required for spacy training.
+
+        This is a bit painful as the spans slices from the doc do contain the sent information,
+        but there is no sentence id or so. So we need to iterate over both sents and spans
+        and compare to find out if a span is inside a certain sentence. Also, the span token ids
+        (span.start and span.end) are given relative per text source (doc). So we always need
+        to add the total number of tokens already parsed in the nested list.
+        Example: First text source has an annotation (82, 116, 'Moralisierung explizit'). Second
+            text source has an annotation (23, 44, 'Moralisierung explizit'). The total number
+            of tokens in first text source is 523. Then the second span tuple needs to account
+            for those tokens and thus be corrected to (23+523, 44+523, 'Moralisierung explizit').
+
+        Args:
+            doc_dict (dict, required): The dictionary of doc objects for each data source.
+            selected_labels (Union[list, str], optional): The labels that should be combined in the training. Default: [
+                "Moralisierung Kontext", "Moralisierung Weltwissen", "Moralisierung explizit",
+                "Moralisierung interpretativ",]. You can select "all" to choose all labels for a given task.
+                Note that this will not produce relevant results for task1 as "Keine Moralisierung" is also a label.
+            task (string, optional): The task from which the labels are selected. Default is task 1 (category
+                1 "KAT1-Moralisierendes Segment").
+        """
+        if not selected_labels:
+            # if no labels are selected per task, we just choose all
+            selected_labels = "all"
+        if not task:
+            task = "task1"
+        print("task is {}".format(task))
+        # generate the nested spans based on the sentences
+        # create a list of all annotated spans per sentence
+        self.span_list = []
+        accumulated_number_of_tokens = 0
+        for example_name in doc_dict.keys():
+            # first we generate a list of all sentence beginning and end tokens per text source
+            sentence_start_end = [
+                (sent.start, sent.end) for sent in doc_dict[example_name].sents
+            ]
+            spans = [[] for _ in doc_dict[example_name].sents]
+            total_number_of_tokens_in_source = len(doc_dict[example_name])
+            for span in doc_dict[example_name].spans[task]:
+                if selected_labels == "all" or span.label_ in selected_labels:
+                    # find out which sentence the span lies in
+                    sentence_boundaries = (span.sent.start, span.sent.end)
+                    sentence_id = sentence_start_end.index(sentence_boundaries)
+                    spans[sentence_id].append(
+                        (
+                            span.start + accumulated_number_of_tokens,
+                            span.end + accumulated_number_of_tokens,
+                            span.label_,
+                        )
+                    )
+                else:
+                    print(span.label_, "not in selected labels")
+            self.span_list.extend(spans)
+            accumulated_number_of_tokens = (
+                accumulated_number_of_tokens + total_number_of_tokens_in_source
+            )
+        # print(self.span_list)
+
     def structure_labels(self) -> Tuple[List, List]:
-        """Structure the tokens from one long list into a nested list for sentences. Required for transformers training.
+        """Structure the tokens from one long list into a nested list for sentences.
+        Required for transformers training.
 
         Returns:
             sentence_list (list): A nested list of the tokens (nested by sentence).
@@ -97,4 +153,4 @@ class TransformersDataHandler:
                 if sent_tokens[i].is_punct:
                     sent_labels[i] = -100
                 j = j + 1
-        return self.sentence_list, self.label_list
+        return self.sentence_list, self.label_list, self.span_list
