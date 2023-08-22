@@ -31,27 +31,33 @@ def test_generate_labels(doc_dict, gen_instance):
     assert gen_instance.labels[510] == 0
     assert gen_instance.labels[1124] == 2
     assert gen_instance.labels[1125] == 1
-    assert gen_instance.labels[1171] == 1
-    assert gen_instance.labels[1172] == 0
+    assert gen_instance.labels[1170] == 1
+    assert gen_instance.labels[1171] == 0
     assert len(gen_instance.labels) == 1346
 
 
-def test_generate_spans_task1(doc_dict, gen_instance):
+def test_generate_spans(doc_dict, gen_instance):
     gen_instance.get_data_lists(doc_dict=doc_dict)
     gen_instance.generate_labels(doc_dict=doc_dict)
     gen_instance.generate_spans(doc_dict=doc_dict)
-    assert gen_instance.span_list[0] == []
-    assert gen_instance.span_list[4] == [(23, 44, "Moralisierung explizit")]
+    assert gen_instance.span_begin[0] == [0]
+    assert gen_instance.span_end[0] == [0]
+    assert gen_instance.span_label[0] == [""]
+    assert gen_instance.span_begin[4] == [1]
+    assert gen_instance.span_end[4] == [22]
+    assert gen_instance.span_label[4] == ["Moralisierung explizit"]
     gen_instance.get_data_lists(doc_dict=doc_dict)
     gen_instance.generate_labels(doc_dict=doc_dict, task="task2")
     gen_instance.generate_spans(doc_dict=doc_dict, task="task2")
-    assert gen_instance.span_list[3] == []
-    assert gen_instance.span_list[4] == [(33, 37, "Care")]
-    assert gen_instance.span_list[8] == [
-        (109, 111, "Care"),
-        (106, 107, "Oppression"),
-        (112, 114, "Fairness"),
-    ]
+    assert gen_instance.span_begin[3] == [0]
+    assert gen_instance.span_end[3] == [0]
+    assert gen_instance.span_label[3] == [""]
+    assert gen_instance.span_begin[4] == [11]
+    assert gen_instance.span_end[4] == [15]
+    assert gen_instance.span_label[4] == ["Care"]
+    assert gen_instance.span_begin[8] == [8, 5, 11]
+    assert gen_instance.span_end[8] == [10, 6, 13]
+    assert gen_instance.span_label[8] == ["Care", "Oppression", "Fairness"]
 
 
 def test_structure_labels(doc_dict, gen_instance):

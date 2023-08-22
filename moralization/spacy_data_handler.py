@@ -3,6 +3,8 @@ from pathlib import Path
 from tempfile import mkdtemp
 import datasets
 
+# import spacy
+
 
 class SpacyDataHandler:
     """Helper class to organize and prepare spacy train and test data."""
@@ -11,15 +13,26 @@ class SpacyDataHandler:
         """Create a DocBin from a Dataset.
 
         Args:
-            data_set (datasets.Dataset): The dataset to be converted into a DocBin.
+            data_set (datasets.Dataset): The dataframe to be converted into a DocBin.
 
         Returns:
             DocBin: The spacy formatted data."""
-
-        # print(data_set["Sentences"])
-        # print(data_set["Spans"])
         # nlp = spacy.blank("en")
-        pass
+
+        # now we need to attach the sentences together again
+        # first create a list from the dataset "Sentences" column for train and test
+        print(data_set["train"])
+        textlist = data_set["train"]["Sentences"]
+        labellist = data_set["train"]["Labels"]
+        span_begin_list = data_set["train"]["Span_begin"]
+        span_end_list = data_set["train"]["Span_end"]
+        span_label_list = data_set["train"]["Span_label"]
+
+        for i in range(len(textlist)):
+            print(" ".join(textlist[i]))
+            print(labellist[i])
+            print(span_begin_list[i], span_end_list[i], span_label_list[i])
+        # doc = nlp(" ".join(textlist[0]))
 
     def export_training_testing_data(
         self, train_dict, test_dict, output_dir=None, overwrite=False

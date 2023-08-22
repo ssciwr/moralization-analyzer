@@ -53,7 +53,7 @@ def test_data_manager(data_dir):
         "verletzt",
         ".",
     ]
-    ref_label = [0, 0, 0, -100, 0, -100, -100, 0, 0, 0, 2, 1, 1, 0, -100]
+    ref_label = [0, 0, 0, -100, 0, -100, -100, 0, 0, 0, 2, 1, 0, 0, -100]
     assert dm.data_in_frame["Sentences"][8] == ref_sentence
     assert dm.data_in_frame["Labels"][8] == ref_label
 

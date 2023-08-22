@@ -1,4 +1,5 @@
 from typing import Dict, List, Tuple, Union
+import copy
 
 
 class TransformersDataHandler:
@@ -62,8 +63,8 @@ class TransformersDataHandler:
             labels = [0 for _ in doc_dict[example_name]]
             for span in doc_dict[example_name].spans[task]:
                 if selected_labels == "all" or span.label_ in selected_labels:
-                    labels[span.start + 1 : span.end + 1] = [1] * (
-                        span.end - span.start
+                    labels[span.start + 1 : span.end] = [1] * (
+                        span.end - span.start - 1
                     )
                     # mark the beginning of a span with 2
                     labels[span.start] = 2
@@ -80,11 +81,9 @@ class TransformersDataHandler:
         but there is no sentence id or so. So we need to iterate over both sents and spans
         and compare to find out if a span is inside a certain sentence. Also, the span token ids
         (span.start and span.end) are given relative per text source (doc). So we always need
-        to add the total number of tokens already parsed in the nested list.
-        Example: First text source has an annotation (82, 116, 'Moralisierung explizit'). Second
-            text source has an annotation (23, 44, 'Moralisierung explizit'). The total number
-            of tokens in first text source is 523. Then the second span tuple needs to account
-            for those tokens and thus be corrected to (23+523, 44+523, 'Moralisierung explizit').
+        to correct this, as for the dataset splitting into test and train, this information will
+        be lost. The span begin and span end token integer needs to be given relative to the
+        position of the token in the sentence.
 
         Args:
             doc_dict (dict, required): The dictionary of doc objects for each data source.
@@ -100,37 +99,35 @@ class TransformersDataHandler:
             selected_labels = "all"
         if not task:
             task = "task1"
-        print("task is {}".format(task))
         # generate the nested spans based on the sentences
-        # create a list of all annotated spans per sentence
-        self.span_list = []
-        accumulated_number_of_tokens = 0
+        self.span_begin = []
+        self.span_end = []
+        self.span_label = []
         for example_name in doc_dict.keys():
-            # first we generate a list of all sentence beginning and end tokens per text source
             sentence_start_end = [
                 (sent.start, sent.end) for sent in doc_dict[example_name].sents
             ]
-            spans = [[] for _ in doc_dict[example_name].sents]
-            total_number_of_tokens_in_source = len(doc_dict[example_name])
+            span_b = [[] for _ in doc_dict[example_name].sents]
+            span_e = copy.deepcopy(span_b)
+            span_l = [[] for _ in doc_dict[example_name].sents]
             for span in doc_dict[example_name].spans[task]:
                 if selected_labels == "all" or span.label_ in selected_labels:
                     # find out which sentence the span lies in
                     sentence_boundaries = (span.sent.start, span.sent.end)
                     sentence_id = sentence_start_end.index(sentence_boundaries)
-                    spans[sentence_id].append(
-                        (
-                            span.start + accumulated_number_of_tokens,
-                            span.end + accumulated_number_of_tokens,
-                            span.label_,
-                        )
-                    )
+                    span_b[sentence_id].append(span.start - sentence_boundaries[0] + 1)
+                    span_e[sentence_id].append(span.end - sentence_boundaries[0] + 1)
+                    span_l[sentence_id].append(span.label_)
                 else:
                     print(span.label_, "not in selected labels")
-            self.span_list.extend(spans)
-            accumulated_number_of_tokens = (
-                accumulated_number_of_tokens + total_number_of_tokens_in_source
-            )
-        # print(self.span_list)
+            # fill all the empty lists with 0,0,"" so that in the conversion to a
+            # pyarrow Table, we have enough information to create the correct Arrow type
+            span_b = [[0] if not i else i for i in span_b]
+            span_e = [[0] if not i else i for i in span_e]
+            span_l = [[""] if not i else i for i in span_l]
+            self.span_begin.extend(span_b)
+            self.span_end.extend(span_e)
+            self.span_label.extend(span_l)
 
     def structure_labels(self) -> Tuple[List, List]:
         """Structure the tokens from one long list into a nested list for sentences.
@@ -153,4 +150,10 @@ class TransformersDataHandler:
                 if sent_tokens[i].is_punct:
                     sent_labels[i] = -100
                 j = j + 1
-        return self.sentence_list, self.label_list, self.span_list
+        return (
+            self.sentence_list,
+            self.label_list,
+            self.span_begin,
+            self.span_end,
+            self.span_label,
+        )

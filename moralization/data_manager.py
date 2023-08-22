@@ -237,7 +237,8 @@ class DataManager:
                 )
         # generate the DocBin files from the train and test split of the dataset object,
         # and optionally from validate if present
-        # train_data = SpacyDataHandler.docbin_from_dataset(self.train_test_set["train"])
+
+        SpacyDataHandler.docbin_from_dataset(self.train_test_set)
         self.spacy_docbin_files = SpacyDataHandler().export_training_testing_data(
             self.train_dict, self.test_dict, output_dir, overwrite=overwrite
         )
@@ -378,7 +379,13 @@ class DataManager:
         tdh.get_data_lists(self.doc_dict)
         tdh.generate_labels(self.doc_dict, self.selected_labels, self.task)
         tdh.generate_spans(self.doc_dict, self.selected_labels, self.task)
-        self.sentence_list, self.label_list, self.span_list = tdh.structure_labels()
+        (
+            self.sentence_list,
+            self.label_list,
+            self.span_begin,
+            self.span_end,
+            self.span_label,
+        ) = tdh.structure_labels()
 
     def _lists_to_df(self):
         """Convert nested lists of tokens and labels into a pandas dataframe.
@@ -387,11 +394,22 @@ class DataManager:
             data_in_frame (dataframe): A list of the train and test files path.
         """
         self.data_in_frame = pd.DataFrame(
-            zip(self.sentence_list, self.label_list),
-            columns=["Sentences", "Labels"]
-            # zip(self.sentence_list, self.label_list, self.span_list), columns=["Sentences", "Labels", "Spans"]
+            zip(
+                self.sentence_list,
+                self.label_list,
+                self.span_begin,
+                self.span_end,
+                self.span_label,
+            ),
+            columns=["Sentences", "Labels", "Span_begin", "Span_end", "Span_label"],
         )
-        self.column_names = ["Sentences", "Labels"]
+        self.column_names = [
+            "Sentences",
+            "Labels",
+            "Span begin",
+            "Span end",
+            "Span label",
+        ]
 
     def df_to_dataset(self, data_in_frame: pd.DataFrame = None, split: bool = True):
         if not data_in_frame:
