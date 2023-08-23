@@ -518,7 +518,7 @@ class InteractiveVisualization:
         )
 
 
-def visualize_data(doc_dict, style="span", spans_key="sc"):
+def return_displacy_visualization(doc_dict, style="span", spans_key="sc"):
     """Use the displacy class offered by spacy to visualize the current dataset.
         use SpacySetup.span_keys to show possible keys or use 'sc' for all.
 

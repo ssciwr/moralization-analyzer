@@ -3,7 +3,7 @@ from moralization.analyse import _loop_over_files, _return_span_analyzer
 from moralization.plot import (
     report_occurrence_heatmap,
     InteractiveCategoryPlot,
-    visualize_data,
+    return_displacy_visualization,
     InteractiveAnalyzerResults,
     InteractiveVisualization,
 )
@@ -225,7 +225,7 @@ class DataManager:
             "test": self.test_dict,
         }
 
-        return visualize_data(return_dict[_type], spans_key=spans_key)
+        return return_displacy_visualization(return_dict[_type], spans_key=spans_key)
 
     def export_data_DocBin(
         self, output_dir=None, overwrite=False, check_data_integrity=True
