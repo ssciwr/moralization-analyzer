@@ -158,7 +158,7 @@ class InputOutput:
             "Protagonistinnen3": "KAT3-own/other",
             "KommunikativeFunktion": "KAT4-Kommunikative Funktion",
             "Forderung": "KAT5-Forderung explizit",
-            #       "KAT5Ausformulierung": "KAT5-Forderung implizit",
+            "KAT5Ausformulierung": "KAT5-Forderung implizit",
             #       "Kommentar": "KOMMENTAR",
         }
 
@@ -237,11 +237,19 @@ class InputOutput:
                 if span[cat_old] and span[cat_old] not in labels_to_delete:
                     # we need to attach each span category on its own, as well as all together in "sc"
 
-                    char_span = doc.char_span(
-                        span.begin,
-                        span.end,
-                        label=span[cat_old],
-                    )
+                    if cat_old == "KAT5Ausformulierung":
+                        char_span = doc.char_span(
+                            span.begin,
+                            span.end,
+                            label="implizit",
+                        )
+
+                    else:
+                        char_span = doc.char_span(
+                            span.begin,
+                            span.end,
+                            label=span[cat_old],
+                        )
                     if char_span:
                         doc.spans[cat_new].append(char_span)
                         doc.spans["sc"].append(char_span)
@@ -321,7 +329,7 @@ class InputOutput:
                     "task2": ["KAT2-Moralwerte", "KAT2-Subjektive Ausdrücke"],
                     "task3": ["KAT3-Rolle", "KAT3-Gruppe", "KAT3-own/other"],
                     "task4": ["KAT4-Kommunikative Funktion"],
-                    "task5": ["KAT5-Forderung explizit"],
+                    "task5": ["KAT5-Forderung explizit",  "KAT5-Forderung implizit"],
                 }
             Defaults to None.
             task (str, optional): The task from which the labels are selected.
@@ -335,7 +343,7 @@ class InputOutput:
                 "task2": ["KAT2-Moralwerte", "KAT2-Subjektive Ausdrücke"],
                 "task3": ["KAT3-Rolle", "KAT3-Gruppe", "KAT3-own/other"],
                 "task4": ["KAT4-Kommunikative Funktion"],
-                "task5": ["KAT5-Forderung explizit"],
+                "task5": ["KAT5-Forderung explizit", "KAT5-Forderung implizit"],
             }
         if task is None:
             task = "task1"
@@ -361,7 +369,7 @@ class InputOutput:
                 except KeyError:
                     raise KeyError(
                         f"{old_main_cat} not found in doc_dict[file].spans which"
-                        + " has {list(doc_dict[file].spans.keys())} as keys."
+                        + f" has {list(doc_dict[file].spans.keys())} as keys."
                     )
         return doc_dict
 

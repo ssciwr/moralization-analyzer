@@ -10,7 +10,7 @@ import re
 import logging
 from moralization.data_manager import DataManager
 from moralization.model_manager import ModelManager
-from moralization.plot import visualize_data
+from moralization.plot import return_displacy_visualization
 import shutil
 
 
@@ -231,7 +231,7 @@ class SpacyModelManager(ModelManager):
         self._check_model_is_trained_before_it_can_be("tested")
         nlp = spacy.load(self._best_model_path)
         doc_dict = {"test_doc": nlp(test_string)}
-        return visualize_data(doc_dict, style=style, spans_key=spans_key)
+        return return_displacy_visualization(doc_dict, style=style, spans_key=spans_key)
 
     def publish(self, hugging_face_token: Optional[str] = None) -> str:
         """Publish the model to Hugging Face.
