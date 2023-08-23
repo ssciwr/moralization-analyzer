@@ -124,7 +124,7 @@
 <dl class="py class" id="module-moralization">
 <dt class="sig sig-object py" id="moralization.DataManager">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">DataManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'de_core_news_sm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_read</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager" title="Link to this definition"></a></dt>
-<dd><p>Initialize the Datamanager that handles the data transformations.</p>
+<dd><p>Initialize the DataManager that handles the data transformations.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
 <dt>data_dir (str): The data directory where the data is located, or where the pulled dataset</dt><dd><p>should be stored.</p>
@@ -151,7 +151,7 @@ or None. Defaults to None.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.check_data_integrity">
-<span class="sig-name descname"><span class="pre">check_data_integrity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moralization.DataManager.check_data_integrity" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">check_data_integrity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.check_data_integrity" title="Link to this definition"></a></dt>
 <dd><p>This function checks the data and compares it to the spacy thresholds for label count,
 span distinctiveness and boundary distinctiveness.</p>
 <p>If a value is found to be insufficient a warning will be raised.</p>
@@ -165,13 +165,19 @@ span distinctiveness and boundary distinctiveness.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.export_data_DocBin">
-<span class="sig-name descname"><span class="pre">export_data_DocBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_data_integrity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#moralization.DataManager.export_data_DocBin" title="Link to this definition"></a></dt>
-<dd><p>Export the currently loaded docs as a spacy binary. This is used in spacy training.</p>
-<dl class="simple">
+<span class="sig-name descname"><span class="pre">export_data_DocBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_data_integrity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.export_data_DocBin" title="Link to this definition"></a></dt>
+<dd><p>Export the currently loaded dataset as a spacy binary. This is used in spacy training.</p>
+<dl>
 <dt>Args:</dt><dd><p>output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
-overwrite(bool, optional): whether or not the spacy files should be written
-even if files are already present.
-check_data_integrity (bool): Whether or not to test the data integrity.</p>
+overwrite(bool, optional): If True, spacy files are written even if files are already present.</p>
+<blockquote>
+<div><p>Defaults to False.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>check_data_integrity (bool): Whether or not to test the data integrity. If the data integrity</dt><dd><p>check fails, then no output is written. Skip the test by setting to False. In this case,
+the output is always generated even if the data does not pass the quality check.</p>
+</dd>
+</dl>
 </dd>
 <dt>Returns:</dt><dd><p>list[Path]: A list of the train and test files path.</p>
 </dd>
@@ -280,7 +286,7 @@ Defaults to None.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.return_analyzer_result">
-<span class="sig-name descname"><span class="pre">return_analyzer_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'frequency'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#moralization.DataManager.return_analyzer_result" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">return_analyzer_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'frequency'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.return_analyzer_result" title="Link to this definition"></a></dt>
 <dd><dl class="simple">
 <dt>Returns the result of the spacy_span-analyzer.</dt><dd><p>If no analyzer has been created yet, a new one will be generated and stored.</p>
 </dd>
@@ -294,7 +300,7 @@ Defaults to None.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="moralization.DataManager.return_categories">
-<span class="sig-name descname"><span class="pre">return_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#moralization.DataManager.return_categories" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">return_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.return_categories" title="Link to this definition"></a></dt>
 <dd><p>Returns a dict of all categories in the dataset.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>dict: A list of all categories in the dataset.</p>
