@@ -27,6 +27,7 @@ class DataManager:
         language_model: str = "de_core_news_sm",
         skip_read: bool = False,
         selected_labels: Union[list, str] = None,
+        merge_dict=None,
         task: str = None,
     ):
         """Initialize the DataManager that handles the data transformations.
@@ -42,6 +43,17 @@ class DataManager:
                 return all labels of a given task, or a list of selected labels, such as ["Cheating", "Fairness"].
                 If you provide a list, this is independent of the task.
                 Defaults to None, in which case all labels for all categories are selected.
+            merge_dict_cat(dict, optional): map new category to list of existing_categories.
+                Default is:
+                merge_dict = {
+                    "task1": ["KAT1-Moralisierendes Segment"],
+                    "task2": ["KAT2-Moralwerte", "KAT2-Subjektive Ausdrücke"],
+                    "task3": ["KAT3-Rolle", "KAT3-Gruppe", "KAT3-own/other"],
+                    "task4": ["KAT4-Kommunikative Funktion"],
+                    "task5": ["KAT5-Forderung explizit"],
+                }
+                Defaults to None.
+
             task (str): The task to train on. The options are
                 "task1": ["KAT1-Moralisierendes Segment"]
                 "task2": ["KAT2-Moralwerte", "KAT2-Subjektive Ausdrücke"]
@@ -62,7 +74,10 @@ class DataManager:
         self.task = task
         if not skip_read:
             doc_dicts = InputOutput.read_data(
-                self.data_dir, language_model=language_model
+                self.data_dir,
+                language_model=language_model,
+                merge_dict=merge_dict,
+                task=task,
             )
             self.doc_dict, self.train_dict, self.test_dict = doc_dicts
             # generate the data lists and data frame

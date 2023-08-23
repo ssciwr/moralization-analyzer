@@ -252,7 +252,7 @@ class InputOutput:
                     # This might be due to the fact that spacy tokenizes on whitespace and cassis on punctuation.
                     # This leads to a mismatch between the indices of the tokens,
                     # where spacy sees ".Ich" as a single token
-                    # cassis on the other hand returns only the indeces for I and h as start and end point,
+                    # cassis on the other hand returns only the indices for I and h as start and end point,
                     # thus spacy complains that the start ID is not actually the beginning of the token.
                     # We could fix this by trying reduce the index by 1 and check if the token is not complete.
                     # However this would give us some tokens that are not actually Words and
@@ -309,14 +309,23 @@ class InputOutput:
         return doc_dict, train_dict, test_dict
 
     @staticmethod
-    def _merge_span_categories(doc_dict, merge_dict=None):
+    def _merge_span_categories(doc_dict, merge_dict=None, task=None):
         """Take the new_dict_cat dict and add its key as a main_cat to data_dict.
         The values are the total sub_dict_entries of the given list.
 
         Args:
-          doc_dict(dict: doc): The provided doc dict.
-          new_dict_cat(dict): map new category to list of existing_categories.
-
+            doc_dict(dict: doc): The provided doc dict.
+            merge_dict_cat(dict, optional): map new category to list of existing_categories.
+                merge_dict = {
+                    "task1": ["KAT1-Moralisierendes Segment"],
+                    "task2": ["KAT2-Moralwerte", "KAT2-Subjektive Ausdrücke"],
+                    "task3": ["KAT3-Rolle", "KAT3-Gruppe", "KAT3-own/other"],
+                    "task4": ["KAT4-Kommunikative Funktion"],
+                    "task5": ["KAT5-Forderung explizit"],
+                }
+            Defaults to None.
+            task (str, optional): The task from which the labels are selected.
+            By default task 1 is selected. Default is None.
         Return:
             dict: The data_dict with new span categories.
         """
@@ -328,34 +337,46 @@ class InputOutput:
                 "task4": ["KAT4-Kommunikative Funktion"],
                 "task5": ["KAT5-Forderung explizit"],
             }
+        if task is None:
+            task = "task1"
+
+        if task not in merge_dict.keys():
+            raise KeyError(
+                f"{task} not in merge_dict. Please provide a valid task or include the given task in the merge dict."
+            )
+
+        # now we only need to merge categories for the given task.
+        merge_categories = merge_dict[task]
 
         for file in doc_dict.keys():
-            # initilize new span_groups
-            for cat in merge_dict.keys():
-                doc_dict[file].spans[cat] = []
+            # initilize new span_group
+            doc_dict[file].spans[task] = []
 
-            for new_main_cat, new_cat_entries in merge_dict.items():
-                if new_cat_entries == "all":
-                    for main_cat in list(doc_dict[file].spans.keys()):
-                        doc_dict[file].spans[new_main_cat].extend(
-                            doc_dict[file].spans[main_cat]
-                        )
-                else:
-                    for old_main_cat in new_cat_entries:
-                        doc_dict[file].spans[new_main_cat].extend(
-                            doc_dict[file].spans[old_main_cat]
-                        )
+            for old_main_cat in merge_categories:
+                try:
+                    doc_dict[file].spans[task].extend(
+                        doc_dict[file].spans[old_main_cat]
+                    )
+
+                except KeyError:
+                    raise KeyError(
+                        f"{old_main_cat} not found in doc_dict[file].spans which"
+                        + " has {list(doc_dict[file].spans.keys())} as keys."
+                    )
         return doc_dict
 
     @staticmethod
-    def read_data(dir: str, language_model: str = "de_core_news_sm"):
+    def read_data(
+        dir: str, language_model: str = "de_core_news_sm", merge_dict=None, task=None
+    ):
         """Convenience method to handle input reading in one go.
 
         Args:
-          dir (str): Path to the data directory.
-          language_model (str, optional): Language model of the corpus that is being read.
-            Defaults to "de_core_news_sm" (German).
-
+            dir (str): Path to the data directory.
+            language_model (str, optional): Language model of the corpus that is being read.
+                Defaults to "de_core_news_sm" (German).
+            merge_dict_cat(dict, optional): map new category to list of existing_categories.
+            task (str, optional): which task to use in the merge. Defaults to None.
         Returns:
             doc_dict (dict): Dictionary of with all the available data in one.
             train_dict (dict): Dictionary with only the spans that are used for training.
@@ -369,6 +390,8 @@ class InputOutput:
         )
 
         for dict_ in [doc_dict, train_dict, test_dict]:
-            dict_ = InputOutput._merge_span_categories(dict_)
+            dict_ = InputOutput._merge_span_categories(
+                dict_, merge_dict=merge_dict, task=task
+            )
 
         return doc_dict, train_dict, test_dict
