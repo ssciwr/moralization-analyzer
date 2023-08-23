@@ -135,7 +135,14 @@ class InteractiveAnalyzerResults:
                     ],
                     style={"width": "40%"},
                 ),
-                dcc.Graph(id="graph_output"),
+                dcc.Graph(
+                    id="graph_output",
+                    config={
+                        "toImageButtonOptions": {
+                            "format": "svg",  # one of png, svg, jpeg, webp
+                        }
+                    },
+                ),
             ]
         )
 
@@ -276,7 +283,14 @@ class InteractiveCategoryPlot:
                 # Graph output for displaying the heatmap
                 html.Div(
                     children=[
-                        dcc.Graph(id="graph_output"),
+                        dcc.Graph(
+                            id="graph_output",
+                            config={
+                                "toImageButtonOptions": {
+                                    "format": "svg",  # one of png, svg, jpeg, webp
+                                }
+                            },
+                        ),
                     ],
                     id="div_output",
                     style={"width": "100%"},
