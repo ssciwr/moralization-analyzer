@@ -248,9 +248,16 @@ class InputOutput:
 
                     # char_span returns None when the given indices do not match a token begin and end.
                     # e.G ".Ich" instead of ". Ich"
-                    # TODO @Gwydion can you explain again which ones are relevant here
-                    # in the above example, there was a space missing after the "."?
-                    # Was it like this in the original data?
+                    # The problem stems from a mismatch between spacy token beginnings and cassis token beginning.
+                    # This might be due to the fact that spacy tokenizes on whitespace and cassis on punctuation.
+                    # This leads to a mismatch between the indices of the tokens,
+                    # where spacy sees ".Ich" as a single token
+                    # cassis on the other hand returns only the indeces for I and h as start and end point,
+                    # thus spacy complains that the start ID is not actually the beginning of the token.
+                    # We could fix this by trying reduce the index by 1 and check if the token is not complete.
+                    # However this would give us some tokens that are not actually Words and
+                    # thus are not useful for training.
+
                     # print a warning that this span cannot be used
                     elif char_span is None:
                         InputOutput._warn_empty_span(doc, span, cat_old)
