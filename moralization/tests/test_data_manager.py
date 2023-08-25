@@ -63,16 +63,16 @@ def test_return_analyzer_result(data_dir):
     dm.return_analyzer_result()
 
     test1 = dm.return_analyzer_result("frequency")
-    assert test1.shape == (24, 11)
+    assert test1.shape == (24, 12)
 
     test2 = dm.return_analyzer_result("length")
-    assert test2.shape == (24, 11)
+    assert test2.shape == (24, 12)
 
     test3 = dm.return_analyzer_result("span_distinctiveness")
-    assert test3.shape == (24, 11)
+    assert test3.shape == (24, 12)
 
     test4 = dm.return_analyzer_result("boundary_distinctiveness")
-    assert test4.shape == (24, 11)
+    assert test4.shape == (24, 12)
 
     assert not np.array_equal(test1.values, test2.values)
     assert not np.array_equal(test2.values, test3.values)
