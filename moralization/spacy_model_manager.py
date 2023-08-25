@@ -146,6 +146,8 @@ class SpacyModelManager(ModelManager):
             base_config_file (str or Path, optional): If supplied this base config will be used to create a new model
             overwrite_existing_files (bool): If true any existing files in `model_path` are removed
         """
+        # TODO we need to check that task is the same as in the data
+        # also task and file names for the original data should be added to data metadata information
         super().__init__(model_path)
         self._best_model_path = self.model_path / "model-best"
         self._last_model_path = self.model_path / "model-last"
