@@ -5,6 +5,9 @@ import copy
 class TransformersDataHandler:
     """Helper class to organize and prepare data for transformer models."""
 
+    # here we work with instantiation and not static methods because there are inter-
+    # dependencies btw the messages and we would need to pass data explicitly otherwise
+
     def get_data_lists(self, doc_dict: Dict) -> None:
         """Convert the data from doc object to lists. Required for transformers training.
 

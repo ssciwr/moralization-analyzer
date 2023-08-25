@@ -378,7 +378,6 @@ class DataManager:
     def _docdict_to_lists(self):
         """Convert the dictionary of doc objects to nested lists."""
 
-        # TODO for now work with instantiation
         tdh = TransformersDataHandler()
         tdh.get_data_lists(self.doc_dict)
         tdh.generate_labels(self.doc_dict, self.selected_labels, self.task)
