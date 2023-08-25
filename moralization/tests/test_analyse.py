@@ -62,17 +62,6 @@ def test_summarize_span_occurrences(doc_dict):
         0.0,
         1.0,
         1.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
     ]
     assert list(df.iloc[0].values) == ref_values
     column_names = list(df.columns)
@@ -91,19 +80,8 @@ def test_summarize_span_occurrences(doc_dict):
         ("KAT4-Kommunikative Funktion", "Darstellung"),
         ("KAT4-Kommunikative Funktion", "Appell"),
         ("KAT5-Forderung explizit", "explizit"),
+        ("KAT5-Forderung implizit", "implizit"),
         ("task1", "Moralisierung explizit"),
-        ("task2", "Care"),
-        ("task2", "Fairness"),
-        ("task2", "Oppression"),
-        ("task2", "Cheating"),
-        ("task3", "Forderer:in"),
-        ("task3", "Benefizient:in"),
-        ("task3", "Institution"),
-        ("task3", "Individuum"),
-        ("task3", "soziale Gruppe"),
-        ("task4", "Darstellung"),
-        ("task4", "Appell"),
-        ("task5", "explizit"),
     ]
     assert sorted(column_names) == sorted(real_names)
 

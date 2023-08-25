@@ -92,7 +92,7 @@ def test_spacy_model_manager_test(spacy_model_path, monkeypatch):
 
     # monkey patch moralization.plot.visualize_data to just store doc_dict argument
     monkeypatch.setattr(
-        "moralization.spacy_model_manager.visualize_data", store_doc_dict
+        "moralization.spacy_model_manager.return_displacy_visualization", store_doc_dict
     )
 
     model = SpacyModelManager(spacy_model_path)

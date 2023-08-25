@@ -75,8 +75,10 @@ class DataManager:
         self.task = task
         if not skip_read:
             self.doc_dict = InputOutput.read_data(
-                self.data_dir, language_model=language_model, merge_dict=merge_dict,
-                task=task,
+                self.data_dir,
+                language_model=language_model,
+                merge_dict=merge_dict,
+                task=self.task,
             )
             # generate the data lists and data frame
             self._docdict_to_lists()

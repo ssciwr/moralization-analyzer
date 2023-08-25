@@ -382,5 +382,5 @@ class InputOutput:
         doc_dict = InputOutput.files_to_docs(
             data_files, ts, language_model=language_model
         )
-        doc_dict = InputOutput._merge_span_categories(doc_dict)
+        doc_dict = InputOutput._merge_span_categories(doc_dict, merge_dict, task)
         return doc_dict

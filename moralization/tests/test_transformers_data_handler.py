@@ -10,6 +10,12 @@ def doc_dict(data_dir):
 
 
 @pytest.fixture
+def doc_dict_task2(data_dir):
+    data_manager = DataManager(data_dir, task="task2")
+    return data_manager.doc_dict
+
+
+@pytest.fixture
 def gen_instance():
     return TransformersDataHandler()
 
@@ -36,7 +42,7 @@ def test_generate_labels(doc_dict, gen_instance):
     assert len(gen_instance.labels) == 1346
 
 
-def test_generate_spans(doc_dict, gen_instance):
+def test_generate_spans(doc_dict, doc_dict_task2, gen_instance):
     gen_instance.get_data_lists(doc_dict=doc_dict)
     gen_instance.generate_labels(doc_dict=doc_dict)
     gen_instance.generate_spans(doc_dict=doc_dict)
@@ -46,9 +52,9 @@ def test_generate_spans(doc_dict, gen_instance):
     assert gen_instance.span_begin[4] == [1]
     assert gen_instance.span_end[4] == [22]
     assert gen_instance.span_label[4] == ["Moralisierung explizit"]
-    gen_instance.get_data_lists(doc_dict=doc_dict)
-    gen_instance.generate_labels(doc_dict=doc_dict, task="task2")
-    gen_instance.generate_spans(doc_dict=doc_dict, task="task2")
+    gen_instance.get_data_lists(doc_dict=doc_dict_task2)
+    gen_instance.generate_labels(doc_dict=doc_dict_task2, task="task2")
+    gen_instance.generate_spans(doc_dict=doc_dict_task2, task="task2")
     assert gen_instance.span_begin[3] == [0]
     assert gen_instance.span_end[3] == [0]
     assert gen_instance.span_label[3] == [""]

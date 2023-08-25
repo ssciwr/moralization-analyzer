@@ -39,24 +39,9 @@ def test_report_occurrence_heatmap(doc_dict, monkeypatch):
         ("KAT4-Kommunikative Funktion", "Appell"),
         ("KAT4-Kommunikative Funktion", "Darstellung"),
         ("KAT5-Forderung explizit", "explizit"),
+        ("KAT5-Forderung implizit", "implizit"),
         ("task1", "Moralisierung explizit"),
         ("task1", "Moralisierung interpretativ"),
-        ("task2", "Care"),
-        ("task2", "Cheating"),
-        ("task2", "Fairness"),
-        ("task2", "Harm"),
-        ("task2", "Liberty"),
-        ("task2", "Oppression"),
-        ("task3", "Adresassat:in"),
-        ("task3", "Benefizient:in"),
-        ("task3", "Forderer:in"),
-        ("task3", "Individuum"),
-        ("task3", "Institution"),
-        ("task3", "Kein Bezug"),
-        ("task3", "soziale Gruppe"),
-        ("task4", "Appell"),
-        ("task4", "Darstellung"),
-        ("task5", "explizit"),
     ]
 
     assert sorted(list(corr_df.columns)) == sorted(all_columns)
@@ -80,8 +65,6 @@ def test_report_occurrence_heatmap(doc_dict, monkeypatch):
     filtered_columns_sub = [
         ("KAT3-Gruppe", "Individuum"),
         ("KAT3-Gruppe", "Institution"),
-        ("task3", "Individuum"),
-        ("task3", "Institution"),
     ]
     corr_df = plot.report_occurrence_heatmap(
         df, _filter=["Individuum", "Institution"], _type="corr"
@@ -117,7 +100,7 @@ def test_InteractiveAnalyzerResults(data_dir):
     test_interactive_analyzer = plot.InteractiveAnalyzerResults(
         dm.return_analyzer_result("all"), dm.return_categories()
     )
-
+    # TODO why not implicit?
     span_key_list = sorted(
         [
             "KAT1-Moralisierendes Segment",
@@ -131,10 +114,6 @@ def test_InteractiveAnalyzerResults(data_dir):
             "paragraphs",
             "sc",
             "task1",
-            "task2",
-            "task3",
-            "task4",
-            "task5",
         ]
     )
 
@@ -183,11 +162,8 @@ def test_InteractiveCategoryPlot(data_dir):
             "KAT3-own/other",
             "KAT4-Kommunikative Funktion",
             "KAT5-Forderung explizit",
+            "KAT5-Forderung implizit",
             "task1",
-            "task2",
-            "task3",
-            "task4",
-            "task5",
         ]
     )
     file_names = list(dm.doc_dict.keys())
@@ -260,8 +236,8 @@ def test_InteractiveVisualization(data_dir):
 
 def test_spacy_data_handler_visualize_data(doc_dict):
     with pytest.raises(EnvironmentError):
-        plot.visualize_data(doc_dict, spans_key=["task1", "sc"])
+        plot.return_displacy_visualization(doc_dict, spans_key=["task1", "sc"])
     with pytest.raises(EnvironmentError):
-        plot.visualize_data(doc_dict)
+        plot.return_displacy_visualization(doc_dict)
     with pytest.raises(EnvironmentError):
-        plot.visualize_data(doc_dict, spans_key="task2")
+        plot.return_displacy_visualization(doc_dict, spans_key="task2")

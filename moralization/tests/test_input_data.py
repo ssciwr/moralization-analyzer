@@ -59,11 +59,8 @@ def test_span_merge(doc_dict):
         "KAT3-own/other",
         "KAT4-Kommunikative Funktion",
         "KAT5-Forderung explizit",
+        "KAT5-Forderung implizit",
         "task1",
-        "task2",
-        "task3",
-        "task4",
-        "task5",
     ]
 
     # default merge dict
@@ -111,11 +108,8 @@ def test_read_data(data_dir):
         "KAT3-own/other",
         "KAT4-Kommunikative Funktion",
         "KAT5-Forderung explizit",
+        "KAT5-Forderung implizit",
         "task1",
-        "task2",
-        "task3",
-        "task4",
-        "task5",
     }
     # assert categories
     assert set(doc_dict[correctlist[0]].spans.keys()) == spans_set
@@ -131,12 +125,3 @@ def test_read_data(data_dir):
     assert doc_dict[correctlist[0]].spans["paragraphs"][0].text.strip() == test_string
     assert doc_dict[correctlist[0]].spans["paragraphs"][0].start == 1
     assert doc_dict[correctlist[0]].spans["paragraphs"][0].end == 45
-
-    # assert length of train and test data in relation to all data
-    # for train_file, test_file, main_file in zip(
-    # train_dict.values(), test_dict.values(), doc_dict.values()
-    # ):
-    # assert len(main_file.spans["sc"]) == len(test_file.spans["sc"]) + len(
-    # train_file.spans["sc"]
-    # )
-    # assert len(test_file.spans["sc"]) * 4 <= len(train_file.spans["sc"])
