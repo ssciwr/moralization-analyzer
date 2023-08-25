@@ -36,7 +36,10 @@ class TransformersDataHandler:
             self.label_list.extend(label_list)
 
     def generate_labels(
-        self, doc_dict: Dict, selected_labels: Union[List, str] = None, task: str = None
+        self,
+        doc_dict: Dict,
+        selected_labels: Union[List, str] = None,
+        task: str = "task1",
     ) -> None:
         """Generate the labels from the annotated tokens in one long list. Required for transformers training.
 
@@ -55,8 +58,6 @@ class TransformersDataHandler:
         if not selected_labels:
             # if not set, we select all
             selected_labels = "all"
-        if not task:
-            task = "task1"
         # create a list as long as tokens
         self.labels = []
         for example_name in doc_dict.keys():

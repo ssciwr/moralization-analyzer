@@ -184,13 +184,7 @@ class InputOutput:
         span_list = cas.select(span_type.name)
         # now assign the spans and labels in the doc object from the cas object
         doc = InputOutput._assign_span_labels(doc, span_list, map_expressions)
-
-        # TODO now split into test and train set - not sure if we can do it at this stage
-        # as it is a doc object for each file source that would need to be split
-        # alternatively ???
-        doc_train, doc_test = InputOutput._split_train_test(doc)
-
-        return doc, doc_train, doc_test
+        return doc
 
     @staticmethod
     def _get_paragraphs(doc, paragraph_list):
@@ -295,26 +289,20 @@ class InputOutput:
 
         """
         doc_dict = {}
-        train_dict = {}
-        test_dict = {}
 
         for file in data_files:
             logging.info(f"Reading ./{file}")
             try:
-                cas, file_type = InputOutput.read_cas_file(file, ts)
-                doc, doc_train, doc_test = InputOutput.cas_to_doc(
-                    cas, ts, language_model
-                )
+                cas, _ = InputOutput.read_cas_file(file, ts)
+                doc = InputOutput.cas_to_doc(cas, ts, language_model)
                 doc_dict[file.stem] = doc
-                train_dict[file.stem] = doc_train
-                test_dict[file.stem] = doc_test
 
             except XMLSyntaxError as e:
                 logging.warning(
                     f"WARNING: skipping file '{file}' due to XMLSyntaxError: {e}"
                 )
 
-        return doc_dict, train_dict, test_dict
+        return doc_dict
 
     @staticmethod
     def _merge_span_categories(doc_dict, merge_dict=None, task=None):
@@ -387,19 +375,12 @@ class InputOutput:
             task (str, optional): which task to use in the merge. Defaults to None.
         Returns:
             doc_dict (dict): Dictionary of with all the available data in one.
-            train_dict (dict): Dictionary with only the spans that are used for training.
-            test_dict (dict): Dictionary with only the spans that are used for testing.
         """
         data_files, ts_file = InputOutput.get_multiple_input(dir)
         # read in the ts
         ts = InputOutput.read_typesystem(ts_file)
-        doc_dict, train_dict, test_dict = InputOutput.files_to_docs(
+        doc_dict = InputOutput.files_to_docs(
             data_files, ts, language_model=language_model
         )
-
-        for dict_ in [doc_dict, train_dict, test_dict]:
-            dict_ = InputOutput._merge_span_categories(
-                dict_, merge_dict=merge_dict, task=task
-            )
-
-        return doc_dict, train_dict, test_dict
+        doc_dict = InputOutput._merge_span_categories(doc_dict)
+        return doc_dict

@@ -18,6 +18,7 @@ import datasets
 import numpy as np
 from typing import Dict, Optional, Union
 import huggingface_hub
+from pathlib import Path
 
 
 class DataManager:
@@ -28,7 +29,7 @@ class DataManager:
         skip_read: bool = False,
         selected_labels: Union[list, str] = None,
         merge_dict=None,
-        task: str = None,
+        task: str = "task1",
     ):
         """Initialize the DataManager that handles the data transformations.
 
@@ -60,7 +61,7 @@ class DataManager:
                 "task3": ["KAT3-Rolle", "KAT3-Gruppe", "KAT3-own/other"]
                 "task4": ["KAT4-Kommunikative Funktion"]
                 "task5": ["KAT5-Forderung explizit"]
-                or None. Defaults to None.
+                Defaults to "task1".
 
         Returns:
             A DataManager object.
@@ -73,13 +74,10 @@ class DataManager:
         self.selected_labels = selected_labels
         self.task = task
         if not skip_read:
-            doc_dicts = InputOutput.read_data(
-                self.data_dir,
-                language_model=language_model,
-                merge_dict=merge_dict,
+            self.doc_dict = InputOutput.read_data(
+                self.data_dir, language_model=language_model, merge_dict=merge_dict,
                 task=task,
             )
-            self.doc_dict, self.train_dict, self.test_dict = doc_dicts
             # generate the data lists and data frame
             self._docdict_to_lists()
             self._lists_to_df()
@@ -208,24 +206,12 @@ class DataManager:
         interactive_visualization = InteractiveVisualization(self)
         return interactive_visualization.run_app(port=port)
 
-    def visualize_data(self, _type: str, spans_key="sc"):
+    def visualize_data(self, spans_key="sc"):
         if not hasattr(self, "doc_dict"):
             raise ValueError(
                 "The data analysis can only be carried out for xmi data, not datasets pulled from the Hugging Face Hub."
             )
-        # type can only be all, train or test
-        if _type not in ["all", "train", "test"]:
-            raise KeyError(
-                f"_type must be either 'all', 'train' or `test` but is `{_type}`."
-            )
-
-        return_dict = {
-            "all": self.doc_dict,
-            "train": self.train_dict,
-            "test": self.test_dict,
-        }
-
-        return return_displacy_visualization(return_dict[_type], spans_key=spans_key)
+        return return_displacy_visualization(self.doc_dict, spans_key=spans_key)
 
     def export_data_DocBin(
         self, output_dir=None, overwrite=False, check_data_integrity=True
@@ -252,12 +238,13 @@ class DataManager:
                 )
         # generate the DocBin files from the train and test split of the dataset object,
         # and optionally from validate if present
-
-        SpacyDataHandler.docbin_from_dataset(self.train_test_set)
-        self.spacy_docbin_files = SpacyDataHandler().export_training_testing_data(
-            self.train_dict, self.test_dict, output_dir, overwrite=overwrite
+        train_path = SpacyDataHandler.docbin_from_dataset(
+            self.train_test_set, self.task, "train", output_dir, overwrite=overwrite
         )
-        return self.spacy_docbin_files
+        test_path = SpacyDataHandler.docbin_from_dataset(
+            self.train_test_set, self.task, "test", output_dir, overwrite=overwrite
+        )
+        self.spacy_docbin_files = [train_path, test_path]
 
     def _check_relativ_frequency(
         self,
@@ -381,7 +368,7 @@ class DataManager:
         Returns:
             list[Path]: A list of the train and test files path.
         """
-        self.spacy_docbin_files = SpacyDataHandler().import_training_testing_data(
+        self.spacy_docbin_files = SpacyDataHandler.import_training_testing_data(
             input_dir, train_file, test_file
         )
         return self.spacy_docbin_files
@@ -616,4 +603,8 @@ if __name__ == "__main__":
         # "/home/iulusoy/projects/moralization-project/moralization/data/All_Data/XMI_11"
         task="task2",
     )
-    dm.export_data_DocBin(check_data_integrity=False)
+    dm.export_data_DocBin(
+        output_dir=Path("/home/iulusoy/projects/moralization-project/moralization"),
+        overwrite=True,
+        check_data_integrity=False,
+    )

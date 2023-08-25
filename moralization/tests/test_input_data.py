@@ -47,7 +47,7 @@ def test_get_multiple_input(data_dir):
     assert ts_file.parts[-1] == "TypeSystem.xml"
 
 
-def test_span_merge(doc_dicts):
+def test_span_merge(doc_dict):
     all_categories = [
         "sc",
         "paragraphs",
@@ -67,11 +67,10 @@ def test_span_merge(doc_dicts):
     ]
 
     # default merge dict
-    for doc_dict in doc_dicts:
-        merged_dict = InputOutput._merge_span_categories(doc_dict)
-        for doc in merged_dict.values():
-            generated_categories = list(doc.spans.keys())
-            assert all_categories == generated_categories
+    merged_dict = InputOutput._merge_span_categories(doc_dict)
+    for doc in merged_dict.values():
+        generated_categories = list(doc.spans.keys())
+        assert all_categories == generated_categories
 
     # custom merge dict
     merge_dict = {
@@ -83,15 +82,14 @@ def test_span_merge(doc_dicts):
         "task5": ["KAT5-Forderung explizit"],
     }
 
-    for doc_dict in doc_dicts:
-        merged_dict = InputOutput._merge_span_categories(doc_dict, merge_dict)
-        for doc in merged_dict.values():
-            generated_categories = list(doc.spans.keys())
-            assert all_categories == generated_categories
+    merged_dict = InputOutput._merge_span_categories(doc_dict, merge_dict)
+    for doc in merged_dict.values():
+        generated_categories = list(doc.spans.keys())
+        assert all_categories == generated_categories
 
 
 def test_read_data(data_dir):
-    doc_dict, train_dict, test_dict = InputOutput.read_data(data_dir)
+    doc_dict = InputOutput.read_data(data_dir)
     testFilenameList = sorted(doc_dict.keys())
     correctlist = sorted(
         [

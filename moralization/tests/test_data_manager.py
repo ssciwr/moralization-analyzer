@@ -130,33 +130,25 @@ def test_interactive_data_analysis(data_dir):
 def test_visualize_data(data_dir):
     dm = DataManager(data_dir)
     with pytest.raises(EnvironmentError):
-        dm.visualize_data(_type="all")
+        dm.visualize_data()
 
     with pytest.raises(EnvironmentError):
-        dm.visualize_data(_type="test")
+        dm.visualize_data(spans_key="task1")
 
     with pytest.raises(EnvironmentError):
-        dm.visualize_data(_type="train")
-
-    with pytest.raises(EnvironmentError):
-        dm.visualize_data(_type="all", spans_key="task1")
-
-    with pytest.raises(EnvironmentError):
-        dm.visualize_data(_type="all", spans_key=["task1", "task2"])
-
-    with pytest.raises(KeyError):
-        dm.visualize_data(_type="blub")
+        dm.visualize_data(spans_key=["task1", "task2"])
 
     # check that with pulled df from Hugging Face this will not work
     dm = DataManager(data_dir, skip_read=True)
     with pytest.raises(ValueError):
-        dm.visualize_data(_type="all")
+        dm.visualize_data()
 
 
 def test_export_data_DocBin(data_dir):
     dm = DataManager(data_dir)
     tmp_dir = Path(mkdtemp())
-    test_files = dm.export_data_DocBin(tmp_dir, check_data_integrity=False)
+    dm.export_data_DocBin(tmp_dir, check_data_integrity=False)
+    test_files = dm.spacy_docbin_files
     assert test_files[0].stem == "train"
     assert test_files[1].stem == "dev"
     assert dm.spacy_docbin_files[0].stem == "train"
@@ -181,9 +173,8 @@ def test_import_data_DocBin(data_dir):
     dm = DataManager(data_dir)
     tmp_dir = Path(mkdtemp())
     dm.export_data_DocBin(tmp_dir, check_data_integrity=False)
-
     dm2 = DataManager(data_dir)
-    dm2.import_data_DocBin((tmp_dir))
+    dm2.import_data_DocBin(tmp_dir)
 
     assert dm.spacy_docbin_files == dm2.spacy_docbin_files
 

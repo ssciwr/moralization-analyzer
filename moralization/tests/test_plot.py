@@ -5,8 +5,8 @@ import seaborn as sns
 from moralization.data_manager import DataManager
 
 
-def test_report_occurrence_heatmap(doc_dicts, monkeypatch):
-    df = _loop_over_files(doc_dicts[0])
+def test_report_occurrence_heatmap(doc_dict, monkeypatch):
+    df = _loop_over_files(doc_dict)
 
     # test corr without filter
     corr_df = plot.report_occurrence_heatmap(df, _type="corr")
@@ -248,44 +248,20 @@ def test_InteractiveCategoryPlot(data_dir):
 
 
 def test_InteractiveVisualization(data_dir):
-    span_key_list = sorted(
-        [
-            "KAT1-Moralisierendes Segment",
-            "KAT2-Moralwerte",
-            "KAT2-Subjektive Ausdrücke",
-            "KAT3-Gruppe",
-            "KAT3-Rolle",
-            "KAT3-own/other",
-            "KAT4-Kommunikative Funktion",
-            "KAT5-Forderung explizit",
-            "paragraphs",
-            "sc",
-            "task1",
-            "task2",
-            "task3",
-            "task4",
-            "task5",
-        ]
-    )
     dm = DataManager(data_dir)
     test_interactive_vis = plot.InteractiveVisualization(dm)
-
     with pytest.raises(EnvironmentError):
         test_interactive_vis.run_app()
-
-    for mode in ["all", "test", "train"]:
-        assert test_interactive_vis.change_mode(mode) == (span_key_list, "sc")
-        with pytest.raises(EnvironmentError):
-            test_interactive_vis.change_span_cat(span_key_list[0], mode)
-
-        with pytest.raises(EnvironmentError):
-            test_interactive_vis.change_span_cat("", mode)
-
-
-def test_spacy_data_handler_visualize_data(doc_dicts):
     with pytest.raises(EnvironmentError):
-        plot.visualize_data(doc_dicts[0], spans_key=["task1", "sc"])
+        test_interactive_vis.change_span_cat("KAT1-Moralisierendes Segment")
     with pytest.raises(EnvironmentError):
-        plot.visualize_data(doc_dicts[0])
+        test_interactive_vis.change_span_cat("")
+
+
+def test_spacy_data_handler_visualize_data(doc_dict):
     with pytest.raises(EnvironmentError):
-        plot.visualize_data(doc_dicts[0], spans_key="task2")
+        plot.visualize_data(doc_dict, spans_key=["task1", "sc"])
+    with pytest.raises(EnvironmentError):
+        plot.visualize_data(doc_dict)
+    with pytest.raises(EnvironmentError):
+        plot.visualize_data(doc_dict, spans_key="task2")
