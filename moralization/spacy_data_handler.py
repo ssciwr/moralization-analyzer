@@ -8,6 +8,7 @@ import spacy
 class SpacyDataHandler:
     """Helper class to organize and prepare spacy train and test data."""
 
+    @staticmethod
     def docbin_from_dataset(
         data_set: datasets.Dataset,
         task: str,
@@ -107,11 +108,13 @@ class SpacyDataHandler:
         )
         return data_path
 
+    @staticmethod
     def _check_docs(doc: Doc, task):
         # go through the doc and print all spans and labels
         for span in doc.spans[task]:
             print("""Span is: "{}", with label: "{}".""".format(span, span.label_))
 
+    @staticmethod
     def _get_character_ids(merged_tokens, text, span_begin, span_end):
         # figure out which list indices match the span tokens
         # first put the token substring together
@@ -138,6 +141,7 @@ class SpacyDataHandler:
         char_span_end = len(substring) + char_span_begin
         return char_span_begin, char_span_end, substring
 
+    @staticmethod
     def export_training_testing_data(
         doclist: list, filename: str, output_dir, overwrite
     ) -> Path:
@@ -182,6 +186,7 @@ class SpacyDataHandler:
         db_out.to_disk(out_filename)
         return out_filename
 
+    @staticmethod
     def _check_files(input_dir=None, train_file=None, test_file=None):
         if input_dir is None and test_file is None and train_file is None:
             raise FileNotFoundError(
@@ -233,6 +238,7 @@ class SpacyDataHandler:
 
         return db_train, db_test
 
+    @staticmethod
     def import_training_testing_data(input_dir=None, train_file=None, test_file=None):
         db_train, db_test = SpacyDataHandler._check_files(
             input_dir, train_file, test_file
