@@ -228,7 +228,7 @@ class InputOutput:
         for span in span_list:
             for cat_old, cat_new in map_expressions.items():
                 # not all of these categories have values in every span.
-                if span[cat_old] and span[cat_old] not in labels_to_delete:
+                if span[cat_old] not in labels_to_delete:
                     # we need to attach each span category on its own, as well as all together in "sc"
 
                     if cat_old == "KAT5Ausformulierung":

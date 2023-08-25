@@ -53,4 +53,4 @@ def spacy_model_path(data_dir, config_file, tmp_path_factory) -> pathlib.Path:
 
 @pytest.fixture
 def doc_dict(data_dir):
-    return input_data.InputOutput.read_data(str(data_dir))
+    return input_data.InputOutput.read_data(data_dir.as_posix())

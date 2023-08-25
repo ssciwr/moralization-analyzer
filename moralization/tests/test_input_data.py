@@ -48,18 +48,23 @@ def test_get_multiple_input(data_dir):
     assert ts_file.parts[-1] == "TypeSystem.xml"
 
 
-def test_cas_to_doc(data_dir):
-    data_files, ts_file = InputOutput.get_multiple_input(data_dir)
-    # read in the ts
-    data_files = sorted(data_files)
+def test_cas_to_doc(ts_file, data_file):
     ts = InputOutput.read_typesystem(ts_file)
-    cas, _ = InputOutput.read_cas_file(data_files[0], ts)
+    cas, _ = InputOutput.read_cas_file(data_file, ts)
     doc = InputOutput.cas_to_doc(cas, ts)
-    assert len(doc) == 500
+    assert len(doc) == 846
     assert isinstance(doc, Doc)
 
 
-def test_span_merge(doc_dict):
+def test_assign_span_labels():
+    pass
+
+
+def test_files_to_docs():
+    pass
+
+
+def test_merge_span_categories(doc_dict):
     all_categories = [
         "sc",
         "paragraphs",
