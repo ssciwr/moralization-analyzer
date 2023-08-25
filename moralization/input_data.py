@@ -267,13 +267,6 @@ class InputOutput:
         return doc
 
     @staticmethod
-    def _split_train_test(doc):
-        # create test and train set
-        doc_train = doc
-        doc_test = doc
-        return doc_train, doc_test
-
-    @staticmethod
     def files_to_docs(
         data_files: List or str, ts: object, language_model: str = "de_core_news_sm"
     ):

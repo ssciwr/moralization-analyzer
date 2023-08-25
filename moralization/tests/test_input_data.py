@@ -1,5 +1,6 @@
 from moralization.input_data import InputOutput, spacy_load_model
 import pytest
+from spacy.tokens import Doc
 
 
 def test_spacy_load_model():
@@ -45,6 +46,17 @@ def test_get_multiple_input(data_dir):
     ]
     assert set(data_files) == set(test_files)
     assert ts_file.parts[-1] == "TypeSystem.xml"
+
+
+def test_cas_to_doc(data_dir):
+    data_files, ts_file = InputOutput.get_multiple_input(data_dir)
+    # read in the ts
+    data_files = sorted(data_files)
+    ts = InputOutput.read_typesystem(ts_file)
+    cas, _ = InputOutput.read_cas_file(data_files[0], ts)
+    doc = InputOutput.cas_to_doc(cas, ts)
+    assert len(doc) == 500
+    assert isinstance(doc, Doc)
 
 
 def test_span_merge(doc_dict):
