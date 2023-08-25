@@ -52,7 +52,7 @@ def test_spacy_model_manager_train_new_model_task(tmp_path, data_dir):
     # model is not yet trained
     assert not (model_path / "model-best").is_dir()
     assert not (model_path / "model-last").is_dir()
-    data_manager = DataManager(data_dir)
+    data_manager = DataManager(data_dir, task="task2")
     # train model
     model.train(
         data_manager, overrides={"training.max_epochs": 5}, check_data_integrity=False

@@ -17,7 +17,7 @@ def test_data_manager(data_dir):
     dm = DataManager(data_dir)
     assert dm.doc_dict
     assert not dm.selected_labels
-    assert not dm.task
+    assert dm.task == "task1"
     dm = DataManager(data_dir, selected_labels="all", task="task2")
     ref_sentence = [
         "HMP05",
