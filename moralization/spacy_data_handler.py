@@ -15,6 +15,7 @@ class SpacyDataHandler:
         data_split: str = "train",
         output_dir: Path = None,
         overwrite: bool = False,
+        column_names: list = None,
         check_docs: bool = False,
     ) -> DocBin:
         """Create a DocBin from a Dataset.
@@ -37,18 +38,36 @@ class SpacyDataHandler:
                 If None the working directory is used.
             overwrite (bool, optional): Whether or not the spacy files should be written
                 even if the file is already present.
+            column_names (str, optional): The column names of the feature, label, and span columns.
+                Defaults to None, in which case it will be set to
+                ["Sentences", "Labels", "Span_begin", "Span_end", "Span_label"].
             check_docs (bool, optional): Check all the spans inside the doc and print. Defaults to False.
         Returns:
             Path: The path to the spacy formatted data."""
         nlp = spacy.blank("en")
 
+        if not column_names:
+            column_names = [
+                "Sentences",
+                "Labels",
+                "Span_begin",
+                "Span_end",
+                "Span_label",
+            ]
         # first create a list from the dataset "Sentences" column for train and test
+        textlist = SpacyDataHandler._get_list_from_dataset_column(
+            data_set[data_split], column_names[0]
+        )
         # similarly for the spans
-        # TODO here we need to pass column names
-        textlist = data_set[data_split]["Sentences"]
-        span_begin_list = data_set[data_split]["Span_begin"]
-        span_end_list = data_set[data_split]["Span_end"]
-        span_label_list = data_set[data_split]["Span_label"]
+        span_begin_list = SpacyDataHandler._get_list_from_dataset_column(
+            data_set[data_split], column_names[2]
+        )
+        span_end_list = SpacyDataHandler._get_list_from_dataset_column(
+            data_set[data_split], column_names[3]
+        )
+        span_label_list = SpacyDataHandler._get_list_from_dataset_column(
+            data_set[data_split], column_names[4]
+        )
 
         # we create one doc container each for each sentence, then concatenate them together
         # could be faster to first concat the lists and adjust the span_begin and span_end
@@ -101,6 +120,20 @@ class SpacyDataHandler:
             doclist, outfilename, output_dir, overwrite
         )
         return data_path
+
+    @staticmethod
+    def _get_list_from_dataset_column(data, column):
+        # we try this, if fails likely the column names are incorrect
+        try:
+            mylist = data[column]
+        except ValueError:
+            print(
+                "Could not generate a list of the text input, likely the given column name {}\
+                does not match any of {} in the dataset.".format(
+                    column, data.column_names
+                )
+            )
+        return mylist
 
     @staticmethod
     def _check_same_string(new_string, old_string, complete_string):

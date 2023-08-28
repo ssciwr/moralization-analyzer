@@ -18,7 +18,6 @@ import datasets
 import numpy as np
 from typing import Dict, Optional, Union
 import huggingface_hub
-from pathlib import Path
 
 
 class DataManager:
@@ -241,10 +240,20 @@ class DataManager:
         # generate the DocBin files from the train and test split of the dataset object,
         # and optionally from validate if present
         train_path = SpacyDataHandler.docbin_from_dataset(
-            self.train_test_set, self.task, "train", output_dir, overwrite=overwrite
+            self.train_test_set,
+            self.task,
+            "train",
+            output_dir,
+            overwrite=overwrite,
+            column_names=self.column_names,
         )
         test_path = SpacyDataHandler.docbin_from_dataset(
-            self.train_test_set, self.task, "test", output_dir, overwrite=overwrite
+            self.train_test_set,
+            self.task,
+            "test",
+            output_dir,
+            overwrite=overwrite,
+            column_names=self.column_names,
         )
         self.spacy_docbin_files = [train_path, test_path]
 
@@ -595,17 +604,3 @@ class DataManager:
                 self.data_in_frame = pd.concat(
                     [self.data_in_frame, self.raw_data_set["validation"].to_pandas()]
                 )
-            self.train_test_set = self.raw_data_set
-
-
-if __name__ == "__main__":
-    dm = DataManager(
-        "/home/iulusoy/projects/moralization-project/moralization/data/Test_Data/XMI_11",
-        # "/home/iulusoy/projects/moralization-project/moralization/data/All_Data/XMI_11"
-        task="task2",
-    )
-    dm.export_data_DocBin(
-        output_dir=Path("/home/iulusoy/projects/moralization-project/moralization"),
-        overwrite=True,
-        check_data_integrity=False,
-    )
