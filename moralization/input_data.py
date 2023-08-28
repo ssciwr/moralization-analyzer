@@ -200,6 +200,61 @@ class InputOutput:
         return doc
 
     @staticmethod
+    def _assign_span_labels(doc, span_list, map_expressions):
+        # put the custom spans into the categories
+        # we also need to delete "Moralisierung" and "Keine Moralisierung"
+        labels_to_delete = ["Keine Moralisierung", "Moralisierung"]
+        for span in span_list:
+            for cat_old, cat_new in map_expressions.items():
+                # not all of these categories have values in every span.
+                if span[cat_old] and span[cat_old] not in labels_to_delete:
+                    # we need to attach each span category on its own, as well as all together in "sc"
+                    char_span = InputOutput._get_char_span(cat_old, doc, span)
+                    doc = InputOutput._append_char_span(
+                        doc, cat_new, char_span, span, cat_old
+                    )
+        return doc
+
+    @staticmethod
+    def _get_char_span(cat_old, doc, span):
+        # Kat5 implicit has a long string inside the label
+        # we need to delete this string and instead put "implicit"
+        if cat_old == "KAT5Ausformulierung":
+            char_span = doc.char_span(
+                span.begin,
+                span.end,
+                label="implizit",
+            )
+        else:
+            char_span = doc.char_span(
+                span.begin,
+                span.end,
+                label=span[cat_old],
+            )
+        return char_span
+
+    @staticmethod
+    def _append_char_span(doc, cat_new, char_span, span, cat_old):
+        if char_span:
+            doc.spans[cat_new].append(char_span)
+            doc.spans["sc"].append(char_span)
+        # char_span returns None when the given indices do not match a token begin and end.
+        # e.G ".Ich" instead of ". Ich"
+        # The problem stems from a mismatch between spacy token beginnings and cassis token beginning.
+        # This might be due to the fact that spacy tokenizes on whitespace and cassis on punctuation.
+        # This leads to a mismatch between the indices of the tokens,
+        # where spacy sees ".Ich" as a single token
+        # cassis on the other hand returns only the indices for I and h as start and end point,
+        # thus spacy complains that the start ID is not actually the beginning of the token.
+        # We could fix this by trying reduce the index by 1 and check if the token is not complete.
+        # However this would give us some tokens that are not actually Words and
+        # thus are not useful for training.
+        # print a warning that this span cannot be used
+        elif char_span is None:
+            InputOutput._warn_empty_span(doc, span, cat_old)
+        return doc
+
+    @staticmethod
     def _warn_empty_span(doc, span, cat_old):
         logging_warning = (
             f"The char span for {span.get_covered_text()} ({span}) returned None.\n"
@@ -221,54 +276,8 @@ class InputOutput:
         )
 
     @staticmethod
-    def _assign_span_labels(doc, span_list, map_expressions):
-        # put the custom spans into the categories
-        # we also need to delete "Moralisierung" and "Keine Moralisierung"
-        labels_to_delete = ["Keine Moralisierung", "Moralisierung"]
-        for span in span_list:
-            for cat_old, cat_new in map_expressions.items():
-                # not all of these categories have values in every span.
-                if span[cat_old] and span[cat_old] not in labels_to_delete:
-                    # we need to attach each span category on its own, as well as all together in "sc"
-
-                    if cat_old == "KAT5Ausformulierung":
-                        char_span = doc.char_span(
-                            span.begin,
-                            span.end,
-                            label="implizit",
-                        )
-
-                    else:
-                        char_span = doc.char_span(
-                            span.begin,
-                            span.end,
-                            label=span[cat_old],
-                        )
-                    if char_span:
-                        doc.spans[cat_new].append(char_span)
-                        doc.spans["sc"].append(char_span)
-
-                    # char_span returns None when the given indices do not match a token begin and end.
-                    # e.G ".Ich" instead of ". Ich"
-                    # The problem stems from a mismatch between spacy token beginnings and cassis token beginning.
-                    # This might be due to the fact that spacy tokenizes on whitespace and cassis on punctuation.
-                    # This leads to a mismatch between the indices of the tokens,
-                    # where spacy sees ".Ich" as a single token
-                    # cassis on the other hand returns only the indices for I and h as start and end point,
-                    # thus spacy complains that the start ID is not actually the beginning of the token.
-                    # We could fix this by trying reduce the index by 1 and check if the token is not complete.
-                    # However this would give us some tokens that are not actually Words and
-                    # thus are not useful for training.
-
-                    # print a warning that this span cannot be used
-                    elif char_span is None:
-                        InputOutput._warn_empty_span(doc, span, cat_old)
-
-        return doc
-
-    @staticmethod
     def files_to_docs(
-        data_files: List or str, ts: object, language_model: str = "de_core_news_sm"
+        data_files: List, ts: object, language_model: str = "de_core_news_sm"
     ):
         """
 

@@ -1,6 +1,25 @@
 from moralization.input_data import InputOutput, spacy_load_model
 import pytest
 from spacy.tokens import Doc
+import logging
+
+
+@pytest.fixture
+def data_file_wrong_span(data_dir):
+    return (
+        data_dir
+        / "failed_inputs"
+        / "Wikipediadiskussion-pos-BD-alt_bis_Zeile60-optimiert-CK-trimmed.xmi"
+    )
+
+
+@pytest.fixture
+def data_file_wrong_xmi(data_dir):
+    return (
+        data_dir
+        / "failed_inputs"
+        / "Wikipediadiskussionen-pos-BD-neu_ab_Zeile60-optimiert-CK-trimmed.xmi"
+    )
 
 
 def test_spacy_load_model():
@@ -48,20 +67,32 @@ def test_get_multiple_input(data_dir):
     assert ts_file.parts[-1] == "TypeSystem.xml"
 
 
-def test_cas_to_doc(ts_file, data_file):
+def test_cas_to_doc(ts_file, data_file, caplog, data_file_wrong_span):
+    caplog.set_level(logging.WARNING)
     ts = InputOutput.read_typesystem(ts_file)
     cas, _ = InputOutput.read_cas_file(data_file, ts)
     doc = InputOutput.cas_to_doc(cas, ts)
     assert len(doc) == 846
     assert isinstance(doc, Doc)
+    ts = InputOutput.read_typesystem(ts_file)
+    cas, _ = InputOutput.read_cas_file(data_file_wrong_span, ts)
+    doc = InputOutput.cas_to_doc(cas, ts)
+    assert "Skipping span! Enable Debug Logging for more information." in caplog.text
 
 
-def test_assign_span_labels():
-    pass
-
-
-def test_files_to_docs():
-    pass
+def test_files_to_docs(ts_file, data_file, data_file_wrong_xmi, caplog):
+    caplog.set_level(logging.WARNING)
+    ts = InputOutput.read_typesystem(ts_file)
+    doc_dict = InputOutput.files_to_docs([data_file], ts)
+    assert doc_dict
+    assert len(doc_dict) == 1
+    # non-existing file
+    data_file_2 = data_file.parent / (data_file.name + "1")
+    with pytest.raises(FileNotFoundError):
+        InputOutput.files_to_docs([data_file_2], ts)
+    # check for xml syntax error in logs
+    InputOutput.files_to_docs([data_file_wrong_xmi], ts)
+    assert "skipping file" in caplog.text
 
 
 def test_merge_span_categories(doc_dict):
