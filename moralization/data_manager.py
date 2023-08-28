@@ -87,7 +87,9 @@ class DataManager:
             self._lists_to_df()
             self.df_to_dataset()
             description = self._set_dataset_description()
-            self.set_dataset_info(description=description)
+            description = self._set_dataset_description()
+            self.set_dataset_info(self.train_test_set["train"], description=description)
+            self.set_dataset_info(self.train_test_set["test"], description=description)
 
     def occurrence_analysis(self, _type="table", cat_filter=None, file_filter=None):
         """Returns the occurrence df, occurrence_corr_table or heatmap of the dataset.
@@ -439,7 +441,7 @@ class DataManager:
     def publish(
         self,
         repo_id: str,
-        data_set: datasets.Dataset = None,
+        data_set: datasets.Dataset,
         hugging_face_token: Optional[str] = None,
     ) -> Dict[str, str]:
         """Publish the dataset to Hugging Face.
@@ -453,7 +455,7 @@ class DataManager:
         Args:
             repo_id (str): The name of the repository that you are pushing to.
             This can either be a new repository or an existing one.
-            data_set (Dataset, optional): The Dataset to be published to Hugging Face. Please
+            data_set (Dataset): The Dataset to be published to Hugging Face. Please
             note that this is a Dataset object and not a DatasetDict object, meaning
             that if you have already split your dataset into test and train, you can
             either push test and train separately or need to concatenate them using "+".
@@ -461,9 +463,11 @@ class DataManager:
             be used.
             hugging_face_token (str, optional): Hugging Face User Access Token.
         """
-        if not data_set:
-            data_set = self.raw_data_set
-        self.print_dataset_info(data_set)
+        if isinstance(data_set, datasets.Dataset):
+            self.print_dataset_info(data_set)
+        if isinstance(data_set, datasets.DatasetDict):
+            self.print_dataset_info(data_set["train"])
+            self.print_dataset_info(data_set["test"])
         if hugging_face_token is None:
             hugging_face_token = os.environ.get("HUGGING_FACE_TOKEN")
         if hugging_face_token is None:
@@ -478,28 +482,18 @@ class DataManager:
         """Print information set in the dataset.
 
         Args:
-            data_set (Dataset, optional): The Dataset object of which the information
-            is to be printed. Defaults to the raw dataset associated with the DataManager
-            instance.
+            data_set (Dataset): The Dataset object of which the information
+            is to be printed.
         """
-        if not data_set:
-            data_set = self.raw_data_set
-        if not hasattr(self, "data_set_info"):
-            # check for Dataset or DatasetDict
-            if isinstance(data_set, datasets.Dataset):
-                self.data_set_info = data_set.info
-            elif isinstance(data_set, datasets.DatasetDict):
-                # the datasetdict should at the very least contain the training data
-                self.data_set_info = data_set["train"].info
         print("The following dataset metadata has been set:")
-        print("Description:", self.data_set_info.description)
-        print("Version:", self.data_set_info.version)
-        print("License:", self.data_set_info.license)
-        print("Citation:", self.data_set_info.citation)
-        print("homepage:", self.data_set_info.homepage)
+        print("Description:", data_set.info.description)
+        print("Version:", data_set.info.version)
+        print("License:", data_set.info.license)
+        print("Citation:", data_set.info.citation)
+        print("homepage:", data_set.info.homepage)
 
     def _set_dataset_description(self):
-        description = "The dataset was generated for labels: {} and task: {} .".format(
+        description = "The dataset was generated for labels: {} and task: {}. ".format(
             self.selected_labels, self.task
         )
         description += "It contains the data from the original files {}.".format(
@@ -509,7 +503,7 @@ class DataManager:
 
     def set_dataset_info(
         self,
-        data_set: datasets.Dataset = None,
+        data_set: datasets.Dataset,
         description: str = None,
         version: str = None,
         license_: str = None,
@@ -519,7 +513,7 @@ class DataManager:
         """Update the information set in the dataset.
 
         Args:
-            data_set (Dataset, optional): The Dataset object of which the information is to be updated.
+            data_set (Dataset): The Dataset object of which the information is to be updated.
             Defaults to the raw dataset associated with the DataManager instance.
             description (str, optional): The new description to be updated. Optional, defaults to None.
                 The description will contain the task for which the labels were created, and the
@@ -531,49 +525,30 @@ class DataManager:
         Returns:
             Dataset: The updated Dataset object.
         """
-        if not data_set:
-            data_set = self.raw_data_set
-        if not hasattr(self, "data_set_info"):
-            # check for Dataset or DatasetDict
-            if isinstance(data_set, datasets.Dataset):
-                self.data_set_info = data_set.info
-            elif isinstance(data_set, datasets.DatasetDict):
-                # the datasetdict should at the very least contain the training data
-                self.data_set_info = data_set["train"].info
         print("Updating the following dataset metadata:")
         if description:
             print(
                 "Description: old - {} new - {}".format(
-                    self.data_set_info.description, description
+                    data_set.info.description, description
                 )
             )
-            self.data_set_info.description = description
+            data_set.info.description = description
         if version:
-            print(
-                "Version: old - {} new - {}".format(self.data_set_info.version, version)
-            )
-            self.data_set_info.version = version
+            print("Version: old - {} new - {}".format(data_set.info.version, version))
+            data_set.info.version = version
         if license_:
-            print(
-                "License: old - {} new - {}".format(
-                    self.data_set_info.license, license_
-                )
-            )
-            self.data_set_info.license = license_
+            print("License: old - {} new - {}".format(data_set.info.license, license_))
+            data_set.info.license = license_
         if citation:
             print(
-                "Citation: old - {} new - {}".format(
-                    self.data_set_info.citation, citation
-                )
+                "Citation: old - {} new - {}".format(data_set.info.citation, citation)
             )
-            self.data_set_info.citation = citation
+            data_set.info.citation = citation
         if homepage:
             print(
-                "homepage: old - {} new - {}".format(
-                    self.data_set_info.homepage, homepage
-                )
+                "homepage: old - {} new - {}".format(data_set.info.homepage, homepage)
             )
-            self.data_set_info.homepage = homepage
+            data_set.info.homepage = homepage
         return data_set
 
     def pull_dataset(self, dataset_name: str, revision: str = None, split: str = None):
@@ -590,33 +565,36 @@ class DataManager:
                 Can also be set to None , pulling the full dataset with existing splits.
                 Defaults to None."""
         # this should check if dataset is already downloaded
-        self.raw_data_set = datasets.load_dataset(
+        data_set = datasets.load_dataset(
             path=dataset_name,
             split=split,
             revision=revision,
             cache_dir=self.data_dir,
         )
-        if isinstance(self.raw_data_set, datasets.Dataset):
+        if isinstance(data_set, datasets.Dataset):
             print(
                 "Your dataset is in Dataset format - will now be split into test and train"
             )
+            self.raw_data_set = data_set
             self.data_in_frame = pd.DataFrame(self.raw_data_set)
             self.column_names = self.raw_data_set.column_names
             self.train_test_set = self.raw_data_set.train_test_split(test_size=0.1)
-        if isinstance(self.raw_data_set, datasets.DatasetDict):
+        if isinstance(data_set, datasets.DatasetDict):
             print("Your dataset is in DatasetDict format - will keep the split")
             # check if the split contains train
-            if "train" in self.raw_data_set:
+            if "train" in data_set:
                 print("Found train split - ")
-                self.data_in_frame = self.raw_data_set["train"].to_pandas()
-                self.column_names = self.raw_data_set.column_names["train"]
-            if "test" in self.raw_data_set:
+                self.data_in_frame = data_set["train"].to_pandas()
+                self.column_names = data_set.column_names["train"]
+            if "test" in data_set:
                 print("Found test split - ")
                 self.data_in_frame = pd.concat(
-                    [self.data_in_frame, self.raw_data_set["test"].to_pandas()]
+                    [self.data_in_frame, data_set["test"].to_pandas()]
                 )
-            if "validation" in self.raw_data_set:
+            if "validation" in data_set:
                 print("Found validation split - ")
                 self.data_in_frame = pd.concat(
-                    [self.data_in_frame, self.raw_data_set["validation"].to_pandas()]
+                    [self.data_in_frame, data_set["validation"].to_pandas()]
                 )
+            self.train_test_set = data_set
+            self.raw_data_set = None

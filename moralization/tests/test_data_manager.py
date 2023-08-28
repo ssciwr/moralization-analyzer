@@ -236,17 +236,17 @@ def test_publish_datasetdict(tmp_path):
     dm = DataManager(tmp_path.as_posix(), skip_read=True)
     dm.pull_dataset(dataset_name="rotten_tomatoes")
     repo_id = "test-datasetdict-2"
-    dm.publish(repo_id)
+    dm.publish(repo_id, dm.train_test_set)
 
 
 def test_print_dataset_info(data_dir):
     dm = DataManager(data_dir)
     dm.df_to_dataset(split=True)
-    dm.print_dataset_info()
+    dm.print_dataset_info(dm.train_test_set["train"])
 
 
 def test_set_dataset_info(data_dir, get_dataset):
-    dm = DataManager(data_dir)
+    dm = DataManager(data_dir, skip_read=True)
     description = "Something"
     dataset = dm.set_dataset_info(get_dataset["test"], description=description)
     assert dataset.info.description == description
@@ -266,8 +266,7 @@ def test_set_dataset_info(data_dir, get_dataset):
     dataset = dm.set_dataset_info(get_dataset["test"], homepage=homepage)
     assert dataset.info.homepage == homepage
     dm = DataManager(data_dir)
-    dm.df_to_dataset(split=False)
-    dataset = dm.set_dataset_info(homepage=homepage)
+    dataset = dm.set_dataset_info(dm.train_test_set["test"], homepage=homepage)
     assert dataset.info.homepage == homepage
 
 
