@@ -70,6 +70,9 @@ class DataManager:
         self.analyzer = None
         self.spacy_docbin_files = None
         # select the labels and task for the dataset
+        if not selected_labels:
+            # if no labels are selected per task, we just choose all
+            selected_labels = "all"
         self.selected_labels = selected_labels
         self.task = task
         if not skip_read:
@@ -83,6 +86,8 @@ class DataManager:
             self._docdict_to_lists()
             self._lists_to_df()
             self.df_to_dataset()
+            description = self._set_dataset_description()
+            self.set_dataset_info(description=description)
 
     def occurrence_analysis(self, _type="table", cat_filter=None, file_filter=None):
         """Returns the occurrence df, occurrence_corr_table or heatmap of the dataset.
@@ -493,6 +498,15 @@ class DataManager:
         print("Citation:", self.data_set_info.citation)
         print("homepage:", self.data_set_info.homepage)
 
+    def _set_dataset_description(self):
+        description = "The dataset was generated for labels: {} and task: {} .".format(
+            self.selected_labels, self.task
+        )
+        description += "It contains the data from the original files {}.".format(
+            list(self.doc_dict.keys())
+        )
+        return description
+
     def set_dataset_info(
         self,
         data_set: datasets.Dataset = None,
@@ -508,6 +522,8 @@ class DataManager:
             data_set (Dataset, optional): The Dataset object of which the information is to be updated.
             Defaults to the raw dataset associated with the DataManager instance.
             description (str, optional): The new description to be updated. Optional, defaults to None.
+                The description will contain the task for which the labels were created, and the
+                names of the original data files.
             version (str, optional): The new version to be updated. Optional, defaults to None.
             license (str, optional): The new license to be updated. Optional, defaults to None.
             citation (str, optional): The new citation to be updated. Optional, defaults to None.
