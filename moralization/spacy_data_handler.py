@@ -126,8 +126,8 @@ class SpacyDataHandler:
         # we try this, if fails likely the column names are incorrect
         try:
             mylist = data[column]
-        except ValueError:
-            print(
+        except KeyError:
+            raise ValueError(
                 "Could not generate a list of the text input, likely the given column name {}\
                 does not match any of {} in the dataset.".format(
                     column, data.column_names

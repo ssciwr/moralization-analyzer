@@ -418,9 +418,9 @@ class DataManager:
         self.column_names = [
             "Sentences",
             "Labels",
-            "Span begin",
-            "Span end",
-            "Span label",
+            "Span_begin",
+            "Span_end",
+            "Span_label",
         ]
 
     def df_to_dataset(self, data_in_frame: pd.DataFrame = None, split: bool = True):
