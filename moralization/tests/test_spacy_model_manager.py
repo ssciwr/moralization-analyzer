@@ -8,8 +8,16 @@ from typing import Any
 from pathlib import Path
 
 
-def test_spacy_model_manager_train_new_model(tmp_path, data_dir):
+@pytest.fixture
+def data_dir_large(data_dir):
+    data_dir_large = data_dir / "large_input_data"
+    return data_dir_large
+
+
+def test_spacy_model_manager_train_new_model(tmp_path, data_dir_large):
     # non-existent model_path: new model created with default config/meta
+    # we need a larger data set than test data, otherwise it is not guaranteed that
+    # there is an annotation in the test data
     model_path = tmp_path / "idontexist"
     assert not model_path.is_dir()
     model = SpacyModelManager(model_path)
@@ -20,7 +28,7 @@ def test_spacy_model_manager_train_new_model(tmp_path, data_dir):
     # model is not yet trained
     assert not (model_path / "model-best").is_dir()
     assert not (model_path / "model-last").is_dir()
-    data_manager = DataManager(data_dir)
+    data_manager = DataManager(data_dir_large)
     # train model
     model.train(
         data_manager, overrides={"training.max_epochs": 5}, check_data_integrity=False
