@@ -45,6 +45,16 @@ def test_docbin_from_dataset(get_dataset_task1, get_dataset_task2, tmp_path):
     assert train_file.exists()
 
 
+def test_same_string():
+    string1 = "A"
+    string2 = "A"
+    string_all = "A is in this sentence."
+    SpacyDataHandler._check_same_string(string1, string2, string_all)
+    string2 = "B"
+    with pytest.raises(RuntimeError):
+        SpacyDataHandler._check_same_string(string1, string2, string_all)
+
+
 def test_check_docs(doc_dict):
     SpacyDataHandler._check_docs(next(iter(doc_dict.values())), task="task1")
 

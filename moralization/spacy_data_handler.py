@@ -77,24 +77,18 @@ class SpacyDataHandler:
                         span_end_list[i][j],
                     )
                     # check that this will return the same string as merged_tokens
-                    if merged_tokens[char_span_begin:char_span_end] != substring:
-                        raise RuntimeError(
-                            "Could not match *{}* and *{}* inside *{}*".format(
-                                merged_tokens[char_span_begin:char_span_end],
-                                substring,
-                                merged_tokens,
-                            )
-                        )
+                    SpacyDataHandler._check_same_string(
+                        merged_tokens[char_span_begin:char_span_end],
+                        substring,
+                        merged_tokens,
+                    )
                     span = doc.char_span(
                         char_span_begin, char_span_end, span_label_list[i][j]
                     )
                     # check that span text is the same as substring
-                    if span.text != substring:
-                        raise RuntimeError(
-                            "Could not assign span *{}* for annotation *{}*".format(
-                                span, substring[1::]
-                            )
-                        )
+                    SpacyDataHandler._check_same_string(
+                        span.text, substring, merged_tokens
+                    )
                     doc.spans[task].append(span)
                 doclist.append(doc)
                 if check_docs:
@@ -107,6 +101,17 @@ class SpacyDataHandler:
             doclist, outfilename, output_dir, overwrite
         )
         return data_path
+
+    @staticmethod
+    def _check_same_string(new_string, old_string, complete_string):
+        if new_string != old_string:
+            raise RuntimeError(
+                "Could not match *{}* and *{}* inside *{}*".format(
+                    new_string,
+                    old_string,
+                    complete_string,
+                )
+            )
 
     @staticmethod
     def _check_docs(doc: Doc, task):
