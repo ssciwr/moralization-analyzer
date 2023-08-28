@@ -227,7 +227,7 @@ def test_publish_dataset(data_dir):
     dm = DataManager(data_dir)
     repo_id = "test-data-2"
     dm.df_to_dataset(split=False)
-    dm.publish(repo_id)
+    dm.publish(repo_id, dm.train_test_set["train"])
     dataset = dm.raw_data_set
     dm.publish(repo_id, dataset)
 
@@ -273,8 +273,8 @@ def test_set_dataset_info(data_dir, get_dataset):
 def test_pull_dataset(tmp_path):
     dm = DataManager(tmp_path.as_posix(), skip_read=True)
     dm.pull_dataset(dataset_name="rotten_tomatoes")
-    assert dm.raw_data_set.column_names["train"] == ["text", "label"]
-    assert dm.raw_data_set["train"].num_rows == 8530
+    assert dm.column_names == ["text", "label"]
+    assert dm.train_test_set["train"].num_rows == 8530
     ref_text = "the gorgeo"
     ref_label = 1
     assert dm.data_in_frame["text"].iloc[1][0:10] == ref_text

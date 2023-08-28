@@ -591,6 +591,8 @@ class DataManager:
                 self.data_in_frame = pd.concat(
                     [self.data_in_frame, data_set["test"].to_pandas()]
                 )
+                if not self.column_names:
+                    self.column_names = data_set.column_names["test"]
             if "validation" in data_set:
                 print("Found validation split - ")
                 self.data_in_frame = pd.concat(
