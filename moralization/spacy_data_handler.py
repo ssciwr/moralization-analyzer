@@ -225,7 +225,7 @@ class SpacyDataHandler:
         return out_filename
 
     @staticmethod
-    def _check_files(input_dir=None, train_file=None, test_file=None):
+    def _check_files(input_dir: Path = None, train_file=None, test_file=None):
         if input_dir is None and test_file is None and train_file is None:
             raise FileNotFoundError(
                 "Please provide either a directory or the file locations."
@@ -258,12 +258,6 @@ class SpacyDataHandler:
         # if not we search in the current or given working directory
         if input_dir is None:
             input_dir = Path.cwd()
-        else:
-            input_dir = Path(input_dir)
-
-        # search the directory for the files.
-        # TODO I believe the below line is not required. It is already a path.
-        input_dir = Path(input_dir)
         if (input_dir / train_file).exists():
             db_train = input_dir / train_file
         else:
