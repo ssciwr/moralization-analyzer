@@ -442,64 +442,32 @@ class InteractiveVisualization:
         self.app.layout = html.Div(
             [
                 "Interactive Visualization",
-                dcc.Dropdown(["all", "train", "test"], value="all", id="dropdown_mode"),
                 dcc.Dropdown(id="dropdown_span_cat"),
                 dcc.Markdown(id="markdown_displacy", dangerously_allow_html=True),
             ]
         )
 
-        # Define the callback to update the dropdown_span_cat options and default value based on the selected mode
-        self.app.callback(
-            Output("dropdown_span_cat", "options"),
-            Output("dropdown_span_cat", "value"),
-            Input("dropdown_mode", "value"),
-        )(self.change_mode)
-
-        # Define the callback to update the visualization based on the selected span category and mode
+        # Define the callback to update the visualization based on the selected span category
         self.app.callback(
             Output("markdown_displacy", "children"),
             Input("dropdown_span_cat", "value"),
-            State("dropdown_mode", "value"),
         )(self.change_span_cat)
 
-    def change_mode(self, mode):
-        """
-        Changes the mode of the visualization.
-
-        This method retrieves the span categories for the selected mode and returns them as
-        options for the dropdown_span_cat dropdown.
-
-        Args:
-            mode (str): The selected mode of the visualization.
-
-        Returns:
-            A tuple containing a list of span categories and the default value for the dropdown_span_cat.
-        """
-        span_cats = []
-
-        # Retrieve the span categories for the selected mode
-        for doc in self.data_manager.doc_dict.values():
-            [span_cats.append(span_cat) for span_cat in list(doc.spans.keys())]
-
-        span_cats = list(set(span_cats))
-        return sorted(span_cats), "sc"
-
-    def change_span_cat(self, span_cat, mode):
+    def change_span_cat(self, span_cat):
         """
         Changes the selected span category.
 
-        This method visualizes the selected span category for the selected mode and returns the
+        This method visualizes the selected span category and returns the
         visualized data as an HTML document.
 
         Args:
             span_cat (str): The selected span category.
-            mode (str): The selected mode of the visualization.
 
         Returns:
             The visualized data as an HTML document.
         """
-        # Visualize the selected span category for the selected mode
-        html_doc = self.data_manager.visualize_data(_type=mode, spans_key=span_cat)
+        # Visualize the selected span category
+        html_doc = self.data_manager.visualize_data(spans_key=span_cat)
         html_doc = html_doc.replace("\n", " ")
         return html_doc
 
@@ -518,7 +486,7 @@ class InteractiveVisualization:
         )
 
 
-def visualize_data(doc_dict, style="span", spans_key="sc"):
+def return_displacy_visualization(doc_dict, style="span", spans_key="sc"):
     """Use the displacy class offered by spacy to visualize the current dataset.
         use SpacySetup.span_keys to show possible keys or use 'sc' for all.
 

@@ -5,14 +5,12 @@ import seaborn as sns
 from moralization.data_manager import DataManager
 
 
-def test_report_occurrence_heatmap(doc_dicts, monkeypatch):
-    df = _loop_over_files(doc_dicts[0])
+def test_report_occurrence_heatmap(doc_dict, monkeypatch):
+    df = _loop_over_files(doc_dict)
 
     # test corr without filter
     corr_df = plot.report_occurrence_heatmap(df, _type="corr")
     all_columns = [
-        ("KAT1-Moralisierendes Segment", "Keine Moralisierung"),
-        ("KAT1-Moralisierendes Segment", "Moralisierung"),
         ("KAT1-Moralisierendes Segment", "Moralisierung explizit"),
         ("KAT1-Moralisierendes Segment", "Moralisierung interpretativ"),
         ("KAT2-Moralwerte", "Care"),
@@ -41,26 +39,9 @@ def test_report_occurrence_heatmap(doc_dicts, monkeypatch):
         ("KAT4-Kommunikative Funktion", "Appell"),
         ("KAT4-Kommunikative Funktion", "Darstellung"),
         ("KAT5-Forderung explizit", "explizit"),
-        ("task1", "Keine Moralisierung"),
-        ("task1", "Moralisierung"),
+        ("KAT5-Forderung implizit", "implizit"),
         ("task1", "Moralisierung explizit"),
         ("task1", "Moralisierung interpretativ"),
-        ("task2", "Care"),
-        ("task2", "Cheating"),
-        ("task2", "Fairness"),
-        ("task2", "Harm"),
-        ("task2", "Liberty"),
-        ("task2", "Oppression"),
-        ("task3", "Adresassat:in"),
-        ("task3", "Benefizient:in"),
-        ("task3", "Forderer:in"),
-        ("task3", "Individuum"),
-        ("task3", "Institution"),
-        ("task3", "Kein Bezug"),
-        ("task3", "soziale Gruppe"),
-        ("task4", "Appell"),
-        ("task4", "Darstellung"),
-        ("task5", "explizit"),
     ]
 
     assert sorted(list(corr_df.columns)) == sorted(all_columns)
@@ -84,8 +65,6 @@ def test_report_occurrence_heatmap(doc_dicts, monkeypatch):
     filtered_columns_sub = [
         ("KAT3-Gruppe", "Individuum"),
         ("KAT3-Gruppe", "Institution"),
-        ("task3", "Individuum"),
-        ("task3", "Institution"),
     ]
     corr_df = plot.report_occurrence_heatmap(
         df, _filter=["Individuum", "Institution"], _type="corr"
@@ -121,7 +100,6 @@ def test_InteractiveAnalyzerResults(data_dir):
     test_interactive_analyzer = plot.InteractiveAnalyzerResults(
         dm.return_analyzer_result("all"), dm.return_categories()
     )
-
     span_key_list = sorted(
         [
             "KAT1-Moralisierendes Segment",
@@ -132,13 +110,10 @@ def test_InteractiveAnalyzerResults(data_dir):
             "KAT3-own/other",
             "KAT4-Kommunikative Funktion",
             "KAT5-Forderung explizit",
+            "KAT5-Forderung implizit",
             "paragraphs",
             "sc",
             "task1",
-            "task2",
-            "task3",
-            "task4",
-            "task5",
         ]
     )
 
@@ -187,11 +162,8 @@ def test_InteractiveCategoryPlot(data_dir):
             "KAT3-own/other",
             "KAT4-Kommunikative Funktion",
             "KAT5-Forderung explizit",
+            "KAT5-Forderung implizit",
             "task1",
-            "task2",
-            "task3",
-            "task4",
-            "task5",
         ]
     )
     file_names = list(dm.doc_dict.keys())
@@ -216,20 +188,10 @@ def test_InteractiveCategoryPlot(data_dir):
                 "label": "Moralisierung explizit",
                 "value": "KAT1-Moralisierendes Segment___Moralisierung explizit",
             },
-            {
-                "label": "Keine Moralisierung",
-                "value": "KAT1-Moralisierendes Segment___Keine Moralisierung",
-            },
-            {
-                "label": "Moralisierung",
-                "value": "KAT1-Moralisierendes Segment___Moralisierung",
-            },
             {"label": "Care", "value": "KAT2-Moralwerte___Care"},
         ],
         [
             "KAT1-Moralisierendes Segment___Moralisierung explizit",
-            "KAT1-Moralisierendes Segment___Keine Moralisierung",
-            "KAT1-Moralisierendes Segment___Moralisierung",
             "KAT2-Moralwerte___Care",
         ],
     )
@@ -239,19 +201,9 @@ def test_InteractiveCategoryPlot(data_dir):
                 "label": "Moralisierung explizit",
                 "value": "KAT1-Moralisierendes Segment___Moralisierung explizit",
             },
-            {
-                "label": "Keine Moralisierung",
-                "value": "KAT1-Moralisierendes Segment___Keine Moralisierung",
-            },
-            {
-                "label": "Moralisierung",
-                "value": "KAT1-Moralisierendes Segment___Moralisierung",
-            },
         ],
         [
             "KAT1-Moralisierendes Segment___Moralisierung explizit",
-            "KAT1-Moralisierendes Segment___Keine Moralisierung",
-            "KAT1-Moralisierendes Segment___Moralisierung",
         ],
     )
     assert test_interactive_heatmap.update_category([]) == (
@@ -272,44 +224,20 @@ def test_InteractiveCategoryPlot(data_dir):
 
 
 def test_InteractiveVisualization(data_dir):
-    span_key_list = sorted(
-        [
-            "KAT1-Moralisierendes Segment",
-            "KAT2-Moralwerte",
-            "KAT2-Subjektive Ausdrücke",
-            "KAT3-Gruppe",
-            "KAT3-Rolle",
-            "KAT3-own/other",
-            "KAT4-Kommunikative Funktion",
-            "KAT5-Forderung explizit",
-            "paragraphs",
-            "sc",
-            "task1",
-            "task2",
-            "task3",
-            "task4",
-            "task5",
-        ]
-    )
     dm = DataManager(data_dir)
     test_interactive_vis = plot.InteractiveVisualization(dm)
-
     with pytest.raises(EnvironmentError):
         test_interactive_vis.run_app()
-
-    for mode in ["all", "test", "train"]:
-        assert test_interactive_vis.change_mode(mode) == (span_key_list, "sc")
-        with pytest.raises(EnvironmentError):
-            test_interactive_vis.change_span_cat(span_key_list[0], mode)
-
-        with pytest.raises(EnvironmentError):
-            test_interactive_vis.change_span_cat("", mode)
-
-
-def test_spacy_data_handler_visualize_data(doc_dicts):
     with pytest.raises(EnvironmentError):
-        plot.visualize_data(doc_dicts[0], spans_key=["task1", "sc"])
+        test_interactive_vis.change_span_cat("KAT1-Moralisierendes Segment")
     with pytest.raises(EnvironmentError):
-        plot.visualize_data(doc_dicts[0])
+        test_interactive_vis.change_span_cat("")
+
+
+def test_spacy_data_handler_visualize_data(doc_dict):
     with pytest.raises(EnvironmentError):
-        plot.visualize_data(doc_dicts[0], spans_key="task2")
+        plot.return_displacy_visualization(doc_dict, spans_key=["task1", "sc"])
+    with pytest.raises(EnvironmentError):
+        plot.return_displacy_visualization(doc_dict)
+    with pytest.raises(EnvironmentError):
+        plot.return_displacy_visualization(doc_dict, spans_key="task2")

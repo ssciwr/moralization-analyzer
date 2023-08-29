@@ -10,7 +10,7 @@ import re
 import logging
 from moralization.data_manager import DataManager
 from moralization.model_manager import ModelManager
-from moralization.plot import visualize_data
+from moralization.plot import return_displacy_visualization
 import shutil
 
 
@@ -147,6 +147,7 @@ class SpacyModelManager(ModelManager):
             overwrite_existing_files (bool): If true any existing files in `model_path` are removed
         """
         super().__init__(model_path)
+        self.task = task
         self._best_model_path = self.model_path / "model-best"
         self._last_model_path = self.model_path / "model-last"
         existing_model = (
@@ -165,7 +166,7 @@ class SpacyModelManager(ModelManager):
             _create_model(
                 self.model_path,
                 language,
-                task,
+                self.task,
                 base_config_file,
                 overwrite_existing_files,
             )
@@ -231,7 +232,7 @@ class SpacyModelManager(ModelManager):
         self._check_model_is_trained_before_it_can_be("tested")
         nlp = spacy.load(self._best_model_path)
         doc_dict = {"test_doc": nlp(test_string)}
-        return visualize_data(doc_dict, style=style, spans_key=spans_key)
+        return return_displacy_visualization(doc_dict, style=style, spans_key=spans_key)
 
     def publish(self, hugging_face_token: Optional[str] = None) -> str:
         """Publish the model to Hugging Face.
@@ -278,6 +279,15 @@ class SpacyModelManager(ModelManager):
 
         If the supplied DataManager has no docbin files we first export them to `model_path/data`.
         """
+        # check first that the task that is defined in the ModelManager is the same
+        # task that the data was created for
+        if self.task != data_manager.task:
+            raise ValueError(
+                "The task that was specified in the model training is not the \
+                             same the data was generated for: {} - training, {} - data.".format(
+                    self.task, data_manager.task
+                )
+            )
         data_files = data_manager.spacy_docbin_files
         data_files_exist = data_files is not None and all(
             [data_file.is_file() for data_file in data_files]

@@ -3,7 +3,7 @@ from moralization.analyse import _loop_over_files, _return_span_analyzer
 from moralization.plot import (
     report_occurrence_heatmap,
     InteractiveCategoryPlot,
-    visualize_data,
+    return_displacy_visualization,
     InteractiveAnalyzerResults,
     InteractiveVisualization,
 )
@@ -27,9 +27,10 @@ class DataManager:
         language_model: str = "de_core_news_sm",
         skip_read: bool = False,
         selected_labels: Union[list, str] = None,
-        task: str = None,
+        merge_dict=None,
+        task: str = "task1",
     ):
-        """Initialize the Datamanager that handles the data transformations.
+        """Initialize the DataManager that handles the data transformations.
 
         Args:
             data_dir (str): The data directory where the data is located, or where the pulled dataset
@@ -42,32 +43,51 @@ class DataManager:
                 return all labels of a given task, or a list of selected labels, such as ["Cheating", "Fairness"].
                 If you provide a list, this is independent of the task.
                 Defaults to None, in which case all labels for all categories are selected.
+            merge_dict_cat(dict, optional): map new category to list of existing_categories.
+                Default is:
+                merge_dict = {
+                    "task1": ["KAT1-Moralisierendes Segment"],
+                    "task2": ["KAT2-Moralwerte", "KAT2-Subjektive Ausdrücke"],
+                    "task3": ["KAT3-Rolle", "KAT3-Gruppe", "KAT3-own/other"],
+                    "task4": ["KAT4-Kommunikative Funktion"],
+                    "task5": ["KAT5-Forderung explizit"],
+                }
+                Defaults to None.
+
             task (str): The task to train on. The options are
                 "task1": ["KAT1-Moralisierendes Segment"]
                 "task2": ["KAT2-Moralwerte", "KAT2-Subjektive Ausdrücke"]
                 "task3": ["KAT3-Rolle", "KAT3-Gruppe", "KAT3-own/other"]
                 "task4": ["KAT4-Kommunikative Funktion"]
                 "task5": ["KAT5-Forderung explizit"]
-                or None. Defaults to None.
+                Defaults to "task1".
 
         Returns:
             A DataManager object.
         """
-        # what are these? why set to None?
         self.data_dir = data_dir
         self.analyzer = None
         self.spacy_docbin_files = None
         # select the labels and task for the dataset
+        if not selected_labels:
+            # if no labels are selected per task, we just choose all
+            selected_labels = "all"
         self.selected_labels = selected_labels
         self.task = task
         if not skip_read:
-            doc_dicts = InputOutput.read_data(
-                self.data_dir, language_model=language_model
+            self.doc_dict = InputOutput.read_data(
+                self.data_dir,
+                language_model=language_model,
+                merge_dict=merge_dict,
+                task=self.task,
             )
-            self.doc_dict, self.train_dict, self.test_dict = doc_dicts
             # generate the data lists and data frame
             self._docdict_to_lists()
             self._lists_to_df()
+            self.df_to_dataset()
+            description = self._set_dataset_description()
+            self.set_dataset_info(self.train_test_set["train"], description=description)
+            self.set_dataset_info(self.train_test_set["test"], description=description)
 
     def occurrence_analysis(self, _type="table", cat_filter=None, file_filter=None):
         """Returns the occurrence df, occurrence_corr_table or heatmap of the dataset.
@@ -192,36 +212,25 @@ class DataManager:
         interactive_visualization = InteractiveVisualization(self)
         return interactive_visualization.run_app(port=port)
 
-    def visualize_data(self, _type: str, spans_key="sc"):
+    def visualize_data(self, spans_key="sc"):
         if not hasattr(self, "doc_dict"):
             raise ValueError(
                 "The data analysis can only be carried out for xmi data, not datasets pulled from the Hugging Face Hub."
             )
-        # type can only be all, train or test
-        if _type not in ["all", "train", "test"]:
-            raise KeyError(
-                f"_type must be either 'all', 'train' or `test` but is `{_type}`."
-            )
-
-        return_dict = {
-            "all": self.doc_dict,
-            "train": self.train_dict,
-            "test": self.test_dict,
-        }
-
-        return visualize_data(return_dict[_type], spans_key=spans_key)
+        return return_displacy_visualization(self.doc_dict, spans_key=spans_key)
 
     def export_data_DocBin(
         self, output_dir=None, overwrite=False, check_data_integrity=True
     ):
-        """Export the currently loaded docs as a spacy binary. This is used in spacy training.
+        """Export the currently loaded dataset as a spacy binary. This is used in spacy training.
 
         Args:
             output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
-            overwrite(bool, optional): whether or not the spacy files should be written
-            even if files are already present.
-            check_data_integrity (bool): Whether or not to test the data integrity.
-
+            overwrite(bool, optional): If True, spacy files are written even if files are already present.
+                Defaults to False.
+            check_data_integrity (bool): Whether or not to test the data integrity. If the data integrity
+                check fails, then no output is written. Skip the test by setting to False. In this case,
+                the output is always generated even if the data does not pass the quality check.
 
         Returns:
             list[Path]: A list of the train and test files path.
@@ -233,11 +242,25 @@ class DataManager:
                     "The given data did not pass the integrity check. Please check the provided output.\n"
                     + "if you want to continue with your data set `check_data_integrity=False`"
                 )
-
-        self.spacy_docbin_files = SpacyDataHandler().export_training_testing_data(
-            self.train_dict, self.test_dict, output_dir, overwrite=overwrite
+        # generate the DocBin files from the train and test split of the dataset object,
+        # and optionally from validate if present
+        train_path = SpacyDataHandler.docbin_from_dataset(
+            self.train_test_set,
+            self.task,
+            "train",
+            output_dir,
+            overwrite=overwrite,
+            column_names=self.column_names,
         )
-        return self.spacy_docbin_files
+        test_path = SpacyDataHandler.docbin_from_dataset(
+            self.train_test_set,
+            self.task,
+            "test",
+            output_dir,
+            overwrite=overwrite,
+            column_names=self.column_names,
+        )
+        self.spacy_docbin_files = [train_path, test_path]
 
     def _check_relativ_frequency(
         self,
@@ -361,7 +384,7 @@ class DataManager:
         Returns:
             list[Path]: A list of the train and test files path.
         """
-        self.spacy_docbin_files = SpacyDataHandler().import_training_testing_data(
+        self.spacy_docbin_files = SpacyDataHandler.import_training_testing_data(
             input_dir, train_file, test_file
         )
         return self.spacy_docbin_files
@@ -369,11 +392,17 @@ class DataManager:
     def _docdict_to_lists(self):
         """Convert the dictionary of doc objects to nested lists."""
 
-        # for now work with instantiation
         tdh = TransformersDataHandler()
         tdh.get_data_lists(self.doc_dict)
         tdh.generate_labels(self.doc_dict, self.selected_labels, self.task)
-        self.sentence_list, self.label_list = tdh.structure_labels()
+        tdh.generate_spans(self.doc_dict, self.selected_labels, self.task)
+        (
+            self.sentence_list,
+            self.label_list,
+            self.span_begin,
+            self.span_end,
+            self.span_label,
+        ) = tdh.structure_labels()
 
     def _lists_to_df(self):
         """Convert nested lists of tokens and labels into a pandas dataframe.
@@ -382,9 +411,22 @@ class DataManager:
             data_in_frame (dataframe): A list of the train and test files path.
         """
         self.data_in_frame = pd.DataFrame(
-            zip(self.sentence_list, self.label_list), columns=["Sentences", "Labels"]
+            zip(
+                self.sentence_list,
+                self.label_list,
+                self.span_begin,
+                self.span_end,
+                self.span_label,
+            ),
+            columns=["Sentences", "Labels", "Span_begin", "Span_end", "Span_label"],
         )
-        self.column_names = ["Sentences", "Labels"]
+        self.column_names = [
+            "Sentences",
+            "Labels",
+            "Span_begin",
+            "Span_end",
+            "Span_label",
+        ]
 
     def df_to_dataset(self, data_in_frame: pd.DataFrame = None, split: bool = True):
         if not data_in_frame:
@@ -397,7 +439,7 @@ class DataManager:
     def publish(
         self,
         repo_id: str,
-        data_set: datasets.Dataset = None,
+        data_set: datasets.Dataset,
         hugging_face_token: Optional[str] = None,
     ) -> Dict[str, str]:
         """Publish the dataset to Hugging Face.
@@ -411,7 +453,7 @@ class DataManager:
         Args:
             repo_id (str): The name of the repository that you are pushing to.
             This can either be a new repository or an existing one.
-            data_set (Dataset, optional): The Dataset to be published to Hugging Face. Please
+            data_set (Dataset): The Dataset to be published to Hugging Face. Please
             note that this is a Dataset object and not a DatasetDict object, meaning
             that if you have already split your dataset into test and train, you can
             either push test and train separately or need to concatenate them using "+".
@@ -419,9 +461,11 @@ class DataManager:
             be used.
             hugging_face_token (str, optional): Hugging Face User Access Token.
         """
-        if not data_set:
-            data_set = self.raw_data_set
-        self.print_dataset_info(data_set)
+        if isinstance(data_set, datasets.Dataset):
+            self.print_dataset_info(data_set)
+        if isinstance(data_set, datasets.DatasetDict):
+            self.print_dataset_info(data_set["train"])
+            self.print_dataset_info(data_set["test"])
         if hugging_face_token is None:
             hugging_face_token = os.environ.get("HUGGING_FACE_TOKEN")
         if hugging_face_token is None:
@@ -436,29 +480,28 @@ class DataManager:
         """Print information set in the dataset.
 
         Args:
-            data_set (Dataset, optional): The Dataset object of which the information
-            is to be printed. Defaults to the raw dataset associated with the DataManager
-            instance.
+            data_set (Dataset): The Dataset object of which the information
+            is to be printed.
         """
-        if not data_set:
-            data_set = self.raw_data_set
-        if not hasattr(self, "data_set_info"):
-            # check for Dataset or DatasetDict
-            if isinstance(data_set, datasets.Dataset):
-                self.data_set_info = data_set.info
-            elif isinstance(data_set, datasets.DatasetDict):
-                # the datasetdict should at the very least contain the training data
-                self.data_set_info = data_set["train"].info
         print("The following dataset metadata has been set:")
-        print("Description:", self.data_set_info.description)
-        print("Version:", self.data_set_info.version)
-        print("License:", self.data_set_info.license)
-        print("Citation:", self.data_set_info.citation)
-        print("homepage:", self.data_set_info.homepage)
+        print("Description:", data_set.info.description)
+        print("Version:", data_set.info.version)
+        print("License:", data_set.info.license)
+        print("Citation:", data_set.info.citation)
+        print("homepage:", data_set.info.homepage)
+
+    def _set_dataset_description(self):
+        description = "The dataset was generated for labels: {} and task: {}. ".format(
+            self.selected_labels, self.task
+        )
+        description += "It contains the data from the original files {}.".format(
+            list(self.doc_dict.keys())
+        )
+        return description
 
     def set_dataset_info(
         self,
-        data_set: datasets.Dataset = None,
+        data_set: datasets.Dataset,
         description: str = None,
         version: str = None,
         license_: str = None,
@@ -468,9 +511,11 @@ class DataManager:
         """Update the information set in the dataset.
 
         Args:
-            data_set (Dataset, optional): The Dataset object of which the information is to be updated.
+            data_set (Dataset): The Dataset object of which the information is to be updated.
             Defaults to the raw dataset associated with the DataManager instance.
             description (str, optional): The new description to be updated. Optional, defaults to None.
+                The description will contain the task for which the labels were created, and the
+                names of the original data files.
             version (str, optional): The new version to be updated. Optional, defaults to None.
             license (str, optional): The new license to be updated. Optional, defaults to None.
             citation (str, optional): The new citation to be updated. Optional, defaults to None.
@@ -478,49 +523,30 @@ class DataManager:
         Returns:
             Dataset: The updated Dataset object.
         """
-        if not data_set:
-            data_set = self.raw_data_set
-        if not hasattr(self, "data_set_info"):
-            # check for Dataset or DatasetDict
-            if isinstance(data_set, datasets.Dataset):
-                self.data_set_info = data_set.info
-            elif isinstance(data_set, datasets.DatasetDict):
-                # the datasetdict should at the very least contain the training data
-                self.data_set_info = data_set["train"].info
         print("Updating the following dataset metadata:")
         if description:
             print(
                 "Description: old - {} new - {}".format(
-                    self.data_set_info.description, description
+                    data_set.info.description, description
                 )
             )
-            self.data_set_info.description = description
+            data_set.info.description = description
         if version:
-            print(
-                "Version: old - {} new - {}".format(self.data_set_info.version, version)
-            )
-            self.data_set_info.version = version
+            print("Version: old - {} new - {}".format(data_set.info.version, version))
+            data_set.info.version = version
         if license_:
-            print(
-                "License: old - {} new - {}".format(
-                    self.data_set_info.license, license_
-                )
-            )
-            self.data_set_info.license = license_
+            print("License: old - {} new - {}".format(data_set.info.license, license_))
+            data_set.info.license = license_
         if citation:
             print(
-                "Citation: old - {} new - {}".format(
-                    self.data_set_info.citation, citation
-                )
+                "Citation: old - {} new - {}".format(data_set.info.citation, citation)
             )
-            self.data_set_info.citation = citation
+            data_set.info.citation = citation
         if homepage:
             print(
-                "homepage: old - {} new - {}".format(
-                    self.data_set_info.homepage, homepage
-                )
+                "homepage: old - {} new - {}".format(data_set.info.homepage, homepage)
             )
-            self.data_set_info.homepage = homepage
+            data_set.info.homepage = homepage
         return data_set
 
     def pull_dataset(self, dataset_name: str, revision: str = None, split: str = None):
@@ -537,42 +563,38 @@ class DataManager:
                 Can also be set to None , pulling the full dataset with existing splits.
                 Defaults to None."""
         # this should check if dataset is already downloaded
-        self.raw_data_set = datasets.load_dataset(
+        data_set = datasets.load_dataset(
             path=dataset_name,
             split=split,
             revision=revision,
             cache_dir=self.data_dir,
         )
-        if isinstance(self.raw_data_set, datasets.Dataset):
+        if isinstance(data_set, datasets.Dataset):
             print(
                 "Your dataset is in Dataset format - will now be split into test and train"
             )
+            self.raw_data_set = data_set
             self.data_in_frame = pd.DataFrame(self.raw_data_set)
             self.column_names = self.raw_data_set.column_names
             self.train_test_set = self.raw_data_set.train_test_split(test_size=0.1)
-        if isinstance(self.raw_data_set, datasets.DatasetDict):
+        if isinstance(data_set, datasets.DatasetDict):
             print("Your dataset is in DatasetDict format - will keep the split")
             # check if the split contains train
-            if "train" in self.raw_data_set:
+            if "train" in data_set:
                 print("Found train split - ")
-                self.data_in_frame = self.raw_data_set["train"].to_pandas()
-                self.column_names = self.raw_data_set.column_names["train"]
-            if "test" in self.raw_data_set:
+                self.data_in_frame = data_set["train"].to_pandas()
+                self.column_names = data_set.column_names["train"]
+            if "test" in data_set:
                 print("Found test split - ")
                 self.data_in_frame = pd.concat(
-                    [self.data_in_frame, self.raw_data_set["test"].to_pandas()]
+                    [self.data_in_frame, data_set["test"].to_pandas()]
                 )
-            if "validation" in self.raw_data_set:
+                if not self.column_names:
+                    self.column_names = data_set.column_names["test"]
+            if "validation" in data_set:
                 print("Found validation split - ")
                 self.data_in_frame = pd.concat(
-                    [self.data_in_frame, self.raw_data_set["validation"].to_pandas()]
+                    [self.data_in_frame, data_set["validation"].to_pandas()]
                 )
-            self.train_test_set = self.raw_data_set
-
-
-if __name__ == "__main__":
-    dm = DataManager("/home/iulusoy/", skip_read=True)
-    dm.pull_dataset(dataset_name="rotten_tomatoes")
-    # now try to push this to new repo
-    repo_id = "test-datasetdict"
-    dm.publish(repo_id)
+            self.train_test_set = data_set
+            self.raw_data_set = None
