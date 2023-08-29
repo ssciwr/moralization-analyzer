@@ -65,7 +65,6 @@ class DataManager:
         Returns:
             A DataManager object.
         """
-        # what are these? why set to None?
         self.data_dir = data_dir
         self.analyzer = None
         self.spacy_docbin_files = None
