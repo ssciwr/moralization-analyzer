@@ -146,9 +146,8 @@ class SpacyModelManager(ModelManager):
             base_config_file (str or Path, optional): If supplied this base config will be used to create a new model
             overwrite_existing_files (bool): If true any existing files in `model_path` are removed
         """
-        # TODO we need to check that task is the same as in the data
-        # also task and file names for the original data should be added to data metadata information
         super().__init__(model_path)
+        self.task = task
         self._best_model_path = self.model_path / "model-best"
         self._last_model_path = self.model_path / "model-last"
         existing_model = (
@@ -167,7 +166,7 @@ class SpacyModelManager(ModelManager):
             _create_model(
                 self.model_path,
                 language,
-                task,
+                self.task,
                 base_config_file,
                 overwrite_existing_files,
             )
@@ -280,8 +279,15 @@ class SpacyModelManager(ModelManager):
 
         If the supplied DataManager has no docbin files we first export them to `model_path/data`.
         """
-        # data_files = data_manager.export_data_DocBin()
-        # TODO handle the export and import into model
+        # check first that the task that is defined in the ModelManager is the same
+        # task that the data was created for
+        if self.task != data_manager.task:
+            raise ValueError(
+                "The task that was specified in the model training is not the \
+                             same the data was generated for: {} - training, {} - data.".format(
+                    self.task, data_manager.task
+                )
+            )
         data_files = data_manager.spacy_docbin_files
         data_files_exist = data_files is not None and all(
             [data_file.is_file() for data_file in data_files]

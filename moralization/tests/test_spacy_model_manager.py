@@ -68,6 +68,14 @@ def test_spacy_model_manager_train_new_model_task(tmp_path, data_dir):
     # evaluate trained model
     evaluation = model.evaluate(data_manager)
     assert "Fairness" in evaluation["spans_task2_per_type"]
+    # try with wrong task in model train
+    model = SpacyModelManager(model_path, language="en", task="task1")
+    with pytest.raises(ValueError):
+        model.train(
+            data_manager,
+            overrides={"training.max_epochs": 5},
+            check_data_integrity=False,
+        )
 
 
 def test_spacy_model_manager_existing_invalid_model_path(tmp_path):
