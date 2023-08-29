@@ -87,7 +87,6 @@ class DataManager:
             self._lists_to_df()
             self.df_to_dataset()
             description = self._set_dataset_description()
-            description = self._set_dataset_description()
             self.set_dataset_info(self.train_test_set["train"], description=description)
             self.set_dataset_info(self.train_test_set["test"], description=description)
 
