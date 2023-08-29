@@ -76,7 +76,7 @@ def test_cas_to_doc(ts_file, data_file, caplog, data_file_wrong_span):
     assert isinstance(doc, Doc)
     ts = InputOutput.read_typesystem(ts_file)
     cas, _ = InputOutput.read_cas_file(data_file_wrong_span, ts)
-    doc = InputOutput.cas_to_doc(cas, ts)
+    _ = InputOutput.cas_to_doc(cas, ts)
     assert "Skipping span! Enable Debug Logging for more information." in caplog.text
 
 

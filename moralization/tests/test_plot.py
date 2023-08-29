@@ -100,7 +100,6 @@ def test_InteractiveAnalyzerResults(data_dir):
     test_interactive_analyzer = plot.InteractiveAnalyzerResults(
         dm.return_analyzer_result("all"), dm.return_categories()
     )
-    # TODO why not implicit?
     span_key_list = sorted(
         [
             "KAT1-Moralisierendes Segment",
