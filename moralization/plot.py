@@ -8,7 +8,7 @@ from spacy import displacy
 from dash import dcc, html, Input, Output, State, Dash
 import plotly.express as px
 import plotly.figure_factory as ff
-
+import sys
 import numpy as np
 from moralization.utils import is_interactive
 
@@ -526,6 +526,11 @@ def return_displacy_visualization(doc_dict, style="span", spans_key="sc"):
                     f"Please use one of the following: {list(doc.spans.keys())}"
                 )
 
+    # check if running on google colab
+    # if so we need to set the jupter arguement to false.
+
+    run_notebook_style = "google.colab" not in sys.modules
+
     # Finally, we call `displacy.render` with the `doc_dict` values and the specified
     # options.
 
@@ -533,4 +538,5 @@ def return_displacy_visualization(doc_dict, style="span", spans_key="sc"):
         [doc for doc in doc_dict.values()],
         style=style,
         options={"spans_key": spans_key},
+        jupyter=run_notebook_style,
     )
