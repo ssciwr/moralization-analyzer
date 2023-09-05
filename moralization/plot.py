@@ -439,7 +439,7 @@ class InteractiveVisualization:
         self.app = Dash("DataVisualizer")
         # Define the layout of the app
 
-        category_list = list(self.data_manager.return_categories().keys()) + ["sc"]
+        category_list = ["sc"] + list(self.data_manager.return_categories().keys())
 
         self.app.layout = html.Div(
             [
