@@ -9,9 +9,9 @@ def test__reduce_cat_list():
     assert reduced_list == ["test"]
 
 
-def test_get_paragraphs(doc_dicts):
+def test_get_paragraphs(doc_dict):
     filename = "test_data-trimmed_version_of-Interviews-pos-SH-neu-optimiert-AW"
-    doc = doc_dicts[0][filename]
+    doc = doc_dict[filename]
     print(analyse._get_paragraphs(doc))
     paragraph_list = [
         [1, 87],
@@ -27,8 +27,8 @@ def test_get_paragraphs(doc_dicts):
     assert analyse._get_paragraphs(doc) == paragraph_list
 
 
-def test__find_spans_in_paragraph(doc_dicts):
-    doc = list(doc_dicts[0].values())[0]
+def test__find_spans_in_paragraph(doc_dict):
+    doc = list(doc_dict.values())[0]
     with pytest.raises(KeyError):
         analyse._find_spans_in_paragraph(doc, "test")
 
@@ -36,28 +36,17 @@ def test__find_spans_in_paragraph(doc_dicts):
     spans_idx = analyse._find_spans_in_paragraph(doc, span_key)
     print(spans_idx)
 
-    assert len(spans_idx) == 11
+    assert len(spans_idx) == 3
     assert spans_idx[0] == (0, "Moralisierung explizit")
 
 
-def test_summarize_span_occurrences(doc_dicts):
-    doc = list(doc_dicts[0].values())[0]
+def test_summarize_span_occurrences(doc_dict):
+    doc = list(doc_dict.values())[0]
 
     df = analyse._summarize_span_occurrences(doc)
     # check occurrences of first row
-    assert list(df.iloc[0].values) == [
+    ref_values = [
         1.0,
-        0.0,
-        0.0,
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0,
-        0.0,
-        0.0,
-        1.0,
-        0.0,
         1.0,
         0.0,
         0.0,
@@ -67,23 +56,17 @@ def test_summarize_span_occurrences(doc_dicts):
         0.0,
         1.0,
         0.0,
-        0.0,
-        0.0,
         1.0,
         0.0,
         0.0,
         0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
+        1.0,
+        1.0,
     ]
-
+    assert list(df.iloc[0].values) == ref_values
     column_names = list(df.columns)
     real_names = [
         ("KAT1-Moralisierendes Segment", "Moralisierung explizit"),
-        ("KAT1-Moralisierendes Segment", "Keine Moralisierung"),
-        ("KAT1-Moralisierendes Segment", "Moralisierung"),
         ("KAT2-Moralwerte", "Care"),
         ("KAT2-Subjektive Ausdrücke", "Fairness"),
         ("KAT2-Subjektive Ausdrücke", "Oppression"),
@@ -97,26 +80,13 @@ def test_summarize_span_occurrences(doc_dicts):
         ("KAT4-Kommunikative Funktion", "Darstellung"),
         ("KAT4-Kommunikative Funktion", "Appell"),
         ("KAT5-Forderung explizit", "explizit"),
+        ("KAT5-Forderung implizit", "implizit"),
         ("task1", "Moralisierung explizit"),
-        ("task1", "Keine Moralisierung"),
-        ("task1", "Moralisierung"),
-        ("task2", "Care"),
-        ("task2", "Fairness"),
-        ("task2", "Oppression"),
-        ("task2", "Cheating"),
-        ("task3", "Forderer:in"),
-        ("task3", "Benefizient:in"),
-        ("task3", "Institution"),
-        ("task3", "Individuum"),
-        ("task3", "soziale Gruppe"),
-        ("task4", "Darstellung"),
-        ("task4", "Appell"),
-        ("task5", "explizit"),
     ]
     assert sorted(column_names) == sorted(real_names)
 
 
-def test_loop_over_files(doc_dicts):
+def test_loop_over_files(doc_dict):
     def _index_to_dict(index_list):
         index_dict = defaultdict(list)
         for file_index, sentence in index_list:
@@ -128,10 +98,10 @@ def test_loop_over_files(doc_dicts):
 
     # wrong filter
     with pytest.raises(KeyError):
-        analyse._loop_over_files(doc_dicts[0], "test_filter")
+        analyse._loop_over_files(doc_dict, "test_filter")
 
     # default filter
-    default_df = analyse._loop_over_files(doc_dicts[0], None)
+    default_df = analyse._loop_over_files(doc_dict, None)
     index_list = list(default_df.index)
     index_dict = _index_to_dict(index_list)
     assert len(index_dict) == 2
@@ -139,7 +109,7 @@ def test_loop_over_files(doc_dicts):
     assert list(index_dict.keys())[1] == file2
 
     # manual filter
-    manual_df = analyse._loop_over_files(doc_dicts[0], [file1, file2])
+    manual_df = analyse._loop_over_files(doc_dict, [file1, file2])
     index_list = list(manual_df.index)
     index_dict = _index_to_dict(index_list)
     assert len(index_dict) == 2
@@ -147,7 +117,7 @@ def test_loop_over_files(doc_dicts):
     assert list(index_dict.keys())[1] == file2
 
     # one filter as list
-    one_list_df = analyse._loop_over_files(doc_dicts[0], [file2])
+    one_list_df = analyse._loop_over_files(doc_dict, [file2])
     index_list = list(one_list_df.index)
     index_dict = _index_to_dict(index_list)
     assert len(index_dict) == 1
@@ -155,7 +125,7 @@ def test_loop_over_files(doc_dicts):
     assert list(index_dict.keys())[0] == file2
 
     # one filter as str
-    ond_str_df = analyse._loop_over_files(doc_dicts[0], file2)
+    ond_str_df = analyse._loop_over_files(doc_dict, file2)
     index_list = list(ond_str_df.index)
     index_dict = _index_to_dict(index_list)
     assert len(index_dict) == 1

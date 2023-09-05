@@ -16,7 +16,6 @@ def _return_span_analyzer(doc_dict: dict) -> SpanAnalyzer:
     for doc in doc_dict.values():
         # doc.spans.pop("paragraphs", None)
         doc.spans.pop("KOMMENTAR", None)
-        doc.spans.pop("KAT5-Forderung implizit", None)
         doc_list.append(doc)
 
     return SpanAnalyzer(doc_list)
