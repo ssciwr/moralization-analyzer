@@ -468,7 +468,8 @@ class InteractiveVisualization:
         """
         # Visualize the selected span category
         html_doc = self.data_manager.visualize_data(spans_key=span_cat)
-        html_doc = html_doc.replace("\n", " ")
+        if "google.colab" not in sys.modules:
+            html_doc = html_doc.replace("\n", " ")
         return html_doc
 
     def run_app(self, port=8052):
