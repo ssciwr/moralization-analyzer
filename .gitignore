@@ -133,3 +133,5 @@ data/
 .vscode/settings.json
 notebooks/my_model/
 
+# keep test data 
+!/moralization/data
