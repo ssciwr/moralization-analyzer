@@ -43,7 +43,8 @@ def _loop_over_files(doc_dict, file_filter=None):
         ),
         axis=0,
     )
-    df_complete = df_complete.fillna(0)
+
+    df_complete = df_complete.fillna(0).sort_index(axis=1)
 
     return df_complete
 
