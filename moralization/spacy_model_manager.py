@@ -200,6 +200,7 @@ class SpacyModelManager(ModelManager):
         )
         overrides["paths.train"] = str(data_train)
         overrides["paths.dev"] = str(data_dev)
+        overrides["components.spancat.spans_key"] = self.task
         spacy.cli.train.train(
             self.model_path / "config.cfg",
             self.model_path,
@@ -227,12 +228,14 @@ class SpacyModelManager(ModelManager):
         for model_path in [self._best_model_path, self._last_model_path]:
             _update_spacy_model_meta(model_path, self.metadata)
 
-    def test(self, test_string: str, style: str = "span", spans_key="sc"):
+    def test(self, test_string: str, style: str = "span"):
         """Test the model output with a test string"""
         self._check_model_is_trained_before_it_can_be("tested")
         nlp = spacy.load(self._best_model_path)
         doc_dict = {"test_doc": nlp(test_string)}
-        return return_displacy_visualization(doc_dict, style=style, spans_key=spans_key)
+        return return_displacy_visualization(
+            doc_dict, style=style, spans_key=self.task, jupyter_mode=True
+        )
 
     def publish(self, hugging_face_token: Optional[str] = None) -> str:
         """Publish the model to Hugging Face.
