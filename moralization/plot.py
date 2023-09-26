@@ -493,7 +493,9 @@ class InteractiveVisualization:
         )
 
 
-def return_displacy_visualization(doc_dict, style="span", spans_key="sc"):
+def return_displacy_visualization(
+    doc_dict, style="span", spans_key="sc", jupyter_mode=False
+):
     """Use the displacy class offered by spacy to visualize the current dataset.
         use SpacySetup.span_keys to show possible keys or use 'sc' for all.
 
@@ -505,6 +507,7 @@ def return_displacy_visualization(doc_dict, style="span", spans_key="sc"):
         spans_key (str, optional): The key of the span category that should be visualized. If
             set to "sc", all span categories in the Spacy Doc objects will be visualized.
             Defaults to "sc".
+        jupyter_mode (bool, optional): If set to True, the visualization will be displayed in the jupyter notebook mode.
     Raises:
 
         ValueError: Raised if `spans_key` is not a valid span category in any of the Spacy
@@ -540,5 +543,5 @@ def return_displacy_visualization(doc_dict, style="span", spans_key="sc"):
         [doc for doc in doc_dict.values()],
         style=style,
         options={"spans_key": spans_key},
-        jupyter=False,
+        jupyter=jupyter_mode,
     )
