@@ -11,6 +11,7 @@ import plotly.figure_factory as ff
 
 import numpy as np
 from moralization.utils import is_interactive
+from typing import Union
 
 
 def report_occurrence_heatmap(
@@ -52,9 +53,8 @@ def _get_filter_multiindex(occurrence_df: pd.DataFrame, filters):
     when a main_cat_key is given.
 
     Args:
-        df(pd.Dataframe): The sentence occurrence dataframe.
-        filters(str): Filter values for the dataframe.
-        occurrence_df: pd.DataFrame:
+        occurrence_df (pd.Dataframe): The sentence occurrence dataframe.
+        filters (str): Filter values for the dataframe.
 
     Returns:
         list: the filter strings of only the sub_cat_keys
@@ -87,10 +87,11 @@ def _generate_corr_df(occurrence_df: pd.DataFrame, _filter=None) -> pd.DataFrame
     """
 
     Args:
-      df_paragraph_occurrence: pd.DataFrame:
-      _filter:  (Default value = None)
+        occurrence_df (pd.DataFrame): DataFrame containing occurences per instance
+        filters (str): Filter values for the dataframe.
 
     Returns:
+        pd.DataFrame: The correlation matrix of the dataframe.
 
     """
     if _filter is None:
@@ -111,12 +112,13 @@ def _generate_corr_df(occurrence_df: pd.DataFrame, _filter=None) -> pd.DataFrame
 class InteractiveAnalyzerResults:
     """Interactive plotting tool for the DataAnalyzer in jupyter notebooks"""
 
-    def __init__(self, analyzer_results_all, categories_dict):
+    def __init__(self, analyzer_results_all: dict, categories_dict: dict):
         """
         Initializes the InteractiveAnalyzerResults class.
 
         Args:
-            analyzer_results_all: A dictionary containing the analyzer results for all categories and spans.
+            analyzer_results_all (dict): A dictionary containing the analyzer results for all categories and spans.
+            categories_dict (dict): A dictionary containing the subcategories for each span category.
         """
         self.analyzer_results_all = analyzer_results_all
         self.categories_dict = categories_dict
@@ -152,12 +154,13 @@ class InteractiveAnalyzerResults:
             Input("dropdown_analyzer_span_cat", "value"),
         )(self.update_graph)
 
-    def change_analyzer_key(self, key_input, current_cat_value):
+    def change_analyzer_key(self, key_input: str, current_cat_value: str):
         """
         Changes the analyzer key in response to a user selection.
 
         Args:
-            key_input: The user-selected analyzer key.
+            key_input (str): The user-selected analyzer key.
+            current_cat_value (str): The current analyzer span category that is to be shown.
 
         Returns:
             A tuple containing the analyzer span categories and the first category in the list.
@@ -168,13 +171,15 @@ class InteractiveAnalyzerResults:
             current_cat_value = analyzer_span_cat[0]
         return analyzer_span_cat, current_cat_value
 
-    def update_graph(self, input_analyzer_key, input_analyzer_span_cat):
+    def update_graph(
+        self, input_analyzer_key: Union[list, str], input_analyzer_span_cat: str
+    ):
         """
         Updates the graph in response to a user selection.
 
         Args:
-            input_analyzer_key: The user-selected analyzer key.
-            input_analyzer_span_cat: The user-selected analyzer span category.
+            input_analyzer_key (Union[list, str]): The user-selected analyzer key.
+            input_analyzer_span_cat (str): The user-selected analyzer span category.
 
         Returns:
             A plotly figure.
@@ -304,7 +309,7 @@ class InteractiveCategoryPlot:
             prevent_initial_call=True,
         )(self.update_subcat)
 
-    def update_filename(self, input_files):
+    def update_filename(self, input_files: list):
         """Update the dropdown options for selecting main categories.
 
         Args:
@@ -326,7 +331,7 @@ class InteractiveCategoryPlot:
         """Updates the categories available for selection in the Dash app.
 
         Args:
-            span_cats (list or str): List of span categories or a single span category.
+            span_cats (Union[list, str]): List of span categories or a single span category.
 
         Returns:
             tuple: A tuple containing two lists. The first list contains a dictionary of
@@ -356,11 +361,11 @@ class InteractiveCategoryPlot:
             values["value"] for values in main_sub_combination
         ]
 
-    def update_subcat(self, subcats):
+    def update_subcat(self, subcats: list):
         """Generates a correlation heatmap for selected subcategories of a given category.
 
         Args:
-            subcats (list): List of subcategories selected by the user.
+            subcats (list[str]): List of subcategories selected by the user.
 
         Returns:
             plotly.graph_objs._figure.Figure: A correlation heatmap showing the correlation
@@ -504,7 +509,7 @@ def return_displacy_visualization(doc_dict, style="span", spans_key="sc"):
             Doc objects in `doc_dict`.
 
     Returns:
-        displacy.render: Renders a visualization of the Spacy Doc objects.
+        str: A html string containing the visualization of the Spacy Doc categories.
     """
     if not is_interactive():
         raise EnvironmentError(

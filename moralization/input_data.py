@@ -56,7 +56,7 @@ class InputOutput:
         """
         Get the file extension of a given filename.
         Args:
-          filename: (str): path to the file.
+          filename (str): path to the file.
 
         Returns:
             str: file extension.
@@ -69,7 +69,7 @@ class InputOutput:
         Read in the typesystem from a given file.
         Also checks if a default type can be read from the
         Args:
-          filename: (str):  path to the typesystem file.
+          filename (str):  path to the typesystem file.
           If none the provided default typesystem will be used.(Default value = None)
 
         Returns:
@@ -98,8 +98,8 @@ class InputOutput:
         Needs a typesystem to run.
 
         Args:
-          filename: (str): Filepath to the cas file.
-          ts: (spacy.TypeSystem): Typesystem object.
+          filename (str): Filepath to the cas file.
+          ts (spacy.TypeSystem): Typesystem object.
 
         Returns:
             tuple: cas object and file type.
@@ -114,7 +114,7 @@ class InputOutput:
         """
          Get a list of input files from a given directory. Currently only xmi files.
         Args:
-          dir: (str): dir path.
+          dir (str): dir path.
 
         Returns:
             tuple: list of input files and typesystem file.
@@ -288,8 +288,8 @@ class InputOutput:
         """
 
         Args:
-          data_files: (list or str): List of input files or path to a directory.
-          ts: cassis.TypeSystem: Typesystem object.
+          data_files (list or str): List of input files or path to a directory.
+          ts (cassis.TypeSystem): Typesystem object.
             language_model (str, optional): Language model of the corpus that is being read.
                 Defaults to "de_core_news_sm" (small German model).
 
@@ -321,8 +321,8 @@ class InputOutput:
         The values are the total sub_dict_entries of the given list.
 
         Args:
-            doc_dict(dict: doc): The provided doc dict.
-            merge_dict_cat(dict, optional): map new category to list of existing_categories.
+            doc_dict (dict[doc]): The provided doc dict.
+            merge_dict_cat (dict, optional): map new category to list of existing_categories.
                 merge_dict = {
                     "task1": ["KAT1-Moralisierendes Segment"],
                     "task2": ["KAT2-Moralwerte", "KAT2-Subjektive Ausdrücke"],
@@ -382,7 +382,7 @@ class InputOutput:
             dir (str): Path to the data directory.
             language_model (str, optional): Language model of the corpus that is being read.
                 Defaults to "de_core_news_sm" (German).
-            merge_dict_cat(dict, optional): map new category to list of existing_categories.
+            merge_dict_cat (dict, optional): map new category to list of existing_categories.
             task (str, optional): which task to use in the merge. Defaults to None.
         Returns:
             doc_dict (dict): Dictionary of with all the available data in one.
