@@ -284,7 +284,7 @@ class InputOutput:
     @staticmethod
     def files_to_docs(
         data_files: List or str, ts: typesystem, language_model: str = "de_core_news_sm"
-    ) -> tuple:
+    ) -> dict:
         """
 
         Args:
