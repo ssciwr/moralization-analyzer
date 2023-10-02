@@ -8,7 +8,6 @@ from spacy import displacy
 from dash import dcc, html, Input, Output, State, Dash
 import plotly.express as px
 import plotly.figure_factory as ff
-
 import numpy as np
 from moralization.utils import is_interactive
 from typing import Union
@@ -458,10 +457,17 @@ class InteractiveVisualization:
         self.data_manager = data_manager
         self.app = Dash("DataVisualizer")
         # Define the layout of the app
+
+        category_list = ["sc"] + list(self.data_manager.return_categories().keys())
+
         self.app.layout = html.Div(
             [
                 "Interactive Visualization",
-                dcc.Dropdown(id="dropdown_span_cat"),
+                dcc.Dropdown(
+                    id="dropdown_span_cat",
+                    options=category_list,
+                    value=category_list[-1],
+                ),
                 dcc.Markdown(id="markdown_displacy", dangerously_allow_html=True),
             ]
         )
@@ -488,6 +494,7 @@ class InteractiveVisualization:
         # Visualize the selected span category
         html_doc = self.data_manager.visualize_data(spans_key=span_cat)
         html_doc = html_doc.replace("\n", " ")
+
         return html_doc
 
     def run_app(self, port=8052):
@@ -505,7 +512,9 @@ class InteractiveVisualization:
         )
 
 
-def return_displacy_visualization(doc_dict, style="span", spans_key="sc"):
+def return_displacy_visualization(
+    doc_dict, style="span", spans_key="sc", jupyter_mode=False
+):
     """Use the displacy class offered by spacy to visualize the current dataset.
         use SpacySetup.span_keys to show possible keys or use 'sc' for all.
 
@@ -517,6 +526,7 @@ def return_displacy_visualization(doc_dict, style="span", spans_key="sc"):
         spans_key (str, optional): The key of the span category that should be visualized. If
             set to "sc", all span categories in the Spacy Doc objects will be visualized.
             Defaults to "sc".
+        jupyter_mode (bool, optional): If set to True, the visualization will be displayed in the jupyter notebook mode.
     Raises:
 
         ValueError: Raised if `spans_key` is not a valid span category in any of the Spacy
@@ -552,4 +562,5 @@ def return_displacy_visualization(doc_dict, style="span", spans_key="sc"):
         [doc for doc in doc_dict.values()],
         style=style,
         options={"spans_key": spans_key},
+        jupyter=jupyter_mode,
     )
