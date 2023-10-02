@@ -118,7 +118,7 @@ class DataManager:
                 occurrence_df, _type=_type, _filter=cat_filter
             )
 
-    def return_analyzer_result(self, result_type="frequency"):
+    def return_analyzer_result(self, result_type="frequency") -> pd.DataFrame:
         """Returns the result of the spacy_span-analyzer.
             If no analyzer has been created yet, a new one will be generated and stored.
 
@@ -183,7 +183,7 @@ class DataManager:
         heatmap = InteractiveCategoryPlot(self)
         return heatmap.run_app(port=port)
 
-    def return_categories(self):
+    def return_categories(self) -> dict:
         """Returns a dict of all categories in the dataset.
 
         Returns:
@@ -221,8 +221,8 @@ class DataManager:
 
     def export_data_DocBin(
         self, output_dir=None, overwrite=False, check_data_integrity=True
-    ):
-        """Export the currently loaded dataset as a spacy binary. This is used in spacy training.
+    ) -> list:
+        """Export the currently loaded docs as a spacy binary. This is used in spacy training.
 
         Args:
             output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
@@ -265,7 +265,7 @@ class DataManager:
     def _check_relativ_frequency(
         self,
         threshold,
-    ):
+    ) -> tuple:
         analyzer_df = self.return_analyzer_result("frequency")
         warning_str = ""
         frequency_integrity = True
@@ -302,7 +302,7 @@ class DataManager:
                 logging.warning(warning_str)
         return warning_str, frequency_integrity
 
-    def check_data_integrity(self):
+    def check_data_integrity(self) -> bool:
         """This function checks the data and compares it to the spacy thresholds for label count,
         span distinctiveness and boundary distinctiveness.
 

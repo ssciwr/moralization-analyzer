@@ -4,12 +4,13 @@ Contains statistical analysis.
 from collections import defaultdict
 import pandas as pd
 import numpy as np
+from spacy import language
 from spacy_span_analyzer import (
     SpanAnalyzer,
 )  # https://github.com/ljvmiranda921/spacy-span-analyzer
 
 
-def _return_span_analyzer(doc_dict):
+def _return_span_analyzer(doc_dict: dict) -> SpanAnalyzer:
     doc_list = []
 
     for doc in doc_dict.values():
@@ -20,7 +21,7 @@ def _return_span_analyzer(doc_dict):
     return SpanAnalyzer(doc_list)
 
 
-def _loop_over_files(doc_dict, file_filter=None):
+def _loop_over_files(doc_dict: dict, file_filter=None) -> pd.DataFrame:
     df_list = []
     if file_filter is None:
         file_filter = doc_dict.keys()
@@ -49,7 +50,7 @@ def _loop_over_files(doc_dict, file_filter=None):
     return df_complete
 
 
-def _summarize_span_occurrences(doc):
+def _summarize_span_occurrences(doc: language) -> pd.DataFrame:
     # iterate over all annotation categories and write occurrence per paragraph in pandas.DataFrame
     span_categories = list(doc.spans.keys())
     span_categories = _reduce_cat_list(span_categories)
@@ -68,7 +69,7 @@ def _summarize_span_occurrences(doc):
     return df_span
 
 
-def _find_spans_in_paragraph(doc, span_cat):
+def _find_spans_in_paragraph(doc: language, span_cat: str) -> list:
     if span_cat not in list(doc.spans.keys()):
         raise KeyError(
             f"Key: `{span_cat}` not found in doc.spans, which has {list(doc.spans.keys())}"
@@ -92,12 +93,12 @@ def _find_spans_in_paragraph(doc, span_cat):
     return return_idx_list
 
 
-def _get_paragraphs(doc):
+def _get_paragraphs(doc: language) -> list:
     paragraph_list = [[span.start, span.end] for span in doc.spans["paragraphs"]]
     return paragraph_list
 
 
-def _reduce_cat_list(span_categories):
+def _reduce_cat_list(span_categories: list) -> list:
     # remove "sc", "paragraph", from list
     span_categories.remove("sc")
     span_categories.remove("paragraphs")

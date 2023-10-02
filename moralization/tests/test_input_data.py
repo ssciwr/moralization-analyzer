@@ -25,6 +25,7 @@ def data_file_wrong_xmi(data_dir):
 def test_spacy_load_model():
     nlp = spacy_load_model("en_core_web_sm")
     assert nlp
+
     with pytest.raises(SystemExit):
         spacy_load_model("en_core_web")
 

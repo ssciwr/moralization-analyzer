@@ -1,7 +1,7 @@
 """
 Module that handles input reading.
 """
-from cassis import load_typesystem, load_cas_from_xmi, typesystem
+from cassis import load_typesystem, load_cas_from_xmi, typesystem, Cas
 import pathlib
 import importlib_resources
 import logging
@@ -13,7 +13,7 @@ from typing import List
 pkg = importlib_resources.files("moralization")
 
 
-def spacy_load_model(language_model):
+def spacy_load_model(language_model) -> spacy.Language:
     """Load the model for the selected language,
     download the model if it is missing.
 
@@ -52,26 +52,28 @@ class InputOutput:
     input_type = {"xmi": load_cas_from_xmi}
 
     @staticmethod
-    def get_file_type(filename: str):
+    def get_file_type(filename: str) -> str:
         """
-
+        Get the file extension of a given filename.
         Args:
-          filename: str:
+          filename (str): path to the file.
 
         Returns:
-
+            str: file extension.
         """
         return pathlib.Path(filename).suffix[1:]
 
     @staticmethod
-    def read_typesystem(filename: str = None) -> object:
+    def read_typesystem(filename: str = None) -> typesystem:
         """
-
+        Read in the typesystem from a given file.
+        Also checks if a default type can be read from the
         Args:
-          filename: str:  (Default value = None)
+          filename (str):  path to the typesystem file.
+          If none the provided default typesystem will be used.(Default value = None)
 
         Returns:
-
+            cassis.TypeSystem: The typesystem object.
         """
         if filename is None:
             filename = pkg / "data" / "TypeSystem.xml"
@@ -90,15 +92,17 @@ class InputOutput:
             raise Warning(f"No valid type system found at {filename}")
 
     @staticmethod
-    def read_cas_file(filename: str, ts: object):
+    def read_cas_file(filename: str, ts: typesystem) -> tuple:
         """
+        Select and read a given cas file.
+        Needs a typesystem to run.
 
         Args:
-          filename: str:
-          ts: object:
+          filename (str): Filepath to the cas file.
+          ts (spacy.TypeSystem): Typesystem object.
 
         Returns:
-
+            tuple: cas object and file type.
         """
         file_type = InputOutput.get_file_type(filename)
         with open(filename, "rb") as f:
@@ -110,10 +114,10 @@ class InputOutput:
         """
          Get a list of input files from a given directory. Currently only xmi files.
         Args:
-          dir: str:
+          dir (str): dir path.
 
         Returns:
-
+            tuple: list of input files and typesystem file.
         """
 
         # load multiple files into a list
@@ -135,18 +139,20 @@ class InputOutput:
         return data_files, ts_file
 
     @staticmethod
-    def cas_to_doc(cas, ts, language_model: str = "de_core_news_sm"):
+    def cas_to_doc(
+        cas: Cas, ts: typesystem, language_model: str = "de_core_news_sm"
+    ) -> spacy.language:
         """Transforms the cassis object into a spacy doc.
             Adds the paragraph and the different span categories to the doc object.
             Also maps the provided labels to a more user readable format.
         Args:
-            cas (cassis.cas): The cassis object generated from the input files
-            ts (typesystem): The provided typesytem
+            cas (cassis.Cas): The cassis object generated from the input files
+            ts (cassos.TypeSystem): The provided type system
             language_model (str, optional): Language model of the corpus that is being read.
                 Defaults to "de_core_news_sm" (small German model).
 
         Returns:
-            spacy.Doc: A doc object with all the annotation categories present.
+            spacy.language: A doc object with all the annotation categories present.
         """
         # list and remap of all span categories
         map_expressions = {
@@ -277,17 +283,20 @@ class InputOutput:
 
     @staticmethod
     def files_to_docs(
-        data_files: List, ts: object, language_model: str = "de_core_news_sm"
-    ):
+        data_files: List or str, ts: typesystem, language_model: str = "de_core_news_sm"
+    ) -> dict:
         """
 
         Args:
-          data_files: list or str:
-          ts: object:
+          data_files (list or str): List of input files or path to a directory.
+          ts (cassis.TypeSystem): Typesystem object.
             language_model (str, optional): Language model of the corpus that is being read.
                 Defaults to "de_core_news_sm" (small German model).
 
         Returns:
+            doc_dict (dict): Dictionary of with all the available data in one.
+            train_dict (dict): Dictionary with only the spans that are used for training.
+            test_dict (dict): Dictionary with only the spans that are used for testing.
 
         """
         doc_dict = {}
@@ -307,13 +316,13 @@ class InputOutput:
         return doc_dict
 
     @staticmethod
-    def _merge_span_categories(doc_dict, merge_dict=None, task=None):
+    def _merge_span_categories(doc_dict: dict, merge_dict=None, task=None) -> dict:
         """Take the new_dict_cat dict and add its key as a main_cat to data_dict.
         The values are the total sub_dict_entries of the given list.
 
         Args:
-            doc_dict(dict: doc): The provided doc dict.
-            merge_dict_cat(dict, optional): map new category to list of existing_categories.
+            doc_dict (dict[doc]): The provided doc dict.
+            merge_dict_cat (dict, optional): map new category to list of existing_categories.
                 merge_dict = {
                     "task1": ["KAT1-Moralisierendes Segment"],
                     "task2": ["KAT2-Moralwerte", "KAT2-Subjektive Ausdrücke"],
@@ -373,7 +382,7 @@ class InputOutput:
             dir (str): Path to the data directory.
             language_model (str, optional): Language model of the corpus that is being read.
                 Defaults to "de_core_news_sm" (German).
-            merge_dict_cat(dict, optional): map new category to list of existing_categories.
+            merge_dict_cat (dict, optional): map new category to list of existing_categories.
             task (str, optional): which task to use in the merge. Defaults to None.
         Returns:
             doc_dict (dict): Dictionary of with all the available data in one.
