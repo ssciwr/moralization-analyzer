@@ -271,7 +271,7 @@ def test_train_evaluate(gen_instance, gen_instance_dm):
     assert evaluate_result[0]["score"]
     del gen_instance._model_path
     with pytest.raises(ValueError):
-        evaluate_result = gen_instance.evaluate("Python ist toll.")
+        gen_instance.evaluate("Python ist toll.")
     # check that column names throw error if not given correctly
     label_column_name = "something"
     with pytest.raises(ValueError):

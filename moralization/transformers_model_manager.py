@@ -70,7 +70,7 @@ class TransformersModelManager(ModelManager):
         self,
         model_path: Union[str, Path],
         model_name: str = "bert-base-cased",
-        label_names: List = ["0", "M", "M-BEG"],
+        label_names: List = None,
     ) -> None:
         """
         Import an existing model from `model_name` from Hugging Face.
@@ -81,6 +81,8 @@ class TransformersModelManager(ModelManager):
         """
         super().__init__(model_path)
         self.model_name = model_name
+        if label_names is None:
+            label_names = ["0", "M", "M-BEG"]
         self._model_is_trained = False
         self.metadata = _import_or_create_metadata(self.model_path)
         # somewhere we should check that the label names length is same as number of different labels
@@ -471,8 +473,8 @@ class TransformersModelManager(ModelManager):
     def train(
         self,
         data_manager: DataManager,
-        token_column_name: str,
-        label_column_name: str,
+        token_column_name: str = "Sentences",
+        label_column_name: str = "Labels",
         num_train_epochs: int = 5,
         learning_rate: float = 2e-5,
     ) -> None:
@@ -569,7 +571,8 @@ class TransformersModelManager(ModelManager):
         )
         return token_classifier(token)
 
-    def test(self):
+    def test(self, test_string: str, style: str = "span"):
+        # to be completed
         pass
 
     def _check_model_is_trained_before_it_can_be(self, action: str = "used"):
