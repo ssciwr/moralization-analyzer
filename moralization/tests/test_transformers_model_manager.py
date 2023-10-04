@@ -227,9 +227,9 @@ def test_load_dataloader(gen_instance, train_test_dataset):
 def test_load_optimizer(gen_instance):
     gen_instance.label_names = ["A", "B", "C"]
     gen_instance._load_optimizer(learning_rate=1e-3)
-    assert gen_instance.optimizer.defaults["lr"] == 1e-3
+    assert gen_instance.optimizer.defaults["lr"] == pytest.approx(1e-3, 1e-4)
     gen_instance._load_optimizer(learning_rate=1e-3, kwargs={"weight_decay": 0.015})
-    assert gen_instance.optimizer.defaults["weight_decay"] == 0.015
+    assert gen_instance.optimizer.defaults["weight_decay"] == pytest.approx(0.015, 1e-3)
 
 
 def test_load_scheduler(gen_instance, train_test_dataset):
@@ -263,7 +263,7 @@ def test_train_evaluate(gen_instance, gen_instance_dm):
         num_train_epochs,
         learning_rate,
     )
-    assert gen_instance.results["overall_precision"] == 0.0
+    assert gen_instance.results["overall_precision"] == pytest.approx(0.0, 1e-3)
     assert (model_path / "pytorch_model.bin").is_file()
     assert (model_path / "special_tokens_map.json").is_file()
     assert (model_path / "config.json").is_file()
@@ -271,7 +271,7 @@ def test_train_evaluate(gen_instance, gen_instance_dm):
     assert evaluate_result[0]["score"]
     del gen_instance._model_path
     with pytest.raises(ValueError):
-        evaluate_result = gen_instance.evaluate("Python ist toll.")
+        gen_instance.evaluate("Python ist toll.")
     # check that column names throw error if not given correctly
     label_column_name = "something"
     with pytest.raises(ValueError):
