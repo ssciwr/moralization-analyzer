@@ -19,6 +19,7 @@ from moralization.model_manager import ModelManager
 import frontmatter
 from huggingface_hub import HfApi
 import shutil
+from sklearn.metrics import classification_report
 
 
 IGNORED_LABEL = -100
@@ -318,6 +319,7 @@ class TransformersModelManager(ModelManager):
             "recall": all_metrics["overall_recall"],
             "f1": all_metrics["overall_f1"],
             "accuracy": all_metrics["overall_accuracy"],
+            "classification report": classification_report(y_true=true_labels, y_pred=true_predictions),
         }
 
     def _set_id2label(self) -> None:
