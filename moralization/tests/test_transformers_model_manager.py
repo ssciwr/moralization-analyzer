@@ -264,14 +264,11 @@ def test_train_evaluate(gen_instance, gen_instance_dm):
         learning_rate,
     )
     assert gen_instance.results["overall_precision"] == pytest.approx(0.0, 1e-3)
-    assert (model_path / "pytorch_model.bin").is_file()
+    assert (model_path / "model.safetensors").is_file()
     assert (model_path / "special_tokens_map.json").is_file()
     assert (model_path / "config.json").is_file()
     evaluate_result = gen_instance.evaluate("Python ist toll.")
     assert evaluate_result[0]["score"]
-    del gen_instance._model_path
-    with pytest.raises(ValueError):
-        gen_instance.evaluate("Python ist toll.")
     # check that column names throw error if not given correctly
     label_column_name = "something"
     with pytest.raises(ValueError):
@@ -291,6 +288,9 @@ def test_train_evaluate(gen_instance, gen_instance_dm):
             num_train_epochs,
             learning_rate,
         )
+    del gen_instance._model_path
+    with pytest.raises(ValueError):
+        gen_instance.evaluate("Python ist toll.")
 
 
 def test_publish(gen_instance):

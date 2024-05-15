@@ -1,6 +1,7 @@
 """
 Contains plotting functionality.
 """
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -72,7 +73,7 @@ def _get_filter_multiindex(occurrence_df: pd.DataFrame, filters):
             filter_dict["sub"].append(_filter)
 
         else:
-            raise KeyError(f"Filter key: `{ _filter}` not in dataframe columns.")
+            raise KeyError(f"Filter key: `{_filter}` not in dataframe columns.")
 
     if filter_dict["main"] == []:
         filter_dict["main"] = slice(None)

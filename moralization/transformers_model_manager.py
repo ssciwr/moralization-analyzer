@@ -541,7 +541,7 @@ class TransformersModelManager(ModelManager):
     def save(self):
         """Save the model to the set model path.
         If a model already exists in that path, it will be overwritten."""
-        model_file = self.model_path / "pytorch_model.bin"
+        model_file = self.model_path / "model.safetensors"
         if model_file.exists():
             print(
                 "Model file already existing at specified model path {} - will be overwritten.".format(
