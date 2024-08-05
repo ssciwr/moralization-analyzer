@@ -48,7 +48,48 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html">Automated recognition of moralization in written text</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Text managment and automatic span annotation.</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">User API</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#moralization.DataManager"><code class="docutils literal notranslate"><span class="pre">DataManager</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.check_data_integrity"><code class="docutils literal notranslate"><span class="pre">DataManager.check_data_integrity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.df_to_dataset"><code class="docutils literal notranslate"><span class="pre">DataManager.df_to_dataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.export_data_DocBin"><code class="docutils literal notranslate"><span class="pre">DataManager.export_data_DocBin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.import_data_DocBin"><code class="docutils literal notranslate"><span class="pre">DataManager.import_data_DocBin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_correlation_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_correlation_analysis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_data_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_data_analysis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.interactive_data_visualization"><code class="docutils literal notranslate"><span class="pre">DataManager.interactive_data_visualization()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.occurrence_analysis"><code class="docutils literal notranslate"><span class="pre">DataManager.occurrence_analysis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.print_dataset_info"><code class="docutils literal notranslate"><span class="pre">DataManager.print_dataset_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.publish"><code class="docutils literal notranslate"><span class="pre">DataManager.publish()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.pull_dataset"><code class="docutils literal notranslate"><span class="pre">DataManager.pull_dataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.return_analyzer_result"><code class="docutils literal notranslate"><span class="pre">DataManager.return_analyzer_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.return_categories"><code class="docutils literal notranslate"><span class="pre">DataManager.return_categories()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.set_dataset_info"><code class="docutils literal notranslate"><span class="pre">DataManager.set_dataset_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.DataManager.visualize_data"><code class="docutils literal notranslate"><span class="pre">DataManager.visualize_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#moralization.SpacyModelManager"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyModelManager.evaluate"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager.evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyModelManager.publish"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager.publish()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyModelManager.save"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager.save()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyModelManager.test"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager.test()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.SpacyModelManager.train"><code class="docutils literal notranslate"><span class="pre">SpacyModelManager.train()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#moralization.TransformersModelManager"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.add_labels_to_inputs"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.add_labels_to_inputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.compute_metrics"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.compute_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.create_batch"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.create_batch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.evaluate"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.map_dataset"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.map_dataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.postprocess"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.postprocess()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.publish"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.publish()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.save"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.save()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.test"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.test()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.tokenize"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.tokenize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.tokenize_and_align"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.tokenize_and_align()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moralization.TransformersModelManager.train"><code class="docutils literal notranslate"><span class="pre">TransformersModelManager.train()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="license_link.html">License</a></li>
@@ -82,6 +123,457 @@
 <h1>User API<a class="headerlink" href="#user-api" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 </div>
+<dl class="py class" id="module-moralization">
+<dt class="sig sig-object py" id="moralization.DataManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">DataManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'de_core_news_sm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_read</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'task1'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager" title="Link to this definition"></a></dt>
+<dd><p>Initialize the DataManager that handles the data transformations.</p>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>data_dir (str): The data directory where the data is located, or where the pulled dataset</dt><dd><p>should be stored.</p>
+</dd>
+<dt>language_model (str, optional): Language model for sentencizing the corpus that is being read.</dt><dd><p>Defaults to “de_core_news_sm” (small German).</p>
+</dd>
+<dt>skip_read (bool, optional): If this is set to True, no data reading will be attempted. Use</dt><dd><p>this if pulling a dataset from Hugging Face. Defaults to False.</p>
+</dd>
+<dt>selected_labels (Union[str, list]): The labels used in the training. Either “all”, which will</dt><dd><p>return all labels of a given task, or a list of selected labels, such as [“Cheating”, “Fairness”].
+If you provide a list, this is independent of the task.
+Defaults to None, in which case all labels for all categories are selected.</p>
+</dd>
+<dt>merge_dict_cat(dict, optional): map new category to list of existing_categories.</dt><dd><p>Default is:
+merge_dict = {</p>
+<blockquote>
+<div><p>“task1”: [“KAT1-Moralisierendes Segment”],
+“task2”: [“KAT2-Moralwerte”, “KAT2-Subjektive Ausdrücke”],
+“task3”: [“KAT3-Rolle”, “KAT3-Gruppe”, “KAT3-own/other”],
+“task4”: [“KAT4-Kommunikative Funktion”],
+“task5”: [“KAT5-Forderung explizit”],</p>
+</div></blockquote>
+<p>}
+Defaults to None.</p>
+</dd>
+<dt>task (str): The task to train on. The options are</dt><dd><p>“task1”: [“KAT1-Moralisierendes Segment”]
+“task2”: [“KAT2-Moralwerte”, “KAT2-Subjektive Ausdrücke”]
+“task3”: [“KAT3-Rolle”, “KAT3-Gruppe”, “KAT3-own/other”]
+“task4”: [“KAT4-Kommunikative Funktion”]
+“task5”: [“KAT5-Forderung explizit”]
+Defaults to “task1”.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>A DataManager object.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.check_data_integrity">
+<span class="sig-name descname"><span class="pre">check_data_integrity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#moralization.DataManager.check_data_integrity" title="Link to this definition"></a></dt>
+<dd><p>This function checks the data and compares it to the spacy thresholds for label count,
+span distinctiveness and boundary distinctiveness.</p>
+<p>If a value is found to be insufficient a warning will be raised.</p>
+<p>By default this function will be called when training data is exported</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.df_to_dataset">
+<span class="sig-name descname"><span class="pre">df_to_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_in_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.df_to_dataset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.export_data_DocBin">
+<span class="sig-name descname"><span class="pre">export_data_DocBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_data_integrity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#moralization.DataManager.export_data_DocBin" title="Link to this definition"></a></dt>
+<dd><p>Export the currently loaded docs as a spacy binary. This is used in spacy training.</p>
+<dl>
+<dt>Args:</dt><dd><p>output_dir (str/Path, optional): The directory in which to place the output files. Defaults to None.
+overwrite(bool, optional): If True, spacy files are written even if files are already present.</p>
+<blockquote>
+<div><p>Defaults to False.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>check_data_integrity (bool): Whether or not to test the data integrity. If the data integrity</dt><dd><p>check fails, then no output is written. Skip the test by setting to False. In this case,
+the output is always generated even if the data does not pass the quality check.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>list[Path]: A list of the train and test files path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.import_data_DocBin">
+<span class="sig-name descname"><span class="pre">import_data_DocBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.import_data_DocBin" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Load spacy files from a given directory, from absolute path,</dt><dd><p>from relative path of given directory or from relative path of current working directory.</p>
+</dd>
+<dt>Args:</dt><dd><p>input_dir (Path, optional): Lookup directory. Defaults to None.
+train_file (Path, optional): Absolute or relative path. Defaults to None.
+test_file (Path, optional): Absolute or relative path. Defaults to None.</p>
+</dd>
+<dt>Returns:</dt><dd><p>list[Path]: A list of the train and test files path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.interactive_correlation_analysis">
+<span class="sig-name descname"><span class="pre">interactive_correlation_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8051</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.interactive_correlation_analysis" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.interactive_data_analysis">
+<span class="sig-name descname"><span class="pre">interactive_data_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8053</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">InteractiveAnalyzerResults</span></span></span><a class="headerlink" href="#moralization.DataManager.interactive_data_analysis" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.interactive_data_visualization">
+<span class="sig-name descname"><span class="pre">interactive_data_visualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8052</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.interactive_data_visualization" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.occurrence_analysis">
+<span class="sig-name descname"><span class="pre">occurrence_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'table'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.occurrence_analysis" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Returns the occurrence df, occurrence_corr_table or heatmap of the dataset.</dt><dd><p>optionally one can filter by filename(s).</p>
+</dd>
+<dt>Args:</dt><dd><p>_type (str, optional): Either “table”, “corr” or “heatmap”, defaults to table.
+filter (str/list(str), optional): Filename filters. Defaults to None.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: occurrence dataframe per paragraph.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.print_dataset_info">
+<span class="sig-name descname"><span class="pre">print_dataset_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dataset</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moralization.DataManager.print_dataset_info" title="Link to this definition"></a></dt>
+<dd><p>Print information set in the dataset.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data_set (Dataset): The Dataset object of which the information
+is to be printed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.publish">
+<span class="sig-name descname"><span class="pre">publish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hugging_face_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#moralization.DataManager.publish" title="Link to this definition"></a></dt>
+<dd><p>Publish the dataset to Hugging Face.</p>
+<p>This requires a User Access Token from <a class="reference external" href="https://huggingface.co/">https://huggingface.co/</a></p>
+<p>The token can either be passed via the <cite>hugging_face_token</cite> argument,
+or it can be set via the <cite>HUGGING_FACE_TOKEN</cite> environment variable.
+If the token is not set, a prompt will pop up where it can be provided.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>repo_id (str): The name of the repository that you are pushing to.
+This can either be a new repository or an existing one.
+data_set (Dataset): The Dataset to be published to Hugging Face. Please
+note that this is a Dataset object and not a DatasetDict object, meaning
+that if you have already split your dataset into test and train, you can
+either push test and train separately or need to concatenate them using “+”.
+If not set, the raw dataset that is connected to the DataManager instance will
+be used.
+hugging_face_token (str, optional): Hugging Face User Access Token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.pull_dataset">
+<span class="sig-name descname"><span class="pre">pull_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.pull_dataset" title="Link to this definition"></a></dt>
+<dd><p>Method to pull existing dataset from Hugging Face.</p>
+<dl>
+<dt>Args:</dt><dd><p>dataset_name (str): Name of the dataset to pull.
+revision (str, optional): The revision number of the dataset</p>
+<blockquote>
+<div><p>that should be pulled. If not set, the default version from
+the “main” branch will be pulled.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>split (str, optional): Select a specific split of the dataset to pull.</dt><dd><p>Depending on the dataset, this can be “train”, “test”, “validation”,
+to be split into new test and train sets after the pull.
+Can also be set to None , pulling the full dataset with existing splits.
+Defaults to None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.return_analyzer_result">
+<span class="sig-name descname"><span class="pre">return_analyzer_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'frequency'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#moralization.DataManager.return_analyzer_result" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Returns the result of the spacy_span-analyzer.</dt><dd><p>If no analyzer has been created yet, a new one will be generated and stored.</p>
+</dd>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>result_type (str, optional): Can be <cite>frequency</cite>, <cite>length</cite>,</dt><dd><p><cite>span_distinctiveness</cite>, <cite>boundary_distinctiveness</cite> or “all”. Defaults to “frequency”.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.return_categories">
+<span class="sig-name descname"><span class="pre">return_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#moralization.DataManager.return_categories" title="Link to this definition"></a></dt>
+<dd><p>Returns a dict of all categories in the dataset.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>dict: A list of all categories in the dataset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.set_dataset_info">
+<span class="sig-name descname"><span class="pre">set_dataset_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">citation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">homepage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dataset</span></span></span><a class="headerlink" href="#moralization.DataManager.set_dataset_info" title="Link to this definition"></a></dt>
+<dd><p>Update the information set in the dataset.</p>
+<dl>
+<dt>Args:</dt><dd><p>data_set (Dataset): The Dataset object of which the information is to be updated.
+Defaults to the raw dataset associated with the DataManager instance.
+description (str, optional): The new description to be updated. Optional, defaults to None.</p>
+<blockquote>
+<div><p>The description will contain the task for which the labels were created, and the
+names of the original data files.</p>
+</div></blockquote>
+<p>version (str, optional): The new version to be updated. Optional, defaults to None.
+license (str, optional): The new license to be updated. Optional, defaults to None.
+citation (str, optional): The new citation to be updated. Optional, defaults to None.
+homepage (str, optional): The new homepage to be updated. Optional, defaults to None.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Dataset: The updated Dataset object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.DataManager.visualize_data">
+<span class="sig-name descname"><span class="pre">visualize_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spans_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sc'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.DataManager.visualize_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moralization.SpacyModelManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">SpacyModelManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'de'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'task1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_config_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_existing_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager" title="Link to this definition"></a></dt>
+<dd><p>Create, import, modify, train and publish spacy models.</p>
+<p>Models can be trained on data from a DataManager, and published to hugging face.</p>
+<p>Imports an existing model from the <cite>model_path</cite> folder if found.</p>
+<p>If the <cite>model_path</cite> folder does not exist, or if <cite>base_config_file</cite>
+is supplied, or if <cite>overwrite_existing_files</cite> is True,
+creates a new model in the <cite>model_path</cite> folder.</p>
+<p>Resulting folder structure inside <cite>model_path</cite>:</p>
+<ul class="simple">
+<li><p>/config.cfg: model config file</p></li>
+<li><p>/meta.json: user-editable metadata (also exported to trained models)</p></li>
+</ul>
+<p>If the model has been trained the folder will also contain:</p>
+<ul class="simple">
+<li><p>/data/train.spacy: training dataset generated by DataManager</p></li>
+<li><p>/data/dev.spacy: testing dataset generated by DataManager</p></li>
+<li><p>/model-best/config.cfg: best trained model</p></li>
+<li><p>/model-last/config.cfg: last trained model</p></li>
+</ul>
+<dl>
+<dt>Args:</dt><dd><p>model_path (str or Path): Folder where the model is (or will be) stored
+language (str, optional): Language that will be finetuned.</p>
+<blockquote>
+<div><p>Defaults to spaCy’s small German model.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>task (str, optional): Task that is selected for the training. Defaults to</dt><dd><p>task1: Training on all labels of category 1.</p>
+</dd>
+</dl>
+<p>base_config_file (str or Path, optional): If supplied this base config will be used to create a new model
+overwrite_existing_files (bool): If true any existing files in <cite>model_path</cite> are removed</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.SpacyModelManager.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#moralization.DataManager" title="moralization.data_manager.DataManager"><span class="pre">DataManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_data_integrity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#moralization.SpacyModelManager.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the model against the test dataset in <cite>data_manager</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.SpacyModelManager.publish">
+<span class="sig-name descname"><span class="pre">publish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hugging_face_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#moralization.SpacyModelManager.publish" title="Link to this definition"></a></dt>
+<dd><p>Publish the model to Hugging Face.</p>
+<p>This requires a User Access Token from <a class="reference external" href="https://huggingface.co/">https://huggingface.co/</a></p>
+<p>The token can either be passed via the <cite>hugging_face_token</cite> argument,
+or it can be set via the <cite>HUGGING_FACE_TOKEN</cite> environment variable. If
+no token is provided, a command prompt will open to request the token.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>hugging_face_token (str, optional): Hugging Face User Access Token</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: The URL of the published model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.SpacyModelManager.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager.save" title="Link to this definition"></a></dt>
+<dd><p>Save any changes made to the model metadata.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.SpacyModelManager.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'span'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager.test" title="Link to this definition"></a></dt>
+<dd><p>Test the model output with a test string</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.SpacyModelManager.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#moralization.DataManager" title="moralization.data_manager.DataManager"><span class="pre">DataManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_data_integrity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overrides</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.SpacyModelManager.train" title="Link to this definition"></a></dt>
+<dd><p>Train the model on the data contained in <cite>data_manager</cite>.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data_manager (DataManager): the DataManager that contains the training data
+check_data_integrity (bool): Whether to test the data integrity.
+use_gpu (int): The index of the GPU to use (default: -1 which means no GPU)
+overrides (dict): An optional dictionary of parameters to override in the model config</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">moralization.</span></span><span class="sig-name descname"><span class="pre">TransformersModelManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'bert-base-cased'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager" title="Link to this definition"></a></dt>
+<dd><p>Create, import, modify, train and publish transformers models.</p>
+<p>Models can be trained on data from a DataManager, and published to hugging face.</p>
+<p>Import an existing model from <cite>model_name</cite> from Hugging Face.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>model_path (str or Path): Folder where the model is (or will be) stored
+model_name (str): Name of the pretrained model</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.add_labels_to_inputs">
+<span class="sig-name descname"><span class="pre">add_labels_to_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moralization.TransformersModelManager.add_labels_to_inputs" title="Link to this definition"></a></dt>
+<dd><p>Expand the label list to match the tokens after tokenization by
+selected tokenizer. Add to inputs.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>labels (list, required): The nested list of labels that needs to be aligned.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.compute_metrics">
+<span class="sig-name descname"><span class="pre">compute_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eval_preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#moralization.TransformersModelManager.compute_metrics" title="Link to this definition"></a></dt>
+<dd><p>Convenience function to compute and return the metrics.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eval_preds (tuple, required): The predicted and actual labels as a tuple.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.create_batch">
+<span class="sig-name descname"><span class="pre">create_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokenized_datasets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DatasetDict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BatchEncoding</span></span></span><a class="headerlink" href="#moralization.TransformersModelManager.create_batch" title="Link to this definition"></a></dt>
+<dd><p>Creates the batches from the tokenized datasets using the Data Collator.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the model against the test dataset in <cite>data_manager</cite>.
+Args:</p>
+<blockquote>
+<div><p>data_manager (DataManager): the DataManager that contains the training data</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.map_dataset">
+<span class="sig-name descname"><span class="pre">map_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_test_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DatasetDict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_column_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'word'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_column_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'label'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DatasetDict</span></span></span><a class="headerlink" href="#moralization.TransformersModelManager.map_dataset" title="Link to this definition"></a></dt>
+<dd><p>Apply the tokenization to the complete dataset using a mapping function.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>train_test_set (DatasetDict, required): The nested list of labels that needs to be aligned.
+token_column_name (str, optional): The name of the column containing the sentences/tokens.
+Defaults to “word”.
+label_column_name (str): The name of the column containing the labels.
+Defaults to “label”.</p>
+</dd>
+<dt>Returns:</dt><dd><p>tokenized_datasets (DatasetDict): The tokenized and label-aligned dataset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.postprocess">
+<span class="sig-name descname"><span class="pre">postprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.postprocess" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.publish">
+<span class="sig-name descname"><span class="pre">publish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hf_namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hugging_face_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_new_repo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#moralization.TransformersModelManager.publish" title="Link to this definition"></a></dt>
+<dd><p>Publish the model to Hugging Face.</p>
+<p>This requires a User Access Token from <a class="reference external" href="https://huggingface.co/">https://huggingface.co/</a></p>
+<p>The token can either be passed via the <cite>hugging_face_token</cite> argument,
+or it can be set via the <cite>HUGGING_FACE_TOKEN</cite> environment variable. If
+no token is provided, a command prompt will open to request the token.</p>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>repo_name (str, required): The repository name on Hugging Face to push to. Can be a new</dt><dd><p>repository.</p>
+</dd>
+<dt>hf_namespace (str, required): The namespace on Hugging Face under which the repository is</dt><dd><p>located (or shall be created).</p>
+</dd>
+</dl>
+<p>hugging_face_token (str, optional): Hugging Face User Access Token
+create_new_repo (bool, optional): Create a new repository with new model card</p>
+<blockquote>
+<div><p>on Hugging Face.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>str: The URL of the published model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.save" title="Link to this definition"></a></dt>
+<dd><p>Save the model to the set model path.
+If a model already exists in that path, it will be overwritten.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'span'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#moralization.TransformersModelManager.test" title="Link to this definition"></a></dt>
+<dd><p>Test the model output with a test string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.tokenize">
+<span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wordlist</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moralization.TransformersModelManager.tokenize" title="Link to this definition"></a></dt>
+<dd><p>Tokenize the pre-tokenized inputs with the selected tokenizer.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wordlist (list, required): The list of words that will be tokenized.
+The list is checked for nesting, the tokenizer expects a nested list of lists.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.tokenize_and_align">
+<span class="sig-name descname"><span class="pre">tokenize_and_align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">examples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">LazyBatch</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BatchEncoding</span></span></span><a class="headerlink" href="#moralization.TransformersModelManager.tokenize_and_align" title="Link to this definition"></a></dt>
+<dd><p>Tokenize the word list and align the label list to the new tokens.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>examples (batch, required): The batch of pre-tokenized words
+and labels that needs to be aligned.</p>
+</dd>
+<dt>Returns:</dt><dd><p>inputs (BatchEncoding): The encoded tokens, labels, etc, after tokenization</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moralization.TransformersModelManager.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#moralization.DataManager" title="moralization.data_manager.DataManager"><span class="pre">DataManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_column_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Sentences'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_column_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Labels'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_train_epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2e-5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#moralization.TransformersModelManager.train" title="Link to this definition"></a></dt>
+<dd><p>Train a model using the pre-loaded components.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
