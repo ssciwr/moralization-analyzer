@@ -6,6 +6,7 @@ import spacy_huggingface_hub
 import huggingface_hub
 from typing import Any
 from pathlib import Path
+from requests.exceptions import HTTPError
 
 
 @pytest.fixture
@@ -171,14 +172,14 @@ def test_spacy_model_manager_publish_untrained(tmp_path):
 def test_spacy_model_manager_publish_invalid_token_env(spacy_model_path, monkeypatch):
     monkeypatch.setenv("HUGGING_FACE_TOKEN", "invalid")
     model = SpacyModelManager(spacy_model_path)
-    with pytest.raises(ValueError) as e:
+    with pytest.raises(HTTPError) as e:
         model.publish()
     assert "token" in str(e.value).lower()
 
 
 def test_spacy_model_manager_publish_invalid_token_arg(spacy_model_path):
     model = SpacyModelManager(spacy_model_path)
-    with pytest.raises(ValueError) as e:
+    with pytest.raises(HTTPError) as e:
         model.publish(hugging_face_token="invalid")
     assert "token" in str(e.value).lower()
 
