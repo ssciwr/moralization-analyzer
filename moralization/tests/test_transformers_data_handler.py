@@ -61,9 +61,9 @@ def test_generate_spans(doc_dict, doc_dict_task2, gen_instance):
     assert gen_instance.span_begin[4] == [11]
     assert gen_instance.span_end[4] == [15]
     assert gen_instance.span_label[4] == ["Care"]
-    assert gen_instance.span_begin[8] == [8, 5, 11]
-    assert gen_instance.span_end[8] == [10, 6, 13]
-    assert gen_instance.span_label[8] == ["Care", "Oppression", "Fairness"]
+    assert gen_instance.span_begin[9] == [8, 5, 11]
+    assert gen_instance.span_end[9] == [10, 6, 13]
+    assert gen_instance.span_label[9] == ["Care", "Oppression", "Fairness"]
 
 
 def test_structure_labels(doc_dict, gen_instance):
@@ -101,6 +101,6 @@ def test_structure_labels(doc_dict, gen_instance):
         1,
         -100,
     ]
-    assert gen_instance.sentence_list[43] == ref_sentence
-    assert gen_instance.label_list[43] == ref_labels
-    assert gen_instance.label_list[80] == ref_labels2
+    assert gen_instance.sentence_list[46] == ref_sentence
+    assert gen_instance.label_list[46] == ref_labels
+    assert gen_instance.label_list[87] == ref_labels2

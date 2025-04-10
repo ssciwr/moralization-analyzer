@@ -218,7 +218,10 @@ class SpacyModelManager(ModelManager):
         _, data_dev = self._get_data_manager_docbin_files(
             data_manager, check_data_integrity=check_data_integrity
         )
-        return spacy.cli.evaluate(str(self._best_model_path), data_dev)
+        evaluation_result = spacy.cli.evaluate(str(self._best_model_path), data_dev)
+        if evaluation_result is None:
+            raise RuntimeError("Evaluation failed: spacy.cli.evaluate returned None.")
+        return evaluation_result
 
     def save(self):
         """Save any changes made to the model metadata."""
