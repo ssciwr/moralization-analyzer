@@ -19,7 +19,7 @@ def test_spacy_model_manager_train_new_model(tmp_path, data_dir_large):
     # non-existent model_path: new model created with default config/meta
     # we need a larger data set than test data, otherwise it is not guaranteed that
     # there is an annotation in the test data
-    model_path = tmp_path / "idontexist"
+    model_path = tmp_path / "idontexist-1"
     assert not model_path.is_dir()
     model = SpacyModelManager(model_path)
     assert str(model_path) in str(model)
@@ -40,7 +40,7 @@ def test_spacy_model_manager_train_new_model(tmp_path, data_dir_large):
     # create instance with pre-existing config
     path_to_config = model_path / "config.cfg"
     # save model to other path
-    model_path = tmp_path / "idontexist2"
+    model_path = tmp_path / "idontexist-2"
     _ = SpacyModelManager(model_path, base_config_file=path_to_config.as_posix())
     # try with config not found
     with pytest.raises(ValueError):
@@ -51,7 +51,7 @@ def test_spacy_model_manager_train_new_model(tmp_path, data_dir_large):
 
 def test_spacy_model_manager_train_new_model_task(tmp_path, data_dir):
     # non-existent model_path: new model created with default config/meta
-    model_path = tmp_path / "idontexist"
+    model_path = tmp_path / "idontexist-3"
     assert not model_path.is_dir()
     model = SpacyModelManager(model_path, language="en", task="task2")
     assert str(model_path) in str(model)
@@ -61,14 +61,14 @@ def test_spacy_model_manager_train_new_model_task(tmp_path, data_dir):
     # model is not yet trained
     assert not (model_path / "model-best").is_dir()
     assert not (model_path / "model-last").is_dir()
-    data_manager = DataManager(data_dir, task="task2")
+    data_manager = DataManager(data_dir, language_model="en_core_web_md", task="task2")
     # train model
     model.train(
         data_manager, overrides={"training.max_epochs": 5}, check_data_integrity=False
     )
     # evaluate trained model
     evaluation = model.evaluate(data_manager)
-    assert "Fairness" or "Harm" in evaluation["spans_task2_per_type"]
+    assert "Fairness" in evaluation["spans_task2_per_type"]
     # try with wrong task in model train
     model = SpacyModelManager(model_path, language="en", task="task1")
     with pytest.raises(ValueError):
