@@ -10,7 +10,6 @@ from lxml.etree import XMLSyntaxError
 import spacy
 from typing import List
 
-
 pkg = importlib_resources.files("moralization")
 
 
@@ -27,12 +26,8 @@ def spacy_load_model(language_model) -> spacy.Language:
     try:
         nlp = spacy.load(language_model)
     except OSError:
-        logging.warning(
-            "Required spaCy model {} was not found. \
-                        Attempting to download it..".format(
-                language_model
-            )
-        )
+        logging.warning("Required spaCy model {} was not found. \
+                        Attempting to download it..".format(language_model))
         try:
             spacy.cli.download(language_model)
         except SystemExit:
@@ -272,15 +267,13 @@ class InputOutput:
                 "Skipping span! Enable Debug Logging for more information."
             )
         logging.warning(logging_warning)
-        logging.debug(
-            f"""Token should be: \n \t'{span.get_covered_text()}', but is '{
+        logging.debug(f"""Token should be: \n \t'{span.get_covered_text()}', but is '{
                     doc.char_span(
                     span.begin,
                     span.end,
                     alignment_mode="expand",
                     label=span[cat_old],
-                )}'\n"""
-        )
+                )}'\n""")
 
     @staticmethod
     def files_to_docs(
