@@ -3,7 +3,6 @@ from moralization import DataManager
 import pytest
 import re
 
-
 CONFIG_CFG = "config.cfg"
 EVALUATION_JSON = "evaluation.json"
 
